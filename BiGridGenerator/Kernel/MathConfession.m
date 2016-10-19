@@ -13,7 +13,23 @@
 (* :Discussion: *)
 
 BeginPackage["MathConfession`"];
-(* Exported symbols added here with SymbolName::usage *)
+
+Begin["`Private`"];
+Rose[x_,theta_]:=Module[{phi=(Pi/2)*Exp[-(theta/(8*Pi))],
+      X=1-(1/2)*((5/4)*(1-Mod[18/5*theta,2*Pi]/Pi)^2-1/4)^2,y,
+      r},y=(3913/2000-5x+16x^2/5)x^2*Sin[phi];
+    r=X*(x*Sin[phi]+y*Cos[phi]);{r*Sin[theta],r*Cos[theta],
+      X*(x*Cos[phi]-y*Sin[phi])}];
+MathLove[1]:=Module[{rose,stem,text},
+  rose=ParametricPlot3D[
+    Evaluate[Rose[x,theta]],{x,0,1},{theta,-2Pi,15Pi},
+    Mesh->None,PerformanceGoal->"Speed",
+    PlotStyle->RGBColor[246/255,1,157/255],PlotPoints->100,
+    Boxed->False,Axes->False,
+    PlotRange->{{-1,1},{-1,1},{-1.6,1}}];
+  stem=Graphics3D[{Green,Cylinder[{{0,0,-0.05},{0,0,-10}},0.1]}];
+  text=Text[TraditionalForm[(49/50)*x*((x*(400*x*(16*x-25)+3913)*(Cos[Pi/E^(1/4)]-1))/4000+Cos[Pi/(2*E^(1/4))])]];
+  Print[text];Show[rose,stem]]
 MathLove[2]:=Module[{vals,funs},
   {vals,funs}=NDEigensystem[{-Laplacian[u[x,y],{x,y}],
         DirichletCondition[u[x,y]==0,x==0]},
@@ -29,8 +45,6 @@ MathLove[2]:=Module[{vals,funs},
 
 
 
-
-Begin["`Private`"]
 
 End[] (* `Private` *)
 

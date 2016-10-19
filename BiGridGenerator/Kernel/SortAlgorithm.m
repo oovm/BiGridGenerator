@@ -179,6 +179,7 @@ OptimalSort[
   5},{6,8},{9,10}},{{2,3},{5,7},{8,9},{4,6}},{{3,
   6},{7,9},{2,4},{5,8}},{{3,4},{7,8}},{{4,5},{6,
   7}},{{5,6}}};
+(*Thanks to @Stephen Wolfram*)
 (*We just know the OptimalSortNetwork under 10*)
 (*https://arxiv.org/pdf/1405.5754v3.pdf*)
 OptimalSort[

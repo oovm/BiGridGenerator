@@ -56,7 +56,13 @@ GEBPlot[str_String,res_Integer:100]:=Module[{X,Y,Z},
         Z[[Round[j],Round[k]]]==0,{i,1,res},{j,1,res},{k,1,res},
     Boxed->False,Axes->False,Mesh->None,
     PlotPoints->res/10]];
-
+FunQ={ConstantArray[#1,Length@{##2}],{##2}}&@@@NestList[RotateLeft,#,Length@#-1]&;
+FunGE[{a_,b_}]:=If[Inner[GreaterEqual,a,b,And],a[[1]],I];
+FunLE[{a_,b_}]:=If[Inner[LessEqual,a,b,And],a[[1]],I];
+MaxPlot[funcs_,range_,ops___]:=Plot[Evaluate[FunGE/@(FunQ@funcs)],range,ops];
+MinPlot[funcs_,range_,ops___]:=Plot[Evaluate[FunLE/@(FunQ@funcs)],range,ops];
+MaxPlot3D[funcs_,range_,ops___]:=Plot3D[Evaluate[FunGE/@(FunQ@funcs)],range,ops];
+MinPlot3D[funcs_,range_,ops___]:=Plot3D[Evaluate[FunLE/@(FunQ@funcs)],range,ops];
 
 
 

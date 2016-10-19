@@ -140,6 +140,39 @@ Mondrian[p_, complex_: 6, ratio_: 0.7] := Module[{splitx, splity, f, cols},
       Graphics[{EdgeForm@Thickness[0.012], {FaceForm@RandomChoice@cols, #} & /@
           Flatten@Nest[f, Rectangle[{0, 0}, {p, p}], complex]},AspectRatio -> ratio]];
 
+
+
+
+
+MaxPlot[{Sin[x], Cos[x], 0.2}, {x, -10, 10}]
+MinPlot[{Sin[x], Cos[x], 0.2}, {x, -1, 1}]
+MaxPlot3D[{Sin[x] Cos[y], Cos[x] Sin[y]}, {x, -Pi, Pi}, {y, -Pi, Pi},
+  ViewPoint -> {0, 0, \[Infinity]}]
+MinPlot3D[{Sin[x] Cos[y], Cos[x] Sin[y]}, {x, -Pi, Pi}, {y, -Pi, Pi},
+  ViewPoint -> {0, 0, \[Infinity]}]
+
+
+SingleElectronGrid[k_, way_: Re, ops___] :=
+    GraphicsGrid[
+      Table[SphericalPlot3D[
+        Evaluate@
+            way@SphericalHarmonicY[l, m, \[Theta], \[Phi]], {\[Theta], 0,
+          Pi}, {\[Phi], 0, 2 Pi}, PlotRange -> All, Mesh -> None,
+        Boxed -> False, Axes -> None, ColorFunction -> "Rainbow",
+        ops], {l, 0, k - 1}, {m, 0, l}], Frame -> All]
+SingleElectron[l_, m_, ops___] :=
+    GraphicsRow[
+      SphericalPlot3D[#[
+          SphericalHarmonicY[l, m, \[Theta], \[CurlyPhi]]], {\[Theta], 0,
+        Pi}, {\[CurlyPhi], 0, 2 Pi}, Boxed -> False, Axes -> None,
+        ColorFunction -> "TemperatureMap", ops] & /@ {Re, Abs},
+      Frame -> All]
+
+
+
+
+
+
 End[];
 Protect[DigitalCycle,TriPainting];
 

@@ -426,3 +426,39 @@ M=AdjacencyMatrix@GridGraph[{n,n}]+SparseArray[{Band[{1,1}]->1},{n^2,n^2}]
 ArrayPlot@Partition[LinearSolve[M,ConstantArray[1,n^2],Modulus->2],n]
 res=RowReduce[Transpose@Join[Transpose@M,{ConstantArray[1,n^2]}],Modulus->2];
 ArrayPlot@Partition[res[[All,-1]],n]
+
+
+
+
+
+
+
+
+
+
+ops = {PlotRange -> All, Boxed -> False, Axes -> False,
+  ContourStyle -> Directive[Red, Specularity[White, 10]],
+  PlotRange -> All, ViewPoint -> {1, 1, 0.2}}
+Nordstrand[x_, y_, z_] :=
+    (2*((4/3)*x)^2 + 2*y^2 + z^2 - 1)^3 - ((4/3)*x)^2*(z^3/10) -
+        y^2*z^3
+Kuska[x_, y_,
+  z_] := (2*x^2 + y^2 + z^2 - 1)^3 - ((1/10)*x^2)*z^3 - y^2*z^3
+
+Taubin[x_, y_, z_] := (x^2 + (3/2)^2*y^2 + z^2 - 1)^3 - x^2*z^3 -
+    (((3/2)^2/20)*y^2)*z^3
+
+Trott[x_, y_, z_] :=
+    320*((x^2 + (3/2)^2*y^2 + z^2 - 1)^3 -
+        x^2*z^3 - (((3/2)^2/20)*y^2)*z^3)
+ContourPlot3D[Kuska[x, y, z] == 0,
+  {x, -0.9, 0.9}, {y, -1.2, 1.2}, {z, -1.2, 1.4}]
+ContourPlot3D[Taubin[x, y, z] == 0,
+  {x, -2, 2}, {y, -2, 2}, {z, -2, 2}]
+ContourPlot3D[
+  Trott[x, y, z] == 0, {x, -3/2, 3/2}, {y, -1, 1}, {z, -3/2,
+  3/2}, #] & @@ ops
+ContourPlot3D[Nordstrand[x, y, z] == 0,
+  {x, -2, 2}, {y, -2, 2}, {z, -2, 2}, #] & @@ ops
+
+
