@@ -144,14 +144,6 @@ Mondrian[p_, complex_: 6, ratio_: 0.7] := Module[{splitx, splity, f, cols},
 
 
 
-MaxPlot[{Sin[x], Cos[x], 0.2}, {x, -10, 10}]
-MinPlot[{Sin[x], Cos[x], 0.2}, {x, -1, 1}]
-MaxPlot3D[{Sin[x] Cos[y], Cos[x] Sin[y]}, {x, -Pi, Pi}, {y, -Pi, Pi},
-  ViewPoint -> {0, 0, \[Infinity]}]
-MinPlot3D[{Sin[x] Cos[y], Cos[x] Sin[y]}, {x, -Pi, Pi}, {y, -Pi, Pi},
-  ViewPoint -> {0, 0, \[Infinity]}]
-
-
 SingleElectronGrid[k_, way_: Re, ops___] :=
     GraphicsGrid[
       Table[SphericalPlot3D[

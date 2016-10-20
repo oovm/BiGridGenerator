@@ -49,20 +49,7 @@ ParametricPlot[Evaluate[tocurve[#, 500, t] & /@ lines], {t, 0, 1},
   Frame -> True, Axes -> False]
 ------------------------------------------------------------------------------------------------------------------------------------
 
-MatrixRPS[n_?OddQ] :=MapIndexed[RotateRight,Table[Join[ConstantArray[1, (n - 1)/2], ConstantArray[0, (n + 1)/2]], {n}]]
-RPS7 = Graph[{"天枢", "天璇", "天玑", "天权", "玉衡", "开阳",
-  "瑶光"}, {SparseArray[Automatic, {7, 7}, 0, {1, {{0, 3, 6, 9, 12, 15, 18,
-  21}, {{2}, {3}, {4}, {3}, {4}, {5}, {4}, {5}, {6}, {5}, {6},
-  {7}, {1}, {6}, {7}, {1}, {2}, {7}, {1}, {2}, {3}}}, Pattern}], Null},
-  VertexLabels -> Placed["Name", Center],
-  VertexLabelStyle -> Directive[24, Lighter@Blue, Bold],VertexSize -> 0.3,
-  EdgeShapeFunction -> GraphElementData["CarvedArrow", "ArrowSize" -> 0.04],
-  GraphLayout -> "CircularEmbedding", ImageSize -> Large]
-RPS21 = AdjacencyGraph[MatrixRPS[21],
-  VertexLabels -> Placed["Index", Center],
-  VertexLabelStyle -> Directive[18, Lighter@Blue, Bold],VertexSize -> 0.3,
-  EdgeShapeFunction -> GraphElementData["CarvedArrow", "ArrowSize" -> 0.03],
-  GraphLayout -> "CircularEmbedding", ImageSize -> Large];
+
 
 A = ConstantArray[0, {7, 7}];
 DynamicModule[{pt = {0, 0}},
@@ -460,5 +447,3 @@ ContourPlot3D[
   3/2}, #] & @@ ops
 ContourPlot3D[Nordstrand[x, y, z] == 0,
   {x, -2, 2}, {y, -2, 2}, {z, -2, 2}, #] & @@ ops
-
-

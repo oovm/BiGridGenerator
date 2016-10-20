@@ -46,19 +46,18 @@ Gray3DPlot[img_,points_:200]:=Module[{gray},
 Options[letter]={ImageSize->100};
 letter[s_,OptionsPattern[]]:=Binarize@Graphics[
   {EdgeForm[None],FaceForm[Black],
-    First[First[
-      ImportString[ExportString[Style[s,FontSize->100],"PDF"],
+    First[First[ImportString[ExportString[Style[s,FontSize->100],"PDF"],
         "PDF","TextMode"->"Outlines"]]]},AspectRatio->1,
   ImageSize->OptionValue[ImageSize]];
 GEBPlot[str_String,res_Integer:100]:=Module[{X,Y,Z},
   {X,Y,Z}=(ImageData@letter[#,ImageSize->res])&/@StringPartition[str,1];
   Quiet@RegionPlot3D[X[[Round[i],Round[j]]]==0&&Y[[Round[i],Round[k]]]==0&&
         Z[[Round[j],Round[k]]]==0,{i,1,res},{j,1,res},{k,1,res},
-    Boxed->False,Axes->False,Mesh->None,
-    PlotPoints->res/10]];
+    Boxed->False,Axes->False,Mesh->None,PlotPoints->res/10]];
 FunQ={ConstantArray[#1,Length@{##2}],{##2}}&@@@NestList[RotateLeft,#,Length@#-1]&;
 FunGE[{a_,b_}]:=If[Inner[GreaterEqual,a,b,And],a[[1]],I];
 FunLE[{a_,b_}]:=If[Inner[LessEqual,a,b,And],a[[1]],I];
+(*Thanks to @Apple*)
 MaxPlot[funcs_,range_,ops___]:=Plot[Evaluate[FunGE/@(FunQ@funcs)],range,ops];
 MinPlot[funcs_,range_,ops___]:=Plot[Evaluate[FunLE/@(FunQ@funcs)],range,ops];
 MaxPlot3D[funcs_,range_,ops___]:=Plot3D[Evaluate[FunGE/@(FunQ@funcs)],range,ops];
