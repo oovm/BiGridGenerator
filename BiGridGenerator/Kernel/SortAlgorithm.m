@@ -6,8 +6,8 @@
 (* :Author: GalAster *)
 (* :Date: 2016-10-05 *)
 
-(* :Package Version: 1.2 *)
-(* :Update: 2016-10-16 *)
+(* :Package Version: 1.3 *)
+(* :Update: 2016-10-23 *)
 (* :Mathematica Version: 11.0+ *)
 (* :Copyright:该软件包遵从CC协议:BY+NA+NC(署名、非商业性使用、相同方式共享） *)
 (* :Keywords: *)
@@ -29,11 +29,11 @@ SortPlot::usage = "SortPlot[{List}]使用对应点状图显示排序过程";
 BeadSortStep::usage = "BeadSortStep[Matrix]给出状态矩阵Matrix的珠排的逐步过程.";
 BeadSort::usage = "BeadSort[List]给出List的珠排过程追踪.";
 BeadPlay::usage = "BeadPlay[List]播放List的状态矩阵的排序过程";
-BatcherSort::usage = "BatcherSort[n]显示对n个输入排序时的合并交换排序网络";
-InsertionSort::usage = "InsertionSort[n]显示对n个输入排序时的插入排序排序网络";
-OddEvenTranspositionSort::usage = "OddEvenTranspositionSort[n]显示对n个输入排序时的奇偶归并排序网络";
-PairwiseSort::usage = "PairwiseSort[n]显示对n个输入排序时的成对比较排序网络";
-OptimalSort::usage = "OptimalSort[n],n<=10时输出完美排序网络,10<n<=16输出理想排序网络,n>16时套用最佳的Batcher排序网络.";
+BatcherNet::usage = "BatcherNet[n]显示对n个输入排序时的合并交换排序网络";
+InsertionNet::usage = "InsertionNet[n]显示对n个输入排序时的插入排序排序网络";
+OddEvenTranspositionNet::usage = "OddEvenTranspositionNet[n]显示对n个输入排序时的奇偶归并排序网络";
+PairwiseNet::usage = "PairwiseNet[n]显示对n个输入排序时的成对比较排序网络";
+OptimalNet::usage = "OptimalNet[n],n<=10时输出完美排序网络,10<n<=16输出理想排序网络,n>16时套用最佳的Batcher排序网络.";
 NetEfficiency::usage = "NetEfficiency[net]分析排序网络net的工作效率.";
 NetShow::usage = "NetShow[n,net,input]大小为n的排序网络,选用排序网络算法net,input为待排序数据.";
 
@@ -85,12 +85,22 @@ CocktailSort[start_]:=Module[{liCocktail,CSort},
     liCocktail=Append[liCocktail,arr];]];]];
   CSort[start];liCocktail];
 BogoSort[start_]:=Module[{l,time,ans,res},
-  l=Length@start;time=RandomVariate@PoissonDistribution[ll!];
+  l=Length@start;time=RandomVariate@PoissonDistribution[l l!];
   res=DeleteCases[Table[RandomSample[start],{t,0,
     RandomVariate@PoissonDistribution[l^2]}],Sort@start]~Join~{Sort@start};
   ans=Sort@Union@RandomInteger[time,Ceiling@Sqrt@Length@res];
   Print["我们观测了"<>ToString[time]<>"个平行宇宙后得到了最终的结果,接下来我们输出编号"<>
       ToString[ans]<>"等"<>ToString[Length[res]]<>"个宇宙中的观测结果:"];res];
+QuickSort[s_]:=Module[{head,tail,qsort,t0},
+  head[{x_,xs___}]:=Select[{xs},#<=x&];
+  tail[{x_,xs___}]:=Select[{xs},#>x&];
+  qsort[{}]={};
+  qsort[l:{x_,___}]:=
+      Module[{lh,lt},(Sow@{l,lh=head@l,x,lt=tail@l};
+      Join[qsort@lh,{x},qsort@lt])];
+  t0=(Reap@qsort@s)[[2,1]]/.{l_,h_,x_,t_}:>Thread[l->Flatten@{h,x,t}];
+  t0=t0//.HoldPattern[x_->x_]|{}->Sequence[];
+  FoldList[#1/.#2&,s,t0]];
 Options[SortPlay]={ChartStyle->"DarkRainbow"};
 SortPlay[startlist_,OptionsPattern[]]:=
     Animate[BarChart[startlist[[n]],
@@ -146,7 +156,7 @@ NetworkGraphics[net_,seq_]:=
         If[seq=!=None,Thickness[.1/Length[First[seq]]],{}],
         MapIndexed[Line[{{#2[[1]],#1[[1]]},{#2[[1]],#1[[2]]}}]&,
           net1,{-2}]}},PlotRange->All,AspectRatio->1/3,ImageSize->Full]];
-BatcherSort[n_Integer]/;n>=2:=Block[{q,r,d,p,res={}},
+BatcherNet[n_Integer]/;n>=2:=Block[{q,r,d,p,res={}},
   Table[d=2^t;p=2^t;r=0;
     q=2^(Ceiling[Log[2,n]]-1);
     ExchangeLoop[n],
@@ -154,26 +164,26 @@ BatcherSort[n_Integer]/;n>=2:=Block[{q,r,d,p,res={}},
   DeleteCases[res,Null,\[Infinity]]];
 ExchangeLoop[n_Integer]:=(res=Append[res,Table[If[BitAnd[i,2^t]==r,{i+1,i+d+1}],{i,0,n-d-1}]];
 If[q!=p,d=q-p;q=q/2;r=p;ExchangeLoop[n]]);
-InsertionSort[n_]:=With[{m=Log[2,n]},(Join[#1,Rest[Reverse[#1]]]&)[
+InsertionNet[n_]:=With[{m=Log[2,n]},(Join[#1,Rest[Reverse[#1]]]&)[
       Rest[Flatten[Transpose[{Table[{i,i+1},{k,1,n,2},{i,2,k,2}],
           Table[{i,i+1},{k,1,n,2},{i,1,k,2}]}],1]]]]/;
         IntegerQ[Log[2,n]];
-OddEvenTranspositionSort[n_]:=
+OddEvenTranspositionNet[n_]:=
     Flatten[Table[{Table[{i,i+1},{i,1,n-1,2}],
       Table[{i,i+1},{i,2,n-2,2}]},{n/2}],1]/;
         IntegerQ[Log[2,n]];
-PairwiseSort[1]:={};
-PairwiseSort[n_]/;IntegerQ[Log[2,n]]&&n>=2:=Module[{res},
+PairwiseNet[1]:={};
+PairwiseNet[n_]/;IntegerQ[Log[2,n]]&&n>=2:=Module[{res},
   Join[{Table[{2i-1,2i},{i,1,n/2}]},
-    With[{s=PairwiseSort[n/2]},
+    With[{s=PairwiseNet[n/2]},
       Join[Map[2#-1&,s,{2}],Map[2#&,s,{2}]]],
     Table[Table[{2j,2(j+n/2^i)-1},{j,1,n/2-n/2^i}],{i,2,Log[2,n]}]]];
-OptimalSort[
+OptimalNet[
   9]={{{1,2},{4,5},{7,8}},{{2,3},{5,6},{8,9}},{{1,
   2},{4,5},{7,8},{3,6}},{{1,4},{2,5},{6,9}},{{4,
   7},{5,8},{3,6}},{{1,4},{2,5},{6,8},{3,7}},{{2,
   4},{5,7}},{{3,5},{6,7}},{{3,4}}};
-OptimalSort[
+OptimalNet[
   10]={{{5,10},{4,9},{3,8},{2,7},{1,6}},{{2,5},{7,
   10},{1,4},{6,9}},{{1,3},{4,7},{8,10}},{{1,2},{3,
   5},{6,8},{9,10}},{{2,3},{5,7},{8,9},{4,6}},{{3,
@@ -182,21 +192,21 @@ OptimalSort[
 (*Thanks to @Stephen Wolfram*)
 (*We just know the OptimalSortNetwork under 10*)
 (*https://arxiv.org/pdf/1405.5754v3.pdf*)
-OptimalSort[
+OptimalNet[
   11]={{{1,2},{3,4},{5,6},{7,8},{9,10}},{{2,4},{6,
   8},{1,3},{5,7},{9,11}},{{2,3},{6,7},{10,11},{1,
   5},{4,8}},{{2,6},{7,11},{5,9}},{{6,10},{3,7},{1,
   5},{4,9}},{{2,6},{7,11},{3,4},{9,10}},{{2,5},{8,
   11},{4,6},{7,9}},{{3,5},{8,10},{6,7}},{{4,5},{8,
   9}}};
-OptimalSort[
+OptimalNet[
   12]={{{1,2},{3,4},{5,6},{7,8},{9,10},{11,12}},{{2,
   4},{6,8},{10,12},{1,3},{5,7},{9,11}},{{2,3},{6,
   7},{10,11},{1,5},{8,12}},{{2,6},{7,11},{4,8},{5,
   9}},{{6,10},{3,7},{1,5},{8,12},{4,9}},{{2,6},{7,
   11},{3,4},{9,10}},{{2,5},{8,11},{4,6},{7,9}},{{3,
   5},{8,10},{6,7}},{{4,5},{8,9}}};
-OptimalSort[
+OptimalNet[
   13]={{{2,8},{10,12},{4,5},{6,9},{1,13},{3,7}},{{1,
   2},{3,4},{5,7},{9,12},{8,13},{6,10}},{{1,3},{4,
   8},{11,12},{2,5},{7,13}},{{8,9},{12,13},{5,10},{7,
@@ -204,7 +214,7 @@ OptimalSort[
   12},{2,4},{5,8},{9,11},{1,6}},{{3,6},{7,9},{10,
   11}},{{2,3},{4,6},{8,9},{5,7}},{{3,4},{5,6},{7,
   8},{9,10}},{{4,5},{6,7}}};
-OptimalSort[
+OptimalNet[
   14]={{{1,2},{3,4},{5,6},{7,8},{9,10},{11,12},{13,
   14}},{{1,3},{5,7},{9,11},{2,4},{6,8},{10,12}},{{1,
   5},{9,13},{2,6},{10,14},{3,7},{4,8}},{{1,9},{2,
@@ -213,7 +223,7 @@ OptimalSort[
   7},{10,11}},{{3,5},{12,14},{4,9},{8,13}},{{7,9},{11,
   13},{4,6},{8,10}},{{4,5},{6,7},{8,9},{10,11},{12,
   13}},{{7,8},{9,10}}};
-OptimalSort[
+OptimalNet[
   15]={{{1,2},{3,4},{5,6},{7,8},{9,10},{11,12},{13,
   14}},{{1,3},{5,7},{9,11},{13,15},{2,4},{6,8},{10,
   12}},{{1,5},{9,13},{2,6},{10,14},{3,7},{11,15},{4,
@@ -223,7 +233,7 @@ OptimalSort[
   5},{12,14},{4,9},{8,13}},{{7,9},{11,13},{4,6},{8,
   10}},{{4,5},{6,7},{8,9},{10,11},{12,13}},{{7,8},{9,
   10}}};
-OptimalSort[
+OptimalNet[
   16]={{{1,2},{3,4},{5,6},{7,8},{9,10},{11,12},{13,
   14},{15,16}},{{1,3},{5,7},{9,11},{13,15},{2,4},{6,
   8},{10,12},{14,16}},{{1,5},{9,13},{2,6},{10,14},{3,
@@ -233,16 +243,16 @@ OptimalSort[
   9},{12,15},{6,7},{10,11}},{{3,5},{12,14},{4,9},{8,
   13}},{{7,9},{11,13},{4,6},{8,10}},{{4,5},{6,7},{8,
   9},{10,11},{12,13}},{{7,8},{9,10}}};
-OptimalSort[n_]:=BatcherSort[n];
+OptimalNet[n_]:=BatcherNet[n];
 NetEfficiency[net_]:={Length@Flatten[net,1],Max[(Transpose@Tally@Flatten@net)[[2]]]};
 NetShow::undef="尚未发现大于10的完美排序网络,若n>16时仍输出Batcher网络.";
-NetShow[nn_,net_:OptimalSort,input_:None]:=Module[{n,s},
-  If[nn>10&&net===OptimalSort,Message[NetShow::undef]];
-  n=Switch[net,OddEvenTranspositionSort,2^Round[Log[2,nn]],
-    InsertionSort,2^Round[Log[2,nn]],
-    PairwiseSort,2^Round[Log[2,nn]],
-    BatcherSort,nn,
-    OptimalSort,nn];
+NetShow[nn_,net_:OptimalNet,input_:None]:=Module[{n,s},
+  If[nn>10&&net===OptimalNet,Message[NetShow::undef]];
+  n=Switch[net,OddEvenTranspositionNet,2^Round[Log[2,nn]],
+    InsertionNet,2^Round[Log[2,nn]],
+    PairwiseNet,2^Round[Log[2,nn]],
+    BatcherNet,nn,
+    OptimalNet,nn];
   s=net[n];
   If[input===None,NetworkGraphics[s,None],
     NetworkGraphics[s,Quiet@ApplySortingList[List/@Flatten[s,1],input]]]];
@@ -251,12 +261,12 @@ End[];
 
 
 SetAttributes[{ShellSort,BubbleSort,InsertionSort,CocktailSort,BogoSort,QuickSort,SortPlay,SortDraw,SortShow,SortPlot,
-  BeadSortStep,BeadSort,BeadPlay,PairSort,MultiPairSort,ApplySorting,ApplySortingList,NetworkGraphics,BatcherSort,
-  ExchangeLoop,InsertionSort,OddEvenTranspositionSort,PairwiseSort,OptimalSort,NetEfficiency,NetShow},Protected];
+  BeadSortStep,BeadSort,BeadPlay,PairSort,MultiPairSort,ApplySorting,ApplySortingList,NetworkGraphics,BatcherNet,
+  ExchangeLoop,InsertionNet,OddEvenTranspositionNet,PairwiseNet,OptimalNet,NetEfficiency,NetShow},Protected];
 SetAttributes[{ShellSort,BubbleSort,InsertionSort,CocktailSort,BogoSort,QuickSort,SortPlay,SortDraw,SortShow,SortPlot,
-  BeadSortStep,BeadSort,BeadPlay,PairSort,MultiPairSort,ApplySorting,ApplySortingList,NetworkGraphics,BatcherSort,
-  ExchangeLoop,InsertionSort,OddEvenTranspositionSort,PairwiseSort,OptimalSort,NetEfficiency,NetShow},ReadProtected];
+  BeadSortStep,BeadSort,BeadPlay,PairSort,MultiPairSort,ApplySorting,ApplySortingList,NetworkGraphics,BatcherNet,
+  ExchangeLoop,InsertionNet,OddEvenTranspositionNet,PairwiseNet,OptimalNet,NetEfficiency,NetShow},ReadProtected];
 SetAttributes[{ShellSort,BubbleSort,InsertionSort,CocktailSort,BogoSort,QuickSort,SortPlay,SortDraw,SortShow,SortPlot,
-  BeadSortStep,BeadSort,BeadPlay,PairSort,MultiPairSort,ApplySorting,ApplySortingList,NetworkGraphics,BatcherSort,
-  ExchangeLoop,InsertionSort,OddEvenTranspositionSort,PairwiseSort,OptimalSort,NetEfficiency,NetShow},Locked];
+  BeadSortStep,BeadSort,BeadPlay,PairSort,MultiPairSort,ApplySorting,ApplySortingList,NetworkGraphics,BatcherNet,
+  ExchangeLoop,InsertionNet,OddEvenTranspositionNet,PairwiseNet,OptimalNet,NetEfficiency,NetShow},Locked];
 EndPackage[]

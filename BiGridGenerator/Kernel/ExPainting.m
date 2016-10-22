@@ -98,7 +98,16 @@ ExpandPainting[img_,neigh_:20,samp_:1000]:=Module[{dims,canvas,mask},
       dims=ImageDimensions[img];
       canvas=ImageCrop[starryNight,2*dims,Padding->White];
       mask=ImageCrop[ConstantImage[Black,dims],2*dims,Padding->White];
-      Inpaint[canvas,mask,Method->{"TextureSynthesis","NeighborCount"->30,"MaxSamples"->1000}]]
+      Inpaint[canvas,mask,Method->{"TextureSynthesis","NeighborCount"->30,"MaxSamples"->1000}]];
+(*LineWebPainting[图像,细腻度:100]*)
+LineWebPainting[img_,k_:100]:=Module[{radon,lhalf,inverseDualRadon,lines},
+      radon=Radon[ColorNegate@ColorConvert[img,"Grayscale"]];
+      {w,h}=ImageDimensions[radon];
+      lhalf=Table[N@Sin[\[Pi] i/h],{i,0,h-1},{j,0,w-1}];
+      inverseDualRadon=Image@Chop@InverseFourier[lhalf Fourier[ImageData[radon]]];
+      lines=ImageApply[With[{p=Clip[k#,{0,1}]},RandomChoice[{1-p,p}->{0,1}]]&,inverseDualRadon];
+      ColorNegate@ImageAdjust[InverseRadon[lines,ImageDimensions[img],Method->None],0,{0,k}]];
+
 
 
 
