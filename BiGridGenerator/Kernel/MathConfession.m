@@ -29,7 +29,7 @@ MathLove[1]:=Module[{rose,stem,text},
     PlotRange->{{-1,1},{-1,1},{-1.6,1}}];
   stem=Graphics3D[{Green,Cylinder[{{0,0,-0.05},{0,0,-10}},0.1]}];
   text=Text[TraditionalForm[(49/50)*x*((x*(400*x*(16*x-25)+3913)*(Cos[Pi/E^(1/4)]-1))/4000+Cos[Pi/(2*E^(1/4))])]];
-  Print[text];Show[rose,stem]]
+  Print[text];Show[rose,stem]];
 MathLove[2]:=Module[{vals,funs},
   {vals,funs}=NDEigensystem[{-Laplacian[u[x,y],{x,y}],
         DirichletCondition[u[x,y]==0,x==0]},
@@ -40,7 +40,8 @@ MathLove[2]:=Module[{vals,funs},
         RowBox[{\"x\",\",\",\"y\"}],\"}\"}]},\n\
         \"Laplacian\"]\),3<\!\(\*SuperscriptBox[\(x\),\
         \(2\)]\)+\!\(\*SuperscriptBox[\(y\),\(2\)]\)<5",Below]]];
-
+MathLove[3]:=Module[{},Print@TraditionalForm[z==(x+y)/((y^2+x^2-2)^3+y^2x^3)];
+      MatrixPlot[Table[(x+y)/((y^2+x^2-2)^3+y^2x^3),{x,-2.5,2,0.01},{y,-2.25,2.25,0.01}],Frame->False]];
 
 
 

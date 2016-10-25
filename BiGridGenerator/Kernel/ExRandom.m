@@ -58,8 +58,22 @@ DecryptMarySue[Str_String]:=Module[{输入,破译密匙,破译内容},
       破译密匙=SymmetricKey[<|"Cipher"->"AES256","BlockMode"->"CBC","Key"->ByteArray[输入[[1;;32]]-1],"InitializationVector"->ByteArray["AQIDBAUGBwgJCgsMDQ4PEA=="]|>];
       破译内容=EncryptedObject[<|"Data"->ByteArray[输入[[33;;-1]]-1],"InitializationVector"->ByteArray["AQIDBAUGBwgJCgsMDQ4PEA=="],"OriginalForm"->String|>];
       Decrypt[破译密匙,破译内容]];
-
-
+(*Random cosmic background radiation*)
+InvMollweide[{x_,y_}]:=With[{theta=ArcSin[y]},{Pi(x)/(2Cos[theta]),ArcSin[(2theta+Sin[2theta])/Pi]}];
+RandomCBR[res_:64]:=Module[{Alms,fieldN,dat,im},
+  Do[Alms[l,m]=(Random[NormalDistribution[]]+I Random[NormalDistribution[]])/Sqrt[(l+2)(l+1)];
+  Alms[l,-m]=(-1)^m Conjugate@Alms[l,m];,{l,0,48},{m,0,l}];
+  Do[Alms[l,0]=(Random[NormalDistribution[]])/Sqrt[(l+2)(l+1)];,{l,0,48}];
+  fieldN=Compile[{\[Theta],\[Phi]},Evaluate@Sum[Alms[l,m]SphericalHarmonicY[l,m,\[Theta],\[Phi]],{l,0,48},{m,-l,l}]];
+  dat=ParallelTable[fieldN[\[Theta],\[Phi]],{\[Theta],0.0,Pi,Pi/res},{\[Phi],0.0,2Pi,Pi/res}];
+  im=Re[dat]//Image//ImageAdjust//Colorize[#,ColorFunction->"LightTemperatureMap"]&;
+  ImageTransformation[im,InvMollweide,DataRange->{{-Pi,Pi},{-Pi/2,Pi/2}},PlotRange->{{-2,2},{-1,1}},Padding->White]];
+RandomPebble[n_,sc_:0.95]:=With[{data=MapIndexed[Flatten[{##1}]&,RandomReal[1,{n,2}]]},
+  Normal[ListDensityPlot[data,InterpolationOrder->0,
+    ColorFunction->Hue,Mesh->All,
+    Background->Lighter[Hue[RandomReal[]],.75],Frame->False,
+    ImageSize->400]]/.Polygon[l_,v_]:>Scale[{Hue[RandomReal[]],
+    FilledCurve[BSplineCurve[l,SplineClosed->True,SplineDegree->3]]},sc]];
 
 
 

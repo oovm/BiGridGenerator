@@ -43,6 +43,10 @@ ComplexPlot[f_]:=Module[{fun,data,RE,IM,ABS},
 Gray3DPlot[img_,points_:200]:=Module[{gray},
   gray=Reverse@ImageData@RemoveAlphaChannel@ColorConvert[img,"Grayscale"];
   ListPlot3D[gray,ColorFunction->GrayLevel,MaxPlotPoints->points,Boxed->False,Axes->False,Mesh->None]];
+WavePlot[img_,mf_:5,md_:80,ops___]:=Module[{in,gray},
+  in=ImageResize[MeanFilter[img,mf],{200,md}];
+  gray=Reverse@ImageData@RemoveAlphaChannel@ColorConvert[in,"Grayscale"];
+  ListPlot3D[gray,Mesh->{0,md},PlotStyle->Opacity[0],Boxed->False,Axes->False,ops]];
 Options[letter]={ImageSize->100};
 letter[s_,OptionsPattern[]]:=Binarize@Graphics[
   {EdgeForm[None],FaceForm[Black],
@@ -62,7 +66,8 @@ MaxPlot[funcs_,range_,ops___]:=Plot[Evaluate[FunGE/@(FunQ@funcs)],range,ops];
 MinPlot[funcs_,range_,ops___]:=Plot[Evaluate[FunLE/@(FunQ@funcs)],range,ops];
 MaxPlot3D[funcs_,range_,ops___]:=Plot3D[Evaluate[FunGE/@(FunQ@funcs)],range,ops];
 MinPlot3D[funcs_,range_,ops___]:=Plot3D[Evaluate[FunLE/@(FunQ@funcs)],range,ops];
-
+DigitsPlot[x_,num_:100,dig_:10,ops___]:=
+    ArrayPlot[Partition[RealDigits[x,dig,num][[1]],dig],Mesh->True,ops];
 
 
 
