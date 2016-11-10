@@ -392,6 +392,6 @@ Quiet@LayeredGraphPlot[Union@DeleteCases[
   ControlType->PopupMenu},{{view,"plot","view"},{"plot","graph"}},SynchronousUpdating->False,AutorunSequencing->{3}];
 
 
-End[] (* `Private` *)
+End[]; (* `Private` *)
 
-EndPackage[]
+EndPackage[];

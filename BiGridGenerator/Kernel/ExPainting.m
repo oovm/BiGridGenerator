@@ -161,13 +161,18 @@ ExpandPainting[img_,neigh_:20,samp_:1000]:=Module[{dims,canvas,mask},
       Inpaint[canvas,mask,Method->{"TextureSynthesis","NeighborCount"->30,"MaxSamples"->1000}]];
 (*LineWebPainting[图像,细腻度:100]*)
 LineWebPainting[img_,k_:100]:=Module[{radon,lhalf,inverseDualRadon,lines},
+  If[k === 0, Return[img]];
       radon=Radon[ColorNegate@ColorConvert[img,"Grayscale"]];
       {w,h}=ImageDimensions[radon];
       lhalf=Table[N@Sin[\[Pi] i/h],{i,0,h-1},{j,0,w-1}];
       inverseDualRadon=Image@Chop@InverseFourier[lhalf Fourier[ImageData[radon]]];
-      lines=ImageApply[With[{p=Clip[k#,{0,1}]},RandomChoice[{1-p,p}->{0,1}]]&,inverseDualRadon];
+      lines=ImageApply[With[{p=Clip[k #,{0,1}]},RandomChoice[{1-p,p}->{0,1}]]&,inverseDualRadon];
       ColorNegate@ImageAdjust[InverseRadon[lines,ImageDimensions[img],Method->None],0,{0,k}]];
-
+ImageStandUp[img_]:=Module[{lines=ImageLines@DeleteSmallComponents[EdgeDetect[img,Method->{"Canny","StraightEdges"->0.4}]],list},
+      ImageRotate[img,Mean@Select[list=Mod[-#,Pi/2,-Pi/4]&/@ArcTan@@@Subtract@@@lines,
+        Chop[First@Commonest@Round[list,1/1000]-#,1/1000]===0&],Background->Transparent]];
+ImageStandUp[img_,"TryAll"]:=Module[{imgrote},imgrote=ImageRotate[img,#,"SameRatioCropping"]&/@
+    Range[-Pi/2,Pi/2,Pi/6];TableForm[Function[{a,b},a->b]@@@Transpose@{imgrote,ImageStandUp/@imgrote}]];
 
 
 

@@ -447,3 +447,22 @@ ContourPlot3D[
   3/2}, #] & @@ ops
 ContourPlot3D[Nordstrand[x, y, z] == 0,
   {x, -2, 2}, {y, -2, 2}, {z, -2, 2}, #] & @@ ops
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
