@@ -453,9 +453,23 @@ ContourPlot3D[Nordstrand[x, y, z] == 0,
 
 
 
+Trans = If[
+  Head@ WolframLanguageData[ToString@#, "Translations"] === Missing,
+  Nothing, # ->
+      Entity["WritingScript", "SimplifiedChinese::zzc7y"] /.
+      WolframLanguageData[ToString@#, "Translations"]] &;
+SetAttributes[{ToLisp}, HoldAll];
+ToLisp[exp_] := Module[{raw, input, output},
+  raw = HoldForm[#] &[FullForm[exp]];
+  input = exp /. f_[x_] -> {f, x};
+  output = Trans /@ Union@Flatten@input;
+  StringReplace[
+    ToString[input /. output], {"{" -> "(", "}" -> ")", "," -> " "}]]
 
-
-
+Function[{total, num},
+  Differences@
+      Sort[1 + (RandomInteger[{0, 100 total - num}, num - 1]~
+          Join~{0, 100 total - num})]/100.0]
 
 
 

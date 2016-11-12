@@ -4,9 +4,11 @@
 
 
 (*Data\:5305*)
-Get[FileNameJoin[{NotebookDirectory[],"ExData.mx"}]]
+Get[FileNameJoin[{NotebookDirectory[],"ExCode","ExData.mx"}]]
 (*Kernel\:5305*)
 Get[FileNameJoin[{NotebookDirectory[],"MagicSquare.mx"}]]
 Get[FileNameJoin[{NotebookDirectory[],"SortAlgorithm.mx"}]]
+(*Ex\:5305*)
+
 (*Game\:5305*)
 Get[FileNameJoin[{NotebookDirectory[],"Game","RockPaperScissors.mx"}]]

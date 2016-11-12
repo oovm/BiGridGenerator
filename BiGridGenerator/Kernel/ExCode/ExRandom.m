@@ -41,23 +41,6 @@ RandomPartition[n_,p_?IntegerQ]:=Module[{r},r=RandomSample[Range[1,n],p-1]//Sort
     AppendTo[r,n];Prepend[r//Differences,r[[1]]]];
 RandomPartition[n_,V_?VectorQ]:=Module[{r,s},r=RandomInteger[V,n];
     s=Select[Accumulate@r,#<n&]~Join~{n};Append[Differences@s,s[[1]]]];
-(*StringJoin@Union@StringPartition[%,1]*)
-取值集=StringPartition[(*反正比256多就行*)
-  "丝丹丽之乐云亚仪伊优伤佳依俏倩倾兮兰冰凌凝凡凤凪利千华卿可叶吉君咏哀嘉园城基塔墨夏多奥如妍妖妙妮妲姆姣姬娅娜娣娥娴婉婵婷媛嫩宁安宜寂\
-寇寒岚巧希幻幽弥彩影御心思怡恋恩悠悦情慕慧拉文斯春昭晓晗晶曦曼月朵枝枫柒柔格桂梅梦樱欢欣殇残毓沫泪洁洛浅海涅淑清温渺滢澜澪灵烟然燕燢爱爽玉\
-玖玛玥玫环玲珊珍珠琉琦琪琬琰琳琴琼瑗瑞瑟瑰瑶瑷璃璎璐璧白百盘眉真碎离秀秋筱米素紫红纨纯纱绯缈美羽翠翼育舒舞艳艺艾芊芝芬花芳芸苏苑英茉茗茜茹荔\
-荷莉莎莲莳莹莺菁菲萌萍萝萦萨落蒂蓉蓓蓝蔷蕊蕴蕾薇薰蝶融血裳语贞迷邪铃银锦阳陌雁雅雨雪霄霜霞霭露青静音韵颖颜风飘香馥馨魂魅魑鸢黎黛",1];
-关联=AssociationThread[Range@Length[取值集]->取值集];
-反关联=AssociationThread[取值集->Range@Length[取值集]];
-EncryptMarySue[Str_String]:=Module[{密匙,输出},
-      密匙=GenerateSymmetricKey[Method-><|"Cipher"->"AES256","InitializationVector"->ByteArray[{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16}]|>];
-      输出=Join[Normal@密匙["Key"],Normal@Encrypt[密匙,Str]["Data"]]+1;
-      StringInsert[StringJoin[关联/@输出],"\[CenterDot]",Select[Accumulate[{RandomInteger[{2,5}]}~Join~RandomInteger[{1,9},关联/@输出//Length]],#<Length[关联/@输出]&]]];
-DecryptMarySue[Str_String]:=Module[{输入,破译密匙,破译内容},
-      输入=反关联/@StringPartition[StringDelete[Str,"\[CenterDot]"],1];
-      破译密匙=SymmetricKey[<|"Cipher"->"AES256","BlockMode"->"CBC","Key"->ByteArray[输入[[1;;32]]-1],"InitializationVector"->ByteArray["AQIDBAUGBwgJCgsMDQ4PEA=="]|>];
-      破译内容=EncryptedObject[<|"Data"->ByteArray[输入[[33;;-1]]-1],"InitializationVector"->ByteArray["AQIDBAUGBwgJCgsMDQ4PEA=="],"OriginalForm"->String|>];
-      Decrypt[破译密匙,破译内容]];
 (*Random cosmic background radiation*)
 InvMollweide[{x_,y_}]:=With[{theta=ArcSin[y]},{Pi(x)/(2Cos[theta]),ArcSin[(2theta+Sin[2theta])/Pi]}];
 RandomCBR[res_:64]:=Module[{Alms,fieldN,dat,im},
