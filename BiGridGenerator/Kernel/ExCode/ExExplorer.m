@@ -14,7 +14,7 @@
 (* :Discussion: *)
 
 BeginPackage["ExExplorer`"];
-(* Exported symbols added here with SymbolName::usage *)
+
 
 Begin["`Private`"];
 AttractorExplorer=Manipulate[With[{sol$=NDSolve[Evaluate[{
@@ -87,6 +87,7 @@ ParametricPlot3D[Evaluate[{x[t],y[t],z[t]}/.sol$],
     31->"Wimol\[Dash]Banlue",
     32->"Yu\[Dash]Wang"}},
 {{tf,500.,"time"},1,500,Appearance->"Labeled"},SynchronousUpdating->False,ControllerLinking->True];
+(*-------------------------------------------------------------------------------------------------------------------------------------------------*)
 DecayExplorer=Manipulate[Quiet@If[!MemberQ[IsotopeData[],
         StringJoin[elem,isotope]|Entity["Isotope",StringJoin[elem,isotope]]],
     isotope=Which[elem=="Neutron",First[{}],
@@ -390,8 +391,8 @@ Quiet@LayeredGraphPlot[Union@DeleteCases[
     elem=="Ununseptium",{"291","292"},
     elem=="Ununoctium",{"293"}],
   ControlType->PopupMenu},{{view,"plot","view"},{"plot","graph"}},SynchronousUpdating->False,AutorunSequencing->{3}];
+(*-------------------------------------------------------------------------------------------------------------------------------------------------*)
 
-
-End[]; (* `Private` *)
+End[];
 
 EndPackage[];

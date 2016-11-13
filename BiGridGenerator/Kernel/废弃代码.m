@@ -49,37 +49,6 @@ ParametricPlot[Evaluate[tocurve[#, 500, t] & /@ lines], {t, 0, 1},
   Frame -> True, Axes -> False]
 ------------------------------------------------------------------------------------------------------------------------------------
 
-
-
-A = ConstantArray[0, {7, 7}];
-DynamicModule[{pt = {0, 0}},
-  Dynamic@EventHandler[
-    ArrayPlot[A, ImageSize -> 512, Mesh -> True,
-      MeshStyle ->
-          Black], {{"MouseDown",
-      1} :> (A[[Ceiling[7 - MousePosition["Graphics"][[2]]],
-        Ceiling[MousePosition["Graphics"][[1]]]]] = 1), {"MouseDown",
-      2} :> (A[[Ceiling[7 - MousePosition["Graphics"][[2]]],
-        Ceiling[MousePosition["Graphics"][[1]]]]] = 0)}]]
-Dynamic[B = {Length[A[[1]]], FromDigits[#, 2] & /@ A}]
-NonogramList = B
-ListToMatrix[list_] := IntegerDigits[list[[2]], 2, list[[1]]]
-ArrayPlot[NonogramMatrix = ListToMatrix@NonogramList]
-SplitNM = Map[Split, NonogramMatrix];
-SplitMN = Map[Split, Transpose[NonogramMatrix]];
-ListLift =
-    Map[Length,
-      Table[Select[SplitNM[[i]], MemberQ[#, 1] &], {i, 1,
-        Length[SplitNM]}], {2}]
-ListAbove =
-    Map[Length,
-      Table[Select[SplitMN[[i]], MemberQ[#, 1] &], {i, 1,
-        Length[SplitMN]}], {2}]
-
-----------------------------------------------------------------------------------------------------------------------------------
-
-
-
 (*定义决策树*)
 决策[救赎者] := 1;
 决策[背叛者] := 0;
@@ -282,43 +251,6 @@ Sum[Sum[Fibonacci[i]*Fibonacci[1-i+n],{i,1,n-2}],{n,4,32,2}]
 Sum[Sum[Fibonacci[i],{i,1,n-2}],{n,4,32,2}]
 
 
-DisplaySum[a_,{n_,n1_,n2_},opts:OptionsPattern[]]/;n1<=n2:=
-    Module[{nf=Min[n1+OptionValue["Terms"]-1,n2]},
-      Row[{Defer[Sum[a,{n,n1,n2}]],
-      Composition[Defer,Plus]@@Append[Table[a,{n,n1,nf}],
-      If[n2===\[Infinity],"\[CenterEllipsis]",Nothing]],
-    Sum[a,{n,n1,n2}]},"="]];
-Summation[fun_]:=Sum[fun,{n,1,Infinity},Regularization->#]&/@
-    {"None","Abel","Euler","Cesaro","Dirichlet","Borel"};
-RamanujanSummation[fun_]:=Module[{f},
-  f=Function[Evaluate@Variables[Level[fun,{-1}]],Evaluate@fun];
-  -(f[0]/2)+I*Integrate[(f[I*t]-f[(-I)*t])/(E^(2*Pi*t)-1),{t,0,Infinity}]]
-ImproperSum[function_]:=Module[{ans,name},
-  ans=Join[Summation[function],{RamanujanSummation[function]}];
-  name={"Cauchy","Abel","Euler","Cesaro","Dirichlet","Borel","Ramanujan"};
-  TableForm@Transpose[{name,If[Head@#===Sum,"Undefinited",#]&/@ans}]];
-DisplaySum[Sqrt[n], {n, 1, Infinity}]
-ImproperSum[Sqrt[n]]
-
-
-
-
-    
-    
-    
-MultPrime::usage = "PlusPrime[n]生成n以内所有可以由两个素数相乘得到的整数";
-MultPrime[n_] := Union @@ Table[
-    p TakeWhile[Prime@Range@PrimePi@n, p # < n &], {p,
-     TakeWhile[l, # < Sqrt@n &]}];
-PlusPrime::usage = "PlusPrime[n]生成n以内所有可以由两个素数相加得到的整数";
-PlusPrime[n_] := 
-  Union @@ Table[
-    p + TakeWhile[Prime@Range@PrimePi@n, p # < n &], {p, 
-     TakeWhile[l, # < Sqrt@n &]}];
-ManyPrime::usage = "ManyPrime[n]生成n以内所有可以由s个素数相乘得到的整数";
-ManyPrime[n_, s_] := Select[Range[n], PrimeOmega[#] == s &]
-
-
 
 ------------------------------------------------------------------------------------------------------------------------------------
 nc = 15; nr = 3;
@@ -372,7 +304,7 @@ Manipulate[
   ],
   {tmax, 0.001, 200, 1.5}
 ]
-
+-----------------------------------------------------------------------------------------------------------------------------------
 
 Graphics@Table[BlockMap[{RandomColor[],Rectangle[{#[[1]],y},{#[[2]],y+1}]}&,Accumulate@Prepend[0]@RandomPartition[100,16],2,1],{y,100}]
 
@@ -475,7 +407,26 @@ Function[{total, num},
 
 
 
+Clear["`*"];
+谢宾斯基三角上的随机游走
+n = 5;
+steps = 1000;
+dir = {{0, 0}, {1, 0}, {0, 1}};
 
+start = FromDigits[#, 2] & /@
+    Transpose@Append[RandomChoice[dir, n - 1], RandomInteger[1, 2]];
+
+move[pt_] :=
+    With[{c = RandomChoice@Pick[-dir, BitAnd @@ (# + pt) & /@ -dir, 0]},
+      pt + c + RandomChoice@DeleteCases[dir, -c]];
+move[{2^n, 0}] := {2^n - 1, RandomInteger@1};
+move[{0, 2^n}] := {RandomInteger@1, 2^n - 1};
+move[{0, 0}] := RandomChoice@Rest@dir;
+
+ListLinePlot[{#1 + #2/2, #2*Sqrt@3/2} & @@@
+    NestList[move, start, steps],
+  PlotRange -> {{0, 2^n}, {0, 2^n*Sqrt[3]/2}},
+  AspectRatio -> Sqrt[3]/2]
 
 
 
