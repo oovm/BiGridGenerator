@@ -1,11 +1,11 @@
 (* Paclet Info File *)
 
-(* created 2016/10/19*)
+(* created 2016/10/01*)
 
 Paclet[
     Name -> "BiGridGenerator",
-    Version -> "0.1.4",
-    MathematicaVersion -> "9+",
+    Version -> "0.2.2",
+    MathematicaVersion -> "11+",
     Description -> "逼格场发生器",
     Creator -> "GalAster",
     Extensions -> 

@@ -397,7 +397,7 @@ ToLisp[exp_] := Module[{raw, input, output},
   output = Trans /@ Union@Flatten@input;
   StringReplace[
     ToString[input /. output], {"{" -> "(", "}" -> ")", "," -> " "}]]
-
+　
 Function[{total, num},
   Differences@
       Sort[1 + (RandomInteger[{0, 100 total - num}, num - 1]~
