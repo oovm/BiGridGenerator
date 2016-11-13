@@ -13,11 +13,11 @@
 (* :Keywords: *)
 (* :Discussion: *)
 
-BeginPackage["RockPaperScissors`"];
+BeginPackage["BiGridGenerator`RockPaperScissors`"];
 GraphRPS::usage="GraphRPS[n]给出n元猜拳的胜负判定图.";
 MatrixRPS::usage="MatrixRPS[n]可以输出n元猜拳的关系矩阵.";
 RPSQ::usage="RPSQ[k,{x,n}]判定n元猜拳中{x,n}的胜负向量,1为胜,0为平,-1为败.";
-GameRPS::usage="GameRPS[],与MathematicaAI玩猜拳!你觉得猜拳有策略吗?";
+GameRPS::usage="GameRPS[],与Mathematica AI玩猜拳!你觉得猜拳有策略吗?";
 
 
 
@@ -84,7 +84,5 @@ bestGuess[{}]:=RandomInteger[{1,3}];
 bestGuess[data_]:=Block[{max=Length[data]},Sort[Flatten[Outer[prediction[historySeek[data,#1,#2]]&,Range[max],{1,2,All}],{1,2}]]][[1,-1]];
 chooseGo2[data_]:=Mod[bestGuess[data]+1,3,1];)];
 End[];
-SetAttributes[{GraphRPS,MatrixRPS,RPSQ,GameRPS},Protected];
-SetAttributes[{GraphRPS,MatrixRPS,RPSQ,GameRPS},ReadProtected];
-SetAttributes[{GraphRPS,MatrixRPS,RPSQ,GameRPS},Locked];
+SetAttributes[{GraphRPS,MatrixRPS,RPSQ,GameRPS},{Protected,ReadProtected,Locked}];
 EndPackage[];

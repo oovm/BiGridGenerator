@@ -2,9 +2,14 @@
 
 {
 (*幻方程序包 MagicSquare.m*)
-  "Magic -> 幻方"
-  "Magic3D" -> "3D幻方"
-  "Magic3DShow" -> "显示3D幻方"
-  "MagicQ" -> "幻方检测"
-  "Magic3DQ" -> "3D幻方检测"
+  "MagicUsage" -> "幻方",
+  "Magic3DUsage" -> "3D幻方",
+  "Magic3DShowUsage" -> "显示3D幻方",
+  "MagicQUsage" -> "幻方检测",
+  "Magic3DQUsage" -> "3D幻方检测",
+(*猜拳程序包 RockPaperScissors.m*)
+  "GraphRPS" -> "猜拳图",
+  "MatrixRPS" -> "猜拳矩阵",
+  "RPSQ" -> "猜拳判定",
+  "GameRPS" -> "玩猜拳游戏!"
 };

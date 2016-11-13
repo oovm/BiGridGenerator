@@ -6,8 +6,8 @@
 (* :Author: GalAster *)
 (* :Date: 2016-9-17 *)
 
-(* :Package Version: 0.5 *)
-(* :Update: 2016-10-25 *)
+(* :Package Version: 0.6 *)
+(* :Update: 2016-11-13 *)
 (* :Mathematica Version: 11.0+ *)
 (* :Copyright:该软件包遵从CC协议:BY+NA+NC(署名、非商业性使用、相同方式共享） *)
 (* :Keywords: *)
@@ -392,7 +392,22 @@ Quiet@LayeredGraphPlot[Union@DeleteCases[
     elem=="Ununoctium",{"293"}],
   ControlType->PopupMenu},{{view,"plot","view"},{"plot","graph"}},SynchronousUpdating->False,AutorunSequencing->{3}];
 (*-------------------------------------------------------------------------------------------------------------------------------------------------*)
-
+(*http://mathematica.stackexchange.com/questions/29339/the-clearest-way-to-represent-mathematicas-evaluation-sequence#5527117*)
+SetAttributes[TraceExplorer,{HoldAllComplete}];
+TraceExplorer[expr_]:=Module[{steps={},stack={},pre,post,show,default=False},
+      pre[e_]:=(stack={steps,stack};steps={});
+      post[e_,r_]:=(steps=First@stack~Join~{show[e,HoldForm@r,steps]};
+      stack=stack[[2]]);
+      SetAttributes[post,HoldAllComplete];
+      show[e_,r_,steps_]:=Module[{open=False},
+            Grid[steps/.{{}->{{"Expr",Item[e,Background->GrayLevel@.8]}},_->{{"Expr",e},
+              {Toggler[Dynamic@open,{True->Button["Steps",Appearance->{"DialogBox","Pressed"}],False->Button@"Steps"}],
+                steps/.{{}->Style["nodefinitionsapply",Italic],_:>
+                    Dynamic@If[open,Column@steps,Grid@{{Length@steps,"steps"}}]}},{"Result",r}}},
+              Alignment->{Left,Center},Frame->All,Spacings->Automatic,Background->{{Hue[.65,.1,1]},None}]];
+      TraceScan[pre,expr,___,post];
+      Deploy@Column@{Opener@Dynamic@default,Dynamic@Pane[First@steps,ImageSize->10000]}];
+(*-------------------------------------------------------------------------------------------------------------------------------------------------*)
 End[];
 
 EndPackage[];

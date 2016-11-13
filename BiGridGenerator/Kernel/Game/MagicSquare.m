@@ -13,7 +13,9 @@
 (* :Keywords: *)
 (* :Discussion: *)
 
-BeginPackage["MagicSquare`"];
+
+
+BeginPackage["BiGridGenerator`MagicSquare`"];
 Magic::usage = "Magic[n]可以生成n×n的幻方.";
 Magic3D::usage = "Magic3D[n]可以生成n×n×n的幻立方";
 Magic3DShow::usage = "Magic3DShow[n]使得幻立方分层显示";
@@ -88,7 +90,5 @@ End[];
 
 
 SetAttributes[{Magic,Magic3D},Listable];
-SetAttributes[{Magic,Magic3D,Magic3DShow,MagicQ,Magic3DQ},Protected];
-SetAttributes[{Magic,Magic3D,Magic3DShow,MagicQ,Magic3DQ},ReadProtected];
-SetAttributes[{Magic,Magic3D,Magic3DShow,MagicQ,Magic3DQ},Locked];
-EndPackage[]
+SetAttributes[{Magic,Magic3D,Magic3DShow,MagicQ,Magic3DQ},{Protected,ReadProtected,Locked}];
+EndPackage[];
