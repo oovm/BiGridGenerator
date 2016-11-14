@@ -1,69 +1,79 @@
-(* :Title: kempnerSums.m -- a package to compute sums of Kempner series *)
+(* ::Package:: *)
 
-(* :Mathematica Version: works on 4.0, 5.2, and 6.0 *)
+(* ::Subtitle:: *)
+(*A package to compute sums of Kempner series*)
 
-(* :Package Version: 2.2.
-   7/24/2008: updated links to paper and on-line version of this file.
-   5/30/2008: removed old code that is no longer used.
-   5/14/2008: two minor changes to make this be compatible with
-   mathematica versions 4 and 5.2.
-   5/29/2008: use "===", not "==", to check expression types.
-   reworked some of the examples.
-*)
 
-(* :Authors: Robert Baillie and Thomas Schmelzer *)
+(* ::Subsection::Closed:: *)
+(*Version information*)
 
-(* :Copyright: none.  This code is in the public domain.
-   Users are encouraged to improve this code.
-*)
 
-(* :Summary:
-   This package computes sums of "Kempner" series.
+(* ::Text:: *)
+(*Mathematica Version: 4.0 + *)
+(**)
+(*Package Version: 2.2 -- 7/24/2008 *)
+(**)
+(*Authors: Robert Baillie and Thomas Schmelzer *)
+(**)
+(*Translator: GalAster - \:9171\:7d2b\:541b *)
+(**)
+(*Copyright: Non-Commercial *)
 
-   The harmonic series 1/1 + 1/2 + 1/3 + ... + 1/n + ... diverges.  This means
-   that the sum can be made as large as desired by adding enough terms.
 
-   Suppose we delete from this series all terms with a "9" in the denominator.
-   That is, we remove 1/9, 1/19, 1/29, etc.  Then the remaining series converges
-   to a sum less than 80.  This was first proved in 1914 by A. J. Kempner.
+(* ::Subsection::Closed:: *)
+(*Summary*)
 
-   We can also delete from the harmonic series all terms whose denominators
-   contain:
-     any digit 0, 1, ..., 9;
-    or
-     a list of one or more digits, such as the even digits {0, 2, 4, 6, 8};
-    or
-     any individual multi-digit string or number, such as "00", 42, or 314159;
-    or
-     any list of patterns of digits, such as { 3, "00", 42, 314159 }.
-   In all such cases, the terms that remain form a convergent series.
 
-   However, these series converge much too slowly to get even a rough
-   estimate of the sum simply by adding up the terms.  For example,
-    for the series with 9 removed, the sum of the first 10^27 terms
-    still differs from the final sum (22.92067...) by about 1.
+(* ::Text:: *)
+(*   This package computes sums of "Kempner" series.*)
+(**)
+(*   The harmonic series 1/1 + 1/2 + 1/3 + ... + 1/n + ... diverges.  This means*)
+(*   that the sum can be made as large as desired by adding enough terms.*)
+(**)
+(*   Suppose we delete from this series all terms with a "9" in the denominator.*)
+(*   That is, we remove 1/9, 1/19, 1/29, etc.  Then the remaining series converges*)
+(*   to a sum less than 80.  This was first proved in 1914 by A. J. Kempner.*)
+(**)
+(*   We can also delete from the harmonic series all terms whose denominators*)
+(*   contain:*)
+(*     any digit 0, 1, ..., 9;*)
+(*    or*)
+(*     a list of one or more digits, such as the even digits {0, 2, 4, 6, 8};*)
+(*    or*)
+(*     any individual multi-digit string or number, such as "00", 42, or 314159;*)
+(*    or*)
+(*     any list of patterns of digits, such as { 3, "00", 42, 314159 }.*)
+(*   In all such cases, the terms that remain form a convergent series.*)
+(**)
+(*   However, these series converge much too slowly to get even a rough*)
+(*   estimate of the sum simply by adding up the terms.  For example,*)
+(*    for the series with 9 removed, the sum of the first 10^27 terms*)
+(*    still differs from the final sum (22.92067...) by about 1.*)
+(**)
+(*   This package computes the sums of these series to high precision.*)
+(**)
+(**)
+(*Keywords: kempner, harmonic series*)
+(**)
+(*Sources:*)
+(*   The original article that proves convergence of these series is:*)
+(*      A. J. Kempner, "A Curious Convergent Series",*)
+(*      American Mathematical Monthly, vol. 21, pages 48-50 (1914).*)
+(**)
+(*   The original algorithm that shows how to compute a few of these sums is in:*)
+(*      Robert Baillie, "Sums of Reciprocals of Integers Missing a Given Digit",*)
+(*      American Mathematical Monthly, vol. 86, pages 372-374 (May, 1979).*)
+(**)
+(*   The functions in this file implement the algorithm in the following article:*)
+(*      Thomas Schmelzer and Robert Baillie, "Summing a Curious, Slowly Convergent*)
+(*      Series", to appear in the American Mathematical Monthly, vol. 115,*)
+(*      pages 525-540 (June/July 2008).*)
+(*      The latest version of this Mathematica code may be downloaded from*)
+(*        http://library.wolfram.com/infocenter/MathSource/7166/*)
 
-   This package computes the sums of these series to high precision.
-*)
 
-(* :Keywords: kempner, harmonic series *)
-
-(* :Sources:
-   The original article that proves convergence of these series is:
-      A. J. Kempner, "A Curious Convergent Series",
-      American Mathematical Monthly, vol. 21, pages 48-50 (1914).
-
-   The original algorithm that shows how to compute a few of these sums is in:
-      Robert Baillie, "Sums of Reciprocals of Integers Missing a Given Digit",
-      American Mathematical Monthly, vol. 86, pages 372-374 (May, 1979).
-
-   The functions in this file implement the algorithm in the following article:
-      Thomas Schmelzer and Robert Baillie, "Summing a Curious, Slowly Convergent
-      Series", to appear in the American Mathematical Monthly, vol. 115,
-      pages 525-540 (June/July 2008).
-      The latest version of this Mathematica code may be downloaded from
-        http://library.wolfram.com/infocenter/MathSource/7166/
-*)
+(* ::Subsection:: *)
+(*Main Package*)
 
 
 BeginPackage[ "kempnerSums`" ]

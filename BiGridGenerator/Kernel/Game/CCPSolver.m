@@ -44,8 +44,8 @@ CCPMarkov[x_?VectorQ,m_?VectorQ]:=DiscreteMarkovProcess[1,CCPMatrix[x,m]];
 CCPDistribution[x_?VectorQ,m_?VectorQ]:=FirstPassageTimeDistribution[CCPMarkov[x,m],Length@fix@m];
 Unprotect[CDF,PDF,Mean];
 (*http://math.stackexchange.com/questions/379525/probability-distribution-in-the-coupon-collectors-problem*)
-PDF[CCPDistribution[n_?IntegerQ],x_]=(n!*StirlingS2[x-1,n-1])/n^x;
-CDF[CCPDistribution[n_?IntegerQ],x_]=(n!*StirlingS2[x,n])/n^x;
+PDF[CCPDistribution[n_?IntegerQ],x_]:=(n!*StirlingS2[x-1,n-1])/n^x;
+CDF[CCPDistribution[n_?IntegerQ],x_]:=(n!*StirlingS2[x,n])/n^x;
 Mean[CCPDistribution[n_?IntegerQ]]:=n*HarmonicNumber[n];
 (*http://mathoverflow.net/questions/229060/batched-coupon-collector-problem*)
 (*https://www.zhihu.com/question/33576455*)

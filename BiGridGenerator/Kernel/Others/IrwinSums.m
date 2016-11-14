@@ -1,40 +1,63 @@
-(* :Title: irwinSums.m -- a package to compute sums of irwin series *) (* :Mathematica Version: 4.0, 5.2, and 6.0 *)
-(* :Package Version: 1.3, August 16, 2008:
-added iPartialSumThreshold[ ] to compute how many digits are required in the denominators for the partial sum to reach a given threshold.
+(* ::Package:: *)
 
-Version 1.2:
-added setPrintLevel[ ] user function to control the amount of displayed output. default value = 1. user can set the value to 0 to suppress all output, including "sum for k occurrences ...".
-*)
+(* ::Subtitle:: *)
+(*A package to compute sums of irwin series*)
 
-(* :Author: Robert Baillie *)
 
-(* :Copyright: none. This code is in the public domain.
-Users are encouraged to improve this code.
-*)
+(* ::Subsection::Closed:: *)
+(*Version information*)
 
-(* :Summary:
-This package computes sums of "Irwin" series.
 
-The harmonic series 1/1 + 1/2 + 1/3 + ... + 1/n + ... diverges. This means that the sum can be made as large as desired by adding enough terms.
+(* ::Text:: *)
+(*Mathematica Version: 4.0+ *)
+(**)
+(*Package Version: Version 1.3, August 16, 2008 *)
+(**)
+(*Author: Robert Baillie *)
+(**)
+(*Translator: GalAster - \:9171\:7d2b\:541b *)
+(**)
+(*Copyright: Non-Commercial *)
 
-Suppose we delete from this series all terms with a "9" in the denominator. That is, we remove 1/9, 1/19, 1/29, etc. Then the remaining series converges to a sum less than 80. This was proved in 1914 by A. J. Kempner.
 
-In 1916, Irwin proved that the sum of 1/n where n has at most a fixed number of occurrences of one or more digits, is a convergent series. This is a generalization of Kempner's result: in Kempner's series, the digit 9 occurs zero times. It also follows that the sum of 1/n where n has exactly n1 occurrences of digit d1, n2 occurrences of d2, etc., converges.
+(* ::Subsection::Closed:: *)
+(*Summary*)
 
-However, these series converge much too slowly to get even a rough estimate of the sum simply by adding up the terms.
 
-This package computes the sums of these series to high precision.
-*)
-(* :Keywords: kempner, irwin, harmonic series *) (* :Sources:
-The original article that proves convergence of these series is:
-J. Kempner, "A Curious Convergent Series",
-American Mathematical Monthly, vol. 21, pages 48-50 (1914).
+(* ::Text:: *)
+(*This package computes sums of "Irwin" series.*)
+(**)
+(*The harmonic series 1/1 + 1/2 + 1/3 + ... + 1/n + ... diverges. This means that the sum can be made as large as desired by adding enough terms.*)
+(**)
+(*Suppose we delete from this series all terms with a "9" in the denominator. That is, we remove 1/9, 1/19, 1/29, etc. Then the remaining series converges to a sum less than 80. This was proved in 1914 by A. J. Kempner.*)
+(**)
+(*In 1916, Irwin proved that the sum of 1/n where n has at most a fixed number of occurrences of one or more digits, is a convergent series. This is a generalization of Kempner's result: in Kempner's series, the digit 9 occurs zero times. It also follows that the sum of 1/n where n has exactly n1 occurrences of digit d1, n2 occurrences of d2, etc., converges.*)
+(**)
+(*However, these series converge much too slowly to get even a rough estimate of the sum simply by adding up the terms.*)
+(**)
+(*This package computes the sums of these series to high precision.*)
+(**)
+(**)
+(**)
+(**)
+(*Keywords: kempner, irwin, harmonic series*)
+(**)
+(**)
+(**)
+(*Sources:*)
+(*The original article that proves convergence of these series is:*)
+(*J. Kempner, "A Curious Convergent Series",*)
+(*American Mathematical Monthly, vol. 21, pages 48-50 (1914).*)
+(**)
+(*F. Irwin, "A Curious Convergent Series",*)
+(*American Mathematical Monthly, vol. 23, pages 149-152 (1916).*)
+(**)
+(*R. Baillie, "Summing The Curious Series of Kempner and Irwin", May, 2008. Available at http://arxiv.org/abs/0806.4410 .*)
 
-F. Irwin, "A Curious Convergent Series",
-American Mathematical Monthly, vol. 23, pages 149-152 (1916).
 
-R. Baillie, "Summing The Curious Series of Kempner and Irwin", May, 2008. Available at http://arxiv.org/abs/0806.4410 .
-*)
+(* ::Subsection:: *)
+(*Main Package*)
+
 
 BeginPackage[ "irwinSums`" ]
 

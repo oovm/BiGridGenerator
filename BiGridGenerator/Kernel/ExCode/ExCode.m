@@ -21,6 +21,19 @@ ExDecrypt::usage="ExDecrypt[Str,Way]以方式Way给出输入代码Str的超解�
 
 
 Begin["`Private`"];
+trans=If[Head@WolframLanguageData[ToString@#,"Translations"]===Missing,Nothing,
+  ToString@#->Entity["WritingScript","SimplifiedChinese::zzc7y"]/.WolframLanguageData[ToString@#,"Translations"]]&;
+ToLisp[exp_]:=Block[{ml,str,tra,trap,aaa,bbb,ccc,ddd,eee},
+  ml=ImportString@ExportString[FullForm[Hold@exp],"MathML"];
+  str=Cases[ml,_String,-1];
+  tra=trans/@DeleteCases[Quiet@Union[ToExpression/@str],Hold];
+  trap=tra~Join~{"["->"(","]"->")",","->"","Hold"->"演算"};
+  aaa={#-1,#}&@@@Position[str,"["];
+  bbb=SequenceCases[str,{a_,"["}:>{"[",a}];
+  ccc=Rule@@@Partition[Flatten[Transpose/@Transpose[{aaa,bbb}]],2];
+  ddd=Insert[ReplacePart[str,ccc],"",{#+1}&@@@Position[str,"["]];
+  eee=Insert[ddd,"",Position[ddd,"]"]];
+  StringJoin[eee/.trap]];
 SetAttributes[{CodeToCipher,ExEncrypt},HoldAll];
 CodeToCipher[Str_]:=Module[{密匙,输出},
   密匙=GenerateSymmetricKey[Method-><|"Cipher"->"AES256",

@@ -15,7 +15,7 @@
 
 
 
-BeginPackage["ExRandom`"]
+BeginPackage["ExRandom`"];
 RandomExample::usage = "RandomExample[]随机给出一个Mathematica的巧妙范例!";
 AutoBiography::usage = "Biography[Name]可以随机生成Name的自传哦!";
 
