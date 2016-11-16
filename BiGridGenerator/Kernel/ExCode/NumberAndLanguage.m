@@ -38,6 +38,17 @@ ResChinese=Graph[#\[DirectedEdge]ChineseToNumber@NumberToChinese@#&/@Range[0,99]
   VertexLabelStyle->Directive[12,Lighter@Blue,Bold],VertexSize->0.8,EdgeShapeFunction->GraphElementData["ShortFilledArrow","ArrowSize"->0.01],
   GraphLayout->"SpringElectricalEmbedding",ImageSize->Full];
 
+
+拼音={{"零","líng"},{"一","yī"},{"二","èr"},{"三","sān"},{"四","sì"},{"五","wǔ"},{"六","liù"},
+  {"七","qī"},{"八","bā"},{"九","jiǔ"},{"十","shí"},{"百","bǎi"},{"千","qiān"},{"万","wàn"}};
+数位=Association@(Function[{x,y},x->y]@@@Transpose@{(Transpose@拼音)[[1]],StringLength/@(Transpose@拼音)[[2]]});
+NumberToPinyin[n_Integer/;0<=n<=50]:=NumberToChinese@n;
+PinyinToNumber[s_String]:=Total[数位/@Characters@s];
+ResPinyin=Graph[#\[DirectedEdge]PinyinToNumber@NumberToPinyin@#&/@Range[0,50],VertexLabels->Placed["Name",Center],
+  VertexLabelStyle->Directive[12,Lighter@Blue,Bold],VertexSize->0.6,EdgeShapeFunction->GraphElementData["ShortFilledArrow","ArrowSize"->0.01],
+  GraphLayout->"SpringElectricalEmbedding",ImageSize->Full];
+
+
 AusEnglish1={"","one","two","three","four","five","six","seven","eight","nine"};
 AusEnglish2={"ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen","twenty"};
 AusEnglish3={"twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"};
@@ -48,7 +59,18 @@ NumberToEnglish[n_Integer/;20<=n<=99]:=AusEnglish3[[Floor[n,10]/10-1]]<>AusEngli
 NumberToEnglish[n_/;100<=n<=999&&Mod[n,100]===0]:=AusEnglish1[[Floor[n,100]/100+1]]<>"hundred";
 NumberToEnglish[n_Integer/;100<=n<=999]:=AusEnglish1[[Floor[n,100]/100+1]]<>"hundredand"<>NumberToEnglish[Mod[n,100]]
 AusEnglish5=Join[{""},(Function[{x,y},x<>y]@@@Transpose@{ConstantArray["and",99],NumberToEnglish/@Range@99}),NumberToEnglish/@Range[100,999]];
-NumberToEnglish[n_Integer/;1000<=n<=9999]:=AusEnglish1[[Floor[n,1000]/1000+1]]<>"thousand"<>AusEnglish5[[Mod[n,1000]+1]]
+NumberToEnglish[n_Integer/;1000<=n<=9999]:=AusEnglish1[[Floor[n,1000]/1000+1]]<>"thousand"<>AusEnglish5[[Mod[n,1000]+1]];
+NumberToEnglish[n_Integer/;n>=10000]:=Module[{r,
+  numNames={""," one"," two"," three"," four"," five"," six"," seven"," eight"," nine"},
+  teenNames={" ten"," eleven"," twelve"," thirteen"," fourteen"," fifteen"," sixteen"," seventeen"," eighteen"," nineteen"},
+  tensNames={""," ten"," twenty"," thirty"," forty"," fifty"," sixty"," seventy"," eighty"," ninety"},
+  decimals={""," thousand"," million"," billion"," trillion"," quadrillion"," quintillion"," sextillion"," septillion"," octillion",
+    " nonillion"," decillion"," undecillion"," duodecillion"," tredecillion"," quattuordecillion"," quindecillion"," sexdecillion",
+    " septendecillion"," octodecillion"," Novemdecillion"," Vigintillion"}},
+  r=If[#!=0,numNames[[#+1]]<>" hundred"<>If[#2!=0||#3!=0," and",""],""]<>
+      Switch[#2,0,numNames[[#3+1]],1,teenNames[[#3+1]],_,tensNames[[#2+1]]<>numNames[[#3+1]]]&@@@
+          (PadLeft[FromDigits/@Characters@StringReverse@#,3]&/@StringCases[StringReverse@IntegerString@n,RegularExpression["\\d{1,3}"]]);
+StringJoin@Reverse@MapThread[If[#!="",StringJoin[##],""]&,{r,Take[decimals,Length@r]}]];
 ResEnglish=Graph[#\[DirectedEdge]EnglishToNumber@NumberToEnglish@#&/@Range[1,100],VertexLabels->Placed["Name",Center],
   VertexLabelStyle->Directive[12,Lighter@Blue,Bold],VertexSize->0.8,EdgeShapeFunction->GraphElementData["ShortFilledArrow","ArrowSize"->0.01],
   GraphLayout->"SpringElectricalEmbedding",ImageSize->Full];
@@ -74,15 +96,6 @@ ResRoman=Graph[#\[DirectedEdge]StringLength@RomanNumeral@#&/@Range[0,50],VertexL
   VertexLabelStyle->Directive[12,Lighter@Blue,Bold],VertexSize->0.6,EdgeShapeFunction->GraphElementData["ShortFilledArrow","ArrowSize"->0.01],
   GraphLayout->"SpringElectricalEmbedding",ImageSize->Full];
 
-拼音={{"零","líng"},{"一","yī"},{"二","èr"},{"三","sān"},{"四","sì"},{"五","wǔ"},{"六","liù"},
-  {"七","qī"},{"八","bā"},{"九","jiǔ"},{"十","shí"},{"百","bǎi"},{"千","qiān"},{"万","wàn"}};
-数位=Association@(Function[{x,y},x->y]@@@Transpose@{(Transpose@拼音)[[1]],StringLength/@(Transpose@拼音)[[2]]});
-NumberToPinyin[n_Integer/;0<=n<=50]:=NumberToChinese@n;
-PinyinToNumber[s_String]:=Total[数位/@Characters@s];
-ResPinyin=Graph[#\[DirectedEdge]PinyinToNumber@NumberToPinyin@#&/@Range[0,50],VertexLabels->Placed["Name",Center],
-  VertexLabelStyle->Directive[12,Lighter@Blue,Bold],VertexSize->0.6,EdgeShapeFunction->GraphElementData["ShortFilledArrow","ArrowSize"->0.01],
-  GraphLayout->"SpringElectricalEmbedding",ImageSize->Full];
-
 AuxGerman1={"null"}
 AuxGerman2={"eins","zwei","drei","vier","fünf","sechs","sieben","acht","neun"}
 AuxGerman3={"zehn","elf","zwölf","dreizehn","vierzehn","fünfzehn","sechzehn","siebzehn","achtzehn","neunzehn","zwanzig"}
@@ -91,7 +104,7 @@ NumberToGerman[n_Integer/;0<=n<=20]:=Join[AuxGerman1,AuxGerman2,AuxGerman3][[n+1
 NumberToGerman[30]:="dreißig"
 NumberToGerman[n_Integer/;31<=n<=39]:=AuxGerman2[[Mod[n,10]]]<>"unddreißig"
 NumberToGerman[n_/;40<=n<=99&&Mod[n,10]===0]:=AuxGerman2[[n/10]]<>"zig";
-NumberToGerman[n_Integer/;21<=n<=99]:=AuxGerman2[[Mod[n,10]]]<>"und"<>AuxGerman2[[Floor[n,10]/10]]<>"zig"
+NumberToGerman[n_Integer/;21<=n<=99]:=AuxGerman2[[Mod[n,10]]]<>"und"<>AuxGerman2[[Floor[n,10]/10]]<>"zig";
 ResGerman=Graph[#\[DirectedEdge]GermanToNumber@NumberToGerman@#&/@Range[0,49],VertexLabels->Placed["Name",Center],VertexLabelStyle->Directive[12,Lighter@Blue,Bold],
   VertexSize->0.6,EdgeShapeFunction->GraphElementData["ShortFilledArrow","ArrowSize"->0.01],
   GraphLayout->"SpringElectricalEmbedding",ImageSize->Full];

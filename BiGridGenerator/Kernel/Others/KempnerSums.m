@@ -259,41 +259,18 @@ BeginPackage[ "KempnerSums`" ];
 
 
 (* usage messages for this context, and for the exported functions *)
-KempnerSums::usage = "KempnerSums.m是一个用来计算 缺项调和级数(Kempner series)的程序包.\r\n
-本程序包包含以下的函数:\r\n
-  KempnerSum[X]: returns the sum of 1/n where n has no digits in the set X.  This is the primary\
- calculation function in this package.\r\n
-  kSumFormatted[X]: same as KempnerSum, but formats the output.\r\n
-  kPartialSum[nDigits]: uses the most input to KempnerSum or kSumFormatted, and returns\
- the partial sum for all denominators up through (nDigits) digits.\r\n
-  kPartialSumThreshold[s] tells how far we must go in the series to make the\
- partial sum exceed the given threshold s.\r\n
-  kSumGetA[X]: computes the A matrix associated with X.
-  kSumGetT[X]: computes the T matrix associated with X.
-    The A and T matrices are described in the Schmelzer-Baillie paper.\r\n
-In these functions, X is the set of numbers to exclude from the denominators.\
-  X can be a single number, or a comma-separated list of numbers enclosed in braces { }.\
-  (Note: a multi-digit number that has a leading zero must be enclosed in quotes).\r\n
-KempnerSum and kSumFormatted take an optional second parameter: the number of decimal\
- places.  If this parameter is omitted, the default number will be used.\r\n
-KempnerSum, kSumFormatted, and kSumGetA take an optional, final parameter: the base.\
-  If the base is not specified, base 10 is used as the default.\
-  You may also call KempnerSum and kSumFormatted with a T matrix as the first parameter.\
-\r\n
-kSumShowDefaultDecimals and kSumSetDefaultDecimals[m] display and set the default\
- number of decimal places.\r\n
-kSumTimeAndMemory displays estimated time and memory requirements.";
+KempnerSums::usage = "KempnerSums.m是一个用来计算 缺位调和级数(Kempner series)的程序包.\r\n
+本程序包包含函数KempnerSum[X],kSumFormatted[X],kPartialSum[nDigits],kPartialSumThreshold[s],kSumGetA[X],kSumGetT[X]\r
+以及选项kSumShowA,kSumTimeAndMemory,kSumSetDefaultDecimals,kSumShowDefaultDecimals.";
 
 (* these are usage messages for individual functions *)
 
-KempnerSum::usage = "KempnerSum[X] computes the sum of the series 1/n where n has no digits in the set X.\r\n
+KempnerSum::usage = "KempnerSum[X] 对 1/n 求和但是去掉所有含有 X 的项.\r\n
  X is the set of numbers to exclude from the denominators.\
  X can be a single number, or a comma-separated list of numbers enclosed in braces { }.\
- If X is a list, then this computes the sum of 1/n where n has\
- no occurrences of any of the numbers in the list.\
- (Note: a multi-digit number that has a leading zero must be enclosed in quotes).\
- The optional second parameter is the number of decimal places.  All results are\
- rounded to the given number of decimal places.\r\n
+ 如果X是个向量, then this computes the sum of 1/n where n has no occurrences of any of the numbers in the list.\
+ (Note: 一个多位数如果含前导0必须写成字符型).\
+ 第二个参数表示精度.\r\n
  Examples:
    KempnerSum[9] = 22.920676619264150 (使用默认的15位精度)\r
    KempnerSum[9, 10] = 22.9206766193 (使用10位精度)\r
@@ -301,18 +278,17 @@ KempnerSum::usage = "KempnerSum[X] computes the sum of the series 1/n where n ha
    KempnerSum[\"09\"] = 230.404757005814285 (leading 0, so quotes are required)\r
    KempnerSum[{3, 1, 4}] = 3.769948379731421\r
    KempnerSum[314] = 2299.829782767518338\r
-   KempnerSum[314159, 20] = 2302582.33386378260789202376\r\n
+   KempnerSum[314159, 20] = 2302582.33386378260789202376\r
    KempnerSum[{0, 2, 4, 6, 8}] = 3.171765473415905 (denominators with no even digits)\r
    KempnerSum[{1, 3, 5, 7, 9}] = 1.962608412994617 (denominators with no odd digits)\r
    KempnerSum[{0, 1, 4, 6, 8, 9}] = 1.857333779940978 (denominators with only prime digits)\r
-   KempnerSum[{\"00\", 11, 22, 33, 44, 55, 66, 77, 88, 99}] = 23.382957488301063 (no double digits)\r
- KempnerSum takes an optional third parameter: the base.  不做特别说明默认10进制.
+   KempnerSum[{\"00\", 11, 22, 33, 44, 55, 66, 77, 88, 99}] = 23.382957488301063 (去掉所有含连续数字的项)\r
+ KempnerSum 第三个参数表示进制,不做特别说明默认10进制.
  Warning:如果你想输入第三个参数,你必须先输入第二个参数,不得省略.
  Example: KempnerSum[0, 15, 2] = 1.606695152415292 (denominators with no 0 in base 2).\r
  Another form: KempnerSum[ T ], where the input is the T matrix; see the Schmelzer-Baillie paper.";
 
-kSumFormatted::usage = "和 KempnerSum 基本一样,但是自带5位的格式化效果\r
-注意:结果是个NumberForm ,译者注";
+kSumFormatted::usage = "和 KempnerSum 基本一样,但是自带5位的格式化效果.\r注意:结果是个NumberForm.";
 
 kPartialSum::usage = "kPartialSum[ nDigits, nDecimals ]\r\n
  Using the most recent input to KempnerSum or kSumFormatted, compute the sum of all terms\
@@ -346,10 +322,10 @@ kPartialSumThreshold::usage = "kPartialSumThreshold[s]\r\n
    kPartialSumThreshold[22.920676619264149] returns
      {359, 360, 22.92067661926414950999, 22.92067661926414959380} .
    这个结果是错的: 注意到两个输出其实都大于你的输入.
-   (原因在于Mathematica会微微的对你输入的浮点数进行一些处理.)
-   正确的写法应该是:\n
-   kPartialSumThreshold[22.920676619264149``15] 返回了正确的结果 {354, 355, 22.92067661926414892870, 22.92067661926414907065}.\r
-   使用字符型也不会出现错误 kPartialSumThreshold[\"22.920676619264149\"].";
+   (原因在于Mathematica会微微的对你输入的浮点数进行一些舍入处理.)
+   正确的写法应该是:kPartialSumThreshold[22.920676619264149``15] \r
+   返回了正确的结果 {354, 355, 22.92067661926414892870, 22.92067661926414907065}.\r
+   你也可以选择使用字符型 kPartialSumThreshold[\"22.920676619264149\"].";
 
 kSumGetT::usage = "kSumGetT[X] 返回关于 X 的 T 矩阵.\r\n
  X is the collection of numbers to omit from the denominators.\

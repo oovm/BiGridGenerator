@@ -89,7 +89,7 @@ Line 2 shows the total of these six sums. This is just the 对1/n求和 where n 
 
 BeginPackage[ "IrwinSums`" ];
 (* usage messages for this context, and for the exported functions *) 
-IrwinSums::usage = "IrwinSums.m 是一个用于计算 限定调和级数 (Irwin series) 的程序包.\r
+IrwinSums::usage = "IrwinSums.m 是一个用于计算 限位调和级数 (Irwin series) 的程序包.\r
 这个程序包包含了函数 IrwinSum, iSumFormatted, iPartialSum, iPartialSumThreshold,以及选项 setPrintLevel.\r
 IrwinSum[d, k]: 对1/n求和, where n has exactly k occurrences of the digit d.\r\n
 IrwinSum[{d1, d2 ,...}, {k1, k2, ...}]: 对1/n求和 where n has exactly k1 occurrences of d1, k2 of d2, etc.\r\n
@@ -123,21 +123,19 @@ The optional 4th parameter iPartialSum[..., ..., p, m] gives the partial sum to 
 iPartialSum[1, 1, 6, 15, 2] = partial 对1/n求和 where n has one 1 in base 2, n < 2^6, to 15 decimals.
 Note: this is just 1/1 + 1/2 + 1/4 + 1/8 + 1/16 + 1/32 = 63/32 = 1.96875." ;
 
-iPartialSumThreshold::usage = "iPartialSumThreshold[d, k, s] tells how many digits are needed\ in the denominators in order to make the partial sum equal to or greater than your threshold, s. Four numbers are returned: { d1, d2, s1, s2 }. d2 is the number of digits required in the\ denominators to make the partial sum >= s. d1 = d2 - 1. s1 and s2 are the partial sums for d1 and d2.
+iPartialSumThreshold::usage = "iPartialSumThreshold[d, k, s] 给出为了超过 s 需要对多少位数的项求和
+. Four numbers are returned: { d1, d2, s1, s2 }. d2 is the number of digits required in the\ denominators to make the partial sum >= s. d1 = d2 - 1. s1 and s2 are the partial sums for d1 and d2.
 Given s, the output sums s1 and s2 will normally be such that s1 < s <= s2.\r\n
 Example 1. \r
-iPartialSumThreshold[9, 1, 23] computes about how far we need to go to reach a partial sum of 23.
-The output is {80, 22.995762680948152, 81, 23.000125707332644}.
-Therefore, denominators of 81 digits are required. The sum through n < 10^80 is about 22.99576.\
-The sum through n < 10^81 is about 23.00012. iPartialSum[ ] confirms this result:
-iPartialSum[9, 1, 80] = 22.995762680948152
+iPartialSumThreshold[9, 1, 23] 计算只有一个9的限位和需要多少项才能超过 23.
+给过是 {80, 22.995762680948152, 81, 23.000125707332644} 则代表在求到某个81位数的时候和才超过23.\r
+iPartialSum[9, 1, 80] = 22.995762680948152\r
 iPartialSum[9, 1, 81] = 23.000125707332644 .\r\n
-Example 2. This shows what could go wrong if your threshold is a floating-point number. iPartialSumThreshold[9, 1, 23.044287080747] returns {-1, -1, -1, -1} because the threshold is too close to the sum of the entire series. The error message tells you to specify more accuracy. You can do this with Mathematica's backquote notation: 23.044287080747``25 = 23.044287080747000000000000.
-iPartialSumThreshold[9, 1, 23.044287080747``25] returns the correct result
-{327, 23.04428708074693636344610077, 328, 23.04428708074702511802366170} .
-You can also use double quotes to convert the threshold to a string: iPartialSumThreshold[9, 1, \"23.044287080747\"]
-also returns the correct result
-{327, 23.044287080746936363, 328, 23.044287080747025118} .\r\n
+Example 2. \r
+这个例子表明如果你使用浮点数那么有时会出错.\r
+iPartialSumThreshold[9, 1, 23.044287080747] 返回 {-1, -1, -1, -1} 这是精度不够导致的,正确的输入方法是 23.044287080747``25 = 23.044287080747000000000000.\r
+iPartialSumThreshold[9, 1, 23.044287080747``25] 返回了正确的结果 {327, 23.04428708074693636344610077, 328, 23.04428708074702511802366170} .
+当然你也可以使用字符型来避免这个问题 iPartialSumThreshold[9, 1, \"23.044287080747\"] \r\n
 Other forms: iPartialSumThreshold[{d1, d2 ,...}, {k1, k2, ...}, s]. You can also specify the number of\
 decimals and the base: iPartialSumThreshold[d, k, s, nDecimals, base] and\ iPartialSumThreshold[{d1, d2 ,...}, {k1, k2, ...}, s, nDecimals, base]." ;
 
