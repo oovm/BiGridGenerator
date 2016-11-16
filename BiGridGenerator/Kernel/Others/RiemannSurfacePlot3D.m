@@ -64,7 +64,7 @@
 (*Package context change*)
 
 
-BeginPackage["RiemannSurfacePlot3D`"] 
+BeginPackage["RiemannSurfacePlot3D`"] ;
 
 
 (* ::Subsection:: *)
@@ -79,27 +79,27 @@ RiemannSurfacePlot3D::usage =
 
 
 Coloring::usage = 
-"Coloring is an option of RiemannSurfacePlot3D. The coloring should be specified as an expression containing 
+"Coloring 是 RiemannSurfacePlot3D 的一个选项. The coloring should be specified as an expression containing
 Re[z], Im[z], Re[w], Im[w] that for numerical values evaluates to a coloring directive.";
 
 
 BranchPointOffset::usage = 
-"BranchPointOffset is an option of RiemannSurfacePlot3D and determines how far away from a branch point the 
+"BranchPointOffset 是 RiemannSurfacePlot3D 的一个选项 and determines how far away from a branch point the
 numerical solution of the differential equation should start.";
 
 
 StitchPatches::usage = 
-"StitchPatches is an option of RiemannSurfacePlot3D and determines if the individual patches should be joined.";
+"StitchPatches 是 RiemannSurfacePlot3D 的一个选项. and determines if the individual patches should be joined.";
 
 
 LogSheets::usage = 
-"LogSheets is an option of RiemannSurfacePlot3D and determines which sheets to use for logarithms
+"LogSheets 是 RiemannSurfacePlot3D 的一个选项. and determines which sheets to use for logarithms
 and product logarithms. The default is {-1, 0, 1}, meaning the main sheet and the sheets immediately below 
 and above the main sheet.";
 
 
 NDSolveOptions::usage = 
-"NDSolveOptions is an option of RiemannSurfacePlot3D and allows propagating options to NDSolve
+"NDSolveOptions 是 RiemannSurfacePlot3D 的一个选项. and allows propagating options to NDSolve
 for the solution of the coupled system of nonlinear differential equations.";
 
 
@@ -107,7 +107,7 @@ for the solution of the coupled system of nonlinear differential equations.";
 (*Private context change*)
 
 
-Begin["`Private`"]
+Begin["`Private`"];
 
 
 (* ::Subsection:: *)
@@ -527,18 +527,13 @@ Module[{res},
 (*asp=allSheets[sr]*)
 
 
-odeAzimuthal[\!\(\*
-SubsuperscriptBox["w_", "i_", "\[Prime]",
-MultilineFunction->None][z_]\)==rhs_, {Subscript[w_, i_], z_}, {\[Psi]_, \[CurlyPhi]_}, r_] := 
-             Subscript[\[Psi], i]'[\[CurlyPhi]] == rhs D[r E^(I \[CurlyPhi]), \[CurlyPhi]] /.
-                       Subscript[w, j_][z] :> Subscript[\[Psi], j][\[CurlyPhi]] /. z -> r Exp[I \[CurlyPhi]]
-
-
-odeRadial[\!\(\*
-SubsuperscriptBox["w_", "i_", "\[Prime]",
-MultilineFunction->None][z_]\)==rhs_, {Subscript[w_, i_], z_}, {\[Psi]_, \[Rho]_}, \[ScriptD]_] := 
-          Subscript[\[Psi], i]'[\[Rho]] == rhs D[\[Rho] \[ScriptD], \[Rho]] /.
-                      Subscript[w, j_][z] :> Subscript[\[Psi], j][\[Rho]] /. z -> \[ScriptD] \[Rho]
+odeAzimuthal[
+  Derivative[1][Subscript[w_,i_]][z_]==(rhs_),{Subscript[w_,i_],z_},
+  {\[Psi]_,\[CurlyPhi]_},r_]:=Derivative[1][Subscript[\[Psi],i]][\[CurlyPhi]]==
+        rhs*D[r*E^(I*\[CurlyPhi]),\[CurlyPhi]]/.Subscript[w,j_][z]:>Subscript[\[Psi],j][\[CurlyPhi]]/.z->r*Exp[I*\[CurlyPhi]];
+odeRadial[Derivative[1][Subscript[w_,i_]][z_]==(rhs_),{Subscript[w_,i_],z_},
+  {\[Psi]_,\[Rho]_},\[ScriptD]_]:=Derivative[1][Subscript[\[Psi],i]][\[Rho]]==
+        rhs*D[\[Rho]*\[ScriptD],\[Rho]]/.Subscript[w,j_][z]:>Subscript[\[Psi],j][\[Rho]]/.z->\[ScriptD]*\[Rho];
 
 
 (* ::Input:: *)

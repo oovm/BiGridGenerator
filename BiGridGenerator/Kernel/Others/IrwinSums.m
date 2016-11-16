@@ -31,7 +31,7 @@
 (**)
 (*Suppose we delete from this series all terms with a "9" in the denominator. That is, we remove 1/9, 1/19, 1/29, etc. Then the remaining series converges to a sum less than 80. This was proved in 1914 by A. J. Kempner.*)
 (**)
-(*In 1916, Irwin proved that the sum of 1/n where n has at most a fixed number of occurrences of one or more digits, is a convergent series. This is a generalization of Kempner's result: in Kempner's series, the digit 9 occurs zero times. It also follows that the sum of 1/n where n has exactly n1 occurrences of digit d1, n2 occurrences of d2, etc., converges.*)
+(*In 1916, Irwin proved that the 对1/n求和 where n has at most a fixed number of occurrences of one or more digits, is a convergent series. This is a generalization of Kempner's result: in Kempner's series, the digit 9 occurs zero times. It also follows that the 对1/n求和 where n has exactly n1 occurrences of digit d1, n2 occurrences of d2, etc., converges.*)
 (**)
 (*However, these series converge much too slowly to get even a rough estimate of the sum simply by adding up the terms.*)
 (**)
@@ -55,69 +55,76 @@
 (*R. Baillie, "Summing The Curious Series of Kempner and Irwin", May, 2008. Available at http://arxiv.org/abs/0806.4410 .*)
 
 
-(* ::Subsection:: *)
-(*Main Package*)
+(* ::Subsection::Closed:: *)
+(*Test*)
 
-
-BeginPackage[ "irwinSums`" ]
 
 (* :Examples:
-iSum[9, 0] = sum of 1/n where n has no 9's = 22.920676619264150 . iSum[9, 1] = sum of 1/n where n has exactly one 9 = 23.044287080747848 . iSum[{9, 3}, {2, 0}] = sum of 1/n where n has two 9's and no 3's
+IrwinSum[9, 0] = 对1/n求和 where n has no 9's = 22.920676619264150 . IrwinSum[9, 1] = 对1/n求和 where n has exactly one 9 = 23.044287080747848 . IrwinSum[{9, 3}, {2, 0}] = 对1/n求和 where n has two 9's and no 3's
 = 2.593253652747189 .
 
-iSum[9, 2] (this computes the sum of 1/n where n has two 9's) Detailed explanation of the output:
+IrwinSum[9, 2] (this computes the 对1/n求和 where n has two 9's) Detailed explanation of the output:
 1. sum = 23.026040265961244
 2. sum for all 3 'at most' conditions = 68.991003965973242 3. sum for 0 occurrences = 22.920676619264150
 4. sum for 1 occurrences = 23.044287080747848
 5. sum for 2 occurrences = 23.026040265961244
-Line 1: This is the requested sum of 1/n where n has two 9's.
-Line 2: Three sums were computed as part of this calculation: the sums of 1/n where n has zero, one, or two 9's. Line 3 shows the total of these three sums. This is just the sum of 1/n where n has at most two 9's.
-Line 3 is the sum of 1/n where n has zero 9's. Line 4 is the sum of 1/n where n has one 9.
-Line 5 is the sum of 1/n where n has two 9's.
+Line 1: This is the requested 对1/n求和 where n has two 9's.
+Line 2: Three sums were computed as part of this calculation: the sums of 1/n where n has zero, one, or two 9's. Line 3 shows the total of these three sums. This is just the 对1/n求和 where n has at most two 9's.
+Line 3 is the 对1/n求和 where n has zero 9's. Line 4 is the 对1/n求和 where n has one 9.
+Line 5 is the 对1/n求和 where n has two 9's.
 
-iSum[{9, 3}, {2, 1}] (compute the sum of 1/n where n has two 9's and one 3) Detailed explanation of the output:
+IrwinSum[{9, 3}, {2, 1}] (compute the 对1/n求和 where n has two 9's and one 3) Detailed explanation of the output:
 1. sum = 4.169026439566082
-2. sum for all 6 'at most' conditions = 34.282119242240692 Line 1: This is the sum of 1/n where n has two 9's and one 3.
+2. sum for all 6 'at most' conditions = 34.282119242240692 Line 1: This is the 对1/n求和 where n has two 9's and one 3.
 Line 2: Six sums were computed as part of this calculation. They are the sums of 1/n where n has:
 zero 9's and zero 3's zero 9's and one 3 one 9 and zero 3's one 9 and one 3
 two 9's and zero 3's two 9's and one 3.
-Line 2 shows the total of these six sums. This is just the sum of 1/n where n has at most two 9's and one 3.
+Line 2 shows the total of these six sums. This is just the 对1/n求和 where n has at most two 9's and one 3.
 *)
 
-(* usage messages for this context, and for the exported functions *) irwinSums::usage = "irwinSums.m is a package that computes sums of Irwin series.\r\n This package has functions iSum, iSumFormatted, iPartialSum, iPartialSumThreshold, and setPrintLevel.\r\n
-iSum[d, k]: computes the sum of 1/n where n has exactly k occurrences of the digit d.\r\n iSum[{d1, d2 ,...}, {k1, k2, ...}]: sum of 1/n where n has exactly k1 occurrences of d1, k2 of
-d2, etc.\r\n
-iSum[..., ..., m] rounds the result to m decimals.\r\n
-iSum[..., ..., m, b] does calculations with digits in base b.\r\n
-iSumFormatted[...] is the same as iSum, but formats the output in groups of 5 digits.\r\n iPartialSum[d, k, p] or iPartialSum[{d1, d2 ,...}, {k1, k2, ...}, p] gives the partial sum
-through denominators < 10^p.\r\n
-iPartialSumThreshold[d, k, s] and iPartialSumThreshold[{d1, d2 ,...}, {k1, k2, ...}, s] tell how many digits are needed in the denominators in order to make the partial sum reach your
-threshold, s.\r\n
-setPrintLevel sets the print level to control the amount of output." ; (* here are usage messages for individual functions *)
-iSum::usage = "iSum[d, k] computes the sum of the series 1/n where the digit d occurs exactly k times in n.\r\n
-iSum[{d1, d2, ...}, {k1, k2, ...}] is the sum where the digit d1 occurs exactly k1 times, d2\ occurs exactly k2 times, etc.\r\n
-iSum[d, k, m] and iSum[{d1, d2, ...}, {k1, k2, ...}, m] give the sum to m decimal places.\r\n All results are rounded to the number of decimal places shown.\r\n
-Examples:
-iSum[9, 0] = sum of 1/n where n has no 9's = 22.920676619264150 .\r\n iSum[9, 1] = sum of 1/n where n has exactly one 9 = 23.044287080747848 .\r\n
+
+(* ::Subsection:: *)
+(*Main Package*)
+
+
+BeginPackage[ "IrwinSums`" ];
+(* usage messages for this context, and for the exported functions *) 
+IrwinSums::usage = "IrwinSums.m is a package that computes sums of Irwin series.\r\n
+This package has functions IrwinSum, iSumFormatted, iPartialSum, iPartialSumThreshold, and setPrintLevel.\r\n
+IrwinSum[d, k]: 对1/n求和, where n has exactly k occurrences of the digit d.\r\n
+IrwinSum[{d1, d2 ,...}, {k1, k2, ...}]: 对1/n求和 where n has exactly k1 occurrences of d1, k2 of d2, etc.\r\n
+IrwinSum[..., ..., m] rounds the result to m decimals.\r\n
+IrwinSum[..., ..., m, b] does calculations with digits in base b.\r\n
+iSumFormatted[...] is the same as IrwinSum, but formats the output in groups of 5 digits.\r\n iPartialSum[d, k, p] or iPartialSum[{d1, d2 ,...}, {k1, k2, ...}, p] gives the partial sum through denominators < 10^p.\r\n
+iPartialSumThreshold[d, k, s] and iPartialSumThreshold[{d1, d2 ,...}, {k1, k2, ...}, s] tell how many digits are needed in the denominators in order to make the partial sum reach your threshold, s.\r\n
+setPrintLevel sets the print level to control the amount of output." ;
+(* here are usage messages for individual functions *)
+IrwinSum::usage = "IrwinSum[d, k] computes the sum of the series 1/n where the digit d occurs exactly k times in n.\r\n
+IrwinSum[{d1, d2, ...}, {k1, k2, ...}] is the sum where the digit d1 occurs exactly k1 times, d2\ occurs exactly k2 times, etc.\r\n
+IrwinSum[d, k, m] and IrwinSum[{d1, d2, ...}, {k1, k2, ...}, m] give the sum to m decimal places.\r\n All results are rounded to the number of decimal places shown.\r\n
+举个例子:
+  IrwinSum[9, 0] = 对1/n求和,去掉所有含9的项= 22.920676619264150 .\r\n
+  IrwinSum[9, 1] = 对1/n求和,但是保留只有一个9的项 = 23.044287080747848 .\r\n
 You can also specify a list of conditions:
-iSum[{9, 3}, {2, 0}] = sum of 1/n where n has two 9's and no 3's = 2.593253652747189 .\r\n iSum takes an optional third parameter: the number of decimal places. If not specified, the default is 15 decimals.\r\n
-iSum takes an optional fourth parameter: the base. If not specified, base 10 is used.
+  IrwinSum[{9, 3}, {2, 0}] = 对1/n求和,去掉所有含3的项,但是保留有两个9的项 = 2.593253652747189 .\r\n
+IrwinSum takes an optional third parameter: the number of decimal places. If not specified, the default is 15 decimals.\r\n
+IrwinSum takes an optional fourth parameter: the base. If not specified, base 10 is used.
 If you use the fourth parameter (base), you cannot omit the third parameter (number of decimals).
 Examples of calculations in base 2:
-iSum[1, 1, 20, 2] = sum of 1/n where n has one 1 in base 2. The sum is 1/1 + 1/2 + 1/4 + ...
-= 2 .
-iSum[1, 3, 20, 2] = sum of 1/n where n has three 1's in base 2 = 1.42859154585263812400 . iSum[0, 0, 20, 2] = sum of 1/n where n has no 0's in base 2 = 1.60669515241529176378 ." ;
+IrwinSum[1, 1, 20, 2] = 对1/n求和,求和所有只含1个1的项,取20位精度,在二进制下.显然这个和等价于十进制下的 1/1 + 1/2 + 1/4 + ...= 2 .
+IrwinSum[1, 3, 20, 2] = 对1/n求和,求和所有只含3个1的项,取20位精度,在二进制下. = 1.42859154585263812400 .
+IrwinSum[0, 0, 20, 2] = 对1/n求和,去掉所有含0的项,取20位精度,在二进制下 = 1.60669515241529176378 ." ;
 
-iSumFormatted::usage = "Same as iSum, but iSumFormatted formats the output into groups of 5 digits." ;
-iPartialSum::usage = "iPartialSum[d, k, p] computes the partial sum of 1/n where n has k occurrences of d,
-for n < 10^p. Similarly for iPartialSum[{d1, d2 ,...}, {k1, k2, ...}, p]. Example:
-iSum[9, 0] = 22.920676619264150; iPartialSum[9,0, 30] = 21.971055078178619 .
+iSumFormatted::usage = "和 IrwinSum 基本一样,但是自带5位的格式化效果\r\n
+注意:结果是个NumberForm ,译者注";
+
+iPartialSum::usage = "iPartialSum[d, k, p] computes the partial 对1/n求和 where n has k occurrences of d,for n < 10^p. Similarly for iPartialSum[{d1, d2 ,...}, {k1, k2, ...}, p]. Example:
+IrwinSum[9, 0] = 22.920676619264150; iPartialSum[9,0, 30] = 21.971055078178619 .
 The optional 4th parameter iPartialSum[..., ..., p, m] gives the partial sum to m decimals. The optional 5th parameter is the base:
-iPartialSum[1, 1, 6, 15, 2] = partial sum of 1/n where n has one 1 in base 2, n < 2^6, to 15 decimals.
+iPartialSum[1, 1, 6, 15, 2] = partial 对1/n求和 where n has one 1 in base 2, n < 2^6, to 15 decimals.
 Note: this is just 1/1 + 1/2 + 1/4 + 1/8 + 1/16 + 1/32 = 63/32 = 1.96875." ;
 
-iPartialSumThreshold::usage = "iPartialSumThreshold[d, k, s] tells how many digits are needed\ in the denominators in order to make the partial sum equal to or greater than your threshold, s. Four numbers are returned: { d1, d2, s1, s2 }. d2 is the number of digits required in the\ denominators to make the partial sum >= s. d1 = d2 - 1. s1 and s2 are the partial sums for d1
-and d2.
+iPartialSumThreshold::usage = "iPartialSumThreshold[d, k, s] tells how many digits are needed\ in the denominators in order to make the partial sum equal to or greater than your threshold, s. Four numbers are returned: { d1, d2, s1, s2 }. d2 is the number of digits required in the\ denominators to make the partial sum >= s. d1 = d2 - 1. s1 and s2 are the partial sums for d1 and d2.
 Given s, the output sums s1 and s2 will normally be such that s1 < s <= s2.\r\n
 Example 1. iPartialSumThreshold[9, 1, 23] computes about how far we need to go to reach a partial sum of 23.
 The output is {80, 22.995762680948152, 81, 23.000125707332644}.
@@ -146,7 +153,7 @@ Off[ General::spell ];
 sjkPrev;
 
 cumulativeSums1; (* this is a small array, size = countList[[1]] + 1 *) iSumPrintLevel = 1; (* this is the default print level *)
-Unprotect[iSum, iSumFormatted, iPartialSum, iPartialSumThreshold, setPrintLevel]; (* nf0 formats a number to (nDec) decimal places *)
+Unprotect[IrwinSum, iSumFormatted, iPartialSum, iPartialSumThreshold, setPrintLevel]; (* nf0 formats a number to (nDec) decimal places *)
 nf0[y_, nDec_] := If[y == 0, 0, N[y, Max[1, Floor[1+Log[10, Abs[y]]]] + nDec] ];
 
 (* nf1 formats a number to (nDec) decimal places, with a space every 5 digits *)
@@ -186,12 +193,12 @@ Return[bn];
 Clear[getArrayIndexFromList];
 getArrayIndexFromList[n_Integer, ci_?VectorQ, iList_?VectorQ] := Module[
 (* this is called with nConditions = n and countList = ci. this function is the inverse of getListFromArrayIndex. *)
-{ i, iSum = 0, iProd = 1 }, iSum = iList[[1]];
+{ i, IrwinSum = 0, iProd = 1 }, IrwinSum = iList[[1]];
 For[i = 2, i <= n, i++,
-iProd = iProd * (ci[[i-1]] + 1); iSum += iList[[i]] * iProd;
+iProd = iProd * (ci[[i-1]] + 1); IrwinSum += iList[[i]] * iProd;
 ];
 
-iSum + 1 (* return this value; all arrays in mathematica are 1-based *)
+IrwinSum + 1 (* return this value; all arrays in mathematica are 1-based *)
 
 ]; (* end of getArrayIndexFromList *)
 
@@ -389,7 +396,7 @@ Print["count # ", i, " = ", countList[[i]], " must be 0 or greater."]; Return[0]
 ];
 ]; (* end for i loop *)
 
-(* if every non-zero digit has zero occurrences, then we have an empty sum. example: the sum of 1/n where n has no 1 in base 2. just return 0 and a message. *)
+(* if every non-zero digit has zero occurrences, then we have an empty sum. example: the 对1/n求和 where n has no 1 in base 2. just return 0 and a message. *)
 If[nConditions == iBase-1, j = 0;
 For[i = 0, i <= iBase-1, i++,
 If[ (countList[[i]] == 0) && (digitList[[i]] != 0), j++;
@@ -649,41 +656,41 @@ Break[]
 ]; (* end of private function computeIrwinSum *)
 
 (* here are the functions that the user can call:
-iSum, iSumFormatted, iPartialSum, iPartialSumThreshold, setPrintLevel *)
+IrwinSum, iSumFormatted, iPartialSum, iPartialSumThreshold, setPrintLevel *)
 
-Clear[iSum];
-iSum[digitList_?VectorQ, countList_?VectorQ, nDecimals_:15, iBase_:10, iFormatted_:0] := Module[
+Clear[IrwinSum];
+IrwinSum[digitList_?VectorQ, countList_?VectorQ, nDecimals_:15, iBase_:10, iFormatted_:0] := Module[
 (* examples:
-iSum[ { 9 }, { 3 } ] = sum of 1/n where n has exactly three 9's.
-iSum[ { 9 }, { 3 }, 30 ] = same calculation, display result rounded to 30 decimals. iSum[{9, 3}, {2, 0}] = sum of 1/n where n has two 9's and no 3's
+IrwinSum[ { 9 }, { 3 } ] = 对1/n求和 where n has exactly three 9's.
+IrwinSum[ { 9 }, { 3 }, 30 ] = same calculation, display result rounded to 30 decimals. IrwinSum[{9, 3}, {2, 0}] = 对1/n求和 where n has two 9's and no 3's
 = 2.593253652747189 .
 *)
 { },
 computeIrwinSum[iBase, digitList, countList, nDecimals, iFormatted]
 
-]; (* end of iSum[digit list, count list, decimals, base] *)
+]; (* end of IrwinSum[digit list, count list, decimals, base] *)
 
-iSum[d_Integer, iCount_Integer, nDecimals_:15, iBase_:10, iFormatted_:0] := Module[
+IrwinSum[d_Integer, iCount_Integer, nDecimals_:15, iBase_:10, iFormatted_:0] := Module[
 (* examples:
-iSum[ 9, 0 ] = sum of 1/n where n has no 9's. iSum[ 9, 2 ] = sum of 1/n where n has two 9's.
-iSum[ 9, 2, 30 ] = same calculation, to 30 decimals.
+IrwinSum[ 9, 0 ] = 对1/n求和 where n has no 9's. IrwinSum[ 9, 2 ] = 对1/n求和 where n has two 9's.
+IrwinSum[ 9, 2, 30 ] = same calculation, to 30 decimals.
 *)
 
 { },
-(* just call the "list" version of iSum *)
-iSum[ { d }, { iCount }, nDecimals, iBase, iFormatted ]
+(* just call the "list" version of IrwinSum *)
+IrwinSum[ { d }, { iCount }, nDecimals, iBase, iFormatted ]
 
-]; (* end of iSum[digit, count, decimals, base] *)
+]; (* end of IrwinSum[digit, count, decimals, base] *)
 
 Clear[iSumFormatted];
 iSumFormatted[digitList_?VectorQ, countList_?VectorQ, nDecimals_:15, iBase_:10] := Module[
 { iFormatted = 1 },
-iSum[digitList, countList, nDecimals, iBase, iFormatted]
+IrwinSum[digitList, countList, nDecimals, iBase, iFormatted]
 ]; (* end of iSumFormatted[digit list, count list, decimals, base] *)
 
 iSumFormatted[d_Integer, iCount_Integer, nDecimals_:15, iBase_:10] := Module[
 { iFormatted = 1 },
-iSum[d, iCount, nDecimals, iBase, iFormatted]
+IrwinSum[d, iCount, nDecimals, iBase, iFormatted]
 ]; (* end of iSumFormatted[digit, count, decimals, base] *)
 
 Clear[setPrintLevel]; setPrintLevel[i_Integer] := Module[
@@ -710,7 +717,7 @@ computeIrwinSum[iBase, digitList, countList, nDecimals, iFormatted, nDigits]
 iPartialSum[d_Integer, iCount_Integer, nDigits_Integer?Positive, nDecimals_:15, iBase_:10] := Module[
 (* examples:
 iPartialSum[ 9, 0, 20 ] = sum to 10^20 of 1/n where n has no 9's. iPartialSum[ 9, 2, 20 ] = sum to 10^20 of 1/n where n has two 9's. iPartialSum[ 9, 2, 20, 30 ] = same calculation, to 30 decimals.
-iPartialSum[1, 1, 6, 15, 2] = partial sum of 1/n where n has one 1
+iPartialSum[1, 1, 6, 15, 2] = partial 对1/n求和 where n has one 1
 in base 2, for n < 2^6, to 15 decimals.
 *)
 { },
@@ -721,7 +728,7 @@ in base 2, for n < 2^6, to 15 decimals.
 Clear[iPartialSumThreshold];
 iPartialSumThreshold[digitList_?VectorQ, countList_?VectorQ, threshold_?Positive, nDecimals_:15, iBase_:10] :=
 Module[
-(* example of "list" version of iPartialSum: the sum of 1/n where n has three 9's and one 0, is iSum[{9, 0}, {3, 1}] = 2.888545932755274 . therefore, the threshold must be less than
+(* example of "list" version of iPartialSum: the 对1/n求和 where n has three 9's and one 0, is IrwinSum[{9, 0}, {3, 1}] = 2.888545932755274 . therefore, the threshold must be less than
 this
 
 *)
@@ -741,7 +748,7 @@ nDec2 = Max[nDecimals, tAcc]
 ];
 
 iPrintLevelSave = iSumPrintLevel;
-iSumPrintLevel = -1; (* suppress all printed output except error messages *) totalSum = iSum[digitList, countList, nDec2, iBase];
+iSumPrintLevel = -1; (* suppress all printed output except error messages *) totalSum = IrwinSum[digitList, countList, nDec2, iBase];
 If[threshold > totalSum,
 Print["Error: your threshold is greater than the sum of the entire series."]; iSumPrintLevel = iPrintLevelSave;
 Return[ errorReturn ] (* error *)
@@ -780,17 +787,17 @@ Return[ errorReturn ] (* error *)
 
 iPartialSumThreshold[d_Integer, iCount_Integer, threshold_?Positive, nDecimals_:15, iBase_:10] := Module[
 (* examples:
-iPartialSumThreshold[9, 1, 23]: for the sum of 1/n where n has one 9,
-whose sum is iSum[9, 1] = 23.044287080747848, iPartialSumThreshold[9, 1, 23] computes about how far we need to go to reach a partial sum of 23.
+iPartialSumThreshold[9, 1, 23]: for the 对1/n求和 where n has one 9,
+whose sum is IrwinSum[9, 1] = 23.044287080747848, iPartialSumThreshold[9, 1, 23] computes about how far we need to go to reach a partial sum of 23.
 the output is {80, 22.995762680948152, 81, 23.000125707332644}
 interpretation of output:
-the partial sum of 1/n through n < 10^80 is 22.99576..., which is less than 23. however, if we include all terms through 81 digits (that is, n < 10^81),
+the partial 对1/n求和 through n < 10^80 is 22.99576..., which is less than 23. however, if we include all terms through 81 digits (that is, n < 10^81),
 then the partial sum is 23.000125707332644, greater than your threshold. now that we have the 80 and 81, we can use iPartialSum to verify this result:
 iPartialSum[9, 1, 80] = 22.995762680948152
 iPartialSum[9, 1, 81] = 23.000125707332644 .
 iPartialSumThreshold[9, 1, 23, 30]: same calculation, to 30 decimals.
 
-iSum[1, 1, 15, 2] = 2 = sum (to 15 decimals) of 1/n where n has one 1 in base 2. iPartialSumThreshold[1, 1, 1.99, 15, 2] = point at which above series reaches 1.99:
+IrwinSum[1, 1, 15, 2] = 2 = sum (to 15 decimals) of 1/n where n has one 1 in base 2. iPartialSumThreshold[1, 1, 1.99, 15, 2] = point at which above series reaches 1.99:
 {7, 1.984375000000000, 8, 1.9921875000000000}
 iPartialSum confirms this result:
 iPartialSum[1, 1, 7, 15, 2] = 1.984375000000000
@@ -844,4 +851,4 @@ iPartialSumThreshold[d_Integer, iCount_Integer, pSumStr_String, nDecimals_:15, i
 iPartialSumThreshold[ { d }, { iCount }, pSumStr, nDecimals, iBase]
 ]; (* end of iPartialSumThreshold[digit, count, threshold string, decimals, base] *) End[ ] (* end the private context *)
 (* protect the exported symbols *)
-Protect[iSum, iSumFormatted, iPartialSum, iPartialSumThreshold, setPrintLevel]; EndPackage[ ] (* end the package context *)
+Protect[IrwinSum, iSumFormatted, iPartialSum, iPartialSumThreshold, setPrintLevel]; EndPackage[ ] (* end the package context *)

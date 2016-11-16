@@ -232,11 +232,5 @@ NetShow[nn_,net_:OptimalNet,input_:None]:=Module[{n,s},
   If[input===None,NetworkGraphics[s,None],
     NetworkGraphics[s,Quiet@ApplySortingList[List/@Flatten[s,1],input]]]];
 End[];
-
-
-
-SetAttributes[{ShellSort,BubbleSort,InsertionSort,CocktailSort,BogoSort,QuickSort,SortPlay,SortDraw,SortShow,SortPlot,
-  BeadSortStep,BeadSort,BeadPlay,PairSort,MultiPairSort,ApplySorting,ApplySortingList,NetworkGraphics,BatcherNet,
-  ExchangeLoop,InsertionNet,OddEvenTranspositionNet,PairwiseNet,OptimalNet,NetEfficiency,NetShow},
-  {Protected,ReadProtected,Locked}];
+SetAttributes[ToExpression@Names["BiGridGenerator`SortAlgorithm`*"],{Protected,ReadProtected,Locked}];
 EndPackage[]

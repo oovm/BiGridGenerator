@@ -50,7 +50,9 @@ Mean[CCPDistribution[n_?IntegerQ]]:=n*HarmonicNumber[n];
 (*http://mathoverflow.net/questions/229060/batched-coupon-collector-problem*)
 (*https://www.zhihu.com/question/33576455*)
 (*http://math.stackexchange.com/questions/131664/coupon-collector-problem-with-batched-selections?rq=1*)
-Mean[CCPDistribution[n_?IntegerQ,s_?IntegerQ]]:=Sum[((-1)^(1+i)*Binomial[n,i])/(1-Binomial[-i+n,s]/Binomial[n,s]),{i,1,n}];
+Mean[CCPDistribution[n_?IntegerQ,s_?IntegerQ]]:=Sum[1/(1-Binomial[i,s]/Binomial[n,s]),{i,0,n-1}];
+Mean[CCPDistribution[n_?IntegerQ,d_?StringQ]]:=Block[{s=ToExpression@d},
+  Sum[((-1)^(1+i)*Binomial[n,i])/(1-Binomial[-i+n,s]/Binomial[n,s]),{i,1,n}]];
 (*http://cruy.xyz/201601/%E4%BB%8E%E6%8A%9B%E7%A1%AC%E5%B8%81%E8%AF%B4%E8%B5%B7/*)
 Mean[CCPDistribution[n_?IntegerQ,{s_?IntegerQ}]]:=s*Integrate[1-(1-Gamma[n,t]/Gamma[n])^s,{t,0,Infinity}];
 Mean[CCPDistribution[n_,s_,"Fast"]]:=s*NIntegrate[1-(1-Gamma[n,t]/Gamma[n])^s,{t,0,9527}];

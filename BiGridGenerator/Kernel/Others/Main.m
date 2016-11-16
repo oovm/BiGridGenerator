@@ -1,9 +1,21 @@
-BeginPackage["Main`"]
+(* Mathematica Package *)
+(* Created by Mathematica Plugin for IntelliJ IDEA *)
 
-DigitalCycle::usage = "DigitalCycle可以生成螺旋数字图.;"
-TriPainting::usage = "TriPainting可以将图片转变为三角画风;"
+(* :Title: Main *)
+(* :Context: Main` *)
+(* :Author: GalAster *)
+(* :Date: 2016-01-11 *)
+
+(* :Package Version: 0.2 *)
+(* :Update: 2016-11-14 *)
+(* :Mathematica Version: 11.0+ *)
+(* :Copyright:该软件包遵从CC协议:BY+NA+NC(署名、非商业性使用、相同方式共享） *)
+(* :Keywords: *)
+(* :Discussion: *)
 
 
+
+BeginPackage["Main`"];
 Begin["`Private`"];
 PlayList[n_]:=Module[{foo,up},
   foo[p_]:=Range[5(-1+p)p,p(4+5p),p];
@@ -29,6 +41,33 @@ MineLayout[{m_, n_, k_}] := Module[{M, foo, bar, list},
   Do[foo@list[[i]], {i, k}]; bar /@ list; M[[2 ;; -2, 2 ;; -2]]];
 MineDistribution[m_, n_, k_, p_] :=
     Transpose@{Range[0, 10],BinCounts[Flatten[MineLayout /@ ConstantArray[{m, n, k}, p]], {-0.5, 10.5,1}]/p + 0.0};
+
+
+A = ConstantArray[0, {7, 7}];
+DynamicModule[{pt = {0, 0}},
+  Dynamic@EventHandler[
+    ArrayPlot[A, ImageSize -> 512, Mesh -> True,
+      MeshStyle ->
+          Black], {{"MouseDown",
+      1} :> (A[[Ceiling[7 - MousePosition["Graphics"][[2]]],
+        Ceiling[MousePosition["Graphics"][[1]]]]] = 1), {"MouseDown",
+      2} :> (A[[Ceiling[7 - MousePosition["Graphics"][[2]]],
+        Ceiling[MousePosition["Graphics"][[1]]]]] = 0)}]]
+Dynamic[B = {Length[A[[1]]], FromDigits[#, 2] & /@ A}]
+NonogramList = B
+ListToMatrix[list_] := IntegerDigits[list[[2]], 2, list[[1]]]
+ArrayPlot[NonogramMatrix = ListToMatrix@NonogramList]
+SplitNM = Map[Split, NonogramMatrix];
+SplitMN = Map[Split, Transpose[NonogramMatrix]];
+ListLift =
+    Map[Length,
+      Table[Select[SplitNM[[i]], MemberQ[#, 1] &], {i, 1,
+        Length[SplitNM]}], {2}]
+ListAbove =
+    Map[Length,
+      Table[Select[SplitMN[[i]], MemberQ[#, 1] &], {i, 1,
+        Length[SplitMN]}], {2}]
+
 
 End[];
 Protect[DigitalCycle,TriPainting];

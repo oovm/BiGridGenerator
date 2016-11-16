@@ -52,20 +52,28 @@ ExEncrypt[Str_,Way_]:=StringJoin[Map[CharAss[Way],IntegerDigits[FromDigits[CodeT
 ExDecrypt[Str_String,Way_,Safe_:False]:=CipherToCode[IntegerDigits[FromDigits[Map[CharAnti[Way],
   StringPartition[Str,1]]-1,Length@CharSet[Way]],256],Safe];
 (*StringJoin@Union@StringPartition[%,1]*)
-CharSet["MarySue"]:=StringPartition[
+CharSet[Language->"MarySue"]:=StringPartition[
       "丝丹丽之乐云亚仪伊优伤佳依俏倩倾兮兰冰凌凝凡凤凪利千华卿可叶吉君咏哀嘉园城基塔墨夏多奥如妍妖妙妮妲姆姣姬娅娜娣娥娴婉婵婷媛嫩宁安宜寂\
 寇寒岚巧希幻幽弥彩影御心思怡恋恩悠悦情慕慧拉文斯春昭晓晗晶曦曼月朵枝枫柒柔格桂梅梦樱欢欣殇残毓沫泪洁洛浅海涅淑清温渺滢澜澪灵烟然燕燢爱爽玉玖\
 玛玥玫环玲珊珍珠琉琦琪琬琰琳琴琼瑗瑞瑟瑰瑶瑷璃璎璐璧白百盘眉真碎离秀秋筱米素紫红纨纯纱绯缈美羽翠翼育舒舞艳艺艾芊芝芬花芳芸苏苑英茉茗茜茹荔荷\
 莉莎莲莳莹莺菁菲萌萍萝萦萨落蒂蓉蓓蓝蔷蕊蕴蕾薇薰蝶融血裳语贞迷邪铃银锦阳陌雁雅雨雪霄霜霞霭露青静音韵颖颜风飘香馥馨魂魅魑鸢黎黛",1];
-ExEncrypt[Str_,"MarySue"]:=Module[{ans,ins},
-  ans=IntegerDigits[FromDigits[CodeToCipher@Str,256],Length@CharSet["MarySue"]]+1;
+(* https://github.com/atonasting/marysue-encoder
+CharSet[Language\[Rule]"MarySue"]:=StringPartition[
+"薰璃安莹洁莉樱殇雪羽晗灵血娜丽魑魅塔利亚伤梦儿海蔷玫瑰泪邪凡多姆威恩夏影琉舞雅蕾玥瑷曦月瑟薇蓝岚紫蝶馨琦洛凤颜鸢希玖兮雨烟叶兰凝冰伊如落心\
+语凌爱陌悠千艳优花晶墨阳云筱残莲沫渺琴依然丝可茉黎幽幻银韵倾乐慕文思蕊清碎音芊黛怡莎苏香城萌美迷离白嫩风霜萝妖百合珠喃之倩情恋弥绯芸茜魂澪琪\
+欣呗缈娅吉拉斯基柔惠朵茹妙铃裳纱颖蕴燢浅萦璎糜凪莳娥寂翼巧哀俏涅盘辰芝艾柒曼妲眉御寇妮米菲奥格萨温蒂",1];
+*)
+ExEncrypt[Str_,Language->"MarySue"]:=Module[{ans,ins},
+  ans=IntegerDigits[FromDigits[CodeToCipher@Str,256],Length@CharSet[Language->"MarySue"]]+1;
   ins=Select[Accumulate[{RandomInteger[{2,8}]}~Join~RandomInteger[{1,9},Length@ans]],#<Length@ans&];
-  StringInsert[StringJoin[CharAss["MarySue"]/@ans],"\[CenterDot]",ins]];
-ExDecrypt[Str_String,"MarySue",Safe_:False]:=Module[{input,res},
-  input=CharAnti["MarySue"]/@StringPartition[StringDelete[Str,"\[CenterDot]"],1];
-  res=IntegerDigits[FromDigits[input-1,Length@CharSet["MarySue"]],256];
+  StringInsert[StringJoin[CharAss[Language->"MarySue"]/@ans],"\[CenterDot]",ins]];
+ExDecrypt[Str_String,Language->"MarySue",Safe_:False]:=Module[{input,res},
+  input=CharAnti[Language->"MarySue"]/@StringPartition[StringDelete[Str,"\[CenterDot]"],1];
+  res=IntegerDigits[FromDigits[input-1,Length@CharSet[Language->"MarySue"]],256];
   CipherToCode[res,Safe]];
-CharSet["Binary"]:=StringPartition["01",1];
+CharSet[Language->name_]:=Alphabet[Language->name];
+CharSet[Language->"Chinese"]:=StringPartition[FromCharacterCode[Range[13312,40869]],1];
+CharSet[Language->"ASCII"]:=StringPartition[FromCharacterCode[Range[32,126]],1];
 End[];
 
 EndPackage[];

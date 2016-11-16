@@ -72,59 +72,59 @@
 (*        http://library.wolfram.com/infocenter/MathSource/7166/*)
 
 
-(* ::Subsection:: *)
-(*Main Package*)
+(* ::Subsection::Closed:: *)
+(*Test*)
 
 
-BeginPackage[ "kempnerSums`" ]
+BeginPackage[ "KempnerSums`" ];
 
 (* :Examples:
-   The main function in this package is kSum.
-   kSum[X] computes the sum of 1/n where n has no digits in the set X.
+   The main function in this package is KempnerSum.
+   KempnerSum[X] computes the sum of 1/n where n has no digits in the set X.
 
    The output is rounded to the default number of decimal places.  This
    default is initially set to 15, but you can use kSumSetDefaultDecimals[m]
    to reset the default to m decimal places.
    Examples:
-     kSum[9] computes the sum of 1/n where n has no digit 9.
+     KempnerSum[9] computes the sum of 1/n where n has no digit 9.
      This sum is about 22.920676619264150 .
    The second parameter is the number of decimal places:
-     kSum[9, 20] = 22.92067661926415034816 .
+     KempnerSum[9, 20] = 22.92067661926415034816 .
 
-   kSum can also take a third parameter (the base).
-     kSum[X, m, b] computes the sum of 1/n where n has no digits in X in base b.
+   KempnerSum can also take a third parameter (the base).
+     KempnerSum[X, m, b] computes the sum of 1/n where n has no digits in X in base b.
      The sum is rounded and displayed to m decimal places.
      If the third parameter is omitted, the base is assumed to be 10.
      If you want to use the third parameter to specify a base other than 10,
      then you must include all three parameters:
-       kSum[0, 20, 2] = 1.60669515241529176378 .
+       KempnerSum[0, 20, 2] = 1.60669515241529176378 .
 
    The first parameter, X, is the set of numbers that are to be omitted
    from the denominators.
    X can be:
-     a single number: kSum[0] or kSum[314]
+     a single number: KempnerSum[0] or KempnerSum[314]
    or
-     a list of numbers and/or strings enclosed in braces: kSum[ { 1, "07", 32 } ].
+     a list of numbers and/or strings enclosed in braces: KempnerSum[ { 1, "07", 32 } ].
 
-   kSum[{3, 1, 4}] computes the sum of 1/n where n contains no 3, no 1,
+   KempnerSum[{3, 1, 4}] computes the sum of 1/n where n contains no 3, no 1,
    and no 4 in base 10.  The sum is about 3.769948379731421 .
 
-   kSum[314] computes the sum of 1/n where n contains no 314 in base 10.
+   KempnerSum[314] computes the sum of 1/n where n contains no 314 in base 10.
    The sum is about 2299.829782767518338 .
 
    If a missing digit pattern is an integer with more than one digit, and
    it begins with a 0, then you must enclose the number in quotes.  This
    is because Mathematica will interpret the input 09 as the integer 9,
    which gives a different result:
-     kSum[09]   =  22.920676619264150,
+     KempnerSum[09]   =  22.920676619264150,
     but
-     kSum["09"] = 230.404757005814285 .
+     KempnerSum["09"] = 230.404757005814285 .
 
-   kSum[ { 0, 2, 4, 6, 8, 55, 13579 } ] computes the sum of 1/n where
+   KempnerSum[ { 0, 2, 4, 6, 8, 55, 13579 } ] computes the sum of 1/n where
    n has no even digit, no 55, and no 13579.  This example is in the
    Schmelzer-Baillie paper.  The sum is about 3.090849149653806 .
 
-   kSum[0, 30, 2] computes the sum of 1/n where n has no 0 in base 2.
+   KempnerSum[0, 30, 2] computes the sum of 1/n where n has no 0 in base 2.
    In order to specify the base as the third parameter, we cannot omit
    the second parameter (the number of decimal places).
    Note: this sum is equal to the sum of the rapidly-converging series
@@ -133,7 +133,7 @@ BeginPackage[ "kempnerSums`" ]
    This example provides an independent check on the algorithm here.
 
 
-   kSumFormatted is just like kSum, except that kSumFormatted formats
+   kSumFormatted is just like KempnerSum, except that kSumFormatted formats
    the output digits into groups of 5:
      kSumFormatted[9] = 22.92067 66192 64150 .
    (Technical notes: the output from kSumFormatted is not a number, but is
@@ -143,9 +143,9 @@ BeginPackage[ "kempnerSums`" ]
 
    Once you have computed a sum, you can use kPartialSum to compute
    partial sums of the same series.  kPartialSum uses the most recent
-   sum computed by kSum or kSumFormatted.
+   sum computed by KempnerSum or kSumFormatted.
    For example, immediately after computing
-     kSum[9] = 22.920676619264150,
+     KempnerSum[9] = 22.920676619264150,
    you can compute the partial sum of the same series over all terms
    whose denominators have at most 30 digits (that is, all denominators
    in the series that are less than 10^30):
@@ -155,14 +155,14 @@ BeginPackage[ "kempnerSums`" ]
    would still differ from the sum of the entire series by almost 1.0.
 
    Here is an example in base 2:
-     kSum[0, 20, 2] = 1.60669515241529176378 .
+     KempnerSum[0, 20, 2] = 1.60669515241529176378 .
    Here is the partial sum over all denominators in the series that have
    at most 5 digits in base 2, that is, denominators at most (decimal) 31.
      kPartialSum[5] = 1.575115207373272
    This partial sum is just 1 + 1/3 + 1/7 + 1/15 + 1/31 = 1709/1085.
 
    You can specify a different number of decimal places in the second parameter.
-   After computing kSum[9]:
+   After computing KempnerSum[9]:
      kPartialSum[30, 20] = 21.97105507817861948711 .
    The next two calculations show that in order to make the partial sum exceed 22.9,
    you would need to include at least some terms with denominators of 67 digits:
@@ -176,7 +176,7 @@ BeginPackage[ "kempnerSums`" ]
    the (approximate) point at which a partial sum exceeds a given threshold, and
    shows how extraordinarily slowly these series converge to their final sums.  
 
-   After computing kSum[314159] = 2302582.333863782607892, we call
+   After computing KempnerSum[314159] = 2302582.333863782607892, we call
      kPartialSumThreshold[1000000].  The result is:
      {569679, 569680, 999999.793917693872470, 1.000001096506746783363*10^6}
      These four numbers tell us that the sum of the series through all
@@ -205,7 +205,7 @@ BeginPackage[ "kempnerSums`" ]
 
    Here is an example with an even larger sum.  If we exclude denominators
    that have the digit pattern "1234567890", the sum is
-     kSum[1234567890, 20] = 2.302585092202703549829506732687*10^10 .
+     KempnerSum[1234567890, 20] = 2.302585092202703549829506732687*10^10 .
    After including some terms with 434304 digits, the sum finally reaches 1 million:
      kPartialSumThreshold[1000000] returns
      {434303, 434304, 999998.47617794443909902633, 1.00000077866303886642136774*10^6}
@@ -228,12 +228,12 @@ BeginPackage[ "kempnerSums`" ]
 
    This loop computes the 10 sums that arise when terms with the digits
    0, 1, 2, ..., 9 are removed from the harmonic series:
-     Do[Print[ i, " ", kSum[i]], {i, 0, 9}]
+     Do[Print[ i, " ", KempnerSum[i]], {i, 0, 9}]
 
    This computes sums involving all pairs of missing digits, base 10:
      For[i = 0, i <= 9, i++,
        For[j = i+1, j <= 9, j++,
-         Print[ i, ",", j, ": ", kSum[{ i, j }] ]
+         Print[ i, ",", j, ": ", KempnerSum[{ i, j }] ]
        ]
      ]
 
@@ -244,23 +244,27 @@ BeginPackage[ "kempnerSums`" ]
    the the remaining digit patterns 10 - 99).  These sums range between
    approximately 220 and 253.
      Do[Print[IntegerString[i, 10, 2], " ",
-       kSum[IntegerString[i, 10, 2], 10]], {i, 0, 99}]
+       KempnerSum[IntegerString[i, 10, 2], 10]], {i, 0, 99}]
 
 
 
-   The authors believe that all output digits for kSum[X, m] are correct, rounded
+   The authors believe that all output digits for KempnerSum[X, m] are correct, rounded
    in the last place.  To verify that you got as many correct decimal places as
    you wanted, you can run the calculation again with, say, 5 more decimal places.
 *)
 
 
+(* ::Subsection:: *)
+(*Main Package*)
+
+
 (* usage messages for this context, and for the exported functions *)
-kempnerSums::usage = "kempnerSums.m is a package that computes sums of Kempner series.\r\n
+KempnerSums::usage = "KempnerSums.m is a package that computes sums of Kempner series.\r\n
 This package has the following functions:\r\n
-  kSum[X]: returns the sum of 1/n where n has no digits in the set X.  This is the primary\
+  KempnerSum[X]: returns the sum of 1/n where n has no digits in the set X.  This is the primary\
  calculation function in this package.\r\n
-  kSumFormatted[X]: same as kSum, but formats the output.\r\n
-  kPartialSum[nDigits]: uses the most input to kSum or kSumFormatted, and returns\
+  kSumFormatted[X]: same as KempnerSum, but formats the output.\r\n
+  kPartialSum[nDigits]: uses the most input to KempnerSum or kSumFormatted, and returns\
  the partial sum for all denominators up through (nDigits) digits.\r\n
   kPartialSumThreshold[s] tells how far we must go in the series to make the\
  partial sum exceed the given threshold s.\r\n
@@ -270,19 +274,19 @@ This package has the following functions:\r\n
 In these functions, X is the set of numbers to exclude from the denominators.\
   X can be a single number, or a comma-separated list of numbers enclosed in braces { }.\
   (Note: a multi-digit number that has a leading zero must be enclosed in quotes).\r\n
-kSum and kSumFormatted take an optional second parameter: the number of decimal\
+KempnerSum and kSumFormatted take an optional second parameter: the number of decimal\
  places.  If this parameter is omitted, the default number will be used.\r\n
-kSum, kSumFormatted, and kSumGetA take an optional, final parameter: the base.\
+KempnerSum, kSumFormatted, and kSumGetA take an optional, final parameter: the base.\
   If the base is not specified, base 10 is used as the default.\
-  You may also call kSum and kSumFormatted with a T matrix as the first parameter.\
+  You may also call KempnerSum and kSumFormatted with a T matrix as the first parameter.\
 \r\n
 kSumShowDefaultDecimals and kSumSetDefaultDecimals[m] display and set the default\
  number of decimal places.\r\n
-kSumTimeAndMemory displays estimated time and memory requirements."
+kSumTimeAndMemory displays estimated time and memory requirements.";
 
 (* these are usage messages for individual functions *)
 
-kSum::usage = "kSum[X] computes the sum of the series 1/n where n has no digits in the set X.\r\n
+KempnerSum::usage = "KempnerSum[X] computes the sum of the series 1/n where n has no digits in the set X.\r\n
  X is the set of numbers to exclude from the denominators.\
  X can be a single number, or a comma-separated list of numbers enclosed in braces { }.\
  If X is a list, then this computes the sum of 1/n where n has\
@@ -291,30 +295,31 @@ kSum::usage = "kSum[X] computes the sum of the series 1/n where n has no digits 
  The optional second parameter is the number of decimal places.  All results are\
  rounded to the given number of decimal places.\r\n
  Examples:
-   kSum[9] = 22.920676619264150 (uses the default of 15 decimal places)\r\n
-   kSum[9, 10] = 22.9206766193 (get the sum rounded to 10 decimals)\r\n
-   kSum[09] = 22.920676619264150 (warning: Mathematica treats 09 as 9)\r\n
-   kSum[\"09\"] = 230.404757005814285 (leading 0, so quotes are required)\r\n
-   kSum[{3, 1, 4}] = 3.769948379731421\r\n
-   kSum[314] = 2299.829782767518338\r\n
-   kSum[314159, 20] = 2302582.33386378260789202376\r\n
-   kSum[{0, 2, 4, 6, 8}] = 3.171765473415905 (denominators with no even digits)\r\n
-   kSum[{1, 3, 5, 7, 9}] = 1.962608412994617 (denominators with no odd digits)\r\n
-   kSum[{0, 1, 4, 6, 8, 9}] = 1.857333779940978 (denominators with only prime digits)\r\n
-   kSum[{\"00\", 11, 22, 33, 44, 55, 66, 77, 88, 99}] = 23.382957488301063 (no double digits)\r\n
- kSum takes an optional third parameter: the base.  If not specified, base 10 is used.
+   KempnerSum[9] = 22.920676619264150 (使用默认的15位精度)\r\n
+   KempnerSum[9, 10] = 22.9206766193 (使用10位精度)\r\n
+   KempnerSum[09] = 22.920676619264150 (在Mathematica中09就是9)\r\n
+   KempnerSum[\"09\"] = 230.404757005814285 (leading 0, so quotes are required)\r\n
+   KempnerSum[{3, 1, 4}] = 3.769948379731421\r\n
+   KempnerSum[314] = 2299.829782767518338\r\n
+   KempnerSum[314159, 20] = 2302582.33386378260789202376\r\n
+   KempnerSum[{0, 2, 4, 6, 8}] = 3.171765473415905 (denominators with no even digits)\r\n
+   KempnerSum[{1, 3, 5, 7, 9}] = 1.962608412994617 (denominators with no odd digits)\r\n
+   KempnerSum[{0, 1, 4, 6, 8, 9}] = 1.857333779940978 (denominators with only prime digits)\r\n
+   KempnerSum[{\"00\", 11, 22, 33, 44, 55, 66, 77, 88, 99}] = 23.382957488301063 (no double digits)\r\n
+ KempnerSum takes an optional third parameter: the base.  If not specified, base 10 is used.
  If you use the third parameter, you cannot omit the second parameter.
- Example: kSum[0, 15, 2] = 1.606695152415292 (denominators with no 0 in base 2).\r\n
- Another form: kSum[ T ], where the input is the T matrix; see the Schmelzer-Baillie paper."
+ Example: KempnerSum[0, 15, 2] = 1.606695152415292 (denominators with no 0 in base 2).\r\n
+ Another form: KempnerSum[ T ], where the input is the T matrix; see the Schmelzer-Baillie paper.";
 
-kSumFormatted::usage = "Similar to kSum, but the output decimal places are separated into groups of 5 digits."
+kSumFormatted::usage = "和 KempnerSum 基本一样,但是自带5位的格式化效果\r\n
+注意:结果是个NumberForm ,译者注";
 
 kPartialSum::usage = "kPartialSum[ nDigits, nDecimals ]\r\n
- Using the most recent input to kSum or kSumFormatted, compute the sum of all terms\
+ Using the most recent input to KempnerSum or kSumFormatted, compute the sum of all terms\
  whose denominators have at most (nDigits) digits.
- You must call kSum or kSumFormatted before calling kPartialSum.\r\n
+ You must call KempnerSum or kSumFormatted before calling kPartialSum.\r\n
  Examples:
-   kSum[9] = 22.920676619264150 .
+   KempnerSum[9] = 22.920676619264150 .
    Then, kPartialSum[30] gives 21.971055078178619 .
    This is the sum of all terms in the series with denominators < 10^30.
    Likewise, kPartialSum[31] gives 22.066017232287173 .  Therefore, to make the partial\
@@ -324,10 +329,10 @@ kPartialSum::usage = "kPartialSum[ nDigits, nDecimals ]\r\n
   The next two calculations show that, to make the sum exceed 22.9, we need at least some terms\
  whose denominators have 67 digits.
    kPartialSum[66] = 22.899283165770095
-   kPartialSum[67] = 22.901422511119500 ."
+   kPartialSum[67] = 22.901422511119500 .";
 
 kPartialSumThreshold::usage = "kPartialSumThreshold[s]\r\n
- Using the most recent input to kSum or kSumFormatted, compute the number of digits needed
+ Using the most recent input to KempnerSum or kSumFormatted, compute the number of digits needed
  in the denominators to make the partial sum exceed s.
  The value of s must be less than the sum of the series.  If s is a floating-point value close to the
  sum of the entire series, you should enclose it in quotes, or use Mathematica's backquote notation to
@@ -338,16 +343,16 @@ kPartialSumThreshold::usage = "kPartialSumThreshold[s]\r\n
  Four numbers are returned: { d1, d2, s1, s2 }.  d2 is the number of digits required in the
  denominators to make the partial sum > s.  d1 = d2 - 1.  s1 and s2 are the partial sums for d1 and d2.
  Given s, s1 and s2 will normally be such that s1 < s < s2.
- You must call kSum or kSumFormatted before calling kPartialSumThreshold.\r\n
+ You must call KempnerSum or kSumFormatted before calling kPartialSumThreshold.\r\n
  Example 1:
-   kSum[9] = 22.920676619264150 .
+   KempnerSum[9] = 22.920676619264150 .
    Then, kPartialSumThreshold[22] returns {30, 31, 21.971055078178619, 22.066017232287173}.
    This means that, to make the partial sum exceed 22, we need at least some terms whose denominators\
  have 31 digits.\r\n
  Example 2:
    This example shows what can go wrong when your input is a floating-point number that is
    near the sum of the entire series.
-   kSum[9, 20] = 22.92067661926415034816.
+   KempnerSum[9, 20] = 22.92067661926415034816.
    kPartialSumThreshold[22.920676619264149] returns
      {359, 360, 22.92067661926414950999, 22.92067661926414959380} .
    This result is wrong: note that both partial sums are greater than your input value.
@@ -358,28 +363,29 @@ kPartialSumThreshold::usage = "kPartialSumThreshold[s]\r\n
    kPartialSumThreshold[22.920676619264149``15] returns the correct input:
      {354, 355, 22.92067661926414892870, 22.92067661926414907065}.
    You will also get the correct answer if you enter your input as a string:
-     kPartialSumThreshold[\"22.920676619264149\"]."
+     kPartialSumThreshold[\"22.920676619264149\"].";
 
 kSumGetT::usage = "kSumGetT[X] computes and displays the T matrix associated with X.\r\n
  X is the collection of numbers to omit from the denominators.\
- This function takes an optional second parameter: the base.  If not specified, base 10 is used."
+ This function takes an optional second parameter: the base.  If not specified, base 10 is used.";
 
 kSumGetA::usage = "kSumGetA[X] computes and displays the A matrix associated with X.\r\n
  X is the collection of numbers to omit from the denominators.\
- This function takes an optional second parameter: the base.  If not specified, base 10 is used."
+ This function takes an optional second parameter: the base.  If not specified, base 10 is used.";
 
-kSumShowA::usage = "kSumShowA[ ] shows the A matrix for the previously-entered input string or list."
+kSumShowA::usage = "kSumShowA[ ] shows the A matrix for the previously-entered input string or list.";
 
 kSumTimeAndMemory::usage = "kSumTimeAndMemory[nDigits] estimates time and memory requirements\
- for kSum[9, nDigits].\
-  Note that kSum[99, nDigits] needs more time and memory than kSum[9, nDigits]."
+ for KempnerSum[9, nDigits].\
+  Note that KempnerSum[99, nDigits] needs more time and memory than KempnerSum[9, nDigits].";
 
 kSumSetDefaultDecimals::usage = "kSumSetDefaultDecimals[n] sets the default number of decimal places\
- to n.  Initially, the default is 15."
-kSumShowDefaultDecimals::usage = "kSumShowDefaultDecimals displays the current default number of decimal places."
+ to n.  Initially, the default is 15.";
+kSumShowDefaultDecimals::usage = "kSumShowDefaultDecimals displays the current default number of decimal places.";
 
 
-Begin["`Private`"]    (* begin the private context (implementation) *)
+Begin["`Private`"];
+(* begin the private context (implementation) *)
 
 
 Off[ General::spell1 ];
@@ -424,11 +430,11 @@ kSumSave = 0;
 nDecimalsSave = 0;
 
 
-Unprotect[kSum, kSumFormatted, kPartialSum, kSumGetT, kSumGetA, kSumShowA];
+Unprotect[KempnerSum, kSumFormatted, kPartialSum, kSumGetT, kSumGetA, kSumShowA];
 Unprotect[kSumTimeAndMemory, kSumSetDefaultDecimals, kSumShowDefaultDecimals];
 Unprotect[kPartialSumThreshold];
 
-Clear[kSum, kSumFormatted, kPartialSum, kSumGetT, kSumGetA, kSumShowA];
+Clear[KempnerSum, kSumFormatted, kPartialSum, kSumGetT, kSumGetA, kSumShowA];
 Clear[kSumTimeAndMemory, kSumSetDefaultDecimals, kSumShowDefaultDecimals];
 Clear[setT, kSumX];
 
@@ -491,9 +497,9 @@ Module[ (* enter with a list of strings {s1, s2, ...}, like { "12", "345" }; ret
      perhaps we could use lower-case letters a-z for bases 11-36,
      as Mathematica does for BaseForm[ ].  note: we can still enter
      a digit in any base, say 0 in base 100 or base 1000.  for example,
-       kSum[0, 10, 100] = 460.5252026385
+       KempnerSum[0, 10, 100] = 460.5252026385
      and
-       kSum[0, 10, 1000] = 6907.756101048 . *)
+       KempnerSum[0, 10, 1000] = 6907.756101048 . *)
 
   For[i = 1, i <= nInputStrings, i++,
     (* make sure this list element is an integer or a string *)
@@ -672,7 +678,7 @@ Module[ (* enter with a list of strings {s1, s2, ...}, like { "12", "345" }; ret
 
 kSumX[stringList_?VectorQ, T_?MatrixQ, nDecimals0_Integer, iBase_] :=
 Module[
-  (* the user calls kSum[ ] or kSumFormatted[ ].  those functions call this
+  (* the user calls KempnerSum[ ] or kSumFormatted[ ].  those functions call this
      private function kSumX, which does all the work. *)
   { nDecimals, inputLen, nDecSum, f, c, a, S, z, nInputDigits, totalDigits,
     iMaxBase, goalMult, matB, wTrunc2, i, d, l, m, w, h,
@@ -700,7 +706,7 @@ Module[
 
   iMaxBase = Ceiling[ Log[iBase, 1000] ];
 
-  (* for base 1000, kSum[0, 20, 1000] = 6907.75610104793192687449 .
+  (* for base 1000, KempnerSum[0, 20, 1000] = 6907.75610104793192687449 .
      for this, we need iMaxBase > 1 *)
   If[iMaxBase < 2, iMaxBase = 2];    (* could happen if iBase = 1000 *)
 
@@ -729,7 +735,7 @@ Module[
   nDecSum = Floor[goalMult * totalDigits];
 
   (* for large bases (say 1000), we may have to slightly increase the number of digits
-     to prevent this: kSum[0, 10, 1000] = 6907.756101048 (only 9 decimals shown). *)
+     to prevent this: KempnerSum[0, 10, 1000] = 6907.756101048 (only 9 decimals shown). *)
   If[iBase > 10,    
     nDecSum = nDecSum + Ceiling[Log[10, iBase]*nInputDigits]
   ];
@@ -777,7 +783,7 @@ Module[
      Apply[Plus, N[1/S[i, j]^k, nDecSum]]    this is fast but uses lots of memory
 
    lst1 = Range[11, 99]
-   lst1 = Select[Range[11, 99], Mod[#, 10] != 0 &]  (* for kSum[0], remove 20, 30, ..., 90 *)
+   lst1 = Select[Range[11, 99], Mod[#, 10] != 0 &]  (* for KempnerSum[0], remove 20, 30, ..., 90 *)
    there is a difference in how these two expressions are evaluated:
      N[Apply[Plus, 1/lst1^k], nDecSum]
      Apply[Plus, N[1/lst1^k, nDecSum]]
@@ -827,14 +833,14 @@ If[iPrint == -1,
 
   kSumSave    (* kSumSave is used in kPartialSum *)
 
-]    (* end of kSumX *)
+];    (* end of kSumX *)
 
 
-kSum[T_?MatrixQ, nDecimals_Integer] :=
+KempnerSum[T_?MatrixQ, nDecimals_Integer] :=
 Module[ (* in this version, we input a T matrix, not a string *)
   (* note: the base is not a parameter; the base is the number of columns in the matrix *)
-  (* warning - a matrix is a type of list.  therefore, this kSum[matrix] function must be
-     placed before kSum[list] in this source code file. *)
+  (* warning - a matrix is a type of list.  therefore, this KempnerSum[matrix] function must be
+     placed before KempnerSum[list] in this source code file. *)
   { n, iBase, i, stringList = { }, s = ""},
 
   If[nDecimals < 1, nDecimals = 1];
@@ -849,19 +855,19 @@ Module[ (* in this version, we input a T matrix, not a string *)
 
   AppendTo[stringList, s];
   kSumX[stringList, T, nDecimals, iBase]
-]    (* end of kSum[T matrix, nDec] *)
+];    (* end of KempnerSum[T matrix, nDec] *)
 
 
-kSum[T_?MatrixQ] :=
+KempnerSum[T_?MatrixQ] :=
 Module[ (* in this version, we input a T matrix, not a string *)
   (* note: the base is not a parameter; the base is the number of columns in the matrix *)
   { },
 
-  kSum[T, nDefaultDecimals]
-]    (* end of kSum[T matrix] *)
+  KempnerSum[T, nDefaultDecimals]
+];    (* end of KempnerSum[T matrix] *)
 
 
-kSum[inputList_?VectorQ, nDecimals_Integer, iBase_:10] :=
+KempnerSum[inputList_?VectorQ, nDecimals_Integer, iBase_:10] :=
 Module[
   { lst, T },
   lst = convertInputListToStrings[inputList];
@@ -869,114 +875,114 @@ Module[
   T = setT[lst, iBase];
   If[ T[[1, 1]] < 0, Return[0] ];
   kSumX[lst, T, nDecimals, iBase]
-]    (* end of kSum[list, nDec, base] *)
+] ;   (* end of KempnerSum[list, nDec, base] *)
 
 
-kSum[inputList_?VectorQ] :=
+KempnerSum[inputList_?VectorQ] :=
 Module[
   { },
-  kSum[inputList, nDefaultDecimals]
-]    (* end of kSum[list] *)
+  KempnerSum[inputList, nDefaultDecimals]
+];    (* end of KempnerSum[list] *)
 
 
-kSum[s_String, nDecimals_Integer, iBase_:10] :=
+KempnerSum[s_String, nDecimals_Integer, iBase_:10] :=
 Module[
   { stringList = { s } },
-  kSum[stringList, nDecimals, iBase]
-]    (* end of kSum[string, nDec, base] *)
+  KempnerSum[stringList, nDecimals, iBase]
+] ;   (* end of KempnerSum[string, nDec, base] *)
 
 
-kSum[s_String] :=
+KempnerSum[s_String] :=
 Module[
   { stringList = { s } },
-  kSum[stringList, nDefaultDecimals]
-]    (* end of kSum[string] *)
+  KempnerSum[stringList, nDefaultDecimals]
+];    (* end of KempnerSum[string] *)
 
 
-kSum[i_Integer, nDecimals_Integer, iBase_:10] :=
+KempnerSum[i_Integer, nDecimals_Integer, iBase_:10] :=
 Module[
   { stringList = { ToString[i] } },
-  kSum[stringList, nDecimals, iBase]
-]    (* end of kSum[integer, nDec, base] *)
+  KempnerSum[stringList, nDecimals, iBase]
+];    (* end of KempnerSum[integer, nDec, base] *)
 
 
-kSum[i_Integer] :=
+KempnerSum[i_Integer] :=
 Module[
   { stringList = { ToString[i] } },
-  kSum[stringList, nDefaultDecimals]
-]    (* end of kSum[integer] *)
+  KempnerSum[stringList, nDefaultDecimals]
+];    (* end of KempnerSum[integer] *)
 
 
 
 kSumFormatted[T_?MatrixQ, nDecimals_Integer, iBase_:10] :=
 Module[ (* in this version, we input a T matrix *)
   (* returns a formatted value of type NumberForm, not a number *)
-  { z = kSum[T, nDecimals] },
+  { z = KempnerSum[T, nDecimals] },
   nf[z, nDecimals]
-]    (* end of kSumFormatted[matrix, nDec, base] *)
+];    (* end of kSumFormatted[matrix, nDec, base] *)
 
 kSumFormatted[T_?MatrixQ] :=
 Module[ (* in this version, we input a T matrix *)
   (* returns a formatted value of type NumberForm, not a number *)
   { nDecimals = nDefaultDecimals, z },
-  z = kSum[T, nDecimals];
+  z = KempnerSum[T, nDecimals];
   nf[z, nDecimals]
-]    (* end of kSumFormatted[matrix] *)
+];    (* end of kSumFormatted[matrix] *)
 
 
 kSumFormatted[inputList_?VectorQ, nDecimals_Integer, iBase_:10] :=
 Module[ (* returns a formatted value of type NumberForm, not a number *)
-  { z = kSum[inputList, nDecimals, iBase] },
+  { z = KempnerSum[inputList, nDecimals, iBase] },
   nf[z, nDecimals]
-]    (* end of kSumFormatted[list, nDec, base] *)
+] ;   (* end of kSumFormatted[list, nDec, base] *)
 
 
 kSumFormatted[inputList_?VectorQ] :=
 Module[ (* returns a formatted value of type NumberForm, not a number *)
   { nDecimals = nDefaultDecimals, z },
-  z = kSum[inputList, nDecimals];
+  z = KempnerSum[inputList, nDecimals];
   nf[z, nDecimals]
-]    (* end of kSumFormatted[list] *)
+]  ;  (* end of kSumFormatted[list] *)
 
 
 kSumFormatted[s_String, nDecimals_Integer, iBase_:10] :=
 Module[ (* returns a formatted value of type NumberForm, not a number *)
   { stringList = { s } },
   kSumFormatted[stringList, nDecimals, iBase]
-]    (* end of kSumFormatted[string, nDec, base] *)
+] ;   (* end of kSumFormatted[string, nDec, base] *)
 
 
 kSumFormatted[s_String] :=
 Module[ (* returns a formatted value of type NumberForm, not a number *)
   { stringList = { s } },
   kSumFormatted[stringList, nDefaultDecimals]
-]    (* end of kSumFormatted[string] *)
+]  ;  (* end of kSumFormatted[string] *)
 
 
 kSumFormatted[i_Integer, nDecimals_Integer, iBase_:10] :=
 Module[ (* returns a formatted value of type NumberForm, not a number *)
   { stringList = { ToString[i] } },
   kSumFormatted[stringList, nDecimals, iBase]
-]    (* end of kSumFormatted[integer, nDec, base] *)
+]  ;  (* end of kSumFormatted[integer, nDec, base] *)
 
 
 kSumFormatted[i_Integer] :=
 Module[ (* returns a formatted value of type NumberForm, not a number *)
   { stringList = { ToString[i] } },
   kSumFormatted[stringList, nDefaultDecimals]
-]    (* end of kSumFormatted[integer] *)
+];    (* end of kSumFormatted[integer] *)
 
 
 kPartialSum[nDigits_Integer?Positive, nDecimals_Integer] :=
-Module[ (* partial sum calculation, using previous kSum *)
-  (* using the same input just passed to kSum[ ], compute the partial sum of 1/k,
+Module[ (* partial sum calculation, using previous KempnerSum *)
+  (* using the same input just passed to KempnerSum[ ], compute the partial sum of 1/k,
      where k has <= nDigits digits (that is, denominators are < 10^nDigits).
      warning: this could underflow if nDigits > about 2*10^9.
-     first, call kSum[string, decimals].  then, we can call kPartialSum[digits, decimals].
+     first, call KempnerSum[string, decimals].  then, we can call kPartialSum[digits, decimals].
      this function uses the existing values of global variables A, extraPol, n, Psi,
-     iBaseSave, and kSumSave, all of which were set in the last call to kSum.
+     iBaseSave, and kSumSave, all of which were set in the last call to KempnerSum.
      note: if this returns less than the requested number of decimal places, then you must
-     call kSum again with the desired number of places.
+     call KempnerSum again with the desired number of places.
   *)
   { partSum = 0, i, j, matBTrunc },
 
@@ -1008,8 +1014,8 @@ Module[ (* partial sum calculation, using previous kSum *)
   ];    (* end of matBTrunc *)
 
 
-  If[ (extraPol <= 0) || (kSumSave == 0),    (* must call kSum[ ] or kSumFormatted[ ] first *)
-    Print["Error: no sum has been computed yet.  Call kSum[ ] or kSumFormatted[ ] first."];
+  If[ (extraPol <= 0) || (kSumSave == 0),    (* must call KempnerSum[ ] or kSumFormatted[ ] first *)
+    Print["Error: no sum has been computed yet.  Call KempnerSum[ ] or kSumFormatted[ ] first."];
     Return[0]
   ];
 
@@ -1026,16 +1032,16 @@ Module[ (* partial sum calculation, using previous kSum *)
 
   If[partSum == 0, 0, N[partSum, Floor[ 1 + Log[10, partSum] ] + nDecimals ] ]
 
-]    (* end of kPartialSum[nDigits, nDec] *)
+] ;   (* end of kPartialSum[nDigits, nDec] *)
 
 
 kPartialSum[nDigits_Integer?Positive] :=
-Module[ (* partial sum calculation, based on previous kSum *)
-(* using the previous input to kSum[ ], compute the
+Module[ (* partial sum calculation, based on previous KempnerSum *)
+(* using the previous input to KempnerSum[ ], compute the
    partial sum of 1/k, where k has <= nDigits digits. *)
   { },
   kPartialSum[nDigits, nDefaultDecimals]
-]    (* end of kPartialSum[nDigits] *)
+];    (* end of kPartialSum[nDigits] *)
 
 
 Clear[kPartialSumThreshold];
@@ -1044,10 +1050,10 @@ kPartialSumThresholdX[pSum0_?NumericQ, nDecDefault_] :=
 Module[
   (* this private function is called by public functions kPartialSumThreshold.
 
-     using the previous input to kSum[ ], compute the number of digits
+     using the previous input to KempnerSum[ ], compute the number of digits
      at which the partial sum exceeds pSum0.
      example:
-       kSum[9] = 22.920676619264150.
+       KempnerSum[9] = 22.920676619264150.
        kPartialSumThreshold[22] tells approximately how far we must go in the series
        to make the partial sum exceed 22.
        kPartialSumThreshold[22] returns {30, 31, 21.971055078178619, 22.066017232287173}.
@@ -1062,15 +1068,15 @@ Module[
        21.971055078178619 < 22 < 22.066017232287173.
 
      two warnings about using this function:
-     1.  if pSum is very close to the actual sum returned by kSum[ ], you may be asked to
-     call kSum[ ] again, with more decimals, then to call kPartialSumThreshold[ ] again.
+     1.  if pSum is very close to the actual sum returned by KempnerSum[ ], you may be asked to
+     call KempnerSum[ ] again, with more decimals, then to call kPartialSumThreshold[ ] again.
 
      2.  also, if you specify pSum as a decimal value, mathematica may slightly change
      your input before kPartialSumThreshold can process it.  therefore, if pSum is close
      to the actual sum, you could get incorrect results.
 
      here is an example showing how this can heppen.  suppose you compute
-       kSum[314, 20] = 2299.82978276751833845359.
+       KempnerSum[314, 20] = 2299.82978276751833845359.
      then, if you enter
        kPartialSumThreshold[2299.8297827675],
      this function will print out:
@@ -1102,7 +1108,7 @@ Module[
     errorReturn = { -1, -1, -1, -1 } },
 
   If[ (extraPol <= 0) || (kSumSave == 0),
-    Print["Error: no sum has been computed yet.  Call kSum[ ] or kSumFormatted[ ] first."];
+    Print["Error: no sum has been computed yet.  Call KempnerSum[ ] or kSumFormatted[ ] first."];
     Return[ errorReturn ]
   ];
 
@@ -1126,7 +1132,7 @@ Module[
 
   If[pSum >= s,
     Print[pSum, " is too close to the actual sum (", s, ")."];
-    Print["Either enter a smaller value, or call kSum again with more than ", nDecimalsSave, " decimal places."];
+    Print["Either enter a smaller value, or call KempnerSum again with more than ", nDecimalsSave, " decimal places."];
     Return[ errorReturn ]
   ];    (* error *)
 
@@ -1174,9 +1180,9 @@ Module[
     nDecimalsNeeded = -Floor[Log[10, Abs[psb - psa]]] + 5;
     nDecimalsNeeded = 5*(1 + Floor[(nDecimalsNeeded-1)/5]);  (* round up to mult of 5 *)
     If[nDecimalsNeeded > nDec,
-      Print["More decimals are needed.  You should re-compute kSum to at least ",
+      Print["More decimals are needed.  You should re-compute KempnerSum to at least ",
             nDecimalsNeeded, " decimals, then call kPartialSumThreshold again."] ,
-      Print["More precision is needed.  You should re-compute kSum to more decimals,\
+      Print["More precision is needed.  You should re-compute KempnerSum to more decimals,\
  then call kPartialSumThreshold again."];
     ];
     Return[ errorReturn ];
@@ -1255,19 +1261,19 @@ Module[ (* given the input list, return the matrix A *)
   lst = convertInputListToStrings[inputList];
   If[Length[lst] == 0, Return[ {{0}} ] ];
   setT[lst, iBase]    (* return this matrix *)
-]    (* end of kSumGetT[list] *)
+];    (* end of kSumGetT[list] *)
 
 kSumGetT[s_String, iBase_:10] :=
 Module[ (* given the input string s, return the matrix A *)
   { stringList = { s } },
   kSumGetT[stringList, iBase]
-]    (* end of kSumGetT[string] *)
+] ;   (* end of kSumGetT[string] *)
 
 kSumGetT[i_Integer, iBase_:10] :=
 Module[ (* given the input integer, return the matrix A *)
   { stringList = { ToString[i] } },
   kSumGetT[stringList, iBase]
-]    (* end of kSumGetT[integer] *)
+] ;   (* end of kSumGetT[integer] *)
 
 
 kSumShowA[] := A;    (* show the current (private context) A matrix for the previously-entered input *)
@@ -1277,7 +1283,7 @@ Module[ (* given the input list, return the matrix A *)
   { lst2, T, f, j, l, m, A, n },
 
   (* use only local variables here, not the global variables A and n.
-     this allows the user to call kSum, then kSumGetA, then kPartialSum,
+     this allows the user to call KempnerSum, then kSumGetA, then kPartialSum,
      without kSumGetA interfering with the global variables.
   *)
 
@@ -1294,7 +1300,7 @@ Module[ (* given the input list, return the matrix A *)
 
   A    (* return this matrix *)
 
-]    (* end of kSumGetA[list] *)
+];    (* end of kSumGetA[list] *)
 
 kSumGetA[s_String, iBase_:10] :=
 Module[ (* given the input string s, return the matrix A *)
@@ -1317,15 +1323,15 @@ Module[ (* given the input integer, return the matrix A *)
 
 kSumTimeAndMemory[nDigits_] :=
 Module[
-  (* display the estimated time and memory needed to calculate kSum[9, nDigits].
+  (* display the estimated time and memory needed to calculate KempnerSum[9, nDigits].
      based on calculations on a dell laptop for 100, 200, ..., 600 digits. *)
   { nd, t1, t0, tFast, mFast},
   nd = nDigits;
   If[nd < 50, nd = 50];
 
-  t1 = Timing[ kSum[9, 100] ][[1]];
+  t1 = Timing[ KempnerSum[9, 100] ][[1]];
 
-  (* t0 = actual time for kSum[9, 100] on the laptop used for benchmark *)
+  (* t0 = actual time for KempnerSum[9, 100] on the laptop used for benchmark *)
   t0 = 3.647 ;
 
   tFast = .55227 + .017407*nd + .00017173*nd^2 + (3.3708*10^-7)*nd^3 ;
@@ -1333,9 +1339,9 @@ Module[
 
   (* the following cubic polynomial works better for 100 <= nd <= 1000 *)
 
-  Print["Estimated time and memory for kSum[9, ", nd, "]:" ];
+  Print["Estimated time and memory for KempnerSum[9, ", nd, "]:" ];
   Print[Round[tFast*t1/t0], " seconds, ", Round[mFast/1000000], " MBytes of memory"];
-  Print["  Note: kSum[99, ", nd, "], kSum[999, ", nd,"] etc., will use more time and memory." ];
+  Print["  Note: KempnerSum[99, ", nd, "], KempnerSum[999, ", nd,"] etc., will use more time and memory." ];
 ];    (* end of kSumTimeAndMemory *)
 
 
@@ -1359,7 +1365,7 @@ kSumShowDefaultDecimals := nDefaultDecimals;
 End[ ]         (* end the private context *)
 
 (* protect the exported symbols *)
-Protect[kSum, kSumFormatted, kPartialSum, kSumGetT, kSumGetA, kSumShowA];
+Protect[KempnerSum, kSumFormatted, kPartialSum, kSumGetT, kSumGetA, kSumShowA];
 Protect[kSumTimeAndMemory, kSumSetDefaultDecimals, kSumShowDefaultDecimals];
 Protect[kPartialSumThreshold];
 

@@ -16,30 +16,30 @@ BeginPackage["LightOut`"]
 (* Exported symbols added here with SymbolName::usage *)
 
 Begin["`Private`"]
-A = ConstantArray[0, {7, 7}];
-DynamicModule[{pt = {0, 0}},
-  Dynamic@EventHandler[
-    ArrayPlot[A, ImageSize -> 512, Mesh -> True,
-      MeshStyle ->
-          Black], {{"MouseDown",
-      1} :> (A[[Ceiling[7 - MousePosition["Graphics"][[2]]],
-        Ceiling[MousePosition["Graphics"][[1]]]]] = 1), {"MouseDown",
-      2} :> (A[[Ceiling[7 - MousePosition["Graphics"][[2]]],
-        Ceiling[MousePosition["Graphics"][[1]]]]] = 0)}]]
-Dynamic[B = {Length[A[[1]]], FromDigits[#, 2] & /@ A}]
-NonogramList = B
-ListToMatrix[list_] := IntegerDigits[list[[2]], 2, list[[1]]]
-ArrayPlot[NonogramMatrix = ListToMatrix@NonogramList]
-SplitNM = Map[Split, NonogramMatrix];
-SplitMN = Map[Split, Transpose[NonogramMatrix]];
-ListLift =
-    Map[Length,
-      Table[Select[SplitNM[[i]], MemberQ[#, 1] &], {i, 1,
-        Length[SplitNM]}], {2}]
-ListAbove =
-    Map[Length,
-      Table[Select[SplitMN[[i]], MemberQ[#, 1] &], {i, 1,
-        Length[SplitMN]}], {2}]
-End[] (* `Private` *)
+(*啊,狗带,老子辛辛苦苦写的异或求解器
+var[i_,j_]:=x[i,j];
+variable[i_,j_,w_,h_]:=If[i>=1&&i<=w&&j>=1&&j<=h,var[i,j],0];
+GetSquareValue[i_,j_,w_,h_,gs_]:=If[i>=1&&i<=w&&j>=1&&j<=h,gs[[i,j]],0];
+GetShowValue[i_,j_,w_,h_,gs_]:=GetSquareValue[i,j,w,h,gs]+GetSquareValue[i,j+1,w,h,gs]+GetSquareValue[i,j-1,w,h,gs]+GetSquareValue[i-1,j,w,h,gs]+GetSquareValue[i+1,j,w,h,gs];
+AllVariables[w_,h_]:=Flatten[Table[var[i,j],{i,1,w},{j,1,h}]];
+OnSolver[M_?MatrixQ]:=Module[{w,h,OnEquation,OnSol},
+  {w,h}=Length/@{M,Transpose@M};
+  OnEquation[i_,j_,w_,h_,gs_]:=GetShowValue[i,j,w,h,gs]==1+variable[i,j,w,h]+variable[i-1,j,w,h]+ variable[i,j-1,w,h]+variable[i+1,j,w,h]+variable[i,j+1,w,h];
+  OnSol=Quiet[Solve[Flatten[Table[OnEquation[i,j,w,h,M],{i,1,w},{j,1,h}]],AllVariables[w,h],Modulus->2]];
+  Partition[Flatten[OnSol/.(x[a_,b_]->c_)->c],w]/.C[1]->0/.C[2]->0];
+OffSolver[M_?MatrixQ]:=Module[{w,h,OffEquation,OffSol},
+  {w,h}=Length/@{M,Transpose@M};
+  OffEquation[i_,j_,w_,h_,gs_]:=GetShowValue[i,j,w,h,gs]==variable[i,j,w,h]+variable[i-1,j,w,h]+variable[i,j-1,w,h]+variable[i+1,j,w,h]+variable[i,j+1,w,h];
+  OffSol=Quiet[Solve[Flatten[Table[OffEquation[i,j,w,h,M],{i,1,w},{j,1,h}]],AllVariables[w,h],Modulus->2]];
+  Partition[Flatten[OffSol/.(x[a_,b_]->c_)->c],w]/.C[1]->0/.C[2]->0];*)
+(*速度、可读性和可推广性能把上面的代码按在地上摩擦摩擦的通用求解器*)
+M=AdjacencyMatrix@GridGraph[{n,n}]+SparseArray[{Band[{1,1}]->1},{n^2,n^2}]
+ArrayPlot@Partition[LinearSolve[M,ConstantArray[1,n^2],Modulus->2],n]
+res=RowReduce[Transpose@Join[Transpose@M,{ConstantArray[1,n^2]}],Modulus->2];
+ArrayPlot@Partition[res[[All,-1]],n]
 
-EndPackage[]
+
+
+End[];
+
+EndPackage[];
