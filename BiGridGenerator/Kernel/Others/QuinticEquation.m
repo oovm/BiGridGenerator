@@ -60,23 +60,51 @@ Tschirnhaus[expr_,var_,n_]:=Module[{z,randp,newp},
   newp=Resultant[expr/.var->z,var-randp,z];
   If[FreeQ[PolynomialGCD[newp,D[newp,{var}]],var],newp,
     Tschirnhaus[expr,var,n]]];
-FindN=Switch[Exponent[#,Variables[#]],
-  {1},Print["这是一个小学生都会解的一次方程"];Solve[#==0,Variables[#]],
-  {2},Print["这是一个中学生都应该会解的二次方程"];Solve[#==0,Variables[#]],
-  {3},Print["这是一个大多数大学生都不会解的三次方程"];QSolver3[#],
-  {4},Print["这是一个吃饱了撑着没事干才会去手解的四次方程"];QSolver4[#],
-  {5},Print["这是一个不知道解不解的出的五次方程"];QSolver5[#],
-  _,"这是一个高次方程,我没研究过就不解了"]&;
-QuinticSolver[eqn_]:=Module[{},
-  If[PolynomialQ[eqn,x],Nothing,Return["你在逗我,这玩意儿根本不是多项式!"]];
-  If[Length@Variables[eqn]===1,Nothing,Return["你别逗我,这根本不止一个变量!\n而且我这也不解含参方程."]];
-  Print["好的,我们先试着因式分解:"];
-  list=(Power@@@FactorList[eqn])[[2;;-1]];
-  If[IrreduciblePolynomialQ[eqn],Print["好吧,看来没法因式分解\n我们来看看这个方程:"<>ToString[eqn,TraditionalForm]];
-  Print@ToString[FindN[eqn],TraditionalForm],Print["OK,式子可以因式分解成"<>ToString[Factor@eqn,TraditionalForm]];
-  Table[Print["我们来看看第"<>ToString[i]<>"部分"<>ToString[list[[i]],TraditionalForm]];
-  Print@ToString[FindN[list[[i]],TraditionalForm]],{i,1,Length@list}];];
-Print["好了,完事"]];
+QSolver1[eqn_] :=
+    Module[{x, r = CoefficientList[eqn, Variables[eqn]]},
+      {b, a} = r;x = Variables[eqn][[1]];
+    Print["一次方程有且只有一个解:\n" <> ToString@TraditionalForm[x == -b/a]];
+    Nothing];
+QSolver2[eqn_] :=
+    Module[{x, r = CoefficientList[eqn, Variables[eqn]]},
+      {c, b, a} = r;x = Variables[eqn][[1]];
+    Print["我们套用二次方程求根公式得:\n" <>ToString@TraditionalForm[
+      x == (-b \[PlusMinus] Sqrt[b^2 - 4*a*c])/(2*a)]]; Nothing];
+QSolver3[eqn_] := Module[{x, r = CoefficientList[eqn, Variables[eqn]]},
+  {d, c, b, a} = r; x = Variables[eqn][[1]];
+  Print["三次方程有三个解\n令" <> ToString@TraditionalForm[x == t - b/(3 a)] <>"  得  " <>
+      ToString@TraditionalForm[Expand[eqn/.x->t-b/(3a)]==0]];
+  {p,q}={(3ac-b^2)/(3a^2),(2*b^3-9*a*b*c+27*a^2*d)/(27*a^3)};
+  Print["然后根据Cos的三倍角公式,解就是\n" <> ToString@TraditionalForm[
+    x==2*Sqrt[-(p/3)]*Cos[(1/3)*ArcCos[((3*q)/(2*p))*Sqrt[-(3/p)]]-(2*Pi*k)/3]-b/(3*a)]<>"其中,k\[Element]Z"];];
+
+FindN = Switch[Exponent[#, Variables[#]],
+  {1}, Print["这是一个小学生都会解的一次方程"]; QSolver1[#],
+  {2}, Print["这是一个中学生都应该会解的二次方程"]; QSolver2[#],
+  {3}, Print["这是一个很多大学生都不会解的三次方程"]; QSolver3[#],
+  {4}, Print["这是一个吃饱了撑着没事干才会去手解的四次方程"]; QSolver4[#],
+  {5}, Print["这是一个不知道解不解的出的五次方程"]; QSolver5[#],
+  _, QSolverN[#]] &;
+QuinticSolver[eqn_] :=Module[{x, list},
+      If[PolynomialQ[eqn, x], Nothing, Return["你在逗我,这玩意儿根本不是多项式!"]];
+      If[Length@Variables[eqn] === 1, Nothing,
+        Return["你别逗我,这根本不止一个变量!\n而且我这也不解含参方程."]];
+      Print["好的,我们先试着因式分解:"];
+      list = (Power @@@ FactorList[eqn])[[2 ;; -1]];
+      If[IrreduciblePolynomialQ[eqn],
+        Print["好吧,看来没法因式分解\n我们来看看这个方程:" <>
+            ToString[eqn == 0, TraditionalForm]]; FindN[eqn],
+        Print["OK,式子可以因式分解成" <> ToString[Factor@eqn, TraditionalForm]];
+        Table[Print["我们来看看第" <> ToString[i] <> "部分" <>
+              ToString[list[[i]] == 0, TraditionalForm]];
+        FindN[list[[i]]], {i, 1, Length@list}];]; Print["好了,完事"]];
+PostProcess[f_]:=Collect[f,_HypergeometricPFQ]/.{(a_)*(F_HypergeometricPFQ):>With[{r=Rationalize[Chop[N[a]]]},r*F/;Precision[r]===Infinity]};
+RootToHypergeometric[n_]:=Module[{coeff,k},ClearAll[t];
+coeff=Refine[FunctionExpand[SeriesCoefficient[Root[#1^n-#1-t&,1],{t,0,k}]],k>=0];
+PostProcess[Sum[coeff*t^k,{k,0,Infinity}]]];
+RootToHypergeometric[n_Integer,m_,t_]:=Sum[(-(1/((n-1)*k!)))*t^k*E^((2*Pi*I*(k-1)*m)/(n-1))*
+        Pochhammer[(k-1)/(n-1)+1,k-1]*HypergeometricPFQ[Range[n-1]/n+(k-1)/(n-1),
+          Delete[Range[k+1,k+n-1],-k+n-1]/(n-1),n*((n*t)/(n-1))^(n-1)],{k,0,n-2}];
 End[];
 
 EndPackage[];

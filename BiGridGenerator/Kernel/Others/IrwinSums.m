@@ -89,8 +89,8 @@ Line 2 shows the total of these six sums. This is just the 对1/n求和 where n 
 
 BeginPackage[ "IrwinSums`" ];
 (* usage messages for this context, and for the exported functions *) 
-IrwinSums::usage = "IrwinSums.m is a package that computes sums of Irwin series.\r\n
-This package has functions IrwinSum, iSumFormatted, iPartialSum, iPartialSumThreshold, and setPrintLevel.\r\n
+IrwinSums::usage = "IrwinSums.m 是一个用于计算 限定调和级数 (Irwin series) 的程序包.\r
+这个程序包包含了函数 IrwinSum, iSumFormatted, iPartialSum, iPartialSumThreshold,以及选项 setPrintLevel.\r
 IrwinSum[d, k]: 对1/n求和, where n has exactly k occurrences of the digit d.\r\n
 IrwinSum[{d1, d2 ,...}, {k1, k2, ...}]: 对1/n求和 where n has exactly k1 occurrences of d1, k2 of d2, etc.\r\n
 IrwinSum[..., ..., m] rounds the result to m decimals.\r\n
@@ -99,24 +99,23 @@ iSumFormatted[...] is the same as IrwinSum, but formats the output in groups of 
 iPartialSumThreshold[d, k, s] and iPartialSumThreshold[{d1, d2 ,...}, {k1, k2, ...}, s] tell how many digits are needed in the denominators in order to make the partial sum reach your threshold, s.\r\n
 setPrintLevel sets the print level to control the amount of output." ;
 (* here are usage messages for individual functions *)
-IrwinSum::usage = "IrwinSum[d, k] computes the sum of the series 1/n where the digit d occurs exactly k times in n.\r\n
-IrwinSum[{d1, d2, ...}, {k1, k2, ...}] is the sum where the digit d1 occurs exactly k1 times, d2\ occurs exactly k2 times, etc.\r\n
-IrwinSum[d, k, m] and IrwinSum[{d1, d2, ...}, {k1, k2, ...}, m] give the sum to m decimal places.\r\n All results are rounded to the number of decimal places shown.\r\n
-举个例子:
-  IrwinSum[9, 0] = 对1/n求和,去掉所有含9的项= 22.920676619264150 .\r\n
-  IrwinSum[9, 1] = 对1/n求和,但是保留只有一个9的项 = 23.044287080747848 .\r\n
-You can also specify a list of conditions:
-  IrwinSum[{9, 3}, {2, 0}] = 对1/n求和,去掉所有含3的项,但是保留有两个9的项 = 2.593253652747189 .\r\n
-IrwinSum takes an optional third parameter: the number of decimal places. If not specified, the default is 15 decimals.\r\n
-IrwinSum takes an optional fourth parameter: the base. If not specified, base 10 is used.
-If you use the fourth parameter (base), you cannot omit the third parameter (number of decimals).
-Examples of calculations in base 2:
+IrwinSum::usage = "IrwinSum[d, k] 对 1/n 求和,数字d在每一项的分母只能出现k次.\r
+IrwinSum[{d1, d2, ...}, {k1, k2, ...}] 表示数字 di 只能出现 ki 次.\r
+IrwinSum[d, k, m] and IrwinSum[{d1, d2, ...}, {k1, k2, ...}, m] 指定进制为m进制.\r\n
+
+Examples:\r
+  IrwinSum[9, 0] = 22.920676619264150 对1/n求和,去掉所有含9的项.\r
+  IrwinSum[9, 1]  = 23.044287080747848 对1/n求和,但是保留只有一个9的项.\r
+  IrwinSum[{9, 3}, {2, 0}]  = 2.593253652747189 对1/n求和,去掉所有含3的项,但是保留有两个9的项.\r\n
+IrwinSum 的第三个参数表示精度,默认情况下是15位.\r
+IrwinSum 的第四个参数表示进制,默认情况下是10进制.\r
+如果你想要写后面的参数那么必须填前面的参数,不得省略.\r\n
+举几个2进制下的例子:\r
 IrwinSum[1, 1, 20, 2] = 对1/n求和,求和所有只含1个1的项,取20位精度,在二进制下.显然这个和等价于十进制下的 1/1 + 1/2 + 1/4 + ...= 2 .
 IrwinSum[1, 3, 20, 2] = 对1/n求和,求和所有只含3个1的项,取20位精度,在二进制下. = 1.42859154585263812400 .
 IrwinSum[0, 0, 20, 2] = 对1/n求和,去掉所有含0的项,取20位精度,在二进制下 = 1.60669515241529176378 ." ;
 
-iSumFormatted::usage = "和 IrwinSum 基本一样,但是自带5位的格式化效果\r\n
-注意:结果是个NumberForm ,译者注";
+iSumFormatted::usage = "和 IrwinSum 基本一样,但是自带5位的格式化效果\r 注意:结果是个NumberForm ";
 
 iPartialSum::usage = "iPartialSum[d, k, p] computes the partial 对1/n求和 where n has k occurrences of d,for n < 10^p. Similarly for iPartialSum[{d1, d2 ,...}, {k1, k2, ...}, p]. Example:
 IrwinSum[9, 0] = 22.920676619264150; iPartialSum[9,0, 30] = 21.971055078178619 .
@@ -126,7 +125,8 @@ Note: this is just 1/1 + 1/2 + 1/4 + 1/8 + 1/16 + 1/32 = 63/32 = 1.96875." ;
 
 iPartialSumThreshold::usage = "iPartialSumThreshold[d, k, s] tells how many digits are needed\ in the denominators in order to make the partial sum equal to or greater than your threshold, s. Four numbers are returned: { d1, d2, s1, s2 }. d2 is the number of digits required in the\ denominators to make the partial sum >= s. d1 = d2 - 1. s1 and s2 are the partial sums for d1 and d2.
 Given s, the output sums s1 and s2 will normally be such that s1 < s <= s2.\r\n
-Example 1. iPartialSumThreshold[9, 1, 23] computes about how far we need to go to reach a partial sum of 23.
+Example 1. \r
+iPartialSumThreshold[9, 1, 23] computes about how far we need to go to reach a partial sum of 23.
 The output is {80, 22.995762680948152, 81, 23.000125707332644}.
 Therefore, denominators of 81 digits are required. The sum through n < 10^80 is about 22.99576.\
 The sum through n < 10^81 is about 23.00012. iPartialSum[ ] confirms this result:
@@ -148,8 +148,8 @@ Off[ General::spell ];
 
 (* global variables are here *)
 
-(* sjk and sjkPrev are tables (arrays) of size maxJ by maxIndexUsed. the first dimension is a power, the second is an index number 1 .. maxIndexUsed.
-*) sjk;
+(* sjk and sjkPrev are tables (arrays) of size maxJ by maxIndexUsed. the first dimension is a power, the second is an index number 1 .. maxIndexUsed.*)
+sjk;
 sjkPrev;
 
 cumulativeSums1; (* this is a small array, size = countList[[1]] + 1 *) iSumPrintLevel = 1; (* this is the default print level *)
@@ -180,8 +180,7 @@ Clear[bn];
 bn[iBase_Integer, n_Integer, nConditions_Integer, digitList_?VectorQ] := Module[
 (* this is for a set of special digits
 compute sum(k = 0 through iBase-1) of k^n (for k not a special digit). example: if iBase = 10, one special digit (d),
-compute bn = 9 (n = 0), bn = 0^n + 1^n + ... + 9^n - d^n (n > 0).
-*)
+compute bn = 9 (n = 0), bn = 0^n + 1^n + ... + 9^n - d^n (n > 0).*)
 { bn = 0, k },
 If[n == 0, Return[iBase - nConditions] ]; (* iBase minus number of special digits *) For[k = 1, k <= iBase - 1, k++,
 If[isThisASpecialDigit[k, nConditions, digitList] != 0, Continue[] ]; bn += power[k, n];

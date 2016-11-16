@@ -6,14 +6,14 @@
 (* :Author: 28059 *)
 (* :Date: 2016-11-13 *)
 
-(* :Package Version: 0.1 *)
-(* :Mathematica Version: *)
-(* :Copyright: (c) 2016 28059 *)
+(* :Package Version: 0.2 *)
+(* :Mathematica Version: 11.0+ *)
+(* :Copyright:该软件包遵从CC协议:BY+NA+NC(署名、非商业性使用、相同方式共享） *)
 (* :Keywords: *)
 (* :Discussion: *)
 
-BeginPackage["LightOut`"]
-(* Exported symbols added here with SymbolName::usage *)
+BeginPackage["LightOut`"];
+
 
 Begin["`Private`"]
 (*啊,狗带,老子辛辛苦苦写的异或求解器
@@ -36,7 +36,7 @@ OffSolver[M_?MatrixQ]:=Module[{w,h,OffEquation,OffSol},
 M=AdjacencyMatrix@GridGraph[{n,n}]+SparseArray[{Band[{1,1}]->1},{n^2,n^2}]
 ArrayPlot@Partition[LinearSolve[M,ConstantArray[1,n^2],Modulus->2],n]
 res=RowReduce[Transpose@Join[Transpose@M,{ConstantArray[1,n^2]}],Modulus->2];
-ArrayPlot@Partition[res[[All,-1]],n]
+ArrayPlot@Partition[res[[All,-1]],n];
 
 
 

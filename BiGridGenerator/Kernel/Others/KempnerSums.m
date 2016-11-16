@@ -259,8 +259,8 @@ BeginPackage[ "KempnerSums`" ];
 
 
 (* usage messages for this context, and for the exported functions *)
-KempnerSums::usage = "KempnerSums.m is a package that computes sums of Kempner series.\r\n
-This package has the following functions:\r\n
+KempnerSums::usage = "KempnerSums.m是一个用来计算 缺项调和级数(Kempner series)的程序包.\r\n
+本程序包包含以下的函数:\r\n
   KempnerSum[X]: returns the sum of 1/n where n has no digits in the set X.  This is the primary\
  calculation function in this package.\r\n
   kSumFormatted[X]: same as KempnerSum, but formats the output.\r\n
@@ -295,23 +295,23 @@ KempnerSum::usage = "KempnerSum[X] computes the sum of the series 1/n where n ha
  The optional second parameter is the number of decimal places.  All results are\
  rounded to the given number of decimal places.\r\n
  Examples:
-   KempnerSum[9] = 22.920676619264150 (使用默认的15位精度)\r\n
-   KempnerSum[9, 10] = 22.9206766193 (使用10位精度)\r\n
-   KempnerSum[09] = 22.920676619264150 (在Mathematica中09就是9)\r\n
-   KempnerSum[\"09\"] = 230.404757005814285 (leading 0, so quotes are required)\r\n
-   KempnerSum[{3, 1, 4}] = 3.769948379731421\r\n
-   KempnerSum[314] = 2299.829782767518338\r\n
+   KempnerSum[9] = 22.920676619264150 (使用默认的15位精度)\r
+   KempnerSum[9, 10] = 22.9206766193 (使用10位精度)\r
+   KempnerSum[09] = 22.920676619264150 (在Mathematica中09就是9)\r
+   KempnerSum[\"09\"] = 230.404757005814285 (leading 0, so quotes are required)\r
+   KempnerSum[{3, 1, 4}] = 3.769948379731421\r
+   KempnerSum[314] = 2299.829782767518338\r
    KempnerSum[314159, 20] = 2302582.33386378260789202376\r\n
-   KempnerSum[{0, 2, 4, 6, 8}] = 3.171765473415905 (denominators with no even digits)\r\n
-   KempnerSum[{1, 3, 5, 7, 9}] = 1.962608412994617 (denominators with no odd digits)\r\n
-   KempnerSum[{0, 1, 4, 6, 8, 9}] = 1.857333779940978 (denominators with only prime digits)\r\n
-   KempnerSum[{\"00\", 11, 22, 33, 44, 55, 66, 77, 88, 99}] = 23.382957488301063 (no double digits)\r\n
- KempnerSum takes an optional third parameter: the base.  If not specified, base 10 is used.
- If you use the third parameter, you cannot omit the second parameter.
- Example: KempnerSum[0, 15, 2] = 1.606695152415292 (denominators with no 0 in base 2).\r\n
+   KempnerSum[{0, 2, 4, 6, 8}] = 3.171765473415905 (denominators with no even digits)\r
+   KempnerSum[{1, 3, 5, 7, 9}] = 1.962608412994617 (denominators with no odd digits)\r
+   KempnerSum[{0, 1, 4, 6, 8, 9}] = 1.857333779940978 (denominators with only prime digits)\r
+   KempnerSum[{\"00\", 11, 22, 33, 44, 55, 66, 77, 88, 99}] = 23.382957488301063 (no double digits)\r
+ KempnerSum takes an optional third parameter: the base.  不做特别说明默认10进制.
+ Warning:如果你想输入第三个参数,你必须先输入第二个参数,不得省略.
+ Example: KempnerSum[0, 15, 2] = 1.606695152415292 (denominators with no 0 in base 2).\r
  Another form: KempnerSum[ T ], where the input is the T matrix; see the Schmelzer-Baillie paper.";
 
-kSumFormatted::usage = "和 KempnerSum 基本一样,但是自带5位的格式化效果\r\n
+kSumFormatted::usage = "和 KempnerSum 基本一样,但是自带5位的格式化效果\r
 注意:结果是个NumberForm ,译者注";
 
 kPartialSum::usage = "kPartialSum[ nDigits, nDecimals ]\r\n
@@ -319,17 +319,11 @@ kPartialSum::usage = "kPartialSum[ nDigits, nDecimals ]\r\n
  whose denominators have at most (nDigits) digits.
  You must call KempnerSum or kSumFormatted before calling kPartialSum.\r\n
  Examples:
-   KempnerSum[9] = 22.920676619264150 .
-   Then, kPartialSum[30] gives 21.971055078178619 .
-   This is the sum of all terms in the series with denominators < 10^30.
-   Likewise, kPartialSum[31] gives 22.066017232287173 .  Therefore, to make the partial\
- sum exceed 22, we need some terms whose denominators have 31 digits.
-  This fact can also be established with the function 'kPartialSumThreshold':
-   kPartialSumThreshold[22] returns {30, 31, 21.971055078178619, 22.066017232287173}.
-  The next two calculations show that, to make the sum exceed 22.9, we need at least some terms\
- whose denominators have 67 digits.
-   kPartialSum[66] = 22.899283165770095
-   kPartialSum[67] = 22.901422511119500 .";
+   KempnerSum[9] = 22.920676619264150 .\r
+   输入 kPartialSum[30] 返回 21.971055078178619 ,这对所有分母小于10^30进行了求和.\r
+   另外 kPartialSum[31] 返回 22.066017232287173 ,这意味着为了使得和超过 22,我们需要对所有分母小于 10^31 的项求和.\r
+   这一操作可以由函数'kPartialSumThreshold'来完成:\r
+   kPartialSumThreshold[22] 直接返回了 {30, 31, 21.971055078178619, 22.066017232287173}.\r";
 
 kPartialSumThreshold::usage = "kPartialSumThreshold[s]\r\n
  Using the most recent input to KempnerSum or kSumFormatted, compute the number of digits needed
@@ -340,48 +334,37 @@ kPartialSumThreshold::usage = "kPartialSumThreshold[s]\r\n
  you should enter either kPartialSumThreshold[\"22.920676619264149\"] or
  kPartialSumThreshold[22.920676619264149``15].  If you don't do this, you may get a wrong answer.
 
- Four numbers are returned: { d1, d2, s1, s2 }.  d2 is the number of digits required in the
- denominators to make the partial sum > s.  d1 = d2 - 1.  s1 and s2 are the partial sums for d1 and d2.
- Given s, s1 and s2 will normally be such that s1 < s < s2.
- You must call KempnerSum or kSumFormatted before calling kPartialSumThreshold.\r\n
+ Four numbers are returned: { d1, d2, s1, s2 }.  d2 is the number of digits required in the denominators to make the partial sum > s.  d1 = d2 - 1.  s1 and s2 are the partial sums for d1 and d2.
+ Given s, s1 and s2 will normally be such that s1 < s < s2. You must call KempnerSum or kSumFormatted before calling kPartialSumThreshold.\r\n
  Example 1:
-   KempnerSum[9] = 22.920676619264150 .
-   Then, kPartialSumThreshold[22] returns {30, 31, 21.971055078178619, 22.066017232287173}.
-   This means that, to make the partial sum exceed 22, we need at least some terms whose denominators\
- have 31 digits.\r\n
+   KempnerSum[9] = 22.920676619264150 接着输入: \n
+   kPartialSumThreshold[22] 返回结果为 {30, 31, 21.971055078178619, 22.066017232287173}.
+   这意味着为了使和超过22,我们需要计算到某个十进制下31位的大数.\r\n
  Example 2:
-   This example shows what can go wrong when your input is a floating-point number that is
-   near the sum of the entire series.
+   下面这个例子展示了对于浮点输入可能出现的错误.
    KempnerSum[9, 20] = 22.92067661926415034816.
    kPartialSumThreshold[22.920676619264149] returns
      {359, 360, 22.92067661926414950999, 22.92067661926414959380} .
-   This result is wrong: note that both partial sums are greater than your input value.
-   (The result is wrong because Mathematica may slightly altered your floating-point input.)
-   To get the correct answer when your input value is close to the sum of the entire series,
-   you must specify your input more accurately.
-   You can do this using Mathematica's backquote notation:
-   kPartialSumThreshold[22.920676619264149``15] returns the correct input:
-     {354, 355, 22.92067661926414892870, 22.92067661926414907065}.
-   You will also get the correct answer if you enter your input as a string:
-     kPartialSumThreshold[\"22.920676619264149\"].";
+   这个结果是错的: 注意到两个输出其实都大于你的输入.
+   (原因在于Mathematica会微微的对你输入的浮点数进行一些处理.)
+   正确的写法应该是:\n
+   kPartialSumThreshold[22.920676619264149``15] 返回了正确的结果 {354, 355, 22.92067661926414892870, 22.92067661926414907065}.\r
+   使用字符型也不会出现错误 kPartialSumThreshold[\"22.920676619264149\"].";
 
-kSumGetT::usage = "kSumGetT[X] computes and displays the T matrix associated with X.\r\n
+kSumGetT::usage = "kSumGetT[X] 返回关于 X 的 T 矩阵.\r\n
  X is the collection of numbers to omit from the denominators.\
- This function takes an optional second parameter: the base.  If not specified, base 10 is used.";
+ This function takes an optional second parameter: the base.  不做特别说明默认10进制.";
 
-kSumGetA::usage = "kSumGetA[X] computes and displays the A matrix associated with X.\r\n
+kSumGetA::usage = "kSumGetA[X] 返回关于 X 的 A 矩阵.\r\n
  X is the collection of numbers to omit from the denominators.\
- This function takes an optional second parameter: the base.  If not specified, base 10 is used.";
+ This function takes an optional second parameter: the base.  不做特别说明默认10进制.";
 
 kSumShowA::usage = "kSumShowA[ ] shows the A matrix for the previously-entered input string or list.";
 
-kSumTimeAndMemory::usage = "kSumTimeAndMemory[nDigits] estimates time and memory requirements\
- for KempnerSum[9, nDigits].\
-  Note that KempnerSum[99, nDigits] needs more time and memory than KempnerSum[9, nDigits].";
+kSumTimeAndMemory::usage = "kSumTimeAndMemory[nDigits] 估算 KempnerSum[9, nDigits] 需要的时间和内存,注意到 KempnerSum[99, nDigits] 需要更多的时间和内存 KempnerSum[9, nDigits].";
 
-kSumSetDefaultDecimals::usage = "kSumSetDefaultDecimals[n] sets the default number of decimal places\
- to n.  Initially, the default is 15.";
-kSumShowDefaultDecimals::usage = "kSumShowDefaultDecimals displays the current default number of decimal places.";
+kSumSetDefaultDecimals::usage = "kSumSetDefaultDecimals[n] 控制默认的精度,没有设置过的话这个值是15.";
+kSumShowDefaultDecimals::usage = "kSumShowDefaultDecimals 返回当前的默认精度.";
 
 
 Begin["`Private`"];
