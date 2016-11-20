@@ -268,25 +268,24 @@ KempnerSums::usage = "KempnerSums.m是一个用来计算 缺位调和级数(Kemp
 KempnerSum::usage = "KempnerSum[X] 对 1/n 求和但是去掉所有含有 X 的项.\r\n
  X is the set of numbers to exclude from the denominators.\
  X can be a single number, or a comma-separated list of numbers enclosed in braces { }.\
- 如果X是个向量, then this computes the sum of 1/n where n has no occurrences of any of the numbers in the list.\
+ 如果X是个列表, 那么就依次去掉列表中的每一种类型的元素..\
  (Note: 一个多位数如果含前导0必须写成字符型).\
  第二个参数表示精度.\r\n
  Examples:
    KempnerSum[9] = 22.920676619264150 (使用默认的15位精度)\r
    KempnerSum[9, 10] = 22.9206766193 (使用10位精度)\r
    KempnerSum[09] = 22.920676619264150 (在Mathematica中09就是9)\r
-   KempnerSum[\"09\"] = 230.404757005814285 (leading 0, so quotes are required)\r
+   KempnerSum[\"09\"] = 230.404757005814285 (如果需要前导0,必须使用字符型)\r
    KempnerSum[{3, 1, 4}] = 3.769948379731421\r
    KempnerSum[314] = 2299.829782767518338\r
    KempnerSum[314159, 20] = 2302582.33386378260789202376\r
-   KempnerSum[{0, 2, 4, 6, 8}] = 3.171765473415905 (denominators with no even digits)\r
-   KempnerSum[{1, 3, 5, 7, 9}] = 1.962608412994617 (denominators with no odd digits)\r
-   KempnerSum[{0, 1, 4, 6, 8, 9}] = 1.857333779940978 (denominators with only prime digits)\r
-   KempnerSum[{\"00\", 11, 22, 33, 44, 55, 66, 77, 88, 99}] = 23.382957488301063 (去掉所有含连续数字的项)\r
+   KempnerSum[{0, 2, 4, 6, 8}] = 3.171765473415905 (不含偶数的所有项的和)\r
+   KempnerSum[{1, 3, 5, 7, 9}] = 1.962608412994617 (不含奇数的所有项的和)\r
+   KempnerSum[{\"00\", 11, 22, 33, 44, 55, 66, 77, 88, 99}] = 23.382957488301063 (去掉所有含连续数字的项后的和)\r
  KempnerSum 第三个参数表示进制,不做特别说明默认10进制.
  Warning:如果你想输入第三个参数,你必须先输入第二个参数,不得省略.
- Example: KempnerSum[0, 15, 2] = 1.606695152415292 (denominators with no 0 in base 2).\r
- Another form: KempnerSum[ T ], where the input is the T matrix; see the Schmelzer-Baillie paper.";
+ Example: KempnerSum[0, 15, 2] = 1.606695152415292 (二进制中不含0的话剩余的项的和).\r
+ Another form: KempnerSum[ T ], 以上计算本质上调用的是T矩阵,参见 Schmelzer-Baillie 的论文.";
 
 kSumFormatted::usage = "和 KempnerSum 基本一样,但是自带5位的格式化效果.\r注意:结果是个NumberForm.";
 

@@ -70,8 +70,8 @@ getVertexSequences[adjrules_,letterRules_,allTree_,n_]:=
 wordsFromVertexSequences[vseqs_List,letterRules_]:=StringJoin/@(vseqs/.letterRules);
 GetWordTree[minLen_Integer:1,maxLen:_Integer|Infinity:Infinity]:=
     makeTree[Select[ToLowerCase[DictionaryLookup["*"]],minLen<=StringLength[#1]<=maxLen&]];
-GetWords[board_String,wordTree_]:=GetWords[ToLowerCase[ImportString[board]],wordTree];
-GetWords[lboard_,wordTree_]:=Module[{lrules,adjrules},
+BoggleSolver[board_String,wordTree_]:=BoggleSolver[ToLowerCase[ImportString[board]],wordTree];
+BoggleSolver[lboard_,wordTree_]:=Module[{lrules,adjrules},
   {lrules,adjrules}=getLetterAndAdjacencyRules[lboard];
   wordsFromVertexSequences[getVertexSequences[adjrules,lrules,wordTree,Times@@Dimensions[lboard]],lrules]];
 

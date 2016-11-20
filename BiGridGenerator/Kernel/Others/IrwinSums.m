@@ -90,18 +90,11 @@ Line 2 shows the total of these six sums. This is just the 对1/n求和 where n 
 BeginPackage[ "IrwinSums`" ];
 (* usage messages for this context, and for the exported functions *) 
 IrwinSums::usage = "IrwinSums.m 是一个用于计算 限位调和级数 (Irwin series) 的程序包.\r
-这个程序包包含了函数 IrwinSum, iSumFormatted, iPartialSum, iPartialSumThreshold,以及选项 setPrintLevel.\r
-IrwinSum[d, k]: 对1/n求和, where n has exactly k occurrences of the digit d.\r\n
-IrwinSum[{d1, d2 ,...}, {k1, k2, ...}]: 对1/n求和 where n has exactly k1 occurrences of d1, k2 of d2, etc.\r\n
-IrwinSum[..., ..., m] rounds the result to m decimals.\r\n
-IrwinSum[..., ..., m, b] does calculations with digits in base b.\r\n
-iSumFormatted[...] is the same as IrwinSum, but formats the output in groups of 5 digits.\r\n iPartialSum[d, k, p] or iPartialSum[{d1, d2 ,...}, {k1, k2, ...}, p] gives the partial sum through denominators < 10^p.\r\n
-iPartialSumThreshold[d, k, s] and iPartialSumThreshold[{d1, d2 ,...}, {k1, k2, ...}, s] tell how many digits are needed in the denominators in order to make the partial sum reach your threshold, s.\r\n
-setPrintLevel sets the print level to control the amount of output." ;
+这个程序包包含了函数 IrwinSum, iSumFormatted, iPartialSum, iPartialSumThreshold,以及选项 setPrintLevel." ;
 (* here are usage messages for individual functions *)
 IrwinSum::usage = "IrwinSum[d, k] 对 1/n 求和,数字d在每一项的分母只能出现k次.\r
 IrwinSum[{d1, d2, ...}, {k1, k2, ...}] 表示数字 di 只能出现 ki 次.\r
-IrwinSum[d, k, m] and IrwinSum[{d1, d2, ...}, {k1, k2, ...}, m] 指定进制为m进制.\r\n
+IrwinSum[d, k, m] 以及 IrwinSum[{d1, d2, ...}, {k1, k2, ...}, m] 指定进制为m进制.\r\n
 
 Examples:\r
   IrwinSum[9, 0] = 22.920676619264150 对1/n求和,去掉所有含9的项.\r
@@ -117,27 +110,25 @@ IrwinSum[0, 0, 20, 2] = 对1/n求和,去掉所有含0的项,取20位精度,在�
 
 iSumFormatted::usage = "和 IrwinSum 基本一样,但是自带5位的格式化效果\r 注意:结果是个NumberForm ";
 
-iPartialSum::usage = "iPartialSum[d, k, p] computes the partial 对1/n求和 where n has k occurrences of d,for n < 10^p. Similarly for iPartialSum[{d1, d2 ,...}, {k1, k2, ...}, p]. Example:
-IrwinSum[9, 0] = 22.920676619264150; iPartialSum[9,0, 30] = 21.971055078178619 .
-The optional 4th parameter iPartialSum[..., ..., p, m] gives the partial sum to m decimals. The optional 5th parameter is the base:
-iPartialSum[1, 1, 6, 15, 2] = partial 对1/n求和 where n has one 1 in base 2, n < 2^6, to 15 decimals.
-Note: this is just 1/1 + 1/2 + 1/4 + 1/8 + 1/16 + 1/32 = 63/32 = 1.96875." ;
+iPartialSum::usage = "iPartialSum[d, k, p] 对1/n求和,只对小于 10^p 的项筛选求和. \r
+Example: IrwinSum[9, 0] = 22.920676619264150; iPartialSum[9,0, 30] = 21.971055078178619 .\r
+iPartialSum[1, 1, 6, 15, 2] = 1.96875, 对1/n求和,n是二进制中只有1个1的所有项,计算到2^6项为止,取15位精度.\r
+注意到这个和其实就是 1/1 + 1/2 + 1/4 + 1/8 + 1/16 + 1/32 = 63/32 = 1.96875." ;
 
-iPartialSumThreshold::usage = "iPartialSumThreshold[d, k, s] 给出为了超过 s 需要对多少位数的项求和
-. Four numbers are returned: { d1, d2, s1, s2 }. d2 is the number of digits required in the\ denominators to make the partial sum >= s. d1 = d2 - 1. s1 and s2 are the partial sums for d1 and d2.
-Given s, the output sums s1 and s2 will normally be such that s1 < s <= s2.\r\n
+iPartialSumThreshold::usage = "iPartialSumThreshold[d, k, s] 给出为了超过 s 需要对多少位的项求和.\r
+  返回值有4个 { d1, d2, s1, s2 }.\r\n
 Example 1. \r
-iPartialSumThreshold[9, 1, 23] 计算只有一个9的限位和需要多少项才能超过 23.
-给过是 {80, 22.995762680948152, 81, 23.000125707332644} 则代表在求到某个81位数的时候和才超过23.\r
+iPartialSumThreshold[9, 1, 23] 计算只有一个9的限位和需要多少项才能超过 23.返回值 {80, 22.995762680948152, 81, 23.000125707332644} 则代表在求到某个81位数的时候和才超过23.\r
 iPartialSum[9, 1, 80] = 22.995762680948152\r
 iPartialSum[9, 1, 81] = 23.000125707332644 .\r\n
 Example 2. \r
 这个例子表明如果你使用浮点数那么有时会出错.\r
-iPartialSumThreshold[9, 1, 23.044287080747] 返回 {-1, -1, -1, -1} 这是精度不够导致的,正确的输入方法是 23.044287080747``25 = 23.044287080747000000000000.\r
-iPartialSumThreshold[9, 1, 23.044287080747``25] 返回了正确的结果 {327, 23.04428708074693636344610077, 328, 23.04428708074702511802366170} .
-当然你也可以使用字符型来避免这个问题 iPartialSumThreshold[9, 1, \"23.044287080747\"] \r\n
-Other forms: iPartialSumThreshold[{d1, d2 ,...}, {k1, k2, ...}, s]. You can also specify the number of\
-decimals and the base: iPartialSumThreshold[d, k, s, nDecimals, base] and\ iPartialSumThreshold[{d1, d2 ,...}, {k1, k2, ...}, s, nDecimals, base]." ;
+iPartialSumThreshold[9, 1, 23.044287080747] 返回 {-1, -1, -1, -1} 这是精度不够导致的,正确的输入方法是 23.044287080747``25 \r
+iPartialSumThreshold[9, 1, 23.044287080747``25] 返回了正确的结果 {327, 23.04428708074693636344610077, 328, 23.04428708074702511802366170} .\r
+以下语法同样成立:\r
+ iPartialSumThreshold[{d1, d2 ,...}, {k1, k2, ...}, s] \r
+ iPartialSumThreshold[d, k, s, nDecimals, base]  \r
+ iPartialSumThreshold[{d1, d2 ,...}, {k1, k2, ...}, s, nDecimals, base]." ;
 
 setPrintLevel::usage = "Set the print level = 0, 1, 2, 3, 4. Larger values produce more output. Default = 1." ;
 

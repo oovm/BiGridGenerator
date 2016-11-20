@@ -72,9 +72,8 @@ BeginPackage["RiemannSurfacePlot3D`"] ;
 
 
 RiemannSurfacePlot3D::usage = 
-"RiemannSurfacePlot3D[w == f[z], reim[w[z]], {z, w}] plots a Riemann surface of w as 
- the real or imaginary part reim of w over the complex z-plane.
- RiemannSurfacePlot3D[w == f[z], {\[Zeta]1, \[Zeta]2, \[Zeta]3}, {z, w}] plots a Riemann surface of w as {\[Zeta]1, \[Zeta]2, \[Zeta]3} 
+"RiemannSurfacePlot3D[w == f[z], reim[w[z]], {z, w}] plots a Riemann surface of w as  the real or imaginary part reim of w over the complex z-plane.\r
+ RiemannSurfacePlot3D[w == f[z], {\[Zeta]1, \[Zeta]2, \[Zeta]3}, {z, w}] plots a Riemann surface of w as {\[Zeta]1, \[Zeta]2, \[Zeta]3} \r
  along the Cartesian coordinate axes where \[Zeta]1, \[Zeta]2, \[Zeta]3 can be Re[z], Im[z], Re[w], Im[w] or a linear combination of them.";
 
 
@@ -84,8 +83,7 @@ Re[z], Im[z], Re[w], Im[w] that for numerical values evaluates to a coloring dir
 
 
 BranchPointOffset::usage = 
-"BranchPointOffset 是 RiemannSurfacePlot3D 的一个选项 and determines how far away from a branch point the
-numerical solution of the differential equation should start.";
+"BranchPointOffset 是 RiemannSurfacePlot3D 的一个选项 and determines how far away from a branch point the numerical solution of the differential equation should start.";
 
 
 StitchPatches::usage = 
@@ -94,8 +92,7 @@ StitchPatches::usage =
 
 LogSheets::usage = 
 "LogSheets 是 RiemannSurfacePlot3D 的一个选项. and determines which sheets to use for logarithms
-and product logarithms. The default is {-1, 0, 1}, meaning the main sheet and the sheets immediately below 
-and above the main sheet.";
+and product logarithms. The default is {-1, 0, 1}, meaning the main sheet and the sheets immediately below and above the main sheet.";
 
 
 NDSolveOptions::usage = 
