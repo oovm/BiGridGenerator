@@ -266,10 +266,8 @@ KempnerSums::usage = "KempnerSums.m是一个用来计算 缺位调和级数(Kemp
 (* these are usage messages for individual functions *)
 
 KempnerSum::usage = "KempnerSum[X] 对 1/n 求和但是去掉所有含有 X 的项.\r\n
- X is the set of numbers to exclude from the denominators.\
- X can be a single number, or a comma-separated list of numbers enclosed in braces { }.\
- 如果X是个列表, 那么就依次去掉列表中的每一种类型的元素..\
- (Note: 一个多位数如果含前导0必须写成字符型).\
+ X 可以是个数值,如果X是个列表, 那么就依次去掉列表中的每一种类型的元素..\r
+ (Note: 一个多位数如果含前导0必须写成字符型).\r
  第二个参数表示精度.\r\n
  Examples:
    KempnerSum[9] = 22.920676619264150 (使用默认的15位精度)\r
@@ -289,28 +287,15 @@ KempnerSum::usage = "KempnerSum[X] 对 1/n 求和但是去掉所有含有 X 的�
 
 kSumFormatted::usage = "和 KempnerSum 基本一样,但是自带5位的格式化效果.\r注意:结果是个NumberForm.";
 
-kPartialSum::usage = "kPartialSum[ nDigits, nDecimals ]\r\n
- Using the most recent input to KempnerSum or kSumFormatted, compute the sum of all terms\
- whose denominators have at most (nDigits) digits.
- You must call KempnerSum or kSumFormatted before calling kPartialSum.\r\n
- Examples:
+kPartialSum::usage = "kPartialSum[ nDigits, nDecimals ]\r
+ Examples:\r
    KempnerSum[9] = 22.920676619264150 .\r
    输入 kPartialSum[30] 返回 21.971055078178619 ,这对所有分母小于10^30进行了求和.\r
    另外 kPartialSum[31] 返回 22.066017232287173 ,这意味着为了使得和超过 22,我们需要对所有分母小于 10^31 的项求和.\r
    这一操作可以由函数'kPartialSumThreshold'来完成:\r
    kPartialSumThreshold[22] 直接返回了 {30, 31, 21.971055078178619, 22.066017232287173}.\r";
 
-kPartialSumThreshold::usage = "kPartialSumThreshold[s]\r\n
- Using the most recent input to KempnerSum or kSumFormatted, compute the number of digits needed
- in the denominators to make the partial sum exceed s.
- The value of s must be less than the sum of the series.  If s is a floating-point value close to the
- sum of the entire series, you should enclose it in quotes, or use Mathematica's backquote notation to
- specify the accuracy of your input.  For example, instead of kPartialSumThreshold[22.920676619264149],
- you should enter either kPartialSumThreshold[\"22.920676619264149\"] or
- kPartialSumThreshold[22.920676619264149``15].  If you don't do this, you may get a wrong answer.
-
- Four numbers are returned: { d1, d2, s1, s2 }.  d2 is the number of digits required in the denominators to make the partial sum > s.  d1 = d2 - 1.  s1 and s2 are the partial sums for d1 and d2.
- Given s, s1 and s2 will normally be such that s1 < s < s2. You must call KempnerSum or kSumFormatted before calling kPartialSumThreshold.\r\n
+kPartialSumThreshold::usage = "kPartialSumThreshold 语法和 KempnerSum 大体差不多\r
  Example 1:
    KempnerSum[9] = 22.920676619264150 接着输入: \n
    kPartialSumThreshold[22] 返回结果为 {30, 31, 21.971055078178619, 22.066017232287173}.
