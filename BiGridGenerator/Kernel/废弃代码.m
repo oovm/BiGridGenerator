@@ -235,14 +235,7 @@ M = Flatten[Quiet@Inner[Divide, Total /@ A, A, List], 1] /.
     ComplexInfinity -> Infinity;
 WeightedAdjacencyGraph[M]
 
-CoverTime[G_,i_]:=Module[{Start,Roads,Ex,Si},
-  Start=ConstantArray[0,VertexCount[G]];Start[[i]]=1;
-  Roads=Subsets[DeleteCases[Range@VertexCount[G],i]][[2;;-1]];
-  Ex=Mean@FirstPassageTimeDistribution[
-    DiscreteMarkovProcess[Start,G],#]&/@Roads;
-  Si=If[Length[#]~Mod~2==1,1,-1]&/@Roads;
-  Print@GraphPlot[G,VertexLabeling->True];
-  Print[Total[Ex*Si]];];
+
 CoverTime[GridGraph[{3,3}],5]
 
 
@@ -388,4 +381,161 @@ ListLinePlot[{#1 + #2/2, #2*Sqrt@3/2} & @@@
 
 
 
+------------------------------------------------------------------------------------------------------------------------------------
+自动头像算法
+identiconPixels[id_String] :=
+    Module[{hash, color, orient, cells, tm, q},
+      hash = IntegerDigits[Hash[id, "MD5"], 8, 36];
+      color = RGBColor[hash[[1 ;; 3]]/7];
+      orient = If[OddQ[hash[[4]]], {Left, Bottom}, {Bottom, Left}];
+      cells =
+          MapIndexed[If[OddQ[#1], color, White] &, Partition[hash, 6], {2}];
+      q = Image[cells];
+      Magnify[
+        ImageAssemble[{{q,
+          ImageReflect[q, orient[[1]]]}, {ImageReflect[q, orient[[2]]],
+          ImageReflect[ImageReflect[q, Top], Left]}}], 4]]
+identiconPixels["1user@email.com"]
+identiconCells[id_String] :=
+    Module[{hash, color, orient, cells, tm, q},
+      hash = IntegerDigits[Hash[id, "MD5"], 8, 36];
+      color = RGBColor[hash[[1 ;; 3]]/7];
+      orient =
+          If[OddQ[hash[[4]]], {ReflectionMatrix[{1, 0}],
+            ReflectionMatrix[{0, 1}]}, {RotationTransform[Pi/2],
+            RotationTransform[3 Pi/2]}];
+      cells = MapIndexed[If[OddQ[#1], {2, #2[[1]]}, Nothing] &, hash];
+      tm = TriangulateMesh[
+        BoundaryMeshRegion[{{0, 0}, {1, 0}, {1, 1}, {0, 1}},
+          Line[{1, 2, 3, 4, 1}]], MaxCellMeasure -> 1/26,
+        MeshQualityGoal -> 1];
+      q = MeshPrimitives[tm, cells];
+      Graphics[{color, EdgeForm[color], q,
+        Translate[GeometricTransformation[q, orient[[1]]], {2, 0}],
+        Translate[
+          GeometricTransformation[q, RotationTransform[Pi]], {2, 0}],
+        Translate[GeometricTransformation[q, orient[[2]]], {0, 0}]}]]
+identiconCells["user@email.com"]
+generatePic[email_, size_: 256] :=
+    Module[{emailparts, randN, input, inputhash, img},
+      inputhash = IntegerString[Hash[ToLowerCase[email], "MD5"], 16, 32];
+      Import["http://www.gravatar.com/avatar/" <> inputhash <> "?s=" <>
+          ToString[size] <> "&d=identicon&r=PG"]]
+generatePic["gmailuser1@gmail.com", 256]
 
+
+CCP蒙特卡洛
+Manipulate[SeedRandom[sr];
+With[{jj$ = Table[RandomInteger[{1, coupons}], {20*coupons}]},
+  With[{store$ =
+      Table[Length[Union[Take[jj$, k]]], {k, 1, Length[jj$]}]},
+    With[{list$ =
+        Flatten[Table[First[Position[store$, n]], {n, 1, coupons}]]},
+
+      ListPlot[list$, PlotRange -> All, Frame -> True, Axes -> False,
+
+        FrameLabel -> {Style["distinct coupons bought", "Label"],
+          Style["total coupons bought", "Label"]},
+        PlotLabel -> Style[StringJoin[ToString[Last[list$]],
+
+          " coupons had to be bought for the complete set of ",
+          ToString[coupons],
+          ".
+        The expected number was ",
+          ToString[Round[coupons*HarmonicNumber[coupons]]], "."],
+          "Label"],
+        ImagePadding -> {{35, 25}, {35, 35}},
+        ImageSize -> {475, 375}]]]],
+  {{coupons, 50, "number of distinct coupons"}, 6, 100, 1,
+    Appearance -> "Labeled"},
+  {{sr, 1, "seed random"}, 1, 400, 1, Appearance -> "Labeled"},
+  ControllerLinking -> True]
+
+
+
+
+
+
+
+
+
+
+
+一堆砖块?
+    Block[{hmax = 34, vmax = 21, d},
+  Graphics[{EdgeForm[{Thin, Black}],
+    Table[d = Min[i, j, hmax - i - 1, vmax - j - 1]/Max[hmax, vmax];
+    {ColorData["FallColors", 2.2 d^0.7],
+      Translate[
+        Rotate[Rectangle[{i, j}], 2 d*RandomReal[{0, 1}]*\[Pi]/2],
+        400 E^(-6 (1 - d)) RandomReal[{-0.1, 0.1}, 2]]}, {i, 0,
+      hmax - 1}, {j, 0, vmax - 1}]}, Background -> Black]]
+
+
+
+参数曲线动画
+circle[t_] := {Sin[Pi t], Cos[Pi t]};
+dMax = 1.5;
+Animate[ParametricPlot[circle[t], {t, Max[0, u - .2], u},
+  PlotRange -> {{-dMax, dMax}, {-dMax, dMax}},
+  ColorFunction -> Function[{x, y, w}, Opacity[w, Blue]],
+  Frame -> True, Axes -> True, AxesOrigin -> {0, 0},
+  PlotPoints -> 100,
+  Epilog -> {Black, PointSize -> 0.015, Point[circle[u]]}], {u,
+  0. + $MachineEpsilon, 6}, AnimationRate -> 1,
+  AnimationRunning -> False]
+
+
+????????????????
+start = ExampleData[{"TestImage", "Girl3"}]
+step1 = MeanShiftFilter[start, 2, 0.05, MaxIterations -> 10]
+
+
+定态薛定谔
+Table[SphericalPlot3D[{Re[
+  SphericalHarmonicY[l, m, \[Theta], \[Phi]]]^2}, {\[Theta], 0,
+  2 \[Pi]}, {\[Phi], 0, 2 \[Pi]}, PlotRange -> All, PlotPoints -> 25,
+  PlotTheme -> "Detailed",
+  ColorFunction -> (ColorData["Rainbow"][#6] &),
+  Mesh -> None], {m, -l, l}]
+
+
+
+
+
+
+text1 = ExampleData[{"Text", "ToBeOrNotToBe"}];
+text2 = StringReplace[text1, {"s" -> "th"}];
+sa = SequenceAlignment[text1, text2];
+Flatten[Map[
+  If[Length[#] ==
+      2, {Framed[
+    Style[#[[1]], FontVariations -> {"StrikeThrough" -> True}],
+    FrameStyle -> None, FrameMargins -> 2,
+    Background -> Lighter@Red],
+    Framed[#[[2]], FrameStyle -> None, FrameMargins -> 2,
+      Background -> Lighter@Green]},
+    Framed[#, FrameStyle -> None, FrameMargins -> 2]] &, sa]];
+Apply[StringJoin, ToString[#, StandardForm] & /@ %]
+
+
+
+
+
+wikiTranslation[word_, language_: "Chinese"] :=
+    language /. WikipediaData[word, "TitleTranslationRules"]
+namelist = {"Takaaki Kajita", "Arthur B. McDonald", "Isamu Akasaki",
+  "Hiroshi Amano", "Shuji Nakamura"}
+wikiTranslation /@ namelist
+webAppURL =
+    "https://script.google.com/macros/s/alphaNumericSequence/exec"
+onlineTran[textList_, languageCode_] :=
+    URLExecute[
+      webAppURL, {"textlist" -> textList, "language" -> languageCode}]
+onlineTran[{"Takaaki Kajita", "Arthur B. McDonald", "Isamu Akasaki",
+  "Hiroshi Amano", "Shuji Nakamura"}, "zh-CN"]
+
+
+
+quan = Flatten[ConstantArray @@@ Transpose[{{15, 100}, {10, 90}}]];
+BinCounts[RandomInteger[Total@quan, 1000], {{0}~Join~Accumulate@quan}]

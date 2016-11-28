@@ -57,9 +57,10 @@ Mean[CCPDistribution[n_?IntegerQ,d_?StringQ]]:=Block[{s=ToExpression@d},
 Mean[CCPDistribution[n_?IntegerQ,{s_?IntegerQ}]]:=s*Integrate[1-(1-Gamma[n,t]/Gamma[n])^s,{t,0,Infinity}];
 Mean[CCPDistribution[n_,s_,"Fast"]]:=s*NIntegrate[1-(1-Gamma[n,t]/Gamma[n])^s,{t,0,9527}];
 Mean[CCPDistribution[p_?VectorQ]]:=NIntegrate[1-Times@@@{1-E^(-t*#)&/@p},{t,0,Infinity}];
-Mean[CCPDistribution[x_?VectorQ,n_?VectorQ]]:=Total@p*Integrate[
+Se[m_,t_]:=Sum[t^k/k!,{k,0,m-1}];
+Mean[CCPDistribution[x_?VectorQ,n_?VectorQ]]:=Total@x*Integrate[
   1-Product[1-Se[n[[i]],x[[i]]t]E^(-x[[i]]t),{i,1,Length@x}],{t,0,Infinity}];
-Mean[CCPDistribution[x_,n_,"Fast"]]:=Total@p*NIntegrate[
+Mean[CCPDistribution[x_,n_,"Fast"]]:=Total@x*NIntegrate[
   1-Product[1-Se[n[[i]],x[[i]]t]E^(-x[[i]]t),{i,1,Length@x}],{t,0,9527}];
 Protect[CDF,PDF,Mean];
 

@@ -6,15 +6,27 @@
 (* :Author: GalAster *)
 (* :Date: 2016-11-20 *)
 
-(* :Package Version: 0.1 *)
-(* :Update: 2016-11-20 *)
+(* :Package Version: 0.2 *)
+(* :Update: 2016-11-27 *)
 (* :Mathematica Version: 11.0+ *)
 (* :Copyright:该软件包遵从CC协议:BY+NA+NC(署名、非商业性使用、相同方式共享） *)
 (* :Keywords: *)
 (* :Discussion: *)
 
 BeginPackage["ExRandomWalk`"];
+
+
+
 Begin["`Private`"];
+CoverTime[G_,i_]:=Module[{Start,Roads,Ex,Si},
+  Start=ConstantArray[0,VertexCount[G]];Start[[i]]=1;
+  Roads=Subsets[DeleteCases[Range@VertexCount[G],i]][[2;;-1]];
+  Ex=Mean@FirstPassageTimeDistribution[
+    DiscreteMarkovProcess[Start,G],#]&/@Roads;
+  Si=If[Length[#]~Mod~2==1,1,-1]&/@Roads;
+  Print@GraphPlot[G,VertexLabeling->True];
+  Print[Total[Ex*Si]];];
+
 ExRandomWalk[max_,"2DGridSelfAvoiding"]:=Module[{i=0,pts={{0,0}},moves={{-1,0},{0,1},{1,0},{0,-1}}},
   While[i<max&&Not@(And@@(MemberQ[pts,#]&/@Table[pts[[-1]]+moves[[i]],{i,1,4}])),i++;
   AppendTo[pts,RandomChoice[Select[Table[pts[[-1]]+moves[[i]],{i,1,4}],Not@MemberQ[pts,#]&]]]];
@@ -36,6 +48,9 @@ RandomWalkPlot[ExRandomWalk[max_,"3DGridSelfAvoiding"]]:=
       Graphics3D[{Thick,Gray,Line[pts],RGBColor[0.6,0.74,0.36],Sphere[pts[[1]],1],RGBColor[0.9,0.42,0.17],Sphere[pts[[-1]],1]},
         PlotLabel->Style[If[Length[pts]<max,StringJoin[ToString[Length[pts]-1],"步后卡住了!!!"],StringJoin[ToString[max-1],"步后逃逸!"]],"Label",12],
         PlotRange->All,Boxed->False]];
+
+
+
 
 End[];
 
