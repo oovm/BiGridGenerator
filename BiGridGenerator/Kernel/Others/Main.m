@@ -33,14 +33,7 @@ Venn[n_,ineqs_:{}]:=
         RegionPlot[grouprules[x,y],{x,x1,x2},{y,y1,y2},Axes->False]],Graphics[v],
         PlotLabel->TraditionalForm[Replace[ineqs,{}|False->\[EmptySet]]],Frame->False]];
 
-MineLayout[{m_, n_, k_}] := Module[{M, foo, bar, list},
-  M = ConstantArray[0, {m + 2, n + 2}];
-  foo[{x_, y_}] := M[[x - 1 ;; x + 1, y - 1 ;; y + 1]] += 1;
-  bar[{x_, y_}] := M[[x, y]] = 10;
-  list = RandomSample[Tuples[{Range[2, m + 1], Range[2, n + 1]}]][[1 ;; k]];
-  Do[foo@list[[i]], {i, k}]; bar /@ list; M[[2 ;; -2, 2 ;; -2]]];
-MineDistribution[m_, n_, k_, p_] :=
-    Transpose@{Range[0, 10],BinCounts[Flatten[MineLayout /@ ConstantArray[{m, n, k}, p]], {-0.5, 10.5,1}]/p + 0.0};
+
 
 
 A = ConstantArray[0, {7, 7}];

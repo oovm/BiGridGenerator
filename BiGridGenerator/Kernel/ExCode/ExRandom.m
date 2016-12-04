@@ -41,7 +41,7 @@ RandomPartition[n_,p_?IntegerQ]:=Module[{r},r=RandomSample[Range[1,n],p-1]//Sort
     AppendTo[r,n];Prepend[r//Differences,r[[1]]]];
 RandomPartition[n_,V_?VectorQ]:=Module[{r,s},r=RandomInteger[V,n];
     s=Select[Accumulate@r,#<n&]~Join~{n};Append[Differences@s,s[[1]]]];
-(*Random cosmic background radiation*)
+(*随机宇宙背景辐射*)
 InvMollweide[{x_,y_}]:=With[{theta=ArcSin[y]},{Pi(x)/(2Cos[theta]),ArcSin[(2theta+Sin[2theta])/Pi]}];
 RandomCBR[res_:64]:=Module[{Alms,fieldN,dat,im},
   Do[Alms[l,m]=(Random[NormalDistribution[]]+I Random[NormalDistribution[]])/Sqrt[(l+2)(l+1)];
@@ -57,7 +57,39 @@ RandomPebble[n_,sc_:0.95]:=With[{data=MapIndexed[Flatten[{##1}]&,RandomReal[1,{n
     Background->Lighter[Hue[RandomReal[]],.75],Frame->False,
     ImageSize->400]]/.Polygon[l_,v_]:>Scale[{Hue[RandomReal[]],
     FilledCurve[BSplineCurve[l,SplineClosed->True,SplineDegree->3]]},sc]];
-
+MineLayout[{m_,n_,k_}]:=Module[{M,foo,bar,list},
+  M=ConstantArray[0,{m+2,n+2}];
+  foo[{x_,y_}]:=M[[x-1;;x+1,y-1;;y+1]]+=1;
+  bar[{x_,y_}]:=M[[x,y]]=10;
+  list=RandomSample[Tuples[{Range[2,m+1],Range[2,n+1]}]][[1;;k]];
+  Do[foo@list[[i]],{i,k}];bar/@list;M[[2;;-2,2;;-2]]];
+MineDistribution[m_,n_,k_,p_]:=Transpose@{Range[0,10],BinCounts[Flatten[MineLayout/@ConstantArray[{m,n,k},p]],{-0.5,10.5,1}]/p+0.0};
+Gravatar::novpn="数据库请求失败,你可能需要VPN,或者你要求的数据量太过巨大,你可以使用TimeConstraint选项增加请求时长.";
+Options[Gravatar]={Method->"Standard",TimeConstraint->5,ImageSize->256};
+Gravatar[mail_String,OptionsPattern[]]:=Switch[OptionValue[Method],
+  "Standard",TimeConstrained[GravatarLinker[mail,OptionValue[ImageSize]],OptionValue[TimeConstraint],Message[Gravatar::novpn]],
+  "Pixels",IdenticonPixels[mail],
+  "Cells",IdenticonCells[mail]];
+IdenticonPixels[id_String]:=Module[{hash,color,orient,cells,tm,q},
+  hash=IntegerDigits[Hash[id,"MD5"],8,36];
+  color=RGBColor[hash[[1;;3]]/7];
+  orient=If[OddQ[hash[[4]]],{Left,Bottom},{Bottom,Left}];
+  cells=MapIndexed[If[OddQ[#1],color,White]&,Partition[hash,6],{2}];
+  q=Image[cells];
+  Magnify[ImageAssemble[{{q,ImageReflect[q,orient[[1]]]},
+    {ImageReflect[q,orient[[2]]],ImageReflect[ImageReflect[q,Top],Left]}}],4]];
+IdenticonCells[id_String]:=Module[{hash,color,orient,cells,tm,q},
+  hash=IntegerDigits[Hash[id,"MD5"],8,36];
+  color=RGBColor[hash[[1;;3]]/7];
+  orient=If[OddQ[hash[[4]]],{ReflectionMatrix[{1,0}],ReflectionMatrix[{0,1}]},{RotationTransform[Pi/2],RotationTransform[3 Pi/2]}];
+  cells=MapIndexed[If[OddQ[#1],{2,#2[[1]]},Nothing]&,hash];
+  tm=TriangulateMesh[BoundaryMeshRegion[{{0,0},{1,0},{1,1},{0,1}},Line[{1,2,3,4,1}]],MaxCellMeasure->1/26,MeshQualityGoal->1];
+  q=MeshPrimitives[tm,cells];
+  Graphics[{color,EdgeForm[color],q,Translate[GeometricTransformation[q,orient[[1]]],{2,0}],
+    Translate[GeometricTransformation[q,RotationTransform[Pi]],{2,0}],Translate[GeometricTransformation[q,orient[[2]]],{0,0}]}]];
+GravatarLinker[email_,size_: 256]:=Module[{emailparts,randN,input,inputhash,img},
+  inputhash=IntegerString[Hash[ToLowerCase[email],"MD5"],16,32];
+  Import["http://www.gravatar.com/avatar/"<>inputhash<>"?s="<>ToString[size]<>"&d=identicon&r=PG"]];
 
 
 

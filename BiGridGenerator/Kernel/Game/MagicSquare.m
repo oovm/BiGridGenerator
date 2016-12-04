@@ -32,8 +32,8 @@ Magic3DQ::usage = "Magic3DQ[n]检测一个n×n×n幻立方";
 Begin["`Private`"];
 Magic::nosol="无解.";
 Magic::nodef="无定义.";
-Magic::novpn="数据库请求失败,你可能需要VPN,或者你要求的数据量太过巨大,可以使用 TimeConstrained 选项增加请求时长.";
-Options[Magic]={Method->"Simple",TimeConstrained->5};
+Magic::novpn="数据库请求失败,你可能需要VPN,或者你要求的数据量太过巨大,可以使用 TimeConstraint 选项增加请求时长.";
+Options[Magic]={Method->"Simple",TimeConstraint->5};
 
 Magic[n_?OddQ]:=Module[{p},p=Range[n];
 Outer[Plus,p,p-(n+3)/2]~Mod~n*n+Outer[Plus,p,2p-2]~Mod~n+1];
@@ -75,7 +75,7 @@ Magic3D[n_?EvenQ]:=Module[{QMagic,XMagic,u,v,d},
 Magic3D[x_]:=Message[Magic::nodef];
 Magic3DShow[n_]:={Graph3D@GridGraph[{n,n,n},VertexLabels->Table[i->Flatten[Magic3D@n][[i]],{i,n^3}]],MatrixForm/@Magic3D[n]};
 
-Magic[n_,d_,OptionsPattern[]]:=TimeConstrained[MagicLinker[n,d,OptionValue[Method]],OptionValue[TimeConstrained],Message[Magic::novpn]];
+Magic[n_,d_,OptionsPattern[]]:=TimeConstrained[MagicLinker[n,d,OptionValue[Method]],OptionValue[TimeConstraint],Message[Magic::novpn]];
 MagicLinker[n_,d_,p_]:=URLExecute["http://magichypercube.com/rest/hypercube/"<>p<>"/"<>ToString[n]<>"/"<>ToString[d]<>"/true","CSV"];
 
 MagicQ[matrix_]:=Module[{SRow,SCol},

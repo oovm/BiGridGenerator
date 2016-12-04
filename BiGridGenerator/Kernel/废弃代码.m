@@ -382,48 +382,6 @@ ListLinePlot[{#1 + #2/2, #2*Sqrt@3/2} & @@@
 
 
 ------------------------------------------------------------------------------------------------------------------------------------
-自动头像算法
-identiconPixels[id_String] :=
-    Module[{hash, color, orient, cells, tm, q},
-      hash = IntegerDigits[Hash[id, "MD5"], 8, 36];
-      color = RGBColor[hash[[1 ;; 3]]/7];
-      orient = If[OddQ[hash[[4]]], {Left, Bottom}, {Bottom, Left}];
-      cells =
-          MapIndexed[If[OddQ[#1], color, White] &, Partition[hash, 6], {2}];
-      q = Image[cells];
-      Magnify[
-        ImageAssemble[{{q,
-          ImageReflect[q, orient[[1]]]}, {ImageReflect[q, orient[[2]]],
-          ImageReflect[ImageReflect[q, Top], Left]}}], 4]]
-identiconPixels["1user@email.com"]
-identiconCells[id_String] :=
-    Module[{hash, color, orient, cells, tm, q},
-      hash = IntegerDigits[Hash[id, "MD5"], 8, 36];
-      color = RGBColor[hash[[1 ;; 3]]/7];
-      orient =
-          If[OddQ[hash[[4]]], {ReflectionMatrix[{1, 0}],
-            ReflectionMatrix[{0, 1}]}, {RotationTransform[Pi/2],
-            RotationTransform[3 Pi/2]}];
-      cells = MapIndexed[If[OddQ[#1], {2, #2[[1]]}, Nothing] &, hash];
-      tm = TriangulateMesh[
-        BoundaryMeshRegion[{{0, 0}, {1, 0}, {1, 1}, {0, 1}},
-          Line[{1, 2, 3, 4, 1}]], MaxCellMeasure -> 1/26,
-        MeshQualityGoal -> 1];
-      q = MeshPrimitives[tm, cells];
-      Graphics[{color, EdgeForm[color], q,
-        Translate[GeometricTransformation[q, orient[[1]]], {2, 0}],
-        Translate[
-          GeometricTransformation[q, RotationTransform[Pi]], {2, 0}],
-        Translate[GeometricTransformation[q, orient[[2]]], {0, 0}]}]]
-identiconCells["user@email.com"]
-generatePic[email_, size_: 256] :=
-    Module[{emailparts, randN, input, inputhash, img},
-      inputhash = IntegerString[Hash[ToLowerCase[email], "MD5"], 16, 32];
-      Import["http://www.gravatar.com/avatar/" <> inputhash <> "?s=" <>
-          ToString[size] <> "&d=identicon&r=PG"]]
-generatePic["gmailuser1@gmail.com", 256]
-
-
 CCP蒙特卡洛
 Manipulate[SeedRandom[sr];
 With[{jj$ = Table[RandomInteger[{1, coupons}], {20*coupons}]},
@@ -539,3 +497,43 @@ onlineTran[{"Takaaki Kajita", "Arthur B. McDonald", "Isamu Akasaki",
 
 quan = Flatten[ConstantArray @@@ Transpose[{{15, 100}, {10, 90}}]];
 BinCounts[RandomInteger[Total@quan, 1000], {{0}~Join~Accumulate@quan}]
+
+
+
+
+
+
+LSSB[list_] := Module[{base}, ClearAll[n];
+base = Function[t, Table[E^(2 m n Pi I/t), {m, 1, t}, {n, 1, t}]]@
+    Length[list];
+Inner[Times, LinearSolve[base, list], base[[1]]^n, Plus]]
+FullSimplify@LSSB[{1, 4, 9}]
+InterpolatingPolynomial[{1, 4, 9, 16}, x]
+
+
+
+T[list_] := Total@Boole@OddQ[list]
+add[list_] := list~Join~Switch[Mod[T[list], 4],
+  0, {(Total[list^2] - 1)/2, (Total[list^2] + 1)/2},
+  1, {(Total[list^2] - 1)/2, (Total[list^2] + 1)/2},
+  2, {},
+  3, {Total[list^2]/4 - 1, Total[list^2]/4 + 1}]
+
+
+
+\begin{aligned}
+a_n^2 - a_{n - 1}^2 & = ({a_n} + {a_{n - 1}})({a_n} - {a_{n - 1}}) \hfill \
+& = 2(2\sum\limits_{i = 1}^{n - 2} {a_i^2} )/4 = \sum\limits_{i = 1}^{n - 2} {a_i^2}  \hfill \\
+\end{aligned}
+
+
+\[
+\begin{aligned}
+\frac{{{\text{d}}y\left( x \right)}}{{{\text{d}}x}} & = \sin \left( {y\left( x \right)} \right) \hfill \
+\csc \left( {y\left( x \right)} \right)\frac{{{\text{d}}y\left( x \right)}}{{{\text{d}}x}} & = 1 \hfill \
+\int {\csc \left( {y\left( x \right)} \right){\text{d}}y\left( x \right)}  & = \int {1{\text{d}}x}  \hfill \
+- \log \left( {\cos \left( {\frac{{y\left( x \right)}}{2}} \right)} \right) + \log \left( {\sin \left( {\frac{{y\left( x \right)}}{2}} \right)} \right) & = x + {c_1} \hfill \
+y\left( x \right) & = 2{\cot ^{ - 1}}\left( {{{\text{e}}^{ - x - {c_1}}}} \right) \hfill \
+y(x) & = 2ArcCot\left[ {{{\text{e}}^{ - x}}\cot \frac{1}{2}} \right] \hfill \\
+\end{aligned}
+\]

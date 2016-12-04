@@ -6,15 +6,33 @@
 (* :Author: GalAster *)
 (* :Date: 2016-2-17 *)
 
-(* :Package Version: 0.5 *)
-(* :Update: 2016-10-17 *)
+(* :Package Version: 0.6 *)
+(* :Update: 2016-11-27 *)
 (* :Mathematica Version: 11.0+ *)
 (* :Copyright:该软件包遵从CC协议:BY+NA+NC(署名、非商业性使用、相同方式共享） *)
 (* :Keywords: *)
 (* :Discussion: *)
 
 BeginPackage["PolyPainting`"];
-(* Exported symbols added here with SymbolName::usage *)
+TriPainting::usage = "
+TriPainting[image]可以得到图像image的三角划分\r
+TriPainting[image,n]指定生成时的划分数量为n,默认值1000";
+
+PloyPainting::usage = "
+PloyPainting[image]可以得到图像image的多边形划分\r
+PloyPainting[image,n]指定生成时的划分数量为n,默认值1000\r
+PloyPainting[image,{n,m,mesh}],指定畸变度为m,默认值1,网格宽度,默认为0.";
+
+
+GlassPainting::usage = "
+GlassPainting[image]可以得到图像image的
+";
+
+
+PointPainting::usage = "
+PointPainting[image]可以得到图像image的点绘风格划分\r
+PointPainting[image,n]指定生成时的点的数量为n,默认值10000";
+
 
 Begin["`Private`"];
 TriPainting[i_,n_:1000]:=
@@ -40,6 +58,17 @@ PloyPainting[img_,{n_,m_:1,mesh_:None}]:=
         InterpolationOrder->0,Mesh->mesh,
         MeshStyle->Thickness[Small],Frame->False,
         ColorFunction->dat]];
+Dither[pts_,dith_]:=pts+.25 dith RandomReal[{-1,1},{Length@pts,2}];
+GlassPainting[img_,m_:1000,n_:5]:=
+    Module[{bounds,num,seeds,vrnMesh,polygons},
+      bounds=Transpose@{{0,0},ImageDimensions@img};
+      num=ImageValuePositions[EdgeDetect[img],White];
+      seeds=RandomSample[num,Min[m,Length@num]];
+      vrnMesh=VoronoiMesh[Dither[seeds,.01],bounds];
+      polygons=Table[{EdgeForm[Black],
+        FaceForm[RGBColor[PixelValue[img,Mean@@pol]]],pol},{pol,
+        MeshPrimitives[Nest[VoronoiMesh[Mean@@@MeshPrimitives[#,2],bounds]&,vrnMesh,n],2]}];
+      Graphics@polygons];
 PointPainting[img_,n_:10000]:=
     Module[{etf,sdf,map,mapdata,data,w,h,ch,spots},
       etf=EntropyFilter[img,12]//ImageAdjust;
@@ -83,17 +112,6 @@ HexPainting[image_,s_,t_:0]:=
       If[t==1,Graphics[{EdgeForm[{Thickness[0.0003],Black}],
         GraphicsComplex[g[[1]],g[[2]]]}],
         Graphics[{GraphicsComplex[g[[1]],g[[2]]]}]]];
-Dither[pts_,dith_]:=pts+.25 dith RandomReal[{-1,1},{Length@pts,2}];
-GlassPainting[img_,m_:1000,n_:5]:=
-    Module[{bounds,num,seeds,vrnMesh,polygons},
-      bounds=Transpose@{{0,0},ImageDimensions@img};
-      num=ImageValuePositions[EdgeDetect[img],White];
-      seeds=RandomSample[num,Min[m,Length@num]];
-      vrnMesh=VoronoiMesh[Dither[seeds,.01],bounds];
-      polygons=Table[{EdgeForm[Black],
-        FaceForm[RGBColor[PixelValue[img,Mean@@pol]]],pol},{pol,
-        MeshPrimitives[Nest[VoronoiMesh[Mean@@@MeshPrimitives[#,2],bounds]&,vrnMesh,n],2]}];
-      Graphics@polygons];
 (*ShapedPainting[pic, Rescale@GaussianMatrix[#] &]*)
 ShapedFunction=Compile[{{v,_Real},{kernel,_Real,2}},v*kernel,
       RuntimeAttributes->{Listable},Parallelization->True,
@@ -174,7 +192,16 @@ ImageStandUp[img_]:=Module[{lines=ImageLines@DeleteSmallComponents[EdgeDetect[im
 ImageStandUp[img_,"TryAll"]:=Module[{imgrote},imgrote=ImageRotate[img,#,"SameRatioCropping"]&/@
     Range[-Pi/2,Pi/2,Pi/6];TableForm[Function[{a,b},a->b]@@@Transpose@{imgrote,ImageStandUp/@imgrote}]];
 
-
+(*Mondrian[大小,复杂度,比例]*)
+Mondrian[p_,complex_:6,ratio_:0.7]:=Module[{splitx,splity,f,cols},
+  splitx[Rectangle[{x0_,y0_},{x1_,y1_}]]:=
+      Module[{a=RandomInteger[{x0+1,x1-1}]},{Rectangle[{x0,y0},{a,y1}],Rectangle[{a,y0},{x1,y1}]}];
+  splity[Rectangle[{x0_,y0_},{x1_,y1_}]]:=
+      Module[{a=RandomInteger[{y0+1,y1-1}]},{Rectangle[{x0,y0},{x1,a}],Rectangle[{x0,a},{x1,y1}]}];
+  f=ReplaceAll[r:Rectangle[{x0_,y0_},{x1_,y1_}]:>RandomChoice[{(x1-x0)^2,(y1-y0)^2,5}->{splitx,splity,Identity}]@r];
+  cols=MapThread[Darker,{{Black,White,Yellow,Red,Blue},{0,0.1,0.1,0.15,0.3}}];
+  Graphics[{EdgeForm@Thickness[0.012],{FaceForm@RandomChoice@cols,#}&/@
+      Flatten@Nest[f,Rectangle[{0,0},{p,p}],complex]},AspectRatio->ratio]];
 
 
 
