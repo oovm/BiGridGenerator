@@ -49,88 +49,14 @@ ParametricPlot[Evaluate[tocurve[#, 500, t] & /@ lines], {t, 0, 1},
   Frame -> True, Axes -> False]
 ------------------------------------------------------------------------------------------------------------------------------------
 
-(*定义决策树*)
-决策[救赎者] := 1;
-决策[背叛者] := 0;
-(*初始化People矩阵*)
-Peo = Transpose@Join[{Range[10],
-  Join[ConstantArray[救赎者, 8], ConstantArray[背叛者, 2]]},
-  Transpose@ArrayFlatten@ConstantArray[{{0, 10000.0}}, {10, 1}]];
-开始 = Join[{{编号, 阵营, 回合数, 资产}}, Peo] // MatrixForm
-匹配[list_] := Module[{q}, q = Length@list; If[Mod[q, 2] == 0,
-  Partition[RandomSample[list, q], 2],
-  Partition[RandomSample[list[[1 ;; -2]], q - 1], 2]]]
-(*初始化匹配池*)
-匹配池 = Range@10;
-判定[{x_, y_}] := {决策[Peo[[x, 2]]], 决策[Peo[[y, 2]]]}
-效果[{x_, y_}] := Module[{all},
-  Peo[[x, 3]] += 1; Peo[[y, 3]] += 1;
-  all = (0.2 Peo[[x, 4]] + 0.2 Peo[[y, 4]]);
-  Peo[[x, 4]] *= 0.8; Peo[[y, 4]] *= 0.8;
-  Switch[判定[{x, y}],
-    {1, 1}, Peo[[x, 4]] += 0.65 all; Peo[[y, 4]] += 0.65 all,
-    {1, 0}, Peo[[y, 4]] += all,
-    {0, 1}, Peo[[x, 4]] += all]]
-(*模拟开始*)
-ans = ConstantArray[0, 432];
-Do[效果 /@ 匹配@匹配池; ans[[t]] = {t, Peo[[1 ;; 10, 4]]}, {t, 1, 432}]
-结束 = Join[{{编号, 阵营, 回合数, 资产}}, Peo] // MatrixForm
-record = Transpose@((Transpose@ans)[[2]]);
-Column[{ListLinePlot[record[[1 ;; 8]], AspectRatio -> 0.25,
-  MaxPlotPoints -> Infinity, ImageSize -> Full],
-  ListLinePlot[record[[9 ;; 10]], AspectRatio -> 0.25,
-    MaxPlotPoints -> Infinity, ImageSize -> Full],
-  ListLinePlot[Function[{x, y}, {x, Total@y}] @@@ ans,
-    AspectRatio -> 0.25, MaxPlotPoints -> Infinity,
-    ImageSize -> Full]}]
+ToZeta[exp_] := Module[{time},
+  time = Log[Pi, #] & @@ Cases[exp, Pi^_Integer];
+  Inactivate[Zeta[time]] exp/Zeta[time]]
+ToZeta[31 Pi^6/5040]
 
 
 
 
-
-
-
-
-
-
-
-
-(*定义决策树*)
-决策[无知者] = 决策[救赎者] = 1;
-决策[堕落者] = 决策[背叛者] = 0;
-(*初始化People矩阵*)
-Peo = Transpose@Join[{Range[100],
-  Join[ConstantArray[无知者, 36], ConstantArray[堕落者, 12],
-    ConstantArray[救赎者, 28], ConstantArray[背叛者, 24]]},
-  Transpose@ArrayFlatten@ConstantArray[{{0, 100.0, 0}}, {100, 1}]];
-匹配[list_] := Module[{q}, q = Length@list; If[Mod[q, 2] == 0,
-  Partition[RandomSample[list, q], 2],
-  Partition[RandomSample[list[[1 ;; -2]], q - 1], 2]]]
-
-(*初始化匹配池*)
-匹配池 = Range@100;
-判定[{x_, y_}] := {决策[Peo[[x, 2]]], 决策[Peo[[y, 2]]]};
-效果[{x_, y_}] := Module[{all},
-  Peo[[x, 3]] += 1; Peo[[y, 3]] += 1;
-  all = (0.2 Peo[[x, 4]] + 0.2 Peo[[y, 4]]);
-  Peo[[x, 4]] *= 0.8; Peo[[y, 4]] *= 0.8;
-  Switch[判定[{x, y}],
-    {1, 1}, Peo[[x, 5]] += 1; Peo[[y, 5]] += 1;
-  Peo[[x, 4]] += 0.65 all; Peo[[y, 4]] += 0.65 all,
-    {1, 0}, Peo[[x, 5]] -= 1; Peo[[y, 5]] += 1; Peo[[y, 4]] += all,
-    {0, 1}, Peo[[x, 5]] += 1; Peo[[y, 5]] -= 1; Peo[[x, 4]] += all,
-    {0, 0}, Peo[[x, 5]] -= 1; Peo[[y, 5]] -= 1]]
-(*转化树*)
-转化[n_] := Switch[Peo[[n, 2]],
-  无知者, If[Peo[[n, 5]] < -1, Peo[[n, 2]] = 堕落者, Peo[[n, 2]] = 无知者],
-  堕落者, If[Peo[[n, 5]] > 2, Peo[[n, 2]] = 无知者, Peo[[n, 2]] = 堕落者],
-  救赎者, Peo[[n, 2]] = 救赎者,
-  背叛者, Peo[[n, 2]] = 背叛者];
-(*模拟开始*)
-zc = rsd = ConstantArray[0, 432];
-Do[效果 /@ 匹配@匹配池;
-zc[[t]] = Peo[[1 ;; 100, 4]]; rsd[[t]] = Peo[[1 ;; 100, 5]];
-转化 /@ Range@100, {t, 1, 432}]
 TwoAxisListLinePlot[{f_, g_}] :=
     Module[{fgraph, ggraph, frange, grange, fticks,
       gticks}, {fgraph, ggraph} =
@@ -160,38 +86,7 @@ TwoAxisListLinePlot[{f_, g_}] :=
       FrameTicks -> {{fticks, gticks}, {Automatic, Automatic}}]]
 TwoAxisListLinePlot[{Total /@ zc, Total /@ rsd}]
 
-(*定义决策树*)
-决策[救赎者] := 1;
-决策[背叛者] := 0;
-(*初始化People矩阵*)
-Peo = Transpose@Join[{Range[10],
-  Join[ConstantArray[救赎者, 5], ConstantArray[背叛者, 5]]},
-  Transpose@ArrayFlatten@ConstantArray[{{0, 10000.0}}, {10, 1}]];
-开始 = Join[{{编号, 阵营, 回合数, 资产}}, Peo] // MatrixForm;
-匹配[list_] := Module[{q}, q = Length@list; If[Mod[q, 2] == 0,
-  Partition[RandomSample[list, q], 2],
-  Partition[RandomSample[list[[1 ;; -2]], q - 1], 2]]]
-(*初始化匹配池*)
-匹配池 = Range@10;
-判定[{x_, y_}] := {决策[Peo[[x, 2]]], 决策[Peo[[y, 2]]]}
-效果[{x_, y_}] := Module[{all},
-  Peo[[x, 3]] += 1; Peo[[y, 3]] += 1;
-  all = (0.2 Peo[[x, 4]] + 0.2 Peo[[y, 4]]); Switch[判定[{x, y}],
-    {1, 1}, Peo[[x, 4]] += 0.6 all; Peo[[y, 4]] += 0.6 all,
-    {1, 0}, Peo[[x, 4]] *= 0.8; Peo[[y, 4]] += all,
-    {0, 1}, Peo[[x, 4]] += all; Peo[[y, 4]] *= 0.8,
-    {0, 0}, Peo[[x, 4]] *= 0.8; Peo[[y, 4]] *= 0.8]]
 
-(*模拟开始*)
-ans = ConstantArray[0, 100];
-Do[效果 /@ 匹配@匹配池; ans[[t]] = {t, Peo[[1 ;; 10, 4]]}, {t, 1, 100}]
-结束 = Join[{{编号, 阵营, 回合数, 资产}}, Peo] // MatrixForm;
-{开始 -> 结束}
-record = Transpose@((Transpose@ans)[[2]]);
-ListLinePlot[record[[1 ;; 5]], Joined -> True]
-ListLinePlot[record[[6 ;; 10]], Joined -> True]
-ListLinePlot[Function[{x, y}, {x, Total@y}] @@@ ans,
-  AspectRatio -> 0.25, MaxPlotPoints -> Infinity]
 
 da1[{a_, d_}] := If[a >= d, a - d, 0]
 da2[{a_, d_}] := If[a <= 0, 0, If[d > 0, 100*a/(100 + d), a*(2*d - 50)/(d - 50)]]
@@ -521,19 +416,9 @@ add[list_] := list~Join~Switch[Mod[T[list], 4],
 
 
 
-\begin{aligned}
-a_n^2 - a_{n - 1}^2 & = ({a_n} + {a_{n - 1}})({a_n} - {a_{n - 1}}) \hfill \
-& = 2(2\sum\limits_{i = 1}^{n - 2} {a_i^2} )/4 = \sum\limits_{i = 1}^{n - 2} {a_i^2}  \hfill \\
-\end{aligned}
-
-
-\[
-\begin{aligned}
-\frac{{{\text{d}}y\left( x \right)}}{{{\text{d}}x}} & = \sin \left( {y\left( x \right)} \right) \hfill \
-\csc \left( {y\left( x \right)} \right)\frac{{{\text{d}}y\left( x \right)}}{{{\text{d}}x}} & = 1 \hfill \
-\int {\csc \left( {y\left( x \right)} \right){\text{d}}y\left( x \right)}  & = \int {1{\text{d}}x}  \hfill \
-- \log \left( {\cos \left( {\frac{{y\left( x \right)}}{2}} \right)} \right) + \log \left( {\sin \left( {\frac{{y\left( x \right)}}{2}} \right)} \right) & = x + {c_1} \hfill \
-y\left( x \right) & = 2{\cot ^{ - 1}}\left( {{{\text{e}}^{ - x - {c_1}}}} \right) \hfill \
-y(x) & = 2ArcCot\left[ {{{\text{e}}^{ - x}}\cot \frac{1}{2}} \right] \hfill \\
-\end{aligned}
-\]
+IO玄学
+    // Normal // Print; SelectionMove[
+  EvaluationNotebook[], Previous, Cell]; FrontEndExecute[
+  FrontEndToken["CopySpecial", "PlainText"]]; SelectionMove[
+  EvaluationNotebook[], After, CellGroup, 2]; FrontEndExecute[
+  FrontEndToken["Paste"]];

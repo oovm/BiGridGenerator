@@ -14,9 +14,12 @@
 (* :Discussion: *)
 
 BeginPackage["NumberAndLanguage`"];
-
-
-
+ChineseToNumber::usage = "将中文转化为数字";
+NumberToChinese::usage = "将数字转化为中文";
+EnglishToNumber::usage = "将英文转化为数字";
+NumberToEnglish::usage = "将数字转化为英文";
+PinyinToNumber::usage = "将拼音转化为数字";
+NumberToPinyin::usage = "将数字转化为拼音";
 
 Begin["`Private`"];
 简体中文小写={{零,13},{一,1},{二,2},{三,3},{四,5},{五,4},{六,4},{七,2},{八,2},{九,2},{十,2},{百,6},{千,3},{万,3}};
@@ -24,8 +27,8 @@ Begin["`Private`"];
 繁体中文数字={{零,13},{壹,12},{貳,9},{三,3},{肆,13},{伍,6},{陸,10},{柒,9},{捌,10},{玖,7},{拾,10},{佰,8},{仟,5},{萬,12}};
 R=简体中文小写;
 关联=Association@(Function[{x,y},x->y]@@@R);
-ChineseToNumber[s_String]:=Total[关联/@ToExpression/@StringPartition[s,1]]
-NumberToChinese[n_Integer/;0<=n<=10]:=ToString@R[[n+1,1]]
+ChineseToNumber[s_String]:=Total[关联/@ToExpression/@StringPartition[s,1]];
+NumberToChinese[n_Integer/;0<=n<=10]:=ToString@R[[n+1,1]];
 NumberToChinese[n_Integer/;11<=n<=19]:=ToString@R[[11,1]]<>ToString@R[[n-9,1]];
 NumberToChinese[n_Integer/;20<=n<=99]:=StringDelete[ToString@R[[Floor[n,10]/10+1,1]]<>ToString@R[[11,1]]<>ToString@R[[Mod[n,10]+1,1]],"零"];
 辅助表0=f0={""};
@@ -57,9 +60,9 @@ NumberToEnglish[n_Integer/;1<=n<=19]:=StringDelete[(AusEnglish1~Join~AusEnglish2
 AusEnglish4={"","-one","-two","-three","-four","-five","-six","-seven","-eight","-nine"};
 NumberToEnglish[n_Integer/;20<=n<=99]:=AusEnglish3[[Floor[n,10]/10-1]]<>AusEnglish4[[Mod[n,10]+1]]
 NumberToEnglish[n_/;100<=n<=999&&Mod[n,100]===0]:=AusEnglish1[[Floor[n,100]/100+1]]<>"hundred";
-NumberToEnglish[n_Integer/;100<=n<=999]:=AusEnglish1[[Floor[n,100]/100+1]]<>"hundredand"<>NumberToEnglish[Mod[n,100]]
-AusEnglish5=Join[{""},(Function[{x,y},x<>y]@@@Transpose@{ConstantArray["and",99],NumberToEnglish/@Range@99}),NumberToEnglish/@Range[100,999]];
-NumberToEnglish[n_Integer/;1000<=n<=9999]:=AusEnglish1[[Floor[n,1000]/1000+1]]<>"thousand"<>AusEnglish5[[Mod[n,1000]+1]];
+NumberToEnglish[n_Integer/;100<=n<=999]:=AusEnglish1[[Floor[n,100]/100+1]]<>" hundred and "<>NumberToEnglish[Mod[n,100]]
+AusEnglish5=Join[{" "},(Function[{x,y},x<>y]@@@Transpose@{ConstantArray["and ",99],NumberToEnglish/@Range@99}),NumberToEnglish/@Range[100,999]];
+NumberToEnglish[n_Integer/;1000<=n<=9999]:=AusEnglish1[[Floor[n,1000]/1000+1]]<>" thousand "<>AusEnglish5[[Mod[n,1000]+1]];
 NumberToEnglish[n_Integer/;n>=10000]:=Module[{r,
   numNames={""," one"," two"," three"," four"," five"," six"," seven"," eight"," nine"},
   teenNames={" ten"," eleven"," twelve"," thirteen"," fourteen"," fifteen"," sixteen"," seventeen"," eighteen"," nineteen"},

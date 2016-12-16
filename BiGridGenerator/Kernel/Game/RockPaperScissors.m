@@ -13,7 +13,7 @@
 (* :Keywords: *)
 (* :Discussion: *)
 
-BeginPackage["BiGridGenerator`RockPaperScissors`"];
+BeginPackage["RockPaperScissors`"];
 GraphRPS::usage="GraphRPS[n]给出n元猜拳的胜负判定图.";
 MatrixRPS::usage="MatrixRPS[n]可以输出n元猜拳的关系矩阵.";
 RPSQ::usage="RPSQ[k,{x,n}]判定n元猜拳中{x,n}的胜负向量,1为胜,0为平,-1为败.";
