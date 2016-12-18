@@ -13,7 +13,7 @@
 (* :Keywords: *)
 (* :Discussion: *)
 
-BeginPackage["RockPaperScissors`"];
+BeginPackage["OtherGames`"];
 GraphRPS::usage="GraphRPS[n]给出n元猜拳的胜负判定图.";
 MatrixRPS::usage="MatrixRPS[n]可以输出n元猜拳的关系矩阵.";
 RPSQ::usage="RPSQ[k,{x,n}]判定n元猜拳中{x,n}的胜负向量,1为胜,0为平,-1为败.";
@@ -22,6 +22,7 @@ GameRPS::usage="GameRPS[],与Mathematica AI玩猜拳!你觉得猜拳有策略吗
 
 
 Begin["`Private`"];
+
 RPSQ[k_?OddQ,{x_,n_}]:=If[x===n,{0,0},If[Mod[n+1,k]<=x<=Mod[n+(k-1)/2,k],{-1,1},{1,-1}]];
 RPSQ[k_?EvenQ,{x_,n_}]:=If[x===n||x===Mod[n+k/2,k],{0,0},If[Mod[n+1,k]<=x<=Mod[n+k/2-1,k],{-1,1},{1,-1}]];
 MatrixRPS[2]:="请输入大于2的整数";
@@ -83,6 +84,11 @@ historySeek[history_,n_Integer,col_]:=If[n>Length[history]-1,{},If[#==={},{},#[[
 bestGuess[{}]:=RandomInteger[{1,3}];
 bestGuess[data_]:=Block[{max=Length[data]},Sort[Flatten[Outer[prediction[historySeek[data,#1,#2]]&,Range[max],{1,2,All}],{1,2}]]][[1,-1]];
 chooseGo2[data_]:=Mod[bestGuess[data]+1,3,1];)];
+
+
+
+
+
 End[];
 SetAttributes[{GraphRPS,MatrixRPS,RPSQ,GameRPS},{Protected,ReadProtected,Locked}];
 EndPackage[];

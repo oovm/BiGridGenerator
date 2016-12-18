@@ -29,8 +29,10 @@ FCSrule={
   w_FCScore?FCSass1:>FCSass2[w,5],FCScore[{a_,_}..,_,_]:>{4,a},
   FCScore[{a_|b_,_}..,_]:>{3,a~Max~b},
   FCScore[{a_,_}..,_,_,_]:>{2,a},w_FCScore:>FCSass2[w,1]};
-ShowHardQ[case_]:=If[OrderedQ[Apply[FCScore,Characters@Partition[case,5]/.
-    Thread[Characters@"23456789TJQKA"->Range[2,14]], {1}] /. FCSrule], {1, 0}, {0, 1}];
+ShowHardQ[case_]:=Module[{num=Length@case/5,par,rank},
+  par=Characters@Partition[case,5]/.Thread[Characters@"23456789TJQKA"->Range[2,14]];
+  rank[i_,j_]:=If[OrderedQ[Apply[FCScore,{par[[i]],par[[j]]},{1}]/.FCSrule],j,i];
+  UnitVector[num,FoldPair[{rank[#1,#2],rank[#1,#2]}&,Range@num]]];
 
 
 End[];

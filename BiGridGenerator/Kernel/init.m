@@ -13,7 +13,7 @@ Block[{path=FileNameJoin[{$InstallationDirectory,"AddOns","Applications","BiGrid
   Get[path["Game","LightOut.m"]];
   Get[path["Game","MagicSquare.m"]];
   Get[path["Game","MathConfession.m"]];
-  Get[path["Game","RockPaperScissors.m"]];
+  Get[path["Game","OtherGames.m"]];
 
   Get[path["Others","IrwinSums.m"]];
   Get[path["Others","KempnerSums.m"]];

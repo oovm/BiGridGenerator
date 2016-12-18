@@ -18,8 +18,13 @@ PlusPrime::usage = "PlusPrime[n]生成n以内所有可以由两个素数相加�
 ManyPrime::usage = "ManyPrime[n]生成n以内所有可以由s个素数相乘得到的整数";
 DisplaySum::usage = "DisplaySum[f[n],{n,a,b}]显示这个级数的和";
 ImproperSum::usage = "ImproperSum[f[n]]尝试各种手段对f[n]进行无穷求和";
-
-
+RTCount::usage="RTCount[max]对小于max的整数可构成的直角三角形计数\r
+RTCount[max,Return->True]返回具体的每个整数的计数\r
+RTCount[min,max]返回区间[min,max]中的计数.";
+SumProdPartitions::usage="SumProdPartitions[n]给出整数n的积和分解\r
+SumProdPartitions[n,Show->False],不显示分解出的1.";
+SumProdNumber::usage="SumProdNumber[max]给出小于max的整数的最小积和数集合\r
+SumProdNumber[max,s],s代表搜索深度,太小可能会导致丢解,默认为6,可设为Infinite,但是速度会变得很慢";
 
 Begin["`Private`"];
 MultPrime[n_]:=Union@@Table[p*TakeWhile[Prime[Range[PrimePi[n]]],p*#1<n&],{p,TakeWhile[l,#1<Sqrt[n]&]}];
@@ -113,6 +118,39 @@ a=Table[SquareFreeMod[i,50,230],{i,50,200}];
 b=Table[Mod[Binomial[i,50],230],{i,50,200}];
 a\[Equal]b*)
 ModFa[n_,p_]:=Fold[Mod[#1 #2,p]&,Range[n]];
+RTCount::eq="你输入的最大值比最小值大,请进行正确的输入.";
+Options[RTCount]={Return->False};
+RTCount[max_?IntegerQ,OptionsPattern[]]:=Block[
+  {CountArray=ConstantArray[0,max]},
+  Do[If[CoprimeQ[a^2-b^2,2 a b,a^2+b^2],CountArray[[2a k(a+b)]]++],
+    {a,1,Sqrt[max/2]},
+    {b,If[OddQ@a,2,1],Min[(max-2 a^2)/(2 a),a-1],2},
+    {k,1,max/(2 a (a+b))}];
+  Return[If[OptionValue[Return],CountArray,Tally@CountArray]]];
+RTCount[min_?IntegerQ,max_?IntegerQ,OptionsPattern[]]:=Block[
+  {a=RTCount[max,Return->True],
+  i=PadRight[RTCount[min-1,Return->True],max]},
+  If[min>=max,Return[Message[RTCount::eq]]];
+  Return[If[OptionValue[Return],a-i,Tally@Take[a-i,max-min]]]];
+Options[PrimePartitions]={Method->PowerTuple};
+PrimePowerTuple[max_,rule_,offset_]:=Block[{sifter},
+  sifter[l_,x_]:=Union@@(#+Array[Prime,PrimePi[(max-#)^(1/x)]]^x&/@l);
+  Fold[sifter,{offset},Sort[rule,Greater]]];
+Options[SumProdPartitions]={Show->True};
+SumProdPartitions[n_,OptionsPattern[]]:=
+    Block[{div=Take[Divisors[n],Ceiling[Length[Divisors[n]]/2]],ans},
+      ans=Drop[Transpose[Append[{div},n/div]],1];
+      If[OptionValue[Show],PadRight[#,n-Total@#+2,1]&/@ans,ans]];
+SumProdNumber[max_?IntegerQ,bound_:6(*Infinity不丢解,但是太慢了*)]:=
+    Block[{ans=ConstantArray[10^bound,2max],factor,p,k},
+      ans[[1]]=0;factor[0]=2;
+      Do[Table[factor[i]=Range[factor[i-1],Floor[(2max/Product[factor[j],{j,i-1}])^(1/(n+1-i))]],{i,n}];
+      p=Product[factor[i],{i,n}];
+      k=n-Sum[factor[i],{i,n}]+p;
+      MapThread[If[ans[[#]]>#2,ans[[#]]=#2]&,Flatten/@{k,p}];
+        ,{n,2,Floor[Log[2,max]]}];
+      Union[Take[ans,max]]];
+
 
 
 
