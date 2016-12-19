@@ -17,7 +17,9 @@ BeginPackage["CardGames`"];
 ShowHardQ::usage = "给出一个梭哈牌局的胜负向量";
 
 Begin["`Private`"];
-(*FCS=Five Card Stud*)
+(*FCS=Five Card Stud
+Coded by Mr.Wizard
+Well.....It's so hard to understand.*)
 SetAttributes[FCScore,Orderless];
 FCSass1=Union@Differences[List@@#1[[All,1]]]=={1}&;
 FCSass2={#2,Max@@#[[All,1]]}&;

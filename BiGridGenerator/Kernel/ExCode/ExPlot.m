@@ -66,8 +66,7 @@ MaxPlot[funcs_,range_,ops___]:=Plot[Evaluate[FunGE/@(FunQ@funcs)],range,ops];
 MinPlot[funcs_,range_,ops___]:=Plot[Evaluate[FunLE/@(FunQ@funcs)],range,ops];
 MaxPlot3D[funcs_,range_,ops___]:=Plot3D[Evaluate[FunGE/@(FunQ@funcs)],range,ops];
 MinPlot3D[funcs_,range_,ops___]:=Plot3D[Evaluate[FunLE/@(FunQ@funcs)],range,ops];
-DigitsPlot[x_,num_:100,dig_:10,ops___]:=
-    ArrayPlot[Partition[RealDigits[x,dig,num][[1]],dig],Mesh->True,ops];
+DigitsPlot[x_,num_:100,dig_:10,ops___]:=ArrayPlot[Partition[RealDigits[x,dig,num][[1]],dig],Mesh->True,ops];
 
 
 

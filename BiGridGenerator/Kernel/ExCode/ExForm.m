@@ -45,7 +45,13 @@ TriangleForm[triArray_List,OptionsPattern[]]:=Module[{n=Length[triArray]},
   Graphics[MapIndexed[Text[Style[#1,Large,OptionValue[ColorFunction]
   [(Min[triArray]-#1)/Subtract@@MinMax[triArray]]],
     {Sqrt[3]*(n-1+#2.{-1,2}),3*(n-First[#2]+1)}/2]&,triArray,{2}]]];
-
+ListToExpression[list_]:=list//.({x___,PatternSequence[a_,u:#,b_],y___}:>{x,u[a,b],y}&/@{Power|Log|Surd,Times|Divide,Plus|Subtract});
+OperatorRiffle[exp_,oper_:{Times,Divide,Plus,Subtract}] :=Grid[{#,ListToExpression@#}&/@(Riffle[exp,#]&/@Tuples[oper,Length@exp-1]),Alignment->Left];
+Options[ColorForm]={Form->StandardForm,Color->"TemperatureMap"};
+ColorForm[expr_,OptionsPattern[]]:=With[{colored=DisplayForm[ToBoxes[expr,OptionValue[Form]]/.s_String:>
+    With[{x=Quiet@ToExpression@s},RowBox@List@StringReplace[ToBoxes@s,
+      (ToString[#]->"\*\n"<>ToString@ToBoxes@Style[#,ColorData[OptionValue[Color]]
+      [If[NumberQ[OptionValue[Color]],#,#/10]]])&/@Range[0,9]]/;MatchQ[x,_Real|_Integer]]]},Interpretation[colored,expr]];
 
 
 End[];

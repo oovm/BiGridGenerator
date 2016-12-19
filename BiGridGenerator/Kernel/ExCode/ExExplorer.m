@@ -1,59 +1,81 @@
-(* Mathematica Package *)
-(* Created by Mathematica Plugin for IntelliJ IDEA *)
-
-(* :Title: ExExplorer *)
-(* :Context: ExExplorer` *)
-(* :Author: GalAster *)
-(* :Date: 2016-9-17 *)
-
-(* :Package Version: 0.6 *)
-(* :Update: 2016-11-13 *)
-(* :Mathematica Version: 11.0+ *)
-(* :Copyright:该软件包遵从CC协议:BY+NA+NC(署名、非商业性使用、相同方式共享） *)
-(* :Keywords: *)
-(* :Discussion: *)
-
+(* ::Package:: *)
+(* ::Title:: *)
+(*Example(样板包)*)
+(* ::Subchapter:: *)
+(*程序包介绍*)
+(* ::Text:: *)
+(*Mathematica Package*)
+(*Created by Mathematica Plugin for IntelliJ IDEA*)
+(*Establish from GalAster's template*)
+(**)
+(*Author:GalAster*)
+(*Creation Date:2016-09-17*)
+(*Copyright:CC4.0 BY+NA+NC*)
+(**)
+(*该软件包遵从CC协议:署名、非商业性使用、相同方式共享*)
+(**)
+(*这里应该填这个函数的介绍*)
+(* ::Section:: *)
+(*函数说明*)
 BeginPackage["ExExplorer`"];
-
-
+AttractorExplorer::usage="AttractorExplorer[]包含了很多吸引子的资料";
+DecayExplorer::usage="DecayExplorer[]包含了核子衰变的一些资料";
+TraceExplorer::usage="Trace增强器.使得Trace能够以窗体展开.";
+(* ::Section:: *)
+(*程序包正体*)
+(* ::Subsection::Closed:: *)
+(*主设置*)
+ExExplorer$Version="V0.6";
+ExExplorer$Environment="V11.0+";
+ExExplorer$LastUpdate="2016-11-13";
+ExExplorer::usage = "程序包的说明,这里抄一遍";
 Begin["`Private`"];
+(* ::Subsection::Closed:: *)
+(*主体代码*)
+
+
+
+
+
+(* ::Subsubsection:: *)
+(*吸引子数据*)
 AttractorExplorer=Manipulate[With[{sol$=NDSolve[Evaluate[{
-Module[{x0=0.1,y0=0,z0=0,\[Alpha]=0.95,\[Beta]=0.7,\[Gamma]=0.6,\[Delta]=3.5,\[Epsilon]=0.25,\[Zeta]=0.1},{Derivative[1][x][t]==(z[t]-\[Beta])*x[t]-\[Delta]*y[t],Derivative[1][y][t]==\[Delta]*x[t]+(z[t]-\[Beta])*y[t],Derivative[1][z][t]==\[Gamma]+\[Alpha]*z[t]-z[t]^3/3-(x[t]^2+y[t]^2)*(1+\[Epsilon]*z[t])+(\[Zeta]*z[t])*x[t]^3,x[0]==x0,z[0]==z0,y[0]==y0}],
-Module[{x0=0.1,y0=0,z0=0,\[Eta]=0.5,\[Mu]=1.2},{Derivative[1][x][t]==\[Mu]*x[t]+y[t]-x[t]*z[t],Derivative[1][y][t]==-x[t],Derivative[1][z][t]==(-\[Eta])*z[t]+(Piecewise[{{1,x[t]>0},{0,x[t]<=0}}]*\[Eta])*x[t]^2,x[0]==x0,z[0]==z0,y[0]==y0}],
-Module[{x0=0.1,y0=0,z0=0,\[Alpha]=-5.5,\[Beta]=3.5,\[Delta]=-1},{Derivative[1][x][t]==y[t],Derivative[1][y][t]==z[t],Derivative[1][z][t]==(-\[Alpha])*x[t]-\[Beta]*y[t]-z[t]+\[Delta]*x[t]^3,x[0]==x0,z[0]==z0,y[0]==y0}],
-Module[{a=0.3,x0=-0.55,y0=0.6000000000000001,z0=1.8000000000000003,\[Delta]=1},{Derivative[1][x][t]==x[t]*(4-y[t])+a*z[t],Derivative[1][y][t]==(-y[t])*(1-x[t]^2),Derivative[1][z][t]==(-x[t])*(1.5-\[Delta]*z[t])-0.05*z[t],x[0]==x0,z[0]==z0,y[0]==y0}],
-Module[{v=4.272,x0=-0.55,y0=0,z0=0,\[Delta]=10},{Derivative[1][x][t]==(-\[Delta])*(x[t]+y[t]),Derivative[1][y][t]==-y[t]-(\[Delta]*x[t])*z[t],Derivative[1][z][t]==(\[Delta]*x[t])*y[t]+v,x[0]==x0,z[0]==z0,y[0]==y0}],
-Module[{x0=0.1,y0=0.25,z0=0,\[Alpha]=36,\[Beta]=3.,\[Delta]=20},{Derivative[1][x][t]==\[Alpha]*(y[t]-x[t]),Derivative[1][y][t]==\[Delta]*y[t]-x[t]*z[t],Derivative[1][z][t]==x[t]*y[t]-\[Beta]*z[t],x[0]==x0,z[0]==z0,y[0]==y0}],
-Module[{x0=-0.1499999999999999,y0=1.9500000000000002,z0=10.,\[Alpha]=5,\[Beta]=-10,\[Delta]=-0.38},{Derivative[1][x][t]==\[Alpha]*x[t]-y[t]*z[t],Derivative[1][y][t]==\[Beta]*y[t]+x[t]*z[t],Derivative[1][z][t]==((1/3)*x[t])*y[t]+\[Delta]*z[t],x[0]==x0,z[0]==z0,y[0]==y0}],
-Module[{x0=0.1,y0=0,z0=0,\[Alpha]=0.8,\[Beta]=-1.1,\[Delta]=-1,\[Zeta]=-0.45},{Derivative[1][x][t]==y[t],Derivative[1][y][t]==z[t],Derivative[1][z][t]==\[Alpha]*x[t]+\[Beta]*y[t]+\[Zeta]*z[t]+\[Delta]*x[t]^3,x[0]==x0,z[0]==z0,y[0]==y0}],
-Module[{r=1.7,x0=1.2000000000000002,y0=0.6000000000000001,z0=0,\[Delta]=2,\[Epsilon]=9,\[Rho]=3,\[Sigma]=2.7},{Derivative[1][x][t]==y[t]-\[Rho]*x[t]+(\[Sigma]*y[t])*z[t],Derivative[1][y][t]==r*y[t]-x[t]*z[t]+z[t],Derivative[1][z][t]==(\[Delta]*x[t])*y[t]-\[Epsilon]*z[t],x[0]==x0,z[0]==z0,y[0]==y0}],
-Module[{x0=-1.,y0=-1.,z0=2.1500000000000004,\[Alpha]=40,\[Beta]=1.833,\[Delta]=0.16,\[Epsilon]=0.65,\[Zeta]=20,\[Rho]=55},{Derivative[1][x][t]==\[Alpha]*(y[t]-x[t])+(\[Delta]*x[t])*z[t],Derivative[1][y][t]==\[Rho]*x[t]+\[Zeta]*y[t]-x[t]*z[t],Derivative[1][z][t]==\[Beta]*z[t]+x[t]*y[t]-\[Epsilon]*x[t]^2,x[0]==x0,z[0]==z0,y[0]==y0}],
-Module[{x0=0.1,y0=0,z0=0,\[Alpha]=0.0001,\[Beta]=0.2,\[Zeta]=1.1},{Derivative[1][x][t]==(1/\[Beta]-\[Alpha])*x[t]+z[t]+x[t]*y[t],Derivative[1][y][t]==(-\[Beta])*y[t]-x[t]^2,Derivative[1][z][t]==-x[t]-\[Zeta]*z[t],x[0]==x0,z[0]==z0,y[0]==y0}],
-Module[{x0=0.1,y0=0.1,z0=0.1,\[Alpha]=4,\[Beta]=6,\[Delta]=5,\[Zeta]=10,\[Kappa]=1},{Derivative[1][x][t]==\[Alpha]*x[t]-(\[Beta]*y[t])*z[t],Derivative[1][y][t]==(-\[Zeta])*y[t]+x[t]*z[t],Derivative[1][z][t]==\[Kappa]*x[t]-\[Delta]*z[t]+x[t]*y[t],x[0]==x0,z[0]==z0,y[0]==y0}],
-Module[{x0=0.1,y0=0,z0=0,\[Alpha]=0.44,\[Beta]=1.1,\[Delta]=1},{Derivative[1][x][t]==y[t],Derivative[1][y][t]==z[t],Derivative[1][z][t]==(-\[Delta])*x[t]-\[Beta]*y[t]-\[Alpha]*z[t]+x[t]^2,x[0]==x0,z[0]==z0,y[0]==y0}],
-Module[{x0=0.1,y0=0,z0=0,\[Alpha]=0.2,\[Beta]=4,\[Delta]=1,\[Zeta]=8},{Derivative[1][x][t]==-y[t]^2-z[t]^2-\[Alpha]*x[t]+\[Alpha]*\[Zeta],Derivative[1][y][t]==x[t]*y[t]-(\[Beta]*x[t])*z[t]-y[t]+\[Delta],Derivative[1][z][t]==(\[Beta]*x[t])*y[t]+x[t]*z[t]-z[t],x[0]==x0,z[0]==z0,y[0]==y0}],
-Module[{x0=0.1,y0=0,z0=0,\[Alpha]=1.4},{Derivative[1][x][t]==(-\[Alpha])*x[t]-4*y[t]-4*z[t]-y[t]^2,Derivative[1][y][t]==(-\[Alpha])*y[t]-4*z[t]-4*x[t]-z[t]^2,Derivative[1][z][t]==(-\[Alpha])*z[t]-4*x[t]-4*y[t]-x[t]^2,x[0]==x0,z[0]==z0,y[0]==y0}],
-Module[{c=14,x0=0.,y0=0.,z0=0.3000000000000007,\[Alpha]=2.4,\[Beta]=-3.78,\[Delta]=-11,\[Epsilon]=4,\[Zeta]=5.58,\[Rho]=-1},{Derivative[1][x][t]==\[Alpha]*y[t]+\[Beta]*x[t]+(c*y[t])*z[t],Derivative[1][y][t]==\[Delta]*y[t]-z[t]+(\[Epsilon]*x[t])*z[t],Derivative[1][z][t]==\[Zeta]*z[t]+(\[Rho]*x[t])*y[t],x[0]==x0,z[0]==z0,y[0]==y0}],
-Module[{c=14,w0=0,x0=0.1,y0=0,z0=0,\[Alpha]=2.,\[Beta]=0.7,\[Delta]=1.5,\[Zeta]=26},{Derivative[1][x][t]==\[Alpha]*(y[t]-x[t])+\[Delta]*w[t],Derivative[1][y][t]==x[t]*(\[Zeta]-z[t])-y[t],Derivative[1][z][t]==x[t]*y[t]-\[Beta]*z[t],Derivative[1][w][t]==-x[t]-\[Alpha]*w[t],x[0]==x0,z[0]==z0,y[0]==y0,w[0]==w0}],
-Module[{x0=10.,y0=10.,z0=10.,\[Alpha]=-10.,\[Beta]=-4,\[Zeta]=18.1},{Derivative[1][x][t]==-((\[Alpha]*\[Beta])*(x[t]/(\[Alpha]+\[Beta])))-y[t]*z[t]+\[Zeta],Derivative[1][y][t]==\[Alpha]*y[t]+x[t]*z[t],Derivative[1][z][t]==\[Beta]*z[t]+x[t]*y[t],x[0]==x0,z[0]==z0,y[0]==y0}],
-Module[{x0=-0.85,y0=-0.25,z0=0.15000000000000013,\[Alpha]=0.4,\[Beta]=0.175,\[Zeta]=18.1},{Derivative[1][x][t]==(-\[Alpha])*x[t]+y[t]+(10*y[t])*z[t],Derivative[1][y][t]==-x[t]-0.4*y[t]+(5*x[t])*z[t],Derivative[1][z][t]==\[Beta]*z[t]-(5*x[t])*y[t],x[0]==x0,z[0]==z0,y[0]==y0}],
-Module[{x0=5.15,y0=-1.,z0=0.15000000000000013,\[Alpha]=1.5},{Derivative[1][x][t]==y[t],Derivative[1][y][t]==-x[t]+y[t]*z[t],Derivative[1][z][t]==\[Alpha]-y[t]^2,x[0]==x0,z[0]==z0,y[0]==y0}],
-Module[{w0=5.25,x0=4.8500000000000005,y0=3.3,z0=6.800000000000001,\[Alpha]=30,\[Beta]=10,\[Delta]=10,\[Zeta]=1},{Derivative[1][x][t]==\[Alpha]*(y[t]-x[t])+(y[t]*z[t])*w[t],Derivative[1][y][t]==\[Beta]*(x[t]+y[t])-(x[t]*z[t])*w[t],Derivative[1][z][t]==(-\[Zeta])*z[t]+(x[t]*w[t])*w[t],Derivative[1][w][t]==(-\[Delta])*w[t]+(x[t]*y[t])*z[t],x[0]==x0,z[0]==z0,y[0]==y0,w[0]==w0}],
-Module[{c=14,tf=10,w0=0,x0=0.1,y0=0,z0=0,\[Alpha]=38,\[Beta]=8/3,\[Zeta]=80},{Derivative[1][x][t]==\[Alpha]*(y[t]-x[t])+y[t]*z[t],Derivative[1][y][t]==\[Zeta]*x[t]+y[t]-x[t]*z[t],Derivative[1][z][t]==x[t]*y[t]-\[Beta]*z[t],x[0]==x0,z[0]==z0,y[0]==y0}],
-Module[{r=12,x0=5.200000000000001,y0=-3.8999999999999995,z0=7.699999999999999,\[Alpha]=5.800000000000001,\[Beta]=0.6500000000000004},{Derivative[1][x][t]==(-\[Alpha])*x[t]+\[Alpha]*y[t],Derivative[1][y][t]==r*x[t]-y[t]-x[t]*z[t],Derivative[1][z][t]==x[t]*y[t]-\[Beta]*z[t],x[0]==x0,z[0]==z0,y[0]==y0}],
-Module[{x0=0.1,y0=0,z0=0,\[Alpha]=6.7,\[Kappa]=2},{Derivative[1][x][t]==(-\[Kappa])*x[t]+\[Alpha]*y[t]-y[t]*z[t],Derivative[1][y][t]==x[t],Derivative[1][z][t]==-z[t]+y[t]^2,x[0]==x0,z[0]==z0,y[0]==y0}],
-Module[{x0=-7.4,y0=-5.3,z0=-1.799999999999999,\[Alpha]=0.4,\[Beta]=0.3},{Derivative[1][x][t]==-x[t]+y[t]+y[t]*z[t],Derivative[1][y][t]==-x[t]-y[t]+(\[Alpha]*x[t])*z[t],Derivative[1][z][t]==z[t]-(\[Beta]*x[t])*y[t],x[0]==x0,z[0]==z0,y[0]==y0}],
-Module[{c=14,r=12,x0=0.7000000000000011,y0=1.,z0=1.4000000000000004,\[Alpha]=0.4,\[Beta]=0.3},{Derivative[1][x][t]==y[t],Derivative[1][y][t]==(1-z[t])*x[t]-\[Alpha]*y[t],Derivative[1][z][t]==x[t]^2-\[Beta]*z[t],x[0]==x0,z[0]==z0,y[0]==y0}],
-Module[{x0=3.6000000000000014,y0=5.700000000000001,z0=3.6000000000000014,\[Beta]=0.19},{Derivative[1][x][t]==(-\[Beta])*x[t]+Sin[y[t]],Derivative[1][y][t]==(-\[Beta])*y[t]+Sin[z[t]],Derivative[1][z][t]==(-\[Beta])*z[t]+Sin[x[t]],x[0]==x0,z[0]==z0,y[0]==y0}],
-Module[{x0=0.1,y0=-2.8,z0=0,\[Alpha]=40,\[Beta]=0.833,\[Delta]=0.5,\[Epsilon]=0.65,\[Zeta]=20},{Derivative[1][x][t]==\[Alpha]*(y[t]-x[t])+(\[Delta]*x[t])*z[t],Derivative[1][y][t]==\[Zeta]*y[t]-x[t]*z[t],Derivative[1][z][t]==\[Beta]*z[t]+x[t]*y[t]-\[Epsilon]*x[t]^2,x[0]==x0,z[0]==z0,y[0]==y0}],
-Module[{c=0.65,r=12,x0=-5.7,y0=4.5,z0=3.1000000000000014,\[Alpha]=40,\[Beta]=0.833,\[Delta]=0.5,\[Epsilon]=0.65,\[Zeta]=20},{Derivative[1][x][t]==\[Alpha]*(y[t]-x[t])+(\[Delta]*x[t])*z[t],Derivative[1][y][t]==c*x[t]-x[t]*z[t]+\[Zeta]*y[t],Derivative[1][z][t]==\[Beta]*z[t]+x[t]*y[t]-\[Epsilon]*x[t]^2,x[0]==x0,z[0]==z0,y[0]==y0}],
-Module[{c=0.65,x0=0.,y0=-0.6999999999999993,z0=0.7000000000000011,\[Alpha]=0.2,\[Beta]=-0.01,\[Delta]=-0.4,\[Epsilon]=-1,\[Zeta]=-1},{Derivative[1][x][t]==\[Alpha]*x[t]+(c*y[t])*z[t],Derivative[1][y][t]==\[Beta]*x[t]+\[Delta]*y[t]-x[t]*z[t],Derivative[1][z][t]==\[Epsilon]*z[t]+(\[Zeta]*x[t])*y[t],x[0]==x0,z[0]==z0,y[0]==y0}],
-Module[{x0=0.1,y0=0,z0=0,\[Alpha]=2},{Derivative[1][x][t]==y[t]-x[t],Derivative[1][y][t]==(-z[t])*Tanh[x[t]],Derivative[1][z][t]==-\[Alpha]+x[t]*y[t]+Abs[y[t]],x[0]==x0,z[0]==z0,y[0]==y0}],
-Module[{x0=0.1,y0=0,z0=0,\[Alpha]=10,\[Beta]=40,\[Delta]=2.5,c=2},{Derivative[1][x][t]==\[Alpha]*(y[t]-x[t]),Derivative[1][y][t]==\[Beta]*x[t]-(c*x[t])*z[t],Derivative[1][z][t]==Exp[x[t]*y[t]]-\[Delta]*z[t],x[0]==x0,z[0]==z0,y[0]==y0}]}[[eqs]]],{x,y,z,w},{t,0,tf},MaxSteps->2000000]},
-ParametricPlot3D[Evaluate[{x[t],y[t],z[t]}/.sol$],
-  {t,0,tf},ColorFunction->(ColorData["Rainbow"][#4]&),
-  PlotRange->All,SphericalRegion->True,
-  BoxRatios->1,PlotPoints->5000,ImageSize->420]],{{eqs,1,"attractor"},
+  Module[{x0=0.1,y0=0,z0=0,\[Alpha]=0.95,\[Beta]=0.7,\[Gamma]=0.6,\[Delta]=3.5,\[Epsilon]=0.25,\[Zeta]=0.1},{Derivative[1][x][t]==(z[t]-\[Beta])*x[t]-\[Delta]*y[t],Derivative[1][y][t]==\[Delta]*x[t]+(z[t]-\[Beta])*y[t],Derivative[1][z][t]==\[Gamma]+\[Alpha]*z[t]-z[t]^3/3-(x[t]^2+y[t]^2)*(1+\[Epsilon]*z[t])+(\[Zeta]*z[t])*x[t]^3,x[0]==x0,z[0]==z0,y[0]==y0}],
+  Module[{x0=0.1,y0=0,z0=0,\[Eta]=0.5,\[Mu]=1.2},{Derivative[1][x][t]==\[Mu]*x[t]+y[t]-x[t]*z[t],Derivative[1][y][t]==-x[t],Derivative[1][z][t]==(-\[Eta])*z[t]+(Piecewise[{{1,x[t]>0},{0,x[t]<=0}}]*\[Eta])*x[t]^2,x[0]==x0,z[0]==z0,y[0]==y0}],
+  Module[{x0=0.1,y0=0,z0=0,\[Alpha]=-5.5,\[Beta]=3.5,\[Delta]=-1},{Derivative[1][x][t]==y[t],Derivative[1][y][t]==z[t],Derivative[1][z][t]==(-\[Alpha])*x[t]-\[Beta]*y[t]-z[t]+\[Delta]*x[t]^3,x[0]==x0,z[0]==z0,y[0]==y0}],
+  Module[{a=0.3,x0=-0.55,y0=0.6000000000000001,z0=1.8000000000000003,\[Delta]=1},{Derivative[1][x][t]==x[t]*(4-y[t])+a*z[t],Derivative[1][y][t]==(-y[t])*(1-x[t]^2),Derivative[1][z][t]==(-x[t])*(1.5-\[Delta]*z[t])-0.05*z[t],x[0]==x0,z[0]==z0,y[0]==y0}],
+  Module[{v=4.272,x0=-0.55,y0=0,z0=0,\[Delta]=10},{Derivative[1][x][t]==(-\[Delta])*(x[t]+y[t]),Derivative[1][y][t]==-y[t]-(\[Delta]*x[t])*z[t],Derivative[1][z][t]==(\[Delta]*x[t])*y[t]+v,x[0]==x0,z[0]==z0,y[0]==y0}],
+  Module[{x0=0.1,y0=0.25,z0=0,\[Alpha]=36,\[Beta]=3.,\[Delta]=20},{Derivative[1][x][t]==\[Alpha]*(y[t]-x[t]),Derivative[1][y][t]==\[Delta]*y[t]-x[t]*z[t],Derivative[1][z][t]==x[t]*y[t]-\[Beta]*z[t],x[0]==x0,z[0]==z0,y[0]==y0}],
+  Module[{x0=-0.1499999999999999,y0=1.9500000000000002,z0=10.,\[Alpha]=5,\[Beta]=-10,\[Delta]=-0.38},{Derivative[1][x][t]==\[Alpha]*x[t]-y[t]*z[t],Derivative[1][y][t]==\[Beta]*y[t]+x[t]*z[t],Derivative[1][z][t]==((1/3)*x[t])*y[t]+\[Delta]*z[t],x[0]==x0,z[0]==z0,y[0]==y0}],
+  Module[{x0=0.1,y0=0,z0=0,\[Alpha]=0.8,\[Beta]=-1.1,\[Delta]=-1,\[Zeta]=-0.45},{Derivative[1][x][t]==y[t],Derivative[1][y][t]==z[t],Derivative[1][z][t]==\[Alpha]*x[t]+\[Beta]*y[t]+\[Zeta]*z[t]+\[Delta]*x[t]^3,x[0]==x0,z[0]==z0,y[0]==y0}],
+  Module[{r=1.7,x0=1.2000000000000002,y0=0.6000000000000001,z0=0,\[Delta]=2,\[Epsilon]=9,\[Rho]=3,\[Sigma]=2.7},{Derivative[1][x][t]==y[t]-\[Rho]*x[t]+(\[Sigma]*y[t])*z[t],Derivative[1][y][t]==r*y[t]-x[t]*z[t]+z[t],Derivative[1][z][t]==(\[Delta]*x[t])*y[t]-\[Epsilon]*z[t],x[0]==x0,z[0]==z0,y[0]==y0}],
+  Module[{x0=-1.,y0=-1.,z0=2.1500000000000004,\[Alpha]=40,\[Beta]=1.833,\[Delta]=0.16,\[Epsilon]=0.65,\[Zeta]=20,\[Rho]=55},{Derivative[1][x][t]==\[Alpha]*(y[t]-x[t])+(\[Delta]*x[t])*z[t],Derivative[1][y][t]==\[Rho]*x[t]+\[Zeta]*y[t]-x[t]*z[t],Derivative[1][z][t]==\[Beta]*z[t]+x[t]*y[t]-\[Epsilon]*x[t]^2,x[0]==x0,z[0]==z0,y[0]==y0}],
+  Module[{x0=0.1,y0=0,z0=0,\[Alpha]=0.0001,\[Beta]=0.2,\[Zeta]=1.1},{Derivative[1][x][t]==(1/\[Beta]-\[Alpha])*x[t]+z[t]+x[t]*y[t],Derivative[1][y][t]==(-\[Beta])*y[t]-x[t]^2,Derivative[1][z][t]==-x[t]-\[Zeta]*z[t],x[0]==x0,z[0]==z0,y[0]==y0}],
+  Module[{x0=0.1,y0=0.1,z0=0.1,\[Alpha]=4,\[Beta]=6,\[Delta]=5,\[Zeta]=10,\[Kappa]=1},{Derivative[1][x][t]==\[Alpha]*x[t]-(\[Beta]*y[t])*z[t],Derivative[1][y][t]==(-\[Zeta])*y[t]+x[t]*z[t],Derivative[1][z][t]==\[Kappa]*x[t]-\[Delta]*z[t]+x[t]*y[t],x[0]==x0,z[0]==z0,y[0]==y0}],
+  Module[{x0=0.1,y0=0,z0=0,\[Alpha]=0.44,\[Beta]=1.1,\[Delta]=1},{Derivative[1][x][t]==y[t],Derivative[1][y][t]==z[t],Derivative[1][z][t]==(-\[Delta])*x[t]-\[Beta]*y[t]-\[Alpha]*z[t]+x[t]^2,x[0]==x0,z[0]==z0,y[0]==y0}],
+  Module[{x0=0.1,y0=0,z0=0,\[Alpha]=0.2,\[Beta]=4,\[Delta]=1,\[Zeta]=8},{Derivative[1][x][t]==-y[t]^2-z[t]^2-\[Alpha]*x[t]+\[Alpha]*\[Zeta],Derivative[1][y][t]==x[t]*y[t]-(\[Beta]*x[t])*z[t]-y[t]+\[Delta],Derivative[1][z][t]==(\[Beta]*x[t])*y[t]+x[t]*z[t]-z[t],x[0]==x0,z[0]==z0,y[0]==y0}],
+  Module[{x0=0.1,y0=0,z0=0,\[Alpha]=1.4},{Derivative[1][x][t]==(-\[Alpha])*x[t]-4*y[t]-4*z[t]-y[t]^2,Derivative[1][y][t]==(-\[Alpha])*y[t]-4*z[t]-4*x[t]-z[t]^2,Derivative[1][z][t]==(-\[Alpha])*z[t]-4*x[t]-4*y[t]-x[t]^2,x[0]==x0,z[0]==z0,y[0]==y0}],
+  Module[{c=14,x0=0.,y0=0.,z0=0.3000000000000007,\[Alpha]=2.4,\[Beta]=-3.78,\[Delta]=-11,\[Epsilon]=4,\[Zeta]=5.58,\[Rho]=-1},{Derivative[1][x][t]==\[Alpha]*y[t]+\[Beta]*x[t]+(c*y[t])*z[t],Derivative[1][y][t]==\[Delta]*y[t]-z[t]+(\[Epsilon]*x[t])*z[t],Derivative[1][z][t]==\[Zeta]*z[t]+(\[Rho]*x[t])*y[t],x[0]==x0,z[0]==z0,y[0]==y0}],
+  Module[{c=14,w0=0,x0=0.1,y0=0,z0=0,\[Alpha]=2.,\[Beta]=0.7,\[Delta]=1.5,\[Zeta]=26},{Derivative[1][x][t]==\[Alpha]*(y[t]-x[t])+\[Delta]*w[t],Derivative[1][y][t]==x[t]*(\[Zeta]-z[t])-y[t],Derivative[1][z][t]==x[t]*y[t]-\[Beta]*z[t],Derivative[1][w][t]==-x[t]-\[Alpha]*w[t],x[0]==x0,z[0]==z0,y[0]==y0,w[0]==w0}],
+  Module[{x0=10.,y0=10.,z0=10.,\[Alpha]=-10.,\[Beta]=-4,\[Zeta]=18.1},{Derivative[1][x][t]==-((\[Alpha]*\[Beta])*(x[t]/(\[Alpha]+\[Beta])))-y[t]*z[t]+\[Zeta],Derivative[1][y][t]==\[Alpha]*y[t]+x[t]*z[t],Derivative[1][z][t]==\[Beta]*z[t]+x[t]*y[t],x[0]==x0,z[0]==z0,y[0]==y0}],
+  Module[{x0=-0.85,y0=-0.25,z0=0.15000000000000013,\[Alpha]=0.4,\[Beta]=0.175,\[Zeta]=18.1},{Derivative[1][x][t]==(-\[Alpha])*x[t]+y[t]+(10*y[t])*z[t],Derivative[1][y][t]==-x[t]-0.4*y[t]+(5*x[t])*z[t],Derivative[1][z][t]==\[Beta]*z[t]-(5*x[t])*y[t],x[0]==x0,z[0]==z0,y[0]==y0}],
+  Module[{x0=5.15,y0=-1.,z0=0.15000000000000013,\[Alpha]=1.5},{Derivative[1][x][t]==y[t],Derivative[1][y][t]==-x[t]+y[t]*z[t],Derivative[1][z][t]==\[Alpha]-y[t]^2,x[0]==x0,z[0]==z0,y[0]==y0}],
+  Module[{w0=5.25,x0=4.8500000000000005,y0=3.3,z0=6.800000000000001,\[Alpha]=30,\[Beta]=10,\[Delta]=10,\[Zeta]=1},{Derivative[1][x][t]==\[Alpha]*(y[t]-x[t])+(y[t]*z[t])*w[t],Derivative[1][y][t]==\[Beta]*(x[t]+y[t])-(x[t]*z[t])*w[t],Derivative[1][z][t]==(-\[Zeta])*z[t]+(x[t]*w[t])*w[t],Derivative[1][w][t]==(-\[Delta])*w[t]+(x[t]*y[t])*z[t],x[0]==x0,z[0]==z0,y[0]==y0,w[0]==w0}],
+  Module[{c=14,tf=10,w0=0,x0=0.1,y0=0,z0=0,\[Alpha]=38,\[Beta]=8/3,\[Zeta]=80},{Derivative[1][x][t]==\[Alpha]*(y[t]-x[t])+y[t]*z[t],Derivative[1][y][t]==\[Zeta]*x[t]+y[t]-x[t]*z[t],Derivative[1][z][t]==x[t]*y[t]-\[Beta]*z[t],x[0]==x0,z[0]==z0,y[0]==y0}],
+  Module[{r=12,x0=5.200000000000001,y0=-3.8999999999999995,z0=7.699999999999999,\[Alpha]=5.800000000000001,\[Beta]=0.6500000000000004},{Derivative[1][x][t]==(-\[Alpha])*x[t]+\[Alpha]*y[t],Derivative[1][y][t]==r*x[t]-y[t]-x[t]*z[t],Derivative[1][z][t]==x[t]*y[t]-\[Beta]*z[t],x[0]==x0,z[0]==z0,y[0]==y0}],
+  Module[{x0=0.1,y0=0,z0=0,\[Alpha]=6.7,\[Kappa]=2},{Derivative[1][x][t]==(-\[Kappa])*x[t]+\[Alpha]*y[t]-y[t]*z[t],Derivative[1][y][t]==x[t],Derivative[1][z][t]==-z[t]+y[t]^2,x[0]==x0,z[0]==z0,y[0]==y0}],
+  Module[{x0=-7.4,y0=-5.3,z0=-1.799999999999999,\[Alpha]=0.4,\[Beta]=0.3},{Derivative[1][x][t]==-x[t]+y[t]+y[t]*z[t],Derivative[1][y][t]==-x[t]-y[t]+(\[Alpha]*x[t])*z[t],Derivative[1][z][t]==z[t]-(\[Beta]*x[t])*y[t],x[0]==x0,z[0]==z0,y[0]==y0}],
+  Module[{c=14,r=12,x0=0.7000000000000011,y0=1.,z0=1.4000000000000004,\[Alpha]=0.4,\[Beta]=0.3},{Derivative[1][x][t]==y[t],Derivative[1][y][t]==(1-z[t])*x[t]-\[Alpha]*y[t],Derivative[1][z][t]==x[t]^2-\[Beta]*z[t],x[0]==x0,z[0]==z0,y[0]==y0}],
+  Module[{x0=3.6000000000000014,y0=5.700000000000001,z0=3.6000000000000014,\[Beta]=0.19},{Derivative[1][x][t]==(-\[Beta])*x[t]+Sin[y[t]],Derivative[1][y][t]==(-\[Beta])*y[t]+Sin[z[t]],Derivative[1][z][t]==(-\[Beta])*z[t]+Sin[x[t]],x[0]==x0,z[0]==z0,y[0]==y0}],
+  Module[{x0=0.1,y0=-2.8,z0=0,\[Alpha]=40,\[Beta]=0.833,\[Delta]=0.5,\[Epsilon]=0.65,\[Zeta]=20},{Derivative[1][x][t]==\[Alpha]*(y[t]-x[t])+(\[Delta]*x[t])*z[t],Derivative[1][y][t]==\[Zeta]*y[t]-x[t]*z[t],Derivative[1][z][t]==\[Beta]*z[t]+x[t]*y[t]-\[Epsilon]*x[t]^2,x[0]==x0,z[0]==z0,y[0]==y0}],
+  Module[{c=0.65,r=12,x0=-5.7,y0=4.5,z0=3.1000000000000014,\[Alpha]=40,\[Beta]=0.833,\[Delta]=0.5,\[Epsilon]=0.65,\[Zeta]=20},{Derivative[1][x][t]==\[Alpha]*(y[t]-x[t])+(\[Delta]*x[t])*z[t],Derivative[1][y][t]==c*x[t]-x[t]*z[t]+\[Zeta]*y[t],Derivative[1][z][t]==\[Beta]*z[t]+x[t]*y[t]-\[Epsilon]*x[t]^2,x[0]==x0,z[0]==z0,y[0]==y0}],
+  Module[{c=0.65,x0=0.,y0=-0.6999999999999993,z0=0.7000000000000011,\[Alpha]=0.2,\[Beta]=-0.01,\[Delta]=-0.4,\[Epsilon]=-1,\[Zeta]=-1},{Derivative[1][x][t]==\[Alpha]*x[t]+(c*y[t])*z[t],Derivative[1][y][t]==\[Beta]*x[t]+\[Delta]*y[t]-x[t]*z[t],Derivative[1][z][t]==\[Epsilon]*z[t]+(\[Zeta]*x[t])*y[t],x[0]==x0,z[0]==z0,y[0]==y0}],
+  Module[{x0=0.1,y0=0,z0=0,\[Alpha]=2},{Derivative[1][x][t]==y[t]-x[t],Derivative[1][y][t]==(-z[t])*Tanh[x[t]],Derivative[1][z][t]==-\[Alpha]+x[t]*y[t]+Abs[y[t]],x[0]==x0,z[0]==z0,y[0]==y0}],
+  Module[{x0=0.1,y0=0,z0=0,\[Alpha]=10,\[Beta]=40,\[Delta]=2.5,c=2},{Derivative[1][x][t]==\[Alpha]*(y[t]-x[t]),Derivative[1][y][t]==\[Beta]*x[t]-(c*x[t])*z[t],Derivative[1][z][t]==Exp[x[t]*y[t]]-\[Delta]*z[t],x[0]==x0,z[0]==z0,y[0]==y0}]}[[eqs]]],{x,y,z,w},{t,0,tf},MaxSteps->2000000]},
+  ParametricPlot3D[Evaluate[{x[t],y[t],z[t]}/.sol$],
+    {t,0,tf},ColorFunction->(ColorData["Rainbow"][#4]&),
+    PlotRange->All,SphericalRegion->True,
+    BoxRatios->1,PlotPoints->5000,ImageSize->420]],{{eqs,1,"attractor"},
   {1->"Aizawa",
     2->"Anishchenko\[Dash]Astakhov",
     3->"Arneodo",
@@ -86,168 +108,173 @@ ParametricPlot3D[Evaluate[{x[t],y[t],z[t]}/.sol$],
     30->"Wang\[Dash]Sun",
     31->"Wimol\[Dash]Banlue",
     32->"Yu\[Dash]Wang"}},
-{{tf,500.,"time"},1,500,Appearance->"Labeled"},SynchronousUpdating->False,ControllerLinking->True];
-(*-------------------------------------------------------------------------------------------------------------------------------------------------*)
+  {{tf,500.,"time"},1,500,Appearance->"Labeled"},SynchronousUpdating->False,ControllerLinking->True];
+
+
+
+
+(* ::Subsubsection:: *)
+(*核子衰变数据*)
 DecayExplorer=Manipulate[Quiet@If[!MemberQ[IsotopeData[],
-        StringJoin[elem,isotope]|Entity["Isotope",StringJoin[elem,isotope]]],
-    isotope=Which[elem=="Neutron",First[{}],
-          elem=="Hydrogen","1",
-          elem=="Helium","10",
-          elem=="Lithium","10",
-          elem=="Beryllium","10",
-          elem=="Boron","10",
-          elem=="Carbon","10",
-          elem=="Nitrogen","10",
-          elem=="Oxygen","12",
-          elem=="Fluorine","14",
-          elem=="Neon","16",
-          elem=="Sodium","18",
-          elem=="Magnesium","19",
-          elem=="Aluminum","21",
-          elem=="Silicon","22",
-          elem=="Phosphorus","24",
-          elem=="Sulfur","26",
-          elem=="Chlorine","28",
-          elem=="Argon","30",
-          elem=="Potassium","32",
-          elem=="Calcium","34",
-          elem=="Scandium","36",
-          elem=="Titanium","38",
-          elem=="Vanadium","40",
-          elem=="Chromium","42",
-          elem=="Manganese","44",
-          elem=="Iron","45",
-          elem=="Cobalt","47",
-          elem=="Nickel","48",
-          elem=="Copper","52",
-          elem=="Zinc","54",
-          elem=="Gallium","56",
-          elem=="Germanium","58",
-          elem=="Arsenic","60",
-          elem=="Selenium","65",
-          elem=="Bromine","67",
-          elem=="Krypton","100",
-          elem=="Rubidium","100",
-          elem=="Strontium","100",
-          elem=="Yttrium","100",
-          elem=="Zirconium","100",
-          elem=="Niobium","100",
-          elem=="Molybdenum","100",
-          elem=="Technetium","100",
-          elem=="Ruthenium","87",
-          elem=="Rhodium","100",
-          elem=="Palladium","100",
-          elem=="Silver","100",
-          elem=="Cadmium","100",
-          elem=="Indium","100",
-          elem=="Tin","100",
-          elem=="Antimony","103",
-          elem=="Tellurium","105",
-          elem=="Iodine","108",
-          elem=="Xenon","110",
-          elem=="Cesium","112",
-          elem=="Barium","114",
-          elem=="Lanthanum","117",
-          elem=="Cerium","119",
-          elem=="Praseodymium","121",
-          elem=="Neodymium","124",
-          elem=="Promethium","126",
-          elem=="Samarium","128",
-          elem=="Europium","130",
-          elem=="Gadolinium","134",
-          elem=="Terbium","136",
-          elem=="Dysprosium","138",
-          elem=="Holmium","140",
-          elem=="Erbium","143",
-          elem=="Thulium","145",
-          elem=="Ytterbium","148",
-          elem=="Lutetium","150",
-          elem=="Hafnium","153",
-          elem=="Tantalum","155",
-          elem=="Tungsten","158",
-          elem=="Rhenium","160",
-          elem=="Osmium","162",
-          elem=="Iridium","164",
-          elem=="Platinum","166",
-          elem=="Gold","169",
-          elem=="Mercury","171",
-          elem=="Thallium","176",
-          elem=="Lead","178",
-          elem=="Bismuth","184",
-          elem=="Polonium","188",
-          elem=="Astatine","193",
-          elem=="Radon","195",
-          elem=="Francium","199",
-          elem=="Radium","202",
-          elem=="Actinium","206",
-          elem=="Thorium","209",
-          elem=="Protactinium","212",
-          elem=="Uranium","217",
-          elem=="Neptunium","225",
-          elem=="Plutonium","228",
-          elem=="Americium","231",
-          elem=="Curium","233",
-          elem=="Berkelium","235",
-          elem=="Californium","237",
-          elem=="Einsteinium","240",
-          elem=="Fermium","242",
-          elem=="Mendelevium","245",
-          elem=="Nobelium","248",
-          elem=="Lawrencium","251",
-          elem=="Rutherfordium","253",
-          elem=="Dubnium","255",
-          elem=="Seaborgium","258",
-          elem=="Bohrium","260",
-          elem=="Hassium","263",
-          elem=="Meitnerium","265",
-          elem=="Darmstadtium","267",
-          elem=="Roentgenium","272",
-          elem=="Copernicium","277",
-          elem=="Ununtrium","283",
-          elem=="Flerovium","285",
-          elem=="Ununpentium","287",
-          elem=="Livermorium","289",
-          elem=="Ununseptium","291",
-          elem=="Ununoctium","293"]];
-  If[view=="plot",With[{is=Quiet@DeleteCases[Flatten[NestWhileList[
-      (IsotopeData[#1,"DaughterNuclides"]/.Entity["Isotope",isotope_]->isotope&)/@
-          DeleteCases[Union[Flatten[#1]],IsotopeData[Missing["Variable"],
-            "DaughterNuclides"]]&,{StringJoin[elem,isotope]},#1=!={{}}&,1,50]],
-      IsotopeData[Missing["Variable"],"DaughterNuclides"]|Missing["Variable"]]},
-      With[{tb=Quiet@DeleteCases[DeleteCases[Table[((IsotopeData[#1,"Symbol"]/.
-          Entity["Isotope",isotope_]-> isotope&)/@(i->#1)&)/@(IsotopeData[i,
-                "DaughterNuclides"]/. Entity["Isotope",isotope_]->isotope),
-        {i,is}],_->IsotopeData[Missing["Variable"],"Symbol"],3],{}],
-        elems=Union[Flatten[(StringSplit[#1,_?DigitQ]&)/@is]],
-        an=Thread[#->Range[Length[#]]]&@Union[(ElementData[
-              First[Flatten[{StringSplit[#1,_?DigitQ], StringSplit[#1,_?LetterQ]}]],"AtomicNumber"]&)/@ is],
-        am=Thread[#->Range[Length[#]]]&@Union[(IsotopeData[#1,"NeutronNumber"]&)/@is]},
-        With[{sb=Union[Flatten[Apply[List,tb,2]]]},
-          With[{rd=sb/.Row[{Superscript["", n_], st_}]:>{st,IsotopeData[(st/."Cn"->"Copernicium")<>ToString[n],"NeutronNumber"]},
-f=(ElementData[#1,"Abbreviation"])->ElementData[#1,"AtomicNumber"]&/@elems},
-Quiet@Graphics[{Arrowheads[.02],
-      MapThread[{If[Divide@@Subtract@@#1>0/.ComplexInfinity->1,Red,Blue],
-        Tooltip[Arrow[List@@#1],First[#2]/.Row[{Superscript["", n_], st_}]:>{IsotopeData[(ElementData[st,"StandardName"])<>ToString[n],"Lifetime"],
-  IsotopeData[(ElementData[st,"StandardName"])<>ToString[n],"DecayModes"]}]}&,
-{Flatten[tb/.Thread[sb->rd],1]/.f/.{i_Integer,j_Integer}:>{i/.an,j/.am}//Union,Union[Flatten[tb]]}],Yellow,
-PointSize[.01],(Tooltip[Point[#1/.{i_Integer,j_Integer}:>{i/.an,j/.am}],#1/.Thread[(rd/.f)->sb]]&)/@(rd/.f)},
-Frame->True,AxesOrigin->{0,0},
-FrameLabel->(Style[#,14]&/@{"atomicnumberZ","neutronnumber"}),AxesOrigin->{0,0},
-FrameTicks->{Transpose[{Range[Length[elems]],
-  Column/@Sort[({ElementData[#1,"Symbol"],
-        ElementData[#1,"AtomicNumber"]}&)/@elems,#1[[2]]<#2[[2]]&]}],
-  Transpose[{Range[Length[am]],First/@am}],None,None},
-AspectRatio->1/GoldenRatio,ImageSize->{500,400},
-ImagePadding->{{35,10},{55,10}}]]]]],
-Quiet@LayeredGraphPlot[Union@DeleteCases[
+  StringJoin[elem,isotope]|Entity["Isotope",StringJoin[elem,isotope]]],
+  isotope=Which[elem=="Neutron",First[{}],
+    elem=="Hydrogen","1",
+    elem=="Helium","10",
+    elem=="Lithium","10",
+    elem=="Beryllium","10",
+    elem=="Boron","10",
+    elem=="Carbon","10",
+    elem=="Nitrogen","10",
+    elem=="Oxygen","12",
+    elem=="Fluorine","14",
+    elem=="Neon","16",
+    elem=="Sodium","18",
+    elem=="Magnesium","19",
+    elem=="Aluminum","21",
+    elem=="Silicon","22",
+    elem=="Phosphorus","24",
+    elem=="Sulfur","26",
+    elem=="Chlorine","28",
+    elem=="Argon","30",
+    elem=="Potassium","32",
+    elem=="Calcium","34",
+    elem=="Scandium","36",
+    elem=="Titanium","38",
+    elem=="Vanadium","40",
+    elem=="Chromium","42",
+    elem=="Manganese","44",
+    elem=="Iron","45",
+    elem=="Cobalt","47",
+    elem=="Nickel","48",
+    elem=="Copper","52",
+    elem=="Zinc","54",
+    elem=="Gallium","56",
+    elem=="Germanium","58",
+    elem=="Arsenic","60",
+    elem=="Selenium","65",
+    elem=="Bromine","67",
+    elem=="Krypton","100",
+    elem=="Rubidium","100",
+    elem=="Strontium","100",
+    elem=="Yttrium","100",
+    elem=="Zirconium","100",
+    elem=="Niobium","100",
+    elem=="Molybdenum","100",
+    elem=="Technetium","100",
+    elem=="Ruthenium","87",
+    elem=="Rhodium","100",
+    elem=="Palladium","100",
+    elem=="Silver","100",
+    elem=="Cadmium","100",
+    elem=="Indium","100",
+    elem=="Tin","100",
+    elem=="Antimony","103",
+    elem=="Tellurium","105",
+    elem=="Iodine","108",
+    elem=="Xenon","110",
+    elem=="Cesium","112",
+    elem=="Barium","114",
+    elem=="Lanthanum","117",
+    elem=="Cerium","119",
+    elem=="Praseodymium","121",
+    elem=="Neodymium","124",
+    elem=="Promethium","126",
+    elem=="Samarium","128",
+    elem=="Europium","130",
+    elem=="Gadolinium","134",
+    elem=="Terbium","136",
+    elem=="Dysprosium","138",
+    elem=="Holmium","140",
+    elem=="Erbium","143",
+    elem=="Thulium","145",
+    elem=="Ytterbium","148",
+    elem=="Lutetium","150",
+    elem=="Hafnium","153",
+    elem=="Tantalum","155",
+    elem=="Tungsten","158",
+    elem=="Rhenium","160",
+    elem=="Osmium","162",
+    elem=="Iridium","164",
+    elem=="Platinum","166",
+    elem=="Gold","169",
+    elem=="Mercury","171",
+    elem=="Thallium","176",
+    elem=="Lead","178",
+    elem=="Bismuth","184",
+    elem=="Polonium","188",
+    elem=="Astatine","193",
+    elem=="Radon","195",
+    elem=="Francium","199",
+    elem=="Radium","202",
+    elem=="Actinium","206",
+    elem=="Thorium","209",
+    elem=="Protactinium","212",
+    elem=="Uranium","217",
+    elem=="Neptunium","225",
+    elem=="Plutonium","228",
+    elem=="Americium","231",
+    elem=="Curium","233",
+    elem=="Berkelium","235",
+    elem=="Californium","237",
+    elem=="Einsteinium","240",
+    elem=="Fermium","242",
+    elem=="Mendelevium","245",
+    elem=="Nobelium","248",
+    elem=="Lawrencium","251",
+    elem=="Rutherfordium","253",
+    elem=="Dubnium","255",
+    elem=="Seaborgium","258",
+    elem=="Bohrium","260",
+    elem=="Hassium","263",
+    elem=="Meitnerium","265",
+    elem=="Darmstadtium","267",
+    elem=="Roentgenium","272",
+    elem=="Copernicium","277",
+    elem=="Ununtrium","283",
+    elem=="Flerovium","285",
+    elem=="Ununpentium","287",
+    elem=="Livermorium","289",
+    elem=="Ununseptium","291",
+    elem=="Ununoctium","293"]];
+If[view=="plot",With[{is=Quiet@DeleteCases[Flatten[NestWhileList[
+  (IsotopeData[#1,"DaughterNuclides"]/.Entity["Isotope",isotope_]->isotope&)/@
+      DeleteCases[Union[Flatten[#1]],IsotopeData[Missing["Variable"],
+        "DaughterNuclides"]]&,{StringJoin[elem,isotope]},#1=!={{}}&,1,50]],
+  IsotopeData[Missing["Variable"],"DaughterNuclides"]|Missing["Variable"]]},
+  With[{tb=Quiet@DeleteCases[DeleteCases[Table[((IsotopeData[#1,"Symbol"]/.
+      Entity["Isotope",isotope_]-> isotope&)/@(i->#1)&)/@(IsotopeData[i,
+    "DaughterNuclides"]/. Entity["Isotope",isotope_]->isotope),
+    {i,is}],_->IsotopeData[Missing["Variable"],"Symbol"],3],{}],
+    elems=Union[Flatten[(StringSplit[#1,_?DigitQ]&)/@is]],
+    an=Thread[#->Range[Length[#]]]&@Union[(ElementData[
+      First[Flatten[{StringSplit[#1,_?DigitQ], StringSplit[#1,_?LetterQ]}]],"AtomicNumber"]&)/@ is],
+    am=Thread[#->Range[Length[#]]]&@Union[(IsotopeData[#1,"NeutronNumber"]&)/@is]},
+    With[{sb=Union[Flatten[Apply[List,tb,2]]]},
+      With[{rd=sb/.Row[{Superscript["", n_], st_}]:>{st,IsotopeData[(st/."Cn"->"Copernicium")<>ToString[n],"NeutronNumber"]},
+        f=(ElementData[#1,"Abbreviation"])->ElementData[#1,"AtomicNumber"]&/@elems},
+        Quiet@Graphics[{Arrowheads[.02],
+          MapThread[{If[Divide@@Subtract@@#1>0/.ComplexInfinity->1,Red,Blue],
+            Tooltip[Arrow[List@@#1],First[#2]/.Row[{Superscript["", n_], st_}]:>{IsotopeData[(ElementData[st,"StandardName"])<>ToString[n],"Lifetime"],
+              IsotopeData[(ElementData[st,"StandardName"])<>ToString[n],"DecayModes"]}]}&,
+            {Flatten[tb/.Thread[sb->rd],1]/.f/.{i_Integer,j_Integer}:>{i/.an,j/.am}//Union,Union[Flatten[tb]]}],Yellow,
+          PointSize[.01],(Tooltip[Point[#1/.{i_Integer,j_Integer}:>{i/.an,j/.am}],#1/.Thread[(rd/.f)->sb]]&)/@(rd/.f)},
+          Frame->True,AxesOrigin->{0,0},
+          FrameLabel->(Style[#,14]&/@{"atomicnumberZ","neutronnumber"}),AxesOrigin->{0,0},
+          FrameTicks->{Transpose[{Range[Length[elems]],
+            Column/@Sort[({ElementData[#1,"Symbol"],
+              ElementData[#1,"AtomicNumber"]}&)/@elems,#1[[2]]<#2[[2]]&]}],
+            Transpose[{Range[Length[am]],First/@am}],None,None},
+          AspectRatio->1/GoldenRatio,ImageSize->{500,400},
+          ImagePadding->{{35,10},{55,10}}]]]]],
+  Quiet@LayeredGraphPlot[Union@DeleteCases[
     Table[(IsotopeData[#,"Symbol"]&/@(i->#))&/@(IsotopeData[i,"DaughterNuclides"]/.
         Entity["Isotope",isotope_]->isotope),{i,DeleteCases[Flatten@NestWhileList[
       IsotopeData[#,"DaughterNuclides"]&/@DeleteCases[Union@Flatten@#,IsotopeData[Missing["Variable"],
         "DaughterNuclides"]]&,{StringJoin[elem,isotope]},#=!={{}}&,1,50],
       IsotopeData[Missing["Variable"],"DaughterNuclides"]|Missing["Variable"]]}]//Flatten,_->IsotopeData[__],3],
-  DirectedEdges->True,VertexLabeling->True,
-  AspectRatio->1,ImageSize->{500,400},PlotRangePadding->0,
-  ImagePadding->{{35,35},{55,35}}]],{{elem,"Thorium",
+    DirectedEdges->True,VertexLabeling->True,
+    AspectRatio->1,ImageSize->{500,400},PlotRangePadding->0,
+    ImagePadding->{{35,35},{55,35}}]],{{elem,"Thorium",
   "element"},{"Actinium","Aluminum","Americium","Antimony",
   "Argon","Arsenic","Astatine","Barium","Berkelium",
   "Beryllium","Bismuth","Bohrium","Boron","Bromine","Cadmium",
@@ -391,23 +418,39 @@ Quiet@LayeredGraphPlot[Union@DeleteCases[
     elem=="Ununseptium",{"291","292"},
     elem=="Ununoctium",{"293"}],
   ControlType->PopupMenu},{{view,"plot","view"},{"plot","graph"}},SynchronousUpdating->False,AutorunSequencing->{3}];
-(*-------------------------------------------------------------------------------------------------------------------------------------------------*)
+
+
+
+
+(* ::Subsubsection:: *)
+(*Trace功能增强*)
 (*http://mathematica.stackexchange.com/questions/29339/the-clearest-way-to-represent-mathematicas-evaluation-sequence#5527117*)
 SetAttributes[TraceExplorer,{HoldAllComplete}];
 TraceExplorer[expr_]:=Module[{steps={},stack={},pre,post,show,default=False},
-      pre[e_]:=(stack={steps,stack};steps={});
-      post[e_,r_]:=(steps=First@stack~Join~{show[e,HoldForm@r,steps]};
-      stack=stack[[2]]);
-      SetAttributes[post,HoldAllComplete];
-      show[e_,r_,steps_]:=Module[{open=False},
-            Grid[steps/.{{}->{{"Expr",Item[e,Background->GrayLevel@.8]}},_->{{"Expr",e},
-              {Toggler[Dynamic@open,{True->Button["Steps",Appearance->{"DialogBox","Pressed"}],False->Button@"Steps"}],
-                steps/.{{}->Style["nodefinitionsapply",Italic],_:>
-                    Dynamic@If[open,Column@steps,Grid@{{Length@steps,"steps"}}]}},{"Result",r}}},
-              Alignment->{Left,Center},Frame->All,Spacings->Automatic,Background->{{Hue[.65,.1,1]},None}]];
-      TraceScan[pre,expr,___,post];
-      Deploy@Column@{Opener@Dynamic@default,Dynamic@Pane[First@steps,ImageSize->10000]}];
-(*-------------------------------------------------------------------------------------------------------------------------------------------------*)
-End[];
+  pre[e_]:=(stack={steps,stack};steps={});
+  post[e_,r_]:=(steps=First@stack~Join~{show[e,HoldForm@r,steps]};
+  stack=stack[[2]]);
+  SetAttributes[post,HoldAllComplete];
+  show[e_,r_,steps_]:=Module[{open=False},
+    Grid[steps/.{{}->{{"Expr",Item[e,Background->GrayLevel@.8]}},_->{{"Expr",e},
+      {Toggler[Dynamic@open,{True->Button["Steps",Appearance->{"DialogBox","Pressed"}],False->Button@"Steps"}],
+        steps/.{{}->Style["nodefinitionsapply",Italic],_:>
+            Dynamic@If[open,Column@steps,Grid@{{Length@steps,"steps"}}]}},{"Result",r}}},
+      Alignment->{Left,Center},Frame->All,Spacings->Automatic,Background->{{Hue[.65,.1,1]},None}]];
+  TraceScan[pre,expr,___,post];
+  Deploy@Column@{Opener@Dynamic@default,Dynamic@Pane[First@steps,ImageSize->10000]}];
+
+
+
+
+
+
+
+
+
+
+(* ::Subsection::Closed:: *)
+(*附加设置*)
+End[] ;
 
 EndPackage[];

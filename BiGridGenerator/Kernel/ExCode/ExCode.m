@@ -1,26 +1,47 @@
-(* Mathematica Package *)
-(* Created by Mathematica Plugin for IntelliJ IDEA *)
-
-(* :Title: ExCode *)
-(* :Context: ExCode` *)
-(* :Author: GalAster *)
-(* :Date: 2016-11-11 *)
-
-(* :Package Version: 0.2 *)
-(* :Mathematica Version: 11.0+ *)
-(* :Copyright:该软件包遵从CC协议:BY+NA+NC(署名、非商业性使用、相同方式共享） *)
-(* :Keywords: *)
-(* :Discussion: *)
-
-
-
+(* ::Package:: *)
+(* ::Title:: *)
+(*Example(样板包)*)
+(* ::Subchapter:: *)
+(*程序包介绍*)
+(* ::Text:: *)
+(*Mathematica Package*)
+(*Created by Mathematica Plugin for IntelliJ IDEA*)
+(*Establish from GalAster's template*)
+(**)
+(*Author:GalAster*)
+(*Creation Date:2016-11-11*)
+(*Copyright:CC4.0 BY+NA+NC*)
+(**)
+(*该软件包遵从CC协议:署名、非商业性使用、相同方式共享*)
+(**)
+(*这里应该填这个函数的介绍*)
+(* ::Section:: *)
+(*函数说明*)
 BeginPackage["ExCode`"];
 ExEncrypt::usage="ExEncrypt[Str,Way]以方式Way给出输入代码Str的超编码";
 ExDecrypt::usage="ExDecrypt[Str,Way]以方式Way给出输入代码Str的超解码";
-
-
-
+(* ::Section:: *)
+(*程序包正体*)
+(* ::Subsection::Closed:: *)
+(*主设置*)
+ExCode$Version="V0.1";
+ExCode$Environment="V11.0+";
+ExCode$LastUpdate="2016-11-11";
+ExCode::usage = "程序包的说明,这里抄一遍";
 Begin["`Private`"];
+(* ::Subsection::Closed:: *)
+(*主体代码*)
+
+
+
+
+
+
+
+
+
+(* ::Subsubsection:: *)
+(*超加密、超解密*)
 SetAttributes[{CodeToCipher,ExEncrypt},HoldAll];
 CodeToCipher[Str_]:=Module[{密匙,输出},
   密匙=GenerateSymmetricKey[Method-><|"Cipher"->"AES256",
@@ -40,7 +61,7 @@ ExDecrypt[Str_String,Way_,Safe_:False]:=CipherToCode[IntegerDigits[FromDigits[Ma
   StringPartition[Str,1]]-1,Length@CharSet[Way]],256],Safe];
 (*StringJoin@Union@StringPartition[%,1]*)
 CharSet[Language->"MarySue"]:=StringPartition[
-      "丝丹丽之乐云亚仪伊优伤佳依俏倩倾兮兰冰凌凝凡凤凪利千华卿可叶吉君咏哀嘉园城基塔墨夏多奥如妍妖妙妮妲姆姣姬娅娜娣娥娴婉婵婷媛嫩宁安宜寂\
+  "丝丹丽之乐云亚仪伊优伤佳依俏倩倾兮兰冰凌凝凡凤凪利千华卿可叶吉君咏哀嘉园城基塔墨夏多奥如妍妖妙妮妲姆姣姬娅娜娣娥娴婉婵婷媛嫩宁安宜寂\
 寇寒岚巧希幻幽弥彩影御心思怡恋恩悠悦情慕慧拉文斯春昭晓晗晶曦曼月朵枝枫柒柔格桂梅梦樱欢欣殇残毓沫泪洁洛浅海涅淑清温渺滢澜澪灵烟然燕燢爱爽玉玖\
 玛玥玫环玲珊珍珠琉琦琪琬琰琳琴琼瑗瑞瑟瑰瑶瑷璃璎璐璧白百盘眉真碎离秀秋筱米素紫红纨纯纱绯缈美羽翠翼育舒舞艳艺艾芊芝芬花芳芸苏苑英茉茗茜茹荔荷\
 莉莎莲莳莹莺菁菲萌萍萝萦萨落蒂蓉蓓蓝蔷蕊蕴蕾薇薰蝶融血裳语贞迷邪铃银锦阳陌雁雅雨雪霄霜霞霭露青静音韵颖颜风飘香馥馨魂魅魑鸢黎黛",1];
@@ -61,6 +82,18 @@ ExDecrypt[Str_String,Language->"MarySue",Safe_:False]:=Module[{input,res},
 CharSet[Language->name_]:=Alphabet[Language->name];
 CharSet[Language->"Chinese"]:=StringPartition[FromCharacterCode[Range[13312,40869]],1];
 CharSet[Language->"ASCII"]:=StringPartition[FromCharacterCode[Range[32,126]],1];
-End[];
+
+
+
+
+(* ::Subsubsection:: *)
+(*功能块 2*)
+
+(*空*)
+
+
+(* ::Subsection::Closed:: *)
+(*附加设置*)
+End[] ;
 
 EndPackage[];
