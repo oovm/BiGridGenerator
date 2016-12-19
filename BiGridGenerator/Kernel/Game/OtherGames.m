@@ -1,28 +1,43 @@
-(* Mathematica Package *)
-(* Created by Mathematica Plugin for IntelliJ IDEA *)
-
-(* :Title: RockPaperScissors *)
-(* :Context: RockPaperScissors` *)
-(* :Author: GalAster *)
-(* :Date: 2016-10-16 *)
-
-(* :Package Version: 1.0 *)
-(* :Update: 2016-10-20 *)
-(* :Mathematica Version: 11.0+ *)
-(* :Copyright:该软件包遵从CC协议:BY+NA+NC(署名、非商业性使用、相同方式共享） *)
-(* :Keywords: *)
-(* :Discussion: *)
-
+(* ::Package:: *)
+(* ::Title:: *)
+(*Example(样板包)*)
+(* ::Subchapter:: *)
+(*程序包介绍*)
+(* ::Text:: *)
+(*Mathematica Package*)
+(*Created by Mathematica Plugin for IntelliJ IDEA*)
+(*Establish from GalAster's template*)
+(**)
+(*Author:GalAster*)
+(*Creation Date:2016-12-06*)
+(*Copyright:CC4.0 BY+NA+NC*)
+(**)
+(*该软件包遵从CC协议:署名、非商业性使用、相同方式共享*)
+(**)
+(*这里应该填这个函数的介绍*)
+(* ::Section:: *)
+(*函数说明*)
 BeginPackage["OtherGames`"];
 GraphRPS::usage="GraphRPS[n]给出n元猜拳的胜负判定图.";
 MatrixRPS::usage="MatrixRPS[n]可以输出n元猜拳的关系矩阵.";
 RPSQ::usage="RPSQ[k,{x,n}]判定n元猜拳中{x,n}的胜负向量,1为胜,0为平,-1为败.";
 GameRPS::usage="GameRPS[],与Mathematica AI玩猜拳!你觉得猜拳有策略吗?";
-
-
-
+(* ::Section:: *)
+(*程序包正体*)
+(* ::Subsection::Closed:: *)
+(*主设置*)
+OtherGames$Version="V0.2";
+OtherGames$Environment="V11.0+";
+OtherGames$LastUpdate="2016-12-19";
+OtherGames::usage = "程序包的说明,这里抄一遍";
 Begin["`Private`"];
+(* ::Subsection::Closed:: *)
+(*主体代码*)
 
+
+
+(* ::Subsubsection:: *)
+(*猜拳程序块*)
 RPSQ[k_?OddQ,{x_,n_}]:=If[x===n,{0,0},If[Mod[n+1,k]<=x<=Mod[n+(k-1)/2,k],{-1,1},{1,-1}]];
 RPSQ[k_?EvenQ,{x_,n_}]:=If[x===n||x===Mod[n+k/2,k],{0,0},If[Mod[n+1,k]<=x<=Mod[n+k/2-1,k],{-1,1},{1,-1}]];
 MatrixRPS[2]:="请输入大于2的整数";
@@ -54,10 +69,10 @@ GraphRPS[n_?IntegerQ,size_:18]:=AdjacencyGraph[MatrixRPS[n],
 GraphRPS[n_]:=MatrixRPS[2];
 GameRPS=DynamicModule[{history={},hLast=0,cLast=0,hScore=0,
   cScore=0,message=""},Panel@Column[{Dynamic@Grid[{{Column[MapIndexed[Button[#,cLast=chooseGo2[history];
-  hLast=#2[[1]];
-  message=Switch[winTest[hLast,cLast],"Win",hScore++;"Youwin","Lose",cScore++;"Youlose",_,"Draw"];
+hLast=#2[[1]];
+message=Switch[winTest[hLast,cLast],"Win",hScore++;"Youwin","Lose",cScore++;"Youlose",_,"Draw"];
 AppendTo[history,{hLast,cLast}];]&,{"Rock","Paper","Scissors"}]],displayPlay[hLast,"You"],Style[message,20],
-    displayPlay[cLast,Style["Mathematica",Italic]]},
+  displayPlay[cLast,Style["Mathematica",Italic]]},
   {PieChart[{hScore,cScore},ChartLegends->SwatchLegend[{Row[{"You:",hScore}],Row[{Style["Mathematica:",Italic],cScore}]}],
     ChartStyle->{Darker@Green,Darker@Red},ImageSize->110],SpanFromLeft,
     ListLinePlot[Prepend[MeanFilter[(winTest@@@history)/.{"Win"->1,"Lose"->-1,"Draw"->0},
@@ -68,28 +83,32 @@ AppendTo[history,{hLast,cLast}];]&,{"Rock","Paper","Scissors"}]],displayPlay[hLa
   message="";cLast=0;hLast=0;]}],Alignment->Right]}],
   Initialization:>(displayPlay[play_,name_]:=Column[{Text[Style[name,18]],
     Show[If[name === "You", ImageReflect[#, Left], #] &@Switch[play,
-          1, ExData`Private`石头,
-          2, ExData`Private`剪刀,
-          3, ExData`Private`布,
-          _, Graphics[{}]],ImageSize->{109,70}]},Alignment->Center];
-winTest[p1_,p2_]:=Switch[Mod[p1-p2,3],
-  0,"Draw",
-  1,"Win",
-  2,"Lose"];
-historySeek[history_,n_Integer,col_]:=If[n>Length[history]-1,{},If[#==={},{},#[[1,All,1]]]&
-    [Reap[Do[If[history[[i;;(i+n-1),col]]===history[[-n;;,col]],Sow[history[[i+n]]]],
-        {i,Length[history]-n}]][[2]]]];prediction[pastChoices_List]:={If[Length[pastChoices]<2,1,
-  DistributionFitTest[pastChoices,DiscreteUniformDistribution[{1,3}]]],
-  RandomChoice[Commonest[pastChoices/.{}->{1,2,3}]]};
-bestGuess[{}]:=RandomInteger[{1,3}];
-bestGuess[data_]:=Block[{max=Length[data]},Sort[Flatten[Outer[prediction[historySeek[data,#1,#2]]&,Range[max],{1,2,All}],{1,2}]]][[1,-1]];
-chooseGo2[data_]:=Mod[bestGuess[data]+1,3,1];)];
+      1, ExData`Private`石头,
+      2, ExData`Private`剪刀,
+      3, ExData`Private`布,
+      _, Graphics[{}]],ImageSize->{109,70}]},Alignment->Center];
+  winTest[p1_,p2_]:=Switch[Mod[p1-p2,3],
+    0,"Draw",
+    1,"Win",
+    2,"Lose"];
+  historySeek[history_,n_Integer,col_]:=If[n>Length[history]-1,{},If[#==={},{},#[[1,All,1]]]&
+  [Reap[Do[If[history[[i;;(i+n-1),col]]===history[[-n;;,col]],Sow[history[[i+n]]]],
+      {i,Length[history]-n}]][[2]]]];prediction[pastChoices_List]:={If[Length[pastChoices]<2,1,
+    DistributionFitTest[pastChoices,DiscreteUniformDistribution[{1,3}]]],
+    RandomChoice[Commonest[pastChoices/.{}->{1,2,3}]]};
+  bestGuess[{}]:=RandomInteger[{1,3}];
+  bestGuess[data_]:=Block[{max=Length[data]},Sort[Flatten[Outer[prediction[historySeek[data,#1,#2]]&,Range[max],{1,2,All}],{1,2}]]][[1,-1]];
+  chooseGo2[data_]:=Mod[bestGuess[data]+1,3,1];)];
 
+
+
+(* ::Subsubsection:: *)
+(*数独程序块*)
+SetAttributes[{SudokuFX3,SudokuExc},HoldAll];
 (*本程序包数独的标准格式是一个9×9的矩阵,里面只能填0到9,0表示待解*)
 (*Coded by Mr. Wizard's
 Thanks for Morphie's commit,it's helpful
 but it's still very hard to understand.*)
-SetAttributes[{SudokuFX3,SudokuExc},HoldAll];
 (*SudokuLinked returns a list of the values at all locations that constrain the passed location,Delete is used*)
 (*to ensure that the value of the passed location is not included in the list*)
 SudokuLinked[m_][u_,v_,r_,c_]:={m[[u,All,r]]~Delete~{v,c},m[[All,v,All,c]]~Delete~{u,r},m[[u,v]]~Delete~{r,c}};
@@ -138,7 +157,19 @@ ShowMarking[initialHard](*需要写一个转换器*)
 
 
 
+(* ::Subsubsection:: *)
+(*扫雷程序块*)
+MineLayout[{m_,n_,k_}]:=Module[{M,foo,bar,list},
+  M=ConstantArray[0,{m+2,n+2}];
+  foo[{x_,y_}]:=M[[x-1;;x+1,y-1;;y+1]]+=1;
+  bar[{x_,y_}]:=M[[x,y]]=10;
+  list=RandomSample[Tuples[{Range[2,m+1],Range[2,n+1]}]][[1;;k]];
+  Do[foo@list[[i]],{i,k}];bar/@list;M[[2;;-2,2;;-2]]];
+MineDistribution[m_,n_,k_,p_]:=Transpose@{Range[0,10],BinCounts[Flatten[MineLayout/@ConstantArray[{m,n,k},p]],{-0.5,10.5,1}]/p+0.0};
 
-End[];
-SetAttributes[{GraphRPS,MatrixRPS,RPSQ,GameRPS},{Protected,ReadProtected,Locked}];
+
+(* ::Subsection::Closed:: *)
+(*附加设置*)
+End[] ;
+
 EndPackage[];

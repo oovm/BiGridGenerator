@@ -1,40 +1,51 @@
-(* Mathematica Package *)
-(* Created by Mathematica Plugin for IntelliJ IDEA *)
-
-(* :Title: PolyPainting *)
-(* :Context: PolyPainting` *)
-(* :Author: GalAster *)
-(* :Date: 2016-2-17 *)
-
-(* :Package Version: 0.6 *)
-(* :Update: 2016-11-27 *)
-(* :Mathematica Version: 11.0+ *)
-(* :Copyright:该软件包遵从CC协议:BY+NA+NC(署名、非商业性使用、相同方式共享） *)
-(* :Keywords: *)
-(* :Discussion: *)
-
-BeginPackage["PolyPainting`"];
+(* ::Package:: *)
+(* ::Title:: *)
+(*ExMatrix(特殊矩阵包)*)
+(* ::Subchapter:: *)
+(*程序包介绍*)
+(* ::Text:: *)
+(*Mathematica Package*)
+(*Created by Mathematica Plugin for IntelliJ IDEA*)
+(*Establish from GalAster's template*)
+(**)
+(*Author:GalAster*)
+(*Creation Date:2016-02-17*)
+(*Copyright:CC4.0 BY+NA+NC*)
+(**)
+(*该软件包遵从CC协议:署名、非商业性使用、相同方式共享*)
+(**)
+(*这里应该填这个函数的介绍*)
+(* ::Section:: *)
+(*函数说明*)
+BeginPackage["ExPainting`"];
 TriPainting::usage = "
 TriPainting[image]可以得到图像image的三角划分\r
 TriPainting[image,n]指定生成时的划分数量为n,默认值1000";
-
 PloyPainting::usage = "
 PloyPainting[image]可以得到图像image的多边形划分\r
 PloyPainting[image,n]指定生成时的划分数量为n,默认值1000\r
 PloyPainting[image,{n,m,mesh}],指定畸变度为m,默认值1,网格宽度,默认为0.";
-
-
 GlassPainting::usage = "
-GlassPainting[image]可以得到图像image的
-";
-
-
+GlassPainting[image]可以得到图像image的玻璃化效果";
 PointPainting::usage = "
 PointPainting[image]可以得到图像image的点绘风格划分\r
 PointPainting[image,n]指定生成时的点的数量为n,默认值10000";
-
-
+(* ::Section:: *)
+(*程序包正体*)
+(* ::Subsection::Closed:: *)
+(*主设置*)
+ExPainting$Version="V0.6";
+ExPainting$Environment="V11.0+";
+ExPainting$LastUpdate="2016-11-27";
+ExPainting::usage = "程序包的说明,这里抄一遍";
 Begin["`Private`"];
+(* ::Subsection::Closed:: *)
+(*主体代码*)
+
+
+
+(* ::Subsubsection:: *)
+(*多边形画风*)
 TriPainting[i_,n_:1000]:=
     Module[{x,y,pt,pts},{x,y}=ImageDimensions[i];
     pt=Reverse/@RandomChoice[Flatten@ImageData@GradientFilter[i,2]->Tuples@{Range[y,1,-1],Range[x]},n];
@@ -52,12 +63,12 @@ PloyPainting[img_,n_:1000]:=
 (*PloyPainting[图片,{精细度,畸变度,网格}]*)
 PloyPainting[img_,{n_,m_:1,mesh_:None}]:=
     Module[{im,pts,dat},im=ImageAdjust[ImageResize[img,n]];
-      dat=Apply[RGBColor,Flatten[Transpose[Reverse[ImageData[im]]],1],{1}];
-      pts=Flatten[Table[{x,y}+RandomReal[m{-1,1}],{x,1,n},{y,1,n}],1];
-      ListDensityPlot[Flatten/@Transpose[{pts,Range[1,n^2]}],
-        InterpolationOrder->0,Mesh->mesh,
-        MeshStyle->Thickness[Small],Frame->False,
-        ColorFunction->dat]];
+    dat=Apply[RGBColor,Flatten[Transpose[Reverse[ImageData[im]]],1],{1}];
+    pts=Flatten[Table[{x,y}+RandomReal[m{-1,1}],{x,1,n},{y,1,n}],1];
+    ListDensityPlot[Flatten/@Transpose[{pts,Range[1,n^2]}],
+      InterpolationOrder->0,Mesh->mesh,
+      MeshStyle->Thickness[Small],Frame->False,
+      ColorFunction->dat]];
 Dither[pts_,dith_]:=pts+.25 dith RandomReal[{-1,1},{Length@pts,2}];
 GlassPainting[img_,m_:1000,n_:5]:=
     Module[{bounds,num,seeds,vrnMesh,polygons},
@@ -96,10 +107,10 @@ HouseHexGrid[s_,imax_,jmax_]:=
 HouseHexGridPerturbed[s_,h_,v_,r_]:=
     Block[{poly=Map[Round[#,10.^-10]&,HouseHexGrid[N[s],h,v],{2}],pts,len,rules},
       pts=DeleteDuplicates[Flatten[poly[[All,1]],1]];
-    len=Length[pts];
-    rules=Dispatch[Thread[pts->Range[len]]];
-    GraphicsComplex[pts+RandomReal[{-r,r},{len,2}],
-      RandomSample[poly]/.rules]];
+      len=Length[pts];
+      rules=Dispatch[Thread[pts->Range[len]]];
+      GraphicsComplex[pts+RandomReal[{-r,r},{len,2}],
+        RandomSample[poly]/.rules]];
 (*HexPainting[图像,粒度,纹理]*)
 HexPainting[image_,s_,t_:0]:=
     Block[{d,dim,g,centroids,colours,rr,gg,bb,greys},
@@ -112,21 +123,27 @@ HexPainting[image_,s_,t_:0]:=
       If[t==1,Graphics[{EdgeForm[{Thickness[0.0003],Black}],
         GraphicsComplex[g[[1]],g[[2]]]}],
         Graphics[{GraphicsComplex[g[[1]],g[[2]]]}]]];
-(*ShapedPainting[pic, Rescale@GaussianMatrix[#] &]*)
+
+
+
+(* ::Subsubsection:: *)
+(*未分类代码*)
+
 ShapedFunction=Compile[{{v,_Real},{kernel,_Real,2}},v*kernel,
-      RuntimeAttributes->{Listable},Parallelization->True,
-      CompilationTarget->"C",RuntimeOptions->"Speed"];
+  RuntimeAttributes->{Listable},Parallelization->True,
+  CompilationTarget->"C",RuntimeOptions->"Speed"];
 ShapedPixels[img_,kernel_]:=
     With[{dim=ImageDimensions[img]},
       ImageCrop[Image[Join@@Transpose[Join@@@
-      Transpose[ShapedFunction[ImageData[ImageResize[img,
-      Ceiling[dim/Reverse[Dimensions[kernel]]]]],kernel],
-      {1,2,5,4,3}],{1,3,2,4}]],dim]];
+          Transpose[ShapedFunction[ImageData[ImageResize[img,
+            Ceiling[dim/Reverse[Dimensions[kernel]]]]],kernel],
+            {1,2,5,4,3}],{1,3,2,4}]],dim]];
 ShapedPainting[pic_,mat___]:=Manipulate[
   ShapedPixels[pic,ArrayPad[matrix[r],padding]],
   {{r,0,"遮罩半径"},0,20,1},{{padding,0,"遮罩间隙"},0,10,1},
   {{matrix,DiskMatrix,"遮罩矩阵"},{DiskMatrix,DiamondMatrix,
-      BoxMatrix,IdentityMatrix,CrossMatrix,mat}}];
+    BoxMatrix,IdentityMatrix,CrossMatrix,mat}}];
+(*测试代码 ShapedPainting[pic, Rescale@GaussianMatrix[#] &]*)
 QRPainting[aim_,text_:"https://github.com/GalAster/BiGridGenerator"]:=
     Module[{img,d,tgi,f,cg,dat,color},
       img=ImageData@ColorConvert[BarcodeImage[text,{"QR","H"},50],"LAB"];
@@ -173,22 +190,22 @@ TiebaPainting[image_,qua_:0.5,time_:20]:=Module[{img,w},
   img=ImageResize[img,w]];
 (*本函数全是bug,一点都不好用*)
 ExpandPainting[img_,neigh_:20,samp_:1000]:=Module[{dims,canvas,mask},
-      dims=ImageDimensions[img];
-      canvas=ImageCrop[starryNight,2*dims,Padding->White];
-      mask=ImageCrop[ConstantImage[Black,dims],2*dims,Padding->White];
-      Inpaint[canvas,mask,Method->{"TextureSynthesis","NeighborCount"->30,"MaxSamples"->1000}]];
+  dims=ImageDimensions[img];
+  canvas=ImageCrop[starryNight,2*dims,Padding->White];
+  mask=ImageCrop[ConstantImage[Black,dims],2*dims,Padding->White];
+  Inpaint[canvas,mask,Method->{"TextureSynthesis","NeighborCount"->30,"MaxSamples"->1000}]];
 (*LineWebPainting[图像,细腻度:100]*)
 LineWebPainting[img_,k_:100]:=Module[{radon,lhalf,inverseDualRadon,lines},
   If[k === 0, Return[img]];
-      radon=Radon[ColorNegate@ColorConvert[img,"Grayscale"]];
-      {w,h}=ImageDimensions[radon];
-      lhalf=Table[N@Sin[\[Pi] i/h],{i,0,h-1},{j,0,w-1}];
-      inverseDualRadon=Image@Chop@InverseFourier[lhalf Fourier[ImageData[radon]]];
-      lines=ImageApply[With[{p=Clip[k #,{0,1}]},RandomChoice[{1-p,p}->{0,1}]]&,inverseDualRadon];
-      ColorNegate@ImageAdjust[InverseRadon[lines,ImageDimensions[img],Method->None],0,{0,k}]];
+  radon=Radon[ColorNegate@ColorConvert[img,"Grayscale"]];
+  {w,h}=ImageDimensions[radon];
+  lhalf=Table[N@Sin[\[Pi] i/h],{i,0,h-1},{j,0,w-1}];
+  inverseDualRadon=Image@Chop@InverseFourier[lhalf Fourier[ImageData[radon]]];
+  lines=ImageApply[With[{p=Clip[k #,{0,1}]},RandomChoice[{1-p,p}->{0,1}]]&,inverseDualRadon];
+  ColorNegate@ImageAdjust[InverseRadon[lines,ImageDimensions[img],Method->None],0,{0,k}]];
 ImageStandUp[img_]:=Module[{lines=ImageLines@DeleteSmallComponents[EdgeDetect[img,Method->{"Canny","StraightEdges"->0.4}]],list},
-      ImageRotate[img,Mean@Select[list=Mod[-#,Pi/2,-Pi/4]&/@ArcTan@@@Subtract@@@lines,
-        Chop[First@Commonest@Round[list,1/1000]-#,1/1000]===0&],Background->Transparent]];
+  ImageRotate[img,Mean@Select[list=Mod[-#,Pi/2,-Pi/4]&/@ArcTan@@@Subtract@@@lines,
+    Chop[First@Commonest@Round[list,1/1000]-#,1/1000]===0&],Background->Transparent]];
 ImageStandUp[img_,"TryAll"]:=Module[{imgrote},imgrote=ImageRotate[img,#,"SameRatioCropping"]&/@
     Range[-Pi/2,Pi/2,Pi/6];TableForm[Function[{a,b},a->b]@@@Transpose@{imgrote,ImageStandUp/@imgrote}]];
 
@@ -204,13 +221,8 @@ Mondrian[p_,complex_:6,ratio_:0.7]:=Module[{splitx,splity,f,cols},
       Flatten@Nest[f,Rectangle[{0,0},{p,p}],complex]},AspectRatio->ratio]];
 
 
-
-
-
-
-End[];
-
-
-
+(* ::Subsection::Closed:: *)
+(*附加设置*)
+End[] ;
 
 EndPackage[];

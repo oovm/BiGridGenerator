@@ -1,23 +1,35 @@
-(* Mathematica Package *)
-(* Created by Mathematica Plugin for IntelliJ IDEA *)
-
-(* :Title: MathConfession *)
-(* :Context: MathConfession` *)
-(* :Author: GalAster *)
-(* :Date: 2016-11-12 *)
-
-(* :Package Version: 0.2 *)
-(* :Mathematica Version: 11.0+ *)
-(* :Copyright:该软件包遵从CC协议:BY+NA+NC(署名、非商业性使用、相同方式共享） *)
-(* :Keywords: *)
-(* :Discussion: *)
-
+(* ::Package:: *)
+(* ::Title:: *)
+(*Example(样板包)*)
+(* ::Subchapter:: *)
+(*程序包介绍*)
+(* ::Text:: *)
+(*Mathematica Package*)
+(*Created by Mathematica Plugin for IntelliJ IDEA*)
+(*Establish from GalAster's template*)
+(**)
+(*Author:GalAster*)
+(*Creation Date:2016-07-12*)
+(*Copyright:CC4.0 BY+NA+NC*)
+(**)
+(*该软件包遵从CC协议:署名、非商业性使用、相同方式共享*)
+(**)
+(*这里应该填这个函数的介绍*)
+(* ::Section:: *)
+(*函数说明*)
 BeginPackage["MathConfession`"];
 MathLove::usage = "MathLove[]随机给你一种表白方式.";
-
-
-
+(* ::Section:: *)
+(*程序包正体*)
+(* ::Subsection::Closed:: *)
+(*主设置*)
+ExForm$Version="V0.2";
+ExForm$Environment="V11.0+";
+ExForm$LastUpdate="2016-11-12";
+ExForm::usage = "程序包的说明,这里抄一遍";
 Begin["`Private`"];
+(* ::Subsection::Closed:: *)
+(*主体代码*)
 MathLove[]:=MathLove[RandomInteger[10]];
 Rose[x_,theta_]:=Module[{phi=(Pi/2)*Exp[-(theta/(8*Pi))],
   X=1-(1/2)*((5/4)*(1-Mod[18/5*theta,2*Pi]/Pi)^2-1/4)^2,y,r},
@@ -48,8 +60,8 @@ MathLove[4]=ParametricPlot3D[Evaluate[Jazmin[u,v,9]],{u,-Pi,Pi},{v,0,3.4},PlotPo
 MathLove[5]:=Module[{vals,funs},{vals,funs}=
     NDEigensystem[{-Laplacian[u[x,y],{x,y}],DirichletCondition[u[x,y]==0,x==0]},
       u[x,y],{x,y}\[Element]RegionSymmetricDifference[Disk[{0,0},5],Disk[{0,0},3]],1];
-  Quiet@Plot3D[funs,{x,-5,5},{y,-5,5},PlotRange->All,PlotTheme->"Marketing",
-    PlotLegends->Placed["-\!\(\*TemplateBox[{RowBox[{\"u\",\"(\",\n\
+Quiet@Plot3D[funs,{x,-5,5},{y,-5,5},PlotRange->All,PlotTheme->"Marketing",
+  PlotLegends->Placed["-\!\(\*TemplateBox[{RowBox[{\"u\",\"(\",\n\
         RowBox[{\"x\",\",\",\"y\"}],\")\"}],RowBox[{\"{\",\n\
         RowBox[{\"x\",\",\",\"y\"}],\"}\"}]},\n\
         \"Laplacian\"]\),3<\!\(\*SuperscriptBox[\(x\),\
@@ -62,9 +74,8 @@ MathLove[8]:=MatrixPlot[Table[(x+y)/((y^2+x^2-2)^3+y^2x^3),{x,-2.5,2,0.01},{y,-2
   Frame->False,PlotLabel->TraditionalForm[(x+y)/((y^2+x^2-2)^3+y^2x^3)]];
 
 
-
-
-
-End[];
+(* ::Subsection::Closed:: *)
+(*附加设置*)
+End[] ;
 
 EndPackage[];

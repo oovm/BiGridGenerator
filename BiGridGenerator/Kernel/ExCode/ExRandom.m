@@ -1,27 +1,41 @@
-(* Mathematica Package *)
-(* Created by Mathematica Plugin for IntelliJ IDEA *)
-
-(* :Title: ExRandom *)
-(* :Context: ExRandom` *)
-(* :Author: GalAster *)
-(* :Date: 2016-03-15 *)
-
-(* :Package Version: 0.4 *)
-(* :Update: 2016-11-22 *)
-(* :Mathematica Version: 11.0+ *)
-(* :Copyright:该软件包遵从CC协议:BY+NA+NC(署名、非商业性使用、相同方式共享） *)
-(* :Keywords: *)
-(* :Discussion: *)
-
-
-
+(* ::Package:: *)
+(* ::Title:: *)
+(*Example(样板包)*)
+(* ::Subchapter:: *)
+(*程序包介绍*)
+(* ::Text:: *)
+(*Mathematica Package*)
+(*Created by Mathematica Plugin for IntelliJ IDEA*)
+(*Establish from GalAster's template*)
+(**)
+(*Author:GalAster*)
+(*Creation Date:2016-03-15*)
+(*Copyright:CC4.0 BY+NA+NC*)
+(**)
+(*该软件包遵从CC协议:署名、非商业性使用、相同方式共享*)
+(**)
+(*这里应该填这个函数的介绍*)
+(* ::Section:: *)
+(*函数说明*)
 BeginPackage["ExRandom`"];
 RandomExample::usage = "RandomExample[]随机给出一个Mathematica的巧妙范例!";
 AutoBiography::usage = "Biography[Name]可以随机生成Name的自传哦!";
-
-
-
+(* ::Section:: *)
+(*程序包正体*)
+(* ::Subsection::Closed:: *)
+(*主设置*)
+ExRandom$Version="V0.1";
+ExRandom$Environment="V11.0+";
+ExRandom$LastUpdate="2016-11-22";
+ExRandom::usage = "程序包的说明,这里抄一遍";
 Begin["`Private`"];
+(* ::Subsection::Closed:: *)
+(*主体代码*)
+
+
+
+(* ::Subsubsection:: *)
+(*随机巧妙范例*)
 RandomExample[]:=
     Module[{dir,file,inputs,output,cap,i=0,j=1,in},
       dir=DirectoryName[FindFile["ExamplePages/CreateMolecularGraphs.nb"]];
@@ -37,33 +51,11 @@ RandomExample[]:=
         If[StringQ[in],i=ToExpression[StringReplace[in,"In["~~x__~~"]"~~__:>x]]];
         Sow[inputs[[j++]]]]][[-1,1]]];
       CellPrint[output];];
-RandomPartition[n_,p_?IntegerQ]:=Module[{r},r=RandomSample[Range[1,n],p-1]//Sort;
-    AppendTo[r,n];Prepend[r//Differences,r[[1]]]];
-RandomPartition[n_,V_?VectorQ]:=Module[{r,s},r=RandomInteger[V,n];
-    s=Select[Accumulate@r,#<n&]~Join~{n};Append[Differences@s,s[[1]]]];
-(*随机宇宙背景辐射*)
-InvMollweide[{x_,y_}]:=With[{theta=ArcSin[y]},{Pi(x)/(2Cos[theta]),ArcSin[(2theta+Sin[2theta])/Pi]}];
-RandomCBR[res_:64]:=Module[{Alms,fieldN,dat,im},
-  Do[Alms[l,m]=(Random[NormalDistribution[]]+I Random[NormalDistribution[]])/Sqrt[(l+2)(l+1)];
-  Alms[l,-m]=(-1)^m Conjugate@Alms[l,m];,{l,0,48},{m,0,l}];
-  Do[Alms[l,0]=(Random[NormalDistribution[]])/Sqrt[(l+2)(l+1)];,{l,0,48}];
-  fieldN=Compile[{\[Theta],\[Phi]},Evaluate@Sum[Alms[l,m]SphericalHarmonicY[l,m,\[Theta],\[Phi]],{l,0,48},{m,-l,l}]];
-  dat=ParallelTable[fieldN[\[Theta],\[Phi]],{\[Theta],0.0,Pi,Pi/res},{\[Phi],0.0,2Pi,Pi/res}];
-  im=Re[dat]//Image//ImageAdjust//Colorize[#,ColorFunction->"LightTemperatureMap"]&;
-  ImageTransformation[im,InvMollweide,DataRange->{{-Pi,Pi},{-Pi/2,Pi/2}},PlotRange->{{-2,2},{-1,1}},Padding->White]];
-RandomPebble[n_,sc_:0.95]:=With[{data=MapIndexed[Flatten[{##1}]&,RandomReal[1,{n,2}]]},
-  Normal[ListDensityPlot[data,InterpolationOrder->0,
-    ColorFunction->Hue,Mesh->All,
-    Background->Lighter[Hue[RandomReal[]],.75],Frame->False,
-    ImageSize->400]]/.Polygon[l_,v_]:>Scale[{Hue[RandomReal[]],
-    FilledCurve[BSplineCurve[l,SplineClosed->True,SplineDegree->3]]},sc]];
-MineLayout[{m_,n_,k_}]:=Module[{M,foo,bar,list},
-  M=ConstantArray[0,{m+2,n+2}];
-  foo[{x_,y_}]:=M[[x-1;;x+1,y-1;;y+1]]+=1;
-  bar[{x_,y_}]:=M[[x,y]]=10;
-  list=RandomSample[Tuples[{Range[2,m+1],Range[2,n+1]}]][[1;;k]];
-  Do[foo@list[[i]],{i,k}];bar/@list;M[[2;;-2,2;;-2]]];
-MineDistribution[m_,n_,k_,p_]:=Transpose@{Range[0,10],BinCounts[Flatten[MineLayout/@ConstantArray[{m,n,k},p]],{-0.5,10.5,1}]/p+0.0};
+
+
+
+(* ::Subsubsection:: *)
+(*随机头像 Gravatar*)
 Gravatar::novpn="数据库请求失败,你可能需要VPN,或者你要求的数据量太过巨大,你可以使用TimeConstraint选项增加请求时长.";
 Options[Gravatar]={Method->"Standard",TimeConstraint->5,ImageSize->256};
 Gravatar[mail_String,OptionsPattern[]]:=Switch[OptionValue[Method],
@@ -93,11 +85,86 @@ GravatarLinker[email_,size_: 256]:=Module[{emailparts,randN,input,inputhash,img}
 
 
 
+(* ::Subsubsection:: *)
+(*随机游走研究*)
+CoverTime[G_,i_]:=Module[{Start,Roads,Ex,Si},
+  Start=ConstantArray[0,VertexCount[G]];Start[[i]]=1;
+  Roads=Subsets[DeleteCases[Range@VertexCount[G],i]][[2;;-1]];
+  Ex=Mean@FirstPassageTimeDistribution[
+    DiscreteMarkovProcess[Start,G],#]&/@Roads;
+  Si=If[Length[#]~Mod~2==1,1,-1]&/@Roads;
+  Print@GraphPlot[G,VertexLabeling->True];
+  Print[Total[Ex*Si]];];
+
+ExRandomWalk[max_,"2DGridSelfAvoiding"]:=Module[{i=0,pts={{0,0}},moves={{-1,0},{0,1},{1,0},{0,-1}}},
+  While[i<max&&Not@(And@@(MemberQ[pts,#]&/@Table[pts[[-1]]+moves[[i]],{i,1,4}])),i++;
+  AppendTo[pts,RandomChoice[Select[Table[pts[[-1]]+moves[[i]],{i,1,4}],Not@MemberQ[pts,#]&]]]];
+  TemporalData[Transpose@#,{Range@Length@#}]&@pts];
+ExRandomWalk[max_,"3DGridSelfAvoiding"]:=Module[{notvisitedQ,SARW,pts},
+  notvisitedQ[_]:=True;
+  SARW={#1,Select[Flatten[Outer[Plus,{#1},{{1,0,0},{-1,0,0},{0,1,0},{0,-1,0},{0,0,1},{0,0,-1}},1],1],notvisitedQ]}&;
+  pts=NestWhileList[SARW[notvisitedQ[#1[[1]]]=False;
+  RandomChoice[#1[[2]]]]&,{{0,0,0},{{1,0,0},{-1,0,0},{0,1,0},{0,-1,0},{0,0,1},{0,0,-1}}},#1[[2]]=!={}&,1,max-1];
+  TemporalData[Transpose@#,{Range@Length@#}]&@(First/@pts)];
+
+SetAttributes[RandomWalkPlot,HoldAll];
+RandomWalkPlot[ExRandomWalk[max_,"2DGridSelfAvoiding"]]:=
+    Module[{pts=Transpose[ExRandomWalk[max,"2DGridSelfAvoiding"]["ValueList"]]},
+      Graphics[Line@pts,Epilog->{PointSize[Large],RGBColor[.6,.74,.36],Point[{0,0}],RGBColor[.9,.42,.17],
+        Point[Last@pts],PointSize[Medium],Black,Table[Point[pts[[i]]],{i,2,Length[pts]-1}]},PlotRange->All]];
+RandomWalkPlot[ExRandomWalk[max_,"3DGridSelfAvoiding"]]:=
+    Module[{pts=Transpose[ExRandomWalk[max,"3DGridSelfAvoiding"]["ValueList"]]},
+      Graphics3D[{Thick,Gray,Line[pts],RGBColor[0.6,0.74,0.36],Sphere[pts[[1]],1],RGBColor[0.9,0.42,0.17],Sphere[pts[[-1]],1]},
+        PlotLabel->Style[If[Length[pts]<max,StringJoin[ToString[Length[pts]-1],"步后卡住了!!!"],StringJoin[ToString[max-1],"步后逃逸!"]],"Label",12],
+        PlotRange->All,Boxed->False]];
 
 
 
 
-RandomName
+
+
+
+
+
+
+(* ::Subsubsection:: *)
+(*随机图案*)
+InvMollweide[{x_,y_}]:=With[{theta=ArcSin[y]},{Pi(x)/(2Cos[theta]),ArcSin[(2theta+Sin[2theta])/Pi]}];
+(*随机宇宙背景辐射*)
+RandomCBR[res_:64]:=Module[{Alms,fieldN,dat,im},
+  Do[Alms[l,m]=(Random[NormalDistribution[]]+I Random[NormalDistribution[]])/Sqrt[(l+2)(l+1)];
+  Alms[l,-m]=(-1)^m Conjugate@Alms[l,m];,{l,0,48},{m,0,l}];
+  Do[Alms[l,0]=(Random[NormalDistribution[]])/Sqrt[(l+2)(l+1)];,{l,0,48}];
+  fieldN=Compile[{\[Theta],\[Phi]},Evaluate@Sum[Alms[l,m]SphericalHarmonicY[l,m,\[Theta],\[Phi]],{l,0,48},{m,-l,l}]];
+  dat=ParallelTable[fieldN[\[Theta],\[Phi]],{\[Theta],0.0,Pi,Pi/res},{\[Phi],0.0,2Pi,Pi/res}];
+  im=Re[dat]//Image//ImageAdjust//Colorize[#,ColorFunction->"LightTemperatureMap"]&;
+  ImageTransformation[im,InvMollweide,DataRange->{{-Pi,Pi},{-Pi/2,Pi/2}},PlotRange->{{-2,2},{-1,1}},Padding->White]];
+(*随机生成类似鹅卵石的图案*)
+RandomPebble[n_,sc_:0.95]:=With[{data=MapIndexed[Flatten[{##1}]&,RandomReal[1,{n,2}]]},
+  Normal[ListDensityPlot[data,InterpolationOrder->0,
+    ColorFunction->Hue,Mesh->All,
+    Background->Lighter[Hue[RandomReal[]],.75],Frame->False,
+    ImageSize->400]]/.Polygon[l_,v_]:>Scale[{Hue[RandomReal[]],
+    FilledCurve[BSplineCurve[l,SplineClosed->True,SplineDegree->3]]},sc]];
+
+
+
+
+
+
+
+(* ::Subsubsection:: *)
+(*随机列表划分*)
+RandomPartition[n_,p_?IntegerQ]:=Module[{r},r=RandomSample[Range[1,n],p-1]//Sort;
+AppendTo[r,n];Prepend[r//Differences,r[[1]]]];
+RandomPartition[n_,V_?VectorQ]:=Module[{r,s},r=RandomInteger[V,n];
+s=Select[Accumulate@r,#<n&]~Join~{n};Append[Differences@s,s[[1]]]];
+
+
+
+
+(* ::Subsubsection:: *)
+(*待处理*)
 (*https://zhuanlan.zhihu.com/p/21258963*)
 百家姓=StringPartition["王李张刘陈杨黄赵周吴徐孙马胡朱郭何罗高林郑梁谢唐许冯宋韩邓彭曹曾田于萧潘袁董叶杜丁蒋程余吕魏蔡苏任卢沈姜姚钟崔陆谭汪石傅贾范金方韦\
 夏廖侯白孟邹秦尹江熊薛邱阎段雷季史陶毛贺龙万顾关郝孔向龚邵钱武扬黎汤戴严文常牛莫洪米康温代赖施覃安",1];
@@ -131,7 +198,10 @@ AutoBiography[姓名_] := Module[{choose},
 
 
 
-End[];
-Protect[AutoBiography];
 
-EndPackage[]
+
+(* ::Subsection::Closed:: *)
+(*附加设置*)
+End[] ;
+
+EndPackage[];

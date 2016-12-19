@@ -1,6 +1,6 @@
 (* ::Package:: *)
 (* ::Title:: *)
-(*Example(样板包)*)
+(*ExCode(特殊编码包)*)
 (* ::Subchapter:: *)
 (*程序包介绍*)
 (* ::Text:: *)
@@ -20,6 +20,13 @@
 BeginPackage["ExCode`"];
 ExEncrypt::usage="ExEncrypt[Str,Way]以方式Way给出输入代码Str的超编码";
 ExDecrypt::usage="ExDecrypt[Str,Way]以方式Way给出输入代码Str的超解码";
+ListToPolish::usage =
+    "ListToPolish[list]转换一个逆波兰表达式列表,如果有多个表达式混在一个栈,返回会自动划分\r
+    注意算子(Plus)和运算符(+)的区别.运算符要用字符串,算子无所谓,允许使用字母.例:\r
+    ListToPolish[{4,2,3,\"*\"}]返回结果是{4,3*2}\r
+    ListToPolish[{4,2,3,Times}]返回结果是{Times[3,2,4]}\r\r
+    ListToPolish[{1,\"2\",\"+\",3,4,\"+\",\"*\",Exp,10,\"!\",\"Sqrt\",70,\"42\",GCD,Plus,\"a\",b,\"+\",c,d,\"+\",\"*\",\"e\",\"/\",n,\"^\"}]\r
+    对于数字、字母以及非算符来说是否是字符串形式是无所谓的.";
 (* ::Section:: *)
 (*程序包正体*)
 (* ::Subsection::Closed:: *)
@@ -87,9 +94,46 @@ CharSet[Language->"ASCII"]:=StringPartition[FromCharacterCode[Range[32,126]],1];
 
 
 (* ::Subsubsection:: *)
-(*功能块 2*)
+(*逆波兰表达式*)
+ListToExpression[list_]:=list//.({x___,PatternSequence[a_,u:#,b_],y___}:>{x,u[a,b],y}&/@{Power|Log|Surd,Times|Divide,Plus|Subtract});
+OperatorRiffle[exp_,oper_:{Times,Divide,Plus,Subtract}] :=Grid[{#,ListToExpression@#}&/@(Riffle[exp,#]&/@Tuples[oper,Length@exp-1]),Alignment->Left];
+RPNexpression`infix={"+","-","*","*","/","/","^",".","==","==","!=","!=","<",">","<=","<=",">=",">=","&&","||"};
+RPNexpression`prefix={"Sqrt","CubeRoot","Log","Log10","Log2","Exp","Sin","Cos","Tan","ArcSin","ArcCos","ArcTan","Sinh","Cosh","Tanh",
+  "ArcSinh","ArcCosh","ArcTanh","N","Abs","Arg","Re","Im","Round","Floor","Ceiling","IntegerPart","FractionalPart","Gamma","Erf","Erfc","InverseErf","InverseErfc"};
+RPNexpression`prefix2={"Mod","Quotient","GCD","LCM","Binomial","Surd"};
+RPNexpression`prefixall={"Plus","Times","Min","Max","Power"};
+RPNexpression`postfix={"!"};
+(*RPN=Reverse Polish Notation 逆波兰表达式*)
+RPNexpression::short="请输入合法的逆波兰表达式!";
+RPNexpression[stack_,{op_,rest___}]:=Which[MemberQ[RPNexpression`infix,op],
+  If[Length[stack]<2,Message[RPNexpression::short,op,2];
+  RPNexpression[stack,{rest}],RPNexpression[Append[Drop[stack,-2],
+    ToExpression["#1"<>op<>"#2&"]@@Take[stack,-2]],{rest}]],
+  MemberQ[RPNexpression`prefix,op],If[Length[stack]<1,
+    Message[RPNexpression::short,op,1];RPNexpression[stack,{rest}],
+    RPNexpression[Append[Drop[stack,-1],ToExpression[op]@stack[[-1]]],{rest}]],
+  MemberQ[RPNexpression`prefix2,op],If[Length[stack]<2,
+    Message[RPNexpression::short,op,2];RPNexpression[stack,{rest}],
+    RPNexpression[Append[Drop[stack,-2],ToExpression[op]@@Take[stack,-2]],{rest}]],
+  MemberQ[RPNexpression`prefixall,op],RPNexpression[{ToExpression[op]@@stack},{rest}],
+  MemberQ[RPNexpression`postfix,op],If[Length[stack]<1,Message[RPNexpression::short,op,1];
+  RPNexpression[stack,{rest}],RPNexpression[Append[Drop[stack,-1],
+    ToExpression["#"<>op<>"&"]@stack[[-1]]],{rest}]],True,
+  RPNexpression[Append[stack,ToExpression[op]],{rest}]];
+ListToPolish[list_]:=First@RPNexpression[{},ToString/@list];
+SetAttributes[Lispify,HoldAll];
+Lispify[h_[args___]]:=Prepend[Lispify/@Unevaluated@{args},Lispify[h]];
+Lispify[s_/;AtomQ[s]]:=s;
+FooReverse[a_?AtomQ]:=a;
+FooReverse[a_?ListQ]:=Reverse[a];
+ExpressionToList[exp_]:=Flatten[Reverse@Map[FooReverse,Lispify[Unevaluated[exp]],Infinity]];
 
-(*空*)
+
+
+(* ::Subsubsection:: *)
+(*逆波兰表达式*)
+
+
 
 
 (* ::Subsection::Closed:: *)

@@ -1,6 +1,6 @@
 (* ::Package:: *)
 (* ::Title:: *)
-(*Example(样板包)*)
+(*ExNumber(特殊数论包)*)
 (* ::Subchapter:: *)
 (*程序包介绍*)
 (* ::Text:: *)
@@ -30,6 +30,7 @@ SumProdPartitions::usage="SumProdPartitions[n]给出整数n的积和分解\r
 SumProdPartitions[n,Show->False],不显示分解出的1.";
 SumProdNumber::usage="SumProdNumber[max]给出小于max的整数的最小积和数集合\r
 SumProdNumber[max,s],s代表搜索深度,太小可能会导致丢解,默认为6,可设为Infinite,但是速度会变得很慢";
+DigitReplacePrime::usage="DigitReplacePrime[n,m,p]在n位数搜索交换m位的p元素数组.";
 (* ::Section:: *)
 (*程序包正体*)
 (* ::Subsection::Closed:: *)
@@ -41,13 +42,6 @@ ExNumber::usage = "程序包的说明,这里抄一遍";
 Begin["`Private`"];
 (* ::Subsection::Closed:: *)
 (*主体代码*)
-
-
-
-
-
-
-
 
 
 
@@ -96,8 +90,6 @@ ModFa[n_,p_]:=Fold[Mod[#1 #2,p]&,Range[n]];
 
 
 
-
-
 (* ::Subsubsection::Closed:: *)
 (*数盘*)
 fontstyle=((Translate[#1,{-4.5,-10}]&)/@First[First[ImportString[ExportString[
@@ -133,13 +125,6 @@ DigitalSector[num_,digits_:1000,style_:35,fontsize_:30]:=
           {i,0,9}],{1/2,1.8}],ChartStyle->style,Background->Black],
         Graphics[{{Opacity[.4],curves},Text[Style[ToString[num,StandardForm],
           White,fontsize,Bold],{0,0}]}]}]];
-
-
-
-
-
-
-
 
 
 
@@ -194,6 +179,19 @@ SumProdNumber[max_?IntegerQ,bound_:6(*Infinity不丢解,但是太慢了*)]:=
         ,{n,2,Floor[Log[2,max]]}];
       Union[Take[ans,max]]];
 
+
+(* ::Subsubsection::Closed:: *)
+(*DRP=DigitReplacePrime 数位替换素数组*)
+DRP`base[k_]:=Array[a,k] ;
+DRP`space[k_,i_]:=Subsets[Range[k-1],{i}];
+DRP`remain[k_,i_]:=Select[IntegerDigits/@Range[10^(k-2-i),10^(k-1-i)-1],Mod[Total[#],3]!=0&];
+DRP`remplace[k_,i_]:=Complement[Range[k-1],#]&/@DRP`space[k,i];
+DRP`tab[k_,i_]:=Table[DRP`base[k]/.(Thread[Rule[DRP`base[k][[#]]&/@o,m]]),{o,DRP`remplace[k,i]},{m,DRP`remain[k,i]}]//Flatten[#,1]&;
+DRP`lastnum[n_,k_]:=Table[DRP`tab[n,k]/.a[n]:>z,{z,{1,3,7,9}}]//Flatten[#,1]&;
+DRP`d=Table[a[_]->i,{i,0,9}];
+DRP`f=DeleteCases[#,a_/;First[a]==0]&;
+DRP`end[n_,k_]:=Map[FromDigits,#,{2}]&@(DRP`f/@Outer[ReplaceAll,DRP`lastnum[n,k],DRP`d,1]);
+DigitReplacePrime[n_,m_,p_]:=Select[#,PrimeQ]&/@Sort[Select[DRP`end[n,m],Total@Boole@PrimeQ@#==p&]];
 
 
 

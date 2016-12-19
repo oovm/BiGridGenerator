@@ -1,21 +1,42 @@
-(* Mathematica Package *)
-(* Created by Mathematica Plugin for IntelliJ IDEA *)
-
-(* :Title: ExForm *)
-(* :Context: ExForm` *)
-(* :Author: GalAster *)
-(* :Date: 2016-12-06 *)
-
-(* :Package Version: 0.1 *)
-(* :Mathematica Version: 11.0+ *)
-(* :Copyright:该软件包遵从CC协议:BY+NA+NC(署名、非商业性使用、相同方式共享） *)
-(* :Keywords: *)
-(* :Discussion: *)
-
+(* ::Package:: *)
+(* ::Title:: *)
+(*Example(样板包)*)
+(* ::Subchapter:: *)
+(*程序包介绍*)
+(* ::Text:: *)
+(*Mathematica Package*)
+(*Created by Mathematica Plugin for IntelliJ IDEA*)
+(*Establish from GalAster's template*)
+(**)
+(*Author:GalAster*)
+(*Creation Date:2016-12-06*)
+(*Copyright:CC4.0 BY+NA+NC*)
+(**)
+(*该软件包遵从CC协议:署名、非商业性使用、相同方式共享*)
+(**)
+(*这里应该填这个函数的介绍*)
+(* ::Section:: *)
+(*函数说明*)
 BeginPackage["ExForm`"];
-
-
+LispForm::usage = "以Lisp形式显示Mathematica表达式";
+TriangleForm::usage = "将一个三角式的多重表显示出来,比如杨辉三角";
+ColorForm::usage = "给数字染色";
+(* ::Section:: *)
+(*程序包正体*)
+(* ::Subsection::Closed:: *)
+(*主设置*)
+ExForm$Version="V0.1";
+ExForm$Environment="V11.0+";
+ExForm$LastUpdate="2016-12-06";
+ExForm::usage = "程序包的说明,这里抄一遍";
 Begin["`Private`"];
+(* ::Subsection::Closed:: *)
+(*主体代码*)
+
+
+
+(* ::Subsubsection:: *)
+(*Lisp形式*)
 Attributes[LispForm]=HoldAll;
 LispForm[exp_]:=Block[{ml,str,aaa,bbb,ccc,ddd,eee},
   ml=ImportString@ExportString[FullForm[Hold@exp],"MathML"];
@@ -39,14 +60,21 @@ LispForm[exp_,"匿天算"]:=Block[{ml,str,tra,trap,aaa,bbb,ccc,ddd,eee},
   ddd=Insert[ReplacePart[str,ccc]," ",{#+1}&@@@Position[str,"["]];
   eee=Insert[ddd," ",Position[ddd,"]"]];
   StringJoin[eee/.trap]];
+
+
+
+(* ::Subsubsection:: *)
+(*三角形式排列*)
 Options[TriangleForm]={ColorFunction->ColorDataFunction["Black","Gradients",{0,1},If[#1<0,#1,Black]&]};
-(*将一个三角式的多重表显示出来,比如杨辉三角*)
 TriangleForm[triArray_List,OptionsPattern[]]:=Module[{n=Length[triArray]},
   Graphics[MapIndexed[Text[Style[#1,Large,OptionValue[ColorFunction]
   [(Min[triArray]-#1)/Subtract@@MinMax[triArray]]],
     {Sqrt[3]*(n-1+#2.{-1,2}),3*(n-First[#2]+1)}/2]&,triArray,{2}]]];
-ListToExpression[list_]:=list//.({x___,PatternSequence[a_,u:#,b_],y___}:>{x,u[a,b],y}&/@{Power|Log|Surd,Times|Divide,Plus|Subtract});
-OperatorRiffle[exp_,oper_:{Times,Divide,Plus,Subtract}] :=Grid[{#,ListToExpression@#}&/@(Riffle[exp,#]&/@Tuples[oper,Length@exp-1]),Alignment->Left];
+
+
+
+(* ::Subsubsection:: *)
+(*数字上色代码*)
 Options[ColorForm]={Form->StandardForm,Color->"TemperatureMap"};
 ColorForm[expr_,OptionsPattern[]]:=With[{colored=DisplayForm[ToBoxes[expr,OptionValue[Form]]/.s_String:>
     With[{x=Quiet@ToExpression@s},RowBox@List@StringReplace[ToBoxes@s,
@@ -54,6 +82,8 @@ ColorForm[expr_,OptionsPattern[]]:=With[{colored=DisplayForm[ToBoxes[expr,Option
       [If[NumberQ[OptionValue[Color]],#,#/10]]])&/@Range[0,9]]/;MatchQ[x,_Real|_Integer]]]},Interpretation[colored,expr]];
 
 
-End[];
+(* ::Subsection::Closed:: *)
+(*附加设置*)
+End[] ;
 
 EndPackage[];

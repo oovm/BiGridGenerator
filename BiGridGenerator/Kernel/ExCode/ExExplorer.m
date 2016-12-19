@@ -1,6 +1,6 @@
 (* ::Package:: *)
 (* ::Title:: *)
-(*Example(样板包)*)
+(*ExExplorer(特殊资料包)*)
 (* ::Subchapter:: *)
 (*程序包介绍*)
 (* ::Text:: *)
