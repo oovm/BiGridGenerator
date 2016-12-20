@@ -87,7 +87,6 @@ MaxPlot[funcs_,range_,ops___]:=Plot[Evaluate[FunGE/@(FunQ@funcs)],range,ops];
 MinPlot[funcs_,range_,ops___]:=Plot[Evaluate[FunLE/@(FunQ@funcs)],range,ops];
 MaxPlot3D[funcs_,range_,ops___]:=Plot3D[Evaluate[FunGE/@(FunQ@funcs)],range,ops];
 MinPlot3D[funcs_,range_,ops___]:=Plot3D[Evaluate[FunLE/@(FunQ@funcs)],range,ops];
-DigitsPlot[x_,num_:100,dig_:10,ops___]:=ArrayPlot[Partition[RealDigits[x,dig,num][[1]],dig],Mesh->True,ops];
 (*Thanks to @Apple*)
 
 
@@ -103,7 +102,7 @@ GEBPlot[str_String,res_Integer:100]:=Module[{X,Y,Z},
   Quiet@RegionPlot3D[X[[Round[i],Round[j]]]==0&&Y[[Round[i],Round[k]]]==0&&
       Z[[Round[j],Round[k]]]==0,{i,1,res},{j,1,res},{k,1,res},
     Boxed->False,Axes->False,Mesh->None,PlotPoints->res/10]];
-
+DigitsPlot[x_,num_:100,dig_:10,ops___]:=ArrayPlot[Partition[RealDigits[x,dig,num][[1]],dig],Mesh->True,ops];
 
 
 

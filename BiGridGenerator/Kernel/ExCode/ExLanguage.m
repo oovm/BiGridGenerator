@@ -1,27 +1,45 @@
-(* Mathematica Package *)
-(* Created by Mathematica Plugin for IntelliJ IDEA *)
-
-(* :Title: NumberAndLanguage *)
-(* :Context: NumberAndLanguage` *)
-(* :Author: GalAster *)
-(* :Date: 2016-04-12 *)
-
-(* :Package Version: 0.5 *)
-(* :Update: 2016-10-21 *)
-(* :Mathematica Version: 11.0+ *)
-(* :Copyright:该软件包遵从CC协议:BY+NA+NC(署名、非商业性使用、相同方式共享） *)
-(* :Keywords: *)
-(* :Discussion: *)
-
-BeginPackage["NumberAndLanguage`"];
+(* ::Package:: *)
+(* ::Title:: *)
+(*Example(样板包)*)
+(* ::Subchapter:: *)
+(*程序包介绍*)
+(* ::Text:: *)
+(*Mathematica Package*)
+(*Created by Mathematica Plugin for IntelliJ IDEA*)
+(*Establish from GalAster's template*)
+(**)
+(*Author:GalAster*)
+(*Creation Date:2016-04-12*)
+(*Copyright:CC4.0 BY+NA+NC*)
+(**)
+(*该软件包遵从CC协议:署名、非商业性使用、相同方式共享*)
+(**)
+(*这里应该填这个函数的介绍*)
+(* ::Section:: *)
+(*函数说明*)
+BeginPackage["ExLanguage`"];
 ChineseToNumber::usage = "将中文转化为数字";
 NumberToChinese::usage = "将数字转化为中文";
 EnglishToNumber::usage = "将英文转化为数字";
 NumberToEnglish::usage = "将数字转化为英文";
 PinyinToNumber::usage = "将拼音转化为数字";
 NumberToPinyin::usage = "将数字转化为拼音";
-
+(* ::Section:: *)
+(*程序包正体*)
+(* ::Subsection::Closed:: *)
+(*主设置*)
+ExLanguage$Version="V0.5";
+ExLanguage$Environment="V11.0+";
+ExLanguage$LastUpdate="2016-10-21";
+ExLanguage::usage = "程序包的说明,这里抄一遍";
 Begin["`Private`"];
+(* ::Subsection::Closed:: *)
+(*主体代码*)
+
+
+
+(* ::Subsubsection:: *)
+(*中文*)
 简体中文小写={{零,13},{一,1},{二,2},{三,3},{四,5},{五,4},{六,4},{七,2},{八,2},{九,2},{十,2},{百,6},{千,3},{万,3}};
 简体中文大写={{零,13},{壹,12},{贰,9},{叁,8},{肆,13},{伍,6},{陆,7},{柒,9},{捌,10},{玖,7},{拾,10},{佰,8},{仟,5},{万,3}};
 繁体中文数字={{零,13},{壹,12},{貳,9},{三,3},{肆,13},{伍,6},{陸,10},{柒,9},{捌,10},{玖,7},{拾,10},{佰,8},{仟,5},{萬,12}};
@@ -52,6 +70,9 @@ ResPinyin=Graph[#\[DirectedEdge]PinyinToNumber@NumberToPinyin@#&/@Range[0,50],Ve
   GraphLayout->"SpringElectricalEmbedding",ImageSize->Full];
 
 
+
+(* ::Subsubsection:: *)
+(*英文*)
 AusEnglish1={"","one","two","three","four","five","six","seven","eight","nine"};
 AusEnglish2={"ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen","twenty"};
 AusEnglish3={"twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"};
@@ -72,12 +93,16 @@ NumberToEnglish[n_Integer/;n>=10000]:=Module[{r,
     " septendecillion"," octodecillion"," Novemdecillion"," Vigintillion"}},
   r=If[#!=0,numNames[[#+1]]<>" hundred"<>If[#2!=0||#3!=0," and",""],""]<>
       Switch[#2,0,numNames[[#3+1]],1,teenNames[[#3+1]],_,tensNames[[#2+1]]<>numNames[[#3+1]]]&@@@
-          (PadLeft[FromDigits/@Characters@StringReverse@#,3]&/@StringCases[StringReverse@IntegerString@n,RegularExpression["\\d{1,3}"]]);
-StringJoin@Reverse@MapThread[If[#!="",StringJoin[##],""]&,{r,Take[decimals,Length@r]}]];
+      (PadLeft[FromDigits/@Characters@StringReverse@#,3]&/@StringCases[StringReverse@IntegerString@n,RegularExpression["\\d{1,3}"]]);
+  StringJoin@Reverse@MapThread[If[#!="",StringJoin[##],""]&,{r,Take[decimals,Length@r]}]];
 ResEnglish=Graph[#\[DirectedEdge]EnglishToNumber@NumberToEnglish@#&/@Range[1,100],VertexLabels->Placed["Name",Center],
   VertexLabelStyle->Directive[12,Lighter@Blue,Bold],VertexSize->0.8,EdgeShapeFunction->GraphElementData["ShortFilledArrow","ArrowSize"->0.01],
   GraphLayout->"SpringElectricalEmbedding",ImageSize->Full];
 
+
+
+(* ::Subsubsection:: *)
+(*其他*)
 音読み={"れい","いち","に","さん","し","ご","ろく","しち","はち","く","じゅう","ひゃく"};
 训読み={"まる","ひと","ふた","み","よ","いつ","む","なな","や","ここの","と","もも"};
 筆画={{}};
@@ -111,10 +136,11 @@ NumberToGerman[n_Integer/;21<=n<=99]:=AuxGerman2[[Mod[n,10]]]<>"und"<>AuxGerman2
 ResGerman=Graph[#\[DirectedEdge]GermanToNumber@NumberToGerman@#&/@Range[0,49],VertexLabels->Placed["Name",Center],VertexLabelStyle->Directive[12,Lighter@Blue,Bold],
   VertexSize->0.6,EdgeShapeFunction->GraphElementData["ShortFilledArrow","ArrowSize"->0.01],
   GraphLayout->"SpringElectricalEmbedding",ImageSize->Full];
+
+
+(* ::Subsection::Closed:: *)
+(*附加设置*)
 End[];
-
-
-
 SetAttributes[{},Listable];
 SetAttributes[{},Protected];
 SetAttributes[{},ReadProtected];

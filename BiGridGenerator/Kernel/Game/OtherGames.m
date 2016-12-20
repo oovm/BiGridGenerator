@@ -67,6 +67,7 @@ GraphRPS[n_?IntegerQ,size_:18]:=AdjacencyGraph[MatrixRPS[n],
   VertexSize->0.3,EdgeShapeFunction->GraphElementData["CarvedArrow","ArrowSize"->0.03],
   GraphLayout->"CircularEmbedding",ImageSize->Large];
 GraphRPS[n_]:=MatrixRPS[2];
+Needs["ExData`"];
 GameRPS=DynamicModule[{history={},hLast=0,cLast=0,hScore=0,
   cScore=0,message=""},Panel@Column[{Dynamic@Grid[{{Column[MapIndexed[Button[#,cLast=chooseGo2[history];
 hLast=#2[[1]];

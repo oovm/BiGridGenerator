@@ -1,21 +1,41 @@
-(* Mathematica Package *)
-(* Created by Mathematica Plugin for IntelliJ IDEA *)
-
-(* :Title: ExScience *)
-(* :Context: ExScience` *)
-(* :Author: GalAster *)
-(* :Date: 2016-11-1 *)
-
-(* :Package Version: 0.2 *)
-(* :Mathematica Version: 11.0+ *)
-(* :Copyright:该软件包遵从CC协议:BY+NA+NC(署名、非商业性使用、相同方式共享） *)
-(* :Keywords: *)
-(* :Discussion: *)
-
-BeginPackage["ExScience`"]
-(* Exported symbols added here with SymbolName::usage *)
-
+(* ::Package:: *)
+(* ::Title:: *)
+(*Example(样板包)*)
+(* ::Subchapter:: *)
+(*程序包介绍*)
+(* ::Text:: *)
+(*Mathematica Package*)
+(*Created by Mathematica Plugin for IntelliJ IDEA*)
+(*Establish from GalAster's template*)
+(**)
+(*Author:GalAster*)
+(*Creation Date:2016-11-01*)
+(*Copyright:CC4.0 BY+NA+NC*)
+(**)
+(*该软件包遵从CC协议:署名、非商业性使用、相同方式共享*)
+(**)
+(*这里应该填这个函数的介绍*)
+(* ::Section:: *)
+(*函数说明*)
+BeginPackage["ExScience`"];
+Catacaustic::usage = "";
+TangentComplex::usage = "";
+(* ::Section:: *)
+(*程序包正体*)
+(* ::Subsection::Closed:: *)
+(*主设置*)
+ExScience$Version="V0.2";
+ExScience$Environment="V11.0+";
+ExScience$LastUpdate="2016-12-06";
+ExScience::usage = "程序包的说明,这里抄一遍";
 Begin["`Private`"];
+(* ::Subsection::Closed:: *)
+(*主体代码*)
+
+
+
+(* ::Subsubsection:: *)
+(*类氢原子波函数*)
 SingleElectronGrid[k_,way_:Re,ops___]:=GraphicsGrid[Table[SphericalPlot3D[
   Evaluate@way@SphericalHarmonicY[l,m,\[Theta],\[Phi]],{\[Theta],0,Pi},{\[Phi],0,2Pi},
   PlotRange->All,Mesh->None,Boxed->False,Axes->None,ColorFunction->"Rainbow",ops],
@@ -24,19 +44,22 @@ SingleElectron[l_,m_,ops___]:=GraphicsRow[SphericalPlot3D[
   #[SphericalHarmonicY[l,m,\[Theta],\[CurlyPhi]]],{\[Theta],0,Pi},{\[CurlyPhi],0,2Pi},
   Boxed->False,Axes->None,ColorFunction->"TemperatureMap",ops]&/@{Re,Abs},Frame->All];
 
+
+
+(* ::Subsubsection:: *)
 (*光学*)
 ReflectCircle:=Module[{p,q,inref},inref[pt1_,pt2_,k_]:=
     ({Re[#1],Im[#1]}&)[(#2*(#2/#1)^k&)[pt1.{1,I},pt2.{1,I}]];
-    Manipulate[Dynamic[p={-1,0};q={Cos[x],Sin[x]};
-    With[{inrefs=(inref[p,q,#1]&)/@Range[-1,s]},
-      Graphics[Flatten[{GrayLevel[0.3],Disk[],White,Line[inrefs]}]]]],
-      {{x,0,"入射点"},-Pi,Pi},{{s,120,"反射次数"},0,120,1}]];
+Manipulate[Dynamic[p={-1,0};q={Cos[x],Sin[x]};
+With[{inrefs=(inref[p,q,#1]&)/@Range[-1,s]},
+  Graphics[Flatten[{GrayLevel[0.3],Disk[],White,Line[inrefs]}]]]],
+  {{x,0,"入射点"},-Pi,Pi},{{s,120,"反射次数"},0,120,1}]];
 Epicycloid[n_]:=Manipulate[Show[Graphics[Style[
   Line[Partition[Riffle[Table[{-Cos[i],Sin[i]},{i,0,((n+1)*lin)*(Pi/32),Pi/32}],
     Table[{Cos[i/(n+1)],-Sin[i/(n+1)]},{i,0,((n+1)*lin)*(Pi/32),Pi/32}]],2]],Darker[Purple]]],
-    ParametricPlot[{Sin[f],Cos[f]},{f,0,2*Pi},PlotStyle->{Hue[1/3,1,0.4,0.9],Thickness[0.006]}],
-    PlotLabel->FullSimplify[{(n/(n+2)+1/(n+2))*Cos[t]-(1/(n+2))*Cos[(n+1)*t],(n/(n+2)+1/(n+2))*Sin[t]-(1/(n+2))*Sin[(n+1)*t]}],
-    ImageSize->{400,400}],{{lin,64,"线段数"},0,64,1,Appearance->"Labeled"}];
+  ParametricPlot[{Sin[f],Cos[f]},{f,0,2*Pi},PlotStyle->{Hue[1/3,1,0.4,0.9],Thickness[0.006]}],
+  PlotLabel->FullSimplify[{(n/(n+2)+1/(n+2))*Cos[t]-(1/(n+2))*Cos[(n+1)*t],(n/(n+2)+1/(n+2))*Sin[t]-(1/(n+2))*Sin[(n+1)*t]}],
+  ImageSize->{400,400}],{{lin,64,"线段数"},0,64,1,Appearance->"Labeled"}];
 ReflectLine:=Manipulate[Module[{pts,lines},
   pts=Table[{Sin[2*k*(Pi/n)],Cos[2*k*(Pi/n)]},{k,1,n}];
   lines=Table[{k,Mod[k*mult,n,1]},{k,1,n}];
@@ -84,6 +107,10 @@ ReflectEllipse[aa_, bb_] :=Manipulate[ellipseMultiReflectionGraphics[\[CurlyPhi]
       paralleComponent = parallelDir . dir;
       {p, (-normalComponent)*normalDir +paralleComponent*parallelDir}]}];
 
+
+
+(* ::Subsubsection:: *)
+(*切线从与回光线*)
 Catacaustic[f_, {left_, right_, down_, up_}, n_: 200] :=
     Module[{refl$y$, sol$, F},F[x_, y_, a_,g_] := (2*Derivative[1][g][a])*(y -g[a]) - (Derivative[1][g][a]^2 - 1)*(x - a);
     With[{},sol$ = Simplify[First[Solve[{F[x, y, t, f] == 0, D[F[x, y, t, f], t] == 0}, {x,y}]]];
@@ -115,8 +142,8 @@ TangentComplex[function_] := Module[{f0,f1,f2},
     Axes -> False, PlotLabel -> y == f1]];
 
 
+(* ::Subsection::Closed:: *)
+(*附加设置*)
+End[] ;
 
-
-End[] (* `Private` *)
-
-EndPackage[]
+EndPackage[];

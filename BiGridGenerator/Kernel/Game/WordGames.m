@@ -1,21 +1,42 @@
-(* Mathematica Package *)
-(* Created by Mathematica Plugin for IntelliJ IDEA *)
-
-(* :Title: ExWords *)
-(* :Context: ExWords` *)
-(* :Author: GalAster *)
-(* :Date: 2016-11-16 *)
-
-(* :Package Version: 0.1 *)
-(* :Mathematica Version: 11.0+ *)
-(* :Copyright:该软件包遵从CC协议:BY+NA+NC(署名、非商业性使用、相同方式共享） *)
-(* :Keywords: *)
-(* :Discussion: *)
-
-BeginPackage["ExWords`"];
-
-
+(* ::Package:: *)
+(* ::Title:: *)
+(*Example(样板包)*)
+(* ::Subchapter:: *)
+(*程序包介绍*)
+(* ::Text:: *)
+(*Mathematica Package*)
+(*Created by Mathematica Plugin for IntelliJ IDEA*)
+(*Establish from GalAster's template*)
+(**)
+(*Author:GalAster*)
+(*Creation Date:2016-11-16*)
+(*Copyright:CC4.0 BY+NA+NC*)
+(**)
+(*该软件包遵从CC协议:署名、非商业性使用、相同方式共享*)
+(**)
+(*这里应该填这个函数的介绍*)
+(* ::Section:: *)
+(*函数说明*)
+BeginPackage["WordGames`"];
+WordSquare::usage = "";
+WordCube::usage = "";
+BoggleSolver::usage = "";
+(* ::Section:: *)
+(*程序包正体*)
+(* ::Subsection::Closed:: *)
+(*主设置*)
+WordGames$Version="V0.1";
+WordGames$Environment="V11.0+";
+WordGames$LastUpdate="2016-11-16";
+WordGames::usage = "程序包的说明,这里抄一遍";
 Begin["`Private`"];
+(* ::Subsection::Closed:: *)
+(*主体代码*)
+
+
+
+(* ::Subsubsection:: *)
+(*词方*)
 Options[WordSquare]={Language->"English",Dimensions->2};
 WordSquare[len_,pattern_:All,OptionsPattern[]]:=Module[{alln,goal},
   alln=Characters/@Select[DictionaryLookup[{OptionValue[Language],All}],StringLength[#1]==len&];
@@ -30,6 +51,11 @@ WordSquare[len_,pattern_:All,OptionsPattern[]]:=Module[{alln,goal},
   fixone[ml_,nl_]:=If[FreeQ[ml[[nl]],Verbatim[_]],ml,ReplacePart[ml,nl->First[Cases[alln,ml[[nl]]]]]];
   goal=If[pattern===All,{Nest[ConstantArray[#1,len]&,_,OptionValue[Dimensions]]},pattern];
   FixedPoint[Union[Join@@findCompletionsOriented/@#1]&,goal]];
+
+
+
+(* ::Subsubsection:: *)
+(*词立方*)
 Options[WordCube]={Random->True,Language->"English",Dimensions->3};
 WordCube[len_Integer,op:OptionsPattern[]]:=WordCube[ConstantArray[_,ConstantArray[len,OptionValue[Dimensions]]],op];
 WordCube[mat_,OptionsPattern[]]:=Block[{$random=If[OptionValue[Random],RandomSample,Identity],
@@ -48,6 +74,11 @@ inspect[mat_,True]:=Throw[mat,tag];
 inspect[mat_,indices_]:=Scan[Function[word,inspect[change[mat,word,indices]]],
   (Characters[$random[Pick[#1,StringMatchQ[#1,StringExpression@@mat[[Sequence@@First[indices]]]]]]]&)[dict[Length[mat]]]];
 change[mat_,word_,indices_]:=Module[{newMat=mat},Scan[Function[wordPos,newMat[[Sequence@@wordPos]]=word],indices];newMat];
+
+
+
+(* ::Subsubsection:: *)
+(*Boggle*)
 makeTree[wrds:{__String}]:=makeTree[Characters[wrds]];
 makeTree[wrds_/;MemberQ[wrds,{}]]:=Prepend[makeTree[DeleteCases[wrds,{}]],{}->{}];
 makeTree[wrds_]:=Reap[(If[#1=!={},Sow[Rest[#1],First[#1]]]&)/@wrds,_,#1->makeTree[#2]&][[2]];
@@ -76,6 +107,8 @@ BoggleSolver[lboard_,wordTree_]:=Module[{lrules,adjrules},
   wordsFromVertexSequences[getVertexSequences[adjrules,lrules,wordTree,Times@@Dimensions[lboard]],lrules]];
 
 
-End[];
+(* ::Subsection::Closed:: *)
+(*附加设置*)
+End[] ;
 
 EndPackage[];
