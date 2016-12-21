@@ -32,11 +32,6 @@ ExExplorer::usage = "程序包的说明,这里抄一遍";
 Begin["`Private`"];
 (* ::Subsection::Closed:: *)
 (*主体代码*)
-
-
-
-
-
 (* ::Subsubsection:: *)
 (*吸引子数据*)
 AttractorExplorer=Manipulate[With[{sol$=NDSolve[Evaluate[{
@@ -109,10 +104,6 @@ AttractorExplorer=Manipulate[With[{sol$=NDSolve[Evaluate[{
     31->"Wimol\[Dash]Banlue",
     32->"Yu\[Dash]Wang"}},
   {{tf,500.,"time"},1,500,Appearance->"Labeled"},SynchronousUpdating->False,ControllerLinking->True];
-
-
-
-
 (* ::Subsubsection:: *)
 (*核子衰变数据*)
 DecayExplorer=Manipulate[Quiet@If[!MemberQ[IsotopeData[],
@@ -418,14 +409,10 @@ If[view=="plot",With[{is=Quiet@DeleteCases[Flatten[NestWhileList[
     elem=="Ununseptium",{"291","292"},
     elem=="Ununoctium",{"293"}],
   ControlType->PopupMenu},{{view,"plot","view"},{"plot","graph"}},SynchronousUpdating->False,AutorunSequencing->{3}];
-
-
-
-
 (* ::Subsubsection:: *)
 (*Trace功能增强*)
-(*http://mathematica.stackexchange.com/questions/29339/the-clearest-way-to-represent-mathematicas-evaluation-sequence#5527117*)
 SetAttributes[TraceExplorer,{HoldAllComplete}];
+(*http://mathematica.stackexchange.com/questions/29339/the-clearest-way-to-represent-mathematicas-evaluation-sequence#5527117*)
 TraceExplorer[expr_]:=Module[{steps={},stack={},pre,post,show,default=False},
   pre[e_]:=(stack={steps,stack};steps={});
   post[e_,r_]:=(steps=First@stack~Join~{show[e,HoldForm@r,steps]};
@@ -439,15 +426,6 @@ TraceExplorer[expr_]:=Module[{steps={},stack={},pre,post,show,default=False},
       Alignment->{Left,Center},Frame->All,Spacings->Automatic,Background->{{Hue[.65,.1,1]},None}]];
   TraceScan[pre,expr,___,post];
   Deploy@Column@{Opener@Dynamic@default,Dynamic@Pane[First@steps,ImageSize->10000]}];
-
-
-
-
-
-
-
-
-
 
 (* ::Subsection::Closed:: *)
 (*附加设置*)

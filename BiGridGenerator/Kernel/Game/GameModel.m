@@ -17,7 +17,7 @@
 (*这里应该填这个函数的介绍*)
 (* ::Section:: *)
 (*函数说明*)
-BeginPackage["CCPSolver`"];
+BeginPackage["GameModel`"];
 CCPGraph::usage = "";
 CCPMatrix::usage = "";
 CCPMarkov::usage = "";
@@ -26,10 +26,10 @@ CCPDistribution::usage = "";
 (*程序包正体*)
 (* ::Subsection::Closed:: *)
 (*主设置*)
-CCPSolver$Version="V0.1";
-CCPSolver$Environment="V11.0+";
-CCPSolver$LastUpdate="2016-11-12";
-CCPSolver::usage = "程序包的说明,这里抄一遍";
+GameModel$Version="V0.1";
+GameModel$Environment="V11.0+";
+GameModel$LastUpdate="2016-11-12";
+GameModel::usage = "程序包的说明,这里抄一遍";
 Begin["`Private`"];
 (* ::Subsection::Closed:: *)
 (*主体代码*)
@@ -37,7 +37,7 @@ Begin["`Private`"];
 
 
 (* ::Subsubsection:: *)
-(*Lisp形式*)
+(*氪皇集卡问题*)
 step=Function[list,Ramp[list-#&/@IdentityMatrix@Length@list]];
 fix=Function[list,Union@Flatten[FixedPointList[Union@Flatten[step/@#,1]&,{list}],1]];
 add=Function[list,(list->#&/@step@list)~Join~{list->list}];
@@ -68,7 +68,7 @@ CCPMarkov[x_?VectorQ,m_?VectorQ]:=DiscreteMarkovProcess[1,CCPMatrix[x,m]];
 
 
 (* ::Subsubsection:: *)
-(*三角形式排列*)
+(*氪皇集卡概率*)
 CCPDistribution[x_?VectorQ,m_?VectorQ]:=FirstPassageTimeDistribution[CCPMarkov[x,m],Length@fix@m];
 Unprotect[CDF,PDF,Mean];
 (*http://math.stackexchange.com/questions/379525/probability-distribution-in-the-coupon-collectors-problem*)
@@ -95,7 +95,10 @@ Protect[CDF,PDF,Mean];
 
 
 (* ::Subsubsection:: *)
-(*数字上色代码*)
+(*伪随机分布*)
+
+
+
 
 
 
