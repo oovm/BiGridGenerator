@@ -342,7 +342,7 @@ nf[y_, nDec_] :=
   ];
 
 removeDups[inputList_?VectorQ] :=
-Module[
+Block[
   (* remove duplicates from a list without changing the order;
      (Union[ ] removes duplicates, but also sorts the list) *)
   { },
@@ -383,7 +383,7 @@ Clear[setT, kSumX];
 
 Clear[convertInputListToStrings];
 convertInputListToStrings[inputList_?VectorQ] :=
-Module[
+Block[
   (* convert input list to all strings; if a list element is neither a string
      nor an integer, return an empty list. *)
   { len, i, str, outputList = { }, bSet },
@@ -403,7 +403,7 @@ Module[
 
 
 setT[stringList_?VectorQ, iBase_:10] :=
-Module[ (* enter with a list of strings {s1, s2, ...}, like { "12", "345" }; return the T matrix *)
+Block[ (* enter with a list of strings {s1, s2, ...}, like { "12", "345" }; return the T matrix *)
   (* note: this function returns a 2-dimensional matrix, not a list.  even when the output
      matrix has only one row, it is a matrix of the form {{1,2,3. ...}}, not a vector of the
      form {1,2,3, ...}. *)
@@ -620,7 +620,7 @@ Module[ (* enter with a list of strings {s1, s2, ...}, like { "12", "345" }; ret
 
 
 kSumX[stringList_?VectorQ, T_?MatrixQ, nDecimals0_Integer, iBase_] :=
-Module[
+Block[
   (* the user calls KempnerSum[ ] or kSumFormatted[ ].  those functions call this
      private function kSumX, which does all the work. *)
   { nDecimals, inputLen, nDecSum, f, c, a, S, z, nInputDigits, totalDigits,
@@ -709,12 +709,12 @@ Module[
 
   S[i_, j_] := S[i, j] =
   If[i == 1, Complement[Extract[Table[d, {d, 0, iBase-1}], Position[T[[1]], j]], {0}] ,
-    Module[{ p, el, m, k, elel, mm },
+    Block[{ p, el, m, k, elel, mm },
            p = Position[Table[T[[el, m]], {el, n}, {m, iBase}], j]; h = {};
            For[k = 1, k <= Length[p], k++,
              {elel, mm} = p[[k]]; h = Join[h, iBase * S[i - 1, elel] + (mm - 1)]
            ]
-          ];    (* end Module *)
+          ];    (* end Block *)
 (* If[iPrint == 1, Print["h[", i, ",", j,"]=", h] ]; *)
     h    (* return this list of i-digit integers = S[i,j] *)
   ] ;    (* end If *)
@@ -780,7 +780,7 @@ If[iPrint == -1,
 
 
 KempnerSum[T_?MatrixQ, nDecimals_Integer] :=
-Module[ (* in this version, we input a T matrix, not a string *)
+Block[ (* in this version, we input a T matrix, not a string *)
   (* note: the base is not a parameter; the base is the number of columns in the matrix *)
   (* warning - a matrix is a type of list.  therefore, this KempnerSum[matrix] function must be
      placed before KempnerSum[list] in this source code file. *)
@@ -802,7 +802,7 @@ Module[ (* in this version, we input a T matrix, not a string *)
 
 
 KempnerSum[T_?MatrixQ] :=
-Module[ (* in this version, we input a T matrix, not a string *)
+Block[ (* in this version, we input a T matrix, not a string *)
   (* note: the base is not a parameter; the base is the number of columns in the matrix *)
   { },
 
@@ -811,7 +811,7 @@ Module[ (* in this version, we input a T matrix, not a string *)
 
 
 KempnerSum[inputList_?VectorQ, nDecimals_Integer, iBase_:10] :=
-Module[
+Block[
   { lst, T },
   lst = convertInputListToStrings[inputList];
   If[Length[lst] == 0, Return[0] ];
@@ -822,35 +822,35 @@ Module[
 
 
 KempnerSum[inputList_?VectorQ] :=
-Module[
+Block[
   { },
   KempnerSum[inputList, nDefaultDecimals]
 ];    (* end of KempnerSum[list] *)
 
 
 KempnerSum[s_String, nDecimals_Integer, iBase_:10] :=
-Module[
+Block[
   { stringList = { s } },
   KempnerSum[stringList, nDecimals, iBase]
 ] ;   (* end of KempnerSum[string, nDec, base] *)
 
 
 KempnerSum[s_String] :=
-Module[
+Block[
   { stringList = { s } },
   KempnerSum[stringList, nDefaultDecimals]
 ];    (* end of KempnerSum[string] *)
 
 
 KempnerSum[i_Integer, nDecimals_Integer, iBase_:10] :=
-Module[
+Block[
   { stringList = { ToString[i] } },
   KempnerSum[stringList, nDecimals, iBase]
 ];    (* end of KempnerSum[integer, nDec, base] *)
 
 
 KempnerSum[i_Integer] :=
-Module[
+Block[
   { stringList = { ToString[i] } },
   KempnerSum[stringList, nDefaultDecimals]
 ];    (* end of KempnerSum[integer] *)
@@ -858,14 +858,14 @@ Module[
 
 
 kSumFormatted[T_?MatrixQ, nDecimals_Integer, iBase_:10] :=
-Module[ (* in this version, we input a T matrix *)
+Block[ (* in this version, we input a T matrix *)
   (* returns a formatted value of type NumberForm, not a number *)
   { z = KempnerSum[T, nDecimals] },
   nf[z, nDecimals]
 ];    (* end of kSumFormatted[matrix, nDec, base] *)
 
 kSumFormatted[T_?MatrixQ] :=
-Module[ (* in this version, we input a T matrix *)
+Block[ (* in this version, we input a T matrix *)
   (* returns a formatted value of type NumberForm, not a number *)
   { nDecimals = nDefaultDecimals, z },
   z = KempnerSum[T, nDecimals];
@@ -874,14 +874,14 @@ Module[ (* in this version, we input a T matrix *)
 
 
 kSumFormatted[inputList_?VectorQ, nDecimals_Integer, iBase_:10] :=
-Module[ (* returns a formatted value of type NumberForm, not a number *)
+Block[ (* returns a formatted value of type NumberForm, not a number *)
   { z = KempnerSum[inputList, nDecimals, iBase] },
   nf[z, nDecimals]
 ] ;   (* end of kSumFormatted[list, nDec, base] *)
 
 
 kSumFormatted[inputList_?VectorQ] :=
-Module[ (* returns a formatted value of type NumberForm, not a number *)
+Block[ (* returns a formatted value of type NumberForm, not a number *)
   { nDecimals = nDefaultDecimals, z },
   z = KempnerSum[inputList, nDecimals];
   nf[z, nDecimals]
@@ -889,35 +889,35 @@ Module[ (* returns a formatted value of type NumberForm, not a number *)
 
 
 kSumFormatted[s_String, nDecimals_Integer, iBase_:10] :=
-Module[ (* returns a formatted value of type NumberForm, not a number *)
+Block[ (* returns a formatted value of type NumberForm, not a number *)
   { stringList = { s } },
   kSumFormatted[stringList, nDecimals, iBase]
 ] ;   (* end of kSumFormatted[string, nDec, base] *)
 
 
 kSumFormatted[s_String] :=
-Module[ (* returns a formatted value of type NumberForm, not a number *)
+Block[ (* returns a formatted value of type NumberForm, not a number *)
   { stringList = { s } },
   kSumFormatted[stringList, nDefaultDecimals]
 ]  ;  (* end of kSumFormatted[string] *)
 
 
 kSumFormatted[i_Integer, nDecimals_Integer, iBase_:10] :=
-Module[ (* returns a formatted value of type NumberForm, not a number *)
+Block[ (* returns a formatted value of type NumberForm, not a number *)
   { stringList = { ToString[i] } },
   kSumFormatted[stringList, nDecimals, iBase]
 ]  ;  (* end of kSumFormatted[integer, nDec, base] *)
 
 
 kSumFormatted[i_Integer] :=
-Module[ (* returns a formatted value of type NumberForm, not a number *)
+Block[ (* returns a formatted value of type NumberForm, not a number *)
   { stringList = { ToString[i] } },
   kSumFormatted[stringList, nDefaultDecimals]
 ];    (* end of kSumFormatted[integer] *)
 
 
 kPartialSum[nDigits_Integer?Positive, nDecimals_Integer] :=
-Module[ (* partial sum calculation, using previous KempnerSum *)
+Block[ (* partial sum calculation, using previous KempnerSum *)
   (* using the same input just passed to KempnerSum[ ], compute the partial sum of 1/k,
      where k has <= nDigits digits (that is, denominators are < 10^nDigits).
      warning: this could underflow if nDigits > about 2*10^9.
@@ -935,7 +935,7 @@ Module[ (* partial sum calculation, using previous KempnerSum *)
 *)
 
   matBTrunc[a_?MatrixQ, M_] :=
-  Module[
+  Block[
     (* instead of computing the exact value of a^(M+1), we first convert "a"
        to floating-point, then exponentiate.  if enough decimal places are used,
        this will produce an accurate value of a^(M+1).
@@ -979,7 +979,7 @@ Module[ (* partial sum calculation, using previous KempnerSum *)
 
 
 kPartialSum[nDigits_Integer?Positive] :=
-Module[ (* partial sum calculation, based on previous KempnerSum *)
+Block[ (* partial sum calculation, based on previous KempnerSum *)
 (* using the previous input to KempnerSum[ ], compute the
    partial sum of 1/k, where k has <= nDigits digits. *)
   { },
@@ -990,7 +990,7 @@ Module[ (* partial sum calculation, based on previous KempnerSum *)
 Clear[kPartialSumThreshold];
 Clear[kPartialSumThresholdX];
 kPartialSumThresholdX[pSum0_?NumericQ, nDecDefault_] :=
-Module[
+Block[
   (* this private function is called by public functions kPartialSumThreshold.
 
      using the previous input to KempnerSum[ ], compute the number of digits
@@ -1136,7 +1136,7 @@ Module[
 
 
 kPartialSumThreshold[pSumStr_String, nDecDefault_] :=
-Module[
+Block[
   (* a string was entered.  add double backquotes to specify the accuracy,
      then call the private function kPartialSumThresholdX. *)
   { pSum, inputStr2, decPtList, quoteList, nDecimalsInput, nDec2,
@@ -1171,14 +1171,14 @@ Module[
 
 
 kPartialSumThreshold[pSumStr_String] :=
-Module[
+Block[
   { },
   kPartialSumThreshold[pSumStr, nDefaultDecimals]
 ];    (* end of kPartialSumThreshold[string] *)
 
 
 kPartialSumThreshold[pSum0_?NumericQ] :=
-Module[
+Block[
 (* a numeric value was entered.  assume the user has included double backquotes
     if they are needed; this calls the private function kPartialSumThresholdX. *)
   { },
@@ -1186,7 +1186,7 @@ Module[
 ];
 
 kPartialSumThreshold[pSum0_?NumericQ, nDecDefault_] :=
-Module[
+Block[
 (* a numeric value was entered.  assume the user has included double backquotes
     if they are needed.  if they did not, there is no way to include them now.
     this calls the private function kPartialSumThresholdX. *)
@@ -1199,7 +1199,7 @@ Module[
 (* these return the A and T matrices *)
 
 kSumGetT[inputList_?VectorQ, iBase_:10] :=
-Module[ (* given the input list, return the matrix A *)
+Block[ (* given the input list, return the matrix A *)
   { lst },
   lst = convertInputListToStrings[inputList];
   If[Length[lst] == 0, Return[ {{0}} ] ];
@@ -1207,13 +1207,13 @@ Module[ (* given the input list, return the matrix A *)
 ];    (* end of kSumGetT[list] *)
 
 kSumGetT[s_String, iBase_:10] :=
-Module[ (* given the input string s, return the matrix A *)
+Block[ (* given the input string s, return the matrix A *)
   { stringList = { s } },
   kSumGetT[stringList, iBase]
 ] ;   (* end of kSumGetT[string] *)
 
 kSumGetT[i_Integer, iBase_:10] :=
-Module[ (* given the input integer, return the matrix A *)
+Block[ (* given the input integer, return the matrix A *)
   { stringList = { ToString[i] } },
   kSumGetT[stringList, iBase]
 ] ;   (* end of kSumGetT[integer] *)
@@ -1222,7 +1222,7 @@ Module[ (* given the input integer, return the matrix A *)
 kSumShowA[] := A;    (* show the current (private context) A matrix for the previously-entered input *)
 
 kSumGetA[inputList_?VectorQ, iBase_:10] :=
-Module[ (* given the input list, return the matrix A *)
+Block[ (* given the input list, return the matrix A *)
   { lst2, T, f, j, l, m, A, n },
 
   (* use only local variables here, not the global variables A and n.
@@ -1246,14 +1246,14 @@ Module[ (* given the input list, return the matrix A *)
 ];    (* end of kSumGetA[list] *)
 
 kSumGetA[s_String, iBase_:10] :=
-Module[ (* given the input string s, return the matrix A *)
+Block[ (* given the input string s, return the matrix A *)
   { stringList = {} },
   AppendTo[stringList, s];
   kSumGetA[stringList, iBase]
 ];    (* end of kSumGetA[string] *)
 
 kSumGetA[i_Integer, iBase_:10] :=
-Module[ (* given the input integer, return the matrix A *)
+Block[ (* given the input integer, return the matrix A *)
   { stringList = {} },
   AppendTo[stringList, ToString[i]];
   kSumGetA[stringList, iBase]
@@ -1265,7 +1265,7 @@ Module[ (* given the input integer, return the matrix A *)
 
 
 kSumTimeAndMemory[nDigits_] :=
-Module[
+Block[
   (* display the estimated time and memory needed to calculate KempnerSum[9, nDigits].
      based on calculations on a dell laptop for 100, 200, ..., 600 digits. *)
   { nd, t1, t0, tFast, mFast},
@@ -1289,7 +1289,7 @@ Module[
 
 
 kSumSetDefaultDecimals[i_Integer] :=
-Module[
+Block[
   (* set the number of default decimal places *)
   { },
   If[i < 1, i = 1];

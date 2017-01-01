@@ -55,7 +55,7 @@ Begin["`Private`"];
 
 (* ::Subsubsection:: *)
 (*无穷->单位框的映射*)
-InfinitePlot[list_]:=Module[{funs,func,tick,axis,coor},
+InfinitePlot[list_]:=Block[{funs,func,tick,axis,coor},
   funs=ArcTan[Function[x,#][Tan[x]]]&/@list;
   func=Plot[Evaluate@funs,{x,-Pi/2,Pi/2},AspectRatio->1,Axes->False,PlotLegends->list,PerformanceGoal->"Quality",MaxRecursion->15];
   tick=N@ConstantArray[Pi/2,12]-((Pi/2^#)&/@Range[12]);
@@ -63,7 +63,7 @@ InfinitePlot[list_]:=Module[{funs,func,tick,axis,coor},
   coor=Graphics[Line/@((#.RotationMatrix[Pi/2])~Join~#)&@(axis~Join~-axis)];
   Show[func,coor,ImageSize->Large]];
 InfinitePlot[list_,Method->List]:=
-    Module[{funs,xxx,data,func,tick,axis,coor},
+    Block[{funs,xxx,data,func,tick,axis,coor},
       funs=ArcTan[Function[x,#][Tan[x]]]&/@list;
       xxx=Subdivide[-Pi/2,-Pi/4.0,800]~Join~Subdivide[-Pi/4,Pi/4.0,400]~Join~Subdivide[Pi/4,Pi/2.0,800];
       data=Transpose[{xxx,Function[x,#]/@xxx}]&/@funs;
@@ -109,7 +109,8 @@ C3DPlot[f_,range_,ops:OptionsPattern[Plot3D]]:=
       Plot3D[Abs[g[rangerealvar,rangeimagvar]],
         {rangerealvar,Re[range[[2]]],Re[range[[3]]]},
         {rangeimagvar,Im[range[[2]]],Im[range[[3]]]},
-        Evaluate@FilterRules[{ops,ColorFunction->(Hue[Mod[Arg[g[#1,#2]]/(2*Pi)+1,1]]&),ColorFunctionScaling->False},Options[Plot3D]]]];
+        Evaluate@FilterRules[{ops,ColorFunction->(Hue[Mod[Arg[g[#1,#2]]/(2*Pi)+1,1]]&),
+          ColorFunctionScaling->False},Options[Plot3D]]]];
 
 
 
@@ -152,11 +153,11 @@ PiecewisePlot`solve[eq_,var_]:={var->(var/.#)}&/@List@ToRules@PiecewisePlot`expa
 Needs["NumericalCalculus`"];
 PiecewisePlot`nlimit[f_?NumericQ,var_->x0_,dir_]:=f;
 PiecewisePlot`nlimit[f_,var_->x0_,dir_]:=NLimit[f,var->x0,dir];
-PiecewisePlot`limit[f_,var_->x0_,dir_]/;MemberQ[Numerator[f],PiecewisePlot`$discontinuous,Infinity,Heads->True]:=Module[{y0,f0},f0=f//.(disc:PiecewisePlot`$discontinuous)[z_]/;
+PiecewisePlot`limit[f_,var_->x0_,dir_]/;MemberQ[Numerator[f],PiecewisePlot`$discontinuous,Infinity,Heads->True]:=Block[{y0,f0},f0=f//.(disc:PiecewisePlot`$discontinuous)[z_]/;
     FreeQ[z,PiecewisePlot`$discontinuous]:>disc[With[{dz=Abs[D[z,var]/.var->N@x0]},Mean[{z/.var->N@x0,z/.var->x0-0.1 Last[dir]/Max[1,dz]}]]];
 Message[PiecewisePlot`debug::limit,{f0,f,var->x0,dir}];
 Quiet[Check[y0=PiecewisePlot`nlimit[f0,var->x0,dir],Check[y0=Limit[f0,var->x0,dir],If[!NumericQ[y0],y0=Indeterminate]]],{Power::infy,Infinity::indet,NLimit::noise}];y0];
-PiecewisePlot`limit[f_,var_->x0_,dir_]:=Module[{y0},Quiet[Check[y0=f/.var->x0,Check[y0=Limit[f,var->x0,dir],If[!NumericQ[y0],y0=Indeterminate]]],{Power::infy,Infinity::indet}];y0];
+PiecewisePlot`limit[f_,var_->x0_,dir_]:=Block[{y0},Quiet[Check[y0=f/.var->x0,Check[y0=Limit[f,var->x0,dir],If[!NumericQ[y0],y0=Indeterminate]]],{Power::infy,Infinity::indet}];y0];
 PiecewisePlot`$reverseIneq={Less->Greater,Greater->Less,LessEqual->GreaterEqual};
 PiecewisePlot`reverseIneq[(rel:PiecewisePlot`$inequality)[args__]]:=(rel/.PiecewisePlot`$reverseIneq)@@Reverse@{args};
 PiecewisePlot`inDomain[]:=LessEqual@@PiecewisePlot`domain[[{2,1,3}]];
@@ -180,7 +181,7 @@ PiecewisePlot`interiorPoints[allpieces_,domain:{var_,_,_}]:=
 PiecewisePlot`sowAnnotations[allpieces_,domain:{var_,a_,b_},{}]:={};
 PiecewisePlot`sowAnnotations[allpieces_,domain:{var_,a_,b_},points_List]:=(Message[PiecewisePlot`debug::annotation,"sowAnn"->{allpieces,points}];
 PiecewisePlot`sowAnnotations[allpieces,domain,##]&@@@Partition[{If[First[#]==a,Indeterminate,a]}~Join~#~Join~{If[Last[#]==b,Indeterminate,b]},3,1]&@SortBy[points,N]);
-PiecewisePlot`sowAnnotations[allpieces_,domain:{var_,_,_},xminus_,x0_?NumericQ,xplus_]:=Module[{y0,yplus,yminus,f0,fminus,fplus},f0=First[Pick@@MapAt[#/.var->x0&/@#&,Transpose@allpieces,2]/.{}->{Indeterminate}];
+PiecewisePlot`sowAnnotations[allpieces_,domain:{var_,_,_},xminus_,x0_?NumericQ,xplus_]:=Block[{y0,yplus,yminus,f0,fminus,fplus},f0=First[Pick@@MapAt[#/.var->x0&/@#&,Transpose@allpieces,2]/.{}->{Indeterminate}];
 Quiet[y0=f0/.var->N@x0,{Power::infy,Infinity::indet}];
 If[xminus=!=Indeterminate,(*xminus\[NotEqual]left endpoint*)fminus=First[Pick@@MapAt[#/.var->Mean[{xminus,x0}]&/@#&,Transpose@allpieces,2]/.{}->{Indeterminate}];
 yminus=PiecewisePlot`limit[fminus,var->x0,Direction->1];];
@@ -241,10 +242,10 @@ Periodization[func_,{val_Symbol,min_?NumberQ,max_?NumberQ}]:=func/.(val:>Mod[val
 
 (* ::Subsubsection:: *)
 (*作用于图片的绘图函数*)
-Gray3DPlot[img_,points_:200]:=Module[{gray},
+Gray3DPlot[img_,points_:200]:=Block[{gray},
   gray=Reverse@ImageData@RemoveAlphaChannel@ColorConvert[img,"Grayscale"];
   ListPlot3D[gray,ColorFunction->GrayLevel,MaxPlotPoints->points,Boxed->False,Axes->False,Mesh->None]];
-Wave3DPlot[img_,mf_:5,md_:80,ops___]:=Module[{in,gray},
+Wave3DPlot[img_,mf_:5,md_:80,ops___]:=Block[{in,gray},
   in=ImageResize[MeanFilter[img,mf],{200,md}];
   gray=Reverse@ImageData@RemoveAlphaChannel@ColorConvert[in,"Grayscale"];
   ListPlot3D[gray,Mesh->{0,md},PlotStyle->Opacity[0],Boxed->False,Axes->False,ops]];
@@ -259,7 +260,7 @@ letter[s_,OptionsPattern[]]:=Binarize@Graphics[
 
 (* ::Subsubsection:: *)
 (*其他绘图*)
-GEBPlot[str_String,res_Integer:100]:=Module[{X,Y,Z},
+GEBPlot[str_String,res_Integer:100]:=Block[{X,Y,Z},
   {X,Y,Z}=(ImageData@letter[#,ImageSize->res])&/@StringPartition[str,1];
   Quiet@RegionPlot3D[X[[Round[i],Round[j]]]==0&&Y[[Round[i],Round[k]]]==0&&
       Z[[Round[j],Round[k]]]==0,{i,1,res},{j,1,res},{k,1,res},

@@ -39,7 +39,8 @@ SpiralMatrix[n_?OddQ]:=Permute[Range[n^2],Accumulate@Take[Join[{n^2+1}/2,
   Flatten@Table[(-1)^ji,{j,n},{i,{-1,n}},{j}]],n^2]]~Partition~n;
 SpiralMatrix[n_]:=SpiralMatrix[n+1][[1;;-2,2;;-1]];
 MagicMatrix[n_]:=MagicSquare`Magic[n];
-
+JacobianMatrix[f_List?VectorQ,x_List]:=Outer[D,f,x]/;Equal@@(Dimensions/@{f,x}) ;
+JacobianDeterminant[f_List?VectorQ,x_List]:=Det[JacobianMatrix[f,x]]/;Equal@@(Dimensions/@{f,x});
 
 
 (* ::Subsubsection:: *)

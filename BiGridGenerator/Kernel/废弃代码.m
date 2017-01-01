@@ -1,4 +1,4 @@
-Module[{}, def = "1,2,0.2,2,5,10,3,64Pi,140";
+Block[{}, def = "1,2,0.2,2,5,10,3,64Pi,140";
 
 list = {1, 1, 2, 3, 5, 8};
 TraditionalForm[
@@ -27,7 +27,7 @@ VoronoiMesh[AnglePath[Table[{Sqrt[k], GoldenAngle}, {k, 800}]],
   PlotTheme -> "Lines"]
 
 param[x_, m_, t_] :=
-    Module[{f, n = Length[x], nf},
+    Block[{f, n = Length[x], nf},
       f = Chop[Fourier[x]][[;; Ceiling[Length[x]/2]]];
       nf = Length[f];
       Total[Rationalize[
@@ -49,7 +49,7 @@ ParametricPlot[Evaluate[tocurve[#, 500, t] & /@ lines], {t, 0, 1},
   Frame -> True, Axes -> False]
 ------------------------------------------------------------------------------------------------------------------------------------
 
-ToZeta[exp_] := Module[{time},
+ToZeta[exp_] := Block[{time},
   time = Log[Pi, #] & @@ Cases[exp, Pi^_Integer];
   Inactivate[Zeta[time]] exp/Zeta[time]]
 ToZeta[31 Pi^6/5040]
@@ -58,7 +58,7 @@ ToZeta[31 Pi^6/5040]
 
 
 TwoAxisListLinePlot[{f_, g_}] :=
-    Module[{fgraph, ggraph, frange, grange, fticks,
+    Block[{fgraph, ggraph, frange, grange, fticks,
       gticks}, {fgraph, ggraph} =
         MapIndexed[
           ListLinePlot[#, Axes -> True, PlotStyle -> ColorData[1][#2[[1]]],
@@ -398,7 +398,7 @@ BinCounts[RandomInteger[Total@quan, 1000], {{0}~Join~Accumulate@quan}]
 
 
 
-LSSB[list_] := Module[{base}, ClearAll[n];
+LSSB[list_] := Block[{base}, ClearAll[n];
 base = Function[t, Table[E^(2 m n Pi I/t), {m, 1, t}, {n, 1, t}]]@
     Length[list];
 Inner[Times, LinearSolve[base, list], base[[1]]^n, Plus]]
@@ -422,3 +422,52 @@ IO玄学
   FrontEndToken["CopySpecial", "PlainText"]]; SelectionMove[
   EvaluationNotebook[], After, CellGroup, 2]; FrontEndExecute[
   FrontEndToken["Paste"]];
+
+
+(*UDCL:UniformDistributionCompositionList*)
+UDCL={{"和分布",Piecewise[{{2 - z, 1 < z < 2}, {z,0<z<=1}}]},
+  {"差分布",Piecewise[{{1 - z, 0 < z < 1}, {1 + z,-1<z<=0}}]},
+  {"积分布",Piecewise[{{-Log[z], 0 < z < 1}}]},
+  {"商分布",Piecewise[{{1/2, 0 <= z <= 1}, {1/(2*z^2), z > 1}}]},
+  {"幂分布",Piecewise[{{-LogIntegral[z]/z,0<=z<1}}]},
+  {"根分布",Piecewise[{{(1 - z + z*Log[z])/(z*Log[z]^2),0<=z}}]},
+  {"对数分布",Piecewise[{{1/(1 + z)^2,0<z}}]},
+  {"调和分布",Piecewise[{{1/2, z == 0}, {(2*(-1 + z - 2*z*ArcTanh[1 - z]
+      + z^2*ArcTanh[1 - z]))/(-2 + z), 0< z < 1}}]}};
+Just01=Plot[Evaluate@UDCL[[{3,5,8},2]],{z,0,1},PlotTheme->"Monochrome",
+  PlotLegends->{UDCL[[{3,5,8},1]]},Background->None]
+Not01=Plot[Evaluate@UDCL[[{1,2,4,6,7},2]],{z,-1,4},
+  PlotTheme->{"VibrantColor","Detailed","Monochrome","ThickLines"},
+  PlotLegends->{UDCL[[{1,2,4,6,7},1]]},PlotRange->{0,1.2},AspectRatio->1,Background->None]
+Export["UDCL.png",Grid[{{Just01},{Not01}}],Background->None,ImageResolution->200];
+
+
+基本运算符={Plus,Subtract,Times,Divide,Power,Surd,Log};
+均值运算符={HarmonicMean,GeometricMean,Mean,RootMeanSquare,ContraharmonicMean};
+统计运算符={Mean,Variance,Total,Max,Min};
+自定义算符={#1Sin[#2],#1Cos[#2],Gamma[#1,#2]};
+二元算符=Function/@Join[Through[基本运算符[#1,#2]]
+  ,Through[均值运算符[{#1,#2}]],Through[统计运算符[{#1,#2}]],自定义算符];
+算符重整化={#1+#2&,#1-#2&,#1*#2&,#1/#2&,#1^#2&,#1^(1/#2)&,Log[#2]/Log[#1]&,
+  (2*#1*#2)/(#1+#2)&,Sqrt[#1*#2]&,(#1+#2)/2&,Sqrt[(#1^2+#2^2)/2]&,
+  (#1^2+#2^2)/(#1+#2)&,(#1+#2)/2&,
+  (1/2)*(Conjugate[#1]-Conjugate[#2])*(#1-#2)&,#1+#2&,
+  (#1+#2)/2+Sqrt[(#1-#2)^2]/2&,(1/2)*(#1-Sqrt[(#1-#2)^2]+#2)&}
+
+
+(*NDCL:NormalDistributionCompositionList*)
+NDCL={{"和分布",1/(E^(z^2/4)*(2*Sqrt[Pi]))},
+  {"差分布",1/(E^(z^2/4)*(2*Sqrt[Pi]))},
+  {"积分布",BesselK[0, Abs[z]]/Pi},
+  {"商分布",1/(Pi*(1 + z^2))}};
+All2=Plot[Evaluate@NDCL[[All,2]],{z,-2,2},
+  PlotTheme->{"VibrantColor","Monochrome","ThickLines"},
+  PlotLegends->{NDCL[[All,1]]},PlotRange->{0,0.5},Background->None]
+Export["All2.png",All2,Background->None,ImageResolution->200];
+
+
+
+
+IMethod[n_]:=NIntegrate[(1-Product[Subscript[x,i](1-Subscript[x,i]),{i,1,n}])^(-1),##]&@@Array[{Subscript[x,#],0,1}&,n];
+HMethod[n_]:=N@HypergeometricPFQ[ConstantArray[1,n+1],ConstantArray[3/2,n],1/4^n]
+Table[NMethod[i]-HMethod[i],{i,1,20}]

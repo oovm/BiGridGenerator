@@ -31,12 +31,12 @@ Begin["`Private`"];
 (* ::Subsection::Closed:: *)
 (*主体代码*)
 MathLove[]:=MathLove[RandomInteger[10]];
-Rose[x_,theta_]:=Module[{phi=(Pi/2)*Exp[-(theta/(8*Pi))],
+Rose[x_,theta_]:=Block[{phi=(Pi/2)*Exp[-(theta/(8*Pi))],
   X=1-(1/2)*((5/4)*(1-Mod[18/5*theta,2*Pi]/Pi)^2-1/4)^2,y,r},
   y=(3913/2000-5x+16x^2/5)x^2*Sin[phi];
   r=X*(x*Sin[phi]+y*Cos[phi]);{r*Sin[theta],r*Cos[theta],
     X*(x*Cos[phi]-y*Sin[phi])}];
-MathLove[1]:=Module[{rose,stem,text},
+MathLove[1]:=Block[{rose,stem,text},
   rose=ParametricPlot3D[
     Evaluate[Rose[x,theta]],{x,0,1},{theta,-2Pi,15Pi},
     Mesh->None,PerformanceGoal->"Speed",
@@ -57,7 +57,7 @@ MathLove[3]=ParametricPlot3D[Evaluate[Jazmin[u,v,7]],{u,-Pi,Pi},{v,0,Pi},PlotPoi
 MathLove[4]=ParametricPlot3D[Evaluate[Jazmin[u,v,9]],{u,-Pi,Pi},{v,0,3.4},PlotPoints->50,
   BoxRatios->Automatic,PlotRange->All,Boxed->False,Axes->None,Mesh->None,
   ColorFunction->(ColorData["SunsetColors"][0.9(1-0.9#5)]&)];
-MathLove[5]:=Module[{vals,funs},{vals,funs}=
+MathLove[5]:=Block[{vals,funs},{vals,funs}=
     NDEigensystem[{-Laplacian[u[x,y],{x,y}],DirichletCondition[u[x,y]==0,x==0]},
       u[x,y],{x,y}\[Element]RegionSymmetricDifference[Disk[{0,0},5],Disk[{0,0},3]],1];
 Quiet@Plot3D[funs,{x,-5,5},{y,-5,5},PlotRange->All,PlotTheme->"Marketing",

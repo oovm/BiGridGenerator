@@ -241,7 +241,7 @@ Union[Cases[canonicalizeFunction[w],
 
 
 branchPoints[w_, z_] := 
-Module[{mvt = multiValuedTerms[w, z], bcsPre, bps},
+Block[{mvt = multiValuedTerms[w, z], bcsPre, bps},
        bcsPre = DeleteCases[Flatten[branchPointsF[#, z]& /@ mvt], z | _DirectedInfinity, \[Infinity]]; 
        bps = If[And @@ (NumericQ /@ bcsPre), bcsPre, $Failed];
        If[debugQ, Print[Style[Row[{Text["Branch points: "], bps}], Darker[Green]]]];
@@ -258,7 +258,7 @@ branchPointsF[Power[f_, _], z_] := z /. {ToRules[Reduce[f == 0 || 1/f == 0, z]]}
 
 
 branchPointsF[Root[f_, _], z_] := 
-Module[{w, p}, p = f[w]; (z /. {ToRules[Reduce[Resultant[p, D[p, w], w] == 0, z]]})]
+Block[{w, p}, p = f[w]; (z /. {ToRules[Reduce[Resultant[p, D[p, w], w] == 0, z]]})]
 
 
 (* ::Input:: *)
@@ -311,7 +311,7 @@ Module[{w, p}, p = f[w]; (z /. {ToRules[Reduce[Resultant[p, D[p, w], w] == 0, z]
 
 
 sectorArray[branchPoints_, branchPointOffset_:10^-6, prec_:25] := 
-	Module[{\[CurlyEpsilon] = branchPointOffset, rMax, rList, \[CurlyPhi]List}, 
+	Block[{\[CurlyEpsilon] = branchPointOffset, rMax, rList, \[CurlyPhi]List}, 
         rMax = If[# == 0., 1, 15/10 #]&[Max[Abs[rList = Abs /@ N[branchPoints, prec]]]];		
 		(* the different distances *)
 		rList = Union[Prepend[Append[rList, rMax], \[CurlyEpsilon]], SameTest -> ((Abs[#1 - #2]< 2 \[CurlyEpsilon])&)];
@@ -354,7 +354,7 @@ sectorArray[branchPoints_, branchPointOffset_:10^-6, prec_:25] :=
 
 
 numberMultiValuedTerms[w_, z_] := 
-Module[{root, function, \[Omega], res}, 
+Block[{root, function, \[Omega], res}, 
 res = Block[{i = 1}, 
 MapAll[Which[MatchQ[#, Log[_?(MemberQ[#, z, {0, \[Infinity]}]&)]], 
 				       (* the Log terms *)  Subscript[Log, i++] @@ #, 
@@ -393,7 +393,7 @@ MapAll[Which[MatchQ[#, Log[_?(MemberQ[#, z, {0, \[Infinity]}]&)]],
 
 
 powerAndLogTerms[w_, z_] := 
-	Module[{powerTerms, logTerms, productLogTerms, sortedPowerAndLogTerms, rootTerms}, 
+	Block[{powerTerms, logTerms, productLogTerms, sortedPowerAndLogTerms, rootTerms}, 
            \[AlignmentMarker]powerTerms = Cases[w, Subscript[Power, _][__], {0, \[Infinity]}];
            productLogTerms = Cases[w, Subscript[ProductLog, _][_], {0, \[Infinity]}];
            \[AlignmentMarker]logTerms = Cases[w, Subscript[Log, _][_], {0, \[Infinity]}];
@@ -407,7 +407,7 @@ powerAndLogTerms[w_, z_] :=
 
 
 substitutions[powerAndLogTerms_, wFunc_, w_, z_] := 
-	Module[{ws = (# -> Subscript[w, #[[0, 2]]][z])& /@ powerAndLogTerms}, 
+	Block[{ws = (# -> Subscript[w, #[[0, 2]]][z])& /@ powerAndLogTerms}, 
 	   	{Last /@ FoldList[Append[#1, #2 //. #1]&, 
            {First[ws]}, Rest[ws]], ws, wFunc//.ws}]
 
@@ -513,7 +513,7 @@ sheets[\[Omega]:Subscript[Root, _][\[Xi]_, d_], ___] :=
 
 
 allSheets[sheetRealizations_] := 
-Module[{res},
+Block[{res},
        res = Flatten[Outer[List, ##]& @@ sheetRealizations, Length[sheetRealizations] - 1];
        If[debugQ, Print[Style[Row[{Text["All sheets: "], res}], Darker[Green]]]];
        res]
@@ -550,7 +550,7 @@ odeRadial[Derivative[1][Subscript[w_,i_]][z_]==(rhs_),{Subscript[w_,i_],z_},
 sectorSheetPatchPoints[args: PatternSequence[{w_, z_}, {w\[Psi]_, w\[Psi]Prime_}, wSheet_, {odes\[CurlyPhi]_, {\[Psi]_, \[CurlyPhi]_}, r_},    
                                              {odesr_, {\[Psi]_, \[Rho]_}, \[ScriptD]_}, sector:{r1_, \[CurlyPhi]1_, r2_, \[CurlyPhi]2_}, {pp\[CurlyPhi]O_, pprO_}, 
                                              prec_, NDSolveOptions___]] := 
-	Module[{radialStartingValues, radialInits, radialIFs, azimuthalIFs, points, ra, \[CurlyPhi]a, rb, \[CurlyPhi]b, pp\[CurlyPhi], ppr, \[Psi]s,
+	Block[{radialStartingValues, radialInits, radialIFs, azimuthalIFs, points, ra, \[CurlyPhi]a, rb, \[CurlyPhi]b, pp\[CurlyPhi], ppr, \[Psi]s,
             \[CapitalPsi], \[CapitalPsi]P, values, derivatives, defaultNDSolveOptions}, 
         {pp\[CurlyPhi], ppr} = {pp\[CurlyPhi]O, pprO} - 1;
 		(* get initial values for the differential equation *)
@@ -600,7 +600,7 @@ sectorSheetPatchPoints[args: PatternSequence[{w_, z_}, {w\[Psi]_, w\[Psi]Prime_}
 
 interpolateValuesAndDerivatives[{sector:{r1_, \[CurlyPhi]1_, r2_, \[CurlyPhi]2_}, {values_, derivatives_}}, 
                                 {pp\[CurlyPhi]IO_, pprIO_}, ifOptions___] :=
-Module[{rb, \[CurlyPhi]b, pp\[CurlyPhi]I, pprI, \[CapitalPsi]IF, \[CapitalPsi]PIF, valuesIF, derivativesIF},
+Block[{rb, \[CurlyPhi]b, pp\[CurlyPhi]I, pprI, \[CapitalPsi]IF, \[CapitalPsi]PIF, valuesIF, derivativesIF},
      If[(InterpolationOrder /. {ifOptions}) === Automatic,
         Apply[{#1 Cos[#2], #1 Sin[#2], #3}&, {values, derivatives}, {-2}],
        {pp\[CurlyPhi]I, pprI} = {pp\[CurlyPhi]IO, pprIO} - 1;
@@ -628,7 +628,7 @@ Module[{rb, \[CurlyPhi]b, pp\[CurlyPhi]I, pprI, \[CapitalPsi]IF, \[CapitalPsi]PI
 
 makePointsAndNormals = 
 Compile[{{M, _Real, 2}, {valuesAndDerivatives, _Complex, 4}},
-       Module[{values = valuesAndDerivatives[[1]], derivatives = valuesAndDerivatives[[2]],
+       Block[{values = valuesAndDerivatives[[1]], derivatives = valuesAndDerivatives[[2]],
                a = {0., 0., 0.}, b = {0., 0., 0.}},
        {Map[Re[M.{#[[1]], #[[2]], Re[#[[3]]], Im[#[[3]]]}]&, values, {2}], 
         Map[(a = Re[M.{1., 0.,  Re[#[[3]]], Im[#[[3]]]}];
@@ -645,7 +645,7 @@ makeVertexColors[values_, cf_] :=
 
 
 makeGraphicsComplex[{points_?ArrayQ, normals_?ArrayQ}]  :=  
-Module[{lOuter = Length[points], lInner = Length[points[[1]]]}, 
+Block[{lOuter = Length[points], lInner = Length[points[[1]]]}, 
        GraphicsComplex[Flatten[N[points], 1], {EdgeForm[], 
        GraphicsGroup[Polygon[Flatten[#, 1]& @ 
            Table[{i lInner + j, i lInner + j + 1, (i + 1) lInner + j + 1, (i + 1) lInner + j}, 
@@ -685,7 +685,7 @@ complexUnion[{#, N[(wnum //. #) /. z -> z1, prec]}& /@ allSheets,
 
 
 identicalSheetsQ[{sector1_, pointArray1_}, {sector2_, pointArray2_}]  :=  
-Module[{ap1 = Map[Last, pointArray1, {2}], ap2 = Map[Last, pointArray2, {2}], 
+Block[{ap1 = Map[Last, pointArray1, {2}], ap2 = Map[Last, pointArray2, {2}], 
         \[Delta]\[CapitalSigma], scale, \[CurlyEpsilon] = 10^-4}, 
         (* check sum of absolute values of differences at all points *)
         \[Delta]\[CapitalSigma] = Total[Flatten[Abs[ap1 - ap2]]];
@@ -702,7 +702,7 @@ sectorSheetPatches[{w_, z_}, w\[Psi]AndPrime_, wnum_, sheetRealizations_,
                    {odes\[CurlyPhi]_, {\[Psi]_, \[CurlyPhi]_}, r_}, {odesr_, {\[Psi]_, \[Rho]_}, dir_}, 
                    sector:{r1_, \[CurlyPhi]1_, r2_, \[CurlyPhi]2_}, {pp\[CurlyPhi]_, ppr_}, {pp\[CurlyPhi]I_, pprI_}, 
                    prec_, io_, NDSolveOptions___] := 
-Module[{sheetValues, sheetPointArrays, uniqueSheetDataArrays}, 
+Block[{sheetValues, sheetPointArrays, uniqueSheetDataArrays}, 
 		(* the various log and radical sheet realizations *)
        sheetValues = First /@ differentSheetRealizations[sheetRealizations, wnum, z, r1 E^(I \[CurlyPhi]1), prec]; 
 		(* calculating the sheet patches *)
@@ -761,7 +761,7 @@ Module[{sheetValues, sheetPointArrays, uniqueSheetDataArrays},
 
 
 makeConnectingPatches[patchArray_] := 
-Module[{dr = Length[patchArray], d\[CurlyPhi] = Length[patchArray[[1]]],
+Block[{dr = Length[patchArray], d\[CurlyPhi] = Length[patchArray[[1]]],
         patchArrayPairsR, patchArrayPairs\[CapitalPhi], stitchPatches},
        (* radial *)
         patchArrayPairsR = Flatten[Table[{patchArray[[k, j]], patchArray[[k + 1, j]]},
@@ -789,7 +789,7 @@ With[{T = (Take[#, {2, -2}]& /@ #)&},
 
 
 addConnectingStripRadial[{patch1_, patch2_}] := 
-Module[{n = Length[patch1], \[CurlyEpsilon] = 10.^-3, bottoms, tops, diffData},
+Block[{n = Length[patch1], \[CurlyEpsilon] = 10.^-3, bottoms, tops, diffData},
        bottoms = Table[{Last @ patch1[[k, 1]], Last @ patch1[[k, 2]]}, {k, n}];
        tops = Table[{First @ patch2[[k, 1]], First @ patch2[[k, 2]]}, {k, n}];
        Table[diffData = Sort[{N[glueDifference[#]], #}& /@ Table[{bottoms[[i]], tops[[j]]}, {j, n}],
@@ -800,7 +800,7 @@ Module[{n = Length[patch1], \[CurlyEpsilon] = 10.^-3, bottoms, tops, diffData},
 
 
 addConnectingStripAzimuthal[{patch1_, patch2_}] := 
-Module[{n = Length[patch1], \[CurlyEpsilon] = 10.^-3, lefts, rights, diffData},
+Block[{n = Length[patch1], \[CurlyEpsilon] = 10.^-3, lefts, rights, diffData},
        lefts = Table[{Last /@ patch1[[k, 1]], Last /@ patch1[[k, 2]]}, {k, n}]; 
        rights = Table[{First /@ patch2[[k, 1]], First /@ patch2[[k, 2]]}, {k, n}]; 
        Table[diffData = Sort[{N[glueDifference[#]], #}& /@ Table[{lefts[[i]], rights[[j]]}, {j, n}],
@@ -902,7 +902,7 @@ branchCutFreeQ[expr_, z_] := TrueQ[branchCutFreeQI[expr, z]]
 
 
 notTreatedFunctions[w_, z_] := 
-Module[{foreignFunction, u}, 
+Block[{foreignFunction, u}, 
 (* z is the independent variable *)
 foreignFunction[z] = {};
 (* u is the dummy variable needed for the Root pure functions *)
@@ -926,7 +926,7 @@ First /@ Union[Flatten[{foreignFunction[w]}]]]
 
 
 numericQ[w_, z_] := 
-	Module[{x}, SetAttributes[x, NumericFunction]; NumericQ[w //. z->x[1]]]
+	Block[{x}, SetAttributes[x, NumericFunction]; NumericQ[w //. z->x[1]]]
 
 
 RiemannSurfacePlot3D::notANumericFunction = "`1` is not a numeric function of `2`.";
@@ -943,7 +943,7 @@ patchPlotPoints[{r1_, \[CurlyPhi]1_, r2_, \[CurlyPhi]2_}, rMax_, {pp\[CurlyPhi]_
 Clear[RiemannSurfacePatchData];
 RiemannSurfacePatchData[args:PatternSequence[{w_, z_}, {pp\[CurlyPhi]_, ppr_}, {pp\[CurlyPhi]I_, pprI_}, ks_, 
                         branchPointOffset_, workingPrecision_, interpolationOrder_, NDSolveOptions___]] := 
-Module[{wf, wcan, bps, secarray, wnum, \[CapitalPsi]\[CapitalPsi]p, \[CurlyPhi], rplts, subs, odes1, plts, 
+Block[{wf, wcan, bps, secarray, wnum, \[CapitalPsi]\[CapitalPsi]p, \[CurlyPhi], rplts, subs, odes1, plts, 
 		odes2, sr, asp, odes\[CurlyPhi], odesr, rMax, polys, test1, test2, test3, test4, oF, sheetGraphics, 
         \[Psi],  \[Rho] , r,  \[ScriptD], \[Lambda]1, \[Lambda]2, 
         allSheetPatchesArray,  allSheetPatches, allSheetPatchesArrayRes}, 
@@ -1015,7 +1015,7 @@ RiemannSurfaceGraphics3DData[{w_, z_}, reImMatrix_, colorFunction_,
                              {pp\[CurlyPhi]_, ppr_}, {pp\[CurlyPhi]I_, pprI_}, ks_, 
                              branchPointOffset_, workingPrecision_, 
                              interpolationOrder_, stitchQ_, NDSolveOptions___] := 
-Module[{rsfpd = RiemannSurfacePatchData[{w, z}, {pp\[CurlyPhi], ppr}, {pp\[CurlyPhi]I, pprI}, ks, 
+Block[{rsfpd = RiemannSurfacePatchData[{w, z}, {pp\[CurlyPhi], ppr}, {pp\[CurlyPhi]I, pprI}, ks, 
                                         branchPointOffset, workingPrecision, interpolationOrder, NDSolveOptions],
        stitchPatches, stitchCGs},  
      If[debugQ, Print[Style[Row[{Text["Call to RiemannSurfacePatchData with: "],
@@ -1148,7 +1148,7 @@ Join[Options[Graphics3D] /. {(BoxRatios -> _) :> (BoxRatios -> {1, 1, 1.2}),
 
 
 RiemannSurfacePlot3D[eq_Equal, reimw_, {z_, w_}, opts:OptionsPattern[]] :=  
-Module[{pps, ips, lsr, ndsos, bpo, wp, io, sp, MMat, colF, rsfgcs, rsfgcs1, ps,
+Block[{pps, ips, lsr, ndsos, bpo, wp, io, sp, MMat, colF, rsfgcs, rsfgcs1, ps,
         setGraphics3DOptions, defaultGraphics3DOptions, actualGraphics3DOptions}, 
        (* set options *)
        pps = OptionValue[PlotPoints] {1, 1};

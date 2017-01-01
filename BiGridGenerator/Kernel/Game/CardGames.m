@@ -51,7 +51,7 @@ rule={
   core[{a_|b_,_}..,_]:>{3,a~Max~b},
   core[{a_,_}..,_,_,_]:>{2,a},w_core:>ass2[w,1]};
 End[];
-ShowHardQ[case_]:=Module[{num=Length@case/5,par,rank},
+ShowHardQ[case_]:=Block[{num=Length@case/5,par,rank},
   par=Characters@Partition[case,5]/.Thread[Characters@"23456789TJQKA"->Range[2,14]];
   rank[i_,j_]:=If[OrderedQ[Apply[FCS`core,{par[[i]],par[[j]]},{1}]/.FCS`rule],j,i];
   UnitVector[num,FoldPair[{rank[#1,#2],rank[#1,#2]}&,Range@num]]];

@@ -30,7 +30,7 @@ SumProdPartitions::usage="SumProdPartitions[n]给出整数n的积和分解\r
 SumProdPartitions[n,Show->False],不显示分解出的1.";
 SumProdNumber::usage="SumProdNumber[max]给出小于max的整数的最小积和数集合\r
 SumProdNumber[max,s],s代表搜索深度,太小可能会导致丢解,默认为6,可设为Infinite,但是速度会变得很慢";
-DigitReplacePrime::usage="DigitReplacePrime[n,m,p]在n位数搜索交换m位的 p元 素数组.";
+DigitReplacePrime::usage="DigitReplacePrime[n,m,p]在n位数搜索交换m位的p元质数组.";
 (* ::Section:: *)
 (*程序包正体*)
 (* ::Subsection::Closed:: *)
@@ -95,7 +95,7 @@ ModFa[n_,p_]:=Fold[Mod[#1 #2,p]&,Range[n]];
 fontstyle=((Translate[#1,{-4.5,-10}]&)/@First[First[ImportString[ExportString[
   Style[#1,FontSize->24,FontFamily->"Arial"],"PDF"],
   "PDF","TextMode"->"Outlines"]]]&)/@Join[{"."},CharacterRange["0","9"]];
-DigitalCycle[num_,digits_:5000,start_:Pi/4,fontsize_:0.0655]:=Module[{list},
+DigitalCycle[num_,digits_:5000,start_:Pi/4,fontsize_:0.0655]:=Block[{list},
   list=Insert[#[[1]],-1,1+#[[2]]]&@RealDigits[num,10,digits];
   Graphics[MapIndexed[With[{angle=(-(#2[[1]]-2)+Switch[#2[[1]],1,-0.1,2,0,_,0.6])*fontsize},
     With[{scale=(1-1.5*fontsize)^(-angle/(2*Pi))},GeometricTransformation[fontstyle[[#1+2]],
@@ -113,7 +113,7 @@ iCurve[{x_,y_},rad_:15,bin_:60,colorf_:ColorData[35]]:=
     Line[BezierFunction[rad{s,{0,0}+.4Normalize[(s+t)],t}]/@range,
       VertexColors->(Blend[{c1,c2},#]&/@range)]];
 DigitalSector[num_,digits_:1000,style_:35,fontsize_:30]:=
-    Module[{digit,count,cdigits,curves},
+    Block[{digit,count,cdigits,curves},
       digit=First@RealDigits[num,10,digits];
       count=Association[Thread[Range[0,9]->Table[1,10]]];
       cdigits=Partition[{#,count[#]++}&/@digit,2,1];
@@ -135,13 +135,13 @@ MultPrime[n_]:=Union@@Table[p*TakeWhile[Prime[Range[PrimePi[n]]],p*#1<n&],{p,Tak
 PlusPrime[n_]:=Union@@Table[p+TakeWhile[Prime[Range[PrimePi[n]]],p*#1<n&],{p,TakeWhile[l,#1<Sqrt[n]&]}];
 ManyPrime[n_,s_]:=Select[Range[n],PrimeOmega[#1]==s&];
 DisplaySum[a_,{n_,n1_,n2_},opts:OptionsPattern[]]/;n1<=n2:=
-    Module[{nf=Min[n1+OptionValue["Terms"]-1,n2]},Row[{Defer[Sum[a,{n,n1,n2}]],
+    Block[{nf=Min[n1+OptionValue["Terms"]-1,n2]},Row[{Defer[Sum[a,{n,n1,n2}]],
       Composition[Defer,Plus]@@Append[Table[a,{n,n1,nf}],If[n2===\[Infinity],"\[CenterEllipsis]",Nothing]],Sum[a,{n,n1,n2}]},"="]];
 Summation[fun_]:=Sum[fun,{n,1,Infinity},Regularization->#]&/@{"None","Abel","Euler","Cesaro","Dirichlet","Borel"};
-RamanujanSummation[fun_]:=Module[{f},
+RamanujanSummation[fun_]:=Block[{f},
   f=Function[Evaluate@Variables[Level[fun,{-1}]],Evaluate@fun];
   -(f[0]/2)+I*Integrate[(f[I*t]-f[(-I)*t])/(E^(2*Pi*t)-1),{t,0,Infinity}]];
-ImproperSum[function_]:=Module[{ans,name},
+ImproperSum[function_]:=Block[{ans,name},
   ans=Join[Summation[function],{RamanujanSummation[function]}];
   name={"Cauchy","Abel","Euler","Cesaro","Dirichlet","Borel","Ramanujan"};
   TableForm@Transpose[{name,If[Head@#===Sum,"Undefinited",#]&/@ans}]];
@@ -184,7 +184,7 @@ SumProdNumber[max_?IntegerQ,bound_:6(*Infinity不丢解,但是太慢了*)]:=
 (*DRP=DigitReplacePrime 数位替换素数组*)
 Begin["`DRP`"];
 base[k_]:=Array[a,k];
-space[k_,i_]:=Subsets[Range[k-1],{i}]
+space[k_,i_]:=Subsets[Range[k-1],{i}];
 remain[k_,i_]:=Select[IntegerDigits/@Range[10^(k-2-i),10^(k-1-i)-1],Mod[Total[#],3]!=0&];
 remplace[k_,i_]:=Complement[Range[k-1],#]&/@space[k,i];
 tab[k_,i_]:=Table[base[k]/.(Thread[Rule[base[k][[#]]&/@o,m]]),{o,remplace[k,i]},{m,remain[k,i]}]//Flatten[#,1]&;
@@ -197,8 +197,19 @@ DigitReplacePrime[n_,m_,p_]:=Select[#,PrimeQ]&/@Sort[Select[DRP`end[n,m],Total@B
 
 
 
+
+(* ::Subsubsection::Closed:: *)
+(*快速平方判定*)
+SqrtQ[num_,power_:2]:=Round@Surd[N@num,power]^power==num;
+SqrtQSelect[(list_)?VectorQ,power_:2]:=
+    Intersection[Array[#^power&,
+      Ceiling[Surd[Max[list],power]]-Floor[Surd[Min[list],power]]+1,
+      Floor[Surd[Min[list],power]]],list];
+
+
+
 (* ::Subsection::Closed:: *)
 (*附加设置*)
 End[] ;
 
-EndPackage[];
+EndPackage[]

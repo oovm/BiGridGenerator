@@ -54,15 +54,15 @@ SetAttributes[{Magic,Magic3D},Listable];
 
 (* ::Subsubsection:: *)
 (*幻方生成核心代码*)
-Magic[n_?OddQ]:=Module[{p},p=Range[n];
+Magic[n_?OddQ]:=Block[{p},p=Range[n];
 Outer[Plus,p,p-(n+3)/2]~Mod~n*n+Outer[Plus,p,2p-2]~Mod~n+1];
 Magic[n_/;n~Mod~4==0]:=
-    Module[{J,K1,M},J=Floor[(Range[n]~Mod~4)/2.0];
+    Block[{J,K1,M},J=Floor[(Range[n]~Mod~4)/2.0];
     K1=Abs@Outer[Plus,J,-J]~BitXor~1;
     M=Outer[Plus,Range[1,n^2,n],Range[0,n-1]];
     M+K1(n*n+1-2M)]//Experimental`CompileEvaluate;
 Magic[2]:=Message[Magic::nosol];
-Magic[n_?EvenQ]:=Module[{p,M,i,j,k},p=n/2;M=Magic[p];
+Magic[n_?EvenQ]:=Block[{p,M,i,j,k},p=n/2;M=Magic[p];
 M=ArrayFlatten@{{M,M+2p^2},{M+3p^2,M+p^2}};
 If[n==2,Return[M]];
 i=Transpose@{Range@p};
@@ -80,11 +80,11 @@ Magic[x_]:=Message[Magic::nodef];
 Magic[n_,3]:=Magic3D[n];
 Magic3D[n_?OddQ]:=Table[n^2Mod[i-j+k-1,n]+n Mod[i-j-k,n]+Mod[i+j+k-2,n]+1,{i,1,n},{j,1,n},{k,1,n}];
 Magic3D[n_/;n~Mod~4==0]:=
-    Module[{QMagic,FMagic},QMagic[x_]:=If[1<=x<=n/2,0,1];
+    Block[{QMagic,FMagic},QMagic[x_]:=If[1<=x<=n/2,0,1];
     FMagic[i_,j_,k_]:=Mod[i+j+k+QMagic[i]+QMagic[j]+QMagic[k],2];
     Table[If[FMagic[i,j,k]==1,(i-1)n^2+(j-1)n+k,1-k+n(1-j+n(1-i+n))],{i,1,n},{j,1,n},{k,1,n}]];
 Magic3D[2]:=Message[Magic::nosol];
-Magic3D[n_?EvenQ]:=Module[{QMagic,XMagic,u,v,d},
+Magic3D[n_?EvenQ]:=Block[{QMagic,XMagic,u,v,d},
   QMagic[x_]:=If[1<=x<=n/2,0,1];
   XMagic[x_]:=Min[x,n+1-x];
   u=Mod[XMagic[i]-XMagic[j]+XMagic[k],n/2]+1;
@@ -102,7 +102,7 @@ Magic3DShow[n_]:={Graph3D@GridGraph[{n,n,n},VertexLabels->Table[i->Flatten[Magic
 
 (* ::Subsubsection:: *)
 (*幻方判别过程*)
-MagicQ[matrix_]:=Module[{SRow,SCol},
+MagicQ[matrix_]:=Block[{SRow,SCol},
   Print["该矩阵所有数字总和为"<>ToString@Total[Total/@matrix]];
   SRow=Total/@matrix;
   Print["该矩阵各行和分别为"<>ToString@SRow];
@@ -113,7 +113,7 @@ MagicQ[matrix_]:=Module[{SRow,SCol},
   Print["该矩阵主对角线和为"<>ToString@Tr@matrix<>",该矩阵主副角线和为"<>
       ToString@Tr[Reverse/@matrix]];
   If[SameQ[Tr@matrix,Tr[Reverse/@matrix]],True,False]];
-Magic3DQ[x3d_]:=Module[{y3d,z3d,SF,LF,TF},
+Magic3DQ[x3d_]:=Block[{y3d,z3d,SF,LF,TF},
   Print["该立方矩阵所有数字总和为"<>ToString@Total@Flatten@x3d];
   {y3d,z3d}={Transpose[x3d,{3,1,2}],Transpose[x3d,{2,3,1}]};
   SF={Total@Flatten@#&/@x3d,Total@Flatten@#&/@y3d,Total@Flatten@#&/@z3d};

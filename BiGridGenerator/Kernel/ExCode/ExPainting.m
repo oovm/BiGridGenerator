@@ -47,12 +47,12 @@ Begin["`Private`"];
 (* ::Subsubsection:: *)
 (*多边形画风*)
 TriPainting[i_,n_:1000]:=
-    Module[{x,y,pt,pts},{x,y}=ImageDimensions[i];
+    Block[{x,y,pt,pts},{x,y}=ImageDimensions[i];
     pt=Reverse/@RandomChoice[Flatten@ImageData@GradientFilter[i,2]->Tuples@{Range[y,1,-1],Range[x]},n];
     pts=Join[pt,{{0,0},{x,0},{x,y},{0,y}}];
     Graphics[With[{col=RGBColor@ImageValue[i,Mean@@#]},{EdgeForm@col,col,#}]&/@MeshPrimitives[DelaunayMesh@pts,2]]];
 PloyPainting[img_,n_:1000]:=
-    Module[{x,y,gr,pt},{x,y}=ImageDimensions[img];
+    Block[{x,y,gr,pt},{x,y}=ImageDimensions[img];
     gr=ListDensityPlot[
       Transpose@{RandomReal[x,n],RandomReal[y,n],RandomReal[1,n]},
       InterpolationOrder->0,Frame->False,Mesh->All,
@@ -62,7 +62,7 @@ PloyPainting[img_,n_:1000]:=
       {EdgeForm@col,col,#}]&/@pt,AspectRatio->ImageAspectRatio[img]]];
 (*PloyPainting[图片,{精细度,畸变度,网格}]*)
 PloyPainting[img_,{n_,m_:1,mesh_:None}]:=
-    Module[{im,pts,dat},im=ImageAdjust[ImageResize[img,n]];
+    Block[{im,pts,dat},im=ImageAdjust[ImageResize[img,n]];
     dat=Apply[RGBColor,Flatten[Transpose[Reverse[ImageData[im]]],1],{1}];
     pts=Flatten[Table[{x,y}+RandomReal[m{-1,1}],{x,1,n},{y,1,n}],1];
     ListDensityPlot[Flatten/@Transpose[{pts,Range[1,n^2]}],
@@ -71,7 +71,7 @@ PloyPainting[img_,{n_,m_:1,mesh_:None}]:=
       ColorFunction->dat]];
 Dither[pts_,dith_]:=pts+.25 dith RandomReal[{-1,1},{Length@pts,2}];
 GlassPainting[img_,m_:1000,n_:5]:=
-    Module[{bounds,num,seeds,vrnMesh,polygons},
+    Block[{bounds,num,seeds,vrnMesh,polygons},
       bounds=Transpose@{{0,0},ImageDimensions@img};
       num=ImageValuePositions[EdgeDetect[img],White];
       seeds=RandomSample[num,Min[m,Length@num]];
@@ -81,7 +81,7 @@ GlassPainting[img_,m_:1000,n_:5]:=
         MeshPrimitives[Nest[VoronoiMesh[Mean@@@MeshPrimitives[#,2],bounds]&,vrnMesh,n],2]}];
       Graphics@polygons];
 PointPainting[img_,n_:10000]:=
-    Module[{etf,sdf,map,mapdata,data,w,h,ch,spots},
+    Block[{etf,sdf,map,mapdata,data,w,h,ch,spots},
       etf=EntropyFilter[img,12]//ImageAdjust;
       sdf=ColorConvert[StandardDeviationFilter[img,5],"GrayScale"]//ImageAdjust;
       map=ImageAdd[sdf,etf]//ImageAdjust;
@@ -145,7 +145,7 @@ ShapedPainting[pic_,mat___]:=Manipulate[
     BoxMatrix,IdentityMatrix,CrossMatrix,mat}}];
 (*测试代码 ShapedPainting[pic, Rescale@GaussianMatrix[#] &]*)
 QRPainting[aim_,text_:"https://github.com/GalAster/BiGridGenerator"]:=
-    Module[{img,d,tgi,f,cg,dat,color},
+    Block[{img,d,tgi,f,cg,dat,color},
       img=ImageData@ColorConvert[BarcodeImage[text,{"QR","H"},50],"LAB"];
       d=Length@img;
       tgi=ImageAdjust@ImageResize[aim,Most@Dimensions@img];
@@ -179,7 +179,7 @@ ImageAssemble[Map[Image[IDCT[ImageData[#]]]&,ImagePartition[jpeg[img],8],{2}]];*
 (*伪造的劣化绿绿算法,再编译加速下好了
 RGB2RGB=Function[{r,g,b},{RandomReal[{0.9,1.0}]r,RandomReal[{0.99,1.01}]g,RandomReal[{0.9,1.0}]b}];*)
 RGB2RGB=Compile[{{r,_Integer},{g,_Integer},{b,_Integer}},{RandomReal[{0.9,1.0}]r,RandomReal[{0.99,1.01}]g,RandomReal[{0.9,1.0}]b}];
-TiebaPainting[image_,qua_:0.5,time_:20]:=Module[{img,w},
+TiebaPainting[image_,qua_:0.5,time_:20]:=Block[{img,w},
   img=image;
   w=ImageDimensions[img][[1]];
   img=ImageResize[img,201];
@@ -189,13 +189,13 @@ TiebaPainting[image_,qua_:0.5,time_:20]:=Module[{img,w},
     ,{n,1,time}];
   img=ImageResize[img,w]];
 (*本函数全是bug,一点都不好用*)
-ExpandPainting[img_,neigh_:20,samp_:1000]:=Module[{dims,canvas,mask},
+ExpandPainting[img_,neigh_:20,samp_:1000]:=Block[{dims,canvas,mask},
   dims=ImageDimensions[img];
   canvas=ImageCrop[starryNight,2*dims,Padding->White];
   mask=ImageCrop[ConstantImage[Black,dims],2*dims,Padding->White];
   Inpaint[canvas,mask,Method->{"TextureSynthesis","NeighborCount"->30,"MaxSamples"->1000}]];
 (*LineWebPainting[图像,细腻度:100]*)
-LineWebPainting[img_,k_:100]:=Module[{radon,lhalf,inverseDualRadon,lines},
+LineWebPainting[img_,k_:100]:=Block[{radon,lhalf,inverseDualRadon,lines},
   If[k === 0, Return[img]];
   radon=Radon[ColorNegate@ColorConvert[img,"Grayscale"]];
   {w,h}=ImageDimensions[radon];
@@ -203,18 +203,18 @@ LineWebPainting[img_,k_:100]:=Module[{radon,lhalf,inverseDualRadon,lines},
   inverseDualRadon=Image@Chop@InverseFourier[lhalf Fourier[ImageData[radon]]];
   lines=ImageApply[With[{p=Clip[k #,{0,1}]},RandomChoice[{1-p,p}->{0,1}]]&,inverseDualRadon];
   ColorNegate@ImageAdjust[InverseRadon[lines,ImageDimensions[img],Method->None],0,{0,k}]];
-ImageStandUp[img_]:=Module[{lines=ImageLines@DeleteSmallComponents[EdgeDetect[img,Method->{"Canny","StraightEdges"->0.4}]],list},
+ImageStandUp[img_]:=Block[{lines=ImageLines@DeleteSmallComponents[EdgeDetect[img,Method->{"Canny","StraightEdges"->0.4}]],list},
   ImageRotate[img,Mean@Select[list=Mod[-#,Pi/2,-Pi/4]&/@ArcTan@@@Subtract@@@lines,
     Chop[First@Commonest@Round[list,1/1000]-#,1/1000]===0&],Background->Transparent]];
-ImageStandUp[img_,"TryAll"]:=Module[{imgrote},imgrote=ImageRotate[img,#,"SameRatioCropping"]&/@
+ImageStandUp[img_,"TryAll"]:=Block[{imgrote},imgrote=ImageRotate[img,#,"SameRatioCropping"]&/@
     Range[-Pi/2,Pi/2,Pi/6];TableForm[Function[{a,b},a->b]@@@Transpose@{imgrote,ImageStandUp/@imgrote}]];
 
 (*Mondrian[大小,复杂度,比例]*)
-Mondrian[p_,complex_:6,ratio_:0.7]:=Module[{splitx,splity,f,cols},
+Mondrian[p_,complex_:6,ratio_:0.7]:=Block[{splitx,splity,f,cols},
   splitx[Rectangle[{x0_,y0_},{x1_,y1_}]]:=
-      Module[{a=RandomInteger[{x0+1,x1-1}]},{Rectangle[{x0,y0},{a,y1}],Rectangle[{a,y0},{x1,y1}]}];
+      Block[{a=RandomInteger[{x0+1,x1-1}]},{Rectangle[{x0,y0},{a,y1}],Rectangle[{a,y0},{x1,y1}]}];
   splity[Rectangle[{x0_,y0_},{x1_,y1_}]]:=
-      Module[{a=RandomInteger[{y0+1,y1-1}]},{Rectangle[{x0,y0},{x1,a}],Rectangle[{x0,a},{x1,y1}]}];
+      Block[{a=RandomInteger[{y0+1,y1-1}]},{Rectangle[{x0,y0},{x1,a}],Rectangle[{x0,a},{x1,y1}]}];
   f=ReplaceAll[r:Rectangle[{x0_,y0_},{x1_,y1_}]:>RandomChoice[{(x1-x0)^2,(y1-y0)^2,5}->{splitx,splity,Identity}]@r];
   cols=MapThread[Darker,{{Black,White,Yellow,Red,Blue},{0,0.1,0.1,0.15,0.3}}];
   Graphics[{EdgeForm@Thickness[0.012],{FaceForm@RandomChoice@cols,#}&/@

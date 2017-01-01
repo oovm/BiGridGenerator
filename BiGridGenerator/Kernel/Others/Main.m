@@ -17,13 +17,13 @@
 
 BeginPackage["Main`"];
 Begin["`Private`"];
-PlayList[n_]:=Module[{foo,up},
+PlayList[n_]:=Block[{foo,up},
   foo[p_]:=Range[5(-1+p)p,p(4+5p),p];
   up=Floor[-(2/5)+1/5Sqrt[4+5n]];
   Drop[Flatten@{foo/@Range[up],Range[5up(up+1),n,up+1]},1]];
 
 Venn[n_,ineqs_:{}]:=
-    Module[{i,r=.6,R=1,v,grouprules,x,y,x1,x2,y1,y2,ve},
+    Block[{i,r=.6,R=1,v,grouprules,x,y,x1,x2,y1,y2,ve},
       v=Table[Circle[r{Cos[#],Sin[#]}&[2Pi(i-1)/n],R],{i,n}];
       {x1,x2}={Min[#],Max[#]}&[Flatten@Replace[v,Circle[{xx_,yy_},rr_]:>{xx-rr,xx+rr},{1}]];
       {y1,y2}={Min[#],Max[#]}&[Flatten@Replace[v,Circle[{xx_,yy_},rr_]:>{yy-rr,yy+rr},{1}]];
@@ -37,7 +37,7 @@ Venn[n_,ineqs_:{}]:=
 
 
 A = ConstantArray[0, {7, 7}];
-DynamicModule[{pt = {0, 0}},
+DynamicBlock[{pt = {0, 0}},
   Dynamic@EventHandler[
     ArrayPlot[A, ImageSize -> 512, Mesh -> True,
       MeshStyle ->

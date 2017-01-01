@@ -37,7 +37,7 @@ Begin["`Private`"];
 (* ::Subsubsection:: *)
 (*随机巧妙范例*)
 RandomExample[]:=
-    Module[{dir,file,inputs,output,cap,i=0,j=1,in},
+    Block[{dir,file,inputs,output,cap,i=0,j=1,in},
       dir=DirectoryName[FindFile["ExamplePages/CreateMolecularGraphs.nb"]];
       file=RandomChoice[FileNames["*",dir]];
       output=Import[file,{"Cells","Output"}][[1]];
@@ -62,7 +62,7 @@ Gravatar[mail_String,OptionsPattern[]]:=Switch[OptionValue[Method],
   "Standard",TimeConstrained[GravatarLinker[mail,OptionValue[ImageSize]],OptionValue[TimeConstraint],Message[Gravatar::novpn]],
   "Pixels",IdenticonPixels[mail],
   "Cells",IdenticonCells[mail]];
-IdenticonPixels[id_String]:=Module[{hash,color,orient,cells,tm,q},
+IdenticonPixels[id_String]:=Block[{hash,color,orient,cells,tm,q},
   hash=IntegerDigits[Hash[id,"MD5"],8,36];
   color=RGBColor[hash[[1;;3]]/7];
   orient=If[OddQ[hash[[4]]],{Left,Bottom},{Bottom,Left}];
@@ -70,7 +70,7 @@ IdenticonPixels[id_String]:=Module[{hash,color,orient,cells,tm,q},
   q=Image[cells];
   Magnify[ImageAssemble[{{q,ImageReflect[q,orient[[1]]]},
     {ImageReflect[q,orient[[2]]],ImageReflect[ImageReflect[q,Top],Left]}}],4]];
-IdenticonCells[id_String]:=Module[{hash,color,orient,cells,tm,q},
+IdenticonCells[id_String]:=Block[{hash,color,orient,cells,tm,q},
   hash=IntegerDigits[Hash[id,"MD5"],8,36];
   color=RGBColor[hash[[1;;3]]/7];
   orient=If[OddQ[hash[[4]]],{ReflectionMatrix[{1,0}],ReflectionMatrix[{0,1}]},{RotationTransform[Pi/2],RotationTransform[3 Pi/2]}];
@@ -79,7 +79,7 @@ IdenticonCells[id_String]:=Module[{hash,color,orient,cells,tm,q},
   q=MeshPrimitives[tm,cells];
   Graphics[{color,EdgeForm[color],q,Translate[GeometricTransformation[q,orient[[1]]],{2,0}],
     Translate[GeometricTransformation[q,RotationTransform[Pi]],{2,0}],Translate[GeometricTransformation[q,orient[[2]]],{0,0}]}]];
-GravatarLinker[email_,size_: 256]:=Module[{emailparts,randN,input,inputhash,img},
+GravatarLinker[email_,size_: 256]:=Block[{emailparts,randN,input,inputhash,img},
   inputhash=IntegerString[Hash[ToLowerCase[email],"MD5"],16,32];
   Import["http://www.gravatar.com/avatar/"<>inputhash<>"?s="<>ToString[size]<>"&d=identicon&r=PG"]];
 
@@ -87,7 +87,7 @@ GravatarLinker[email_,size_: 256]:=Module[{emailparts,randN,input,inputhash,img}
 
 (* ::Subsubsection:: *)
 (*随机游走研究*)
-CoverTime[G_,i_]:=Module[{Start,Roads,Ex,Si},
+CoverTime[G_,i_]:=Block[{Start,Roads,Ex,Si},
   Start=ConstantArray[0,VertexCount[G]];Start[[i]]=1;
   Roads=Subsets[DeleteCases[Range@VertexCount[G],i]][[2;;-1]];
   Ex=Mean@FirstPassageTimeDistribution[
@@ -96,11 +96,11 @@ CoverTime[G_,i_]:=Module[{Start,Roads,Ex,Si},
   Print@GraphPlot[G,VertexLabeling->True];
   Print[Total[Ex*Si]];];
 
-ExRandomWalk[max_,"2DGridSelfAvoiding"]:=Module[{i=0,pts={{0,0}},moves={{-1,0},{0,1},{1,0},{0,-1}}},
+ExRandomWalk[max_,"2DGridSelfAvoiding"]:=Block[{i=0,pts={{0,0}},moves={{-1,0},{0,1},{1,0},{0,-1}}},
   While[i<max&&Not@(And@@(MemberQ[pts,#]&/@Table[pts[[-1]]+moves[[i]],{i,1,4}])),i++;
   AppendTo[pts,RandomChoice[Select[Table[pts[[-1]]+moves[[i]],{i,1,4}],Not@MemberQ[pts,#]&]]]];
   TemporalData[Transpose@#,{Range@Length@#}]&@pts];
-ExRandomWalk[max_,"3DGridSelfAvoiding"]:=Module[{notvisitedQ,SARW,pts},
+ExRandomWalk[max_,"3DGridSelfAvoiding"]:=Block[{notvisitedQ,SARW,pts},
   notvisitedQ[_]:=True;
   SARW={#1,Select[Flatten[Outer[Plus,{#1},{{1,0,0},{-1,0,0},{0,1,0},{0,-1,0},{0,0,1},{0,0,-1}},1],1],notvisitedQ]}&;
   pts=NestWhileList[SARW[notvisitedQ[#1[[1]]]=False;
@@ -109,11 +109,11 @@ ExRandomWalk[max_,"3DGridSelfAvoiding"]:=Module[{notvisitedQ,SARW,pts},
 
 SetAttributes[RandomWalkPlot,HoldAll];
 RandomWalkPlot[ExRandomWalk[max_,"2DGridSelfAvoiding"]]:=
-    Module[{pts=Transpose[ExRandomWalk[max,"2DGridSelfAvoiding"]["ValueList"]]},
+    Block[{pts=Transpose[ExRandomWalk[max,"2DGridSelfAvoiding"]["ValueList"]]},
       Graphics[Line@pts,Epilog->{PointSize[Large],RGBColor[.6,.74,.36],Point[{0,0}],RGBColor[.9,.42,.17],
         Point[Last@pts],PointSize[Medium],Black,Table[Point[pts[[i]]],{i,2,Length[pts]-1}]},PlotRange->All]];
 RandomWalkPlot[ExRandomWalk[max_,"3DGridSelfAvoiding"]]:=
-    Module[{pts=Transpose[ExRandomWalk[max,"3DGridSelfAvoiding"]["ValueList"]]},
+    Block[{pts=Transpose[ExRandomWalk[max,"3DGridSelfAvoiding"]["ValueList"]]},
       Graphics3D[{Thick,Gray,Line[pts],RGBColor[0.6,0.74,0.36],Sphere[pts[[1]],1],RGBColor[0.9,0.42,0.17],Sphere[pts[[-1]],1]},
         PlotLabel->Style[If[Length[pts]<max,StringJoin[ToString[Length[pts]-1],"步后卡住了!!!"],StringJoin[ToString[max-1],"步后逃逸!"]],"Label",12],
         PlotRange->All,Boxed->False]];
@@ -131,7 +131,7 @@ RandomWalkPlot[ExRandomWalk[max_,"3DGridSelfAvoiding"]]:=
 (*随机图案*)
 InvMollweide[{x_,y_}]:=With[{theta=ArcSin[y]},{Pi(x)/(2Cos[theta]),ArcSin[(2theta+Sin[2theta])/Pi]}];
 (*随机宇宙背景辐射*)
-RandomCBR[res_:64]:=Module[{Alms,fieldN,dat,im},
+RandomCBR[res_:64]:=Block[{Alms,fieldN,dat,im},
   Do[Alms[l,m]=(Random[NormalDistribution[]]+I Random[NormalDistribution[]])/Sqrt[(l+2)(l+1)];
   Alms[l,-m]=(-1)^m Conjugate@Alms[l,m];,{l,0,48},{m,0,l}];
   Do[Alms[l,0]=(Random[NormalDistribution[]])/Sqrt[(l+2)(l+1)];,{l,0,48}];
@@ -155,9 +155,9 @@ RandomPebble[n_,sc_:0.95]:=With[{data=MapIndexed[Flatten[{##1}]&,RandomReal[1,{n
 
 (* ::Subsubsection:: *)
 (*随机列表划分*)
-RandomPartition[n_,p_?IntegerQ]:=Module[{r},r=RandomSample[Range[1,n],p-1]//Sort;
+RandomPartition[n_,p_?IntegerQ]:=Block[{r},r=RandomSample[Range[1,n],p-1]//Sort;
 AppendTo[r,n];Prepend[r//Differences,r[[1]]]];
-RandomPartition[n_,V_?VectorQ]:=Module[{r,s},r=RandomInteger[V,n];
+RandomPartition[n_,V_?VectorQ]:=Block[{r,s},r=RandomInteger[V,n];
 s=Select[Accumulate@r,#<n&]~Join~{n};Append[Differences@s,s[[1]]]];
 
 
@@ -189,7 +189,7 @@ s=Select[Accumulate@r,#<n&]~Join~{n};Append[Differences@s,s[[1]]]];
 死亡时间表 = Range[500, 1500];
 死亡事件表 = {太过鬼畜, 偷看基友洗澡, 太过脑残, 金坷垃洗脑, 看B站视频, 码代码};
 
-AutoBiography[姓名_] := Module[{choose},
+AutoBiography[姓名_] := Block[{choose},
   SeedRandom[Hash[姓名, "CRC32"]];
   choose[表_] := 表[[RandomInteger[{1, Length[表]}]]];
   {种族, 等级, 武器, 必杀技, 战斗力, 死亡时间, 死亡事件} = choose /@ {种族表, 等级表, 武器表, 必杀技表, 战斗力表, 死亡时间表, 死亡事件表};

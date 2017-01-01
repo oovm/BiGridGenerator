@@ -155,7 +155,7 @@ Clear[power];
 power[x_, y_] := Power[x, y] ; (* in other cases, return same as built-in function *)
 
 Clear[isThisASpecialDigit];
-isThisASpecialDigit[iDigit_, nConditions_, digitList_List] := Module[
+isThisASpecialDigit[iDigit_, nConditions_, digitList_List] := Block[
 (* if iDigit is in the list of special digits, then return the 1-based location in the list; otherwise, return 0. *)
 { j },
 For[j = 1, j <= nConditions, j++, If[iDigit == digitList[[j]], Return[j]]
@@ -166,7 +166,7 @@ For[j = 1, j <= nConditions, j++, If[iDigit == digitList[[j]], Return[j]]
 ]; (* end of isThisASpecialDigit *)
 
 Clear[bn];
-bn[iBase_Integer, n_Integer, nConditions_Integer, digitList_?VectorQ] := Module[
+bn[iBase_Integer, n_Integer, nConditions_Integer, digitList_?VectorQ] := Block[
 (* this is for a set of special digits
 compute sum(k = 0 through iBase-1) of k^n (for k not a special digit). example: if iBase = 10, one special digit (d),
 compute bn = 9 (n = 0), bn = 0^n + 1^n + ... + 9^n - d^n (n > 0).*)
@@ -179,7 +179,7 @@ Return[bn];
 ]; (* end of bn *)
 
 Clear[getArrayIndexFromList];
-getArrayIndexFromList[n_Integer, ci_?VectorQ, iList_?VectorQ] := Module[
+getArrayIndexFromList[n_Integer, ci_?VectorQ, iList_?VectorQ] := Block[
 (* this is called with nConditions = n and countList = ci. this function is the inverse of getListFromArrayIndex. *)
 { i, IrwinSum = 0, iProd = 1 }, IrwinSum = iList[[1]];
 For[i = 2, i <= n, i++,
@@ -190,7 +190,7 @@ IrwinSum + 1 (* return this value; all arrays in mathematica are 1-based *)
 
 ]; (* end of getArrayIndexFromList *)
 
-getListFromArrayIndex[iArrayIndex_Integer, n_Integer, ci_?VectorQ] := Module[
+getListFromArrayIndex[iArrayIndex_Integer, n_Integer, ci_?VectorQ] := Block[
 (*
 given an array index, find the list iList[1..n] that gives this index. this is called with nConditions = n and countList = ci.
 this function is the inverse of getArrayIndexFromList.
@@ -207,7 +207,7 @@ iList (* return this list *)
 
 ]; (* end of getListFromArrayIndex *)
 
-updateCumulativeSums1[iBase_Integer, nConditions_Integer, countList_?VectorQ] := Module[
+updateCumulativeSums1[iBase_Integer, nConditions_Integer, countList_?VectorQ] := Block[
 (* if there is one condition, and we are summing the series for k occurrences of a digit, then keep track of all cumulative sums for i = 0, 1, 2, ..., k occurrences of that digit. *)
 { i, iArrayIndex, kOccurFound },
 kOccurFound = Table[ 0, {iBase + 1} ]; For[i = 0, i <= countList[[1]], i++,
@@ -217,7 +217,7 @@ iArrayIndex = getArrayIndexFromList[nConditions, countList, kOccurFound]; cumula
 ]; (* end of updateCumulativeSums1 *)
 
 printAllSums1[iDigit_Integer, nDec_Integer, nConditions_Integer, countList_?VectorQ, iFormatted_Integer] :=
-Module[
+Block[
 (* if there is just one condition, then print
 the sum for k occurrences, k = 0, 1, 2, ... . *)
 { k },
@@ -228,7 +228,7 @@ Print[" sum for ", k, " occurrences = ", nf[cumulativeSums1[[k+1]] , nDec, iForm
 ]; (* end of printAllSums1 *)
 
 directSummation[iBase_Integer, numDigits_Integer, maxPower_Integer, nConditions_Integer, digitList_?VectorQ, countList_?VectorQ, nDec_Integer] :=
-Module[
+Block[
 (* compute partial sums by directly adding terms whose denominators have (numDigits) digits *)
 { nTerms, (* return this value *)
 iStart, iLast, i, iNumber, iDigitPos, iQuot, iRemainder, iDigit, jPower, k, kFound, iOK, iMatch, sumK = 0,
@@ -277,7 +277,7 @@ Label[nextI];
 ]; (* end of directSummation *)
 
 Clear[computeMaxPowerNeeded];
-computeMaxPowerNeeded[iBase_Integer, nDecimals_Integer, dsDigits_Integer] := Module[
+computeMaxPowerNeeded[iBase_Integer, nDecimals_Integer, dsDigits_Integer] := Block[
 (* enter with nDecimals, which specifies the desired tolerance, and dsDigits = 2nd parameter to directSummation.
 let a = iBase^(dsDigits - 1), b = iBase^dsDigits - 1, and eps = 10^-nDecimals.
 directSummation computes Sum[1/n^j, {n, a, b}] for j = 1, 2, ..., k.
@@ -312,7 +312,7 @@ r0 + 2 (* add 2 more powers just to be safe *)
 Clear[computeIrwinSum];
 computeIrwinSum[iBase_Integer, digitList_?VectorQ, countList_?VectorQ, nDecimals0_Integer, iFormatted_Integer,
 nDigits_:0, threshold_:-1 ] :=
-Module[
+Block[
 (* this private function is the main calculation routine for the package. if nDigits > 0, this computes the partial sum through denominators
 of (nDigits) digits, that is, denominators that are < 10^nDigits,
 and then terminates without computing the complete sum. this parameter is used when the user calls iPartialSum[ ].
@@ -647,7 +647,7 @@ Break[]
 IrwinSum, iSumFormatted, iPartialSum, iPartialSumThreshold, setPrintLevel *)
 
 Clear[IrwinSum];
-IrwinSum[digitList_?VectorQ, countList_?VectorQ, nDecimals_:15, iBase_:10, iFormatted_:0] := Module[
+IrwinSum[digitList_?VectorQ, countList_?VectorQ, nDecimals_:15, iBase_:10, iFormatted_:0] := Block[
 (* examples:
 IrwinSum[ { 9 }, { 3 } ] = 对1/n求和 where n has exactly three 9's.
 IrwinSum[ { 9 }, { 3 }, 30 ] = same calculation, display result rounded to 30 decimals. IrwinSum[{9, 3}, {2, 0}] = 对1/n求和 where n has two 9's and no 3's
@@ -658,7 +658,7 @@ computeIrwinSum[iBase, digitList, countList, nDecimals, iFormatted]
 
 ]; (* end of IrwinSum[digit list, count list, decimals, base] *)
 
-IrwinSum[d_Integer, iCount_Integer, nDecimals_:15, iBase_:10, iFormatted_:0] := Module[
+IrwinSum[d_Integer, iCount_Integer, nDecimals_:15, iBase_:10, iFormatted_:0] := Block[
 (* examples:
 IrwinSum[ 9, 0 ] = 对1/n求和 where n has no 9's. IrwinSum[ 9, 2 ] = 对1/n求和 where n has two 9's.
 IrwinSum[ 9, 2, 30 ] = same calculation, to 30 decimals.
@@ -671,17 +671,17 @@ IrwinSum[ { d }, { iCount }, nDecimals, iBase, iFormatted ]
 ]; (* end of IrwinSum[digit, count, decimals, base] *)
 
 Clear[iSumFormatted];
-iSumFormatted[digitList_?VectorQ, countList_?VectorQ, nDecimals_:15, iBase_:10] := Module[
+iSumFormatted[digitList_?VectorQ, countList_?VectorQ, nDecimals_:15, iBase_:10] := Block[
 { iFormatted = 1 },
 IrwinSum[digitList, countList, nDecimals, iBase, iFormatted]
 ]; (* end of iSumFormatted[digit list, count list, decimals, base] *)
 
-iSumFormatted[d_Integer, iCount_Integer, nDecimals_:15, iBase_:10] := Module[
+iSumFormatted[d_Integer, iCount_Integer, nDecimals_:15, iBase_:10] := Block[
 { iFormatted = 1 },
 IrwinSum[d, iCount, nDecimals, iBase, iFormatted]
 ]; (* end of iSumFormatted[digit, count, decimals, base] *)
 
-Clear[setPrintLevel]; setPrintLevel[i_Integer] := Module[
+Clear[setPrintLevel]; setPrintLevel[i_Integer] := Block[
 { i2 },
 i2 = i;
 (* 0 is the minimum value a user can set. however, some functions like iPartialSumThreshold can set it lower *)
@@ -691,7 +691,7 @@ Print["print level set to ", iSumPrintLevel]
 
 Clear[iPartialSum];
 iPartialSum[digitList_?VectorQ, countList_?VectorQ, nDigits_Integer?Positive, nDecimals_:15, iBase_:10] :=
-Module[
+Block[
 (* examples of "list" version of iPartialSum:
 iPartialSum[ {9}, {0}, 30 ] = sum to 10^30 of 1/n where n has no 9's.
 iPartialSum[ { 9, 0 }, { 3, 1 }, 20 ] = sum to 10^20 of 1/n where n has three 9's and one
@@ -702,7 +702,7 @@ computeIrwinSum[iBase, digitList, countList, nDecimals, iFormatted, nDigits]
 
 ]; (* end of iPartialSum[digit list, count list, numDigits, decimals, base] *)
 
-iPartialSum[d_Integer, iCount_Integer, nDigits_Integer?Positive, nDecimals_:15, iBase_:10] := Module[
+iPartialSum[d_Integer, iCount_Integer, nDigits_Integer?Positive, nDecimals_:15, iBase_:10] := Block[
 (* examples:
 iPartialSum[ 9, 0, 20 ] = sum to 10^20 of 1/n where n has no 9's. iPartialSum[ 9, 2, 20 ] = sum to 10^20 of 1/n where n has two 9's. iPartialSum[ 9, 2, 20, 30 ] = same calculation, to 30 decimals.
 iPartialSum[1, 1, 6, 15, 2] = partial 对1/n求和 where n has one 1
@@ -715,7 +715,7 @@ in base 2, for n < 2^6, to 15 decimals.
 
 Clear[iPartialSumThreshold];
 iPartialSumThreshold[digitList_?VectorQ, countList_?VectorQ, threshold_?Positive, nDecimals_:15, iBase_:10] :=
-Module[
+Block[
 (* example of "list" version of iPartialSum: the 对1/n求和 where n has three 9's and one 0, is IrwinSum[{9, 0}, {3, 1}] = 2.888545932755274 . therefore, the threshold must be less than
 this
 
@@ -773,7 +773,7 @@ Return[ errorReturn ] (* error *)
 
 ]; (* end of iPartialSumThreshold[digit list, count list, threshold, decimals, base] *)
 
-iPartialSumThreshold[d_Integer, iCount_Integer, threshold_?Positive, nDecimals_:15, iBase_:10] := Module[
+iPartialSumThreshold[d_Integer, iCount_Integer, threshold_?Positive, nDecimals_:15, iBase_:10] := Block[
 (* examples:
 iPartialSumThreshold[9, 1, 23]: for the 对1/n求和 where n has one 9,
 whose sum is IrwinSum[9, 1] = 23.044287080747848, iPartialSumThreshold[9, 1, 23] computes about how far we need to go to reach a partial sum of 23.
@@ -806,7 +806,7 @@ iPartialSumThreshold[ { d }, { iCount }, threshold, nDecimals, iBase ]
 ]; (* end of iPartialSumThreshold[digit, count, threshold, decimals, base] *)
 
 iPartialSumThreshold[digitList_?VectorQ, countList_?VectorQ, pSumStr_String, nDecimals_:15, iBase_:10] :=
-Module[
+Block[
 (* the threshold was entered as a string. add double backquotes to specify the accuracy, then call another version of iPartialSumThreshold. *)
 { pSum, inputStr2, decPtList, quoteList, nDecimalsInput, nDec2, errorReturn = { -1, -1, -1, -1 }
 },
@@ -834,7 +834,7 @@ iPartialSumThreshold[digitList, countList, pSum, nDecimals, iBase]
 
 ]; (* end of iPartialSumThreshold[digit list, count list, threshold string, decimals, base] *)
 
-iPartialSumThreshold[d_Integer, iCount_Integer, pSumStr_String, nDecimals_:15, iBase_:10] := Module[
+iPartialSumThreshold[d_Integer, iCount_Integer, pSumStr_String, nDecimals_:15, iBase_:10] := Block[
 { },
 iPartialSumThreshold[ { d }, { iCount }, pSumStr, nDecimals, iBase]
 ]; (* end of iPartialSumThreshold[digit, count, threshold string, decimals, base] *) End[ ] (* end the private context *)

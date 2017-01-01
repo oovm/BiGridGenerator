@@ -84,7 +84,7 @@ NumberToEnglish[n_/;100<=n<=999&&Mod[n,100]===0]:=AusEnglish1[[Floor[n,100]/100+
 NumberToEnglish[n_Integer/;100<=n<=999]:=AusEnglish1[[Floor[n,100]/100+1]]<>" hundred and "<>NumberToEnglish[Mod[n,100]]
 AusEnglish5=Join[{" "},(Function[{x,y},x<>y]@@@Transpose@{ConstantArray["and ",99],NumberToEnglish/@Range@99}),NumberToEnglish/@Range[100,999]];
 NumberToEnglish[n_Integer/;1000<=n<=9999]:=AusEnglish1[[Floor[n,1000]/1000+1]]<>" thousand "<>AusEnglish5[[Mod[n,1000]+1]];
-NumberToEnglish[n_Integer/;n>=10000]:=Module[{r,
+NumberToEnglish[n_Integer/;n>=10000]:=Block[{r,
   numNames={""," one"," two"," three"," four"," five"," six"," seven"," eight"," nine"},
   teenNames={" ten"," eleven"," twelve"," thirteen"," fourteen"," fifteen"," sixteen"," seventeen"," eighteen"," nineteen"},
   tensNames={""," ten"," twenty"," thirty"," forty"," fifty"," sixty"," seventy"," eighty"," ninety"},

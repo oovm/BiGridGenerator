@@ -68,7 +68,7 @@ GraphRPS[n_?IntegerQ,size_:18]:=AdjacencyGraph[MatrixRPS[n],
   GraphLayout->"CircularEmbedding",ImageSize->Large];
 GraphRPS[n_]:=MatrixRPS[2];
 Needs["ExData`"];
-GameRPS=DynamicModule[{history={},hLast=0,cLast=0,hScore=0,
+GameRPS=DynamicBlock[{history={},hLast=0,cLast=0,hScore=0,
   cScore=0,message=""},Panel@Column[{Dynamic@Grid[{{Column[MapIndexed[Button[#,cLast=chooseGo2[history];
 hLast=#2[[1]];
 message=Switch[winTest[hLast,cLast],"Win",hScore++;"Youwin","Lose",cScore++;"Youlose",_,"Draw"];
@@ -127,7 +127,7 @@ SudokuExc[m_][c__]:=If[#!={},{m[[c]]}=#,""]&@Cases[SudokuFX2[BitOr@@#,m[[c]]]&/@
 (*256 means only 8 is possible,1 means only 0 is possible (we're using 0-8,instead of 1-9)*)
 (*FixedPoint applies SudokuFX3 and SudokuExc repeatedly to all locations that are not yet solved (=to a SudokuPof2) "good" is*)
 (*a list of these positions,m (the modified board) is returned*)
-SudokuLoop[board_]:=Module[{m=board},(FixedPoint[Block[{good=Position[m,Except[SudokuPof2,_Integer],{-1}]},SudokuFX3[m]@@@good;SudokuExc[m]@@@good]&,{}];m)];
+SudokuLoop[board_]:=Block[{m=board},(FixedPoint[Block[{good=Position[m,Except[SudokuPof2,_Integer],{-1}]},SudokuFX3[m]@@@good;SudokuExc[m]@@@good]&,{}];m)];
 (*returns the position of the element {w,x,y,z} that is most nearly a power of 2,for example 48 has only*)
 (*two possibles:4 or 5 (48=2^4+2^5)*)
 SudokuNear=Position[#,Min@#,-1,1][[1]]&[Map[#~Count~1&,IntegerDigits[#,2,9],{-2}]/.1->10]&;
@@ -146,7 +146,7 @@ SudokuPrep=2^(#~Partition~{3,3}-1)/.1/2->511&;
 (*"Catch" should get the complete boards Throw'n in SudokuSplit above*)
 SudokuSolverFast=2~Log~Catch[SudokuSplit@SudokuLoop@SudokuPrep@#]+1&;
 
-ShowMarking[marking_]:=Module[{},Graphics[
+ShowMarking[marking_]:=Block[{},Graphics[
   Table[{EdgeForm[Thin],If[EvenQ[Floor[(j-1)/3]+Floor[(i-1)/3]*3],
     Lighter[Gray,0.5],White],Rectangle[{i,j},{i+1,j+1}],Black,
     If[KeyExistsQ[marking,{i,10-j}],
@@ -160,7 +160,7 @@ ShowMarking[initialHard](*需要写一个转换器*)
 
 (* ::Subsubsection:: *)
 (*扫雷程序块*)
-MineLayout[{m_,n_,k_}]:=Module[{M,foo,bar,list},
+MineLayout[{m_,n_,k_}]:=Block[{M,foo,bar,list},
   M=ConstantArray[0,{m+2,n+2}];
   foo[{x_,y_}]:=M[[x-1;;x+1,y-1;;y+1]]+=1;
   bar[{x_,y_}]:=M[[x,y]]=10;

@@ -50,11 +50,11 @@ Begin["`Private`"];
 (* ::Subsubsection:: *)
 (*超加密、超解密*)
 SetAttributes[{CodeToCipher,ExEncrypt},HoldAll];
-CodeToCipher[Str_]:=Module[{密匙,输出},
+CodeToCipher[Str_]:=Block[{密匙,输出},
   密匙=GenerateSymmetricKey[Method-><|"Cipher"->"AES256",
     "InitializationVector"->ByteArray[{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16}]|>];
   输出=Join[Normal@密匙["Key"],Normal@Encrypt[密匙,Compress@Hold@Str]["Data"]]];
-CipherToCode[Str_,Safe_:False]:=Module[{破译密匙,破译内容},
+CipherToCode[Str_,Safe_:False]:=Block[{破译密匙,破译内容},
   破译密匙=SymmetricKey[<|"Cipher"->"AES256","BlockMode"->"CBC","Key"->ByteArray[Str[[1;;32]]],
     "InitializationVector"->ByteArray["AQIDBAUGBwgJCgsMDQ4PEA=="]|>];
   破译内容=EncryptedObject[<|"Data"->ByteArray[Str[[33;;-1]]],
@@ -64,6 +64,7 @@ CharSet[Str_]:=StringPartition[Str,1];
 CharAss[Way_]:=AssociationThread[Range@Length[CharSet[Way]]->CharSet[Way]];
 CharAnti[Way_]:=AssociationThread[CharSet[Way]->Range@Length[CharSet[Way]]];
 ExEncrypt[Str_,Way_]:=StringJoin[Map[CharAss[Way],IntegerDigits[FromDigits[CodeToCipher@Str,256],Length@CharSet[Way]]+1]];
+ExDecrypt[Str_String]:=ExDecrypt[Str,DeleteDuplicates@StringPartition[Str,1],False];
 ExDecrypt[Str_String,Way_,Safe_:False]:=CipherToCode[IntegerDigits[FromDigits[Map[CharAnti[Way],
   StringPartition[Str,1]]-1,Length@CharSet[Way]],256],Safe];
 (*StringJoin@Union@StringPartition[%,1]*)
@@ -78,17 +79,28 @@ CharSet[Language\[Rule]"MarySue"]:=StringPartition[
 语凌爱陌悠千艳优花晶墨阳云筱残莲沫渺琴依然丝可茉黎幽幻银韵倾乐慕文思蕊清碎音芊黛怡莎苏香城萌美迷离白嫩风霜萝妖百合珠喃之倩情恋弥绯芸茜魂澪琪\
 欣呗缈娅吉拉斯基柔惠朵茹妙铃裳纱颖蕴燢浅萦璎糜凪莳娥寂翼巧哀俏涅盘辰芝艾柒曼妲眉御寇妮米菲奥格萨温蒂",1];
 *)
-ExEncrypt[Str_,Language->"MarySue"]:=Module[{ans,ins},
+ExEncrypt[Str_,Language->"MarySue"]:=Block[{ans,ins},
   ans=IntegerDigits[FromDigits[CodeToCipher@Str,256],Length@CharSet[Language->"MarySue"]]+1;
   ins=Select[Accumulate[{RandomInteger[{2,8}]}~Join~RandomInteger[{1,9},Length@ans]],#<Length@ans&];
   StringInsert[StringJoin[CharAss[Language->"MarySue"]/@ans],"\[CenterDot]",ins]];
-ExDecrypt[Str_String,Language->"MarySue",Safe_:False]:=Module[{input,res},
+ExDecrypt[Str_String,Language->"MarySue",Safe_:False]:=Block[{input,res},
   input=CharAnti[Language->"MarySue"]/@StringPartition[StringDelete[Str,"\[CenterDot]"],1];
   res=IntegerDigits[FromDigits[input-1,Length@CharSet[Language->"MarySue"]],256];
   CipherToCode[res,Safe]];
 CharSet[Language->name_]:=Alphabet[Language->name];
 CharSet[Language->"Chinese"]:=StringPartition[FromCharacterCode[Range[13312,40869]],1];
 CharSet[Language->"ASCII"]:=StringPartition[FromCharacterCode[Range[32,126]],1];
+CharSet[Language->"长者之问"]:=StringPartition["苟利国家生死以岂因祸福避趋之",1];
+ExEncrypt[Str_,Language->"长者之问"]:=Block[{ans,ins},
+  ans=IntegerDigits[FromDigits[CodeToCipher@Str,256],Length@CharSet[Language->"长者之问"]]+1;
+  ins=Select[Accumulate[{RandomInteger[{2,5}]}~Join~RandomInteger[{5,20},Length@ans]],#<Length@ans&];
+  StringInsert[StringJoin[CharAss[Language->"长者之问"]/@ans],"?\r",ins]<>"?"];
+ExDecrypt[Str_String,Language->"长者之问",Safe_:False]:=Block[{input,res},
+  input=CharAnti[Language->"长者之问"]/@StringPartition[StringDelete[StringJoin@Str,{"?","\n"}],1];
+  res=IntegerDigits[FromDigits[input-1,Length@CharSet[Language->"长者之问"]],256];
+  CipherToCode[res,Safe]];
+
+
 
 
 

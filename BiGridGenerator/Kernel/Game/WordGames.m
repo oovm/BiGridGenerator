@@ -38,14 +38,14 @@ Begin["`Private`"];
 (* ::Subsubsection:: *)
 (*词方*)
 Options[WordSquare]={Language->"English",Dimensions->2};
-WordSquare[len_,pattern_:All,OptionsPattern[]]:=Module[{alln,goal},
+WordSquare[len_,pattern_:All,OptionsPattern[]]:=Block[{alln,goal},
   alln=Characters/@Select[DictionaryLookup[{OptionValue[Language],All}],StringLength[#1]==len&];
   nmatch[patt_]:=nmatch[Verbatim[patt]]=Length[Cases[alln,patt]];
-  findCompletions[m_]:=Module[{nn,ur},
+  findCompletions[m_]:=Block[{nn,ur},
     {ur,nn}=NestWhile[{fixone[#1[[1]],First[#1[[2]]]],Rest[#1[[2]]]}&,
       {m,Ordering[nmatch/@m]},Length[#1[[2]]]>0&&nmatch[#1[[1,#1[[2,1]]]]]==1&];If[Length[nn]==0,{ur},With[{n=First[nn]},
       (ReplacePart[ur,n->#1]&)/@Cases[alln,ur[[n]]]]]];
-  findCompletionsOriented[m_]:=Module[{osc},
+  findCompletionsOriented[m_]:=Block[{osc},
     osc=findCompletions/@Union[{m,Transpose[m]}];
     osc[[First[Ordering[Length/@osc,1]]]]];
   fixone[ml_,nl_]:=If[FreeQ[ml[[nl]],Verbatim[_]],ml,ReplacePart[ml,nl->First[Cases[alln,ml[[nl]]]]]];
@@ -73,7 +73,7 @@ nextIndices[mat_,indices_,nextIndex_]:=Extract[indices,nextIndex];
 inspect[mat_,True]:=Throw[mat,tag];
 inspect[mat_,indices_]:=Scan[Function[word,inspect[change[mat,word,indices]]],
   (Characters[$random[Pick[#1,StringMatchQ[#1,StringExpression@@mat[[Sequence@@First[indices]]]]]]]&)[dict[Length[mat]]]];
-change[mat_,word_,indices_]:=Module[{newMat=mat},Scan[Function[wordPos,newMat[[Sequence@@wordPos]]=word],indices];newMat];
+change[mat_,word_,indices_]:=Block[{newMat=mat},Scan[Function[wordPos,newMat[[Sequence@@wordPos]]=word],indices];newMat];
 
 
 
@@ -83,7 +83,7 @@ makeTree[wrds:{__String}]:=makeTree[Characters[wrds]];
 makeTree[wrds_/;MemberQ[wrds,{}]]:=Prepend[makeTree[DeleteCases[wrds,{}]],{}->{}];
 makeTree[wrds_]:=Reap[(If[#1=!={},Sow[Rest[#1],First[#1]]]&)/@wrds,_,#1->makeTree[#2]&][[2]];
 getLetterAndAdjacencyRules[(letterMatrix_)?(MatrixQ[#1,StringQ]&)]:=
-    Module[{a,lrules,p,adjRules},lrules=(Thread[Range[Length[#1]]->#1]&)[
+    Block[{a,lrules,p,adjRules},lrules=(Thread[Range[Length[#1]]->#1]&)[
       Flatten[letterMatrix]];p=ArrayPad[Partition[Array[a,Length[lrules]],
       Last[Dimensions[letterMatrix]]],1];
     adjRules=Flatten[ListConvolve[{{1,1,1},{1,2,1},{1,1,1}},p]/.Plus->List/.
@@ -102,7 +102,7 @@ wordsFromVertexSequences[vseqs_List,letterRules_]:=StringJoin/@(vseqs/.letterRul
 GetWordTree[minLen_Integer:1,maxLen:_Integer|Infinity:Infinity]:=
     makeTree[Select[ToLowerCase[DictionaryLookup["*"]],minLen<=StringLength[#1]<=maxLen&]];
 BoggleSolver[board_String,wordTree_]:=BoggleSolver[ToLowerCase[ImportString[board]],wordTree];
-BoggleSolver[lboard_,wordTree_]:=Module[{lrules,adjrules},
+BoggleSolver[lboard_,wordTree_]:=Block[{lrules,adjrules},
   {lrules,adjrules}=getLetterAndAdjacencyRules[lboard];
   wordsFromVertexSequences[getVertexSequences[adjrules,lrules,wordTree,Times@@Dimensions[lboard]],lrules]];
 

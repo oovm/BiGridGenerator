@@ -66,7 +66,7 @@ LispForm[exp_,"匿天算"]:=Block[{ml,str,tra,trap,aaa,bbb,ccc,ddd,eee},
 (* ::Subsubsection:: *)
 (*三角形式排列*)
 Options[TriangleForm]={ColorFunction->ColorDataFunction["Black","Gradients",{0,1},If[#1<0,#1,Black]&]};
-TriangleForm[triArray_List,OptionsPattern[]]:=Module[{n=Length[triArray]},
+TriangleForm[triArray_List,OptionsPattern[]]:=Block[{n=Length[triArray]},
   Graphics[MapIndexed[Text[Style[#1,Large,OptionValue[ColorFunction]
   [(Min[triArray]-#1)/Subtract@@MinMax[triArray]]],
     {Sqrt[3]*(n-1+#2.{-1,2}),3*(n-First[#2]+1)}/2]&,triArray,{2}]]];
