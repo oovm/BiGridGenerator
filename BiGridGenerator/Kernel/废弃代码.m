@@ -471,3 +471,58 @@ Export["All2.png",All2,Background->None,ImageResolution->200];
 IMethod[n_]:=NIntegrate[(1-Product[Subscript[x,i](1-Subscript[x,i]),{i,1,n}])^(-1),##]&@@Array[{Subscript[x,#],0,1}&,n];
 HMethod[n_]:=N@HypergeometricPFQ[ConstantArray[1,n+1],ConstantArray[3/2,n],1/4^n]
 Table[NMethod[i]-HMethod[i],{i,1,20}]
+
+solvedata[nn_]:=Table[ListPlot[Style[{Re[#],Im[#]}&/@Join[{n},
+  Table[-n /Log[n] ProductLog[1/n (-1)^(i/n) Log[n]],{i,0,n}]],Hue[n/10]],
+  PlotStyle->PointSize[Large],PlotRange->All,PlotLegends->Style[TraditionalForm[n^x==x^n],Hue[n/10]],Background->None],{n,2,nn}];
+指数函数=Plot[Evaluate@Table[n^x-x^n,{n,1,10}],{x,-2.5,2.5},PlotLegends->Table[ToString@TraditionalForm[n^x==x^n],{n,1,10}],
+  PlotRange->{-10,20},AspectRatio->1/2,PlotTheme->{"Classic","Frame"},ImageSize->500,Background->None];
+Export["指数函数.png",Grid[{{Show[solvedata[11],PlotRange->All,ImageSize->500]},{指数函数}}],Background->None,ImageResolution->100];
+
+data=Transpose@Table[{
+  Integrate[Floor[t],{t,0,n}],
+  Integrate[Ceiling[t],{t,0,n}],
+  Integrate[Round[t],{t,0,n}],
+  Integrate[SawtoothWave[t],{t,0,n}]
+},{n,0,10,0.1}];
+png=GraphicsGrid[{{Plot[{Floor[t],Ceiling[t],Round[t],SawtoothWave[t]},{t,0,10},AspectRatio->1/2,PlotTheme->"Web",PlotLegends->{"Floor","Ceiling","Round","SawtoothWave"},ImageSize->{400,400}]},{ListLinePlot[data,AspectRatio->1/2,PlotTheme->"Web",PlotLegends->{"\[Integral]Floor","\[Integral]Ceiling","\[Integral]Round","\[Integral]SawtoothWave"},ImageSize->400]}},AspectRatio->1/2,ImageSize->Large]
+Export["Guass_Integrate.png",png,Background->None];
+
+
+
+BaileyP[s_,b_,n_,A_]:=Block[{k,echo},
+  echo=Evaluate[1/b^k  Plus@@(A/Array[(n k+#)&,n])];
+  Echo[Inactivate@Sum[echo,{k,0,Infinity}],"和式展开为: "]]
+BaileyP[1,16,8,{4,0,0,-2,-1,-1,0,0}]//Activate
+%//FullSimplify
+
+
+Clear["`*"]
+s=5;p=0.4;n=20;
+(*蒙特卡洛大法*)
+t=0;
+Do[f=RandomChoice[{p,1-p}->{1,0},n+s-1];
+Do[If[f[[i]]==1,f[[i+1;;i+s-1]]=0],{i,1,n}];
+f=f[[1;;n]];
+g=ConstantArray[0,n+s-1];
+Do[If[f[[i]]==1,g[[i;;i+s-1]]=1],{i,1,n}];
+t+=Total@g[[1;;n]],{j,1,10000}]
+"非覆盖理论值 \[TildeTilde] "<>ToString[n s p/(p (s-1)+1)]
+"非覆盖模拟值 = "<>ToString[t/10000.0]
+t=0;
+Do[g=ConstantArray[0,n+s-1];
+f=RandomChoice[{p,1-p}->{1,0},n];
+Do[If[f[[i]]==1,g[[i;;i+s-1]]=1],{i,1,n}];
+t+=Total@g[[1;;n]],{j,1,10000}]
+"覆盖理论值   = "<>ToString[(-1+p+n p+(1-p)^s (1+p (-1-n+s)))/p]
+"覆盖模拟值   = "<>ToString[t/10000.0]
+
+
+
+can=Rest[Union@@(Range[#,100,#]&/@{7,13})];
+ass=Gather[IntegerDigits[can],First[#1]==First[#2]&][[All,All,2]];
+foo=Function[p,Join[p,{#}]&/@ass[[Last@p]]];
+findpath[path_]:=Select[Flatten[foo/@path,1],DuplicateFreeQ];
+Array[Quiet@Nest[findpath,{{#}},8]&,9]//RepeatedTiming
+
+

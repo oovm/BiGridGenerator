@@ -94,11 +94,19 @@ Protect[CDF,PDF,Mean];
 
 
 
+
+
 (* ::Subsubsection:: *)
-(*伪随机分布*)
-
-
-
+(*竞技场与天梯挑战*)
+ArenaPropertiesName={"总可能胜负链数","胜利概率","失败概率","胜利平均进行场数","失败平均进行场数","进行场数期望","胜利场数期望","失败场数期望"};
+ArenaExpection[w_,l_,p_:p]:=Block[{AT,AL,AW,EL,EW,pro},
+  AT=Gamma[1+l+w]/(Gamma[1+l]*Gamma[1+w]);
+  AL=w Beta[p,w,l] Binomial[-1+l+w,-1+l];
+  AW=1-AL;
+  EL=(1-p)^l Sum[(i+l)Binomial[i+l-1,l-1]p^i,{i,0,w-1}];
+  EW=p^w Sum[(w+i)Binomial[w+i-1,w-1](1-p)^i,{i,0,l-1}];
+  pro={AT,AL,AW,EL/AW,EW/AL,EL+EW,p(EL+EW),(1-p)(EL+EW)};
+  Association@@Rule@@@Transpose[{ArenaPropertiesName,FullSimplify@pro}]];
 
 
 

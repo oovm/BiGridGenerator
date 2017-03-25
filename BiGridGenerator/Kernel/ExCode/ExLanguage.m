@@ -57,7 +57,7 @@ NumberToChinese[n_Integer/;100<=n<=999]:=ToString@R[[Floor[n,100]/100+1,1]]<>ToS
 NumberToChinese[n_Integer/;1000<=n<=9999]:=ToString@R[[Floor[n,1000]/1000+1,1]]<>ToString@R[[13,1]]<>Join[f3,NumberToChinese/@Range[100,999]][[Mod[n,1000]+1]];
 ResChinese=Graph[#\[DirectedEdge]ChineseToNumber@NumberToChinese@#&/@Range[0,99],VertexLabels->Placed["Name",Center],
   VertexLabelStyle->Directive[12,Lighter@Blue,Bold],VertexSize->0.8,EdgeShapeFunction->GraphElementData["ShortFilledArrow","ArrowSize"->0.01],
-  GraphLayout->"SpringElectricalEmbedding",ImageSize->Full];
+  GraphLayout->{"PackingLayout"->"ClosestPacking"},ImageSize->Full,PlotLabel->Style["英文数字",FontFamily->"简体中文小写",FontSize->48]];
 
 
 拼音={{"零","líng"},{"一","yī"},{"二","èr"},{"三","sān"},{"四","sì"},{"五","wǔ"},{"六","liù"},
@@ -67,7 +67,7 @@ NumberToPinyin[n_Integer/;0<=n<=50]:=NumberToChinese@n;
 PinyinToNumber[s_String]:=Total[数位/@Characters@s];
 ResPinyin=Graph[#\[DirectedEdge]PinyinToNumber@NumberToPinyin@#&/@Range[0,50],VertexLabels->Placed["Name",Center],
   VertexLabelStyle->Directive[12,Lighter@Blue,Bold],VertexSize->0.6,EdgeShapeFunction->GraphElementData["ShortFilledArrow","ArrowSize"->0.01],
-  GraphLayout->"SpringElectricalEmbedding",ImageSize->Full];
+  GraphLayout->{"PackingLayout"->"ClosestPacking"},ImageSize->Full,PlotLabel->Style["数字拼音",FontFamily->"华文楷体",FontSize->48]];
 
 
 
@@ -77,11 +77,11 @@ AusEnglish1={"","one","two","three","four","five","six","seven","eight","nine"};
 AusEnglish2={"ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen","twenty"};
 AusEnglish3={"twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"};
 EnglishToNumber[s_String]:=StringLength@s;
-NumberToEnglish[n_Integer/;1<=n<=19]:=StringDelete[(AusEnglish1~Join~AusEnglish2)[[n+1]],"-"]
+NumberToEnglish[n_Integer/;1<=n<=19]:=StringDelete[(AusEnglish1~Join~AusEnglish2)[[n+1]],"-"];
 AusEnglish4={"","-one","-two","-three","-four","-five","-six","-seven","-eight","-nine"};
-NumberToEnglish[n_Integer/;20<=n<=99]:=AusEnglish3[[Floor[n,10]/10-1]]<>AusEnglish4[[Mod[n,10]+1]]
+NumberToEnglish[n_Integer/;20<=n<=99]:=AusEnglish3[[Floor[n,10]/10-1]]<>AusEnglish4[[Mod[n,10]+1]];
 NumberToEnglish[n_/;100<=n<=999&&Mod[n,100]===0]:=AusEnglish1[[Floor[n,100]/100+1]]<>"hundred";
-NumberToEnglish[n_Integer/;100<=n<=999]:=AusEnglish1[[Floor[n,100]/100+1]]<>" hundred and "<>NumberToEnglish[Mod[n,100]]
+NumberToEnglish[n_Integer/;100<=n<=999]:=AusEnglish1[[Floor[n,100]/100+1]]<>" hundred and "<>NumberToEnglish[Mod[n,100]];
 AusEnglish5=Join[{" "},(Function[{x,y},x<>y]@@@Transpose@{ConstantArray["and ",99],NumberToEnglish/@Range@99}),NumberToEnglish/@Range[100,999]];
 NumberToEnglish[n_Integer/;1000<=n<=9999]:=AusEnglish1[[Floor[n,1000]/1000+1]]<>" thousand "<>AusEnglish5[[Mod[n,1000]+1]];
 NumberToEnglish[n_Integer/;n>=10000]:=Block[{r,
@@ -97,7 +97,7 @@ NumberToEnglish[n_Integer/;n>=10000]:=Block[{r,
   StringJoin@Reverse@MapThread[If[#!="",StringJoin[##],""]&,{r,Take[decimals,Length@r]}]];
 ResEnglish=Graph[#\[DirectedEdge]EnglishToNumber@NumberToEnglish@#&/@Range[1,100],VertexLabels->Placed["Name",Center],
   VertexLabelStyle->Directive[12,Lighter@Blue,Bold],VertexSize->0.8,EdgeShapeFunction->GraphElementData["ShortFilledArrow","ArrowSize"->0.01],
-  GraphLayout->"SpringElectricalEmbedding",ImageSize->Full];
+  GraphLayout->{"PackingLayout"->"ClosestPacking"},ImageSize->Full,PlotLabel->Style["英文数字",FontFamily->"华文楷体",FontSize->48]];
 
 
 
@@ -114,28 +114,28 @@ ResEnglish=Graph[#\[DirectedEdge]EnglishToNumber@NumberToEnglish@#&/@Range[1,100
   {"た","ta"},{"み","mi"},{"よ","yo"},{"つ","tsu"},{"む","mu"},
   {"な","na"},{"や","ya"},{"こ","ko"},{"の","no"},{"も","mo"}};
 関=Association@(Function[{x,y},x->y]@@@Transpose@{(Transpose@罗马音)[[1]],StringLength/@(Transpose@罗马音)[[2]]});
-NumberToJapanese[n_Integer/;0<=n<=10]:=训読み[[n+1]]
+NumberToJapanese[n_Integer/;0<=n<=10]:=训読み[[n+1]];
 JapaneseToNumber[s_String]:=Total[関/@Characters@s];
 ResJapanese=Graph[#\[DirectedEdge]JapaneseToNumber@NumberToJapanese@#&/@Range[0,10],VertexLabels->Placed["Name",Center],
   VertexLabelStyle->Directive[12,Lighter@Blue,Bold],VertexSize->0.2,EdgeShapeFunction->GraphElementData["ShortFilledArrow","ArrowSize"->0.01],
-  GraphLayout->"SpringElectricalEmbedding",ImageSize->Full];
+  GraphLayout->{"PackingLayout"->"ClosestPacking"},ImageSize->Full,PlotLabel->Style["日语训读",FontFamily->"华文楷体",FontSize->48]];
 
 ResRoman=Graph[#\[DirectedEdge]StringLength@RomanNumeral@#&/@Range[0,50],VertexLabels->Placed["Name",Center],
   VertexLabelStyle->Directive[12,Lighter@Blue,Bold],VertexSize->0.6,EdgeShapeFunction->GraphElementData["ShortFilledArrow","ArrowSize"->0.01],
-  GraphLayout->"SpringElectricalEmbedding",ImageSize->Full];
+  GraphLayout->{"PackingLayout"->"ClosestPacking"},ImageSize->Full,PlotLabel->Style["罗马数字",FontFamily->"华文楷体",FontSize->48]];
 
-AuxGerman1={"null"}
-AuxGerman2={"eins","zwei","drei","vier","fünf","sechs","sieben","acht","neun"}
-AuxGerman3={"zehn","elf","zwölf","dreizehn","vierzehn","fünfzehn","sechzehn","siebzehn","achtzehn","neunzehn","zwanzig"}
+AuxGerman1={"null"};
+AuxGerman2={"eins","zwei","drei","vier","fünf","sechs","sieben","acht","neun"};
+AuxGerman3={"zehn","elf","zwölf","dreizehn","vierzehn","fünfzehn","sechzehn","siebzehn","achtzehn","neunzehn","zwanzig"};
 GermanToNumber[s_String]:=StringLength@s;
-NumberToGerman[n_Integer/;0<=n<=20]:=Join[AuxGerman1,AuxGerman2,AuxGerman3][[n+1]]
-NumberToGerman[30]:="dreißig"
-NumberToGerman[n_Integer/;31<=n<=39]:=AuxGerman2[[Mod[n,10]]]<>"unddreißig"
+NumberToGerman[n_Integer/;0<=n<=20]:=Join[AuxGerman1,AuxGerman2,AuxGerman3][[n+1]];
+NumberToGerman[30]:="dreißig";
+NumberToGerman[n_Integer/;31<=n<=39]:=AuxGerman2[[Mod[n,10]]]<>"unddreißig";
 NumberToGerman[n_/;40<=n<=99&&Mod[n,10]===0]:=AuxGerman2[[n/10]]<>"zig";
 NumberToGerman[n_Integer/;21<=n<=99]:=AuxGerman2[[Mod[n,10]]]<>"und"<>AuxGerman2[[Floor[n,10]/10]]<>"zig";
 ResGerman=Graph[#\[DirectedEdge]GermanToNumber@NumberToGerman@#&/@Range[0,49],VertexLabels->Placed["Name",Center],VertexLabelStyle->Directive[12,Lighter@Blue,Bold],
   VertexSize->0.6,EdgeShapeFunction->GraphElementData["ShortFilledArrow","ArrowSize"->0.01],
-  GraphLayout->"SpringElectricalEmbedding",ImageSize->Full];
+  GraphLayout->{"PackingLayout"->"ClosestPacking"},ImageSize->Full,PlotLabel->Style["德文数字",FontFamily->"华文楷体",FontSize->48]];
 
 
 (* ::Subsection::Closed:: *)

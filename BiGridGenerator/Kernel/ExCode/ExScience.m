@@ -1,6 +1,6 @@
 (* ::Package:: *)
 (* ::Title:: *)
-(*Example(样板包)*)
+(*Example(几何包)*)
 (* ::Subchapter:: *)
 (*程序包介绍*)
 (* ::Text:: *)
@@ -20,13 +20,19 @@
 BeginPackage["ExScience`"];
 Catacaustic::usage = "";
 TangentComplex::usage = "";
+TriangleSolver::usage="TriangleSolver[{{\!\(\*SubscriptBox[\(x\), \(1\)]\),\
+   \!\(\*SubscriptBox[\(y\), \(1\)]\)},{\!\(\*SubscriptBox[\(x\), \(2\)]\),\
+   \!\(\*SubscriptBox[\(y\), \(2\)]\)},{\!\(\*SubscriptBox[\(x\), \(3\)]\),\
+   \!\(\*SubscriptBox[\(y\), \(3\)]\)}}]或者TriangleSolver[Triangle[TriPoint]]
+    返回一个三角形的求解对象,可用于求解三边三角和三角形五心.";
+
 (* ::Section:: *)
 (*程序包正体*)
 (* ::Subsection::Closed:: *)
 (*主设置*)
 ExScience$Version="V0.2";
 ExScience$Environment="V11.0+";
-ExScience$LastUpdate="2016-12-06";
+ExScience$LastUpdate="2017-3-25";
 ExScience::usage = "程序包的说明,这里抄一遍";
 Begin["`Private`"];
 (* ::Subsection::Closed:: *)
@@ -141,6 +147,29 @@ TangentComplex[function_] := Block[{f0,f1,f2},
     PlotStyle -> Directive[Black, Thin], AspectRatio -> 1,
     Axes -> False, PlotLabel -> y == f1]];
 
+
+TriangleSolverFormatImage=Graphics[{Black,#,{EdgeForm[{Dashed,Red}],Opacity[0.1,Yellow],
+  Cuboid@@Transpose[RegionBounds[#]]}},ImageSize->36]&[Triangle[{{0,0},{1,2},{2,1}}]];
+TriangleSolverFormat::miss="该属性不存在,请确认可选属性!";
+TriangleSolverFormat[ass_][chr__]:=Lookup[ass,Flatten@{chr},Message[TriangleSolverFormat::miss]];
+TriangleSolverFormat/:Format[b:TriangleSolverFormat[a_Association]]:=
+    RawBoxes[BoxForm`ArrangeSummaryBox["TriangleObject",b,TriangleSolverFormatImage,
+      {BoxForm`MakeSummaryItem[{"三角形三顶点坐标: ",a["三顶点"]},StandardForm]},
+      {BoxForm`MakeSummaryItem[{"可选属性: ","三边长,三角度,半周长,面积\n外心,垂心,内心,旁心,重心"},StandardForm]},StandardForm]];
+TriangleSolver[Triangle[TriPoint_]]:=TriangleSolver[TriPoint];
+TriangleSolver[TriPoint_]:=Block[{TriSide,TriAngle,p,W,Nn,Z,H,Dia,Iabc,name,ass},
+    TriSide=Norm/@(RotateLeft[TriPoint]-RotateRight[TriPoint]);
+    TriAngle=ArcCos[(#1^2+#2^2-#3^2)/(2#1 #2)]&@@@Rest[NestList[RotateLeft,TriSide,3]];
+    p=Plus@@TriSide/2;
+    W=First@Circumsphere[TriPoint];
+    Nn=Inner[Times,TriSide,TriPoint,Plus]/(2p);
+    Dia=#-2 DiagonalMatrix@Diagonal@#&@ConstantArray[TriSide,3];
+    Iabc=Inner[Times,#,TriPoint,Plus]/Total[#]&/@Dia;
+    Z=Total@TriPoint/3;
+    H=W-Plus@@(W-#&/@TriPoint);
+    name={"三顶点","三边长","三角度","半周长","面积","外心","垂心","内心","旁心","重心"};
+    ass=Association@Thread[Rule@@{name,{TriPoint,TriSide,TriAngle,p,W,Nn,Z,H,Dia,Iabc}}];
+  TriangleSolverFormat[ass]];
 
 (* ::Subsection::Closed:: *)
 (*附加设置*)

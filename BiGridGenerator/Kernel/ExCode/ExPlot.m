@@ -19,21 +19,21 @@
 (*函数说明*)
 BeginPackage["ExPlot`"];
 InfinitePlot::usage = "一种把无穷函数映射到单位正方形的变换,用法基本同Plot\r
-InfinitePlot[Method->List],使用点绘图,对于波动大的函数效果较好,但是速度较慢.";
+  InfinitePlot[Method->List],使用点绘图,对于波动大的函数效果较好,但是速度较慢.";
 CPlanePlot::usage = "CPlanePlot[Function,{Xmin,Xmax,dX},{Ymin,Ymax,dY}]给出一个函数的复平面图像.\r
-其中Function必须是个纯函数.如Sin或#^2&等等,后面几个参数分别表示绘图区域和步长\r\r
-CPlanePlot[Function,{Xmin,Xmax,dX},{Ymin,Ymax,dY},Options]\r
-本函数继承了ArrayPlot,所以Options里可以填ArrayPlot的选项,不过除了ColorFunction选项外都支持不良:\r
-CPlanePlot[Tan,{-4,4,0.02},{-4,4,0.02},Frame->False,ColorFunction->\"Rainbow\"]";
+  其中Function必须是个纯函数.如Sin或#^2&等等,后面几个参数分别表示绘图区域和步长\r\r
+  CPlanePlot[Function,{Xmin,Xmax,dX},{Ymin,Ymax,dY},Options]\r
+  本函数继承了ArrayPlot,所以Options里可以填ArrayPlot的选项,不过除了ColorFunction选项外都支持不良:\r
+  CPlanePlot[Tan,{-4,4,0.02},{-4,4,0.02},Frame->False,ColorFunction->\"Rainbow\"]";
 CMapPlot::usage = "CMapPlot[Function,{Xmin,Xmax,dX},{Ymin,Ymax,dY}]给出一个函数的复平面映射.\r
-其中Function必须是个纯函数.如Sin或#^2&等等,后面几个参数分别表示绘图区域和步长\r\r
-CMapPlot[Function,{Xmin,Xmax,dX},{Ymin,Ymax,dY},Options]\r
-本函数继承了ListLinePlot,所以Options里可以填ListLinePlot的选项,选项基本上支持良好:\r
-CMapPlot[Tan,{0,Pi,Pi/40},{-1,1,2/20}]\r
-CMapPlot[ArcTan,{0,Pi,Pi/40},{0,2,2/20},PlotTheme->\"Detailed\",ColorFunction->\"Rainbow\",PlotLabel->\"z->ArcTan[z]\"]";
+  其中Function必须是个纯函数.如Sin或#^2&等等,后面几个参数分别表示绘图区域和步长\r\r
+  CMapPlot[Function,{Xmin,Xmax,dX},{Ymin,Ymax,dY},Options]\r
+  本函数继承了ListLinePlot,所以Options里可以填ListLinePlot的选项,选项基本上支持良好:\r
+  CMapPlot[Tan,{0,Pi,Pi/40},{-1,1,2/20}]\r
+  CMapPlot[ArcTan,{0,Pi,Pi/40},{0,2,2/20},PlotTheme->\"Detailed\",ColorFunction->\"Rainbow\",PlotLabel->\"z->ArcTan[z]\"]";
 C3DPlot::usage = "C3DPlot[f(z),{z,Zmin,Zmax},Options]给出一个复函数的模投影,从复二维投影到实三维.\r
-本函数继承了Plot3D,所以Options里可以填Plot3D的选项,选项基本上支持良好:\r
-C3DPlot[Gamma[z],{z,-3.5-3.5I,3.5+5.5I},PlotRange->{0,4}]";
+  本函数继承了Plot3D,所以Options里可以填Plot3D的选项,选项基本上支持良好:\r
+  C3DPlot[Gamma[z],{z,-3.5-3.5I,3.5+5.5I},PlotRange->{0,4}]";
 PiecewisePlot::usage="PiecewisePlot可以有效绘制分段函数以及反常函数,选项基本和Plot相同.";
 Periodization::usage="Periodization[f(x),{x,a,b}]周期化一个单变量函数.";
 Gray3DPlot::usage = ".";
@@ -163,7 +163,9 @@ PiecewisePlot`reverseIneq[(rel:PiecewisePlot`$inequality)[args__]]:=(rel/.Piecew
 PiecewisePlot`inDomain[]:=LessEqual@@PiecewisePlot`domain[[{2,1,3}]];
 PiecewisePlot`inDomain[dom_]:=LessEqual@@dom[[{2,1,3}]];
 (*annotatedPoints-- returns list of abscissas to be "annotated" with dots/asymptotes boundaryPoints-- returns list of boundaries numbers between pieces interiorPoints-- returns list of points where the denominator is zero*)
-PiecewisePlot`annotatedPoints[allpieces_,domain_,additionalpoints_]:=DeleteDuplicates@Flatten@Join[PiecewisePlot`boundaryPoints[allpieces,domain],PiecewisePlot`interiorPoints[allpieces,domain],additionalpoints];
+PiecewisePlot`annotatedPoints[allpieces_,domain_,additionalpoints_]:=
+    DeleteDuplicates@Flatten@Join[PiecewisePlot`boundaryPoints[allpieces,domain],
+      PiecewisePlot`interiorPoints[allpieces,domain],additionalpoints];
 PiecewisePlot`boundaryPoints[allpieces_,domain:{var_,_,_}]:=With[{conditions=DeleteDuplicates[Equal@@@Flatten[Last/@allpieces/.
     {HoldPattern@Inequality[a_,rel1_,b_,rel2_,c_]:>{PiecewisePlot`reverseIneq[rel1[a,b]],rel2[b,c]},(rel:PiecewisePlot`$inequality)[a_,b_,c_]:>{PiecewisePlot`reverseIneq[rel[a,b]],rel[b,c]}}]]},
   Message[PiecewisePlot`debug::annotation,conditions];
