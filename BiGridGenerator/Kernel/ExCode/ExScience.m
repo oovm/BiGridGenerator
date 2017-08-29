@@ -148,16 +148,20 @@ TangentComplex[function_] := Block[{f0,f1,f2},
     Axes -> False, PlotLabel -> y == f1]];
 
 
+
 TriangleSolverFormatImage=Graphics[{Black,#,{EdgeForm[{Dashed,Red}],Opacity[0.1,Yellow],
   Cuboid@@Transpose[RegionBounds[#]]}},ImageSize->36]&[Triangle[{{0,0},{1,2},{2,1}}]];
 TriangleSolverFormat::miss="该属性不存在,请确认可选属性!";
-TriangleSolverFormat[ass_][chr__]:=Lookup[ass,Flatten@{chr},Message[TriangleSolverFormat::miss]];
+TriangleSolverFormat[ass_][chr_]:=Lookup[ass,chr,Message[TriangleSolverFormat::miss]];
+TriangleSolverFormat[ass_][chr__]:=Lookup[ass,{chr},Message[TriangleSolverFormat::miss]];
 TriangleSolverFormat/:Format[b:TriangleSolverFormat[a_Association]]:=
     RawBoxes[BoxForm`ArrangeSummaryBox["TriangleObject",b,TriangleSolverFormatImage,
       {BoxForm`MakeSummaryItem[{"三角形三顶点坐标: ",a["三顶点"]},StandardForm]},
       {BoxForm`MakeSummaryItem[{"可选属性: ","三边长,三角度,半周长,面积\n外心,垂心,内心,旁心,重心"},StandardForm]},StandardForm]];
+TriangleSolver::miss="所给数据无法构成三角形,请核查输入!";
 TriangleSolver[Triangle[TriPoint_]]:=TriangleSolver[TriPoint];
-TriangleSolver[TriPoint_]:=Block[{TriSide,TriAngle,p,W,Nn,Z,H,Dia,Iabc,name,ass},
+TriangleSolver[TriPoint_]:=Block[{TriSide,TriAngle,p,W,Nn,Z,area,H,Dia,Iabc,name,ass},
+  Check[area=Area@Triangle[TriPoint],Return@Message[TriangleSolver::miss]];
     TriSide=Norm/@(RotateLeft[TriPoint]-RotateRight[TriPoint]);
     TriAngle=ArcCos[(#1^2+#2^2-#3^2)/(2#1 #2)]&@@@Rest[NestList[RotateLeft,TriSide,3]];
     p=Plus@@TriSide/2;
@@ -167,9 +171,27 @@ TriangleSolver[TriPoint_]:=Block[{TriSide,TriAngle,p,W,Nn,Z,H,Dia,Iabc,name,ass}
     Iabc=Inner[Times,#,TriPoint,Plus]/Total[#]&/@Dia;
     Z=Total@TriPoint/3;
     H=W-Plus@@(W-#&/@TriPoint);
-    name={"三顶点","三边长","三角度","半周长","面积","外心","垂心","内心","旁心","重心"};
-    ass=Association@Thread[Rule@@{name,{TriPoint,TriSide,TriAngle,p,W,Nn,Z,H,Dia,Iabc}}];
+    name={"三顶点","三边长","三角度","半周长","面积","外心","内心","重心","垂心","旁心"};
+    ass=Association@Thread[Rule@@{name,{TriPoint,TriSide,TriAngle,p,area,W,Nn,Z,H,Iabc}}];
   TriangleSolverFormat[ass]];
+
+
+
+
+
+Begin["ChemicalAutoBalance`"];
+elem=Alternatives@@Reverse@SortBy[StringLength]@Array[ElementData[#,"Symbol"]&,112];
+chem=StringCases[#,e:elem~~n:DigitCharacter...:>{e,n}]/.""->"1"&;
+group=List@@@Normal[GroupBy[#,First->Last,Total@ToExpression[#]&]]&;
+CS[input_List]:=Block[{all,elemts,null},
+  all=group/@chem[ToString/@input];
+  elemts=Union[First@Transpose[Flatten[all,1]]];
+  null=NullSpace@Transpose[(elemts/.Rule@@@#&/@all)/._String->0];
+  Thread[input->Transpose@null]];
+End[];
+ChemicalSolver=ChemicalAutoBalance`CS;
+
+
 
 (* ::Subsection::Closed:: *)
 (*附加设置*)

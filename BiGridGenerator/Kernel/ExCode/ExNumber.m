@@ -24,13 +24,16 @@ ManyPrime::usage = "ManyPrime[n]生成n以内所有可以由s个素数相乘得�
 DisplaySum::usage = "DisplaySum[f[n],{n,a,b}]显示这个级数的和";
 ImproperSum::usage = "ImproperSum[f[n]]尝试各种手段对f[n]进行无穷求和";
 RTCount::usage="RTCount[max]对小于max的整数可构成的直角三角形计数\r
-RTCount[max,Return->True]返回具体的每个整数的计数\r
-RTCount[min,max]返回区间[min,max]中的计数.";
+    RTCount[max,Return->True]返回具体的每个整数的计数\r
+    RTCount[min,max]返回区间[min,max]中的计数.";
 SumProdPartitions::usage="SumProdPartitions[n]给出整数n的积和分解\r
-SumProdPartitions[n,Show->False],不显示分解出的1.";
+    SumProdPartitions[n,Show->False],不显示分解出的1.";
 SumProdNumber::usage="SumProdNumber[max]给出小于max的整数的最小积和数集合\r
-SumProdNumber[max,s],s代表搜索深度,太小可能会导致丢解,默认为6,可设为Infinite,但是速度会变得很慢";
+    SumProdNumber[max,s],s代表搜索深度,太小可能会导致丢解,默认为6,可设为Infinite,但是速度会变得很慢";
 DigitReplacePrime::usage="DigitReplacePrime[n,m,p]在n位数搜索交换m位的p元质数组.";
+BaileyP::usage="BaileyP[1,16,8,{4,0,0,-2,-1,-1,0,0}]//Activate
+    %//FullSimplify";
+
 (* ::Section:: *)
 (*程序包正体*)
 (* ::Subsection::Closed:: *)
@@ -206,6 +209,9 @@ SqrtQSelect[(list_)?VectorQ,power_:2]:=
       Ceiling[Surd[Max[list],power]]-Floor[Surd[Min[list],power]]+1,
       Floor[Surd[Min[list],power]]],list];
 
+BaileyP[s_,b_,n_,A_]:=Block[{k,echo},
+  echo=Evaluate[1/b^k  Plus@@(A/Array[(n k+#)&,n])];
+  Echo[Inactivate@Sum[echo,{k,0,Infinity}],"和式展开为: "]];
 
 
 (* ::Subsection::Closed:: *)

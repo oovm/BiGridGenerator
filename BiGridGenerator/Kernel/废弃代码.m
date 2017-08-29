@@ -490,11 +490,7 @@ Export["Guass_Integrate.png",png,Background->None];
 
 
 
-BaileyP[s_,b_,n_,A_]:=Block[{k,echo},
-  echo=Evaluate[1/b^k  Plus@@(A/Array[(n k+#)&,n])];
-  Echo[Inactivate@Sum[echo,{k,0,Infinity}],"和式展开为: "]]
-BaileyP[1,16,8,{4,0,0,-2,-1,-1,0,0}]//Activate
-%//FullSimplify
+
 
 
 Clear["`*"]
