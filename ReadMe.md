@@ -1,6 +1,6 @@
-# BiGridGenerator
+# BiGridGenerator[项目已废弃]
 
-
+敬请关注我的其他开发.
 
 ## BiGridGenerator(逼格场发生器)
 
