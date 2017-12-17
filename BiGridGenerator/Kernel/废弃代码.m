@@ -522,3 +522,45 @@ findpath[path_]:=Select[Flatten[foo/@path,1],DuplicateFreeQ];
 Array[Quiet@Nest[findpath,{{#}},8]&,9]//RepeatedTiming
 
 
+半傅里叶变换
+Sqrt[1 - I Cot[a]] E^(I Pi Cot[a] u^2) NIntegrate[
+  Exp[-2 Pi I (Csc[a] u x - Cot[a] x^2/2)] f[x], {x, -Infinity,
+    Infinity}];
+foo = FullSimplify[Abs[% /. {a -> 2 Pi a/4}],
+Assumptions -> u > 0 && a > 0]
+g[u_, a_] := Quiet@foo;
+g[u_, 0] := f[u]; g[u_, 2 Pi] := f[u];
+
+
+
+
+index = Compile[{{p, _Integer}, {r, _Integer}, {n, _Integer}},
+  If[p <= r,
+    r + Quotient[n, r] - p,
+    Quotient[n, p]
+  ],
+  CompilationTarget -> "C",
+  Parallelization -> True,
+  RuntimeOptions -> "Speed"
+];
+
+PrimeSum = Compile[{{n, _Integer}},
+  Module[{r = Floor[Sqrt[n]], V, S, p = 2, ind = 0, i = 1, v = 0},
+    V = Quotient[n, Range[r]] ~Join~ Range[Quotient[n, r] - 1, 1, -1];
+    S = Quotient[#(#+1), 2] - 1 & /@ V;
+    For[p = 2, p <= r, ++p, 
+      If[S[[index[p, r, n]]] > S[[index[p-1, r, n]]],
+        i = 1;
+        While[(v = V[[i++]]) >= p^2,
+          ind = index[v, r, n];
+          S[[ind]] -= p (S[[index[Quotient[v, p], r, n]]] - S[[index[p-1, r, n]]])
+        ];
+      ]
+    ];
+    First[S]
+  ],
+  CompilationTarget -> "C",
+  Parallelization -> True,
+  RuntimeOptions -> "Speed",
+  CompilationOptions -> {"InlineCompiledFunctions" -> True, "InlineExternalDefinitions" -> True}
+];

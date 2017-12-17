@@ -87,14 +87,38 @@ GravatarLinker[email_,size_: 256]:=Block[{emailparts,randN,input,inputhash,img},
 
 (* ::Subsubsection:: *)
 (*随机游走研究*)
-CoverTime[G_,i_]:=Block[{Start,Roads,Ex,Si},
-  Start=ConstantArray[0,VertexCount[G]];Start[[i]]=1;
-  Roads=Subsets[DeleteCases[Range@VertexCount[G],i]][[2;;-1]];
-  Ex=Mean@FirstPassageTimeDistribution[
-    DiscreteMarkovProcess[Start,G],#]&/@Roads;
-  Si=If[Length[#]~Mod~2==1,1,-1]&/@Roads;
-  Print@GraphPlot[G,VertexLabeling->True];
-  Print[Total[Ex*Si]];];
+Options[CoverTime] = {Out -> "Mean"};
+CoverTime[input_, i_, OptionsPattern[]] := 
+	Block[{mat, st, dmp},
+  	Switch[Head@input,
+   		Graph,
+   			mat = AdjacencyMatrix@input;
+   			st = UnitVector[Length@mat, i];
+   			dmp = DiscreteMarkovProcess[st, mat],
+  		 List,
+   			If[MatrixQ[input], Message["Not Matrix"]];
+ 		  	st = UnitVector[Length@input, i];
+  		 	dmp = DiscreteMarkovProcess[st, mat = input]
+ 	];
+	CoverTimeAll[mat, i, dmp, OptionValue[Out]]
+]
+
+CoverTimeAll[mat_, i_, dmp_, opt_] :=
+	Block[{k, road, sign, pdf, ex, ans},
+   	road = Subsets[DeleteCases[Range@Length@mat, i]][[2 ;; -1]];
+   	sign = If[Length[#]~Mod~2 == 1, 1, -1] & /@ road;
+   	ans = Switch[opt,
+		"PDF",
+			pdf = PDF[FirstPassageTimeDistribution[dmp, #], k] & /@ road;
+			Total[sign*pdf] // PiecewiseExpand,
+		"Mean",
+			ex = Mean@FirstPassageTimeDistribution[dmp, #] & /@ road;
+			Total[sign*ex]
+		];
+	Return[ans];
+];
+
+
 
 ExRandomWalk[max_,"2DGridSelfAvoiding"]:=Block[{i=0,pts={{0,0}},moves={{-1,0},{0,1},{1,0},{0,-1}}},
   While[i<max&&Not@(And@@(MemberQ[pts,#]&/@Table[pts[[-1]]+moves[[i]],{i,1,4}])),i++;

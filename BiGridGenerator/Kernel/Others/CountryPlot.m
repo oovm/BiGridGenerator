@@ -19,9 +19,11 @@
 
 
 
+(* ::Input::Initialization:: *)
 BeginPackage["CountryPlot`"]
 
 
+(* ::Input::Initialization:: *)
 Unprotect[CountryPlot3D]
 Unprotect[CountryPlot]
 CountryPlot3D::usage="CountryPlot3D[{{c1, v1},...}] produces a three-dimensional plot whith raised countries
@@ -29,11 +31,13 @@ CountryPlot3D[property] plots the CountryData property for all countries";
 CountryPlot::usage="CountryPlot[{{c1,v1},...} produces a plot of the countries ci"
 
 
+(* ::Input::Initialization:: *)
 Begin["`Private`"]
 Unprotect[raisePolygonEdge]
 ClearAll[raisePolygonEdge,expandCountries,getRange]
 
 
+(* ::Input::Initialization:: *)
 
 raisePolygonEdge::usage="raisePolygonEdge[polygon, height] Create a thick polygon";
 Options[raisePolygonEdge]={"EdgeStyle"->Unevaluated[Sequence[]]};
@@ -57,14 +61,17 @@ Polygon[data/.{a_?NumericQ,b_?NumericQ}:>{a,b,h}]
 raisePolygonEdge[p_List,h_?NumericQ,opts:OptionsPattern[]]:=p/.{poly_Polygon:>raisePolygonEdge[poly,h,opts]}
 
 
+(* ::Input::Initialization:: *)
 (* Expands "Europe" etc *)
 expandCountries[c:{_String...}]:=Cases[Flatten[CountryData/@c],_String]
 
 
+(* ::Input::Initialization:: *)
 getRange[data_?MatrixQ]:={
 Min[#],Max[#]}&/@(data\[Transpose])
 
 
+(* ::Input::Initialization:: *)
 (* Does all the work, used by CountryPlot(3D) functions*)
 ClearAll[iCountryPlot]
 Options[iCountryPlot]={
@@ -73,7 +80,7 @@ It may return any graphics object *)
 ColorFunction->Automatic,
 ColorFunctionScaling->True,
 "ExtraCountries"->None,
-(* ScaleHeight->h scales the height values to lie between 0 and h,
+(* ScaleHeight\[Rule]h scales the height values to lie between 0 and h,
 no scaling if False *)
 "ScaleHeight"->Scaled[0.1],
 "ExtraHeight"->0,
@@ -158,6 +165,7 @@ _,1];
 
 
 
+(* ::Input::Initialization:: *)
 ClearAll[CountryPlot]
 Options[CountryPlot]=Join[
 Options[iCountryPlot],
@@ -181,6 +189,7 @@ FilterRules[{opts,Options[CountryPlot]},Options[Graphics]]
 ]
 
 
+(* ::Input::Initialization:: *)
 
 ClearAll[CountryPlot3D]
 Options[CountryPlot3D]=Join[
@@ -191,8 +200,6 @@ Boxed->False,
 },
 Options[Graphics3D]
 ];
-
-
 
 CountryPlot3D[dat:{{_String,_?NumericQ}..},opts:OptionsPattern[]]:=
 Block[{
@@ -214,6 +221,7 @@ FilterRules[{opts,Options[CountryPlot3D]},Options[Graphics3D]]]
 
 
 
+(* ::Input::Initialization:: *)
 (* Inject the countryplot functions *)
 With[{fn=#},
 (* Plot a property for whole world *)
@@ -240,6 +248,7 @@ Options[fn]]
 ]&/@{CountryPlot3D,CountryPlot}
 
 
+(* ::Input::Initialization:: *)
 
 Protect[raisePolygonEdge]
 End[]

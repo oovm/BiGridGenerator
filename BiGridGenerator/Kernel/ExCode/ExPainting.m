@@ -159,7 +159,9 @@ QRPainting[aim_,text_:"https://github.com/GalAster/BiGridGenerator"]:=
       (dat[[Span[24#1],Span[24#2]]]=cg[img[[Span[8#1],Span[8#2]]]])&@@@{{1,1},{1,-1},{-1,1}};
       dat[[22;;3d-21,19;;21]]=Transpose[dat[[19;;21,22;;3d-21]]=cg[{{#,0,0}&/@Mod[Range[d-14],2]}]];
       Image[dat,ColorSpace->"LAB",ImageSize->Large]];
-(*见鬼,写完才发现Mathematica没有YUV的色彩空间,白写了我靠
+
+
+(*见鬼,写完才发现Mathematica没有YUV的色彩空间...
 Solve[{y,u,v}=={0.299*r+0.587*g+0.114*b,-0.169r-0.331g+0.5b+128,0.5r-0.419g-0.081b+128},{b,g,r}];
 YUV2RGB=Function[{y,u,v},Evaluate@Flatten[{r,g,b}/.%]];
 CYR=77;CYG=150;CYB=29;
@@ -175,7 +177,24 @@ Image[Nest[Floor@Apply[YUV2RGB,Apply[RGB2YUV,#,{2}],{2}]&,st,20],"Byte"]*)
 DCT[x_?MatrixQ]:=Transpose[N@FourierDCTMatrix[8]].x.FourierDCTMatrix[8]
 IDCT[x_?MatrixQ]:=Transpose[FourierDCTMatrix[8,3]].x.FourierDCTMatrix[8,3]
 jpeg[img_]:=ImageAssemble[Map[Image[Threshold[DCT[ImageData[#]],{"LargestValues",8}]]&,ImagePartition[ImageSubtract[img],8],{2}]]
-ImageAssemble[Map[Image[IDCT[ImageData[#]]]&,ImagePartition[jpeg[img],8],{2}]];*)
+ImageAssemble[Map[Image[IDCT[ImageData[#]]]&,ImagePartition[jpeg[img],8],{2}]];
+
+RGB2RGB[r_, g_, b_, other___] := Block[{y, u, v},
+  y = BitShiftRight[77*r + 150*g + 29*b, 8];
+  u = BitShiftRight[-43*r - 85*g + 128*b, 8] - 1;
+  v = BitShiftRight[128*r - 107*g - 21*b, 8] - 1;
+  {BitShiftRight[65536*y + 91881*v, 16],
+   BitShiftRight[65536*y - 22553*u - 46802*v, 16],
+   BitShiftRight[65536*y + 116130*u, 16],
+   other}]
+
+RGB2RGBCompile = Compile[{{r, _Integer}, {g, _Integer}, {b, _Integer}},
+  Evaluate@RGB2RGB[r, g, b],
+  RuntimeAttributes -> {Listable}, Parallelization -> True,
+  RuntimeOptions -> "Speed"
+  ]
+
+*)
 (*伪造的劣化绿绿算法,再编译加速下好了
 RGB2RGB=Function[{r,g,b},{RandomReal[{0.9,1.0}]r,RandomReal[{0.99,1.01}]g,RandomReal[{0.9,1.0}]b}];*)
 RGB2RGB=Compile[{{r,_Integer},{g,_Integer},{b,_Integer}},{RandomReal[{0.9,1.0}]r,RandomReal[{0.99,1.01}]g,RandomReal[{0.9,1.0}]b}];

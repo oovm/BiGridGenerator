@@ -426,6 +426,10 @@ TraceExplorer[expr_]:=Block[{steps={},stack={},pre,post,show,default=False},
       Alignment->{Left,Center},Frame->All,Spacings->Automatic,Background->{{Hue[.65,.1,1]},None}]];
   TraceScan[pre,expr,___,post];
   Deploy@Column@{Opener@Dynamic@default,Dynamic@Pane[First@steps,ImageSize->10000]}];
+(* ::Subsubsection:: *)
+(*Map进度监视器*)
+MapMonitored[f_,args_List]:=Module[{x=0},Monitor[MapIndexed[(x=#2[[1]];f[#1])&,args],ProgressIndicator[x/Length[args]]]];
+
 
 (* ::Subsection::Closed:: *)
 (*附加设置*)
