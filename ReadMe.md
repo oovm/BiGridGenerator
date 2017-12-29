@@ -1,6 +1,13 @@
 # BiGridGenerator[项目已废弃]
 
-敬请关注我的其他开发.
+该项目已废弃, 现在是代码垃圾堆.
+
+敬请关注我的其他开发, 使用了更先进的架构.
+
+
+1. Geis: 项目的主要继承者
+2. Deus: 与游戏有关的一些项目
+3. Illusive:
 
 ## BiGridGenerator(逼格场发生器)
 
@@ -8,7 +15,7 @@
 
 所有代码均开源,代码来源有StackExchange、WolframBlog、还有我知乎上的朋友们以及我自己写的一些代码.
 
-- **安装方式:平台为Win10.0且Mathematica11.0+直接拖入安装目录即可使用**
+- **安装方式:平台为 Win10 且Mathematica10.0+直接拖入安装目录即可使用**
 
 - **其他平台以及低版本因为种种bug暂时没有好的安装方式**
 
@@ -17,9 +24,7 @@
 ## ![开发与部署](http://image.flaticon.com/icons/png/32/180/180012.png)开发与部署
 ### 开发环境
 
-本程序包几乎所有代码使用Intellij编写,文档使用Wolfram Workbench生成,运行于Mathematica 11.0+
-
-测试表明9.0也可以使用几乎所有功能.
+本程序包几乎所有代码使用Intellij编写,文档使用Wolfram Workbench生成,运行于Mathematica 10.0+
 
 ### 程序封装
 
@@ -32,14 +37,6 @@
 - `Get[FileNameJoin[{NotebookDirectory[], "main.mx"}]]`读取封装的包
 
 
-## ![意见与建议](http://image.flaticon.com/icons/png/32/179/179966.png)意见与建议
-
-### 联系方式
-
-https://www.zhihu.com/people/GalAster
-
 ## ![许可协议](http://image.flaticon.com/icons/png/32/180/180005.png)License
 
-该软件包遵从CC 3.0协议:NA+NC(非商业性使用、相同方式共享）
-
-也就是说只要不用于商业用途随便你干嘛.
+该软件包遵从CC 3.0协议:NA+NC(非商业性使用、相同方式共享)
