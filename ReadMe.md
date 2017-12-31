@@ -1,9 +1,12 @@
 # BiGridGenerator[项目已废弃]
 
+[![Mathematica](https://img.shields.io/badge/Mathematica-%3E%3D9.0-brightgreen.svg)](https://www.wolfram.com/mathematica/)
+[![Release Vision](https://img.shields.io/badge/release-failed-ff0000.svg)](https://github.com/GalAster/BiGridGenerator/releases)
+[![Repo Size](https://img.shields.io/github/repo-size/GalAster/BiGridGenerator.svg)](https://github.com/GalAster/BiGridGenerator.git)
+
 该项目已废弃, 现在是代码垃圾堆.
 
 敬请关注我的其他开发, 使用了更先进的架构.
-
 
 1. Geis: 项目的主要继承者
 2. Deus: 与游戏有关的一些项目
