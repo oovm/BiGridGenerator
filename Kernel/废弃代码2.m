@@ -22,3 +22,10 @@ game24[input_List, result_: 24] :=
 		]
 	];
 
+RootHypergeometric[n_Integer,m_,t_]:=Sum[
+	(-(1/((n-1)*k!)))*t^k*E^((2*Pi*I*(k-1)*m)/(n-1))*
+		Pochhammer[(k-1)/(n-1)+1,k-1]*HypergeometricPFQ[Range[n-1]/n+(k-1)/(n-1),
+		Delete[Range[k+1,k+n-1],-k+n-1]/(n-1),n*((n*t)/(n-1))^(n-1)],{k,0,n-2}
+];
+Root[#1^5-#1+1&,2]//N
+N@RootHypergeometric[5,1,1]//Chop
