@@ -25,6 +25,7 @@
 BeginPackage["PersonalCurve`"];
 FourierPaintPointListToLines::usage = "";
 PersonalCurveMake::usage = "";
+PersonalCurveGet::usage = "";
 (* ::Section:: *)
 (*程序包正体*)
 (* ::Subsection::Closed:: *)
@@ -177,6 +178,7 @@ FourierPaintPreviewManipulate[data_] :=Manipulate[
 ];
 (* ::Subsubsection:: *)
 (*PersonalCurveMake*)
+Options[FourierPaintFinalCurve]={"order"->25,"dx"->10^-3};
 FourierPaintFinalCurve[data_,t_,OptionsPattern[]] := Rationalize[
 	FourierPaintSingleParametrization[data,t,OptionValue["order"]] ,
 	OptionValue["dx"]
@@ -230,18 +232,50 @@ PersonalCurveMake[hLines_,OptionsPattern[]]:=Block[
 	|>]
 ];
 FourierPaintPreviewExport[data_]:=Block[
-	{
-		opts=Sequence[PlotStyle->Black,Frame->True,Axes->False,FrameTicks->None,PlotRange->All,ImagePadding->12],
-		now,show,tab
-	},
+	{now,show,tab,e,t},
 	now=AbsoluteTime[];
 	show[n_]:=Show[{
-			ParametricPlot[Evaluate[FourierPaintMakeFourierSeries[#,t,n]&/@Cases[data,{"Closed",_}]],{t,-Pi,Pi},opts],
-			ParametricPlot[Evaluate[FourierPaintMakeFourierSeries[#,t,n]&/@Cases[data,{"Open",_}]],{t,-Pi,0},opts]
+			ParametricPlot[Evaluate[FourierPaintMakeFourierSeries[#,t,n]&/@Cases[data,{"Closed",_}]],{t,-Pi,Pi},
+				PlotStyle -> Black, Frame -> True, Axes -> False, FrameTicks -> None,
+				PlotRange -> All, ImagePadding -> 12
+			],
+			ParametricPlot[Evaluate[FourierPaintMakeFourierSeries[#,t,n]&/@Cases[data,{"Open",_}]],{t,-Pi,0},
+				PlotStyle -> Black, Frame -> True, Axes -> False, FrameTicks -> None,
+				PlotRange -> All, ImagePadding -> 12
+			]
 		}];
 	tab=Quiet[Flatten[{#,Reverse@#}]&@Table[show[i],{i,50}]];
-	Export[ToString@now<>".gif",tab, "AnimationRepetitions"->Infinity]
+	e=Export[DateString[
+		DateObject[],
+		{"Year", "Month", "Day", "-", "Hour24", "Minute",	"Second"}
+	]<> ".gif",tab, "AnimationRepetitions"->Infinity];
+	Echo[Quantity[Round[AbsoluteTime[]-now,10^-4.],"seconds"],"IO Time: "];
+	e;
 ];
+Options[PersonalCurveGet]={Order->25,Rationalize->10^-3,Variables->"t"};
+PersonalCurveGet[PersonalCurveData[ass_],OptionsPattern[]]:=Block[
+	{},
+	Echo[StringJoin@{
+		"ListLinePlot[Table[Evaluate[N@curve],{",
+		ToString@OptionValue[Variables],
+		",0,4Pi*",
+		ToString@Lookup[ass,"Curves"],
+		",0.05}],AspectRatio->Automatic]"
+	},
+		"Run: "
+	];
+	FourierPaintFinalCurve[
+		Lookup[ass,"Data"],
+		ToExpression@OptionValue[Variables],
+		"order"->OptionValue[Order],
+		"dx"->OptionValue[Rationalize]
+	]
+];
+PersonalCurveData[ass_]["Loss"]:=FourierPaintLoss@Lookup[ass,"Data"];
+PersonalCurveData[ass_]["Grid"]:=FourierPaintPreviewMulticolumn@Lookup[ass,"Data"];
+PersonalCurveData[ass_]["Preview"]:=FourierPaintPreviewManipulate@Lookup[ass,"Data"];
+PersonalCurveData[ass_]["Export"]:=FourierPaintPreviewExport@Lookup[ass,"Data"];
+PersonalCurveData[ass_]["Curve"]:=PersonalCurveGet[PersonalCurveData[ass]];
 (* ::Subsubsection:: *)
 (*PersonalCurveMake*)
 
