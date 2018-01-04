@@ -54,7 +54,10 @@ ToZeta[exp_] := Block[{time},
   Inactivate[Zeta[time]] exp/Zeta[time]]
 ToZeta[31 Pi^6/5040]
 
-
+ToZeta[exp_] := Module[{time},
+	time = Log[Pi, #] & @@ Cases[exp, Pi^_Integer];
+	Inactivate[Zeta[time]] exp/Zeta[time]]
+ToZeta[31 Pi^6/5040]
 
 
 TwoAxisListLinePlot[{f_, g_}] :=
