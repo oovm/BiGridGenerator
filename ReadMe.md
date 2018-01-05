@@ -3,6 +3,7 @@
 [![Mathematica](https://img.shields.io/badge/Mathematica-%3E%3D9.0-brightgreen.svg)](https://www.wolfram.com/mathematica/)
 [![Release Vision](https://img.shields.io/badge/release-failed-ff0000.svg)](https://github.com/GalAster/BiGridGenerator/releases)
 [![Repo Size](https://img.shields.io/github/repo-size/GalAster/BiGridGenerator.svg)](https://github.com/GalAster/BiGridGenerator.git)
+[![Code Size](https://img.shields.io/github/languages/code-size/GalAster/BiGridGenerator.svg)](https://github.com/GalAster/BiGridGenerator.git)
 
 该项目已废弃, 现在是代码垃圾堆.
 
