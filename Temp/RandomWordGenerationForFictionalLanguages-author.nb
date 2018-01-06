@@ -1,0 +1,3204 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[    169210,       3196]
+NotebookOptionsPosition[    163491,       3084]
+NotebookOutlinePosition[    165557,       3135]
+CellTagsIndexPosition[    165221,       3123]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Random Word Generation for Fictional Languages", "DemoTitle",
+ CellChangeTimes->{{3.523203033451666*^9, 
+  3.5232030417912416`*^9}},ExpressionUUID->"14dff151-1ddb-4ad0-baff-\
+b8d8c5d6ec0e"],
+
+Cell["", "InitializationSection",ExpressionUUID->"95d5eb63-12d3-4181-a3bd-d32b06c373bc"],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection",ExpressionUUID->"67accb67-617a-43d3-96bd-57900840894c"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Module", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "beginningConsonants", ",", "endConsonants", ",", "broadVowels", ",", 
+       "slenderVowels", ",", "broadslenderVowels", ",", "slenderbroadVowels", 
+       ",", "patterns", ",", "chooseLetter", ",", "anyVowels", ",", 
+       "wordlist", ",", "word", ",", "i", ",", "j"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"With", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"fake", "=", "x"}], "}"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Switch", "[", 
+         RowBox[{
+         "language", ",", "\[IndentingNewLine]", "\[IndentingNewLine]", " ", 
+          "\"\<fancy\>\"", ",", "\[IndentingNewLine]", 
+          RowBox[{"(*", "data", "*)"}], "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"beginningConsonants", "=", 
+            RowBox[{"{", 
+             RowBox[{
+             "\"\<f\>\"", ",", "\"\<f\>\"", ",", "\"\<g\>\"", ",", 
+              "\"\<g\>\"", ",", "\"\<h\>\"", ",", "\"\<gh\>\"", ",", 
+              "\"\<gh\>\"", ",", "\"\<k\>\"", ",", "\"\<k\>\"", ",", 
+              "\"\<k\>\"", ",", "\"\<l\>\"", ",", "\"\<l\>\"", ",", 
+              "\"\<l\>\"", ",", "\"\<l\>\"", ",", "\"\<n\>\"", ",", 
+              "\"\<n\>\"", ",", "\"\<n\>\"", ",", "\"\<r\>\"", ",", 
+              "\"\<r\>\"", ",", "\"\<r\>\"", ",", "\"\<r\>\"", ",", 
+              "\"\<s\>\"", ",", "\"\<s\>\"", ",", "\"\<s\>\"", ",", 
+              "\"\<s\>\"", ",", "\"\<t\>\"", ",", "\"\<t\>\"", ",", 
+              "\"\<t\>\"", ",", "\"\<t\>\"", ",", "\"\<v\>\"", ",", 
+              "\"\<w\>\"", ",", "\"\<st\>\"", ",", "\"\<st\>\"", ",", 
+              "\"\<st\>\"", ",", "\"\<sh\>\"", ",", "\"\<sh\>\"", ",", 
+              "\"\<sk\>\"", ",", "\"\<sk\>\"", ",", "\"\<sl\>\"", ",", 
+              "\"\<sn\>\"", ",", "\"\<sn\>\"", ",", "\"\<sn\>\"", ",", 
+              "\"\<sr\>\"", ",", "\"\<sv\>\"", ",", "\"\<sw\>\"", ",", 
+              "\"\<shr\>\"", ",", "\"\<str\>\"", ",", "\"\<str\>\"", ",", 
+              "\"\<stw\>\"", ",", "\"\<fl\>\"", ",", "\"\<fl\>\"", ",", 
+              "\"\<fr\>\"", ",", "\"\<fr\>\"", ",", "\"\<fw\>\"", ",", 
+              "\"\<gl\>\"", ",", "\"\<gl\>\"", ",", "\"\<gr\>\"", ",", 
+              "\"\<gr\>\"", ",", "\"\<gv\>\"", ",", "\"\<gw\>\"", ",", 
+              "\"\<ghl\>\"", ",", "\"\<ghr\>\"", ",", "\"\<ghv\>\"", ",", 
+              "\"\<ghw\>\"", ",", "\"\<kf\>\"", ",", "\"\<kh\>\"", ",", 
+              "\"\<kh\>\"", ",", "\"\<kl\>\"", ",", "\"\<kl\>\"", ",", 
+              "\"\<kr\>\"", ",", "\"\<kr\>\"", ",", "\"\<kv\>\"", ",", 
+              "\"\<kw\>\"", ",", "\"\<kw\>\"", ",", "\"\<nh\>\"", ",", 
+              "\"\<nr\>\"", ",", "\"\<nv\>\"", ",", "\"\<nw\>\"", ",", 
+              "\"\<th\>\"", ",", "\"\<th\>\"", ",", "\"\<tl\>\"", ",", 
+              "\"\<tr\>\"", ",", "\"\<tr\>\"", ",", "\"\<ts\>\"", ",", 
+              "\"\<ts\>\"", ",", "\"\<tv\>\"", ",", "\"\<tw\>\"", ",", 
+              "\"\<vl\>\"", ",", "\"\<vr\>\"", ",", "\"\<vw\>\"", ",", 
+              "\"\<wl\>\""}], "}"}]}], ";", 
+           RowBox[{"endConsonants", "=", 
+            RowBox[{"{", 
+             RowBox[{
+             "\"\<f\>\"", ",", "\"\<f\>\"", ",", "\"\<g\>\"", ",", 
+              "\"\<gh\>\"", ",", "\"\<gh\>\"", ",", "\"\<k\>\"", ",", 
+              "\"\<k\>\"", ",", "\"\<l\>\"", ",", "\"\<l\>\"", ",", 
+              "\"\<l\>\"", ",", "\"\<l\>\"", ",", "\"\<n\>\"", ",", 
+              "\"\<n\>\"", ",", "\"\<r\>\"", ",", "\"\<r\>\"", ",", 
+              "\"\<r\>\"", ",", "\"\<r\>\"", ",", "\"\<s\>\"", ",", 
+              "\"\<s\>\"", ",", "\"\<s\>\"", ",", "\"\<t\>\"", ",", 
+              "\"\<t\>\"", ",", "\"\<v\>\"", ",", "\"\<lf\>\"", ",", 
+              "\"\<rf\>\"", ",", "\"\<sf\>\"", ",", "\"\<lg\>\"", ",", 
+              "\"\<ng\>\"", ",", "\"\<rg\>\"", ",", "\"\<sg\>\"", ",", 
+              "\"\<lk\>\"", ",", "\"\<nk\>\"", ",", "\"\<rk\>\"", ",", 
+              "\"\<sk\>\"", ",", "\"\<rl\>\"", ",", "\"\<rl\>\"", ",", 
+              "\"\<ln\>\"", ",", "\"\<rn\>\"", ",", "\"\<fs\>\"", ",", 
+              "\"\<fs\>\"", ",", "\"\<gs\>\"", ",", "\"\<ks\>\"", ",", 
+              "\"\<ls\>\"", ",", "\"\<ls\>\"", ",", "\"\<ns\>\"", ",", 
+              "\"\<rs\>\"", ",", "\"\<rs\>\"", ",", "\"\<ts\>\"", ",", 
+              "\"\<vs\>\"", ",", "\"\<vs\>\"", ",", "\"\<ft\>\"", ",", 
+              "\"\<lt\>\"", ",", "\"\<nt\>\"", ",", "\"\<rt\>\"", ",", 
+              "\"\<st\>\"", ",", "\"\<vt\>\"", ",", "\"\<lv\>\"", ",", 
+              "\"\<nv\>\"", ",", "\"\<rv\>\""}], "}"}]}], ";", 
+           RowBox[{"broadVowels", "=", 
+            RowBox[{"{", 
+             RowBox[{
+             "\"\<a\>\"", ",", "\"\<a\>\"", ",", "\"\<a\>\"", ",", 
+              "\"\<o\>\"", ",", "\"\<o\>\"", ",", "\"\<o\>\"", ",", 
+              "\"\<o\>\"", ",", "\"\<u\>\"", ",", "\"\<\[UAcute]\>\"", ",", 
+              "\"\<\[UAcute]\>\"", ",", "\"\<ao\>\"", ",", "\"\<au\>\"", ",", 
+              "\"\<a\[UAcute]\>\"", ",", "\"\<oa\>\"", ",", "\"\<ou\>\"", 
+              ",", "\"\<o\[UAcute]\>\"", ",", "\"\<ua\>\"", ",", 
+              "\"\<\[UAcute]a\>\"", ",", "\"\<uo\>\"", ",", 
+              "\"\<\[UAcute]o\>\""}], "}"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"slenderVowels", "=", 
+            RowBox[{"{", 
+             RowBox[{
+             "\"\<e\>\"", ",", "\"\<e\>\"", ",", "\"\<e\>\"", ",", 
+              "\"\<\[EAcute]\>\"", ",", "\"\<\[EAcute]\>\"", ",", 
+              "\"\<\[EAcute]\>\"", ",", "\"\<i\>\"", ",", "\"\<i\>\"", ",", 
+              "\"\<i\>\"", ",", "\"\<\[IAcute]\>\"", ",", "\"\<\[IAcute]\>\"",
+               ",", "\"\<\[IAcute]\>\"", ",", "\"\<\[EAcute]\>\"", ",", 
+              "\"\<\[IAcute]\>\"", ",", "\"\<ei\>\"", ",", 
+              "\"\<\[EAcute]i\>\"", ",", "\"\<e\[IAcute]\>\"", ",", 
+              "\"\<\[EAcute]\[IAcute]\>\"", ",", "\"\<ie\>\"", ",", 
+              "\"\<\[IAcute]e\>\"", ",", "\"\<i\[EAcute]\>\"", ",", 
+              "\"\<\[IAcute]\[EAcute]\>\""}], "}"}]}], ";", 
+           RowBox[{"broadslenderVowels", "=", 
+            RowBox[{"{", 
+             RowBox[{
+             "\"\<ae\>\"", ",", "\"\<a\[EAcute]\>\"", ",", "\"\<ai\>\"", ",", 
+              "\"\<a\[IAcute]\>\"", ",", "\"\<oe\>\"", ",", 
+              "\"\<o\[EAcute]\>\"", ",", "\"\<oi\>\"", ",", 
+              "\"\<o\[IAcute]\>\"", ",", "\"\<u\[EAcute]\>\"", ",", 
+              "\"\<\[UAcute]e\>\"", ",", "\"\<u\[IAcute]\>\"", ",", 
+              "\"\<\[UAcute]\[EAcute]\>\"", ",", "\"\<\[UAcute]i\>\"", ",", 
+              "\"\<\[UAcute]\[IAcute]\>\"", ",", "\"\<a\[EAcute]\>\"", ",", 
+              "\"\<a\[IAcute]\>\"", ",", "\"\<o\[EAcute]\>\"", ",", 
+              "\"\<o\[IAcute]\>\""}], "}"}]}], ";", 
+           RowBox[{"slenderbroadVowels", "=", 
+            RowBox[{"{", 
+             RowBox[{
+             "\"\<ea\>\"", ",", "\"\<\[EAcute]a\>\"", ",", "\"\<eo\>\"", ",", 
+              "\"\<\[EAcute]o\>\"", ",", "\"\<eu\>\"", ",", 
+              "\"\<\[EAcute]u\>\"", ",", "\"\<e\[UAcute]\>\"", ",", 
+              "\"\<\[EAcute]\[UAcute]\>\"", ",", "\"\<\[EAcute]a\>\"", ",", 
+              "\"\<\[EAcute]o\>\"", ",", "\"\<ia\>\"", ",", 
+              "\"\<\[IAcute]a\>\"", ",", "\"\<io\>\"", ",", 
+              "\"\<\[IAcute]o\>\"", ",", "\"\<\[IAcute]u\>\"", ",", 
+              "\"\<i\[UAcute]\>\"", ",", "\"\<\[IAcute]\[UAcute]\>\"", ",", 
+              "\"\<\[IAcute]a\>\"", ",", "\"\<\[IAcute]o\>\""}], "}"}]}], ";", 
+           RowBox[{"patterns", "=", 
+            RowBox[{"{", 
+             RowBox[{
+             "\"\<BPB\>\"", ",", "\"\<SPS\>\"", ",", "\"\<BFB\>\"", ",", 
+              "\"\<SFS\>\"", ",", "\"\<APS\>\"", ",", "\"\<EPB\>\"", ",", 
+              "\"\<AFS\>\"", ",", "\"\<EFB\>\"", ",", "\"\<PBF\>\"", ",", 
+              "\"\<PSF\>\"", ",", "\"\<PAF\>\"", ",", "\"\<PEF\>\"", ",", 
+              "\[IndentingNewLine]", "\"\<PB\>\"", ",", "\"\<PS\>\"", ",", 
+              "\"\<BF\>\"", ",", "\"\<SF\>\"", ",", "\"\<AF\>\"", ",", 
+              "\"\<EF\>\"", ",", "\"\<PA\>\"", ",", "\"\<PE\>\"", ",", 
+              "\[IndentingNewLine]", "\"\<PBPBF\>\"", ",", "\"\<PSPSF\>\"", 
+              ",", "\"\<PAPEF\>\"", ",", "\"\<PEPAF\>\"", ",", 
+              "\"\<PBFBF\>\"", ",", "\"\<PSFSF\>\"", ",", "\"\<PAFEF\>\"", 
+              ",", "\"\<PEFAF\>\"", ",", "\"\<BPBF\>\"", ",", "\"\<SPSF\>\"", 
+              ",", "\"\<BPAF\>\"", ",", "\"\<SPEF\>\"", ",", "\"\<BPBPBF\>\"",
+               ",", "\"\<SPSPSF\>\"", ",", "\"\<BPAPEF\>\"", ",", 
+              "\"\<SPEPAF\>\"", ",", "\"\<BPBFBF\>\"", ",", "\"\<SPSFSF\>\"", 
+              ",", "\"\<BPAFEF\>\"", ",", "\"\<SPEFAF\>\"", ",", 
+              "\"\<PBPB\>\"", ",", "\"\<PSPS\>\"", ",", "\"\<PAPS\>\"", ",", 
+              "\"\<PEPB\>\"", ",", "\"\<PBPBPB\>\"", ",", "\"\<PSPSPS\>\"", 
+              ",", "\"\<PAPEPS\>\"", ",", "\"\<PEPAPS\>\"", ",", 
+              "\"\<PBFBPB\>\"", ",", "\"\<PSFSPS\>\"", ",", "\"\<PAFEPB\>\"", 
+              ",", "\"\<PEFAPS\>\"", ",", "\"\<BPBPB\>\"", ",", 
+              "\"\<SPSPS\>\"", ",", "\"\<BPAPS\>\"", ",", "\"\<SPEPB\>\""}], 
+             "}"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"getPattern", "[", "]"}], ":=", 
+            RowBox[{"Module", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"havePattern", ",", "pattern"}], "}"}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"(*", 
+               RowBox[{
+               "select", " ", "a", " ", "pattern", " ", "and", " ", "make", 
+                " ", "sure", " ", "it", " ", "fits", " ", "the", " ", 
+                RowBox[{"consonant", "/", "vowel"}], " ", "requirements"}], 
+               "*)"}], "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"havePattern", "=", "0"}], ";", "\[IndentingNewLine]", 
+               RowBox[{"While", "[", 
+                RowBox[{
+                 RowBox[{"havePattern", "==", "0"}], ",", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{
+                  RowBox[{"pattern", " ", "=", " ", 
+                   RowBox[{"patterns", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"RandomInteger", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", " ", 
+                    RowBox[{"Length", "[", "patterns", "]"}]}], "}"}], "]"}], 
+                    "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+                  "\[IndentingNewLine]", 
+                  RowBox[{"If", "[", 
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"begin", "\[Equal]", "\"\<either\>\""}], "&&", 
+                    RowBox[{"end", "\[Equal]", "\"\<either\>\""}]}], ")"}], "||", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"begin", "\[Equal]", "\"\<either\>\""}], "&&", 
+                    RowBox[{"end", "\[Equal]", "\"\<vowel\>\""}], "&&", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", 
+                    RowBox[{"-", "1"}]}], "]"}], "\[Equal]", "\"\<S\>\""}], "||", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", 
+                    RowBox[{"-", "1"}]}], "]"}], "\[Equal]", "\"\<B\>\""}], "||", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", 
+                    RowBox[{"-", "1"}]}], "]"}], "\[Equal]", "\"\<A\>\""}], "||", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", 
+                    RowBox[{"-", "1"}]}], "]"}], "\[Equal]", "\"\<E\>\""}]}], 
+                    ")"}]}], ")"}], "||", "\[IndentingNewLine]", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"begin", "\[Equal]", "\"\<either\>\""}], "&&", 
+                    RowBox[{"end", "\[Equal]", "\"\<consonant\>\""}], "&&", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", 
+                    RowBox[{"-", "1"}]}], "]"}], "\[Equal]", "\"\<P\>\""}], "||", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", 
+                    RowBox[{"-", "1"}]}], "]"}], "\[Equal]", "\"\<F\>\""}]}], 
+                    ")"}]}], ")"}], "||", "\[IndentingNewLine]", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"end", "\[Equal]", "\"\<either\>\""}], "&&", 
+                    RowBox[{"begin", "\[Equal]", "\"\<vowel\>\""}], "&&", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", "1"}], "]"}], "\[Equal]", 
+                    "\"\<S\>\""}], "||", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", "1"}], "]"}], "\[Equal]", 
+                    "\"\<B\>\""}], "||", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", "1"}], "]"}], "\[Equal]", 
+                    "\"\<A\>\""}], "||", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", "1"}], "]"}], "\[Equal]", 
+                    "\"\<E\>\""}]}], ")"}]}], ")"}], "||", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"end", "\[Equal]", "\"\<either\>\""}], "&&", 
+                    RowBox[{"begin", "\[Equal]", "\"\<consonant\>\""}], "&&", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", "1"}], "]"}], "\[Equal]", 
+                    "\"\<P\>\""}], "||", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", "1"}], "]"}], "\[Equal]", 
+                    "\"\<F\>\""}]}], ")"}]}], ")"}], "||", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"begin", "\[Equal]", "\"\<vowel\>\""}], "&&", 
+                    RowBox[{"end", "\[Equal]", "\"\<vowel\>\""}], "&&", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", "1"}], "]"}], "\[Equal]", 
+                    "\"\<S\>\""}], "||", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", "1"}], "]"}], "\[Equal]", 
+                    "\"\<B\>\""}], "||", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", "1"}], "]"}], "\[Equal]", 
+                    "\"\<A\>\""}], "||", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", "1"}], "]"}], "\[Equal]", 
+                    "\"\<E\>\""}]}], ")"}], "&&", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", 
+                    RowBox[{"-", "1"}]}], "]"}], "\[Equal]", "\"\<S\>\""}], "||", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", 
+                    RowBox[{"-", "1"}]}], "]"}], "\[Equal]", "\"\<B\>\""}], "||", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", 
+                    RowBox[{"-", "1"}]}], "]"}], "\[Equal]", "\"\<A\>\""}], "||", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", 
+                    RowBox[{"-", "1"}]}], "]"}], "\[Equal]", "\"\<E\>\""}]}], 
+                    ")"}]}], ")"}], "||", "\[IndentingNewLine]", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"begin", "\[Equal]", "\"\<vowel\>\""}], "&&", 
+                    RowBox[{"end", "\[Equal]", "\"\<consonant\>\""}], "&&", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", "1"}], "]"}], "\[Equal]", 
+                    "\"\<S\>\""}], "||", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", "1"}], "]"}], "\[Equal]", 
+                    "\"\<B\>\""}], "||", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", "1"}], "]"}], "\[Equal]", 
+                    "\"\<A\>\""}], "||", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", "1"}], "]"}], "\[Equal]", 
+                    "\"\<E\>\""}]}], ")"}], "&&", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", 
+                    RowBox[{"-", "1"}]}], "]"}], "\[Equal]", "\"\<P\>\""}], "||", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", 
+                    RowBox[{"-", "1"}]}], "]"}], "\[Equal]", "\"\<F\>\""}]}], 
+                    ")"}]}], ")"}], "||", "\[IndentingNewLine]", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"end", "\[Equal]", "\"\<vowel\>\""}], "&&", 
+                    RowBox[{"begin", "\[Equal]", "\"\<consonant\>\""}], "&&", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", "1"}], "]"}], "\[Equal]", 
+                    "\"\<P\>\""}], "||", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", "1"}], "]"}], "\[Equal]", 
+                    "\"\<F\>\""}]}], ")"}], "&&", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", 
+                    RowBox[{"-", "1"}]}], "]"}], "\[Equal]", "\"\<S\>\""}], "||", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", 
+                    RowBox[{"-", "1"}]}], "]"}], "\[Equal]", "\"\<B\>\""}], "||", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", 
+                    RowBox[{"-", "1"}]}], "]"}], "\[Equal]", "\"\<A\>\""}], "||", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", 
+                    RowBox[{"-", "1"}]}], "]"}], "\[Equal]", "\"\<E\>\""}]}], 
+                    ")"}]}], ")"}], "||", "\[IndentingNewLine]", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"end", "\[Equal]", "\"\<consonant\>\""}], "&&", 
+                    RowBox[{"begin", "\[Equal]", "\"\<consonant\>\""}], "&&", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", "1"}], "]"}], "\[Equal]", 
+                    "\"\<P\>\""}], "||", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", "1"}], "]"}], "\[Equal]", 
+                    "\"\<F\>\""}]}], ")"}], "&&", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", 
+                    RowBox[{"-", "1"}]}], "]"}], "\[Equal]", "\"\<P\>\""}], "||", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", 
+                    RowBox[{"-", "1"}]}], "]"}], "\[Equal]", "\"\<F\>\""}]}], 
+                    ")"}]}], ")"}]}], ",", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"havePattern", "=", "1"}], ";", 
+                    RowBox[{"Return", "[", "pattern", "]"}]}]}], "]"}]}]}], 
+                "\[IndentingNewLine]", "\[IndentingNewLine]", "]"}]}]}], 
+             RowBox[{"(*", 
+              RowBox[{"end", " ", "while"}], "*)"}], "\[IndentingNewLine]", 
+             "]"}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"getWord", "[", "patt_", "]"}], ":=", 
+            RowBox[{"word", "=", 
+             RowBox[{"StringJoin", "[", 
+              RowBox[{"Map", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"Switch", "[", 
+                  RowBox[{
+                   RowBox[{"StringTake", "[", 
+                    RowBox[{"patt", ",", 
+                    RowBox[{"{", "#", "}"}]}], "]"}], ",", "\"\<P\>\"", ",", 
+                   RowBox[{"beginningConsonants", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"RandomInteger", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", 
+                    RowBox[{"Length", "[", "beginningConsonants", "]"}]}], 
+                    "}"}], "]"}], "]"}], "]"}], ",", "\"\<F\>\"", ",", 
+                   RowBox[{"endConsonants", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"RandomInteger", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", 
+                    RowBox[{"Length", "[", "endConsonants", "]"}]}], "}"}], 
+                    "]"}], "]"}], "]"}], ",", "\"\<B\>\"", ",", 
+                   RowBox[{"broadVowels", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"RandomInteger", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", 
+                    RowBox[{"Length", "[", "broadVowels", "]"}]}], "}"}], 
+                    "]"}], "]"}], "]"}], ",", "\"\<S\>\"", ",", 
+                   RowBox[{"slenderVowels", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"RandomInteger", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", 
+                    RowBox[{"Length", "[", "slenderVowels", "]"}]}], "}"}], 
+                    "]"}], "]"}], "]"}], ",", "\"\<A\>\"", ",", 
+                   RowBox[{"broadslenderVowels", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"RandomInteger", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", 
+                    RowBox[{"Length", "[", "broadslenderVowels", "]"}]}], 
+                    "}"}], "]"}], "]"}], "]"}], ",", "\"\<E\>\"", ",", 
+                   RowBox[{"slenderbroadVowels", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"RandomInteger", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", 
+                    RowBox[{"Length", "[", "slenderbroadVowels", "]"}]}], 
+                    "}"}], "]"}], "]"}], "]"}]}], "]"}], "&"}], ",", 
+                RowBox[{"Range", "[", 
+                 RowBox[{"1", ",", 
+                  RowBox[{"StringLength", "[", "patt", "]"}]}], "]"}]}], 
+               "]"}], "\[IndentingNewLine]", "]"}]}]}]}], ",", 
+          "\[IndentingNewLine]", "\[IndentingNewLine]", " ", "\"\<simple\>\"",
+           ",", "\[IndentingNewLine]", 
+          RowBox[{"(*", "data", "*)"}], "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"beginningConsonants", "=", 
+            RowBox[{"{", 
+             RowBox[{
+             "\"\<tr\>\"", ",", "\"\<sl\>\"", ",", "\"\<gr\>\"", ",", 
+              "\"\<l\>\"", ",", "\"\<l\>\"", ",", "\"\<l\>\"", ",", 
+              "\"\<l\>\"", ",", "\"\<k\>\"", ",", "\"\<k\>\"", ",", 
+              "\"\<n\>\"", ",", "\"\<n\>\"", ",", "\"\<n\>\"", ",", 
+              "\"\<n\>\"", ",", "\"\<s\>\"", ",", "\"\<s\>\"", ",", 
+              "\"\<t\>\"", ",", "\"\<t\>\"", ",", "\"\<t\>\"", ",", 
+              "\"\<t\>\"", ",", "\"\<m\>\"", ",", "\"\<m\>\"", ",", 
+              "\"\<m\>\"", ",", "\"\<m\>\"", ",", "\"\<g\>\"", ",", 
+              "\"\<g\>\"", ",", "\"\<h\>\"", ",", "\"\<h\>\"", ",", 
+              "\"\<h\>\"", ",", "\"\<h\>\"", ",", "\"\<w\>\"", ",", 
+              "\"\<w\>\"", ",", "\"\<r\>\"", ",", "\"\<r\>\""}], "}"}]}], ";", 
+           RowBox[{"endConsonants", "=", 
+            RowBox[{"{", 
+             RowBox[{
+             "\"\<ts\>\"", ",", "\"\<rs\>\"", ",", "\"\<nt\>\"", ",", 
+              "\"\<ng\>\"", ",", "\"\<l\>\"", ",", "\"\<l\>\"", ",", 
+              "\"\<l\>\"", ",", "\"\<l\>\"", ",", "\"\<k\>\"", ",", 
+              "\"\<k\>\"", ",", "\"\<n\>\"", ",", "\"\<n\>\"", ",", 
+              "\"\<n\>\"", ",", "\"\<n\>\"", ",", "\"\<s\>\"", ",", 
+              "\"\<s\>\"", ",", "\"\<t\>\"", ",", "\"\<t\>\"", ",", 
+              "\"\<t\>\"", ",", "\"\<t\>\"", ",", "\"\<m\>\"", ",", 
+              "\"\<m\>\"", ",", "\"\<m\>\"", ",", "\"\<m\>\"", ",", 
+              "\"\<g\>\"", ",", "\"\<g\>\"", ",", "\"\<h\>\"", ",", 
+              "\"\<h\>\"", ",", "\"\<h\>\"", ",", "\"\<h\>\"", ",", 
+              "\"\<w\>\"", ",", "\"\<w\>\"", ",", "\"\<r\>\"", ",", 
+              "\"\<r\>\""}], "}"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"anyVowels", "=", 
+            RowBox[{"{", 
+             RowBox[{
+             "\"\<a\>\"", ",", "\"\<a\>\"", ",", "\"\<a\>\"", ",", 
+              "\"\<a\>\"", ",", "\"\<e\>\"", ",", "\"\<e\>\"", ",", 
+              "\"\<i\>\"", ",", "\"\<i\>\"", ",", "\"\<o\>\"", ",", 
+              "\"\<o\>\"", ",", "\"\<o\>\"", ",", "\"\<o\>\"", ",", 
+              "\"\<u\>\"", ",", "\"\<u\>\"", ",", "\"\<u\>\"", ",", 
+              "\"\<u\>\"", ",", "\"\<ae\>\"", ",", "\"\<ae\>\"", ",", 
+              "\"\<au\>\"", ",", "\"\<au\>\"", ",", "\"\<oi\>\"", ",", 
+              "\"\<ei\>\"", ",", "\"\<eu\>\""}], "}"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"patterns", "=", 
+            RowBox[{"{", 
+             RowBox[{
+             "\"\<BV\>\"", ",", "\"\<VE\>\"", ",", "\"\<BVE\>\"", ",", 
+              "\"\<VBV\>\"", ",", "\"\<VEV\>\"", ",", "\"\<BVBV\>\"", ",", 
+              "\"\<BVEV\>\"", ",", "\"\<BVBVE\>\"", ",", "\"\<BVEVE\>\"", 
+              ",", "\"\<BVEVE\>\"", ",", "\"\<VBVE\>\"", ",", "\"\<VEBV\>\"", 
+              ",", "\"\<VBBV\>\"", ",", "\"\<VBBVE\>\""}], "}"}]}], ";", 
+           "\[IndentingNewLine]", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"getPattern", "[", "]"}], ":=", 
+            RowBox[{"Module", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"havePattern", ",", "pattern"}], "}"}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"(*", 
+               RowBox[{
+               "select", " ", "a", " ", "pattern", " ", "and", " ", "make", 
+                " ", "sure", " ", "it", " ", "fits", " ", "the", " ", 
+                RowBox[{"consonant", "/", "vowel"}], " ", "requirements"}], 
+               "*)"}], "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"havePattern", "=", "0"}], ";", "\[IndentingNewLine]", 
+               "\[IndentingNewLine]", 
+               RowBox[{"While", "[", 
+                RowBox[{
+                 RowBox[{"havePattern", "==", "0"}], ",", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{
+                  RowBox[{"pattern", " ", "=", " ", 
+                   RowBox[{"patterns", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"RandomInteger", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", " ", 
+                    RowBox[{"Length", "[", "patterns", "]"}]}], "}"}], "]"}], 
+                    "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+                  "\[IndentingNewLine]", 
+                  RowBox[{"If", "[", 
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"begin", "\[Equal]", "\"\<either\>\""}], "&&", 
+                    RowBox[{"end", "\[Equal]", "\"\<either\>\""}]}], ")"}], "||",
+                     "\[IndentingNewLine]", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"begin", "\[Equal]", "\"\<either\>\""}], "&&", 
+                    RowBox[{"end", "\[Equal]", "\"\<vowel\>\""}], "&&", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", 
+                    RowBox[{"-", "1"}]}], "]"}], "\[Equal]", "\"\<V\>\""}]}], 
+                    ")"}], "||", "\[IndentingNewLine]", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"begin", "\[Equal]", "\"\<either\>\""}], "&&", 
+                    RowBox[{"end", "\[Equal]", "\"\<consonant\>\""}], "&&", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", 
+                    RowBox[{"-", "1"}]}], "]"}], "\[Equal]", "\"\<B\>\""}], "||", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", 
+                    RowBox[{"-", "1"}]}], "]"}], "\[Equal]", "\"\<E\>\""}]}], 
+                    ")"}]}], ")"}], " ", "||", "\[IndentingNewLine]", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"begin", "\[Equal]", "\"\<vowel\>\""}], "&&", 
+                    RowBox[{"end", "\[Equal]", "\"\<either\>\""}], "&&", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", "1"}], "]"}], "\[Equal]", 
+                    "\"\<V\>\""}]}], ")"}], "||", "\[IndentingNewLine]", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"begin", "\[Equal]", "\"\<consonant\>\""}], "&&", 
+                    RowBox[{"end", "\[Equal]", "\"\<either\>\""}], "&&", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", "1"}], "]"}], "\[Equal]", 
+                    "\"\<B\>\""}], "||", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", "1"}], "]"}], "\[Equal]", 
+                    "\"\<E\>\""}]}], ")"}]}], ")"}], "||", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"begin", "\[Equal]", "\"\<consonant\>\""}], "&&", 
+                    RowBox[{"end", "\[Equal]", "\"\<vowel\>\""}], "&&", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", "1"}], "]"}], "\[Equal]", 
+                    "\"\<B\>\""}], "||", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", "1"}], "]"}], "\[Equal]", 
+                    "\"\<E\>\""}]}], ")"}], "&&", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", 
+                    RowBox[{"-", "1"}]}], "]"}], "\[Equal]", "\"\<V\>\""}]}], 
+                    ")"}], " ", "||", "\[IndentingNewLine]", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"begin", "\[Equal]", "\"\<vowel\>\""}], "&&", 
+                    RowBox[{"end", "\[Equal]", "\"\<consonant\>\""}], "&&", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", "1"}], "]"}], "\[Equal]", 
+                    "\"\<V\>\""}], "&&", " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", 
+                    RowBox[{"-", "1"}]}], "]"}], "\[Equal]", "\"\<B\>\""}], "||", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", 
+                    RowBox[{"-", "1"}]}], "]"}], "\[Equal]", "\"\<E\>\""}]}], 
+                    ")"}]}], ")"}], " ", "||", "\[IndentingNewLine]", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"begin", "\[Equal]", "\"\<consonant\>\""}], "&&", 
+                    RowBox[{"end", "\[Equal]", "\"\<vowel\>\""}], "&&", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", 
+                    RowBox[{"-", "1"}]}], "]"}], "\[Equal]", "\"\<V\>\""}], "&&",
+                     " ", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", "1"}], "]"}], "\[Equal]", 
+                    "\"\<B\>\""}], "||", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", "1"}], "]"}], "\[Equal]", 
+                    "\"\<E\>\""}]}], ")"}]}], ")"}], " ", "||", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"begin", "\[Equal]", "\"\<vowel\>\""}], "&&", 
+                    RowBox[{"end", "\[Equal]", "\"\<vowel\>\""}], "&&", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", "1"}], "]"}], "\[Equal]", 
+                    "\"\<V\>\""}], "&&", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", 
+                    RowBox[{"-", "1"}]}], "]"}], "\[Equal]", "\"\<V\>\""}]}], 
+                    ")"}], "||", "\[IndentingNewLine]", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"begin", "\[Equal]", "\"\<consonant\>\""}], "&&", 
+                    RowBox[{"end", "\[Equal]", "\"\<consonant\>\""}], "&&", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", "1"}], "]"}], "\[Equal]", 
+                    "\"\<B\>\""}], "||", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", "1"}], "]"}], "\[Equal]", 
+                    "\"\<E\>\""}]}], ")"}], "&&", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", 
+                    RowBox[{"-", "1"}]}], "]"}], "\[Equal]", "\"\<B\>\""}], "||", 
+                    RowBox[{
+                    RowBox[{"StringTake", "[", 
+                    RowBox[{"pattern", ",", 
+                    RowBox[{"-", "1"}]}], "]"}], "\[Equal]", "\"\<E\>\""}]}], 
+                    ")"}]}], ")"}]}], ",", "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"havePattern", "=", "1"}], ";", 
+                    RowBox[{"Return", "[", "pattern", "]"}]}]}], "]"}]}]}], 
+                "\[IndentingNewLine]", "]"}]}]}], 
+             RowBox[{"(*", 
+              RowBox[{"end", " ", "while"}], "*)"}], "\[IndentingNewLine]", 
+             "]"}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"getWord", "[", "patt_", "]"}], ":=", 
+            RowBox[{"word", "=", 
+             RowBox[{"StringJoin", "[", 
+              RowBox[{"Map", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"Switch", "[", 
+                  RowBox[{
+                   RowBox[{"StringTake", "[", 
+                    RowBox[{"patt", ",", 
+                    RowBox[{"{", "#", "}"}]}], "]"}], ",", "\"\<B\>\"", ",", 
+                   RowBox[{"beginningConsonants", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"RandomInteger", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", 
+                    RowBox[{"Length", "[", "beginningConsonants", "]"}]}], 
+                    "}"}], "]"}], "]"}], "]"}], ",", "\"\<E\>\"", ",", 
+                   RowBox[{"endConsonants", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"RandomInteger", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", 
+                    RowBox[{"Length", "[", "endConsonants", "]"}]}], "}"}], 
+                    "]"}], "]"}], "]"}], ",", "\"\<V\>\"", ",", 
+                   RowBox[{"anyVowels", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"RandomInteger", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", 
+                    RowBox[{"Length", "[", "anyVowels", "]"}]}], "}"}], "]"}],
+                     "]"}], "]"}]}], "]"}], "&"}], ",", 
+                RowBox[{"Range", "[", 
+                 RowBox[{"1", ",", 
+                  RowBox[{"StringLength", "[", "patt", "]"}]}], "]"}]}], 
+               "]"}], "\[IndentingNewLine]", "]"}]}]}]}]}], 
+         "\[IndentingNewLine]", "]"}], ";", " ", 
+        RowBox[{"(*", 
+         RowBox[{"end", " ", "switch", " ", "language"}], "*)"}], "\n", 
+        "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{"Length", " ", "adjustments"}], "*)"}], 
+        "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"language", "\[Equal]", " ", "\"\<simple\>\""}], "&&", 
+           RowBox[{"minLength", ">", "5"}]}], ",", 
+          RowBox[{"minLength", "=", "5"}]}], "]"}], ";", "  ", 
+        RowBox[{"(*", 
+         RowBox[{
+         "words", " ", "in", " ", "that", " ", "language", " ", "are", " ", 
+          "short"}], "*)"}], "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"language", "\[Equal]", " ", "\"\<fancy\>\""}], "&&", 
+           RowBox[{"minLength", "<", "5"}]}], ",", 
+          RowBox[{"minLength", "=", "5"}]}], "]"}], ";", "  ", 
+        RowBox[{"(*", 
+         RowBox[{
+         "words", " ", "in", " ", "that", " ", "language", " ", "are", " ", 
+          "long"}], "*)"}], "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"maxLength", "<", "minLength"}], ",", 
+          RowBox[{"minLength", "=", "maxLength"}]}], "]"}], ";", 
+        "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"(*", "Generate", "*)"}], "\[IndentingNewLine]", 
+        RowBox[{"wordlist", " ", "=", " ", 
+         RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+        "\[IndentingNewLine]", " ", 
+        RowBox[{"For", "[", 
+         RowBox[{
+          RowBox[{"j", " ", "=", " ", "1"}], ",", " ", 
+          RowBox[{"j", " ", "<=", " ", "numwords"}], ",", " ", 
+          RowBox[{"j", "++"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"(*", 
+           RowBox[{
+            RowBox[{
+            "select", " ", "a", " ", "pattern", " ", "and", " ", "make", " ", 
+             "sure", " ", "it", " ", "fits", " ", "the", " ", 
+             RowBox[{"consonant", "/", "vowel"}], " ", "requirements"}], ",", 
+            " ", 
+            RowBox[{
+            "then", " ", "use", " ", "it", " ", "to", " ", "get", " ", "a", 
+             " ", "word"}]}], "*)"}], "\[IndentingNewLine]", " ", 
+          RowBox[{
+           RowBox[{"word", " ", "=", " ", "\"\<\>\""}], ";", 
+           "\[IndentingNewLine]", " ", 
+           RowBox[{"getWord", "[", 
+            RowBox[{"getPattern", "[", "]"}], "]"}], ";", 
+           "\[IndentingNewLine]", " ", 
+           RowBox[{"If", "[", " ", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"minLength", "\[LessEqual]", 
+               RowBox[{"StringLength", "[", "word", "]"}]}], "&&", 
+              RowBox[{
+               RowBox[{"StringLength", "[", "word", "]"}], "\[LessEqual]", 
+               "maxLength"}]}], ",", 
+             RowBox[{"AppendTo", "[", 
+              RowBox[{"wordlist", ",", " ", "word"}], "]"}], ",", 
+             RowBox[{"j", "--"}]}], "]"}]}]}], "]"}], ";", 
+        RowBox[{"(*", 
+         RowBox[{"end", " ", "for", " ", "j"}], "*)"}], "\[IndentingNewLine]",
+         "\[IndentingNewLine]", 
+        RowBox[{"Style", "[", 
+         RowBox[{
+          RowBox[{"Row", "[", 
+           RowBox[{"wordlist", ",", " ", "\"\<  \>\""}], "]"}], ",", 
+          RowBox[{"FontFamily", "\[Rule]", "\"\<Times\>\""}], ",", "18"}], 
+         "]"}]}]}], "\[IndentingNewLine]", "]"}]}], "]"}], ",", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", "Controls", "*)"}], "\[IndentingNewLine]", 
+   "\"\<language\>\"", ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"language", ",", " ", "\"\<simple\>\"", ",", "\"\<\>\""}], 
+      "}"}], ",", 
+     RowBox[{"{", " ", 
+      RowBox[{"\"\<simple\>\"", ",", " ", "\"\<fancy\>\""}], "}"}]}], "}"}], 
+   ",", "\[IndentingNewLine]", "\"\<\>\"", ",", "\[IndentingNewLine]", 
+   "\"\<number of words\>\"", ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"numwords", ",", "25", ",", "\"\<\>\""}], "}"}], ",", "1", ",", 
+     "100", ",", "1", ",", "Slider", ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Small"}], ",", 
+     RowBox[{"Appearance", "\[Rule]", " ", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "Delimiter", ",", 
+   RowBox[{"Style", "[", 
+    RowBox[{"\"\<word length\>\"", ",", "Bold"}], "]"}], ",", 
+   "\[IndentingNewLine]", "\"\<\>\"", ",", "\[IndentingNewLine]", 
+   "\"\<minimum\>\"", ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"minLength", ",", "3", ",", "\"\<\>\""}], "}"}], ",", "1", ",", 
+     "10", ",", "1", ",", " ", "Slider", ",", " ", 
+     RowBox[{"ImageSize", "\[Rule]", "Small"}], ",", " ", 
+     RowBox[{"Appearance", "\[Rule]", " ", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", "\"\<\>\"", ",", "\[IndentingNewLine]", 
+   "\"\<maximum\>\"", ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"maxLength", ",", "15", ",", "\"\<\>\""}], "}"}], ",", "3", ",",
+      "30", ",", "1", ",", " ", "Slider", ",", " ", 
+     RowBox[{"ImageSize", "\[Rule]", "Small"}], ",", 
+     RowBox[{"Appearance", "\[Rule]", " ", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "Delimiter", ",", 
+   RowBox[{"Style", "[", 
+    RowBox[{"\"\<beginnings and endings\>\"", ",", "Bold"}], "]"}], ",", 
+   "\[IndentingNewLine]", "\"\<\>\"", ",", "\[IndentingNewLine]", 
+   "\"\<begin with\>\"", ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"begin", ",", "\"\<either\>\"", ",", "\"\<\>\""}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<vowel\>\"", ",", "\"\<consonant\>\"", ",", "\"\<either\>\""}], 
+      "}"}], ",", "RadioButton"}], "}"}], ",", "\[IndentingNewLine]", 
+   "\"\<\>\"", ",", "\[IndentingNewLine]", "\"\<end with\>\"", ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"end", ",", "\"\<either\>\"", ",", "\"\<\>\""}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<vowel\>\"", ",", "\"\<consonant\>\"", ",", "\"\<either\>\""}], 
+      "}"}], ",", "RadioButton"}], "}"}], ",", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "Delimiter", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0", ",", " ", "\"\<\>\""}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"Button", "[", 
+       RowBox[{"\"\<generate\>\"", ",", 
+        RowBox[{"x", "=", 
+         RowBox[{"RandomReal", "[", "]"}]}]}], "]"}], "&"}]}], "}"}], ",", 
+   RowBox[{"ControlPlacement", "\[Rule]", "Left"}], ",", 
+   RowBox[{"TrackedSymbols", "\[RuleDelayed]", 
+    RowBox[{"{", "x", "}"}]}], ",", 
+   RowBox[{"ContentSize", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"420", ",", "400"}], "}"}]}]}], "\[IndentingNewLine]", 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.521989142075589*^9, 3.521989152996594*^9}, {
+   3.521989213426734*^9, 3.521989289575281*^9}, {3.521989469697596*^9, 
+   3.521989544885396*^9}, {3.5219897029947367`*^9, 3.5219897194355087`*^9}, {
+   3.521989796800844*^9, 3.5219898117252073`*^9}, {3.5219900907197647`*^9, 
+   3.5219900963496637`*^9}, {3.5219901624000673`*^9, 3.521990165573182*^9}, {
+   3.521990324054151*^9, 3.521990329629417*^9}, {3.5220024162224407`*^9, 
+   3.522002463329233*^9}, {3.522002507306748*^9, 3.522002553799409*^9}, {
+   3.522002593644825*^9, 3.5220026102548227`*^9}, {3.522002869009811*^9, 
+   3.522002938129822*^9}, {3.522002979247877*^9, 3.522002993786268*^9}, {
+   3.522003106548065*^9, 3.522003108647173*^9}, {3.522003149028268*^9, 
+   3.5220031584113407`*^9}, {3.522003190530465*^9, 3.522003212687159*^9}, {
+   3.522003310489739*^9, 3.522003574776391*^9}, {3.522003645038106*^9, 
+   3.522003658985927*^9}, {3.522003721830721*^9, 3.522003730807458*^9}, {
+   3.522003821592897*^9, 3.52200386105539*^9}, {3.5220038924953337`*^9, 
+   3.522004013107458*^9}, {3.522004043404293*^9, 3.522004066667234*^9}, {
+   3.522004154449812*^9, 3.522004161461293*^9}, {3.5220044711520853`*^9, 
+   3.522004485605116*^9}, {3.522004526965847*^9, 3.522004532692925*^9}, {
+   3.522004753897614*^9, 3.5220047735402107`*^9}, {3.5220048234218397`*^9, 
+   3.522004828691948*^9}, {3.522004919955702*^9, 3.522005045572348*^9}, {
+   3.522005148600312*^9, 3.522005158702935*^9}, {3.52200543849846*^9, 
+   3.522005442437805*^9}, {3.522005539222683*^9, 3.5220055405080967`*^9}, {
+   3.522005588123439*^9, 3.5220056277058477`*^9}, {3.522005675427176*^9, 
+   3.522005678152596*^9}, {3.5220057084582148`*^9, 3.522005708623858*^9}, {
+   3.522005819051319*^9, 3.522005819816709*^9}, {3.522005850462071*^9, 
+   3.522005860083043*^9}, {3.5220059099478416`*^9, 3.522005911273658*^9}, {
+   3.522083906128365*^9, 3.5220839502846127`*^9}, {3.5220840292346067`*^9, 
+   3.5220840400220547`*^9}, {3.522084095454389*^9, 3.5220840979173527`*^9}, {
+   3.522084129062167*^9, 3.5220841452517757`*^9}, {3.522084176006212*^9, 
+   3.522084227626328*^9}, {3.522084302003446*^9, 3.5220844355583267`*^9}, {
+   3.5220844795667152`*^9, 3.522084514758095*^9}, {3.522084719183565*^9, 
+   3.522084779578841*^9}, {3.522084833099163*^9, 3.522084868438547*^9}, {
+   3.52208491517805*^9, 3.522084917207879*^9}, {3.522084994783637*^9, 
+   3.522085059803233*^9}, {3.522085152644259*^9, 3.522085156304748*^9}, {
+   3.522085572452197*^9, 3.522085572666739*^9}, {3.522085620635425*^9, 
+   3.5220856467606*^9}, {3.522085727199436*^9, 3.522085885956077*^9}, {
+   3.5220863051031446`*^9, 3.522086450425212*^9}, {3.5220864834961357`*^9, 
+   3.522086503895905*^9}, {3.5220876872246027`*^9, 3.5220878978182783`*^9}, {
+   3.522087947988461*^9, 3.5220879504410563`*^9}, {3.522088009094692*^9, 
+   3.522088045844165*^9}, {3.522088087224235*^9, 3.5220880883258467`*^9}, {
+   3.522088292372664*^9, 3.5220883466993847`*^9}, {3.52208848919018*^9, 
+   3.522088505203004*^9}, {3.522088541364381*^9, 3.522088541746557*^9}, {
+   3.52208858257096*^9, 3.522088634335973*^9}, {3.522089141492589*^9, 
+   3.522089204859823*^9}, {3.522089279704795*^9, 3.5220892867195063`*^9}, {
+   3.522089323376277*^9, 3.5220893282101307`*^9}, {3.5220894250686293`*^9, 
+   3.5220894253850107`*^9}, {3.522090724766786*^9, 3.5220907366277647`*^9}, {
+   3.522090801527589*^9, 3.5220909769554977`*^9}, {3.522091025998811*^9, 
+   3.5220910642445307`*^9}, {3.5220911094873257`*^9, 3.522091138631503*^9}, {
+   3.5220912070910807`*^9, 3.52209138555204*^9}, 3.5220914165982447`*^9, {
+   3.5220914826879807`*^9, 3.522091485245183*^9}, {3.522091627902894*^9, 
+   3.522091651070409*^9}, {3.5220916853721533`*^9, 3.522091689758712*^9}, {
+   3.522160098031538*^9, 3.52216009866529*^9}, {3.522160525712434*^9, 
+   3.522160830058988*^9}, {3.52216097807545*^9, 3.522160984033402*^9}, {
+   3.522161019628636*^9, 3.522161020360548*^9}, {3.5221610614618187`*^9, 
+   3.522161062310747*^9}, {3.522167533953801*^9, 3.522167660811898*^9}, {
+   3.5221761465295467`*^9, 3.522176147853107*^9}, {3.522176209347842*^9, 
+   3.522176209521347*^9}, {3.522177474251399*^9, 3.5221774830069847`*^9}, {
+   3.52217751399483*^9, 3.522177524941061*^9}, {3.522177568454104*^9, 
+   3.522177585857451*^9}, {3.52242407592209*^9, 3.5224241869636507`*^9}, {
+   3.52242478065976*^9, 3.522424853295239*^9}, {3.522425105156005*^9, 
+   3.522425146855064*^9}, {3.5224253006804047`*^9, 3.522425327959647*^9}, {
+   3.522520629420356*^9, 3.52252067265546*^9}, 3.522520711316196*^9, {
+   3.522520769720735*^9, 3.5225207708172073`*^9}, {3.5225208548593607`*^9, 
+   3.5225208554106827`*^9}, {3.5225218947425203`*^9, 3.522521916248767*^9}, {
+   3.5225219562178383`*^9, 3.522521956848555*^9}, {3.5230403178061857`*^9, 
+   3.523040333984947*^9}, {3.52304039070697*^9, 3.5230404025193157`*^9}, {
+   3.5231001591446857`*^9, 3.523100160901888*^9}, {3.523100193506428*^9, 
+   3.523100198161297*^9}, {3.523100449161931*^9, 3.5231004520954*^9}, {
+   3.523101556889224*^9, 3.5231015682620163`*^9}, {3.52310445426114*^9, 
+   3.5231044585659637`*^9}, {3.5231045286325417`*^9, 3.523104614007978*^9}, {
+   3.523104754253951*^9, 3.52310478686572*^9}, {3.52312167223981*^9, 
+   3.523121676421228*^9}, {3.52312171357901*^9, 3.5231217851460257`*^9}, {
+   3.52312232278442*^9, 3.523122472681686*^9}, {3.523124032022459*^9, 
+   3.523124220619318*^9}, {3.5231244664439507`*^9, 3.523124467211957*^9}, {
+   3.523202122803053*^9, 3.523202129763077*^9}, {3.523204031050995*^9, 
+   3.523204189795802*^9}, {3.5232042332171173`*^9, 3.5232042826786137`*^9}, {
+   3.523204315769614*^9, 3.5232043334871593`*^9}, {3.52320456321768*^9, 
+   3.5232045643877153`*^9}, {3.523809289601941*^9, 3.5238093260144534`*^9}, {
+   3.523809402800144*^9, 3.523809438221561*^9}, {3.5238095208648663`*^9, 
+   3.5238095663166847`*^9}, {3.5238096121485176`*^9, 3.523809640009632*^9}, {
+   3.523824928642614*^9, 3.5238249424561872`*^9}, {3.523824974448393*^9, 
+   3.523825087820966*^9}},
+ CellID->197836779,ExpressionUUID->"e79fc2b6-eda2-4c2c-aa27-f97537e17691"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`begin$$ = "either", $CellContext`end$$ = 
+    "either", $CellContext`language$$ = "fancy", $CellContext`maxLength$$ = 
+    20, $CellContext`minLength$$ = 5, $CellContext`numwords$$ = 
+    100, $CellContext`x$$ = 0.8422680080538327, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold["language"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`language$$], "fancy", ""}, {"simple", "fancy"}}, {
+      Hold[""], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold["number of words"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`numwords$$], 100, ""}, 1, 100, 1}, {
+      Hold[
+       Style["word length", Bold]], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[""], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold["minimum"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`minLength$$], 5, ""}, 1, 10, 1}, {
+      Hold[""], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold["maximum"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`maxLength$$], 27, ""}, 3, 30, 1}, {
+      Hold[
+       Style["beginnings and endings", Bold]], 
+      Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[""], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold["begin with"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`begin$$], "vowel", ""}, {
+      "vowel", "consonant", "either"}}, {
+      Hold[""], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold["end with"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`end$$], "consonant", ""}, {
+      "vowel", "consonant", "either"}}, {{
+       Hold[$CellContext`x$$], 0.24181165840650176`, ""}, 
+      Dynamic[Button["generate", $CellContext`x$$ = RandomReal[]]& ]}}, 
+    Typeset`size$$ = {371.5, {439., 13.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`language$1463287$$ = 
+    False, $CellContext`numwords$1463288$$ = 
+    0, $CellContext`minLength$1463289$$ = 
+    0, $CellContext`maxLength$1463290$$ = 0, $CellContext`begin$1463291$$ = 
+    0, $CellContext`end$1463292$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`begin$$ = "vowel", $CellContext`end$$ = 
+        "consonant", $CellContext`language$$ = 
+        "fancy", $CellContext`maxLength$$ = 27, $CellContext`minLength$$ = 
+        5, $CellContext`numwords$$ = 100, $CellContext`x$$ = 
+        0.24181165840650176`}, "ControllerVariables" :> {
+        Hold[$CellContext`language$$, $CellContext`language$1463287$$, False], 
+        Hold[$CellContext`numwords$$, $CellContext`numwords$1463288$$, 0], 
+        Hold[$CellContext`minLength$$, $CellContext`minLength$1463289$$, 0], 
+        Hold[$CellContext`maxLength$$, $CellContext`maxLength$1463290$$, 0], 
+        Hold[$CellContext`begin$$, $CellContext`begin$1463291$$, 0], 
+        Hold[$CellContext`end$$, $CellContext`end$1463292$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`beginningConsonants$, $CellContext`endConsonants$, \
+$CellContext`broadVowels$, $CellContext`slenderVowels$, \
+$CellContext`broadslenderVowels$, $CellContext`slenderbroadVowels$, \
+$CellContext`patterns$, $CellContext`chooseLetter$, $CellContext`anyVowels$, \
+$CellContext`wordlist$, $CellContext`word$, $CellContext`i$, $CellContext`j$}, 
+        With[{$CellContext`fake$ = $CellContext`x$$}, 
+         Switch[$CellContext`language$$, 
+           "fancy", $CellContext`beginningConsonants$ = {
+             "f", "f", "g", "g", "h", "gh", "gh", "k", "k", "k", "l", "l", 
+              "l", "l", "n", "n", "n", "r", "r", "r", "r", "s", "s", "s", "s",
+               "t", "t", "t", "t", "v", "w", "st", "st", "st", "sh", "sh", 
+              "sk", "sk", "sl", "sn", "sn", "sn", "sr", "sv", "sw", "shr", 
+              "str", "str", "stw", "fl", "fl", "fr", "fr", "fw", "gl", "gl", 
+              "gr", "gr", "gv", "gw", "ghl", "ghr", "ghv", "ghw", "kf", "kh", 
+              "kh", "kl", "kl", "kr", "kr", "kv", "kw", "kw", "nh", "nr", 
+              "nv", "nw", "th", "th", "tl", "tr", "tr", "ts", "ts", "tv", 
+              "tw", "vl", "vr", "vw", "wl"}; $CellContext`endConsonants$ = {
+             "f", "f", "g", "gh", "gh", "k", "k", "l", "l", "l", "l", "n", 
+              "n", "r", "r", "r", "r", "s", "s", "s", "t", "t", "v", "lf", 
+              "rf", "sf", "lg", "ng", "rg", "sg", "lk", "nk", "rk", "sk", 
+              "rl", "rl", "ln", "rn", "fs", "fs", "gs", "ks", "ls", "ls", 
+              "ns", "rs", "rs", "ts", "vs", "vs", "ft", "lt", "nt", "rt", 
+              "st", "vt", "lv", "nv", "rv"}; $CellContext`broadVowels$ = {
+             "a", "a", "a", "o", "o", "o", "o", "u", "\[UAcute]", "\[UAcute]",
+               "ao", "au", "a\[UAcute]", "oa", "ou", "o\[UAcute]", "ua", 
+              "\[UAcute]a", "uo", 
+              "\[UAcute]o"}; $CellContext`slenderVowels$ = {
+             "e", "e", "e", "\[EAcute]", "\[EAcute]", "\[EAcute]", "i", "i", 
+              "i", "\[IAcute]", "\[IAcute]", "\[IAcute]", "\[EAcute]", 
+              "\[IAcute]", "ei", "\[EAcute]i", "e\[IAcute]", 
+              "\[EAcute]\[IAcute]", "ie", "\[IAcute]e", "i\[EAcute]", 
+              "\[IAcute]\[EAcute]"}; $CellContext`broadslenderVowels$ = {
+             "ae", "a\[EAcute]", "ai", "a\[IAcute]", "oe", "o\[EAcute]", "oi",
+               "o\[IAcute]", "u\[EAcute]", "\[UAcute]e", "u\[IAcute]", 
+              "\[UAcute]\[EAcute]", "\[UAcute]i", "\[UAcute]\[IAcute]", 
+              "a\[EAcute]", "a\[IAcute]", "o\[EAcute]", 
+              "o\[IAcute]"}; $CellContext`slenderbroadVowels$ = {
+             "ea", "\[EAcute]a", "eo", "\[EAcute]o", "eu", "\[EAcute]u", 
+              "e\[UAcute]", "\[EAcute]\[UAcute]", "\[EAcute]a", "\[EAcute]o", 
+              "ia", "\[IAcute]a", "io", "\[IAcute]o", "\[IAcute]u", 
+              "i\[UAcute]", "\[IAcute]\[UAcute]", "\[IAcute]a", 
+              "\[IAcute]o"}; $CellContext`patterns$ = {
+             "BPB", "SPS", "BFB", "SFS", "APS", "EPB", "AFS", "EFB", "PBF", 
+              "PSF", "PAF", "PEF", "PB", "PS", "BF", "SF", "AF", "EF", "PA", 
+              "PE", "PBPBF", "PSPSF", "PAPEF", "PEPAF", "PBFBF", "PSFSF", 
+              "PAFEF", "PEFAF", "BPBF", "SPSF", "BPAF", "SPEF", "BPBPBF", 
+              "SPSPSF", "BPAPEF", "SPEPAF", "BPBFBF", "SPSFSF", "BPAFEF", 
+              "SPEFAF", "PBPB", "PSPS", "PAPS", "PEPB", "PBPBPB", "PSPSPS", 
+              "PAPEPS", "PEPAPS", "PBFBPB", "PSFSPS", "PAFEPB", "PEFAPS", 
+              "BPBPB", "SPSPS", "BPAPS", "SPEPB"}; $CellContext`getPattern[] := 
+            Module[{$CellContext`havePattern$, $CellContext`pattern$}, \
+$CellContext`havePattern$ = 0; 
+              While[$CellContext`havePattern$ == 
+                0, $CellContext`pattern$ = Part[$CellContext`patterns$, 
+                   RandomInteger[{1, 
+                    Length[$CellContext`patterns$]}]]; If[
+                  Or[
+                   
+                   And[$CellContext`begin$$ == "either", $CellContext`end$$ == 
+                    "either"], 
+                   
+                   And[$CellContext`begin$$ == "either", $CellContext`end$$ == 
+                    "vowel", 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "S", 
+                    StringTake[$CellContext`pattern$, -1] == "B", 
+                    StringTake[$CellContext`pattern$, -1] == "A", 
+                    StringTake[$CellContext`pattern$, -1] == "E"]], 
+                   
+                   And[$CellContext`begin$$ == "either", $CellContext`end$$ == 
+                    "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "P", 
+                    StringTake[$CellContext`pattern$, -1] == "F"]], 
+                   
+                   And[$CellContext`end$$ == "either", $CellContext`begin$$ == 
+                    "vowel", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "S", 
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "A", 
+                    StringTake[$CellContext`pattern$, 1] == "E"]], 
+                   
+                   And[$CellContext`end$$ == "either", $CellContext`begin$$ == 
+                    "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "P", 
+                    StringTake[$CellContext`pattern$, 1] == "F"]], 
+                   
+                   And[$CellContext`begin$$ == "vowel", $CellContext`end$$ == 
+                    "vowel", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "S", 
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "A", 
+                    StringTake[$CellContext`pattern$, 1] == "E"], 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "S", 
+                    StringTake[$CellContext`pattern$, -1] == "B", 
+                    StringTake[$CellContext`pattern$, -1] == "A", 
+                    StringTake[$CellContext`pattern$, -1] == "E"]], 
+                   
+                   And[$CellContext`begin$$ == "vowel", $CellContext`end$$ == 
+                    "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "S", 
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "A", 
+                    StringTake[$CellContext`pattern$, 1] == "E"], 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "P", 
+                    StringTake[$CellContext`pattern$, -1] == "F"]], 
+                   
+                   And[$CellContext`end$$ == "vowel", $CellContext`begin$$ == 
+                    "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "P", 
+                    StringTake[$CellContext`pattern$, 1] == "F"], 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "S", 
+                    StringTake[$CellContext`pattern$, -1] == "B", 
+                    StringTake[$CellContext`pattern$, -1] == "A", 
+                    StringTake[$CellContext`pattern$, -1] == "E"]], 
+                   
+                   And[$CellContext`end$$ == 
+                    "consonant", $CellContext`begin$$ == "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "P", 
+                    StringTake[$CellContext`pattern$, 1] == "F"], 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "P", 
+                    StringTake[$CellContext`pattern$, -1] == 
+                    "F"]]], $CellContext`havePattern$ = 1; 
+                  Return[$CellContext`pattern$]]]]; $CellContext`getWord[
+              Pattern[$CellContext`patt$, 
+               Blank[]]] := ($CellContext`word$ = StringJoin[
+               Map[Switch[
+                 StringTake[$CellContext`patt$, {#}], "P", 
+                 Part[$CellContext`beginningConsonants$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`beginningConsonants$]}]], "F", 
+                 Part[$CellContext`endConsonants$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`endConsonants$]}]], "B", 
+                 Part[$CellContext`broadVowels$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`broadVowels$]}]], "S", 
+                 Part[$CellContext`slenderVowels$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`slenderVowels$]}]], "A", 
+                 Part[$CellContext`broadslenderVowels$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`broadslenderVowels$]}]], "E", 
+                 Part[$CellContext`slenderbroadVowels$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`slenderbroadVowels$]}]]]& , 
+                Range[1, 
+                 StringLength[$CellContext`patt$]]]]), 
+           "simple", $CellContext`beginningConsonants$ = {
+             "tr", "sl", "gr", "l", "l", "l", "l", "k", "k", "n", "n", "n", 
+              "n", "s", "s", "t", "t", "t", "t", "m", "m", "m", "m", "g", "g",
+               "h", "h", "h", "h", "w", "w", "r", 
+              "r"}; $CellContext`endConsonants$ = {
+             "ts", "rs", "nt", "ng", "l", "l", "l", "l", "k", "k", "n", "n", 
+              "n", "n", "s", "s", "t", "t", "t", "t", "m", "m", "m", "m", "g",
+               "g", "h", "h", "h", "h", "w", "w", "r", 
+              "r"}; $CellContext`anyVowels$ = {
+             "a", "a", "a", "a", "e", "e", "i", "i", "o", "o", "o", "o", "u", 
+              "u", "u", "u", "ae", "ae", "au", "au", "oi", "ei", 
+              "eu"}; $CellContext`patterns$ = {
+             "BV", "VE", "BVE", "VBV", "VEV", "BVBV", "BVEV", "BVBVE", 
+              "BVEVE", "BVEVE", "VBVE", "VEBV", "VBBV", 
+              "VBBVE"}; $CellContext`getPattern[] := 
+            Module[{$CellContext`havePattern$, $CellContext`pattern$}, \
+$CellContext`havePattern$ = 0; 
+              While[$CellContext`havePattern$ == 
+                0, $CellContext`pattern$ = Part[$CellContext`patterns$, 
+                   RandomInteger[{1, 
+                    Length[$CellContext`patterns$]}]]; If[
+                  Or[
+                   
+                   And[$CellContext`begin$$ == "either", $CellContext`end$$ == 
+                    "either"], 
+                   
+                   And[$CellContext`begin$$ == "either", $CellContext`end$$ == 
+                    "vowel", StringTake[$CellContext`pattern$, -1] == "V"], 
+                   
+                   And[$CellContext`begin$$ == "either", $CellContext`end$$ == 
+                    "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "B", 
+                    StringTake[$CellContext`pattern$, -1] == "E"]], 
+                   
+                   And[$CellContext`begin$$ == "vowel", $CellContext`end$$ == 
+                    "either", StringTake[$CellContext`pattern$, 1] == "V"], 
+                   
+                   And[$CellContext`begin$$ == 
+                    "consonant", $CellContext`end$$ == "either", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "E"]], 
+                   
+                   And[$CellContext`begin$$ == 
+                    "consonant", $CellContext`end$$ == "vowel", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "E"], 
+                    StringTake[$CellContext`pattern$, -1] == "V"], 
+                   
+                   And[$CellContext`begin$$ == "vowel", $CellContext`end$$ == 
+                    "consonant", StringTake[$CellContext`pattern$, 1] == "V", 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "B", 
+                    StringTake[$CellContext`pattern$, -1] == "E"]], 
+                   
+                   And[$CellContext`begin$$ == 
+                    "consonant", $CellContext`end$$ == "vowel", 
+                    StringTake[$CellContext`pattern$, -1] == "V", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "E"]], 
+                   
+                   And[$CellContext`begin$$ == "vowel", $CellContext`end$$ == 
+                    "vowel", StringTake[$CellContext`pattern$, 1] == "V", 
+                    StringTake[$CellContext`pattern$, -1] == "V"], 
+                   
+                   And[$CellContext`begin$$ == 
+                    "consonant", $CellContext`end$$ == "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "E"], 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "B", 
+                    StringTake[$CellContext`pattern$, -1] == 
+                    "E"]]], $CellContext`havePattern$ = 1; 
+                  Return[$CellContext`pattern$]]]]; $CellContext`getWord[
+              Pattern[$CellContext`patt$, 
+               Blank[]]] := ($CellContext`word$ = StringJoin[
+               Map[Switch[
+                 StringTake[$CellContext`patt$, {#}], "B", 
+                 Part[$CellContext`beginningConsonants$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`beginningConsonants$]}]], "E", 
+                 Part[$CellContext`endConsonants$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`endConsonants$]}]], "V", 
+                 Part[$CellContext`anyVowels$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`anyVowels$]}]]]& , 
+                Range[1, 
+                 StringLength[$CellContext`patt$]]]])]; If[
+           
+           And[$CellContext`language$$ == "simple", $CellContext`minLength$$ > 
+            5], $CellContext`minLength$$ = 5]; If[
+           
+           And[$CellContext`language$$ == "fancy", $CellContext`minLength$$ < 
+            5], $CellContext`minLength$$ = 5]; 
+         If[$CellContext`maxLength$$ < $CellContext`minLength$$, \
+$CellContext`minLength$$ = $CellContext`maxLength$$]; $CellContext`wordlist$ = \
+{}; For[$CellContext`j$ = 1, $CellContext`j$ <= $CellContext`numwords$$, 
+           Increment[$CellContext`j$], $CellContext`word$ = 
+            ""; $CellContext`getWord[
+             $CellContext`getPattern[]]; If[
+             
+             And[$CellContext`minLength$$ <= StringLength[$CellContext`word$],
+               StringLength[$CellContext`word$] <= $CellContext`maxLength$$], 
+             AppendTo[$CellContext`wordlist$, $CellContext`word$], 
+             Decrement[$CellContext`j$]]]; Style[
+           Row[$CellContext`wordlist$, "  "], FontFamily -> "Times", 18]]], 
+      "Specifications" :> {
+       "language", {{$CellContext`language$$, "fancy", ""}, {
+         "simple", "fancy"}}, "", 
+        "number of words", {{$CellContext`numwords$$, 100, ""}, 1, 100, 1, 
+         ControlType -> Slider, ImageSize -> Small, Appearance -> "Labeled"}, 
+        Delimiter, 
+        Style["word length", Bold], "", 
+        "minimum", {{$CellContext`minLength$$, 5, ""}, 1, 10, 1, ControlType -> 
+         Slider, ImageSize -> Small, Appearance -> "Labeled"}, "", 
+        "maximum", {{$CellContext`maxLength$$, 27, ""}, 3, 30, 1, ControlType -> 
+         Slider, ImageSize -> Small, Appearance -> "Labeled"}, Delimiter, 
+        Style["beginnings and endings", Bold], "", 
+        "begin with", {{$CellContext`begin$$, "vowel", ""}, {
+         "vowel", "consonant", "either"}, ControlType -> RadioButton}, "", 
+        "end with", {{$CellContext`end$$, "consonant", ""}, {
+         "vowel", "consonant", "either"}, ControlType -> RadioButton}, 
+        Delimiter, {{$CellContext`x$$, 0.24181165840650176`, ""}, 
+         Dynamic[Button["generate", $CellContext`x$$ = RandomReal[]]& ]}}, 
+      "Options" :> {
+       ControlPlacement -> Left, TrackedSymbols :> {$CellContext`x$$}, 
+        ContentSize -> {420, 400}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{663., {216., 223.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->660890507,ExpressionUUID->"d6ce9b3f-4ebf-4153-849c-746c9914c4af"]
+}, {2}]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection",ExpressionUUID->"326d1cbf-16b0-4b63-868c-95b17b5549e6"],
+
+Cell["\<\
+Creating a simulated vocabulary for a fictional language\[LongDash]in which \
+the words look like they go together\[LongDash]can be quite simple. One \
+process is to define the consonant and vowel sounds in the language and the \
+patterns in which they can be used. (For example, Irish distinguishes between \
+broad and slender vowels: if the vowel before a consonant is broad, the vowel \
+after it must be broad as well.) This Demonstration generates random words \
+based on rules defined for two fictional languages. The pronunciation of the \
+words is not considered.\
+\>", "ManipulateCaption",
+ CellChangeTimes->{{3.5231989301140013`*^9, 3.5231989802782087`*^9}, {
+  3.523199076869705*^9, 3.523199218752243*^9}, {3.523199975605794*^9, 
+  3.523199997268703*^9}, {3.5232015483920507`*^9, 3.5232015863082314`*^9}, {
+  3.523201979955394*^9, 3.523202067343933*^9}, {3.52320214030448*^9, 
+  3.523202186317007*^9}, {3.523202257357698*^9, 3.5232022580672703`*^9}, {
+  3.523824821018194*^9, 3.5238248695602283`*^9}},
+ CellID->1353594721,ExpressionUUID->"f6bea427-ea38-43d1-9d59-39db3e51ec87"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection",ExpressionUUID->"6ee28b99-3e4e-4f98-83a3-b838a0292ace"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`begin$$ = "vowel", $CellContext`end$$ = 
+    "consonant", $CellContext`language$$ = "fancy", $CellContext`maxLength$$ =
+     27, $CellContext`minLength$$ = 5, $CellContext`numwords$$ = 
+    100, $CellContext`x$$ = 0.24181165840650176`, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold["language"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`language$$], "fancy", ""}, {"simple", "fancy"}}, {
+      Hold[""], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold["number of words"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`numwords$$], 100, ""}, 1, 100, 1}, {
+      Hold[
+       Style["word length", Bold]], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[""], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold["minimum"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`minLength$$], 5, ""}, 1, 10, 1}, {
+      Hold[""], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold["maximum"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`maxLength$$], 27, ""}, 3, 30, 1}, {
+      Hold[
+       Style["beginnings and endings", Bold]], 
+      Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[""], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold["begin with"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`begin$$], "vowel", ""}, {
+      "vowel", "consonant", "either"}}, {
+      Hold[""], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold["end with"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`end$$], "consonant", ""}, {
+      "vowel", "consonant", "either"}}, {{
+       Hold[$CellContext`x$$], 0.24181165840650176`, ""}, 
+      Dynamic[Button["generate", $CellContext`x$$ = RandomReal[]]& ]}}, 
+    Typeset`size$$ = {365.701171875, {461., 13.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`language$1463373$$ = 
+    False, $CellContext`numwords$1463374$$ = 
+    0, $CellContext`minLength$1463375$$ = 
+    0, $CellContext`maxLength$1463376$$ = 0, $CellContext`begin$1463377$$ = 
+    0, $CellContext`end$1463378$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`begin$$ = "vowel", $CellContext`end$$ = 
+        "consonant", $CellContext`language$$ = 
+        "fancy", $CellContext`maxLength$$ = 27, $CellContext`minLength$$ = 
+        5, $CellContext`numwords$$ = 100, $CellContext`x$$ = 
+        0.24181165840650176`}, "ControllerVariables" :> {
+        Hold[$CellContext`language$$, $CellContext`language$1463373$$, False], 
+        Hold[$CellContext`numwords$$, $CellContext`numwords$1463374$$, 0], 
+        Hold[$CellContext`minLength$$, $CellContext`minLength$1463375$$, 0], 
+        Hold[$CellContext`maxLength$$, $CellContext`maxLength$1463376$$, 0], 
+        Hold[$CellContext`begin$$, $CellContext`begin$1463377$$, 0], 
+        Hold[$CellContext`end$$, $CellContext`end$1463378$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`beginningConsonants$, $CellContext`endConsonants$, \
+$CellContext`broadVowels$, $CellContext`slenderVowels$, \
+$CellContext`broadslenderVowels$, $CellContext`slenderbroadVowels$, \
+$CellContext`patterns$, $CellContext`chooseLetter$, $CellContext`anyVowels$, \
+$CellContext`wordlist$, $CellContext`word$, $CellContext`i$, $CellContext`j$}, 
+        With[{$CellContext`fake$ = $CellContext`x$$}, 
+         Switch[$CellContext`language$$, 
+           "fancy", $CellContext`beginningConsonants$ = {
+             "f", "f", "g", "g", "h", "gh", "gh", "k", "k", "k", "l", "l", 
+              "l", "l", "n", "n", "n", "r", "r", "r", "r", "s", "s", "s", "s",
+               "t", "t", "t", "t", "v", "w", "st", "st", "st", "sh", "sh", 
+              "sk", "sk", "sl", "sn", "sn", "sn", "sr", "sv", "sw", "shr", 
+              "str", "str", "stw", "fl", "fl", "fr", "fr", "fw", "gl", "gl", 
+              "gr", "gr", "gv", "gw", "ghl", "ghr", "ghv", "ghw", "kf", "kh", 
+              "kh", "kl", "kl", "kr", "kr", "kv", "kw", "kw", "nh", "nr", 
+              "nv", "nw", "th", "th", "tl", "tr", "tr", "ts", "ts", "tv", 
+              "tw", "vl", "vr", "vw", "wl"}; $CellContext`endConsonants$ = {
+             "f", "f", "g", "gh", "gh", "k", "k", "l", "l", "l", "l", "n", 
+              "n", "r", "r", "r", "r", "s", "s", "s", "t", "t", "v", "lf", 
+              "rf", "sf", "lg", "ng", "rg", "sg", "lk", "nk", "rk", "sk", 
+              "rl", "rl", "ln", "rn", "fs", "fs", "gs", "ks", "ls", "ls", 
+              "ns", "rs", "rs", "ts", "vs", "vs", "ft", "lt", "nt", "rt", 
+              "st", "vt", "lv", "nv", "rv"}; $CellContext`broadVowels$ = {
+             "a", "a", "a", "o", "o", "o", "o", "u", "\[UAcute]", "\[UAcute]",
+               "ao", "au", "a\[UAcute]", "oa", "ou", "o\[UAcute]", "ua", 
+              "\[UAcute]a", "uo", 
+              "\[UAcute]o"}; $CellContext`slenderVowels$ = {
+             "e", "e", "e", "\[EAcute]", "\[EAcute]", "\[EAcute]", "i", "i", 
+              "i", "\[IAcute]", "\[IAcute]", "\[IAcute]", "\[EAcute]", 
+              "\[IAcute]", "ei", "\[EAcute]i", "e\[IAcute]", 
+              "\[EAcute]\[IAcute]", "ie", "\[IAcute]e", "i\[EAcute]", 
+              "\[IAcute]\[EAcute]"}; $CellContext`broadslenderVowels$ = {
+             "ae", "a\[EAcute]", "ai", "a\[IAcute]", "oe", "o\[EAcute]", "oi",
+               "o\[IAcute]", "u\[EAcute]", "\[UAcute]e", "u\[IAcute]", 
+              "\[UAcute]\[EAcute]", "\[UAcute]i", "\[UAcute]\[IAcute]", 
+              "a\[EAcute]", "a\[IAcute]", "o\[EAcute]", 
+              "o\[IAcute]"}; $CellContext`slenderbroadVowels$ = {
+             "ea", "\[EAcute]a", "eo", "\[EAcute]o", "eu", "\[EAcute]u", 
+              "e\[UAcute]", "\[EAcute]\[UAcute]", "\[EAcute]a", "\[EAcute]o", 
+              "ia", "\[IAcute]a", "io", "\[IAcute]o", "\[IAcute]u", 
+              "i\[UAcute]", "\[IAcute]\[UAcute]", "\[IAcute]a", 
+              "\[IAcute]o"}; $CellContext`patterns$ = {
+             "BPB", "SPS", "BFB", "SFS", "APS", "EPB", "AFS", "EFB", "PBF", 
+              "PSF", "PAF", "PEF", "PB", "PS", "BF", "SF", "AF", "EF", "PA", 
+              "PE", "PBPBF", "PSPSF", "PAPEF", "PEPAF", "PBFBF", "PSFSF", 
+              "PAFEF", "PEFAF", "BPBF", "SPSF", "BPAF", "SPEF", "BPBPBF", 
+              "SPSPSF", "BPAPEF", "SPEPAF", "BPBFBF", "SPSFSF", "BPAFEF", 
+              "SPEFAF", "PBPB", "PSPS", "PAPS", "PEPB", "PBPBPB", "PSPSPS", 
+              "PAPEPS", "PEPAPS", "PBFBPB", "PSFSPS", "PAFEPB", "PEFAPS", 
+              "BPBPB", "SPSPS", "BPAPS", "SPEPB"}; $CellContext`getPattern[] := 
+            Module[{$CellContext`havePattern$, $CellContext`pattern$}, \
+$CellContext`havePattern$ = 0; 
+              While[$CellContext`havePattern$ == 
+                0, $CellContext`pattern$ = Part[$CellContext`patterns$, 
+                   RandomInteger[{1, 
+                    Length[$CellContext`patterns$]}]]; If[
+                  Or[
+                   
+                   And[$CellContext`begin$$ == "either", $CellContext`end$$ == 
+                    "either"], 
+                   
+                   And[$CellContext`begin$$ == "either", $CellContext`end$$ == 
+                    "vowel", 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "S", 
+                    StringTake[$CellContext`pattern$, -1] == "B", 
+                    StringTake[$CellContext`pattern$, -1] == "A", 
+                    StringTake[$CellContext`pattern$, -1] == "E"]], 
+                   
+                   And[$CellContext`begin$$ == "either", $CellContext`end$$ == 
+                    "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "P", 
+                    StringTake[$CellContext`pattern$, -1] == "F"]], 
+                   
+                   And[$CellContext`end$$ == "either", $CellContext`begin$$ == 
+                    "vowel", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "S", 
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "A", 
+                    StringTake[$CellContext`pattern$, 1] == "E"]], 
+                   
+                   And[$CellContext`end$$ == "either", $CellContext`begin$$ == 
+                    "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "P", 
+                    StringTake[$CellContext`pattern$, 1] == "F"]], 
+                   
+                   And[$CellContext`begin$$ == "vowel", $CellContext`end$$ == 
+                    "vowel", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "S", 
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "A", 
+                    StringTake[$CellContext`pattern$, 1] == "E"], 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "S", 
+                    StringTake[$CellContext`pattern$, -1] == "B", 
+                    StringTake[$CellContext`pattern$, -1] == "A", 
+                    StringTake[$CellContext`pattern$, -1] == "E"]], 
+                   
+                   And[$CellContext`begin$$ == "vowel", $CellContext`end$$ == 
+                    "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "S", 
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "A", 
+                    StringTake[$CellContext`pattern$, 1] == "E"], 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "P", 
+                    StringTake[$CellContext`pattern$, -1] == "F"]], 
+                   
+                   And[$CellContext`end$$ == "vowel", $CellContext`begin$$ == 
+                    "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "P", 
+                    StringTake[$CellContext`pattern$, 1] == "F"], 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "S", 
+                    StringTake[$CellContext`pattern$, -1] == "B", 
+                    StringTake[$CellContext`pattern$, -1] == "A", 
+                    StringTake[$CellContext`pattern$, -1] == "E"]], 
+                   
+                   And[$CellContext`end$$ == 
+                    "consonant", $CellContext`begin$$ == "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "P", 
+                    StringTake[$CellContext`pattern$, 1] == "F"], 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "P", 
+                    StringTake[$CellContext`pattern$, -1] == 
+                    "F"]]], $CellContext`havePattern$ = 1; 
+                  Return[$CellContext`pattern$]]]]; $CellContext`getWord[
+              Pattern[$CellContext`patt$, 
+               Blank[]]] := ($CellContext`word$ = StringJoin[
+               Map[Switch[
+                 StringTake[$CellContext`patt$, {#}], "P", 
+                 Part[$CellContext`beginningConsonants$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`beginningConsonants$]}]], "F", 
+                 Part[$CellContext`endConsonants$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`endConsonants$]}]], "B", 
+                 Part[$CellContext`broadVowels$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`broadVowels$]}]], "S", 
+                 Part[$CellContext`slenderVowels$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`slenderVowels$]}]], "A", 
+                 Part[$CellContext`broadslenderVowels$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`broadslenderVowels$]}]], "E", 
+                 Part[$CellContext`slenderbroadVowels$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`slenderbroadVowels$]}]]]& , 
+                Range[1, 
+                 StringLength[$CellContext`patt$]]]]), 
+           "simple", $CellContext`beginningConsonants$ = {
+             "tr", "sl", "gr", "l", "l", "l", "l", "k", "k", "n", "n", "n", 
+              "n", "s", "s", "t", "t", "t", "t", "m", "m", "m", "m", "g", "g",
+               "h", "h", "h", "h", "w", "w", "r", 
+              "r"}; $CellContext`endConsonants$ = {
+             "ts", "rs", "nt", "ng", "l", "l", "l", "l", "k", "k", "n", "n", 
+              "n", "n", "s", "s", "t", "t", "t", "t", "m", "m", "m", "m", "g",
+               "g", "h", "h", "h", "h", "w", "w", "r", 
+              "r"}; $CellContext`anyVowels$ = {
+             "a", "a", "a", "a", "e", "e", "i", "i", "o", "o", "o", "o", "u", 
+              "u", "u", "u", "ae", "ae", "au", "au", "oi", "ei", 
+              "eu"}; $CellContext`patterns$ = {
+             "BV", "VE", "BVE", "VBV", "VEV", "BVBV", "BVEV", "BVBVE", 
+              "BVEVE", "BVEVE", "VBVE", "VEBV", "VBBV", 
+              "VBBVE"}; $CellContext`getPattern[] := 
+            Module[{$CellContext`havePattern$, $CellContext`pattern$}, \
+$CellContext`havePattern$ = 0; 
+              While[$CellContext`havePattern$ == 
+                0, $CellContext`pattern$ = Part[$CellContext`patterns$, 
+                   RandomInteger[{1, 
+                    Length[$CellContext`patterns$]}]]; If[
+                  Or[
+                   
+                   And[$CellContext`begin$$ == "either", $CellContext`end$$ == 
+                    "either"], 
+                   
+                   And[$CellContext`begin$$ == "either", $CellContext`end$$ == 
+                    "vowel", StringTake[$CellContext`pattern$, -1] == "V"], 
+                   
+                   And[$CellContext`begin$$ == "either", $CellContext`end$$ == 
+                    "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "B", 
+                    StringTake[$CellContext`pattern$, -1] == "E"]], 
+                   
+                   And[$CellContext`begin$$ == "vowel", $CellContext`end$$ == 
+                    "either", StringTake[$CellContext`pattern$, 1] == "V"], 
+                   
+                   And[$CellContext`begin$$ == 
+                    "consonant", $CellContext`end$$ == "either", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "E"]], 
+                   
+                   And[$CellContext`begin$$ == 
+                    "consonant", $CellContext`end$$ == "vowel", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "E"], 
+                    StringTake[$CellContext`pattern$, -1] == "V"], 
+                   
+                   And[$CellContext`begin$$ == "vowel", $CellContext`end$$ == 
+                    "consonant", StringTake[$CellContext`pattern$, 1] == "V", 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "B", 
+                    StringTake[$CellContext`pattern$, -1] == "E"]], 
+                   
+                   And[$CellContext`begin$$ == 
+                    "consonant", $CellContext`end$$ == "vowel", 
+                    StringTake[$CellContext`pattern$, -1] == "V", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "E"]], 
+                   
+                   And[$CellContext`begin$$ == "vowel", $CellContext`end$$ == 
+                    "vowel", StringTake[$CellContext`pattern$, 1] == "V", 
+                    StringTake[$CellContext`pattern$, -1] == "V"], 
+                   
+                   And[$CellContext`begin$$ == 
+                    "consonant", $CellContext`end$$ == "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "E"], 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "B", 
+                    StringTake[$CellContext`pattern$, -1] == 
+                    "E"]]], $CellContext`havePattern$ = 1; 
+                  Return[$CellContext`pattern$]]]]; $CellContext`getWord[
+              Pattern[$CellContext`patt$, 
+               Blank[]]] := ($CellContext`word$ = StringJoin[
+               Map[Switch[
+                 StringTake[$CellContext`patt$, {#}], "B", 
+                 Part[$CellContext`beginningConsonants$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`beginningConsonants$]}]], "E", 
+                 Part[$CellContext`endConsonants$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`endConsonants$]}]], "V", 
+                 Part[$CellContext`anyVowels$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`anyVowels$]}]]]& , 
+                Range[1, 
+                 StringLength[$CellContext`patt$]]]])]; If[
+           
+           And[$CellContext`language$$ == "simple", $CellContext`minLength$$ > 
+            5], $CellContext`minLength$$ = 5]; If[
+           
+           And[$CellContext`language$$ == "fancy", $CellContext`minLength$$ < 
+            5], $CellContext`minLength$$ = 5]; 
+         If[$CellContext`maxLength$$ < $CellContext`minLength$$, \
+$CellContext`minLength$$ = $CellContext`maxLength$$]; $CellContext`wordlist$ = \
+{}; For[$CellContext`j$ = 1, $CellContext`j$ <= $CellContext`numwords$$, 
+           Increment[$CellContext`j$], $CellContext`word$ = 
+            ""; $CellContext`getWord[
+             $CellContext`getPattern[]]; If[
+             
+             And[$CellContext`minLength$$ <= StringLength[$CellContext`word$],
+               StringLength[$CellContext`word$] <= $CellContext`maxLength$$], 
+             AppendTo[$CellContext`wordlist$, $CellContext`word$], 
+             Decrement[$CellContext`j$]]]; Style[
+           Row[$CellContext`wordlist$, "  "], FontFamily -> "Times", 18]]], 
+      "Specifications" :> {
+       "language", {{$CellContext`language$$, "fancy", ""}, {
+         "simple", "fancy"}}, "", 
+        "number of words", {{$CellContext`numwords$$, 100, ""}, 1, 100, 1, 
+         ControlType -> Slider, ImageSize -> Small, Appearance -> "Labeled"}, 
+        Delimiter, 
+        Style["word length", Bold], "", 
+        "minimum", {{$CellContext`minLength$$, 5, ""}, 1, 10, 1, ControlType -> 
+         Slider, ImageSize -> Small, Appearance -> "Labeled"}, "", 
+        "maximum", {{$CellContext`maxLength$$, 27, ""}, 3, 30, 1, ControlType -> 
+         Slider, ImageSize -> Small, Appearance -> "Labeled"}, Delimiter, 
+        Style["beginnings and endings", Bold], "", 
+        "begin with", {{$CellContext`begin$$, "vowel", ""}, {
+         "vowel", "consonant", "either"}, ControlType -> RadioButton}, "", 
+        "end with", {{$CellContext`end$$, "consonant", ""}, {
+         "vowel", "consonant", "either"}, ControlType -> RadioButton}, 
+        Delimiter, {{$CellContext`x$$, 0.24181165840650176`, ""}, 
+         Dynamic[Button["generate", $CellContext`x$$ = RandomReal[]]& ]}}, 
+      "Options" :> {
+       ControlPlacement -> Left, TrackedSymbols :> {$CellContext`x$$}, 
+        ContentSize -> {420, 400}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{663., {216., 223.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->801328865,ExpressionUUID->"64d50f44-10e9-41d2-8972-d53dd3015f99"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection",ExpressionUUID->"acada3cc-d834-4dcb-abd2-3df0b05824b3"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`begin$$ = "vowel", $CellContext`end$$ = 
+    "vowel", $CellContext`language$$ = "fancy", $CellContext`maxLength$$ = 
+    30, $CellContext`minLength$$ = 8, $CellContext`numwords$$ = 
+    100, $CellContext`x$$ = 0.4138543095803704, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold["language"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`language$$], "fancy", ""}, {"simple", "fancy"}}, {
+      Hold[""], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold["number of words"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`numwords$$], 100, ""}, 1, 100, 1}, {
+      Hold[
+       Style["word length", Bold]], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[""], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold["minimum"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`minLength$$], 8, ""}, 1, 10, 1}, {
+      Hold[""], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold["maximum"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`maxLength$$], 30, ""}, 3, 30, 1}, {
+      Hold[
+       Style["beginnings and endings", Bold]], 
+      Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[""], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold["begin with"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`begin$$], "vowel", ""}, {
+      "vowel", "consonant", "either"}}, {
+      Hold[""], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold["end with"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`end$$], "vowel", ""}, {
+      "vowel", "consonant", "either"}}, {{
+       Hold[$CellContext`x$$], 0.4138543095803704, ""}, 
+      Dynamic[Button["generate", $CellContext`x$$ = RandomReal[]]& ]}}, 
+    Typeset`size$$ = {384.701171875, {459., 13.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`language$1463459$$ = 
+    False, $CellContext`numwords$1463460$$ = 
+    0, $CellContext`minLength$1463461$$ = 
+    0, $CellContext`maxLength$1463462$$ = 0, $CellContext`begin$1463463$$ = 
+    0, $CellContext`end$1463464$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`begin$$ = "vowel", $CellContext`end$$ = 
+        "vowel", $CellContext`language$$ = "fancy", $CellContext`maxLength$$ = 
+        30, $CellContext`minLength$$ = 8, $CellContext`numwords$$ = 
+        100, $CellContext`x$$ = 0.4138543095803704}, "ControllerVariables" :> {
+        Hold[$CellContext`language$$, $CellContext`language$1463459$$, False], 
+        Hold[$CellContext`numwords$$, $CellContext`numwords$1463460$$, 0], 
+        Hold[$CellContext`minLength$$, $CellContext`minLength$1463461$$, 0], 
+        Hold[$CellContext`maxLength$$, $CellContext`maxLength$1463462$$, 0], 
+        Hold[$CellContext`begin$$, $CellContext`begin$1463463$$, 0], 
+        Hold[$CellContext`end$$, $CellContext`end$1463464$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`beginningConsonants$, $CellContext`endConsonants$, \
+$CellContext`broadVowels$, $CellContext`slenderVowels$, \
+$CellContext`broadslenderVowels$, $CellContext`slenderbroadVowels$, \
+$CellContext`patterns$, $CellContext`chooseLetter$, $CellContext`anyVowels$, \
+$CellContext`wordlist$, $CellContext`word$, $CellContext`i$, $CellContext`j$}, 
+        With[{$CellContext`fake$ = $CellContext`x$$}, 
+         Switch[$CellContext`language$$, 
+           "fancy", $CellContext`beginningConsonants$ = {
+             "f", "f", "g", "g", "h", "gh", "gh", "k", "k", "k", "l", "l", 
+              "l", "l", "n", "n", "n", "r", "r", "r", "r", "s", "s", "s", "s",
+               "t", "t", "t", "t", "v", "w", "st", "st", "st", "sh", "sh", 
+              "sk", "sk", "sl", "sn", "sn", "sn", "sr", "sv", "sw", "shr", 
+              "str", "str", "stw", "fl", "fl", "fr", "fr", "fw", "gl", "gl", 
+              "gr", "gr", "gv", "gw", "ghl", "ghr", "ghv", "ghw", "kf", "kh", 
+              "kh", "kl", "kl", "kr", "kr", "kv", "kw", "kw", "nh", "nr", 
+              "nv", "nw", "th", "th", "tl", "tr", "tr", "ts", "ts", "tv", 
+              "tw", "vl", "vr", "vw", "wl"}; $CellContext`endConsonants$ = {
+             "f", "f", "g", "gh", "gh", "k", "k", "l", "l", "l", "l", "n", 
+              "n", "r", "r", "r", "r", "s", "s", "s", "t", "t", "v", "lf", 
+              "rf", "sf", "lg", "ng", "rg", "sg", "lk", "nk", "rk", "sk", 
+              "rl", "rl", "ln", "rn", "fs", "fs", "gs", "ks", "ls", "ls", 
+              "ns", "rs", "rs", "ts", "vs", "vs", "ft", "lt", "nt", "rt", 
+              "st", "vt", "lv", "nv", "rv"}; $CellContext`broadVowels$ = {
+             "a", "a", "a", "o", "o", "o", "o", "u", "\[UAcute]", "\[UAcute]",
+               "ao", "au", "a\[UAcute]", "oa", "ou", "o\[UAcute]", "ua", 
+              "\[UAcute]a", "uo", 
+              "\[UAcute]o"}; $CellContext`slenderVowels$ = {
+             "e", "e", "e", "\[EAcute]", "\[EAcute]", "\[EAcute]", "i", "i", 
+              "i", "\[IAcute]", "\[IAcute]", "\[IAcute]", "\[EAcute]", 
+              "\[IAcute]", "ei", "\[EAcute]i", "e\[IAcute]", 
+              "\[EAcute]\[IAcute]", "ie", "\[IAcute]e", "i\[EAcute]", 
+              "\[IAcute]\[EAcute]"}; $CellContext`broadslenderVowels$ = {
+             "ae", "a\[EAcute]", "ai", "a\[IAcute]", "oe", "o\[EAcute]", "oi",
+               "o\[IAcute]", "u\[EAcute]", "\[UAcute]e", "u\[IAcute]", 
+              "\[UAcute]\[EAcute]", "\[UAcute]i", "\[UAcute]\[IAcute]", 
+              "a\[EAcute]", "a\[IAcute]", "o\[EAcute]", 
+              "o\[IAcute]"}; $CellContext`slenderbroadVowels$ = {
+             "ea", "\[EAcute]a", "eo", "\[EAcute]o", "eu", "\[EAcute]u", 
+              "e\[UAcute]", "\[EAcute]\[UAcute]", "\[EAcute]a", "\[EAcute]o", 
+              "ia", "\[IAcute]a", "io", "\[IAcute]o", "\[IAcute]u", 
+              "i\[UAcute]", "\[IAcute]\[UAcute]", "\[IAcute]a", 
+              "\[IAcute]o"}; $CellContext`patterns$ = {
+             "BPB", "SPS", "BFB", "SFS", "APS", "EPB", "AFS", "EFB", "PBF", 
+              "PSF", "PAF", "PEF", "PB", "PS", "BF", "SF", "AF", "EF", "PA", 
+              "PE", "PBPBF", "PSPSF", "PAPEF", "PEPAF", "PBFBF", "PSFSF", 
+              "PAFEF", "PEFAF", "BPBF", "SPSF", "BPAF", "SPEF", "BPBPBF", 
+              "SPSPSF", "BPAPEF", "SPEPAF", "BPBFBF", "SPSFSF", "BPAFEF", 
+              "SPEFAF", "PBPB", "PSPS", "PAPS", "PEPB", "PBPBPB", "PSPSPS", 
+              "PAPEPS", "PEPAPS", "PBFBPB", "PSFSPS", "PAFEPB", "PEFAPS", 
+              "BPBPB", "SPSPS", "BPAPS", "SPEPB"}; $CellContext`getPattern[] := 
+            Module[{$CellContext`havePattern$, $CellContext`pattern$}, \
+$CellContext`havePattern$ = 0; 
+              While[$CellContext`havePattern$ == 
+                0, $CellContext`pattern$ = Part[$CellContext`patterns$, 
+                   RandomInteger[{1, 
+                    Length[$CellContext`patterns$]}]]; If[
+                  Or[
+                   
+                   And[$CellContext`begin$$ == "either", $CellContext`end$$ == 
+                    "either"], 
+                   
+                   And[$CellContext`begin$$ == "either", $CellContext`end$$ == 
+                    "vowel", 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "S", 
+                    StringTake[$CellContext`pattern$, -1] == "B", 
+                    StringTake[$CellContext`pattern$, -1] == "A", 
+                    StringTake[$CellContext`pattern$, -1] == "E"]], 
+                   
+                   And[$CellContext`begin$$ == "either", $CellContext`end$$ == 
+                    "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "P", 
+                    StringTake[$CellContext`pattern$, -1] == "F"]], 
+                   
+                   And[$CellContext`end$$ == "either", $CellContext`begin$$ == 
+                    "vowel", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "S", 
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "A", 
+                    StringTake[$CellContext`pattern$, 1] == "E"]], 
+                   
+                   And[$CellContext`end$$ == "either", $CellContext`begin$$ == 
+                    "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "P", 
+                    StringTake[$CellContext`pattern$, 1] == "F"]], 
+                   
+                   And[$CellContext`begin$$ == "vowel", $CellContext`end$$ == 
+                    "vowel", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "S", 
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "A", 
+                    StringTake[$CellContext`pattern$, 1] == "E"], 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "S", 
+                    StringTake[$CellContext`pattern$, -1] == "B", 
+                    StringTake[$CellContext`pattern$, -1] == "A", 
+                    StringTake[$CellContext`pattern$, -1] == "E"]], 
+                   
+                   And[$CellContext`begin$$ == "vowel", $CellContext`end$$ == 
+                    "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "S", 
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "A", 
+                    StringTake[$CellContext`pattern$, 1] == "E"], 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "P", 
+                    StringTake[$CellContext`pattern$, -1] == "F"]], 
+                   
+                   And[$CellContext`end$$ == "vowel", $CellContext`begin$$ == 
+                    "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "P", 
+                    StringTake[$CellContext`pattern$, 1] == "F"], 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "S", 
+                    StringTake[$CellContext`pattern$, -1] == "B", 
+                    StringTake[$CellContext`pattern$, -1] == "A", 
+                    StringTake[$CellContext`pattern$, -1] == "E"]], 
+                   
+                   And[$CellContext`end$$ == 
+                    "consonant", $CellContext`begin$$ == "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "P", 
+                    StringTake[$CellContext`pattern$, 1] == "F"], 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "P", 
+                    StringTake[$CellContext`pattern$, -1] == 
+                    "F"]]], $CellContext`havePattern$ = 1; 
+                  Return[$CellContext`pattern$]]]]; $CellContext`getWord[
+              Pattern[$CellContext`patt$, 
+               Blank[]]] := ($CellContext`word$ = StringJoin[
+               Map[Switch[
+                 StringTake[$CellContext`patt$, {#}], "P", 
+                 Part[$CellContext`beginningConsonants$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`beginningConsonants$]}]], "F", 
+                 Part[$CellContext`endConsonants$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`endConsonants$]}]], "B", 
+                 Part[$CellContext`broadVowels$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`broadVowels$]}]], "S", 
+                 Part[$CellContext`slenderVowels$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`slenderVowels$]}]], "A", 
+                 Part[$CellContext`broadslenderVowels$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`broadslenderVowels$]}]], "E", 
+                 Part[$CellContext`slenderbroadVowels$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`slenderbroadVowels$]}]]]& , 
+                Range[1, 
+                 StringLength[$CellContext`patt$]]]]), 
+           "simple", $CellContext`beginningConsonants$ = {
+             "tr", "sl", "gr", "l", "l", "l", "l", "k", "k", "n", "n", "n", 
+              "n", "s", "s", "t", "t", "t", "t", "m", "m", "m", "m", "g", "g",
+               "h", "h", "h", "h", "w", "w", "r", 
+              "r"}; $CellContext`endConsonants$ = {
+             "ts", "rs", "nt", "ng", "l", "l", "l", "l", "k", "k", "n", "n", 
+              "n", "n", "s", "s", "t", "t", "t", "t", "m", "m", "m", "m", "g",
+               "g", "h", "h", "h", "h", "w", "w", "r", 
+              "r"}; $CellContext`anyVowels$ = {
+             "a", "a", "a", "a", "e", "e", "i", "i", "o", "o", "o", "o", "u", 
+              "u", "u", "u", "ae", "ae", "au", "au", "oi", "ei", 
+              "eu"}; $CellContext`patterns$ = {
+             "BV", "VE", "BVE", "VBV", "VEV", "BVBV", "BVEV", "BVBVE", 
+              "BVEVE", "BVEVE", "VBVE", "VEBV", "VBBV", 
+              "VBBVE"}; $CellContext`getPattern[] := 
+            Module[{$CellContext`havePattern$, $CellContext`pattern$}, \
+$CellContext`havePattern$ = 0; 
+              While[$CellContext`havePattern$ == 
+                0, $CellContext`pattern$ = Part[$CellContext`patterns$, 
+                   RandomInteger[{1, 
+                    Length[$CellContext`patterns$]}]]; If[
+                  Or[
+                   
+                   And[$CellContext`begin$$ == "either", $CellContext`end$$ == 
+                    "either"], 
+                   
+                   And[$CellContext`begin$$ == "either", $CellContext`end$$ == 
+                    "vowel", StringTake[$CellContext`pattern$, -1] == "V"], 
+                   
+                   And[$CellContext`begin$$ == "either", $CellContext`end$$ == 
+                    "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "B", 
+                    StringTake[$CellContext`pattern$, -1] == "E"]], 
+                   
+                   And[$CellContext`begin$$ == "vowel", $CellContext`end$$ == 
+                    "either", StringTake[$CellContext`pattern$, 1] == "V"], 
+                   
+                   And[$CellContext`begin$$ == 
+                    "consonant", $CellContext`end$$ == "either", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "E"]], 
+                   
+                   And[$CellContext`begin$$ == 
+                    "consonant", $CellContext`end$$ == "vowel", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "E"], 
+                    StringTake[$CellContext`pattern$, -1] == "V"], 
+                   
+                   And[$CellContext`begin$$ == "vowel", $CellContext`end$$ == 
+                    "consonant", StringTake[$CellContext`pattern$, 1] == "V", 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "B", 
+                    StringTake[$CellContext`pattern$, -1] == "E"]], 
+                   
+                   And[$CellContext`begin$$ == 
+                    "consonant", $CellContext`end$$ == "vowel", 
+                    StringTake[$CellContext`pattern$, -1] == "V", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "E"]], 
+                   
+                   And[$CellContext`begin$$ == "vowel", $CellContext`end$$ == 
+                    "vowel", StringTake[$CellContext`pattern$, 1] == "V", 
+                    StringTake[$CellContext`pattern$, -1] == "V"], 
+                   
+                   And[$CellContext`begin$$ == 
+                    "consonant", $CellContext`end$$ == "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "E"], 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "B", 
+                    StringTake[$CellContext`pattern$, -1] == 
+                    "E"]]], $CellContext`havePattern$ = 1; 
+                  Return[$CellContext`pattern$]]]]; $CellContext`getWord[
+              Pattern[$CellContext`patt$, 
+               Blank[]]] := ($CellContext`word$ = StringJoin[
+               Map[Switch[
+                 StringTake[$CellContext`patt$, {#}], "B", 
+                 Part[$CellContext`beginningConsonants$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`beginningConsonants$]}]], "E", 
+                 Part[$CellContext`endConsonants$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`endConsonants$]}]], "V", 
+                 Part[$CellContext`anyVowels$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`anyVowels$]}]]]& , 
+                Range[1, 
+                 StringLength[$CellContext`patt$]]]])]; If[
+           
+           And[$CellContext`language$$ == "simple", $CellContext`minLength$$ > 
+            5], $CellContext`minLength$$ = 5]; If[
+           
+           And[$CellContext`language$$ == "fancy", $CellContext`minLength$$ < 
+            5], $CellContext`minLength$$ = 5]; 
+         If[$CellContext`maxLength$$ < $CellContext`minLength$$, \
+$CellContext`minLength$$ = $CellContext`maxLength$$]; $CellContext`wordlist$ = \
+{}; For[$CellContext`j$ = 1, $CellContext`j$ <= $CellContext`numwords$$, 
+           Increment[$CellContext`j$], $CellContext`word$ = 
+            ""; $CellContext`getWord[
+             $CellContext`getPattern[]]; If[
+             
+             And[$CellContext`minLength$$ <= StringLength[$CellContext`word$],
+               StringLength[$CellContext`word$] <= $CellContext`maxLength$$], 
+             AppendTo[$CellContext`wordlist$, $CellContext`word$], 
+             Decrement[$CellContext`j$]]]; Style[
+           Row[$CellContext`wordlist$, "  "], FontFamily -> "Times", 18]]], 
+      "Specifications" :> {
+       "language", {{$CellContext`language$$, "fancy", ""}, {
+         "simple", "fancy"}}, "", 
+        "number of words", {{$CellContext`numwords$$, 100, ""}, 1, 100, 1, 
+         ControlType -> Slider, ImageSize -> Small, Appearance -> "Labeled"}, 
+        Delimiter, 
+        Style["word length", Bold], "", 
+        "minimum", {{$CellContext`minLength$$, 8, ""}, 1, 10, 1, ControlType -> 
+         Slider, ImageSize -> Small, Appearance -> "Labeled"}, "", 
+        "maximum", {{$CellContext`maxLength$$, 30, ""}, 3, 30, 1, ControlType -> 
+         Slider, ImageSize -> Small, Appearance -> "Labeled"}, Delimiter, 
+        Style["beginnings and endings", Bold], "", 
+        "begin with", {{$CellContext`begin$$, "vowel", ""}, {
+         "vowel", "consonant", "either"}, ControlType -> RadioButton}, "", 
+        "end with", {{$CellContext`end$$, "vowel", ""}, {
+         "vowel", "consonant", "either"}, ControlType -> RadioButton}, 
+        Delimiter, {{$CellContext`x$$, 0.4138543095803704, ""}, 
+         Dynamic[Button["generate", $CellContext`x$$ = RandomReal[]]& ]}}, 
+      "Options" :> {
+       ControlPlacement -> Left, TrackedSymbols :> {$CellContext`x$$}, 
+        ContentSize -> {420, 400}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{663., {216., 223.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->1064283718,ExpressionUUID->"da71fa09-5795-4ad1-9211-30c8ba7f261f"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`begin$$ = "consonant", $CellContext`end$$ = 
+    "vowel", $CellContext`language$$ = "simple", $CellContext`maxLength$$ = 
+    3, $CellContext`minLength$$ = 1, $CellContext`numwords$$ = 
+    23, $CellContext`x$$ = 0.9105787163788077, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold["language"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`language$$], "simple", ""}, {"simple", "fancy"}}, {
+      Hold[""], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold["number of words"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`numwords$$], 23, ""}, 1, 100, 1}, {
+      Hold[
+       Style["word length", Bold]], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[""], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold["minimum"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`minLength$$], 1, ""}, 1, 10, 1}, {
+      Hold[""], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold["maximum"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`maxLength$$], 3, ""}, 3, 30, 1}, {
+      Hold[
+       Style["beginnings and endings", Bold]], 
+      Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[""], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold["begin with"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`begin$$], "consonant", ""}, {
+      "vowel", "consonant", "either"}}, {
+      Hold[""], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold["end with"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`end$$], "vowel", ""}, {
+      "vowel", "consonant", "either"}}, {{
+       Hold[$CellContext`x$$], 0.9105787163788077, ""}, 
+      Dynamic[Button["generate", $CellContext`x$$ = RandomReal[]]& ]}}, 
+    Typeset`size$$ = {327.701171875, {25., 13.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`language$1463545$$ = 
+    False, $CellContext`numwords$1463546$$ = 
+    0, $CellContext`minLength$1463547$$ = 
+    0, $CellContext`maxLength$1463548$$ = 0, $CellContext`begin$1463549$$ = 
+    0, $CellContext`end$1463550$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`begin$$ = "consonant", $CellContext`end$$ = 
+        "vowel", $CellContext`language$$ = "simple", $CellContext`maxLength$$ = 
+        3, $CellContext`minLength$$ = 1, $CellContext`numwords$$ = 
+        23, $CellContext`x$$ = 0.9105787163788077}, "ControllerVariables" :> {
+        Hold[$CellContext`language$$, $CellContext`language$1463545$$, False], 
+        Hold[$CellContext`numwords$$, $CellContext`numwords$1463546$$, 0], 
+        Hold[$CellContext`minLength$$, $CellContext`minLength$1463547$$, 0], 
+        Hold[$CellContext`maxLength$$, $CellContext`maxLength$1463548$$, 0], 
+        Hold[$CellContext`begin$$, $CellContext`begin$1463549$$, 0], 
+        Hold[$CellContext`end$$, $CellContext`end$1463550$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`beginningConsonants$, $CellContext`endConsonants$, \
+$CellContext`broadVowels$, $CellContext`slenderVowels$, \
+$CellContext`broadslenderVowels$, $CellContext`slenderbroadVowels$, \
+$CellContext`patterns$, $CellContext`chooseLetter$, $CellContext`anyVowels$, \
+$CellContext`wordlist$, $CellContext`word$, $CellContext`i$, $CellContext`j$}, 
+        With[{$CellContext`fake$ = $CellContext`x$$}, 
+         Switch[$CellContext`language$$, 
+           "fancy", $CellContext`beginningConsonants$ = {
+             "f", "f", "g", "g", "h", "gh", "gh", "k", "k", "k", "l", "l", 
+              "l", "l", "n", "n", "n", "r", "r", "r", "r", "s", "s", "s", "s",
+               "t", "t", "t", "t", "v", "w", "st", "st", "st", "sh", "sh", 
+              "sk", "sk", "sl", "sn", "sn", "sn", "sr", "sv", "sw", "shr", 
+              "str", "str", "stw", "fl", "fl", "fr", "fr", "fw", "gl", "gl", 
+              "gr", "gr", "gv", "gw", "ghl", "ghr", "ghv", "ghw", "kf", "kh", 
+              "kh", "kl", "kl", "kr", "kr", "kv", "kw", "kw", "nh", "nr", 
+              "nv", "nw", "th", "th", "tl", "tr", "tr", "ts", "ts", "tv", 
+              "tw", "vl", "vr", "vw", "wl"}; $CellContext`endConsonants$ = {
+             "f", "f", "g", "gh", "gh", "k", "k", "l", "l", "l", "l", "n", 
+              "n", "r", "r", "r", "r", "s", "s", "s", "t", "t", "v", "lf", 
+              "rf", "sf", "lg", "ng", "rg", "sg", "lk", "nk", "rk", "sk", 
+              "rl", "rl", "ln", "rn", "fs", "fs", "gs", "ks", "ls", "ls", 
+              "ns", "rs", "rs", "ts", "vs", "vs", "ft", "lt", "nt", "rt", 
+              "st", "vt", "lv", "nv", "rv"}; $CellContext`broadVowels$ = {
+             "a", "a", "a", "o", "o", "o", "o", "u", "\[UAcute]", "\[UAcute]",
+               "ao", "au", "a\[UAcute]", "oa", "ou", "o\[UAcute]", "ua", 
+              "\[UAcute]a", "uo", 
+              "\[UAcute]o"}; $CellContext`slenderVowels$ = {
+             "e", "e", "e", "\[EAcute]", "\[EAcute]", "\[EAcute]", "i", "i", 
+              "i", "\[IAcute]", "\[IAcute]", "\[IAcute]", "\[EAcute]", 
+              "\[IAcute]", "ei", "\[EAcute]i", "e\[IAcute]", 
+              "\[EAcute]\[IAcute]", "ie", "\[IAcute]e", "i\[EAcute]", 
+              "\[IAcute]\[EAcute]"}; $CellContext`broadslenderVowels$ = {
+             "ae", "a\[EAcute]", "ai", "a\[IAcute]", "oe", "o\[EAcute]", "oi",
+               "o\[IAcute]", "u\[EAcute]", "\[UAcute]e", "u\[IAcute]", 
+              "\[UAcute]\[EAcute]", "\[UAcute]i", "\[UAcute]\[IAcute]", 
+              "a\[EAcute]", "a\[IAcute]", "o\[EAcute]", 
+              "o\[IAcute]"}; $CellContext`slenderbroadVowels$ = {
+             "ea", "\[EAcute]a", "eo", "\[EAcute]o", "eu", "\[EAcute]u", 
+              "e\[UAcute]", "\[EAcute]\[UAcute]", "\[EAcute]a", "\[EAcute]o", 
+              "ia", "\[IAcute]a", "io", "\[IAcute]o", "\[IAcute]u", 
+              "i\[UAcute]", "\[IAcute]\[UAcute]", "\[IAcute]a", 
+              "\[IAcute]o"}; $CellContext`patterns$ = {
+             "BPB", "SPS", "BFB", "SFS", "APS", "EPB", "AFS", "EFB", "PBF", 
+              "PSF", "PAF", "PEF", "PB", "PS", "BF", "SF", "AF", "EF", "PA", 
+              "PE", "PBPBF", "PSPSF", "PAPEF", "PEPAF", "PBFBF", "PSFSF", 
+              "PAFEF", "PEFAF", "BPBF", "SPSF", "BPAF", "SPEF", "BPBPBF", 
+              "SPSPSF", "BPAPEF", "SPEPAF", "BPBFBF", "SPSFSF", "BPAFEF", 
+              "SPEFAF", "PBPB", "PSPS", "PAPS", "PEPB", "PBPBPB", "PSPSPS", 
+              "PAPEPS", "PEPAPS", "PBFBPB", "PSFSPS", "PAFEPB", "PEFAPS", 
+              "BPBPB", "SPSPS", "BPAPS", "SPEPB"}; $CellContext`getPattern[] := 
+            Module[{$CellContext`havePattern$, $CellContext`pattern$}, \
+$CellContext`havePattern$ = 0; 
+              While[$CellContext`havePattern$ == 
+                0, $CellContext`pattern$ = Part[$CellContext`patterns$, 
+                   RandomInteger[{1, 
+                    Length[$CellContext`patterns$]}]]; If[
+                  Or[
+                   
+                   And[$CellContext`begin$$ == "either", $CellContext`end$$ == 
+                    "either"], 
+                   
+                   And[$CellContext`begin$$ == "either", $CellContext`end$$ == 
+                    "vowel", 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "S", 
+                    StringTake[$CellContext`pattern$, -1] == "B", 
+                    StringTake[$CellContext`pattern$, -1] == "A", 
+                    StringTake[$CellContext`pattern$, -1] == "E"]], 
+                   
+                   And[$CellContext`begin$$ == "either", $CellContext`end$$ == 
+                    "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "P", 
+                    StringTake[$CellContext`pattern$, -1] == "F"]], 
+                   
+                   And[$CellContext`end$$ == "either", $CellContext`begin$$ == 
+                    "vowel", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "S", 
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "A", 
+                    StringTake[$CellContext`pattern$, 1] == "E"]], 
+                   
+                   And[$CellContext`end$$ == "either", $CellContext`begin$$ == 
+                    "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "P", 
+                    StringTake[$CellContext`pattern$, 1] == "F"]], 
+                   
+                   And[$CellContext`begin$$ == "vowel", $CellContext`end$$ == 
+                    "vowel", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "S", 
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "A", 
+                    StringTake[$CellContext`pattern$, 1] == "E"], 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "S", 
+                    StringTake[$CellContext`pattern$, -1] == "B", 
+                    StringTake[$CellContext`pattern$, -1] == "A", 
+                    StringTake[$CellContext`pattern$, -1] == "E"]], 
+                   
+                   And[$CellContext`begin$$ == "vowel", $CellContext`end$$ == 
+                    "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "S", 
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "A", 
+                    StringTake[$CellContext`pattern$, 1] == "E"], 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "P", 
+                    StringTake[$CellContext`pattern$, -1] == "F"]], 
+                   
+                   And[$CellContext`end$$ == "vowel", $CellContext`begin$$ == 
+                    "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "P", 
+                    StringTake[$CellContext`pattern$, 1] == "F"], 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "S", 
+                    StringTake[$CellContext`pattern$, -1] == "B", 
+                    StringTake[$CellContext`pattern$, -1] == "A", 
+                    StringTake[$CellContext`pattern$, -1] == "E"]], 
+                   
+                   And[$CellContext`end$$ == 
+                    "consonant", $CellContext`begin$$ == "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "P", 
+                    StringTake[$CellContext`pattern$, 1] == "F"], 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "P", 
+                    StringTake[$CellContext`pattern$, -1] == 
+                    "F"]]], $CellContext`havePattern$ = 1; 
+                  Return[$CellContext`pattern$]]]]; $CellContext`getWord[
+              Pattern[$CellContext`patt$, 
+               Blank[]]] := ($CellContext`word$ = StringJoin[
+               Map[Switch[
+                 StringTake[$CellContext`patt$, {#}], "P", 
+                 Part[$CellContext`beginningConsonants$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`beginningConsonants$]}]], "F", 
+                 Part[$CellContext`endConsonants$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`endConsonants$]}]], "B", 
+                 Part[$CellContext`broadVowels$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`broadVowels$]}]], "S", 
+                 Part[$CellContext`slenderVowels$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`slenderVowels$]}]], "A", 
+                 Part[$CellContext`broadslenderVowels$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`broadslenderVowels$]}]], "E", 
+                 Part[$CellContext`slenderbroadVowels$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`slenderbroadVowels$]}]]]& , 
+                Range[1, 
+                 StringLength[$CellContext`patt$]]]]), 
+           "simple", $CellContext`beginningConsonants$ = {
+             "tr", "sl", "gr", "l", "l", "l", "l", "k", "k", "n", "n", "n", 
+              "n", "s", "s", "t", "t", "t", "t", "m", "m", "m", "m", "g", "g",
+               "h", "h", "h", "h", "w", "w", "r", 
+              "r"}; $CellContext`endConsonants$ = {
+             "ts", "rs", "nt", "ng", "l", "l", "l", "l", "k", "k", "n", "n", 
+              "n", "n", "s", "s", "t", "t", "t", "t", "m", "m", "m", "m", "g",
+               "g", "h", "h", "h", "h", "w", "w", "r", 
+              "r"}; $CellContext`anyVowels$ = {
+             "a", "a", "a", "a", "e", "e", "i", "i", "o", "o", "o", "o", "u", 
+              "u", "u", "u", "ae", "ae", "au", "au", "oi", "ei", 
+              "eu"}; $CellContext`patterns$ = {
+             "BV", "VE", "BVE", "VBV", "VEV", "BVBV", "BVEV", "BVBVE", 
+              "BVEVE", "BVEVE", "VBVE", "VEBV", "VBBV", 
+              "VBBVE"}; $CellContext`getPattern[] := 
+            Module[{$CellContext`havePattern$, $CellContext`pattern$}, \
+$CellContext`havePattern$ = 0; 
+              While[$CellContext`havePattern$ == 
+                0, $CellContext`pattern$ = Part[$CellContext`patterns$, 
+                   RandomInteger[{1, 
+                    Length[$CellContext`patterns$]}]]; If[
+                  Or[
+                   
+                   And[$CellContext`begin$$ == "either", $CellContext`end$$ == 
+                    "either"], 
+                   
+                   And[$CellContext`begin$$ == "either", $CellContext`end$$ == 
+                    "vowel", StringTake[$CellContext`pattern$, -1] == "V"], 
+                   
+                   And[$CellContext`begin$$ == "either", $CellContext`end$$ == 
+                    "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "B", 
+                    StringTake[$CellContext`pattern$, -1] == "E"]], 
+                   
+                   And[$CellContext`begin$$ == "vowel", $CellContext`end$$ == 
+                    "either", StringTake[$CellContext`pattern$, 1] == "V"], 
+                   
+                   And[$CellContext`begin$$ == 
+                    "consonant", $CellContext`end$$ == "either", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "E"]], 
+                   
+                   And[$CellContext`begin$$ == 
+                    "consonant", $CellContext`end$$ == "vowel", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "E"], 
+                    StringTake[$CellContext`pattern$, -1] == "V"], 
+                   
+                   And[$CellContext`begin$$ == "vowel", $CellContext`end$$ == 
+                    "consonant", StringTake[$CellContext`pattern$, 1] == "V", 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "B", 
+                    StringTake[$CellContext`pattern$, -1] == "E"]], 
+                   
+                   And[$CellContext`begin$$ == 
+                    "consonant", $CellContext`end$$ == "vowel", 
+                    StringTake[$CellContext`pattern$, -1] == "V", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "E"]], 
+                   
+                   And[$CellContext`begin$$ == "vowel", $CellContext`end$$ == 
+                    "vowel", StringTake[$CellContext`pattern$, 1] == "V", 
+                    StringTake[$CellContext`pattern$, -1] == "V"], 
+                   
+                   And[$CellContext`begin$$ == 
+                    "consonant", $CellContext`end$$ == "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "E"], 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "B", 
+                    StringTake[$CellContext`pattern$, -1] == 
+                    "E"]]], $CellContext`havePattern$ = 1; 
+                  Return[$CellContext`pattern$]]]]; $CellContext`getWord[
+              Pattern[$CellContext`patt$, 
+               Blank[]]] := ($CellContext`word$ = StringJoin[
+               Map[Switch[
+                 StringTake[$CellContext`patt$, {#}], "B", 
+                 Part[$CellContext`beginningConsonants$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`beginningConsonants$]}]], "E", 
+                 Part[$CellContext`endConsonants$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`endConsonants$]}]], "V", 
+                 Part[$CellContext`anyVowels$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`anyVowels$]}]]]& , 
+                Range[1, 
+                 StringLength[$CellContext`patt$]]]])]; If[
+           
+           And[$CellContext`language$$ == "simple", $CellContext`minLength$$ > 
+            5], $CellContext`minLength$$ = 5]; If[
+           
+           And[$CellContext`language$$ == "fancy", $CellContext`minLength$$ < 
+            5], $CellContext`minLength$$ = 5]; 
+         If[$CellContext`maxLength$$ < $CellContext`minLength$$, \
+$CellContext`minLength$$ = $CellContext`maxLength$$]; $CellContext`wordlist$ = \
+{}; For[$CellContext`j$ = 1, $CellContext`j$ <= $CellContext`numwords$$, 
+           Increment[$CellContext`j$], $CellContext`word$ = 
+            ""; $CellContext`getWord[
+             $CellContext`getPattern[]]; If[
+             
+             And[$CellContext`minLength$$ <= StringLength[$CellContext`word$],
+               StringLength[$CellContext`word$] <= $CellContext`maxLength$$], 
+             AppendTo[$CellContext`wordlist$, $CellContext`word$], 
+             Decrement[$CellContext`j$]]]; Style[
+           Row[$CellContext`wordlist$, "  "], FontFamily -> "Times", 18]]], 
+      "Specifications" :> {
+       "language", {{$CellContext`language$$, "simple", ""}, {
+         "simple", "fancy"}}, "", 
+        "number of words", {{$CellContext`numwords$$, 23, ""}, 1, 100, 1, 
+         ControlType -> Slider, ImageSize -> Small, Appearance -> "Labeled"}, 
+        Delimiter, 
+        Style["word length", Bold], "", 
+        "minimum", {{$CellContext`minLength$$, 1, ""}, 1, 10, 1, ControlType -> 
+         Slider, ImageSize -> Small, Appearance -> "Labeled"}, "", 
+        "maximum", {{$CellContext`maxLength$$, 3, ""}, 3, 30, 1, ControlType -> 
+         Slider, ImageSize -> Small, Appearance -> "Labeled"}, Delimiter, 
+        Style["beginnings and endings", Bold], "", 
+        "begin with", {{$CellContext`begin$$, "consonant", ""}, {
+         "vowel", "consonant", "either"}, ControlType -> RadioButton}, "", 
+        "end with", {{$CellContext`end$$, "vowel", ""}, {
+         "vowel", "consonant", "either"}, ControlType -> RadioButton}, 
+        Delimiter, {{$CellContext`x$$, 0.9105787163788077, ""}, 
+         Dynamic[Button["generate", $CellContext`x$$ = RandomReal[]]& ]}}, 
+      "Options" :> {
+       ControlPlacement -> Left, TrackedSymbols :> {$CellContext`x$$}, 
+        ContentSize -> {420, 400}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{663., {216., 223.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->1025152563,ExpressionUUID->"d0a15261-4298-46d6-a600-019e9f21e73e"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`begin$$ = "either", $CellContext`end$$ = 
+    "either", $CellContext`language$$ = "simple", $CellContext`maxLength$$ = 
+    30, $CellContext`minLength$$ = 5, $CellContext`numwords$$ = 
+    100, $CellContext`x$$ = 0.8886809926133945, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold["language"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`language$$], "simple", ""}, {"simple", "fancy"}}, {
+      Hold[""], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold["number of words"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`numwords$$], 100, ""}, 1, 100, 1}, {
+      Hold[
+       Style["word length", Bold]], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[""], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold["minimum"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`minLength$$], 5, ""}, 1, 10, 1}, {
+      Hold[""], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold["maximum"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`maxLength$$], 30, ""}, 3, 30, 1}, {
+      Hold[
+       Style["beginnings and endings", Bold]], 
+      Manipulate`Dump`ThisIsNotAControl}, {
+      Hold[""], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold["begin with"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`begin$$], "either", ""}, {
+      "vowel", "consonant", "either"}}, {
+      Hold[""], Manipulate`Dump`ThisIsNotAControl}, {
+      Hold["end with"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`end$$], "either", ""}, {
+      "vowel", "consonant", "either"}}, {{
+       Hold[$CellContext`x$$], 0.8886809926133945, ""}, 
+      Dynamic[Button["generate", $CellContext`x$$ = RandomReal[]]& ]}}, 
+    Typeset`size$$ = {384.701171875, {308., 13.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`language$1463631$$ = 
+    False, $CellContext`numwords$1463632$$ = 
+    0, $CellContext`minLength$1463633$$ = 
+    0, $CellContext`maxLength$1463634$$ = 0, $CellContext`begin$1463635$$ = 
+    0, $CellContext`end$1463636$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`begin$$ = "either", $CellContext`end$$ = 
+        "either", $CellContext`language$$ = 
+        "simple", $CellContext`maxLength$$ = 30, $CellContext`minLength$$ = 
+        5, $CellContext`numwords$$ = 100, $CellContext`x$$ = 
+        0.8886809926133945}, "ControllerVariables" :> {
+        Hold[$CellContext`language$$, $CellContext`language$1463631$$, False], 
+        Hold[$CellContext`numwords$$, $CellContext`numwords$1463632$$, 0], 
+        Hold[$CellContext`minLength$$, $CellContext`minLength$1463633$$, 0], 
+        Hold[$CellContext`maxLength$$, $CellContext`maxLength$1463634$$, 0], 
+        Hold[$CellContext`begin$$, $CellContext`begin$1463635$$, 0], 
+        Hold[$CellContext`end$$, $CellContext`end$1463636$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`beginningConsonants$, $CellContext`endConsonants$, \
+$CellContext`broadVowels$, $CellContext`slenderVowels$, \
+$CellContext`broadslenderVowels$, $CellContext`slenderbroadVowels$, \
+$CellContext`patterns$, $CellContext`chooseLetter$, $CellContext`anyVowels$, \
+$CellContext`wordlist$, $CellContext`word$, $CellContext`i$, $CellContext`j$}, 
+        With[{$CellContext`fake$ = $CellContext`x$$}, 
+         Switch[$CellContext`language$$, 
+           "fancy", $CellContext`beginningConsonants$ = {
+             "f", "f", "g", "g", "h", "gh", "gh", "k", "k", "k", "l", "l", 
+              "l", "l", "n", "n", "n", "r", "r", "r", "r", "s", "s", "s", "s",
+               "t", "t", "t", "t", "v", "w", "st", "st", "st", "sh", "sh", 
+              "sk", "sk", "sl", "sn", "sn", "sn", "sr", "sv", "sw", "shr", 
+              "str", "str", "stw", "fl", "fl", "fr", "fr", "fw", "gl", "gl", 
+              "gr", "gr", "gv", "gw", "ghl", "ghr", "ghv", "ghw", "kf", "kh", 
+              "kh", "kl", "kl", "kr", "kr", "kv", "kw", "kw", "nh", "nr", 
+              "nv", "nw", "th", "th", "tl", "tr", "tr", "ts", "ts", "tv", 
+              "tw", "vl", "vr", "vw", "wl"}; $CellContext`endConsonants$ = {
+             "f", "f", "g", "gh", "gh", "k", "k", "l", "l", "l", "l", "n", 
+              "n", "r", "r", "r", "r", "s", "s", "s", "t", "t", "v", "lf", 
+              "rf", "sf", "lg", "ng", "rg", "sg", "lk", "nk", "rk", "sk", 
+              "rl", "rl", "ln", "rn", "fs", "fs", "gs", "ks", "ls", "ls", 
+              "ns", "rs", "rs", "ts", "vs", "vs", "ft", "lt", "nt", "rt", 
+              "st", "vt", "lv", "nv", "rv"}; $CellContext`broadVowels$ = {
+             "a", "a", "a", "o", "o", "o", "o", "u", "\[UAcute]", "\[UAcute]",
+               "ao", "au", "a\[UAcute]", "oa", "ou", "o\[UAcute]", "ua", 
+              "\[UAcute]a", "uo", 
+              "\[UAcute]o"}; $CellContext`slenderVowels$ = {
+             "e", "e", "e", "\[EAcute]", "\[EAcute]", "\[EAcute]", "i", "i", 
+              "i", "\[IAcute]", "\[IAcute]", "\[IAcute]", "\[EAcute]", 
+              "\[IAcute]", "ei", "\[EAcute]i", "e\[IAcute]", 
+              "\[EAcute]\[IAcute]", "ie", "\[IAcute]e", "i\[EAcute]", 
+              "\[IAcute]\[EAcute]"}; $CellContext`broadslenderVowels$ = {
+             "ae", "a\[EAcute]", "ai", "a\[IAcute]", "oe", "o\[EAcute]", "oi",
+               "o\[IAcute]", "u\[EAcute]", "\[UAcute]e", "u\[IAcute]", 
+              "\[UAcute]\[EAcute]", "\[UAcute]i", "\[UAcute]\[IAcute]", 
+              "a\[EAcute]", "a\[IAcute]", "o\[EAcute]", 
+              "o\[IAcute]"}; $CellContext`slenderbroadVowels$ = {
+             "ea", "\[EAcute]a", "eo", "\[EAcute]o", "eu", "\[EAcute]u", 
+              "e\[UAcute]", "\[EAcute]\[UAcute]", "\[EAcute]a", "\[EAcute]o", 
+              "ia", "\[IAcute]a", "io", "\[IAcute]o", "\[IAcute]u", 
+              "i\[UAcute]", "\[IAcute]\[UAcute]", "\[IAcute]a", 
+              "\[IAcute]o"}; $CellContext`patterns$ = {
+             "BPB", "SPS", "BFB", "SFS", "APS", "EPB", "AFS", "EFB", "PBF", 
+              "PSF", "PAF", "PEF", "PB", "PS", "BF", "SF", "AF", "EF", "PA", 
+              "PE", "PBPBF", "PSPSF", "PAPEF", "PEPAF", "PBFBF", "PSFSF", 
+              "PAFEF", "PEFAF", "BPBF", "SPSF", "BPAF", "SPEF", "BPBPBF", 
+              "SPSPSF", "BPAPEF", "SPEPAF", "BPBFBF", "SPSFSF", "BPAFEF", 
+              "SPEFAF", "PBPB", "PSPS", "PAPS", "PEPB", "PBPBPB", "PSPSPS", 
+              "PAPEPS", "PEPAPS", "PBFBPB", "PSFSPS", "PAFEPB", "PEFAPS", 
+              "BPBPB", "SPSPS", "BPAPS", "SPEPB"}; $CellContext`getPattern[] := 
+            Module[{$CellContext`havePattern$, $CellContext`pattern$}, \
+$CellContext`havePattern$ = 0; 
+              While[$CellContext`havePattern$ == 
+                0, $CellContext`pattern$ = Part[$CellContext`patterns$, 
+                   RandomInteger[{1, 
+                    Length[$CellContext`patterns$]}]]; If[
+                  Or[
+                   
+                   And[$CellContext`begin$$ == "either", $CellContext`end$$ == 
+                    "either"], 
+                   
+                   And[$CellContext`begin$$ == "either", $CellContext`end$$ == 
+                    "vowel", 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "S", 
+                    StringTake[$CellContext`pattern$, -1] == "B", 
+                    StringTake[$CellContext`pattern$, -1] == "A", 
+                    StringTake[$CellContext`pattern$, -1] == "E"]], 
+                   
+                   And[$CellContext`begin$$ == "either", $CellContext`end$$ == 
+                    "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "P", 
+                    StringTake[$CellContext`pattern$, -1] == "F"]], 
+                   
+                   And[$CellContext`end$$ == "either", $CellContext`begin$$ == 
+                    "vowel", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "S", 
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "A", 
+                    StringTake[$CellContext`pattern$, 1] == "E"]], 
+                   
+                   And[$CellContext`end$$ == "either", $CellContext`begin$$ == 
+                    "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "P", 
+                    StringTake[$CellContext`pattern$, 1] == "F"]], 
+                   
+                   And[$CellContext`begin$$ == "vowel", $CellContext`end$$ == 
+                    "vowel", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "S", 
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "A", 
+                    StringTake[$CellContext`pattern$, 1] == "E"], 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "S", 
+                    StringTake[$CellContext`pattern$, -1] == "B", 
+                    StringTake[$CellContext`pattern$, -1] == "A", 
+                    StringTake[$CellContext`pattern$, -1] == "E"]], 
+                   
+                   And[$CellContext`begin$$ == "vowel", $CellContext`end$$ == 
+                    "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "S", 
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "A", 
+                    StringTake[$CellContext`pattern$, 1] == "E"], 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "P", 
+                    StringTake[$CellContext`pattern$, -1] == "F"]], 
+                   
+                   And[$CellContext`end$$ == "vowel", $CellContext`begin$$ == 
+                    "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "P", 
+                    StringTake[$CellContext`pattern$, 1] == "F"], 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "S", 
+                    StringTake[$CellContext`pattern$, -1] == "B", 
+                    StringTake[$CellContext`pattern$, -1] == "A", 
+                    StringTake[$CellContext`pattern$, -1] == "E"]], 
+                   
+                   And[$CellContext`end$$ == 
+                    "consonant", $CellContext`begin$$ == "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "P", 
+                    StringTake[$CellContext`pattern$, 1] == "F"], 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "P", 
+                    StringTake[$CellContext`pattern$, -1] == 
+                    "F"]]], $CellContext`havePattern$ = 1; 
+                  Return[$CellContext`pattern$]]]]; $CellContext`getWord[
+              Pattern[$CellContext`patt$, 
+               Blank[]]] := ($CellContext`word$ = StringJoin[
+               Map[Switch[
+                 StringTake[$CellContext`patt$, {#}], "P", 
+                 Part[$CellContext`beginningConsonants$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`beginningConsonants$]}]], "F", 
+                 Part[$CellContext`endConsonants$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`endConsonants$]}]], "B", 
+                 Part[$CellContext`broadVowels$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`broadVowels$]}]], "S", 
+                 Part[$CellContext`slenderVowels$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`slenderVowels$]}]], "A", 
+                 Part[$CellContext`broadslenderVowels$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`broadslenderVowels$]}]], "E", 
+                 Part[$CellContext`slenderbroadVowels$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`slenderbroadVowels$]}]]]& , 
+                Range[1, 
+                 StringLength[$CellContext`patt$]]]]), 
+           "simple", $CellContext`beginningConsonants$ = {
+             "tr", "sl", "gr", "l", "l", "l", "l", "k", "k", "n", "n", "n", 
+              "n", "s", "s", "t", "t", "t", "t", "m", "m", "m", "m", "g", "g",
+               "h", "h", "h", "h", "w", "w", "r", 
+              "r"}; $CellContext`endConsonants$ = {
+             "ts", "rs", "nt", "ng", "l", "l", "l", "l", "k", "k", "n", "n", 
+              "n", "n", "s", "s", "t", "t", "t", "t", "m", "m", "m", "m", "g",
+               "g", "h", "h", "h", "h", "w", "w", "r", 
+              "r"}; $CellContext`anyVowels$ = {
+             "a", "a", "a", "a", "e", "e", "i", "i", "o", "o", "o", "o", "u", 
+              "u", "u", "u", "ae", "ae", "au", "au", "oi", "ei", 
+              "eu"}; $CellContext`patterns$ = {
+             "BV", "VE", "BVE", "VBV", "VEV", "BVBV", "BVEV", "BVBVE", 
+              "BVEVE", "BVEVE", "VBVE", "VEBV", "VBBV", 
+              "VBBVE"}; $CellContext`getPattern[] := 
+            Module[{$CellContext`havePattern$, $CellContext`pattern$}, \
+$CellContext`havePattern$ = 0; 
+              While[$CellContext`havePattern$ == 
+                0, $CellContext`pattern$ = Part[$CellContext`patterns$, 
+                   RandomInteger[{1, 
+                    Length[$CellContext`patterns$]}]]; If[
+                  Or[
+                   
+                   And[$CellContext`begin$$ == "either", $CellContext`end$$ == 
+                    "either"], 
+                   
+                   And[$CellContext`begin$$ == "either", $CellContext`end$$ == 
+                    "vowel", StringTake[$CellContext`pattern$, -1] == "V"], 
+                   
+                   And[$CellContext`begin$$ == "either", $CellContext`end$$ == 
+                    "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "B", 
+                    StringTake[$CellContext`pattern$, -1] == "E"]], 
+                   
+                   And[$CellContext`begin$$ == "vowel", $CellContext`end$$ == 
+                    "either", StringTake[$CellContext`pattern$, 1] == "V"], 
+                   
+                   And[$CellContext`begin$$ == 
+                    "consonant", $CellContext`end$$ == "either", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "E"]], 
+                   
+                   And[$CellContext`begin$$ == 
+                    "consonant", $CellContext`end$$ == "vowel", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "E"], 
+                    StringTake[$CellContext`pattern$, -1] == "V"], 
+                   
+                   And[$CellContext`begin$$ == "vowel", $CellContext`end$$ == 
+                    "consonant", StringTake[$CellContext`pattern$, 1] == "V", 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "B", 
+                    StringTake[$CellContext`pattern$, -1] == "E"]], 
+                   
+                   And[$CellContext`begin$$ == 
+                    "consonant", $CellContext`end$$ == "vowel", 
+                    StringTake[$CellContext`pattern$, -1] == "V", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "E"]], 
+                   
+                   And[$CellContext`begin$$ == "vowel", $CellContext`end$$ == 
+                    "vowel", StringTake[$CellContext`pattern$, 1] == "V", 
+                    StringTake[$CellContext`pattern$, -1] == "V"], 
+                   
+                   And[$CellContext`begin$$ == 
+                    "consonant", $CellContext`end$$ == "consonant", 
+                    Or[
+                    StringTake[$CellContext`pattern$, 1] == "B", 
+                    StringTake[$CellContext`pattern$, 1] == "E"], 
+                    Or[
+                    StringTake[$CellContext`pattern$, -1] == "B", 
+                    StringTake[$CellContext`pattern$, -1] == 
+                    "E"]]], $CellContext`havePattern$ = 1; 
+                  Return[$CellContext`pattern$]]]]; $CellContext`getWord[
+              Pattern[$CellContext`patt$, 
+               Blank[]]] := ($CellContext`word$ = StringJoin[
+               Map[Switch[
+                 StringTake[$CellContext`patt$, {#}], "B", 
+                 Part[$CellContext`beginningConsonants$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`beginningConsonants$]}]], "E", 
+                 Part[$CellContext`endConsonants$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`endConsonants$]}]], "V", 
+                 Part[$CellContext`anyVowels$, 
+                  RandomInteger[{1, 
+                    Length[$CellContext`anyVowels$]}]]]& , 
+                Range[1, 
+                 StringLength[$CellContext`patt$]]]])]; If[
+           
+           And[$CellContext`language$$ == "simple", $CellContext`minLength$$ > 
+            5], $CellContext`minLength$$ = 5]; If[
+           
+           And[$CellContext`language$$ == "fancy", $CellContext`minLength$$ < 
+            5], $CellContext`minLength$$ = 5]; 
+         If[$CellContext`maxLength$$ < $CellContext`minLength$$, \
+$CellContext`minLength$$ = $CellContext`maxLength$$]; $CellContext`wordlist$ = \
+{}; For[$CellContext`j$ = 1, $CellContext`j$ <= $CellContext`numwords$$, 
+           Increment[$CellContext`j$], $CellContext`word$ = 
+            ""; $CellContext`getWord[
+             $CellContext`getPattern[]]; If[
+             
+             And[$CellContext`minLength$$ <= StringLength[$CellContext`word$],
+               StringLength[$CellContext`word$] <= $CellContext`maxLength$$], 
+             AppendTo[$CellContext`wordlist$, $CellContext`word$], 
+             Decrement[$CellContext`j$]]]; Style[
+           Row[$CellContext`wordlist$, "  "], FontFamily -> "Times", 18]]], 
+      "Specifications" :> {
+       "language", {{$CellContext`language$$, "simple", ""}, {
+         "simple", "fancy"}}, "", 
+        "number of words", {{$CellContext`numwords$$, 100, ""}, 1, 100, 1, 
+         ControlType -> Slider, ImageSize -> Small, Appearance -> "Labeled"}, 
+        Delimiter, 
+        Style["word length", Bold], "", 
+        "minimum", {{$CellContext`minLength$$, 5, ""}, 1, 10, 1, ControlType -> 
+         Slider, ImageSize -> Small, Appearance -> "Labeled"}, "", 
+        "maximum", {{$CellContext`maxLength$$, 30, ""}, 3, 30, 1, ControlType -> 
+         Slider, ImageSize -> Small, Appearance -> "Labeled"}, Delimiter, 
+        Style["beginnings and endings", Bold], "", 
+        "begin with", {{$CellContext`begin$$, "either", ""}, {
+         "vowel", "consonant", "either"}, ControlType -> RadioButton}, "", 
+        "end with", {{$CellContext`end$$, "either", ""}, {
+         "vowel", "consonant", "either"}, ControlType -> RadioButton}, 
+        Delimiter, {{$CellContext`x$$, 0.8886809926133945, ""}, 
+         Dynamic[Button["generate", $CellContext`x$$ = RandomReal[]]& ]}}, 
+      "Options" :> {
+       ControlPlacement -> Left, TrackedSymbols :> {$CellContext`x$$}, 
+        ContentSize -> {420, 400}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{663., {216., 223.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->477826460,ExpressionUUID->"a82fc926-5f83-4274-a6fa-09dca99f54ec"]
+}, Open  ]],
+
+Cell["", "DetailsSection",ExpressionUUID->"7ef355f6-6339-4298-88d0-90b11f9fcc5b"],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection",ExpressionUUID->"87d6ddd0-58f3-4790-a061-bc778099e59b"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[
+   " Resize Images",ExpressionUUID->"da0c4a9f-4905-4bed-9ec7-7905d629e8cb"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->
+  "ResizeImages",ExpressionUUID->"c40a384e-5745-4352-bb42-9d547f07f45b"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[
+   " Rotate and Zoom in 3D",ExpressionUUID->
+    "32af832d-7563-4f82-8dcf-5df12d2f32b1"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->
+  "RotateAndZoomIn3D",ExpressionUUID->"87b8efa3-7615-4c8c-ba39-b5885f17a8ba"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[
+   " Drag Locators",ExpressionUUID->"226d3503-8c41-489d-aafb-17fae8a55dbe"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->
+  "DragLocators",ExpressionUUID->"6ded986b-bd9e-4311-9e74-1225bd85acb8"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[
+   " Create and Delete Locators",ExpressionUUID->
+    "38eaf6c4-bec3-478d-a876-57b266d4f816"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->
+  "CreateAndDeleteLocators",ExpressionUUID->"01e90976-b77d-4909-8612-\
+c0cdbc2f549a"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[
+   " Slider Zoom",ExpressionUUID->"8f647902-d0b9-491a-a8ad-42ea8ef779f9"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->
+  "SliderZoom",ExpressionUUID->"44b5c856-b8ed-4d08-bf3d-a714bc6737cf"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[
+   " Gamepad Controls",ExpressionUUID->
+    "95da487d-ae5d-49b4-ab21-7e7e01c34c95"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.3895522232313623`*^9},
+ FontFamily->"Verdana",
+ CellTags->
+  "GamepadControls",ExpressionUUID->"9749b276-f81b-44ee-bbfb-2a193d4eb57a"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[
+   " Automatic Animation",ExpressionUUID->
+    "d35ff398-4af2-4b01-903b-2d2c0f2cd4c0"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0, CellBaseline -> Baseline], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->
+  "AutomaticAnimation",ExpressionUUID->"5b8b94f7-4c7c-4192-8b2b-f31e60ae7697"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[
+   " Bookmark Animation",ExpressionUUID->
+    "e0899463-24d8-4e1f-a795-dca8be58fc78"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->
+  "BookmarkAnimation",ExpressionUUID->"4e039515-61cb-4e2e-92f9-cc1d08ba4275"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SearchTermsSection",ExpressionUUID->"fafac2b8-9d0f-434d-9b6a-0291b66b8107"],
+
+Cell["language", "SearchTerms",
+ CellChangeTimes->{{3.523869870447928*^9, 3.523869871910932*^9}},
+ CellID->691533208,ExpressionUUID->"66d089ad-afd8-442b-9c00-2df3d25b4ef6"],
+
+Cell["word", "SearchTerms",
+ CellChangeTimes->{{3.52386994249765*^9, 3.523869943726677*^9}},
+ CellID->417129292,ExpressionUUID->"467ab63d-6770-444c-bd26-569604fca889"]
+}, Open  ]],
+
+Cell["", "RelatedLinksSection",ExpressionUUID->"c371ece2-09e3-4edc-83c5-954db31e36e8"],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection",ExpressionUUID->"34edab74-a477-45f7-876d-1b09fad258ac"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Elizabeth Shack",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Elizabeth+\
+Shack"], None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Elizabeth+Shack"]
+}], "Author",
+ CellChangeTimes->{{3.5231246647670937`*^9, 
+  3.523124667347438*^9}},ExpressionUUID->"7c40167e-5936-427a-b061-\
+9ca2e6fc07fb"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1680, 915},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"11.2 for Microsoft Windows (64-bit) (2017\:5e7410\:67082\
+\:65e5)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[155821, 2878, 429, 10, 29, "ControlSuggestions",ExpressionUUID->"c40a384e-5745-4352-bb42-9d547f07f45b",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[156253, 2890, 800, 19, 29, "ControlSuggestions",ExpressionUUID->"87b8efa3-7615-4c8c-ba39-b5885f17a8ba",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[157056, 2911, 457, 13, 29, "ControlSuggestions",ExpressionUUID->"6ded986b-bd9e-4311-9e74-1225bd85acb8",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[157516, 2926, 761, 19, 29, "ControlSuggestions",ExpressionUUID->"01e90976-b77d-4909-8612-c0cdbc2f549a",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[158280, 2947, 961, 23, 29, "ControlSuggestions",ExpressionUUID->"44b5c856-b8ed-4d08-bf3d-a714bc6737cf",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[159244, 2972, 491, 12, 29, "ControlSuggestions",ExpressionUUID->"9749b276-f81b-44ee-bbfb-2a193d4eb57a",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[159738, 2986, 1586, 34, 29, "ControlSuggestions",ExpressionUUID->"5b8b94f7-4c7c-4192-8b2b-f31e60ae7697",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[161327, 3022, 1030, 24, 29, "ControlSuggestions",ExpressionUUID->"4e039515-61cb-4e2e-92f9-cc1d08ba4275",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 163871, 3096},
+ {"RotateAndZoomIn3D", 164037, 3099},
+ {"DragLocators", 164203, 3102},
+ {"CreateAndDeleteLocators", 164375, 3105},
+ {"SliderZoom", 164545, 3108},
+ {"GamepadControls", 164707, 3111},
+ {"AutomaticAnimation", 164877, 3114},
+ {"BookmarkAnimation", 165050, 3117}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 195, 3, 74, "DemoTitle",ExpressionUUID->"14dff151-1ddb-4ad0-baff-b8d8c5d6ec0e"],
+Cell[777, 27, 88, 0, 268, "InitializationSection",ExpressionUUID->"95d5eb63-12d3-4181-a3bd-d32b06c373bc"],
+Cell[CellGroupData[{
+Cell[890, 31, 84, 0, 189, "ManipulateSection",ExpressionUUID->"67accb67-617a-43d3-96bd-57900840894c"],
+Cell[CellGroupData[{
+Cell[999, 35, 51476, 982, 1959, "Input",ExpressionUUID->"e79fc2b6-eda2-4c2c-aa27-f97537e17691",
+ CellID->197836779],
+Cell[52478, 1019, 20331, 362, 451, "Output",ExpressionUUID->"d6ce9b3f-4ebf-4153-849c-746c9914c4af",
+ CellID->660890507]
+}, {2}]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[72855, 1387, 91, 0, 169, "ManipulateCaptionSection",ExpressionUUID->"326d1cbf-16b0-4b63-868c-95b17b5549e6"],
+Cell[72949, 1389, 1097, 16, 52, "ManipulateCaption",ExpressionUUID->"f6bea427-ea38-43d1-9d59-39db3e51ec87",
+ CellID->1353594721]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[74083, 1410, 83, 0, 172, "ThumbnailSection",ExpressionUUID->"6ee28b99-3e4e-4f98-83a3-b838a0292ace"],
+Cell[74169, 1412, 20343, 362, 440, "Output",ExpressionUUID->"64d50f44-10e9-41d2-8972-d53dd3015f99",
+ CellID->801328865]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[94549, 1779, 83, 0, 138, "SnapshotsSection",ExpressionUUID->"acada3cc-d834-4dcb-abd2-3df0b05824b3"],
+Cell[94635, 1781, 20311, 361, 440, "Output",ExpressionUUID->"da71fa09-5795-4ad1-9211-30c8ba7f261f",
+ CellID->1064283718],
+Cell[114949, 2144, 20322, 361, 440, "Output",ExpressionUUID->"d0a15261-4298-46d6-a600-019e9f21e73e",
+ CellID->1025152563],
+Cell[135274, 2507, 20331, 362, 440, "Output",ExpressionUUID->"a82fc926-5f83-4274-a6fa-09dca99f54ec",
+ CellID->477826460]
+}, Open  ]],
+Cell[155620, 2872, 81, 0, 332, "DetailsSection",ExpressionUUID->"7ef355f6-6339-4298-88d0-90b11f9fcc5b"],
+Cell[CellGroupData[{
+Cell[155726, 2876, 92, 0, 108, "ControlSuggestionsSection",ExpressionUUID->"87d6ddd0-58f3-4790-a061-bc778099e59b"],
+Cell[155821, 2878, 429, 10, 29, "ControlSuggestions",ExpressionUUID->"c40a384e-5745-4352-bb42-9d547f07f45b",
+ CellTags->"ResizeImages"],
+Cell[156253, 2890, 800, 19, 29, "ControlSuggestions",ExpressionUUID->"87b8efa3-7615-4c8c-ba39-b5885f17a8ba",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[157056, 2911, 457, 13, 29, "ControlSuggestions",ExpressionUUID->"6ded986b-bd9e-4311-9e74-1225bd85acb8",
+ CellTags->"DragLocators"],
+Cell[157516, 2926, 761, 19, 29, "ControlSuggestions",ExpressionUUID->"01e90976-b77d-4909-8612-c0cdbc2f549a",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[158280, 2947, 961, 23, 29, "ControlSuggestions",ExpressionUUID->"44b5c856-b8ed-4d08-bf3d-a714bc6737cf",
+ CellTags->"SliderZoom"],
+Cell[159244, 2972, 491, 12, 29, "ControlSuggestions",ExpressionUUID->"9749b276-f81b-44ee-bbfb-2a193d4eb57a",
+ CellTags->"GamepadControls"],
+Cell[159738, 2986, 1586, 34, 29, "ControlSuggestions",ExpressionUUID->"5b8b94f7-4c7c-4192-8b2b-f31e60ae7697",
+ CellTags->"AutomaticAnimation"],
+Cell[161327, 3022, 1030, 24, 29, "ControlSuggestions",ExpressionUUID->"4e039515-61cb-4e2e-92f9-cc1d08ba4275",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[162394, 3051, 85, 0, 152, "SearchTermsSection",ExpressionUUID->"fafac2b8-9d0f-434d-9b6a-0291b66b8107"],
+Cell[162482, 3053, 172, 2, 22, "SearchTerms",ExpressionUUID->"66d089ad-afd8-442b-9c00-2df3d25b4ef6",
+ CellID->691533208],
+Cell[162657, 3057, 167, 2, 21, "SearchTerms",ExpressionUUID->"467ab63d-6770-444c-bd26-569604fca889",
+ CellID->417129292]
+}, Open  ]],
+Cell[162839, 3062, 86, 0, 138, "RelatedLinksSection",ExpressionUUID->"c371ece2-09e3-4edc-83c5-954db31e36e8"],
+Cell[CellGroupData[{
+Cell[162950, 3066, 80, 0, 124, "AuthorSection",ExpressionUUID->"34edab74-a477-45f7-876d-1b09fad258ac"],
+Cell[163033, 3068, 430, 12, 21, "Author",ExpressionUUID->"7c40167e-5936-427a-b061-9ca2e6fc07fb"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

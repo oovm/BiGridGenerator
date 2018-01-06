@@ -1,0 +1,1774 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     76057,       1765]
+NotebookOptionsPosition[     71691,       1630]
+NotebookOutlinePosition[     73294,       1680]
+CellTagsIndexPosition[     72966,       1668]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Prediction and Entropy of Languages", "DemoTitle",
+ CellChangeTimes->{{3.5555008236327257`*^9, 3.555500827223297*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["", "InitializationSection"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"NGramGenerator", "[", 
+   RowBox[{"text_", ",", "grams_"}], "]"}], ":=", 
+  RowBox[{"Reverse", "[", 
+   RowBox[{"SortBy", "[", 
+    RowBox[{
+     RowBox[{"Thread", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"First", "/@", "#"}], ",", 
+          RowBox[{
+           RowBox[{"N", "@", 
+            RowBox[{"(", 
+             RowBox[{"Last", "/@", "#"}], ")"}]}], "/", 
+           RowBox[{"Total", "[", 
+            RowBox[{"Last", "/@", "#"}], "]"}]}]}], "}"}], "&"}], "@", 
+       RowBox[{"Tally", "[", 
+        RowBox[{"Partition", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"ToLowerCase", "/@", 
+            RowBox[{"StringSplit", "[", 
+             RowBox[{"text", ",", "\"\<\>\""}], "]"}]}], "/.", 
+           RowBox[{"Flatten", "[", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Distribute", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{
+                  "\"\<\[CloseCurlyQuote]\>\"", ",", 
+                   "\"\<\[OpenCurlyQuote]\>\"", ",", 
+                   "\"\<\[OpenCurlyQuote]\>\"", ",", "\"\<,\>\"", ",", 
+                   "\"\<.\>\"", ",", "\"\<;\>\"", ",", "\"\<:\>\"", ",", 
+                   "\"\<?\>\"", ",", "\"\<\[LeftGuillemet]\>\"", ",", 
+                   "\"\<\[RightGuillemet]\>\"", ",", "\"\<)\>\"", ",", 
+                   "\"\<(\>\"", ",", "\"\<-\>\"", ",", "\"\<'\>\"", ",", 
+                   "\"\<]\>\"", ",", "\"\<\[DownQuestion]\>\"", ",", 
+                   RowBox[{
+                    RowBox[{"\"\<\>\"", "!"}], "\"\<\>\""}], ",", 
+                   "\"\<\[DownExclamation]\>\"", ",", "\"\<!\>\"", ",", 
+                   "\"\<\\\"\>\""}], "}"}], "->", 
+                 RowBox[{"Sequence", "[", "]"}]}], ",", "List"}], "]"}], ",", 
+              RowBox[{"Distribute", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"Table", "[", 
+                  RowBox[{
+                   RowBox[{"ToString", "[", "i", "]"}], ",", 
+                   RowBox[{"{", 
+                    RowBox[{"i", ",", "0", ",", "9"}], "}"}]}], "]"}], "->", 
+                 RowBox[{"Sequence", "[", "]"}]}], ",", "List"}], "]"}]}], 
+             "}"}], "]"}]}], ",", "grams", ",", "1"}], "]"}], "]"}]}], "]"}], 
+     ",", "Last"}], "]"}], "]"}]}]], "Input",
+ InitializationCell->True,
+ CellID->114560641],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"entropy", "[", "dist_", "]"}], ":=", 
+  RowBox[{"-", 
+   RowBox[{"Total", "[", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Last", "[", 
+        RowBox[{
+        "dist", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], "]"}],
+        " ", 
+       RowBox[{"Log", "[", 
+        RowBox[{"2", ",", 
+         RowBox[{"Last", "[", 
+          RowBox[{
+          "dist", "\[LeftDoubleBracket]", "i", "\[RightDoubleBracket]"}], 
+          "]"}]}], "]"}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", 
+        RowBox[{"Length", "[", "dist", "]"}]}], "}"}]}], "]"}], 
+    "]"}]}]}]], "Input",
+ InitializationCell->True,
+ CellID->1275345575]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"res", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"NGramGenerator", "[", 
+          RowBox[{
+           RowBox[{"ExampleData", "[", 
+            RowBox[{"{", 
+             RowBox[{"\"\<Text\>\"", ",", "text"}], "}"}], "]"}], ",", "i"}], 
+          "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", "grams"}], "}"}]}], "]"}]}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Text", "@", 
+      RowBox[{"Column", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Row", "[", 
+           RowBox[{"{", 
+            RowBox[{"\"\<Approaching entropy (\>\"", ",", 
+             RowBox[{"Style", "[", 
+              RowBox[{"\"\<H\>\"", ",", "Italic"}], "]"}], ",", 
+             "\"\<) of a language through a corpus \>\"", ",", 
+             RowBox[{"Style", "[", 
+              RowBox[{"\"\<n\>\"", ",", "Italic"}], "]"}], ",", 
+             "\"\<\[Hyphen]grams\>\""}], "}"}], "]"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Grid", "[", 
+           RowBox[{"{", 
+            RowBox[{"{", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"ListLinePlot", "[", 
+               RowBox[{
+                RowBox[{"Reverse", "@", 
+                 RowBox[{"Sort", "[", 
+                  RowBox[{"Last", "/@", 
+                   RowBox[{"Most", "[", 
+                    RowBox[{"Last", "[", "res", "]"}], "]"}]}], "]"}]}], ",", 
+                RowBox[{"Ticks", "\[Rule]", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    "text", "\[Equal]", "\"\<UNHumanRightsChinese\>\""}], 
+                    ")"}], "||", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    "text", "\[Equal]", "\"\<UNHumanRightsKorean\>\""}], 
+                    ")"}], "||", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    "text", "\[Equal]", "\"\<UNHumanRightsJapanese\>\""}], 
+                    ")"}], "||", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    "text", "\[Equal]", "\"\<UNHumanRightsChinese\>\""}], 
+                    ")"}]}], ",", "Automatic", ",", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"grams", ">", "1"}], ",", "Automatic", ",", 
+                    RowBox[{"Thread", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Table", "[", 
+                    RowBox[{"i", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"i", ",", 
+                    RowBox[{"Length", "[", 
+                    RowBox[{"Last", "[", "res", "]"}], "]"}]}], "}"}]}], 
+                    "]"}], ",", 
+                    RowBox[{"Flatten", "[", 
+                    RowBox[{"First", "/@", 
+                    RowBox[{"Last", "[", "res", "]"}]}], "]"}]}], "}"}], 
+                    "]"}]}], "]"}]}], "]"}], ",", "Automatic"}], "}"}]}], ",", 
+                RowBox[{"AxesLabel", "\[Rule]", 
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"Style", "[", "#", "]"}], "&"}], "/@", 
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<n\>\"", ",", "Italic"}], "]"}], ",", 
+                    "\"\<\[Hyphen]gram\>\""}], "}"}], "]"}], ",", 
+                    "\"\<probability\\n\!\(TraditionalForm\`\(\(P\)\((\)\)\)n-\
+gram)\>\""}], "}"}]}], ")"}]}], ",", 
+                RowBox[{"PlotLabel", "\[Rule]", 
+                 RowBox[{"Row", "[", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<n\>\"", ",", "Italic"}], "]"}], ",", 
+                    "\"\<\[Hyphen]gram language probability\\n\>\""}], "}"}], 
+                  "]"}]}], ",", 
+                RowBox[{"ImageSize", "\[Rule]", 
+                 RowBox[{"{", 
+                  RowBox[{"300", ",", "300"}], "}"}]}]}], "]"}], ",", 
+              "\[IndentingNewLine]", "\[IndentingNewLine]", 
+              RowBox[{"ListPlot", "[", 
+               RowBox[{
+                RowBox[{"Flatten", "[", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"entropy", "[", 
+                    RowBox[{
+                    "res", "\[LeftDoubleBracket]", "1", 
+                    "\[RightDoubleBracket]"}], "]"}], ",", 
+                   RowBox[{"Differences", "@", 
+                    RowBox[{"Flatten", "[", 
+                    RowBox[{"Table", "[", 
+                    RowBox[{
+                    RowBox[{"entropy", "[", 
+                    RowBox[{
+                    "res", "\[LeftDoubleBracket]", "i", 
+                    "\[RightDoubleBracket]"}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"i", ",", "grams"}], "}"}]}], "]"}], "]"}]}]}], 
+                  "}"}], "]"}], ",", 
+                RowBox[{"AxesLabel", "\[Rule]", 
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"Style", "[", "#", "]"}], "&"}], "/@", 
+                   RowBox[{"{", 
+                    RowBox[{
+                    "n", ",", 
+                    "\"\<entropy\\napprox.\\n\!\(TraditionalForm\`\(-\(\[Sum]\
+\(P(q)\) \*SubscriptBox[\(log\), \(2\)] \(P(q)\)\)\)\)\>\""}], "}"}]}], 
+                  ")"}]}], ",", 
+                RowBox[{"PlotLabel", "\[Rule]", 
+                 RowBox[{"Row", "[", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<n\>\"", ",", "Italic"}], "]"}], ",", 
+                    "\"\<\[Hyphen]gram entropy rate\>\""}], "}"}], "]"}]}], 
+                ",", 
+                RowBox[{"ImageSize", "\[Rule]", 
+                 RowBox[{"{", 
+                  RowBox[{"290", ",", "300"}], "}"}]}]}], "]"}]}], "}"}], 
+            "}"}], "]"}]}], "}"}], ",", " ", 
+        RowBox[{"Alignment", "\[Rule]", " ", "Center"}]}], "]"}]}]}], "]"}], 
+   ",", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "text", ",", "\"\<UNHumanRightsSpanish\>\"", ",", 
+       "\"\<corpus language\>\""}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"\"\<UNHumanRightsChinese\>\"", "\[Rule]", "\"\<Chinese\>\""}],
+        ",", 
+       RowBox[{"\"\<UNHumanRightsDanish\>\"", "->", "\"\<Danish\>\""}], ",", 
+       RowBox[{"\"\<UNHumanRightsDutch\>\"", "->", "\"\<Dutch\>\""}], ",", 
+       RowBox[{"\"\<UNHumanRightsEnglish\>\"", "->", "\"\<English\>\""}], ",", 
+       RowBox[{"\"\<UNHumanRightsEsperanto\>\"", "->", "\"\<Esperanto\>\""}], 
+       ",", 
+       RowBox[{"\"\<UNHumanRightsFrench\>\"", "->", "\"\<French\>\""}], ",", 
+       RowBox[{"\"\<UNHumanRightsGerman\>\"", "->", "\"\<German\>\""}], ",", 
+       RowBox[{"\"\<UNHumanRightsGreek\>\"", "->", "\"\<Greek\>\""}], ",", 
+       RowBox[{"\"\<UNHumanRightsHawaiian\>\"", "->", "\"\<Hawaiian\>\""}], 
+       ",", 
+       RowBox[{
+       "\"\<UNHumanRightsIndonesian\>\"", "->", "\"\<Indonesian\>\""}], ",", 
+       RowBox[{"\"\<UNHumanRightsIrish\>\"", "->", "\"\<Irish\>\""}], ",", 
+       RowBox[{"\"\<UNHumanRightsJapanese\>\"", "->", "\"\<Japanese\>\""}], 
+       ",", 
+       RowBox[{"\"\<UNHumanRightsKorean\>\"", "->", "\"\<Korean\>\""}], ",", 
+       RowBox[{"\"\<UNHumanRightsLatin\>\"", "->", "\"\<Latin\>\""}], ",", 
+       RowBox[{"\"\<UNHumanRightsMaori\>\"", "->", "\"\<Maori\>\""}], ",", 
+       RowBox[{"\"\<UNHumanRightsRussian\>\"", "->", "\"\<Russian\>\""}], ",", 
+       RowBox[{
+       "\"\<UNHumanRightsScottishGaelic\>\"", "->", 
+        "\"\<Scottish Gaelic\>\""}], ",", 
+       RowBox[{"\"\<UNHumanRightsSpanish\>\"", "->", "\"\<Spanish\>\""}], ",", 
+       RowBox[{"\"\<UNHumanRightsSwahili\>\"", "->", "\"\<Swahili\>\""}], ",", 
+       RowBox[{"\"\<UNHumanRightsSwedish\>\"", "->", "\"\<Swedish\>\""}]}], 
+      "}"}], ",", 
+     RowBox[{"ControlType", "\[Rule]", "PopupMenu"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"grams", ",", "3", ",", "\"\<n-grams\>\""}], "}"}], ",", "1", 
+     ",", "5", ",", "1"}], "}"}], ",", 
+   RowBox[{"Alignment", "\[Rule]", "Center"}], ",", 
+   RowBox[{"SynchronousUpdating", "\[Rule]", "False"}], ",", 
+   RowBox[{"Initialization", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"texts", "=", 
+       RowBox[{"Select", "[", 
+        RowBox[{
+         RowBox[{"ExampleData", "[", "\"\<Text\>\"", "]"}], ",", 
+         RowBox[{
+          RowBox[{"!", 
+           RowBox[{"StringFreeQ", "[", 
+            RowBox[{
+             RowBox[{
+             "#", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}], 
+             ",", "\"\<UNHumanRights\>\""}], "]"}]}], "&"}]}], "]"}]}], ";"}],
+      "}"}]}], ",", 
+   RowBox[{"SynchronousInitialization", "\[Rule]", "False"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"SaveDefinitions", "\[Rule]", " ", "True"}]}], "]"}]], "Input",
+ CellChangeTimes->{
+  3.555500860847117*^9, 3.5555011147275963`*^9, {3.555501485019382*^9, 
+   3.555501504097398*^9}, {3.555501550176433*^9, 3.555501552836541*^9}, {
+   3.555501612051566*^9, 3.555501612138564*^9}, {3.5555020599904613`*^9, 
+   3.5555020636108227`*^9}, {3.5563650616799364`*^9, 
+   3.5563650686216307`*^9}, {3.5563651101990223`*^9, 
+   3.5563651278741617`*^9}, {3.5563651642543592`*^9, 3.556365248230711*^9}, {
+   3.556365278397713*^9, 3.5563653223488827`*^9}, {3.55636535776392*^9, 
+   3.556365491216043*^9}, {3.5563843572074203`*^9, 3.5563843654932756`*^9}, {
+   3.556384498198873*^9, 3.556384630920145*^9}, {3.556384699810336*^9, 
+   3.55638497835716*^9}, {3.5563850210452337`*^9, 3.556385021460828*^9}, {
+   3.5565369435710497`*^9, 3.556537014572618*^9}, 3.556537056141326*^9, {
+   3.55653711949562*^9, 3.5565371379461823`*^9}, {3.556537168786273*^9, 
+   3.556537386918062*^9}, {3.55653745867144*^9, 3.556537498436776*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`grams$$ = 3, $CellContext`text$$ = 
+    "UNHumanRightsSpanish", Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`text$$], "UNHumanRightsSpanish", 
+       "corpus language"}, {
+      "UNHumanRightsChinese" -> "Chinese", "UNHumanRightsDanish" -> "Danish", 
+       "UNHumanRightsDutch" -> "Dutch", "UNHumanRightsEnglish" -> "English", 
+       "UNHumanRightsEsperanto" -> "Esperanto", "UNHumanRightsFrench" -> 
+       "French", "UNHumanRightsGerman" -> "German", "UNHumanRightsGreek" -> 
+       "Greek", "UNHumanRightsHawaiian" -> "Hawaiian", 
+       "UNHumanRightsIndonesian" -> "Indonesian", "UNHumanRightsIrish" -> 
+       "Irish", "UNHumanRightsJapanese" -> "Japanese", "UNHumanRightsKorean" -> 
+       "Korean", "UNHumanRightsLatin" -> "Latin", "UNHumanRightsMaori" -> 
+       "Maori", "UNHumanRightsRussian" -> "Russian", 
+       "UNHumanRightsScottishGaelic" -> "Scottish Gaelic", 
+       "UNHumanRightsSpanish" -> "Spanish", "UNHumanRightsSwahili" -> 
+       "Swahili", "UNHumanRightsSwedish" -> "Swedish"}}, {{
+       Hold[$CellContext`grams$$], 3, "n-grams"}, 1, 5, 1}}, 
+    Typeset`size$$ = {598., {157., 163.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`text$2148$$ = False, $CellContext`grams$2149$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`grams$$ = 3, $CellContext`text$$ = 
+        "UNHumanRightsSpanish"}, "ControllerVariables" :> {
+        Hold[$CellContext`text$$, $CellContext`text$2148$$, False], 
+        Hold[$CellContext`grams$$, $CellContext`grams$2149$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Module[{$CellContext`res$ = Table[
+           $CellContext`NGramGenerator[
+            
+            ExampleData[{
+             "Text", $CellContext`text$$}], $CellContext`i], {$CellContext`i, \
+$CellContext`grams$$}]}, 
+        Text[
+         Column[{
+           Row[{"Approaching entropy (", 
+             Style["H", Italic], ") of a language through a corpus ", 
+             Style["n", Italic], "\[Hyphen]grams"}], 
+           Grid[{{
+              ListLinePlot[
+               Reverse[
+                Sort[
+                 Map[Last, 
+                  Most[
+                   Last[$CellContext`res$]]]]], Ticks -> {
+                 If[
+                  
+                  Or[$CellContext`text$$ == 
+                   "UNHumanRightsChinese", $CellContext`text$$ == 
+                   "UNHumanRightsKorean", $CellContext`text$$ == 
+                   "UNHumanRightsJapanese", $CellContext`text$$ == 
+                   "UNHumanRightsChinese"], Automatic, 
+                  If[$CellContext`grams$$ > 1, Automatic, 
+                   Thread[{
+                    Table[$CellContext`i, {$CellContext`i, 
+                    Length[
+                    Last[$CellContext`res$]]}], 
+                    Flatten[
+                    Map[First, 
+                    Last[$CellContext`res$]]]}]]], Automatic}, AxesLabel -> 
+               Map[Style[#]& , {
+                  Row[{
+                    Style["n", Italic], "\[Hyphen]gram"}], 
+                  "probability\n\
+\!\(TraditionalForm\`\(\(P\)\((\)\)\)n-gram)"}], PlotLabel -> Row[{
+                  Style["n", Italic], 
+                  "\[Hyphen]gram language probability\n"}], 
+               ImageSize -> {300, 300}], 
+              ListPlot[
+               Flatten[{
+                 $CellContext`entropy[
+                  Part[$CellContext`res$, 1]], 
+                 Differences[
+                  Flatten[
+                   Table[
+                    $CellContext`entropy[
+                    
+                    Part[$CellContext`res$, $CellContext`i]], \
+{$CellContext`i, $CellContext`grams$$}]]]}], AxesLabel -> 
+               Map[Style[#]& , {$CellContext`n, 
+                  "entropy\napprox.\n\!\(TraditionalForm\`\(-\(\[Sum]\(P(q)\) \
+\*SubscriptBox[\(log\), \(2\)] \(P(q)\)\)\)\)"}], PlotLabel -> Row[{
+                  Style["n", Italic], "\[Hyphen]gram entropy rate"}], 
+               ImageSize -> {290, 300}]}}]}, Alignment -> Center]]], 
+      "Specifications" :> {{{$CellContext`text$$, "UNHumanRightsSpanish", 
+          "corpus language"}, {
+         "UNHumanRightsChinese" -> "Chinese", "UNHumanRightsDanish" -> 
+          "Danish", "UNHumanRightsDutch" -> "Dutch", "UNHumanRightsEnglish" -> 
+          "English", "UNHumanRightsEsperanto" -> "Esperanto", 
+          "UNHumanRightsFrench" -> "French", "UNHumanRightsGerman" -> 
+          "German", "UNHumanRightsGreek" -> "Greek", "UNHumanRightsHawaiian" -> 
+          "Hawaiian", "UNHumanRightsIndonesian" -> "Indonesian", 
+          "UNHumanRightsIrish" -> "Irish", "UNHumanRightsJapanese" -> 
+          "Japanese", "UNHumanRightsKorean" -> "Korean", "UNHumanRightsLatin" -> 
+          "Latin", "UNHumanRightsMaori" -> "Maori", "UNHumanRightsRussian" -> 
+          "Russian", "UNHumanRightsScottishGaelic" -> "Scottish Gaelic", 
+          "UNHumanRightsSpanish" -> "Spanish", "UNHumanRightsSwahili" -> 
+          "Swahili", "UNHumanRightsSwedish" -> "Swedish"}, ControlType -> 
+         PopupMenu}, {{$CellContext`grams$$, 3, "n-grams"}, 1, 5, 1}}, 
+      "Options" :> {
+       Alignment -> Center, SynchronousUpdating -> False, 
+        SynchronousInitialization -> False}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{647., {219., 224.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`NGramGenerator[
+         Pattern[$CellContext`text, 
+          Blank[]], 
+         Pattern[$CellContext`grams, 
+          Blank[]]] := Reverse[
+         SortBy[
+          Thread[
+           ({
+            Map[First, #], N[
+              Map[Last, #]]/Total[
+             Map[Last, #]]}& )[
+            Tally[
+             Partition[
+              ReplaceAll[
+               Map[ToLowerCase, 
+                StringSplit[$CellContext`text, ""]], 
+               Flatten[{
+                 
+                 Distribute[{
+                   "\[CloseCurlyQuote]", "\[OpenCurlyQuote]", 
+                    "\[OpenCurlyQuote]", ",", ".", ";", ":", "?", 
+                    "\[LeftGuillemet]", "\[RightGuillemet]", ")", "(", "-", 
+                    "'", "]", "\[DownQuestion]", Factorial[""] "", 
+                    "\[DownExclamation]", "!", "\""} -> Sequence[], List], 
+                 Distribute[Table[
+                    ToString[$CellContext`i], {$CellContext`i, 0, 9}] -> 
+                  Sequence[], List]}]], $CellContext`grams, 1]]]], 
+          Last]], $CellContext`entropy[
+         Pattern[$CellContext`dist, 
+          Blank[]]] := -Total[
+          Table[Last[
+             Part[$CellContext`dist, $CellContext`i]] Log[2, 
+             Last[
+              Part[$CellContext`dist, $CellContext`i]]], {$CellContext`i, 
+            Length[$CellContext`dist]}]]}; Typeset`initDone$$ = True),
+    SynchronousInitialization->False,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->377523348]
+}, {2}]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell[TextData[{
+ "Shannon's information entropy [1] is defined by ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"H", "(", "Q", ")"}], "=", 
+    RowBox[{"-", 
+     RowBox[{"\[Sum]", 
+      RowBox[{
+       RowBox[{"P", "(", "n", ")"}], 
+       SubscriptBox["log", "2"], 
+       RowBox[{"P", "(", "n", ")"}]}]}]}]}], TraditionalForm]], "InlineMath"],
+ ", where ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"P", "(", "n", ")"}], TraditionalForm]], "InlineMath"],
+ " is the probability of ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]], "InlineMath"],
+ ", and the sum is over the elements of ",
+ Cell[BoxData[
+  FormBox["Q", TraditionalForm]], "InlineMath"],
+ ". Shannon's entropy is a measure of uncertainty. "
+}], "ManipulateCaption",
+ CellChangeTimes->{{3.555501322251008*^9, 3.555501345417128*^9}, {
+   3.5555017891125917`*^9, 3.555501961346348*^9}, {3.5555020146345*^9, 
+   3.555502028958659*^9}, {3.555502081442214*^9, 3.555502179515417*^9}, {
+   3.555502287172155*^9, 3.5555023668432693`*^9}, 3.5563655363313637`*^9, {
+   3.556385248667713*^9, 3.556385295235242*^9}, {3.5565374013260403`*^9, 
+   3.556537410874206*^9}, {3.556955044211123*^9, 3.5569550465793753`*^9}, {
+   3.556968884625638*^9, 3.556968899807638*^9}}],
+
+Cell[TextData[{
+ "An application is the redundancy in a language relating to the frequencies \
+of letter ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]], "InlineMath"],
+ "-grams (letters, pairs of letters, triplets, etc.). This Demonstration \
+shows the frequency of ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]], "InlineMath"],
+ "-grams calculated from the United Nations' Universal Declaration of Human \
+Rights in 20 languages and illustrates the entropy rate calculated from these \
+",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]], "InlineMath"],
+ "-gram frequency distributions. The entropy of a language is an estimation \
+of the probabilistic information content of each letter in that language and \
+so is also a measure of its predictability and redundancy."
+}], "ManipulateCaption",
+ CellChangeTimes->{{3.555501322251008*^9, 3.555501345417128*^9}, {
+   3.5555017891125917`*^9, 3.555501961346348*^9}, {3.5555020146345*^9, 
+   3.555502028958659*^9}, {3.555502081442214*^9, 3.555502179515417*^9}, {
+   3.555502287172155*^9, 3.5555023668432693`*^9}, 3.5563655363313637`*^9, {
+   3.556385248667713*^9, 3.556385379003048*^9}, {3.556385412608033*^9, 
+   3.55638541711104*^9}, {3.556536783911134*^9, 3.556536784898881*^9}, {
+   3.556536865743724*^9, 3.5565368773292427`*^9}, {3.5569551973345613`*^9, 
+   3.556955197863282*^9}, 3.556968718106638*^9, {3.556968756802638*^9, 
+   3.5569687700486383`*^9}, 3.5569688025486383`*^9, {3.556968942300638*^9, 
+   3.556968944748638*^9}},
+ CellID->1594063793]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`grams$$ = 3, $CellContext`text$$ = 
+    "UNHumanRightsSpanish", Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`text$$], "UNHumanRightsSpanish", 
+       "corpus language"}, {
+      "UNHumanRightsChinese" -> "Chinese", "UNHumanRightsDanish" -> "Danish", 
+       "UNHumanRightsDutch" -> "Dutch", "UNHumanRightsEnglish" -> "English", 
+       "UNHumanRightsEsperanto" -> "Esperanto", "UNHumanRightsFrench" -> 
+       "French", "UNHumanRightsGerman" -> "German", "UNHumanRightsGreek" -> 
+       "Greek", "UNHumanRightsHawaiian" -> "Hawaiian", 
+       "UNHumanRightsIndonesian" -> "Indonesian", "UNHumanRightsIrish" -> 
+       "Irish", "UNHumanRightsJapanese" -> "Japanese", "UNHumanRightsKorean" -> 
+       "Korean", "UNHumanRightsLatin" -> "Latin", "UNHumanRightsMaori" -> 
+       "Maori", "UNHumanRightsRussian" -> "Russian", 
+       "UNHumanRightsScottishGaelic" -> "Scottish Gaelic", 
+       "UNHumanRightsSpanish" -> "Spanish", "UNHumanRightsSwahili" -> 
+       "Swahili", "UNHumanRightsSwedish" -> "Swedish"}}, {{
+       Hold[$CellContext`grams$$], 3, "n-grams"}, 1, 5, 1}}, 
+    Typeset`size$$ = {598., {157., 163.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`text$2206$$ = False, $CellContext`grams$2207$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`grams$$ = 3, $CellContext`text$$ = 
+        "UNHumanRightsSpanish"}, "ControllerVariables" :> {
+        Hold[$CellContext`text$$, $CellContext`text$2206$$, False], 
+        Hold[$CellContext`grams$$, $CellContext`grams$2207$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Module[{$CellContext`res$ = Table[
+           $CellContext`NGramGenerator[
+            
+            ExampleData[{
+             "Text", $CellContext`text$$}], $CellContext`i], {$CellContext`i, \
+$CellContext`grams$$}]}, 
+        Text[
+         Column[{
+           Row[{"Approaching entropy (", 
+             Style["H", Italic], ") of a language through a corpus ", 
+             Style["n", Italic], "\[Hyphen]grams"}], 
+           Grid[{{
+              ListLinePlot[
+               Reverse[
+                Sort[
+                 Map[Last, 
+                  Most[
+                   Last[$CellContext`res$]]]]], Ticks -> {
+                 If[
+                  
+                  Or[$CellContext`text$$ == 
+                   "UNHumanRightsChinese", $CellContext`text$$ == 
+                   "UNHumanRightsKorean", $CellContext`text$$ == 
+                   "UNHumanRightsJapanese", $CellContext`text$$ == 
+                   "UNHumanRightsChinese"], Automatic, 
+                  If[$CellContext`grams$$ > 1, Automatic, 
+                   Thread[{
+                    Table[$CellContext`i, {$CellContext`i, 
+                    Length[
+                    Last[$CellContext`res$]]}], 
+                    Flatten[
+                    Map[First, 
+                    Last[$CellContext`res$]]]}]]], Automatic}, AxesLabel -> 
+               Map[Style[#]& , {
+                  Row[{
+                    Style["n", Italic], "\[Hyphen]gram"}], 
+                  "probability\n\
+\!\(TraditionalForm\`\(\(P\)\((\)\)\)n-gram)"}], PlotLabel -> Row[{
+                  Style["n", Italic], 
+                  "\[Hyphen]gram language probability\n"}], 
+               ImageSize -> {300, 300}], 
+              ListPlot[
+               Flatten[{
+                 $CellContext`entropy[
+                  Part[$CellContext`res$, 1]], 
+                 Differences[
+                  Flatten[
+                   Table[
+                    $CellContext`entropy[
+                    
+                    Part[$CellContext`res$, $CellContext`i]], \
+{$CellContext`i, $CellContext`grams$$}]]]}], AxesLabel -> 
+               Map[Style[#]& , {$CellContext`n, 
+                  "entropy\napprox.\n\!\(TraditionalForm\`\(-\(\[Sum]\(P(q)\) \
+\*SubscriptBox[\(log\), \(2\)] \(P(q)\)\)\)\)"}], PlotLabel -> Row[{
+                  Style["n", Italic], "\[Hyphen]gram entropy rate"}], 
+               ImageSize -> {290, 300}]}}]}, Alignment -> Center]]], 
+      "Specifications" :> {{{$CellContext`text$$, "UNHumanRightsSpanish", 
+          "corpus language"}, {
+         "UNHumanRightsChinese" -> "Chinese", "UNHumanRightsDanish" -> 
+          "Danish", "UNHumanRightsDutch" -> "Dutch", "UNHumanRightsEnglish" -> 
+          "English", "UNHumanRightsEsperanto" -> "Esperanto", 
+          "UNHumanRightsFrench" -> "French", "UNHumanRightsGerman" -> 
+          "German", "UNHumanRightsGreek" -> "Greek", "UNHumanRightsHawaiian" -> 
+          "Hawaiian", "UNHumanRightsIndonesian" -> "Indonesian", 
+          "UNHumanRightsIrish" -> "Irish", "UNHumanRightsJapanese" -> 
+          "Japanese", "UNHumanRightsKorean" -> "Korean", "UNHumanRightsLatin" -> 
+          "Latin", "UNHumanRightsMaori" -> "Maori", "UNHumanRightsRussian" -> 
+          "Russian", "UNHumanRightsScottishGaelic" -> "Scottish Gaelic", 
+          "UNHumanRightsSpanish" -> "Spanish", "UNHumanRightsSwahili" -> 
+          "Swahili", "UNHumanRightsSwedish" -> "Swedish"}, ControlType -> 
+         PopupMenu}, {{$CellContext`grams$$, 3, "n-grams"}, 1, 5, 1}}, 
+      "Options" :> {
+       Alignment -> Center, SynchronousUpdating -> False, 
+        SynchronousInitialization -> False}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{647., {219., 224.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`NGramGenerator[
+         Pattern[$CellContext`text, 
+          Blank[]], 
+         Pattern[$CellContext`grams, 
+          Blank[]]] := Reverse[
+         SortBy[
+          Thread[
+           ({
+            Map[First, #], N[
+              Map[Last, #]]/Total[
+             Map[Last, #]]}& )[
+            Tally[
+             Partition[
+              ReplaceAll[
+               Map[ToLowerCase, 
+                StringSplit[$CellContext`text, ""]], 
+               Flatten[{
+                 
+                 Distribute[{
+                   "\[CloseCurlyQuote]", "\[OpenCurlyQuote]", 
+                    "\[OpenCurlyQuote]", ",", ".", ";", ":", "?", 
+                    "\[LeftGuillemet]", "\[RightGuillemet]", ")", "(", "-", 
+                    "'", "]", "\[DownQuestion]", Factorial[""] "", 
+                    "\[DownExclamation]", "!", "\""} -> Sequence[], List], 
+                 Distribute[Table[
+                    ToString[$CellContext`i], {$CellContext`i, 0, 9}] -> 
+                  Sequence[], List]}]], $CellContext`grams, 1]]]], 
+          Last]], $CellContext`entropy[
+         Pattern[$CellContext`dist, 
+          Blank[]]] := -Total[
+          Table[Last[
+             Part[$CellContext`dist, $CellContext`i]] Log[2, 
+             Last[
+              Part[$CellContext`dist, $CellContext`i]]], {$CellContext`i, 
+            Length[$CellContext`dist]}]]}; Typeset`initDone$$ = True),
+    SynchronousInitialization->False,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->401623053]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`grams$$ = 1, $CellContext`text$$ = 
+    "UNHumanRightsEnglish", Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`text$$], "UNHumanRightsEnglish", 
+       "corpus language"}, {
+      "UNHumanRightsChinese" -> "Chinese", "UNHumanRightsDanish" -> "Danish", 
+       "UNHumanRightsDutch" -> "Dutch", "UNHumanRightsEnglish" -> "English", 
+       "UNHumanRightsEsperanto" -> "Esperanto", "UNHumanRightsFrench" -> 
+       "French", "UNHumanRightsGerman" -> "German", "UNHumanRightsGreek" -> 
+       "Greek", "UNHumanRightsHawaiian" -> "Hawaiian", 
+       "UNHumanRightsIndonesian" -> "Indonesian", "UNHumanRightsIrish" -> 
+       "Irish", "UNHumanRightsJapanese" -> "Japanese", "UNHumanRightsKorean" -> 
+       "Korean", "UNHumanRightsLatin" -> "Latin", "UNHumanRightsMaori" -> 
+       "Maori", "UNHumanRightsRussian" -> "Russian", 
+       "UNHumanRightsScottishGaelic" -> "Scottish Gaelic", 
+       "UNHumanRightsSpanish" -> "Spanish", "UNHumanRightsSwahili" -> 
+       "Swahili", "UNHumanRightsSwedish" -> "Swedish"}}, {{
+       Hold[$CellContext`grams$$], 1, "n-grams"}, 1, 5, 1}}, 
+    Typeset`size$$ = {598., {157., 163.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`text$2262$$ = False, $CellContext`grams$2263$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`grams$$ = 1, $CellContext`text$$ = 
+        "UNHumanRightsEnglish"}, "ControllerVariables" :> {
+        Hold[$CellContext`text$$, $CellContext`text$2262$$, False], 
+        Hold[$CellContext`grams$$, $CellContext`grams$2263$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Module[{$CellContext`res$ = Table[
+           $CellContext`NGramGenerator[
+            
+            ExampleData[{
+             "Text", $CellContext`text$$}], $CellContext`i], {$CellContext`i, \
+$CellContext`grams$$}]}, 
+        Text[
+         Column[{
+           Row[{"Approaching entropy (", 
+             Style["H", Italic], ") of a language through a corpus ", 
+             Style["n", Italic], "\[Hyphen]grams"}], 
+           Grid[{{
+              ListLinePlot[
+               Reverse[
+                Sort[
+                 Map[Last, 
+                  Most[
+                   Last[$CellContext`res$]]]]], Ticks -> {
+                 If[
+                  
+                  Or[$CellContext`text$$ == 
+                   "UNHumanRightsChinese", $CellContext`text$$ == 
+                   "UNHumanRightsKorean", $CellContext`text$$ == 
+                   "UNHumanRightsJapanese", $CellContext`text$$ == 
+                   "UNHumanRightsChinese"], Automatic, 
+                  If[$CellContext`grams$$ > 1, Automatic, 
+                   Thread[{
+                    Table[$CellContext`i, {$CellContext`i, 
+                    Length[
+                    Last[$CellContext`res$]]}], 
+                    Flatten[
+                    Map[First, 
+                    Last[$CellContext`res$]]]}]]], Automatic}, AxesLabel -> 
+               Map[Style[#]& , {
+                  Row[{
+                    Style["n", Italic], "\[Hyphen]gram"}], 
+                  "probability\n\
+\!\(TraditionalForm\`\(\(P\)\((\)\)\)n-gram)"}], PlotLabel -> Row[{
+                  Style["n", Italic], 
+                  "\[Hyphen]gram language probability\n"}], 
+               ImageSize -> {300, 300}], 
+              ListPlot[
+               Flatten[{
+                 $CellContext`entropy[
+                  Part[$CellContext`res$, 1]], 
+                 Differences[
+                  Flatten[
+                   Table[
+                    $CellContext`entropy[
+                    
+                    Part[$CellContext`res$, $CellContext`i]], \
+{$CellContext`i, $CellContext`grams$$}]]]}], AxesLabel -> 
+               Map[Style[#]& , {$CellContext`n, 
+                  "entropy\napprox.\n\!\(TraditionalForm\`\(-\(\[Sum]\(P(q)\) \
+\*SubscriptBox[\(log\), \(2\)] \(P(q)\)\)\)\)"}], PlotLabel -> Row[{
+                  Style["n", Italic], "\[Hyphen]gram entropy rate"}], 
+               ImageSize -> {290, 300}]}}]}, Alignment -> Center]]], 
+      "Specifications" :> {{{$CellContext`text$$, "UNHumanRightsEnglish", 
+          "corpus language"}, {
+         "UNHumanRightsChinese" -> "Chinese", "UNHumanRightsDanish" -> 
+          "Danish", "UNHumanRightsDutch" -> "Dutch", "UNHumanRightsEnglish" -> 
+          "English", "UNHumanRightsEsperanto" -> "Esperanto", 
+          "UNHumanRightsFrench" -> "French", "UNHumanRightsGerman" -> 
+          "German", "UNHumanRightsGreek" -> "Greek", "UNHumanRightsHawaiian" -> 
+          "Hawaiian", "UNHumanRightsIndonesian" -> "Indonesian", 
+          "UNHumanRightsIrish" -> "Irish", "UNHumanRightsJapanese" -> 
+          "Japanese", "UNHumanRightsKorean" -> "Korean", "UNHumanRightsLatin" -> 
+          "Latin", "UNHumanRightsMaori" -> "Maori", "UNHumanRightsRussian" -> 
+          "Russian", "UNHumanRightsScottishGaelic" -> "Scottish Gaelic", 
+          "UNHumanRightsSpanish" -> "Spanish", "UNHumanRightsSwahili" -> 
+          "Swahili", "UNHumanRightsSwedish" -> "Swedish"}, ControlType -> 
+         PopupMenu}, {{$CellContext`grams$$, 1, "n-grams"}, 1, 5, 1}}, 
+      "Options" :> {
+       Alignment -> Center, SynchronousUpdating -> False, 
+        SynchronousInitialization -> False}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{647., {219., 224.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`NGramGenerator[
+         Pattern[$CellContext`text, 
+          Blank[]], 
+         Pattern[$CellContext`grams, 
+          Blank[]]] := Reverse[
+         SortBy[
+          Thread[
+           ({
+            Map[First, #], N[
+              Map[Last, #]]/Total[
+             Map[Last, #]]}& )[
+            Tally[
+             Partition[
+              ReplaceAll[
+               Map[ToLowerCase, 
+                StringSplit[$CellContext`text, ""]], 
+               Flatten[{
+                 
+                 Distribute[{
+                   "\[CloseCurlyQuote]", "\[OpenCurlyQuote]", 
+                    "\[OpenCurlyQuote]", ",", ".", ";", ":", "?", 
+                    "\[LeftGuillemet]", "\[RightGuillemet]", ")", "(", "-", 
+                    "'", "]", "\[DownQuestion]", Factorial[""] "", 
+                    "\[DownExclamation]", "!", "\""} -> Sequence[], List], 
+                 Distribute[Table[
+                    ToString[$CellContext`i], {$CellContext`i, 0, 9}] -> 
+                  Sequence[], List]}]], $CellContext`grams, 1]]]], 
+          Last]], $CellContext`entropy[
+         Pattern[$CellContext`dist, 
+          Blank[]]] := -Total[
+          Table[Last[
+             Part[$CellContext`dist, $CellContext`i]] Log[2, 
+             Last[
+              Part[$CellContext`dist, $CellContext`i]]], {$CellContext`i, 
+            Length[$CellContext`dist]}]]}; Typeset`initDone$$ = True),
+    SynchronousInitialization->False,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->225842068],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`grams$$ = 2, $CellContext`text$$ = 
+    "UNHumanRightsRussian", Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`text$$], "UNHumanRightsRussian", 
+       "corpus language"}, {
+      "UNHumanRightsChinese" -> "Chinese", "UNHumanRightsDanish" -> "Danish", 
+       "UNHumanRightsDutch" -> "Dutch", "UNHumanRightsEnglish" -> "English", 
+       "UNHumanRightsEsperanto" -> "Esperanto", "UNHumanRightsFrench" -> 
+       "French", "UNHumanRightsGerman" -> "German", "UNHumanRightsGreek" -> 
+       "Greek", "UNHumanRightsHawaiian" -> "Hawaiian", 
+       "UNHumanRightsIndonesian" -> "Indonesian", "UNHumanRightsIrish" -> 
+       "Irish", "UNHumanRightsJapanese" -> "Japanese", "UNHumanRightsKorean" -> 
+       "Korean", "UNHumanRightsLatin" -> "Latin", "UNHumanRightsMaori" -> 
+       "Maori", "UNHumanRightsRussian" -> "Russian", 
+       "UNHumanRightsScottishGaelic" -> "Scottish Gaelic", 
+       "UNHumanRightsSpanish" -> "Spanish", "UNHumanRightsSwahili" -> 
+       "Swahili", "UNHumanRightsSwedish" -> "Swedish"}}, {{
+       Hold[$CellContext`grams$$], 2, "n-grams"}, 1, 5, 1}}, 
+    Typeset`size$$ = {598., {157., 163.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`text$2318$$ = False, $CellContext`grams$2319$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`grams$$ = 2, $CellContext`text$$ = 
+        "UNHumanRightsRussian"}, "ControllerVariables" :> {
+        Hold[$CellContext`text$$, $CellContext`text$2318$$, False], 
+        Hold[$CellContext`grams$$, $CellContext`grams$2319$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Module[{$CellContext`res$ = Table[
+           $CellContext`NGramGenerator[
+            
+            ExampleData[{
+             "Text", $CellContext`text$$}], $CellContext`i], {$CellContext`i, \
+$CellContext`grams$$}]}, 
+        Text[
+         Column[{
+           Row[{"Approaching entropy (", 
+             Style["H", Italic], ") of a language through a corpus ", 
+             Style["n", Italic], "\[Hyphen]grams"}], 
+           Grid[{{
+              ListLinePlot[
+               Reverse[
+                Sort[
+                 Map[Last, 
+                  Most[
+                   Last[$CellContext`res$]]]]], Ticks -> {
+                 If[
+                  
+                  Or[$CellContext`text$$ == 
+                   "UNHumanRightsChinese", $CellContext`text$$ == 
+                   "UNHumanRightsKorean", $CellContext`text$$ == 
+                   "UNHumanRightsJapanese", $CellContext`text$$ == 
+                   "UNHumanRightsChinese"], Automatic, 
+                  If[$CellContext`grams$$ > 1, Automatic, 
+                   Thread[{
+                    Table[$CellContext`i, {$CellContext`i, 
+                    Length[
+                    Last[$CellContext`res$]]}], 
+                    Flatten[
+                    Map[First, 
+                    Last[$CellContext`res$]]]}]]], Automatic}, AxesLabel -> 
+               Map[Style[#]& , {
+                  Row[{
+                    Style["n", Italic], "\[Hyphen]gram"}], 
+                  "probability\n\
+\!\(TraditionalForm\`\(\(P\)\((\)\)\)n-gram)"}], PlotLabel -> Row[{
+                  Style["n", Italic], 
+                  "\[Hyphen]gram language probability\n"}], 
+               ImageSize -> {300, 300}], 
+              ListPlot[
+               Flatten[{
+                 $CellContext`entropy[
+                  Part[$CellContext`res$, 1]], 
+                 Differences[
+                  Flatten[
+                   Table[
+                    $CellContext`entropy[
+                    
+                    Part[$CellContext`res$, $CellContext`i]], \
+{$CellContext`i, $CellContext`grams$$}]]]}], AxesLabel -> 
+               Map[Style[#]& , {$CellContext`n, 
+                  "entropy\napprox.\n\!\(TraditionalForm\`\(-\(\[Sum]\(P(q)\) \
+\*SubscriptBox[\(log\), \(2\)] \(P(q)\)\)\)\)"}], PlotLabel -> Row[{
+                  Style["n", Italic], "\[Hyphen]gram entropy rate"}], 
+               ImageSize -> {290, 300}]}}]}, Alignment -> Center]]], 
+      "Specifications" :> {{{$CellContext`text$$, "UNHumanRightsRussian", 
+          "corpus language"}, {
+         "UNHumanRightsChinese" -> "Chinese", "UNHumanRightsDanish" -> 
+          "Danish", "UNHumanRightsDutch" -> "Dutch", "UNHumanRightsEnglish" -> 
+          "English", "UNHumanRightsEsperanto" -> "Esperanto", 
+          "UNHumanRightsFrench" -> "French", "UNHumanRightsGerman" -> 
+          "German", "UNHumanRightsGreek" -> "Greek", "UNHumanRightsHawaiian" -> 
+          "Hawaiian", "UNHumanRightsIndonesian" -> "Indonesian", 
+          "UNHumanRightsIrish" -> "Irish", "UNHumanRightsJapanese" -> 
+          "Japanese", "UNHumanRightsKorean" -> "Korean", "UNHumanRightsLatin" -> 
+          "Latin", "UNHumanRightsMaori" -> "Maori", "UNHumanRightsRussian" -> 
+          "Russian", "UNHumanRightsScottishGaelic" -> "Scottish Gaelic", 
+          "UNHumanRightsSpanish" -> "Spanish", "UNHumanRightsSwahili" -> 
+          "Swahili", "UNHumanRightsSwedish" -> "Swedish"}, ControlType -> 
+         PopupMenu}, {{$CellContext`grams$$, 2, "n-grams"}, 1, 5, 1}}, 
+      "Options" :> {
+       Alignment -> Center, SynchronousUpdating -> False, 
+        SynchronousInitialization -> False}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{647., {219., 224.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`NGramGenerator[
+         Pattern[$CellContext`text, 
+          Blank[]], 
+         Pattern[$CellContext`grams, 
+          Blank[]]] := Reverse[
+         SortBy[
+          Thread[
+           ({
+            Map[First, #], N[
+              Map[Last, #]]/Total[
+             Map[Last, #]]}& )[
+            Tally[
+             Partition[
+              ReplaceAll[
+               Map[ToLowerCase, 
+                StringSplit[$CellContext`text, ""]], 
+               Flatten[{
+                 
+                 Distribute[{
+                   "\[CloseCurlyQuote]", "\[OpenCurlyQuote]", 
+                    "\[OpenCurlyQuote]", ",", ".", ";", ":", "?", 
+                    "\[LeftGuillemet]", "\[RightGuillemet]", ")", "(", "-", 
+                    "'", "]", "\[DownQuestion]", Factorial[""] "", 
+                    "\[DownExclamation]", "!", "\""} -> Sequence[], List], 
+                 Distribute[Table[
+                    ToString[$CellContext`i], {$CellContext`i, 0, 9}] -> 
+                  Sequence[], List]}]], $CellContext`grams, 1]]]], 
+          Last]], $CellContext`entropy[
+         Pattern[$CellContext`dist, 
+          Blank[]]] := -Total[
+          Table[Last[
+             Part[$CellContext`dist, $CellContext`i]] Log[2, 
+             Last[
+              Part[$CellContext`dist, $CellContext`i]]], {$CellContext`i, 
+            Length[$CellContext`dist]}]]}; Typeset`initDone$$ = True),
+    SynchronousInitialization->False,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->94158072],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`grams$$ = 2, $CellContext`text$$ = 
+    "UNHumanRightsChinese", Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`text$$], "UNHumanRightsChinese", 
+       "corpus language"}, {
+      "UNHumanRightsChinese" -> "Chinese", "UNHumanRightsDanish" -> "Danish", 
+       "UNHumanRightsDutch" -> "Dutch", "UNHumanRightsEnglish" -> "English", 
+       "UNHumanRightsEsperanto" -> "Esperanto", "UNHumanRightsFrench" -> 
+       "French", "UNHumanRightsGerman" -> "German", "UNHumanRightsGreek" -> 
+       "Greek", "UNHumanRightsHawaiian" -> "Hawaiian", 
+       "UNHumanRightsIndonesian" -> "Indonesian", "UNHumanRightsIrish" -> 
+       "Irish", "UNHumanRightsJapanese" -> "Japanese", "UNHumanRightsKorean" -> 
+       "Korean", "UNHumanRightsLatin" -> "Latin", "UNHumanRightsMaori" -> 
+       "Maori", "UNHumanRightsRussian" -> "Russian", 
+       "UNHumanRightsScottishGaelic" -> "Scottish Gaelic", 
+       "UNHumanRightsSpanish" -> "Spanish", "UNHumanRightsSwahili" -> 
+       "Swahili", "UNHumanRightsSwedish" -> "Swedish"}}, {{
+       Hold[$CellContext`grams$$], 2, "n-grams"}, 1, 5, 1}}, 
+    Typeset`size$$ = {598., {157., 163.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`text$2374$$ = False, $CellContext`grams$2375$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`grams$$ = 2, $CellContext`text$$ = 
+        "UNHumanRightsChinese"}, "ControllerVariables" :> {
+        Hold[$CellContext`text$$, $CellContext`text$2374$$, False], 
+        Hold[$CellContext`grams$$, $CellContext`grams$2375$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Module[{$CellContext`res$ = Table[
+           $CellContext`NGramGenerator[
+            
+            ExampleData[{
+             "Text", $CellContext`text$$}], $CellContext`i], {$CellContext`i, \
+$CellContext`grams$$}]}, 
+        Text[
+         Column[{
+           Row[{"Approaching entropy (", 
+             Style["H", Italic], ") of a language through a corpus ", 
+             Style["n", Italic], "\[Hyphen]grams"}], 
+           Grid[{{
+              ListLinePlot[
+               Reverse[
+                Sort[
+                 Map[Last, 
+                  Most[
+                   Last[$CellContext`res$]]]]], Ticks -> {
+                 If[
+                  
+                  Or[$CellContext`text$$ == 
+                   "UNHumanRightsChinese", $CellContext`text$$ == 
+                   "UNHumanRightsKorean", $CellContext`text$$ == 
+                   "UNHumanRightsJapanese", $CellContext`text$$ == 
+                   "UNHumanRightsChinese"], Automatic, 
+                  If[$CellContext`grams$$ > 1, Automatic, 
+                   Thread[{
+                    Table[$CellContext`i, {$CellContext`i, 
+                    Length[
+                    Last[$CellContext`res$]]}], 
+                    Flatten[
+                    Map[First, 
+                    Last[$CellContext`res$]]]}]]], Automatic}, AxesLabel -> 
+               Map[Style[#]& , {
+                  Row[{
+                    Style["n", Italic], "\[Hyphen]gram"}], 
+                  "probability\n\
+\!\(TraditionalForm\`\(\(P\)\((\)\)\)n-gram)"}], PlotLabel -> Row[{
+                  Style["n", Italic], 
+                  "\[Hyphen]gram language probability\n"}], 
+               ImageSize -> {300, 300}], 
+              ListPlot[
+               Flatten[{
+                 $CellContext`entropy[
+                  Part[$CellContext`res$, 1]], 
+                 Differences[
+                  Flatten[
+                   Table[
+                    $CellContext`entropy[
+                    
+                    Part[$CellContext`res$, $CellContext`i]], \
+{$CellContext`i, $CellContext`grams$$}]]]}], AxesLabel -> 
+               Map[Style[#]& , {$CellContext`n, 
+                  "entropy\napprox.\n\!\(TraditionalForm\`\(-\(\[Sum]\(P(q)\) \
+\*SubscriptBox[\(log\), \(2\)] \(P(q)\)\)\)\)"}], PlotLabel -> Row[{
+                  Style["n", Italic], "\[Hyphen]gram entropy rate"}], 
+               ImageSize -> {290, 300}]}}]}, Alignment -> Center]]], 
+      "Specifications" :> {{{$CellContext`text$$, "UNHumanRightsChinese", 
+          "corpus language"}, {
+         "UNHumanRightsChinese" -> "Chinese", "UNHumanRightsDanish" -> 
+          "Danish", "UNHumanRightsDutch" -> "Dutch", "UNHumanRightsEnglish" -> 
+          "English", "UNHumanRightsEsperanto" -> "Esperanto", 
+          "UNHumanRightsFrench" -> "French", "UNHumanRightsGerman" -> 
+          "German", "UNHumanRightsGreek" -> "Greek", "UNHumanRightsHawaiian" -> 
+          "Hawaiian", "UNHumanRightsIndonesian" -> "Indonesian", 
+          "UNHumanRightsIrish" -> "Irish", "UNHumanRightsJapanese" -> 
+          "Japanese", "UNHumanRightsKorean" -> "Korean", "UNHumanRightsLatin" -> 
+          "Latin", "UNHumanRightsMaori" -> "Maori", "UNHumanRightsRussian" -> 
+          "Russian", "UNHumanRightsScottishGaelic" -> "Scottish Gaelic", 
+          "UNHumanRightsSpanish" -> "Spanish", "UNHumanRightsSwahili" -> 
+          "Swahili", "UNHumanRightsSwedish" -> "Swedish"}, ControlType -> 
+         PopupMenu}, {{$CellContext`grams$$, 2, "n-grams"}, 1, 5, 1}}, 
+      "Options" :> {
+       Alignment -> Center, SynchronousUpdating -> False, 
+        SynchronousInitialization -> False}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{647., {219., 224.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`NGramGenerator[
+         Pattern[$CellContext`text, 
+          Blank[]], 
+         Pattern[$CellContext`grams, 
+          Blank[]]] := Reverse[
+         SortBy[
+          Thread[
+           ({
+            Map[First, #], N[
+              Map[Last, #]]/Total[
+             Map[Last, #]]}& )[
+            Tally[
+             Partition[
+              ReplaceAll[
+               Map[ToLowerCase, 
+                StringSplit[$CellContext`text, ""]], 
+               Flatten[{
+                 
+                 Distribute[{
+                   "\[CloseCurlyQuote]", "\[OpenCurlyQuote]", 
+                    "\[OpenCurlyQuote]", ",", ".", ";", ":", "?", 
+                    "\[LeftGuillemet]", "\[RightGuillemet]", ")", "(", "-", 
+                    "'", "]", "\[DownQuestion]", Factorial[""] "", 
+                    "\[DownExclamation]", "!", "\""} -> Sequence[], List], 
+                 Distribute[Table[
+                    ToString[$CellContext`i], {$CellContext`i, 0, 9}] -> 
+                  Sequence[], List]}]], $CellContext`grams, 1]]]], 
+          Last]], $CellContext`entropy[
+         Pattern[$CellContext`dist, 
+          Blank[]]] := -Total[
+          Table[Last[
+             Part[$CellContext`dist, $CellContext`i]] Log[2, 
+             Last[
+              Part[$CellContext`dist, $CellContext`i]]], {$CellContext`i, 
+            Length[$CellContext`dist]}]]}; Typeset`initDone$$ = True),
+    SynchronousInitialization->False,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->192727344],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`grams$$ = 5, $CellContext`text$$ = 
+    "UNHumanRightsFrench", Typeset`show$$ = True, Typeset`bookmarkList$$ = {},
+     Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`text$$], "UNHumanRightsFrench", "corpus language"}, {
+      "UNHumanRightsChinese" -> "Chinese", "UNHumanRightsDanish" -> "Danish", 
+       "UNHumanRightsDutch" -> "Dutch", "UNHumanRightsEnglish" -> "English", 
+       "UNHumanRightsEsperanto" -> "Esperanto", "UNHumanRightsFrench" -> 
+       "French", "UNHumanRightsGerman" -> "German", "UNHumanRightsGreek" -> 
+       "Greek", "UNHumanRightsHawaiian" -> "Hawaiian", 
+       "UNHumanRightsIndonesian" -> "Indonesian", "UNHumanRightsIrish" -> 
+       "Irish", "UNHumanRightsJapanese" -> "Japanese", "UNHumanRightsKorean" -> 
+       "Korean", "UNHumanRightsLatin" -> "Latin", "UNHumanRightsMaori" -> 
+       "Maori", "UNHumanRightsRussian" -> "Russian", 
+       "UNHumanRightsScottishGaelic" -> "Scottish Gaelic", 
+       "UNHumanRightsSpanish" -> "Spanish", "UNHumanRightsSwahili" -> 
+       "Swahili", "UNHumanRightsSwedish" -> "Swedish"}}, {{
+       Hold[$CellContext`grams$$], 5, "n-grams"}, 1, 5, 1}}, 
+    Typeset`size$$ = {598., {157., 163.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`text$2430$$ = False, $CellContext`grams$2431$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`grams$$ = 5, $CellContext`text$$ = 
+        "UNHumanRightsFrench"}, "ControllerVariables" :> {
+        Hold[$CellContext`text$$, $CellContext`text$2430$$, False], 
+        Hold[$CellContext`grams$$, $CellContext`grams$2431$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Module[{$CellContext`res$ = Table[
+           $CellContext`NGramGenerator[
+            
+            ExampleData[{
+             "Text", $CellContext`text$$}], $CellContext`i], {$CellContext`i, \
+$CellContext`grams$$}]}, 
+        Text[
+         Column[{
+           Row[{"Approaching entropy (", 
+             Style["H", Italic], ") of a language through a corpus ", 
+             Style["n", Italic], "\[Hyphen]grams"}], 
+           Grid[{{
+              ListLinePlot[
+               Reverse[
+                Sort[
+                 Map[Last, 
+                  Most[
+                   Last[$CellContext`res$]]]]], Ticks -> {
+                 If[
+                  
+                  Or[$CellContext`text$$ == 
+                   "UNHumanRightsChinese", $CellContext`text$$ == 
+                   "UNHumanRightsKorean", $CellContext`text$$ == 
+                   "UNHumanRightsJapanese", $CellContext`text$$ == 
+                   "UNHumanRightsChinese"], Automatic, 
+                  If[$CellContext`grams$$ > 1, Automatic, 
+                   Thread[{
+                    Table[$CellContext`i, {$CellContext`i, 
+                    Length[
+                    Last[$CellContext`res$]]}], 
+                    Flatten[
+                    Map[First, 
+                    Last[$CellContext`res$]]]}]]], Automatic}, AxesLabel -> 
+               Map[Style[#]& , {
+                  Row[{
+                    Style["n", Italic], "\[Hyphen]gram"}], 
+                  "probability\n\
+\!\(TraditionalForm\`\(\(P\)\((\)\)\)n-gram)"}], PlotLabel -> Row[{
+                  Style["n", Italic], 
+                  "\[Hyphen]gram language probability\n"}], 
+               ImageSize -> {300, 300}], 
+              ListPlot[
+               Flatten[{
+                 $CellContext`entropy[
+                  Part[$CellContext`res$, 1]], 
+                 Differences[
+                  Flatten[
+                   Table[
+                    $CellContext`entropy[
+                    
+                    Part[$CellContext`res$, $CellContext`i]], \
+{$CellContext`i, $CellContext`grams$$}]]]}], AxesLabel -> 
+               Map[Style[#]& , {$CellContext`n, 
+                  "entropy\napprox.\n\!\(TraditionalForm\`\(-\(\[Sum]\(P(q)\) \
+\*SubscriptBox[\(log\), \(2\)] \(P(q)\)\)\)\)"}], PlotLabel -> Row[{
+                  Style["n", Italic], "\[Hyphen]gram entropy rate"}], 
+               ImageSize -> {290, 300}]}}]}, Alignment -> Center]]], 
+      "Specifications" :> {{{$CellContext`text$$, "UNHumanRightsFrench", 
+          "corpus language"}, {
+         "UNHumanRightsChinese" -> "Chinese", "UNHumanRightsDanish" -> 
+          "Danish", "UNHumanRightsDutch" -> "Dutch", "UNHumanRightsEnglish" -> 
+          "English", "UNHumanRightsEsperanto" -> "Esperanto", 
+          "UNHumanRightsFrench" -> "French", "UNHumanRightsGerman" -> 
+          "German", "UNHumanRightsGreek" -> "Greek", "UNHumanRightsHawaiian" -> 
+          "Hawaiian", "UNHumanRightsIndonesian" -> "Indonesian", 
+          "UNHumanRightsIrish" -> "Irish", "UNHumanRightsJapanese" -> 
+          "Japanese", "UNHumanRightsKorean" -> "Korean", "UNHumanRightsLatin" -> 
+          "Latin", "UNHumanRightsMaori" -> "Maori", "UNHumanRightsRussian" -> 
+          "Russian", "UNHumanRightsScottishGaelic" -> "Scottish Gaelic", 
+          "UNHumanRightsSpanish" -> "Spanish", "UNHumanRightsSwahili" -> 
+          "Swahili", "UNHumanRightsSwedish" -> "Swedish"}, ControlType -> 
+         PopupMenu}, {{$CellContext`grams$$, 5, "n-grams"}, 1, 5, 1}}, 
+      "Options" :> {
+       Alignment -> Center, SynchronousUpdating -> False, 
+        SynchronousInitialization -> False}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{647., {219., 224.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`NGramGenerator[
+         Pattern[$CellContext`text, 
+          Blank[]], 
+         Pattern[$CellContext`grams, 
+          Blank[]]] := Reverse[
+         SortBy[
+          Thread[
+           ({
+            Map[First, #], N[
+              Map[Last, #]]/Total[
+             Map[Last, #]]}& )[
+            Tally[
+             Partition[
+              ReplaceAll[
+               Map[ToLowerCase, 
+                StringSplit[$CellContext`text, ""]], 
+               Flatten[{
+                 
+                 Distribute[{
+                   "\[CloseCurlyQuote]", "\[OpenCurlyQuote]", 
+                    "\[OpenCurlyQuote]", ",", ".", ";", ":", "?", 
+                    "\[LeftGuillemet]", "\[RightGuillemet]", ")", "(", "-", 
+                    "'", "]", "\[DownQuestion]", Factorial[""] "", 
+                    "\[DownExclamation]", "!", "\""} -> Sequence[], List], 
+                 Distribute[Table[
+                    ToString[$CellContext`i], {$CellContext`i, 0, 9}] -> 
+                  Sequence[], List]}]], $CellContext`grams, 1]]]], 
+          Last]], $CellContext`entropy[
+         Pattern[$CellContext`dist, 
+          Blank[]]] := -Total[
+          Table[Last[
+             Part[$CellContext`dist, $CellContext`i]] Log[2, 
+             Last[
+              Part[$CellContext`dist, $CellContext`i]]], {$CellContext`i, 
+            Length[$CellContext`dist]}]]}; Typeset`initDone$$ = True),
+    SynchronousInitialization->False,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->894208495]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "DetailsSection"],
+
+Cell["Reference", "DetailNotes",
+ CellChangeTimes->{{3.5563854949719267`*^9, 3.5563855016310987`*^9}},
+ CellID->1084443999],
+
+Cell[TextData[{
+ "[1] C. E. Shannon, \"Prediction and Entropy of Printed English,\" ",
+ StyleBox["Bell Systems Technical Journal",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["30",
+  FontWeight->"Bold"],
+ ", 1951 pp. 50\[Dash]64. ",
+ ButtonBox["www.ics.uci.edu/~fowlkes/class/cs177/shannon_51.pdf",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://www.ics.uci.edu/~fowlkes/class/cs177/shannon_51.pdf"], 
+    "http://www.ics.uci.edu/~fowlkes/class/cs177/shannon_51.pdf"},
+  ButtonNote->"http://www.ics.uci.edu/~fowlkes/class/cs177/shannon_51.pdf"],
+ "."
+}], "DetailNotes",
+ CellChangeTimes->{{3.555501150074973*^9, 3.555501180716393*^9}, {
+  3.5563855036797867`*^9, 3.556385542069346*^9}, {3.556969050006638*^9, 
+  3.556969101459638*^9}, {3.556969135988638*^9, 3.5569691425776377`*^9}},
+ CellID->698798318]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.556385548215289*^9},
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.5563855496412277`*^9},
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.3895522232313623`*^9, 
+  3.556385551779091*^9},
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0, CellBaseline -> Baseline], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.556385552721287*^9},
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SearchTermsSection"],
+
+Cell["entropy rate", "SearchTerms",
+ CellChangeTimes->{{3.55550171175664*^9, 3.555501713591916*^9}},
+ CellID->1138164981],
+
+Cell["language entropy", "SearchTerms",
+ CellChangeTimes->{{3.5555017154704103`*^9, 3.555501718304057*^9}},
+ CellID->1501991838],
+
+Cell["Shannon entropy", "SearchTerms",
+ CellChangeTimes->{{3.555501719501141*^9, 3.5555017212077723`*^9}},
+ CellID->306550781],
+
+Cell["information content", "SearchTerms",
+ CellChangeTimes->{{3.555501724151969*^9, 3.555501725855775*^9}},
+ CellID->385707114],
+
+Cell["communication theory", "SearchTerms",
+ CellChangeTimes->{{3.555501726497905*^9, 3.5555017293596697`*^9}},
+ CellID->1473818352],
+
+Cell["N-gram entropy", "SearchTerms",
+ CellChangeTimes->{{3.555501730294373*^9, 3.555501733207777*^9}, 
+   3.5563655425109816`*^9},
+ CellID->1388657566]
+}, Open  ]],
+
+Cell["", "RelatedLinksSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Hector Zenil",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Hector+Zenil"], 
+    None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Hector+Zenil"],
+ " and ",
+ ButtonBox["Elena Villarreal",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Elena+\
+Villarreal"], None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Elena+Villarreal"]
+}], "Author",
+ CellChangeTimes->{{3.5555011299670362`*^9, 3.5555011365476093`*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{822, 915},
+WindowMargins->{{232, Automatic}, {Automatic, -7}},
+FrontEndVersion->"8.0 for Microsoft Windows (64-bit) (October 6, 2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[64338, 1419, 353, 9, 22, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[64694, 1430, 678, 16, 22, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[65375, 1448, 340, 11, 22, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[65718, 1461, 637, 15, 22, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[66358, 1478, 887, 22, 22, "ControlSuggestions",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[67248, 1502, 393, 10, 22, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[67644, 1514, 1505, 32, 22, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[69152, 1548, 908, 21, 22, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 72066, 1641},
+ {"RotateAndZoomIn3D", 72175, 1644},
+ {"DragLocators", 72285, 1647},
+ {"CreateAndDeleteLocators", 72401, 1650},
+ {"SliderZoom", 72515, 1653},
+ {"GamepadControls", 72621, 1656},
+ {"AutomaticAnimation", 72735, 1659},
+ {"BookmarkAnimation", 72852, 1662}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 124, 1, 74, "DemoTitle"],
+Cell[CellGroupData[{
+Cell[728, 27, 33, 0, 287, "InitializationSection"],
+Cell[764, 29, 2458, 59, 188, "Input",
+ InitializationCell->True,
+ CellID->114560641],
+Cell[3225, 90, 707, 23, 27, "Input",
+ InitializationCell->True,
+ CellID->1275345575]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[3969, 118, 29, 0, 194, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[4023, 122, 10461, 230, 752, "Input"],
+Cell[14487, 354, 7637, 157, 455, "Output",
+ CellID->377523348]
+}, {2}]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[22170, 517, 36, 0, 169, "ManipulateCaptionSection"],
+Cell[22209, 519, 1225, 30, 41, "ManipulateCaption"],
+Cell[23437, 551, 1509, 28, 85, "ManipulateCaption",
+ CellID->1594063793]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[24983, 584, 28, 0, 173, "ThumbnailSection"],
+Cell[25014, 586, 7637, 157, 455, "Output",
+ CellID->401623053]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[32688, 748, 28, 0, 143, "SnapshotsSection"],
+Cell[32719, 750, 7637, 157, 455, "Output",
+ CellID->225842068],
+Cell[40359, 909, 7636, 157, 455, "Output",
+ CellID->94158072],
+Cell[47998, 1068, 7637, 157, 455, "Output",
+ CellID->192727344],
+Cell[55638, 1227, 7620, 155, 455, "Output",
+ CellID->894208495]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[63295, 1387, 26, 0, 336, "DetailsSection"],
+Cell[63324, 1389, 123, 2, 22, "DetailNotes",
+ CellID->1084443999],
+Cell[63450, 1393, 811, 19, 37, "DetailNotes",
+ CellID->698798318]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[64298, 1417, 37, 0, 126, "ControlSuggestionsSection"],
+Cell[64338, 1419, 353, 9, 22, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[64694, 1430, 678, 16, 22, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[65375, 1448, 340, 11, 22, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[65718, 1461, 637, 15, 22, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[66358, 1478, 887, 22, 22, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[67248, 1502, 393, 10, 22, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[67644, 1514, 1505, 32, 22, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[69152, 1548, 908, 21, 22, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[70097, 1574, 30, 0, 155, "SearchTermsSection"],
+Cell[70130, 1576, 121, 2, 22, "SearchTerms",
+ CellID->1138164981],
+Cell[70254, 1580, 128, 2, 22, "SearchTerms",
+ CellID->1501991838],
+Cell[70385, 1584, 126, 2, 22, "SearchTerms",
+ CellID->306550781],
+Cell[70514, 1588, 128, 2, 22, "SearchTerms",
+ CellID->385707114],
+Cell[70645, 1592, 132, 2, 22, "SearchTerms",
+ CellID->1473818352],
+Cell[70780, 1596, 152, 3, 22, "SearchTerms",
+ CellID->1388657566]
+}, Open  ]],
+Cell[70947, 1602, 31, 0, 141, "RelatedLinksSection"],
+Cell[CellGroupData[{
+Cell[71003, 1606, 25, 0, 129, "AuthorSection"],
+Cell[71031, 1608, 632, 18, 22, "Author"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

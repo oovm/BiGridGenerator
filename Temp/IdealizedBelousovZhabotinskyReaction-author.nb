@@ -1,0 +1,901 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     34810,        892]
+NotebookOptionsPosition[     30315,        751]
+NotebookOutlinePosition[     31896,        801]
+CellTagsIndexPosition[     31576,        789]
+WindowFrame->Normal
+ContainsDynamic->True *)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Idealized Belousov-Zhabotinsky Reaction", "DemoTitle",
+ CellChangeTimes->{
+  3.35696210375764*^9, 3.3911592570625*^9, {3.39116729315625*^9, 
+   3.391167293734375*^9}, {3.3915208936092405`*^9, 3.391520893969759*^9}, 
+   3.391948063846267*^9}],
+
+Cell["", "InitializationSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  
+  RowBox[{
+   RowBox[{"Manipulate", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"SeedRandom", "[", "seed", "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ArrayPlot", "[", 
+       RowBox[{
+        RowBox[{"CellularAutomaton", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"1350851716507335422", ",", 
+            RowBox[{"{", 
+             RowBox[{"20", ",", "1"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"1", ",", "1"}], "}"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Table", "[", 
+             RowBox[{
+              RowBox[{"RandomInteger", "[", 
+               RowBox[{
+                RowBox[{"{", "19", "}"}], ",", "200"}], "]"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"i", ",", "1", ",", "200"}], "}"}]}], "]"}], ",", 
+            "0"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"{", "steps", "}"}], "}"}], ",", "All", ",", "All"}], 
+           "}"}]}], "]"}], ",", 
+        RowBox[{"ImageSize", "\[Rule]", "360"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"ColorFunctionScaling", "\[Rule]", "False"}]}], "]"}]}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"steps", ",", "0"}], "}"}], ",", "0", ",", "150", ",", "1", 
+       ",", 
+       RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+     "Delimiter", ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"seed", ",", "1", ",", "\"\<new initial conditions\>\""}], 
+        "}"}], ",", "1", ",", "10000", ",", "1", ",", 
+       RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}]}], "]"}],
+    "\[IndentingNewLine]", "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, 3.39115919471875*^9, {3.391159478578125*^9, 
+   3.391159499453125*^9}, {3.391159536109375*^9, 3.39115953734375*^9}, {
+   3.391164363375*^9, 3.39116436384375*^9}, {3.391164503984375*^9, 
+   3.3911645055625*^9}, {3.39116484553125*^9, 3.39116484625*^9}, {
+   3.391164891453125*^9, 3.391164894609375*^9}, {3.39116543875*^9, 
+   3.391165469265625*^9}, {3.391445572947345*^9, 3.391445573197705*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`seed$$ = 1, $CellContext`steps$$ = 0, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`steps$$], 0}, 0, 150, 1}, {{
+       Hold[$CellContext`seed$$], 1, "new initial conditions"}, 1, 10000, 1}},
+     Typeset`size$$ = {360., {177., 182.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`steps$24036$$ = 0, $CellContext`seed$24037$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`seed$$ = 1, $CellContext`steps$$ = 0}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`steps$$, $CellContext`steps$24036$$, 0], 
+        Hold[$CellContext`seed$$, $CellContext`seed$24037$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (SeedRandom[$CellContext`seed$$]; ArrayPlot[
+         CellularAutomaton[{1350851716507335422, {20, 1}, {1, 1}}, {
+           Table[
+            RandomInteger[{19}, 200], {$CellContext`i, 1, 200}], 
+           0}, {{{$CellContext`steps$$}}, All, All}], ImageSize -> 360, 
+         ColorFunctionScaling -> False]), 
+      "Specifications" :> {{{$CellContext`steps$$, 0}, 0, 150, 1, Appearance -> 
+         "Labeled"}, 
+        Delimiter, {{$CellContext`seed$$, 1, "new initial conditions"}, 1, 
+         10000, 1, Appearance -> "Labeled"}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{404., {242., 247.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->7699564]
+}, {2}]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell["\<\
+This Demonstration shows an idealized version of the Belousov-Zhabotinsky \
+reaction implemented by means of a two-dimensional, totalistic cellular \
+automaton.\
+\>", "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.391165640984375*^9, 3.391165666890625*^9}, {
+   3.391363277440635*^9, 3.3913632866438684`*^9}, {3.3913650365429983`*^9, 
+   3.391365039557333*^9}, {3.3919480728692417`*^9, 3.3919480976548815`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`seed$$ = 1776, $CellContext`steps$$ = 124, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`steps$$], 0}, 0, 150, 1}, {{
+       Hold[$CellContext`seed$$], 1776, "new initial conditions"}, 1, 10000, 
+      1}}, Typeset`size$$ = {360., {177., 182.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`steps$24091$$ = 0, $CellContext`seed$24092$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`seed$$ = 1776, $CellContext`steps$$ = 0}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`steps$$, $CellContext`steps$24091$$, 0], 
+        Hold[$CellContext`seed$$, $CellContext`seed$24092$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (SeedRandom[$CellContext`seed$$]; ArrayPlot[
+         CellularAutomaton[{1350851716507335422, {20, 1}, {1, 1}}, {
+           Table[
+            RandomInteger[{19}, 200], {$CellContext`i, 1, 200}], 
+           0}, {{{$CellContext`steps$$}}, All, All}], ImageSize -> 360, 
+         ColorFunctionScaling -> False]), 
+      "Specifications" :> {{{$CellContext`steps$$, 0}, 0, 150, 1, Appearance -> 
+         "Labeled"}, 
+        Delimiter, {{$CellContext`seed$$, 1776, "new initial conditions"}, 1, 
+         10000, 1, Appearance -> "Labeled"}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{404., {242., 247.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->432364224]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`seed$$ = 1776, $CellContext`steps$$ = 0, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`steps$$], 0}, 0, 150, 1}, {{
+       Hold[$CellContext`seed$$], 1776, "new initial conditions"}, 1, 10000, 
+      1}}, Typeset`size$$ = {360., {177., 182.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`steps$24146$$ = 0, $CellContext`seed$24147$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`seed$$ = 1776, $CellContext`steps$$ = 0}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`steps$$, $CellContext`steps$24146$$, 0], 
+        Hold[$CellContext`seed$$, $CellContext`seed$24147$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (SeedRandom[$CellContext`seed$$]; ArrayPlot[
+         CellularAutomaton[{1350851716507335422, {20, 1}, {1, 1}}, {
+           Table[
+            RandomInteger[{19}, 200], {$CellContext`i, 1, 200}], 
+           0}, {{{$CellContext`steps$$}}, All, All}], ImageSize -> 360, 
+         ColorFunctionScaling -> False]), 
+      "Specifications" :> {{{$CellContext`steps$$, 0}, 0, 150, 1, Appearance -> 
+         "Labeled"}, 
+        Delimiter, {{$CellContext`seed$$, 1776, "new initial conditions"}, 1, 
+         10000, 1, Appearance -> "Labeled"}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{404., {242., 247.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->62210286],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`seed$$ = 1776, $CellContext`steps$$ = 23, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`steps$$], 0}, 0, 150, 1}, {{
+       Hold[$CellContext`seed$$], 1776, "new initial conditions"}, 1, 10000, 
+      1}}, Typeset`size$$ = {360., {177., 182.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`steps$24201$$ = 0, $CellContext`seed$24202$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`seed$$ = 1776, $CellContext`steps$$ = 0}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`steps$$, $CellContext`steps$24201$$, 0], 
+        Hold[$CellContext`seed$$, $CellContext`seed$24202$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (SeedRandom[$CellContext`seed$$]; ArrayPlot[
+         CellularAutomaton[{1350851716507335422, {20, 1}, {1, 1}}, {
+           Table[
+            RandomInteger[{19}, 200], {$CellContext`i, 1, 200}], 
+           0}, {{{$CellContext`steps$$}}, All, All}], ImageSize -> 360, 
+         ColorFunctionScaling -> False]), 
+      "Specifications" :> {{{$CellContext`steps$$, 0}, 0, 150, 1, Appearance -> 
+         "Labeled"}, 
+        Delimiter, {{$CellContext`seed$$, 1776, "new initial conditions"}, 1, 
+         10000, 1, Appearance -> "Labeled"}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{404., {242., 247.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->400038339],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`seed$$ = 1776, $CellContext`steps$$ = 88, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`steps$$], 0}, 0, 150, 1}, {{
+       Hold[$CellContext`seed$$], 1776, "new initial conditions"}, 1, 10000, 
+      1}}, Typeset`size$$ = {360., {177., 182.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`steps$24256$$ = 0, $CellContext`seed$24257$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`seed$$ = 1776, $CellContext`steps$$ = 0}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`steps$$, $CellContext`steps$24256$$, 0], 
+        Hold[$CellContext`seed$$, $CellContext`seed$24257$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (SeedRandom[$CellContext`seed$$]; ArrayPlot[
+         CellularAutomaton[{1350851716507335422, {20, 1}, {1, 1}}, {
+           Table[
+            RandomInteger[{19}, 200], {$CellContext`i, 1, 200}], 
+           0}, {{{$CellContext`steps$$}}, All, All}], ImageSize -> 360, 
+         ColorFunctionScaling -> False]), 
+      "Specifications" :> {{{$CellContext`steps$$, 0}, 0, 150, 1, Appearance -> 
+         "Labeled"}, 
+        Delimiter, {{$CellContext`seed$$, 1776, "new initial conditions"}, 1, 
+         10000, 1, Appearance -> "Labeled"}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{404., {242., 247.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->613421674],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`seed$$ = 1776, $CellContext`steps$$ = 150, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`steps$$], 0}, 0, 150, 1}, {{
+       Hold[$CellContext`seed$$], 1776, "new initial conditions"}, 1, 10000, 
+      1}}, Typeset`size$$ = {360., {177., 182.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`steps$24311$$ = 0, $CellContext`seed$24312$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`seed$$ = 1776, $CellContext`steps$$ = 0}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`steps$$, $CellContext`steps$24311$$, 0], 
+        Hold[$CellContext`seed$$, $CellContext`seed$24312$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (SeedRandom[$CellContext`seed$$]; ArrayPlot[
+         CellularAutomaton[{1350851716507335422, {20, 1}, {1, 1}}, {
+           Table[
+            RandomInteger[{19}, 200], {$CellContext`i, 1, 200}], 
+           0}, {{{$CellContext`steps$$}}, All, All}], ImageSize -> 360, 
+         ColorFunctionScaling -> False]), 
+      "Specifications" :> {{{$CellContext`steps$$, 0}, 0, 150, 1, Appearance -> 
+         "Labeled"}, 
+        Delimiter, {{$CellContext`seed$$, 1776, "new initial conditions"}, 1, 
+         10000, 1, Appearance -> "Labeled"}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{404., {242., 247.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->281297278]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "DetailsSection"],
+
+Cell[TextData[{
+ "NKS can describe self-organization of complex chemical and biological \
+spatial structures. Sometimes some of these structures can share the same \
+pattern. For instance, spiral waves\[LongDash]studied in the past by Arthur \
+Winfree and others\[LongDash]are typical of many chemical reactions, as well \
+as in slime mold colonies. This pattern is also typical of the amoeba ",
+ StyleBox["Dictyostelium discoideum",
+  FontSlant->"Italic"],
+ ", in which spiral structures arise from the movements of amoebae in \
+response to propagating waves of the cAMP."
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3911659666875*^9, 3.391166030640625*^9}, {
+   3.39116606403125*^9, 3.391166594171875*^9}, {3.3911666284375*^9, 
+   3.391166923015625*^9}, 3.391167181390625*^9, {3.3911714103318944`*^9, 
+   3.3911714250530624`*^9}, {3.3913633063722367`*^9, 
+   3.3913633542510834`*^9}, {3.3913634216445503`*^9, 
+   3.3913634511144915`*^9}, {3.391364274417115*^9, 3.391364298351531*^9}, {
+   3.392045337049971*^9, 3.39204533732036*^9}, {3.3920454214813776`*^9, 
+   3.392045428902048*^9}},
+ CellID->60401763],
+
+Cell["\<\
+In this Demonstration, the Belousov-Zhabotinsky chemical reaction pattern is \
+implemented by means of two-dimensional totalistic cellular automaton. This \
+Demonstration uses a range 1, 20-color totalistic cellular automaton with \
+rule number 1350851716507335422, but a wide number of rules around this one \
+produce similar patterns. \
+\>", "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3911659666875*^9, 3.391166030640625*^9}, {
+   3.39116606403125*^9, 3.391166594171875*^9}, {3.3911666284375*^9, 
+   3.391166923015625*^9}, 3.391167181390625*^9, {3.3911714103318944`*^9, 
+   3.3911714250530624`*^9}, {3.3913633063722367`*^9, 
+   3.3913633542510834`*^9}, {3.3913634216445503`*^9, 
+   3.3913634511144915`*^9}, {3.391364274417115*^9, 3.391364298351531*^9}, {
+   3.391364344748246*^9, 3.3913644262254047`*^9}, {3.391364458481787*^9, 
+   3.3913644584918013`*^9}, {3.3913650529666147`*^9, 3.3913650673673215`*^9}},
+ 
+ CellID->788618407],
+
+Cell["\<\
+Observing the pattern formation, two different spatial structures can arise: \
+concentric waves and spiral waves. The two different patterns depend on the \
+initial conditions and represent a clear example of multiple modes of \
+self-organization.\
+\>", "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3911659666875*^9, 3.391166030640625*^9}, {
+   3.39116606403125*^9, 3.391166594171875*^9}, {3.3911666284375*^9, 
+   3.391166923015625*^9}, 3.391167181390625*^9, {3.3911714103318944`*^9, 
+   3.3911714250530624`*^9}, {3.3913633063722367`*^9, 
+   3.3913633542510834`*^9}, {3.3913634216445503`*^9, 
+   3.3913634511144915`*^9}, {3.391364274417115*^9, 3.391364298351531*^9}, {
+   3.391364344748246*^9, 3.3913644262254047`*^9}, {3.391364458481787*^9, 
+   3.3913644993305244`*^9}, {3.392045356898512*^9, 3.3920453570387135`*^9}, 
+   3.392045452135456*^9},
+ CellID->358526304],
+
+Cell["For further information, see:", "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3911715328280354`*^9, 3.391171539327381*^9}},
+ CellID->110957262],
+
+Cell[TextData[{
+ "R. Sol\[EAcute] and B. Goodwin, ",
+ StyleBox["Signs of Life: How Complexity Pervades Biology",
+  FontSlant->"Italic"],
+ ", New York: Basic Books, 2000."
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3920454780126657`*^9, 3.392045485002717*^9}},
+ CellID->459044261],
+
+Cell[TextData[{
+ "S. Kauffman, ",
+ StyleBox["At Home in the Universe: The Search for the Laws of \
+Self-Organization and Complexity",
+  FontSlant->"Italic"],
+ ", Oxford: Oxford University Press, 1995."
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.392045543536885*^9, 3.3920455509575553`*^9}},
+ CellID->29079953],
+
+Cell[TextData[{
+ ButtonBox["Belousov-Zhabotinsky reaction",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://en.wikipedia.org/wiki/Belousov-Zhabotinsky_reaction"], 
+    None}],
+ " on Wikipedia"
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3913645146325283`*^9, 3.391364533689931*^9}},
+ CellID->33876212],
+
+Cell[TextData[ButtonBox["CA simulator Cellab, by Rudy Rucker and John Walker \
+(rule ZHABO.JC)",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://www.cs.sjsu.edu/faculty/rucker/cellab.htm"], 
+   None}]], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3920509842510653`*^9, 3.392051016427333*^9}, {
+   3.3920511674144416`*^9, 3.392051182125595*^9}},
+ CellID->186488723],
+
+Cell[TextData[{
+ "A. Winfree, ",
+ StyleBox["When Time Breaks Down: The Three-Dimensional Dynamics of \
+Electrochemical Waves and Cardiac Arrhythmias",
+  FontSlant->"Italic"],
+ ", Princeton: Princeton University Press, 1987."
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3920456255448065`*^9, 3.3920456316736193`*^9}},
+ CellID->582180495]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  ActionDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.3911714574196033`*^9},
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.391171456237904*^9},
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  ActionDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.3895522232313623`*^9},
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SearchTermsSection"],
+
+Cell["Belousov-Zhabotinsky reaction", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.391165818515625*^9, 3.391165818515625*^9}},
+ CellID->293269324],
+
+Cell["Dictostelium Discoideum", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.391165839859375*^9, 3.391165849703125*^9}},
+ CellID->293726988],
+
+Cell["Self-organisation", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.391165861671875*^9, 3.3911658745625*^9}, {
+   3.3911672103125*^9, 3.3911672103125*^9}},
+ CellID->164666373],
+
+Cell["Totalistic cellular automata", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3911672165*^9, 3.39116724028125*^9}},
+ CellID->44290332]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "RelatedLinksSection"],
+
+Cell[TextData[ButtonBox["Totalistic Cellular Automaton",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/TotalisticCellularAutomaton.html"], 
+   None}]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, 3.391168544546875*^9, {3.391171478189469*^9, 
+   3.3911714797817583`*^9}},
+ CellID->33602619],
+
+Cell[TextData[ButtonBox["Implications for Everyday Systems",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://www.wolframscience.com/nksonline/page-1013"], 
+   None}]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.391167896015625*^9, 3.391167921671875*^9}, {
+   3.391168026984375*^9, 3.391168026984375*^9}, {3.391168168296875*^9, 
+   3.391168168296875*^9}, {3.39116843284375*^9, 3.391168432859375*^9}, {
+   3.3911687411875*^9, 3.3911687411875*^9}, {3.3911714841680655`*^9, 
+   3.391171485039318*^9}, {3.3911715561916304`*^9, 3.391171557333272*^9}, {
+   3.391445629959324*^9, 3.391445634405718*^9}},
+ CellID->53504282]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Luca Zammataro",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Luca+Zammataro"]\
+, None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Luca+Zammataro"]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.391159263125*^9, 3.3911592669375*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{807, 629},
+WindowMargins->{{Automatic, 6}, {Automatic, 0}},
+FrontEndVersion->"6.0 for Microsoft Windows (32-bit) (June 19, 2007)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[22431, 526, 375, 9, 70, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[22809, 537, 677, 16, 70, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[23489, 555, 339, 11, 70, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[23831, 568, 636, 15, 70, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[24470, 585, 905, 22, 70, "ControlSuggestions",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[25378, 609, 368, 9, 70, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[25749, 620, 1411, 31, 70, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[27163, 653, 881, 21, 70, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 30685, 762},
+ {"RotateAndZoomIn3D", 30793, 765},
+ {"DragLocators", 30902, 768},
+ {"CreateAndDeleteLocators", 31017, 771},
+ {"SliderZoom", 31130, 774},
+ {"GamepadControls", 31235, 777},
+ {"AutomaticAnimation", 31347, 780},
+ {"BookmarkAnimation", 31463, 783}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[590, 23, 247, 4, 70, "DemoTitle"],
+Cell[840, 29, 33, 0, 70, "InitializationSection"],
+Cell[CellGroupData[{
+Cell[898, 33, 29, 0, 70, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[952, 37, 2359, 56, 70, "Input"],
+Cell[3314, 95, 2224, 44, 70, "Output",
+ CellID->7699564]
+}, {2}]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5584, 145, 36, 0, 70, "ManipulateCaptionSection"],
+Cell[5623, 147, 441, 8, 70, "ManipulateCaption"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6101, 160, 28, 0, 70, "ThumbnailSection"],
+Cell[6132, 162, 2242, 44, 70, "Output",
+ CellID->432364224]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8411, 211, 28, 0, 70, "SnapshotsSection"],
+Cell[8442, 213, 2239, 44, 70, "Output",
+ CellID->62210286],
+Cell[10684, 259, 2241, 44, 70, "Output",
+ CellID->400038339],
+Cell[12928, 305, 2241, 44, 70, "Output",
+ CellID->613421674],
+Cell[15172, 351, 2242, 44, 70, "Output",
+ CellID->281297278]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17451, 400, 26, 0, 70, "DetailsSection"],
+Cell[17480, 402, 1127, 20, 70, "DetailNotes",
+ CellID->60401763],
+Cell[18610, 424, 959, 17, 70, "DetailNotes",
+ CellID->788618407],
+Cell[19572, 443, 891, 16, 70, "DetailNotes",
+ CellID->358526304],
+Cell[20466, 461, 164, 3, 70, "DetailNotes",
+ CellID->110957262],
+Cell[20633, 466, 301, 8, 70, "DetailNotes",
+ CellID->459044261],
+Cell[20937, 476, 331, 9, 70, "DetailNotes",
+ CellID->29079953],
+Cell[21271, 487, 332, 10, 70, "DetailNotes",
+ CellID->33876212],
+Cell[21606, 499, 388, 9, 70, "DetailNotes",
+ CellID->186488723],
+Cell[21997, 510, 357, 9, 70, "DetailNotes",
+ CellID->582180495]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[22391, 524, 37, 0, 70, "ControlSuggestionsSection"],
+Cell[22431, 526, 375, 9, 70, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[22809, 537, 677, 16, 70, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[23489, 555, 339, 11, 70, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[23831, 568, 636, 15, 70, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[24470, 585, 905, 22, 70, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[25378, 609, 368, 9, 70, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[25749, 620, 1411, 31, 70, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[27163, 653, 881, 21, 70, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[28081, 679, 30, 0, 70, "SearchTermsSection"],
+Cell[28114, 681, 162, 3, 70, "SearchTerms",
+ CellID->293269324],
+Cell[28279, 686, 156, 3, 70, "SearchTerms",
+ CellID->293726988],
+Cell[28438, 691, 194, 4, 70, "SearchTerms",
+ CellID->164666373],
+Cell[28635, 697, 154, 3, 70, "SearchTerms",
+ CellID->44290332]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[28826, 705, 31, 0, 70, "RelatedLinksSection"],
+Cell[28860, 707, 335, 8, 70, "RelatedLinks",
+ CellID->33602619],
+Cell[29198, 717, 640, 12, 70, "RelatedLinks",
+ CellID->53504282]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[29875, 734, 25, 0, 70, "AuthorSection"],
+Cell[29903, 736, 384, 11, 70, "Author"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

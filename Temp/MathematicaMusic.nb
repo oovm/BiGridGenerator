@@ -1,0 +1,665 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.0'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     24567,        598]*)
+(*NotebookOutlinePosition[     25210,        620]*)
+(*  CellTagsIndexPosition[     25166,        616]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[TextData[StyleBox["Playing Sine Waves",
+  FontColor->RGBColor[1, 0, 0]]], "Subsection",
+  Background->GrayLevel[0.900008]],
+
+Cell[TextData[{
+  "Another standard application studied in trigonometry is sound waves of the \
+form    ",
+  StyleBox["f ",
+    FontWeight->"Bold",
+    FontSlant->"Italic"],
+  StyleBox["( t )  =  A sin [ B t  ]",
+    FontWeight->"Bold"],
+  " ,  where  A  is the amplitude of the sound (how loud or soft) and  B  is \
+the frequency of the sound (the pitch \[Rule] how high or low the note is).  \
+The frequency of a musical note is measured in Hertz (or cycles per second).  \
+",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " can Play notes of the form  ",
+  StyleBox["Sin[ B*2\[Pi] t]",
+    FontWeight->"Bold"],
+  " .  (I haven't yet figured out how to get ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " to deal with loud or soft.) "
+}], "Text"],
+
+Cell["\<\
+by David R. Wood
+Augustana College
+March, 2004\
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Pure Tones ", "Subsection"],
+
+Cell[TextData[{
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " uses its ",
+  StyleBox["Play",
+    FontWeight->"Bold"],
+  " command to play sounds.  Here's what the ",
+  StyleBox["Help Browser",
+    FontWeight->"Bold"],
+  " says about ",
+  StyleBox["Play",
+    FontWeight->"Bold"],
+  ".\n\[FilledSmallSquare] ",
+  StyleBox["Play[", "MR",
+    FontWeight->"Bold"],
+  StyleBox["f", "TI",
+    FontWeight->"Bold"],
+  StyleBox[",", "MR",
+    FontWeight->"Bold"],
+  StyleBox[" ",
+    FontWeight->"Bold"],
+  Cell[BoxData[
+      \(TraditionalForm\`{\)], "InlineFormula",
+    FontWeight->"Bold"],
+  StyleBox["t", "TI",
+    FontWeight->"Bold"],
+  StyleBox[",", "MR",
+    FontWeight->"Bold"],
+  StyleBox[" ",
+    FontWeight->"Bold"],
+  StyleBox["tmin", "TI",
+    FontWeight->"Bold"],
+  StyleBox[",", "MR",
+    FontWeight->"Bold"],
+  StyleBox[" ",
+    FontWeight->"Bold"],
+  StyleBox["tmax", "TI",
+    FontWeight->"Bold"],
+  Cell[BoxData[
+      \(TraditionalForm\`}\)], "InlineFormula",
+    FontWeight->"Bold"],
+  StyleBox["]", "MR",
+    FontWeight->"Bold"],
+  " plays a sound whose amplitude is given by ",
+  StyleBox["f", "TI"],
+  " as a function of time ",
+  StyleBox["t", "TI"],
+  " in seconds between ",
+  StyleBox["tmin", "TI"],
+  " and ",
+  StyleBox["tmax", "TI"],
+  ". \nThe following command instructs ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " to play a pure tone with a frequency of 263 Hertz for 0.2 seconds. The \
+human ear can hear sounds with frequencies ranging from about: 20 Hertz to \
+about 22,000 Hertz.  Dogs can hear sounds with much higher frequencies \
+(higher pitches). \nThere's another new feature in the command below.  The \
+part that looks like this \[Rule]",
+  StyleBox[" (* Middle C *)",
+    FontFamily->"Courier New",
+    FontWeight->"Bold"],
+  StyleBox[" is called a comment.  ",
+    FontFamily->"Times New Roman"],
+  StyleBox["Mathematica",
+    FontFamily->"Times New Roman",
+    FontSlant->"Italic"],
+  StyleBox[" ignores comments.  We put comments into input cells to provide \
+explanations for those who read our ",
+    FontFamily->"Times New Roman"],
+  StyleBox["Mathematica",
+    FontFamily->"Times New Roman",
+    FontSlant->"Italic"],
+  StyleBox[" documents.  \nThe comment below informs us that the note we hear \
+is A below middle C. ",
+    FontFamily->"Times New Roman"]
+}], "Text"],
+
+Cell[BoxData[
+    \(\(\(Play[Sin[220\ 2  \[Pi]\ t], {t, 0,  .2}]\)\(\ \ \ \ \ \)\( (*\ 
+      A\ below\ middle\ C\ *) \)\)\)], "Input"],
+
+Cell[TextData[{
+  "The command ",
+  StyleBox["Play",
+    FontWeight->"Bold"],
+  " is analogous to the command ",
+  StyleBox["Plot",
+    FontWeight->"Bold"],
+  ".  It takes two arguments.  The first is a function defining the sound to \
+",
+  StyleBox["play",
+    FontSlant->"Italic"],
+  ", and the second is an interval of time telling ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " how long to play it.  Notice that ",
+  StyleBox["Play",
+    FontWeight->"Bold"],
+  " produces two outputs just like ",
+  StyleBox["Plot",
+    FontWeight->"Bold"],
+  " does.  We can suppress the ",
+  StyleBox["  \[SkeletonIndicator]Sound\[SkeletonIndicator]  ",
+    Background->GrayLevel[0.900008]],
+  " tag by putting a semicolon at the end of the command.  Here's a really \
+weird sound without the ",
+  StyleBox["  \[SkeletonIndicator]Sound\[SkeletonIndicator]  ",
+    Background->GrayLevel[0.900008]],
+  "  tag."
+}], "Text"],
+
+Cell[BoxData[
+    \(\(Play[Sin[700\ t\  + \ 25\ t\ Sin[350\ \ t]], {t, 0, 4}];\)\)], "Input"],
+
+Cell[TextData[{
+  "Those who study music tell us that a musical octave spans a factor of 2 in \
+frequency and that there are twelve notes per octave.  The notes are \
+separated by the factors of ",
+  Cell[BoxData[
+      \(TraditionalForm\`\@2\%\(\(12\)\(\ \)\)\)]],
+  " (or approximately ",
+  StyleBox["1.05946",
+    FontFamily->"Courier New"],
+  " ) .  If the frequency of  A  below middle  C  is 220 Hertz, then the \
+frequency of  A#  (the next note in the octave) is 220 * ",
+  Cell[BoxData[
+      \(TraditionalForm\`\@2\%\(\(12\)\(\ \)\)\)]],
+  " (or about 233.08 Hertz.  The command below defines a very simple, \
+eight-note (diatonic) ",
+  StyleBox["C major ",
+    FontSlant->"Italic"],
+  "scale for ",
+  StyleBox["Mathematica. (",
+    FontSlant->"Italic"],
+  "The word ",
+  StyleBox["scale",
+    FontSlant->"Italic"],
+  " comes from the Italian word ",
+  StyleBox["scala",
+    FontSlant->"Italic"],
+  " meaning ",
+  StyleBox["ladder",
+    FontSlant->"Italic"],
+  ".)  Notice that we use ",
+  StyleBox["DisplayFunction \[Rule] Identity",
+    FontWeight->"Bold"],
+  " to suppress the sound and the fancy box.  These notes all have names that \
+are similar.  If we don't turn off the ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " feature that checks for misspellings, we would get many, many error \
+messages.  That's what the first command does \[Rule] suppresses spelling \
+errors.\nEnter this command.  "
+}], "Text"],
+
+Cell[BoxData[{
+    \(\(Off[General::spell1];\)\), "\[IndentingNewLine]", 
+    \(\(c4 = 
+        Play[Sin[2  Pi\ 261.64\ t], {t, 0, 0.4}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(d4 = 
+        Play[Sin[2  Pi\ 293.68  t], {t, 0, 0.4}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(e4 = 
+        Play[Sin[2  Pi\ 329.64  t], {t, 0, 0.4}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(f4 = 
+        Play[Sin[2  Pi\ 349.24\ t], {t, 0, 0.4}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(g4 = 
+        Play[Sin[2  Pi\ 392.00\ t], {t, 0, 0.4}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(a4 = 
+        Play[Sin[2  Pi\ 440.00  t], {t, 0, 0.4}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(b4 = 
+        Play[Sin[2  Pi\ 493.92  t], {t, 0, 0.4}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(cAbove4 = 
+        Play[Sin[2  Pi\ 523.28\ t], {t, 0, 0.4}, 
+          DisplayFunction \[Rule] Identity];\)\)}], "Input"],
+
+Cell[TextData[{
+  " No sound!  Now let's define a simple tune for ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " to play.  Enter this command."
+}], "Text"],
+
+Cell[BoxData[
+    \(\(OdeToJoy = {e4, e4, f4, g4, g4, f4, e4, d4, c4, c4, d4, e4, e4, d4, 
+          d4, e4, e4, f4, g4, g4, f4, e4, d4, c4, c4, d4, e4, d4, c4, 
+          c4};\)\)], "Input"],
+
+Cell[TextData[{
+  "Again, no sound.  Now enter the command below.  Notice that we execute a \
+series a previously produced but suppressed sounds using the ",
+  StyleBox["Show",
+    FontWeight->"Bold"],
+  " command."
+}], "Text"],
+
+Cell[BoxData[
+    \(\(Show[OdeToJoy];\)\)], "Input"],
+
+Cell[TextData[{
+  "I admit that I'm not much of a musician, but I had fun defining all 12 \
+notes in the chromatic scale at each of four note lengths (plus a few extra) \
+and then teaching ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " to play a couple of simple tunes.  Enter the following functions."
+}], "Text"],
+
+Cell[BoxData[{
+    \(\(Off[General::spell1];\)\), "\[IndentingNewLine]", 
+    \(\(bBelow8 = 
+        Play[Sin[2  Pi\ 246.96\ t], {t, 0, 0.2}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(bBelow4 = 
+        Play[Sin[2  Pi\ 246.96\ t], {t, 0, 0.4}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(bBelow2 = 
+        Play[Sin[2  Pi\ 246.96\ t], {t, 0, 0.8}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(bBelow1 = 
+        Play[Sin[2  Pi\ 246.96\ t], {t, 0, 1.6}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(c8 = 
+        Play[Sin[2  Pi\ 261.64\ t], {t, 0, 0.2}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(c4 = 
+        Play[Sin[2  Pi\ 261.64\ t], {t, 0, 0.4}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(c2 = 
+      Play[Sin[2  Pi\ 261.64\ t], {t, 0, 0.8}, 
+        DisplayFunction \[Rule] 
+          Identity];  (*Middle\ C*) \[IndentingNewLine]c1 = 
+      Play[Sin[2  Pi\ 261.64\ t], {t, 0, 1.6}, 
+        DisplayFunction \[Rule] Identity];\), "\[IndentingNewLine]", 
+    \(\(d8 = 
+        Play[Sin[2  Pi\ 293.68  t], {t, 0, 0.2}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(d4 = 
+        Play[Sin[2  Pi\ 293.68  t], {t, 0, 0.4}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(d2 = 
+        Play[Sin[2  Pi\ 293.68  t], {t, 0, 0.8}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(d1 = 
+        Play[Sin[2  Pi\ 293.68  t], {t, 0, 1.6}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(e8 = 
+        Play[Sin[2  Pi\ 329.64  t], {t, 0, 0.2}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(e4 = 
+        Play[Sin[2  Pi\ 329.64  t], {t, 0, 0.4}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(e2 = 
+        Play[Sin[2  Pi\ 329.64  t], {t, 0, 0.8}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(e2dot = 
+        Play[Sin[2  Pi\ 329.64  t], {t, 0, 1.2}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(e1 = 
+        Play[Sin[2  Pi\ 329.64  t], {t, 0, 1.6}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(f8 = 
+        Play[Sin[2  Pi\ 349.24\ t], {t, 0, 0.2}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(f4 = 
+        Play[Sin[2  Pi\ 349.24\ t], {t, 0, 0.4}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(f2 = 
+        Play[Sin[2  Pi\ 349.24\ t], {t, 0, 0.8}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(f1 = 
+        Play[Sin[2  Pi\ 349.24\ t], {t, 0, 1.6}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(g8 = 
+        Play[Sin[2  Pi\ 392.00\ t], {t, 0, 0.2}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(g4 = 
+        Play[Sin[2  Pi\ 392.00\ t], {t, 0, 0.4}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(g2 = 
+        Play[Sin[2  Pi\ 392.00\ t], {t, 0, 0.8}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(g1 = 
+        Play[Sin[2  Pi\ 392.00\ t], {t, 0, 1.6}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(a8 = 
+        Play[Sin[2  Pi\ 440.00  t], {t, 0, 0.2}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(a4 = 
+        Play[Sin[2  Pi\ 440.00  t], {t, 0, 0.4}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(a2 = 
+        Play[Sin[2  Pi\ 440.00  t], {t, 0, 0.8}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(a1 = 
+        Play[Sin[2  Pi\ 440.00  t], {t, 0, 1.6}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(b8 = 
+        Play[Sin[2  Pi\ 493.92  t], {t, 0, 0.2}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(b4 = 
+        Play[Sin[2  Pi\ 493.92  t], {t, 0, 0.4}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(b2 = 
+        Play[Sin[2  Pi\ 493.92  t], {t, 0, 0.8}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(b1 = 
+        Play[Sin[2  Pi\ 493.92  t], {t, 0, 1.6}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(cAbove8 = 
+        Play[Sin[2  Pi\ 523.28\ t], {t, 0, 0.2}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(cAbove4 = 
+        Play[Sin[2  Pi\ 523.28\ t], {t, 0, 0.4}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(cAbove4dot = 
+        Play[Sin[2  Pi\ 523.28\ t], {t, 0, 0.6}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(cAbove2 = 
+        Play[Sin[2  Pi\ 523.28\ t], {t, 0, 0.8}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(cAbove1 = 
+        Play[Sin[2  Pi\ 523.28\ t], {t, 0, 1.6}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(dSharpAbove8 = 
+        Play[Sin[2  Pi\ 622.24\ t], {t, 0, 0.2}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(dAbove8 = 
+        Play[Sin[2  Pi\ 587.36\ t], {t, 0, 0.2}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(dAbove4 = 
+        Play[Sin[2  Pi\ 587.36\ t], {t, 0, 0.4}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(dAbove2 = 
+        Play[Sin[2  Pi\ 587.36\ t], {t, 0, 0.8}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(dAbove1 = 
+        Play[Sin[2  Pi\ 587.36\ t], {t, 0, 1.6}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(eAbove8 = 
+        Play[Sin[2  Pi\ 659.28\ t], {t, 0, 0.2}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(eFlatAbove8 = 
+        Play[Sin[2  Pi\ 622.24\ t], {t, 0, 0.2}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(eAbove4 = 
+        Play[Sin[2  Pi\ 659.28\ t], {t, 0, 0.4}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(eAbove4dot = 
+        Play[Sin[2  Pi\ 659.28\ t], {t, 0, 0.6}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(eAbove2 = 
+        Play[Sin[2  Pi\ 659.28\ t], {t, 0, 0.8}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(eAbove1 = 
+        Play[Sin[2  Pi\ 659.28\ t], {t, 0, 1.6}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(fAbove8 = 
+        Play[Sin[2  Pi\ 698.48\ t], {t, 0, 0.2}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(fAbove4 = 
+        Play[Sin[2  Pi\ 698.48\ t], {t, 0, 0.4}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(fAbove2 = 
+        Play[Sin[2  Pi\ 698.48\ t], {t, 0, 0.8}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(fAbove1 = 
+        Play[Sin[2  Pi\ 698.48\ t], {t, 0, 1.6}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(rest8 = 
+        Play[0, {t, 0, 0.2}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(rest4 = 
+        Play[0, {t, 0, 0.4}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(rest2 = 
+        Play[0, {t, 0, 0.8}, 
+          DisplayFunction \[Rule] Identity];\)\), "\[IndentingNewLine]", 
+    \(\(rest1 = 
+        Play[0, {t, 0, 1.6}, DisplayFunction \[Rule] Identity];\)\)}], "Input"],
+
+Cell[BoxData[
+    \(\(PollyWollyDoodle = {c8, d8, \[IndentingNewLine]e4, e4, c4, c8, 
+          d8, \[IndentingNewLine]e4, e4, c4, c4, \[IndentingNewLine]e8, e8, 
+          e8, e8, f8, f8, e8, e8, \[IndentingNewLine]d2, rest4, bBelow8, 
+          c8, \[IndentingNewLine]d4, d4, bBelow4, 
+          bBelow4, \[IndentingNewLine]d4, d4, bBelow4, 
+          d4, \[IndentingNewLine]g8, g8, g8, g8, f8, f8, d8, 
+          d8, \[IndentingNewLine]c2, rest4, c8, d8, \[IndentingNewLine]e2dot, 
+          c8, d8, \[IndentingNewLine]e2dot, c8, d8, \[IndentingNewLine]e4, 
+          e4, f4, e4, \[IndentingNewLine]d2, rest4, bBelow8, 
+          c8, \[IndentingNewLine]d8, d8, d8, d8, bBelow8, bBelow8, bBelow8, 
+          c8, \[IndentingNewLine]d8, d8, d8, d8, bBelow8, bBelow8, 
+          d4, \[IndentingNewLine]g8, g8, g8, g8, f8, f8, 
+          d4, \[IndentingNewLine]c2, rest4};\)\)], "Input"],
+
+Cell[BoxData[
+    \(\(RockIslandLine = {g8, a8, \[IndentingNewLine]cAbove8, cAbove8, a8, 
+          cAbove4, cAbove8, cAbove8, cAbove8, \[IndentingNewLine]eFlatAbove8, 
+          eAbove8, cAbove8, eAbove4dot, g8, a8, \[IndentingNewLine]cAbove8, 
+          cAbove8, a8, cAbove4, \ cAbove8, cAbove8, 
+          cAbove8, \[IndentingNewLine]dAbove4, b4, g4, g8, 
+          a8, \[IndentingNewLine]cAbove8, cAbove8, a8, cAbove4, cAbove8, 
+          cAbove8, cAbove8, \[IndentingNewLine]eFlatAbove8, eAbove8, cAbove8, 
+          eAbove8, eAbove4dot, cAbove8, a8, \[IndentingNewLine]cAbove4dot, 
+          a8, cAbove8, dAbove8, cAbove8, a8, \[IndentingNewLine]cAbove8, 
+          dAbove8, cAbove8, a8, cAbove8, dAbove8, cAbove8, 
+          a8, \[IndentingNewLine]cAbove8, dAbove8, cAbove8, a8, cAbove8, 
+          dAbove8, cAbove8, a8, \[IndentingNewLine]g8, a8, b8, cAbove4dot, 
+          rest4\[IndentingNewLine]};\)\)], "Input"],
+
+Cell[BoxData[
+    \(\(Show[PollyWollyDoodle];\)\)], "Input"],
+
+Cell[BoxData[
+    \(\(Show[RockIslandLine];\)\)], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Chords", "Subsection"],
+
+Cell[TextData[{
+  "We can also get ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " to play more than one note at a time."
+}], "Text"],
+
+Cell[BoxData[
+    \(\(cChord\  = 
+        Play[{Sin[2  Pi\ 261.64\ t]\  (*C*) , \ \ Sin[
+              2  Pi\ 329.64  t]\  (*E*) , 
+            Sin[2  Pi\ 392.00\ t] (*G*) \ }, {t, 0, 2}];\)\)], "Input"],
+
+Cell[BoxData[
+    \(\(gChord\  = 
+        Play[{Sin[2  Pi\ 392.00\ t] (*G*) , \ \ Sin[
+              2  Pi\ 493.92  t]\  (*B*) , 
+            Sin[2  Pi\ 587.36\ t] (*D*) \ }, {t, 0, 2}];\)\)], "Input"],
+
+Cell[TextData[{
+  Cell[GraphicsData["Metafile", "\<\
+CF5dJ6E]HGAYHf4PEfU^I6mgLb15CDHPAVmbKF5d0@0000[T0@0006`000000000000002<0000Q0000
+00000000001X10008P@00215CDH00040i0X000d000010000000000000000000000@0000300100@00
+l0000000000000000000003R1020Z@<0AP0000@5003h1000AdA9@`4008000`00CeYJ4P00003P1000
+0@090003L0800000EP800000100000<1200500002`8000001@0000`27P0P05H200133b00c00001h0
+800000007P0P0000000X0000800001h0000100P000000000000C2`004`/002X0000Z0000k^k^0<_n
+o`3MgMd0c<c<09W;o`2IVOl0^k^k09S;b`3;biP0ZZZZ06K;c02HV</0VIVI06JHc028R8P0<fGo06FH
+V01gMgL006Gm039Ub`1UIIP0IVIV001Uc00cIIT003;m038bb`0c<iT003;<001UV00bIFD0A4A4000b
+V00b<VD0039V0000IP0005@000140000<P0001000100010000000000:BTY:BTY:BTY:BTY:BTY:BTY
+:BTY:BTY:BTY:BTY:BTY8R8R8R<Y8b8R92DY7a<I6aLO:2@S:@82:B4V7alO:BTR8R8R92TS8b8S:AX?
+3`lC61<O:B<Y1PHY:B4O7alY:B8R8R8T:B@Y8R<Y4`l?3aPC6aXY8b<Y2A4Y8AlO:BTY8R8R8bTT8RTY
+:BTJ3aH?4aPC7bLY:BTA3RTS7bTO:BTR8R8T:B<R:A<Y:BTJ3a/?6AlY:BTC:BT>4BTY7alY:B8R8R<Y
+8b8S:A<O:BTO4a/O:BTJ4bTY92T21RTO7bTY8R8R8R<R8R@Y6@lO:2TO6RTY6Q8C:B<R8RT20RTO:BTS
+8R8S8R8R8bTC3`lO:2TY9aXF3aTY8R8R:@820RTY:BTT8R8R8R8S:BT?3aTO:2PJ4PlC:BTR8R8R:BT2
+0RTY:BTT8b8R8R8T:A<I72TM82TJ4aTY8b8R8R8R8bT6:BTY:BTT8R8R8R@Y:BTY:@d@:2TY:BTS8R8R
+8R@Y:BTY:BTY:BTT8b8R:A@=42T43@d=:@d=3BTR8R<T:BTY:BTY:BTY:BTY92<Y10d7:BT40bTY2`X5
+:B<U:BTY:BTY:BTY:BTY:BTY:BT4:BT4:BTY:@@Y:@@Y:BTY:BTY:BTY:BTY:BTY:BTY:@@Y5@@410@4
+12TE12TY:BTY:BTY:BTY:BTY:BTY:BTY:@@412TY12TY10@Y:BTY:BTY:BTY:BTY:BTY:BTY:BTY:BTY
+:@d;3BTY:BTY:BTY:BTY:BTY:BTY:BTY:@4Y1RTY:BTY:BTY:BTY:@8Y0BTY:BTY:BTY:BTY:BT10BT2
+2@T92@T92@T92@T92BT10BTY:BTY:BTY:BTY0@41:BTY0P820P82008932TY:@L10BTY:BTY:BTY:@41
+0@41:@HY:BTV:BTY:BTY3Q470@410BTY:BTY:BT10@410@4Y30H620H61PP62@T>:@L10@410BTY:BTY
+:@41:BTY:BTY3P<220<30`8832TY:BTY:@41:BTY:BT10BTY:BTY:BTY7PT92@T9314Y:BTY:BTY:@41
+:BTY:@4Y:BTY:BTY:BTY:BTY:BTY:BTY:BTY:BTY:@4Y:BT10BTY:BTY:BTY:BTY:BTY:BTY:BTY:BTY
+:BTY0@4Y:@4Y:BTY:BTY:BTY:BTY:BTY:BTY:BTY:BTY:BTY0BTY:BTY:BTY:BTY:BTY:BTY:BTY:BTY
+:BTY:BTY:BTY:BTY:BTY:BTY:BTY:BTY:BTY:BTY:BTY:BTY:BTY:BTY0`0000004@0000`000080000
+2`000100000T00008P0000T0000@000090000280000:000040000000000000002@000100000P0000
+7P000540003P100000000000000S00008@0000000000000000000000000P00007P000500003@0000
+80400<0300000000803<0200000N0000:0000200000N00000@080000000000004`/001<;000Z0000
+:P000>k^kP3;o_l0gMgM0<c<c02Ibol0VIWo0;^k^`2Hbl/0bl^H0:ZZZP1Vbl`0V9S;09VIV@1VV<`0
+R8R803=Uo`1UV9P0MgMg001Uo@0bIL/0IFFH06IVIP00IL`0<fFI000bo@0b<//0<c>I000bc000IIP0
+<VEU04A4A000<YP0<S9U000bIP0006H0001D0000A0000380000@000@000@0000000002TY:BTY:BTY
+:BTY:BTY:BTY:BTY:BTY:BTY:BTY:BTY:B8R8R8S:B<R8R@U:AlC6A/G7bPT8bT20RTQ9QlO7bTY8R8R
+8R@Y8b<R8bTJ3`l?4aPC7bTS:@H6:BTQ7alO:BTR8R8R92TT:B8S:A<?3`lH4a/J:B<S:@TA:B4O7bTY
+:B8R8R<Y928Y:BTY6PlF3a<H4alW:BTY4@hY8alY7bTY8R8R92TS8RTC:BTY6PlK3aTO:BTY4bTY3Q4Y
+:AlO:BTR8R8S:B<R8bTC7bTY7a<K7bTY6Q<Y:B@Y0PHY7alY:B8R8R8S8R8T:AT?7bPY7aXY:AXB4bTS
+8R8Y0P8Y7bTY8b8R8b8R8R<Y4`l?7bPY:BLJ5PlI:B8R8RT20P8Y:BTY928R8R8R8bTY3`lI7bPX6Q8?
+4bTY8R8R8RTY0P8Y:BTY92<R8R8R92TC6A`Y7B0Y6Q<I:B<R8R8R8R<Y1RTY:BTY928R8R8T:BTY:BT=
+42PY:BTY8b8R8R8T:BTY:BTY:BTY92<R8RTD3A0Y10d=3BT=3@dY8R8S92TY:BTY:BTY:BTY:B@S:@@=
+1bTY10<Y:@/:1BTS9BTY:BTY:BTY:BTY:BTY:BTY12TY12TY:BT4:BT4:BTY:BTY:BTY:BTY:BTY:BTY
+:BT4:AD410@410@Y5@@Y:BTY:BTY:BTY:BTY:BTY:BTY:BT410@Y:@@Y:@@4:BTY:BTY:BTY:BTY:BTY
+:BTY:BTY:BTY:BT=2`dY:BTY:BTY:BTY:BTY:BTY:BTY:BT1:@HY:BTY:BTY:BTY:BT2:@4Y:BTY:BTY
+:BTY:BTY0@4Y0PT92@T92@T92@T92@TY0@4Y:BTY:BTY:BTY:@410BTY:@820P820P022@`Y:BT70@4Y
+:BTY:BTY:BT10@410BT6:BTY9RTY:BTY:@hA1`410@4Y:BTY:BTY0@410@41:@`61PP61PH81PT93RT7
+0@410@4Y:BTY:BT10BTY:BTY:@h30PP30`<220`Y:BTY:BT10BTY:BTY0@4Y:BTY:BTY:Ah92@T92@`A
+:BTY:BTY:BT10BTY:BT1:BTY:BTY:BTY:BTY:BTY:BTY:BTY:BTY:BT1:BTY0@4Y:BTY:BTY:BTY:BTY
+:BTY:BTY:BTY:BTY:@41:BT1:BTY:BTY:BTY:BTY:BTY:BTY:BTY:BTY:BTY:@4Y:BTY:BTY:BTY:BTY
+:BTY:BTY:BTY:BTY:BTY:BTY:BTY:BTY:BTY:BTY:BTY:BTY:BTY:BTY:BTY:BTY:BTY:BD0000<0000
+1`00P2D0000<00000000P300000<00003`00P4/0000@0000000000D0000>000050000000000@0000
+5000
+\>"], "Graphics",
+    ImageSize->{32, 30},
+    ImageMargins->{{0, 0}, {0, 0}},
+    ImageRegion->{{0, 1}, {0, 1}}],
+  " The musicians among us are invited to make some music.  The rest of you \
+can make up your own sounds."
+}], "Text"]
+}, Open  ]]
+},
+FrontEndVersion->"5.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1024}, {0, 681}},
+WindowSize->{905, 508},
+WindowMargins->{{0, Automatic}, {Automatic, 0}}
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 127, 2, 54, "Subsection"],
+Cell[1906, 57, 767, 21, 71, "Text"],
+Cell[2676, 80, 70, 4, 71, "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2783, 89, 33, 0, 38, "Subsection"],
+Cell[2819, 91, 2338, 76, 149, "Text"],
+Cell[5160, 169, 135, 2, 30, "Input"],
+Cell[5298, 173, 921, 28, 71, "Text"],
+Cell[6222, 203, 93, 1, 30, "Input"],
+Cell[6318, 206, 1437, 39, 155, "Text"],
+Cell[7758, 247, 1169, 25, 190, "Input"],
+Cell[8930, 274, 167, 5, 33, "Text"],
+Cell[9100, 281, 191, 3, 50, "Input"],
+Cell[9294, 286, 227, 6, 33, "Text"],
+Cell[9524, 294, 52, 1, 30, "Input"],
+Cell[9579, 297, 326, 7, 52, "Text"],
+Cell[9908, 306, 7981, 171, 1170, "Input"],
+Cell[17892, 479, 885, 13, 350, "Input"],
+Cell[18780, 494, 923, 13, 250, "Input"],
+Cell[19706, 509, 60, 1, 30, "Input"],
+Cell[19769, 512, 58, 1, 30, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[19864, 518, 28, 0, 38, "Subsection"],
+Cell[19895, 520, 144, 5, 33, "Text"],
+Cell[20042, 527, 203, 4, 30, "Input"],
+Cell[20248, 533, 201, 4, 30, "Input"],
+Cell[20452, 539, 4099, 56, 49, "Text"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

@@ -1,0 +1,910 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     34290,        901]
+NotebookOptionsPosition[     30407,        779]
+NotebookOutlinePosition[     31989,        829]
+CellTagsIndexPosition[     31669,        817]
+WindowFrame->Normal
+ContainsDynamic->True *)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Coupon Collector Problem", "DemoTitle",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3809042171632223`*^9, 3.3809042230919247`*^9}}],
+
+Cell["", "InitializationSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"SeedRandom", "[", "sr", "]"}], ";", "\[IndentingNewLine]", 
+    RowBox[{"With", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"jj", "=", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"RandomInteger", "[", 
+           RowBox[{"{", 
+            RowBox[{"1", ",", "coupons"}], "}"}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"20", " ", "coupons"}], "}"}]}], "]"}]}], "}"}], ",", 
+      RowBox[{"With", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"store", "=", 
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"Length", "[", 
+             RowBox[{"Union", "[", 
+              RowBox[{"Take", "[", 
+               RowBox[{"jj", ",", "k"}], "]"}], "]"}], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"k", ",", "1", ",", 
+              RowBox[{"Length", "[", "jj", "]"}]}], "}"}]}], "]"}]}], "}"}], 
+        ",", 
+        RowBox[{"With", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"list", "=", 
+            RowBox[{"Flatten", "[", 
+             RowBox[{"Table", "[", 
+              RowBox[{
+               RowBox[{"First", "[", 
+                RowBox[{"Position", "[", 
+                 RowBox[{"store", ",", "n"}], "]"}], "]"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"n", ",", "1", ",", "coupons"}], "}"}]}], "]"}], 
+             "]"}]}], "}"}], ",", 
+          RowBox[{"ListPlot", "[", 
+           RowBox[{"list", ",", 
+            RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+            RowBox[{"Frame", "\[Rule]", "True"}], ",", 
+            RowBox[{"Axes", "\[Rule]", "False"}], ",", 
+            RowBox[{"FrameLabel", "\[Rule]", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"Style", "[", 
+                RowBox[{
+                "\"\<distinct coupons bought\>\"", ",", "\"\<Label\>\""}], 
+                "]"}], ",", 
+               RowBox[{"Style", "[", 
+                RowBox[{
+                "\"\<total coupons bought\>\"", ",", "\"\<Label\>\""}], 
+                "]"}]}], "}"}]}], ",", 
+            RowBox[{"PlotLabel", "\[Rule]", 
+             RowBox[{"Style", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"ToString", "[", 
+                 RowBox[{"Last", "[", "list", "]"}], "]"}], "<>", 
+                "\"\< coupons had to be bought for the complete set of \>\"", 
+                "<>", 
+                RowBox[{"ToString", "[", "coupons", "]"}], "<>", 
+                "\"\<.\\nThe expected number was \>\"", "<>", 
+                RowBox[{"ToString", "[", 
+                 RowBox[{"Round", "[", 
+                  RowBox[{"coupons", " ", 
+                   RowBox[{"HarmonicNumber", "[", "coupons", "]"}]}], "]"}], 
+                 "]"}], "<>", "\"\<.\>\""}], ",", "\"\<Label\>\""}], "]"}]}], 
+            ",", 
+            RowBox[{"ImagePadding", "\[Rule]", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"35", ",", "25"}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"35", ",", "35"}], "}"}]}], "}"}]}], ",", 
+            RowBox[{"ImageSize", "\[Rule]", 
+             RowBox[{"{", 
+              RowBox[{"475", ",", "375"}], "}"}]}]}], "]"}]}], "]"}]}], 
+       "]"}]}], "]"}]}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "coupons", ",", "50", ",", "\"\<number of distinct coupons\>\""}], 
+      "}"}], ",", "6", ",", "100", ",", "1", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"sr", ",", "1", ",", "\"\<seed random\>\""}], "}"}], ",", "1", 
+     ",", "400", ",", "1", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, 3.3833288962021947`*^9, {3.3833289519365697`*^9, 
+   3.3833290269990697`*^9}, {3.3876337133172293`*^9, 3.38763372598709*^9}},
+ CellID->162139775],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`coupons$$ = 50, $CellContext`sr$$ = 1, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`coupons$$], 50, "number of distinct coupons"}, 6, 
+      100, 1}, {{
+       Hold[$CellContext`sr$$], 1, "seed random"}, 1, 400, 1}}, 
+    Typeset`size$$ = {475., {185., 190.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`coupons$46447$$ = 0, $CellContext`sr$46448$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`coupons$$ = 50, $CellContext`sr$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`coupons$$, $CellContext`coupons$46447$$, 0], 
+        Hold[$CellContext`sr$$, $CellContext`sr$46448$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (SeedRandom[$CellContext`sr$$]; 
+       With[{$CellContext`jj$ = Table[
+            RandomInteger[{1, $CellContext`coupons$$}], {
+            20 $CellContext`coupons$$}]}, 
+         With[{$CellContext`store$ = Table[
+             Length[
+              Union[
+               Take[$CellContext`jj$, $CellContext`k]]], {$CellContext`k, 1, 
+              Length[$CellContext`jj$]}]}, 
+          With[{$CellContext`list$ = Flatten[
+              Table[
+               First[
+                
+                Position[$CellContext`store$, $CellContext`n]], \
+{$CellContext`n, 1, $CellContext`coupons$$}]]}, 
+           
+           ListPlot[$CellContext`list$, PlotRange -> All, Frame -> True, Axes -> 
+            False, FrameLabel -> {
+              Style["distinct coupons bought", "Label"], 
+              Style["total coupons bought", "Label"]}, PlotLabel -> Style[
+              StringJoin[
+               ToString[
+                Last[$CellContext`list$]], 
+               " coupons had to be bought for the complete set of ", 
+               ToString[$CellContext`coupons$$], 
+               ".\nThe expected number was ", 
+               ToString[
+                
+                Round[$CellContext`coupons$$ 
+                 HarmonicNumber[$CellContext`coupons$$]]], "."], "Label"], 
+            ImagePadding -> {{35, 25}, {35, 35}}, 
+            ImageSize -> {475, 375}]]]]), 
+      "Specifications" :> {{{$CellContext`coupons$$, 50, 
+          "number of distinct coupons"}, 6, 100, 1, Appearance -> 
+         "Labeled"}, {{$CellContext`sr$$, 1, "seed random"}, 1, 400, 1, 
+         Appearance -> "Labeled"}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{519., {242., 247.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->423568870]
+}, {2}]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell[TextData[{
+ "If a package has one of 50 random baseball cards, how many packages do you \
+need to buy to get a complete set? The expected answer is ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"50", 
+     SubscriptBox["H", "50"]}], "\[TildeTilde]", "225"}], TraditionalForm]], 
+  "InlineMath"],
+ " packages, where ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["H", "50"], TraditionalForm]], "InlineMath"],
+ " is the harmonic number ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"1", "/", "1"}], "+", 
+    RowBox[{"1", "/", "2"}], "+", 
+    RowBox[{"1", "/", "3"}], "+", "\[Ellipsis]", "+", 
+    RowBox[{"1", "/", "50"}]}], TraditionalForm]], "InlineMath"],
+ ". Switching from baseball cards to coupons gives the coupon collector \
+problem: if there are ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]], "InlineMath"],
+ " different kinds of coupons and many of them are distributed randomly, the \
+expected number of purchases necessary for a complete set is ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"n", " ", 
+    SubscriptBox["H", "n"]}], TraditionalForm]], "InlineMath"],
+ "."
+}], "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3822923924700623`*^9, 3.3822924142307014`*^9}, {
+   3.382810146109231*^9, 3.3828101653198233`*^9}, {3.3829745016218195`*^9, 
+   3.3829747238257957`*^9}},
+ CellID->657447212]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`coupons$$ = 50, $CellContext`sr$$ = 44, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`coupons$$], 50, "number of distinct coupons"}, 6, 
+      100, 1}, {{
+       Hold[$CellContext`sr$$], 44, "seed random"}, 1, 400, 1}}, 
+    Typeset`size$$ = {475., {185., 190.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`coupons$46502$$ = 0, $CellContext`sr$46503$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`coupons$$ = 50, $CellContext`sr$$ = 44}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`coupons$$, $CellContext`coupons$46502$$, 0], 
+        Hold[$CellContext`sr$$, $CellContext`sr$46503$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (SeedRandom[$CellContext`sr$$]; 
+       With[{$CellContext`jj$ = Table[
+            RandomInteger[{1, $CellContext`coupons$$}], {
+            20 $CellContext`coupons$$}]}, 
+         With[{$CellContext`store$ = Table[
+             Length[
+              Union[
+               Take[$CellContext`jj$, $CellContext`k]]], {$CellContext`k, 1, 
+              Length[$CellContext`jj$]}]}, 
+          With[{$CellContext`list$ = Flatten[
+              Table[
+               First[
+                
+                Position[$CellContext`store$, $CellContext`n]], \
+{$CellContext`n, 1, $CellContext`coupons$$}]]}, 
+           
+           ListPlot[$CellContext`list$, PlotRange -> All, Frame -> True, Axes -> 
+            False, FrameLabel -> {
+              Style["distinct coupons bought", "Label"], 
+              Style["total coupons bought", "Label"]}, PlotLabel -> Style[
+              StringJoin[
+               ToString[
+                Last[$CellContext`list$]], 
+               " coupons had to be bought for the complete set of ", 
+               ToString[$CellContext`coupons$$], 
+               ".\nThe expected number was ", 
+               ToString[
+                
+                Round[$CellContext`coupons$$ 
+                 HarmonicNumber[$CellContext`coupons$$]]], "."], "Label"], 
+            ImagePadding -> {{35, 25}, {35, 35}}, 
+            ImageSize -> {475, 375}]]]]), 
+      "Specifications" :> {{{$CellContext`coupons$$, 50, 
+          "number of distinct coupons"}, 6, 100, 1, Appearance -> 
+         "Labeled"}, {{$CellContext`sr$$, 44, "seed random"}, 1, 400, 1, 
+         Appearance -> "Labeled"}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{519., {242., 247.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->233099115]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`coupons$$ = 100, $CellContext`sr$$ = 125, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`coupons$$], 100, "number of distinct coupons"}, 6, 
+      100, 1}, {{
+       Hold[$CellContext`sr$$], 125, "seed random"}, 1, 400, 1}}, 
+    Typeset`size$$ = {475., {185., 190.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`coupons$46557$$ = 0, $CellContext`sr$46558$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`coupons$$ = 100, $CellContext`sr$$ = 125}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`coupons$$, $CellContext`coupons$46557$$, 0], 
+        Hold[$CellContext`sr$$, $CellContext`sr$46558$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (SeedRandom[$CellContext`sr$$]; 
+       With[{$CellContext`jj$ = Table[
+            RandomInteger[{1, $CellContext`coupons$$}], {
+            20 $CellContext`coupons$$}]}, 
+         With[{$CellContext`store$ = Table[
+             Length[
+              Union[
+               Take[$CellContext`jj$, $CellContext`k]]], {$CellContext`k, 1, 
+              Length[$CellContext`jj$]}]}, 
+          With[{$CellContext`list$ = Flatten[
+              Table[
+               First[
+                
+                Position[$CellContext`store$, $CellContext`n]], \
+{$CellContext`n, 1, $CellContext`coupons$$}]]}, 
+           
+           ListPlot[$CellContext`list$, PlotRange -> All, Frame -> True, Axes -> 
+            False, FrameLabel -> {
+              Style["distinct coupons bought", "Label"], 
+              Style["total coupons bought", "Label"]}, PlotLabel -> Style[
+              StringJoin[
+               ToString[
+                Last[$CellContext`list$]], 
+               " coupons had to be bought for the complete set of ", 
+               ToString[$CellContext`coupons$$], 
+               ".\nThe expected number was ", 
+               ToString[
+                
+                Round[$CellContext`coupons$$ 
+                 HarmonicNumber[$CellContext`coupons$$]]], "."], "Label"], 
+            ImagePadding -> {{35, 25}, {35, 35}}, 
+            ImageSize -> {475, 375}]]]]), 
+      "Specifications" :> {{{$CellContext`coupons$$, 100, 
+          "number of distinct coupons"}, 6, 100, 1, Appearance -> 
+         "Labeled"}, {{$CellContext`sr$$, 125, "seed random"}, 1, 400, 1, 
+         Appearance -> "Labeled"}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{519., {242., 247.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->832988833],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`coupons$$ = 20, $CellContext`sr$$ = 125, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`coupons$$], 20, "number of distinct coupons"}, 6, 
+      100, 1}, {{
+       Hold[$CellContext`sr$$], 125, "seed random"}, 1, 400, 1}}, 
+    Typeset`size$$ = {475., {185., 190.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`coupons$46612$$ = 0, $CellContext`sr$46613$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`coupons$$ = 20, $CellContext`sr$$ = 125}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`coupons$$, $CellContext`coupons$46612$$, 0], 
+        Hold[$CellContext`sr$$, $CellContext`sr$46613$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (SeedRandom[$CellContext`sr$$]; 
+       With[{$CellContext`jj$ = Table[
+            RandomInteger[{1, $CellContext`coupons$$}], {
+            20 $CellContext`coupons$$}]}, 
+         With[{$CellContext`store$ = Table[
+             Length[
+              Union[
+               Take[$CellContext`jj$, $CellContext`k]]], {$CellContext`k, 1, 
+              Length[$CellContext`jj$]}]}, 
+          With[{$CellContext`list$ = Flatten[
+              Table[
+               First[
+                
+                Position[$CellContext`store$, $CellContext`n]], \
+{$CellContext`n, 1, $CellContext`coupons$$}]]}, 
+           
+           ListPlot[$CellContext`list$, PlotRange -> All, Frame -> True, Axes -> 
+            False, FrameLabel -> {
+              Style["distinct coupons bought", "Label"], 
+              Style["total coupons bought", "Label"]}, PlotLabel -> Style[
+              StringJoin[
+               ToString[
+                Last[$CellContext`list$]], 
+               " coupons had to be bought for the complete set of ", 
+               ToString[$CellContext`coupons$$], 
+               ".\nThe expected number was ", 
+               ToString[
+                
+                Round[$CellContext`coupons$$ 
+                 HarmonicNumber[$CellContext`coupons$$]]], "."], "Label"], 
+            ImagePadding -> {{35, 25}, {35, 35}}, 
+            ImageSize -> {475, 375}]]]]), 
+      "Specifications" :> {{{$CellContext`coupons$$, 20, 
+          "number of distinct coupons"}, 6, 100, 1, Appearance -> 
+         "Labeled"}, {{$CellContext`sr$$, 125, "seed random"}, 1, 400, 1, 
+         Appearance -> "Labeled"}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{519., {242., 247.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->952308867],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`coupons$$ = 64, $CellContext`sr$$ = 173, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`coupons$$], 64, "number of distinct coupons"}, 6, 
+      100, 1}, {{
+       Hold[$CellContext`sr$$], 173, "seed random"}, 1, 400, 1}}, 
+    Typeset`size$$ = {475., {185., 190.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`coupons$46667$$ = 0, $CellContext`sr$46668$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`coupons$$ = 64, $CellContext`sr$$ = 173}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`coupons$$, $CellContext`coupons$46667$$, 0], 
+        Hold[$CellContext`sr$$, $CellContext`sr$46668$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (SeedRandom[$CellContext`sr$$]; 
+       With[{$CellContext`jj$ = Table[
+            RandomInteger[{1, $CellContext`coupons$$}], {
+            20 $CellContext`coupons$$}]}, 
+         With[{$CellContext`store$ = Table[
+             Length[
+              Union[
+               Take[$CellContext`jj$, $CellContext`k]]], {$CellContext`k, 1, 
+              Length[$CellContext`jj$]}]}, 
+          With[{$CellContext`list$ = Flatten[
+              Table[
+               First[
+                
+                Position[$CellContext`store$, $CellContext`n]], \
+{$CellContext`n, 1, $CellContext`coupons$$}]]}, 
+           
+           ListPlot[$CellContext`list$, PlotRange -> All, Frame -> True, Axes -> 
+            False, FrameLabel -> {
+              Style["distinct coupons bought", "Label"], 
+              Style["total coupons bought", "Label"]}, PlotLabel -> Style[
+              StringJoin[
+               ToString[
+                Last[$CellContext`list$]], 
+               " coupons had to be bought for the complete set of ", 
+               ToString[$CellContext`coupons$$], 
+               ".\nThe expected number was ", 
+               ToString[
+                
+                Round[$CellContext`coupons$$ 
+                 HarmonicNumber[$CellContext`coupons$$]]], "."], "Label"], 
+            ImagePadding -> {{35, 25}, {35, 35}}, 
+            ImageSize -> {475, 375}]]]]), 
+      "Specifications" :> {{{$CellContext`coupons$$, 64, 
+          "number of distinct coupons"}, 6, 100, 1, Appearance -> 
+         "Labeled"}, {{$CellContext`sr$$, 173, "seed random"}, 1, 400, 1, 
+         Appearance -> "Labeled"}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{519., {242., 247.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->214620962]
+}, Open  ]],
+
+Cell["", "DetailsSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SearchTermsSection"],
+
+Cell["baseball cards", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3809071968043337`*^9, 3.3809072004794354`*^9}},
+ CellID->22853842],
+
+Cell["collecting", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3809071768366175`*^9, 3.3809071786391196`*^9}},
+ CellID->397535578],
+
+Cell["complete set", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3809071825445404`*^9, 3.3809071849078207`*^9}},
+ CellID->146828805],
+
+Cell["harmonic number", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3809072053461905`*^9, 3.380907208710861*^9}},
+ CellID->312905223],
+
+Cell["randomness", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3809071694063034`*^9, 3.3809071721200705`*^9}},
+ CellID->221786490]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "RelatedLinksSection"],
+
+Cell[TextData[ButtonBox["Coupon Collector's Problem",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/CouponCollectorsProblem.html"], 
+   None}]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3809071409367857`*^9, 3.380907156538442*^9}},
+ CellID->696299335]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Ed Pegg Jr",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Ed+Pegg+Jr"], 
+    None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Ed+Pegg+Jr"]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.380907158541222*^9, 3.3809071645495625`*^9}},
+ CellID->513295235]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{885, 780},
+WindowMargins->{{10, Automatic}, {Automatic, 0}},
+FrontEndVersion->"6.0 for Microsoft Windows (32-bit) (June 19, 2007)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[23293, 567, 310, 8, 70, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[23606, 577, 677, 16, 70, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[24286, 595, 339, 11, 70, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[24628, 608, 636, 15, 70, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[25267, 625, 842, 21, 70, "ControlSuggestions",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[26112, 648, 303, 8, 70, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[26418, 658, 1411, 31, 70, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[27832, 691, 881, 21, 70, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 30778, 790},
+ {"RotateAndZoomIn3D", 30886, 793},
+ {"DragLocators", 30995, 796},
+ {"CreateAndDeleteLocators", 31110, 799},
+ {"SliderZoom", 31223, 802},
+ {"GamepadControls", 31328, 805},
+ {"AutomaticAnimation", 31440, 808},
+ {"BookmarkAnimation", 31556, 811}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[590, 23, 139, 2, 70, "DemoTitle"],
+Cell[732, 27, 33, 0, 70, "InitializationSection"],
+Cell[CellGroupData[{
+Cell[790, 31, 29, 0, 70, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[844, 35, 4078, 103, 70, "Input",
+ CellID->162139775],
+Cell[4925, 140, 3332, 71, 70, "Output",
+ CellID->423568870]
+}, {2}]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8303, 217, 36, 0, 70, "ManipulateCaptionSection"],
+Cell[8342, 219, 1343, 37, 70, "ManipulateCaption",
+ CellID->657447212]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9722, 261, 28, 0, 70, "ThumbnailSection"],
+Cell[9753, 263, 3336, 71, 70, "Output",
+ CellID->233099115]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13126, 339, 28, 0, 70, "SnapshotsSection"],
+Cell[13157, 341, 3344, 71, 70, "Output",
+ CellID->832988833],
+Cell[16504, 414, 3340, 71, 70, "Output",
+ CellID->952308867],
+Cell[19847, 487, 3340, 71, 70, "Output",
+ CellID->214620962]
+}, Open  ]],
+Cell[23202, 561, 26, 0, 70, "DetailsSection"],
+Cell[CellGroupData[{
+Cell[23253, 565, 37, 0, 70, "ControlSuggestionsSection"],
+Cell[23293, 567, 310, 8, 70, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[23606, 577, 677, 16, 70, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[24286, 595, 339, 11, 70, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[24628, 608, 636, 15, 70, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[25267, 625, 842, 21, 70, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[26112, 648, 303, 8, 70, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[26418, 658, 1411, 31, 70, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[27832, 691, 881, 21, 70, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[28750, 717, 30, 0, 70, "SearchTermsSection"],
+Cell[28783, 719, 150, 3, 70, "SearchTerms",
+ CellID->22853842],
+Cell[28936, 724, 147, 3, 70, "SearchTerms",
+ CellID->397535578],
+Cell[29086, 729, 149, 3, 70, "SearchTerms",
+ CellID->146828805],
+Cell[29238, 734, 150, 3, 70, "SearchTerms",
+ CellID->312905223],
+Cell[29391, 739, 147, 3, 70, "SearchTerms",
+ CellID->221786490]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[29575, 747, 31, 0, 70, "RelatedLinksSection"],
+Cell[29609, 749, 303, 7, 70, "RelatedLinks",
+ CellID->696299335]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[29949, 761, 25, 0, 70, "AuthorSection"],
+Cell[29977, 763, 402, 12, 70, "Author",
+ CellID->513295235]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

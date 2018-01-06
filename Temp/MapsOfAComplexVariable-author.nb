@@ -1,0 +1,2060 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     85430,       2051]
+NotebookOptionsPosition[     81892,       1944]
+NotebookOutlinePosition[     83499,       1994]
+CellTagsIndexPosition[     83171,       1982]
+WindowFrame->Normal
+ContainsDynamic->True *)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Maps of a Complex Variable", "DemoTitle",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4191739020050373`*^9, 3.419173907746611*^9}}],
+
+Cell["", "InitializationSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Switch", "[", 
+    RowBox[{
+    "mapchoice", ",", "\[IndentingNewLine]", "1", ",", "\[IndentingNewLine]", 
+     
+     RowBox[{"ParametricPlot", "[", 
+      RowBox[{
+       RowBox[{"With", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"z", "=", 
+           RowBox[{"r", " ", 
+            RowBox[{"Exp", "[", 
+             RowBox[{"I", " ", "th"}], "]"}]}]}], "}"}], ",", 
+         RowBox[{"Through", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"Re", ",", "Im"}], "}"}], "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"1", "-", "t"}], ")"}], "z"}], "+", 
+            RowBox[{"t", " ", 
+             RowBox[{"z", "^", "2"}]}]}], "]"}], "]"}]}], "]"}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"r", ",", "0", ",", "1"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"th", ",", 
+         RowBox[{"-", "Pi"}], ",", "Pi"}], "}"}], ",", 
+       RowBox[{"Mesh", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"5", ",", "10"}], "}"}]}], ",", 
+       RowBox[{"ColorFunction", "\[Rule]", 
+        RowBox[{"Function", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"x", ",", "y", ",", "r", ",", "th"}], "}"}], ",", 
+          RowBox[{"Blend", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Hue", "[", "th", "]"}], ",", "Black"}], "}"}], ",", 
+            ".2"}], "]"}]}], "]"}]}], ",", 
+       RowBox[{"BoundaryStyle", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"Black", ",", "Thick"}], "}"}]}], ",", 
+       RowBox[{"PlotStyle", "\[Rule]", 
+        RowBox[{"Opacity", "[", ".7", "]"}]}], ",", 
+       RowBox[{"PerformanceGoal", "\[Rule]", "\"\<Quality\>\""}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"PlotRange", "\[Rule]", 
+        RowBox[{"3", "/", "2"}]}], ",", 
+       RowBox[{"GridLines", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Range", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"-", "3"}], "/", "2"}], ",", 
+            RowBox[{"3", "/", "2"}], ",", 
+            RowBox[{"1", "/", "4"}]}], "]"}], ",", 
+          RowBox[{"Range", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"-", "3"}], "/", "2"}], ",", 
+            RowBox[{"3", "/", "2"}], ",", 
+            RowBox[{"1", "/", "4"}]}], "]"}]}], "}"}]}], ",", 
+       RowBox[{"GridLinesStyle", "\[Rule]", 
+        RowBox[{"Directive", "[", 
+         RowBox[{"Thin", ",", "Dotted"}], "]"}]}], ",", 
+       RowBox[{"ImageSize", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"400", ",", "400"}], "}"}]}]}], "]"}], ",", 
+     "\[IndentingNewLine]", "2", ",", "\[IndentingNewLine]", 
+     RowBox[{"ParametricPlot", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"With", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"z", "=", 
+             RowBox[{"x", "+", 
+              RowBox[{"I", " ", "y"}]}]}], "}"}], ",", 
+           RowBox[{"Through", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"Re", ",", "Im"}], "}"}], "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"1", "-", "t"}], ")"}], "z"}], "+", 
+              RowBox[{"t", " ", 
+               RowBox[{"z", "^", "2"}]}]}], "]"}], "]"}]}], "]"}], ",", 
+         RowBox[{"With", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"z", "=", 
+             RowBox[{
+              RowBox[{"-", "x"}], "-", 
+              RowBox[{"I", " ", "y"}]}]}], "}"}], ",", 
+           RowBox[{"Through", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"Re", ",", "Im"}], "}"}], "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"1", "-", "t"}], ")"}], "z"}], "+", 
+              RowBox[{"t", " ", 
+               RowBox[{"z", "^", "2"}]}]}], "]"}], "]"}]}], "]"}]}], "}"}], 
+       ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", "0", ",", "1"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"y", ",", "0", ",", "1"}], "}"}], ",", 
+       RowBox[{"Mesh", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"10", ",", "10"}], "}"}]}], ",", 
+       RowBox[{"ColorFunction", "\[Rule]", 
+        RowBox[{"Function", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"u", ",", "v", ",", "x", ",", "y"}], "}"}], ",", 
+          RowBox[{"Blend", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Hue", "[", "x", "]"}], ",", "Black"}], "}"}], ",", 
+            ".2"}], "]"}]}], "]"}]}], ",", 
+       RowBox[{"BoundaryStyle", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"Black", ",", "Thick"}], "}"}]}], ",", 
+       RowBox[{"PlotStyle", "\[Rule]", 
+        RowBox[{"Opacity", "[", ".7", "]"}]}], ",", 
+       RowBox[{"PerformanceGoal", "\[Rule]", "\"\<Quality\>\""}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"PlotRange", "\[Rule]", "2"}], ",", 
+       RowBox[{"GridLines", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Range", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"-", "7"}], "/", "4"}], ",", 
+            RowBox[{"7", "/", "4"}], ",", 
+            RowBox[{"1", "/", "4"}]}], "]"}], ",", 
+          RowBox[{"Range", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"-", "7"}], "/", "4"}], ",", " ", 
+            RowBox[{"7", "/", "4"}], ",", 
+            RowBox[{"1", "/", "4"}]}], "]"}]}], "}"}]}], ",", 
+       RowBox[{"GridLinesStyle", "\[Rule]", 
+        RowBox[{"Directive", "[", 
+         RowBox[{"Thin", ",", "Dotted"}], "]"}]}], ",", 
+       RowBox[{"ImageSize", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"400", ",", "400"}], "}"}]}]}], "]"}], ",", 
+     "\[IndentingNewLine]", "3", ",", "\[IndentingNewLine]", 
+     RowBox[{"ParametricPlot", "[", 
+      RowBox[{
+       RowBox[{"With", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"z", "=", 
+           RowBox[{"x", "+", 
+            RowBox[{"I", " ", "y"}]}]}], "}"}], ",", 
+         RowBox[{"Through", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"Re", ",", "Im"}], "}"}], "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"1", "-", "t"}], ")"}], "z"}], "+", 
+            RowBox[{"t", "  ", 
+             RowBox[{"Exp", "[", "z", "]"}]}]}], "]"}], "]"}]}], "]"}], ",", 
+       " ", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", 
+         RowBox[{"-", "2"}], ",", "2"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"y", ",", 
+         RowBox[{"-", " ", "Pi"}], ",", "Pi"}], "}"}], ",", 
+       RowBox[{"Mesh", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"7", ",", " ", "11"}], "}"}]}], ",", 
+       RowBox[{"ColorFunction", "\[Rule]", 
+        RowBox[{"Function", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"u", ",", "v", ",", "x", ",", "y"}], "}"}], ",", 
+          RowBox[{"Blend", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Hue", "[", "x", "]"}], ",", "Black"}], "}"}], ",", 
+            ".2"}], "]"}]}], "]"}]}], ",", 
+       RowBox[{"BoundaryStyle", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"Black", ",", "Thick"}], "}"}]}], ",", 
+       RowBox[{"PlotStyle", "\[Rule]", 
+        RowBox[{"Opacity", "[", ".7", "]"}]}], ",", 
+       RowBox[{"PerformanceGoal", "\[Rule]", "\"\<Quality\>\""}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"PlotRange", "\[Rule]", "8"}], ",", 
+       RowBox[{"GridLines", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Range", "[", 
+           RowBox[{
+            RowBox[{"-", "7"}], ",", " ", "7", ",", " ", "1"}], "]"}], ",", 
+          RowBox[{"Range", "[", 
+           RowBox[{
+            RowBox[{"-", "7"}], ",", " ", "7", ",", " ", "1"}], "]"}]}], 
+         "}"}]}], ",", 
+       RowBox[{"GridLinesStyle", "\[Rule]", 
+        RowBox[{"Directive", "[", 
+         RowBox[{"Thin", ",", "Dotted"}], "]"}]}], ",", "\[IndentingNewLine]",
+        
+       RowBox[{"Ticks", " ", "\[Rule]", " ", "None"}], ",", 
+       RowBox[{"ImageSize", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"400", ",", "400"}], "}"}]}]}], "]"}], ",", 
+     "\[IndentingNewLine]", "4", ",", "\[IndentingNewLine]", 
+     RowBox[{"ParametricPlot", "[", 
+      RowBox[{
+       RowBox[{"With", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"z", "=", 
+           RowBox[{"x", "+", 
+            RowBox[{"I", " ", "y"}]}]}], "}"}], ",", 
+         RowBox[{"Through", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"Re", ",", "Im"}], "}"}], "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"1", "-", "t"}], ")"}], "z"}], "+", 
+            RowBox[{"t", "  ", 
+             RowBox[{"Exp", "[", "z", "]"}]}]}], "]"}], "]"}]}], "]"}], ",", 
+       " ", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", 
+         RowBox[{"-", "2"}], ",", "2"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"y", ",", "0", ",", 
+         RowBox[{"2", "Pi"}]}], "}"}], ",", 
+       RowBox[{"Mesh", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"7", ",", " ", "11"}], "}"}]}], ",", 
+       RowBox[{"ColorFunction", "\[Rule]", 
+        RowBox[{"Function", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"u", ",", "v", ",", "x", ",", "y"}], "}"}], ",", 
+          RowBox[{"Blend", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Hue", "[", "x", "]"}], ",", "Black"}], "}"}], ",", 
+            ".2"}], "]"}]}], "]"}]}], ",", 
+       RowBox[{"BoundaryStyle", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"Black", ",", "Thick"}], "}"}]}], ",", 
+       RowBox[{"PlotStyle", "\[Rule]", 
+        RowBox[{"Opacity", "[", ".7", "]"}]}], ",", 
+       RowBox[{"PerformanceGoal", "\[Rule]", "\"\<Quality\>\""}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"PlotRange", "\[Rule]", "8"}], ",", 
+       RowBox[{"GridLines", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Range", "[", 
+           RowBox[{
+            RowBox[{"-", "7"}], ",", " ", "7", ",", " ", "1"}], "]"}], ",", 
+          RowBox[{"Range", "[", 
+           RowBox[{
+            RowBox[{"-", "7"}], ",", " ", "7", ",", " ", "1"}], "]"}]}], 
+         "}"}]}], ",", 
+       RowBox[{"GridLinesStyle", "\[Rule]", 
+        RowBox[{"Directive", "[", 
+         RowBox[{"Thin", ",", "Dotted"}], "]"}]}], ",", "\[IndentingNewLine]",
+        
+       RowBox[{"Ticks", " ", "\[Rule]", " ", "None"}], ",", 
+       RowBox[{"ImageSize", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"400", ",", "400"}], "}"}]}]}], "]"}], ",", 
+     "\[IndentingNewLine]", "5", ",", "\[IndentingNewLine]", 
+     RowBox[{"ParametricPlot", "[", 
+      RowBox[{
+       RowBox[{"With", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"z", "=", 
+           RowBox[{"x", "+", 
+            RowBox[{"I", " ", "y"}]}]}], "}"}], ",", 
+         RowBox[{"Through", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"Re", ",", "Im"}], "}"}], "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"1", "-", "t"}], ")"}], "z"}], "+", 
+            RowBox[{"t", "  ", 
+             RowBox[{"Exp", "[", "z", "]"}]}]}], "]"}], "]"}]}], "]"}], ",", 
+       " ", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", 
+         RowBox[{"-", "2"}], ",", "2"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"y", ",", 
+         RowBox[{
+          RowBox[{"-", "2"}], "Pi"}], ",", 
+         RowBox[{"2", "Pi"}]}], "}"}], ",", 
+       RowBox[{"Mesh", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"7", ",", " ", "11"}], "}"}]}], ",", 
+       RowBox[{"ColorFunction", "\[Rule]", 
+        RowBox[{"Function", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"u", ",", "v", ",", "x", ",", "y"}], "}"}], ",", 
+          RowBox[{"Blend", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Hue", "[", "x", "]"}], ",", "Black"}], "}"}], ",", 
+            ".2"}], "]"}]}], "]"}]}], ",", 
+       RowBox[{"BoundaryStyle", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"Black", ",", "Thick"}], "}"}]}], ",", 
+       RowBox[{"PlotStyle", "\[Rule]", 
+        RowBox[{"Opacity", "[", ".7", "]"}]}], ",", 
+       RowBox[{"PerformanceGoal", "\[Rule]", "\"\<Quality\>\""}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"PlotRange", "\[Rule]", "8"}], ",", 
+       RowBox[{"GridLines", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Range", "[", 
+           RowBox[{
+            RowBox[{"-", "7"}], ",", " ", "7", ",", " ", "1"}], "]"}], ",", 
+          RowBox[{"Range", "[", 
+           RowBox[{
+            RowBox[{"-", "7"}], ",", " ", "7", ",", " ", "1"}], "]"}]}], 
+         "}"}]}], ",", 
+       RowBox[{"GridLinesStyle", "\[Rule]", 
+        RowBox[{"Directive", "[", 
+         RowBox[{"Thin", ",", "Dotted"}], "]"}]}], ",", "\[IndentingNewLine]",
+        
+       RowBox[{"Ticks", " ", "\[Rule]", " ", "None"}], ",", 
+       RowBox[{"ImageSize", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"400", ",", "400"}], "}"}]}]}], "]"}], ",", 
+     "\[IndentingNewLine]", "6", ",", "\[IndentingNewLine]", 
+     RowBox[{"Show", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ParametricPlot", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"With", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"z", "=", 
+             RowBox[{"x", "+", 
+              RowBox[{"I", " ", "y"}]}]}], "}"}], ",", "\[IndentingNewLine]", 
+           
+           RowBox[{"Through", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"Re", ",", "Im"}], "}"}], "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"1", "-", "t"}], ")"}], "z"}], "+", 
+              RowBox[{"t", " ", 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{"z", "^", "3"}], "-", 
+                  RowBox[{"3", 
+                   RowBox[{"z", "^", "2"}]}], "-", "1"}], ")"}], "/", 
+                RowBox[{"(", 
+                 RowBox[{"1", "+", 
+                  RowBox[{"3", "I"}]}], ")"}]}]}]}], "]"}], "]"}]}], "]"}], 
+         ",", " ", 
+         RowBox[{"{", 
+          RowBox[{"x", " ", ",", 
+           RowBox[{
+            RowBox[{"-", "3"}], "/", "4"}], ",", 
+           RowBox[{"3", "/", "4"}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"y", ",", 
+           RowBox[{
+            RowBox[{"-", "3"}], "/", "4"}], ",", 
+           RowBox[{"3", "/", "4"}]}], "}"}], ",", 
+         RowBox[{"Mesh", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{"23", ",", "23"}], "}"}]}], ",", 
+         RowBox[{"ColorFunction", "\[Rule]", 
+          RowBox[{"Function", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"u", ",", "v", ",", "x", ",", "y"}], "}"}], ",", 
+            RowBox[{"Hue", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"2", "x"}], " ", "+", " ", "y"}], ")"}], 
+               RowBox[{"2", "/", "9"}]}], " ", "+", 
+              RowBox[{"1", "/", "2"}]}], "]"}]}], "]"}]}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"ColorFunctionScaling", "\[Rule]", " ", "False"}], ",", " ", 
+         
+         RowBox[{"BoundaryStyle", "\[Rule]", 
+          RowBox[{"{", "Black", "}"}]}], ",", 
+         RowBox[{"PlotStyle", "\[Rule]", 
+          RowBox[{"Opacity", "[", ".7", "]"}]}], ",", 
+         RowBox[{"PerformanceGoal", "\[Rule]", "\"\<Quality\>\""}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"PlotRange", "\[Rule]", 
+          RowBox[{"3", "/", "2"}]}], ",", 
+         RowBox[{"GridLines", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Range", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"-", "3"}], "/", "2"}], ",", 
+              RowBox[{"3", "/", "2"}], ",", 
+              RowBox[{"1", "/", "4"}]}], "]"}], ",", 
+            RowBox[{"Range", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"-", "3"}], "/", "2"}], ",", 
+              RowBox[{"3", "/", "2"}], ",", 
+              RowBox[{"1", "/", "4"}]}], "]"}]}], "}"}]}], ",", 
+         RowBox[{"GridLinesStyle", "\[Rule]", 
+          RowBox[{"Directive", "[", 
+           RowBox[{"Thin", ",", "Dotted"}], "]"}]}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"RegionFunction", "\[Rule]", 
+          RowBox[{"Function", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"u", ",", "v", ",", "x", ",", "y"}], "}"}], ",", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"Abs", "[", "x", "]"}], ">", 
+              RowBox[{"1", "/", "2"}]}], " ", "&&", " ", 
+             RowBox[{
+              RowBox[{"Abs", "[", "y", "]"}], ">", 
+              RowBox[{"1", "/", "2"}]}]}]}], "]"}]}], ",", 
+         RowBox[{"ImageSize", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{"400", ",", "400"}], "}"}]}]}], "]"}], ",", 
+       RowBox[{"ParametricPlot", "[", 
+        RowBox[{
+         RowBox[{"With", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"z", "=", 
+             RowBox[{"x", "+", 
+              RowBox[{"I", " ", "y"}]}]}], "}"}], ",", 
+           RowBox[{"Through", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"Re", ",", "Im"}], "}"}], "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"1", "-", "t"}], ")"}], "z"}], "+", 
+              RowBox[{"t", " ", 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{"z", "^", "3"}], "-", 
+                  RowBox[{"3", 
+                   RowBox[{"z", "^", "2"}]}], "-", "1"}], ")"}], "/", 
+                RowBox[{"(", 
+                 RowBox[{"1", "+", 
+                  RowBox[{"3", "I"}]}], ")"}]}]}]}], "]"}], "]"}]}], "]"}], 
+         ",", " ", 
+         RowBox[{"{", 
+          RowBox[{"x", " ", ",", 
+           RowBox[{
+            RowBox[{"-", "3"}], "/", "4"}], ",", 
+           RowBox[{"3", "/", "4"}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"y", ",", 
+           RowBox[{
+            RowBox[{"-", "3"}], "/", "4"}], ",", 
+           RowBox[{"3", "/", "4"}]}], "}"}], ",", 
+         RowBox[{"Mesh", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{"23", ",", "23"}], "}"}]}], ",", 
+         RowBox[{"BoundaryStyle", "\[Rule]", 
+          RowBox[{"{", "Black", "}"}]}], ",", 
+         RowBox[{"PlotStyle", "\[Rule]", 
+          RowBox[{"Opacity", "[", ".1", "]"}]}], ",", 
+         RowBox[{"PerformanceGoal", "\[Rule]", "\"\<Quality\>\""}], ",", 
+         RowBox[{"ColorFunction", "\[Rule]", 
+          RowBox[{"Function", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"u", ",", "v", ",", "x", ",", "y"}], "}"}], ",", 
+            "Black"}], "]"}]}], ",", "\[IndentingNewLine]", 
+         RowBox[{"PlotRange", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"-", "3"}], "/", "2"}], ",", 
+              RowBox[{"3", "/", "2"}]}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"-", "3"}], "/", "2"}], ",", 
+              RowBox[{"3", "/", "2"}]}], "}"}]}], "}"}]}], ",", 
+         RowBox[{"GridLines", "\[Rule]", "None"}], ",", 
+         RowBox[{"ImageSize", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{"400", ",", "400"}], "}"}]}]}], "]"}]}], "]"}]}], "]"}], 
+   ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"mapchoice", ",", "6", ",", "\"\<map\>\""}], "}"}], ",", 
+     RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"1", "\[Rule]", 
+        RowBox[{"Row", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"TraditionalForm", "[", 
+            RowBox[{"HoldForm", "[", 
+             RowBox[{
+              RowBox[{"f", "[", "z", "]"}], "=", 
+              RowBox[{"z", "^", "2"}]}], "]"}], "]"}], ",", 
+           "\"\<           (unit disc)\>\""}], "}"}], "]"}]}], ",", 
+       RowBox[{"2", "\[Rule]", 
+        RowBox[{"Row", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"TraditionalForm", "[", 
+            RowBox[{"HoldForm", "[", 
+             RowBox[{
+              RowBox[{"f", "[", "z", "]"}], "=", 
+              RowBox[{"z", "^", "2"}]}], "]"}], "]"}], ",", 
+           "\"\<           (two squares)\>\""}], "}"}], "]"}]}], ",", 
+       RowBox[{"3", "\[Rule]", 
+        RowBox[{"Row", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"TraditionalForm", "[", 
+            RowBox[{"HoldForm", "[", 
+             RowBox[{
+              RowBox[{"f", "[", "z", "]"}], "=", 
+              RowBox[{"exp", "[", "z", "]"}]}], "]"}], "]"}], ",", 
+           "\"\<     [-2, 2] \[Times] [-\[Pi], \[Pi]]\>\""}], "}"}], "]"}]}], 
+       ",", 
+       RowBox[{"4", "\[Rule]", 
+        RowBox[{"Row", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"TraditionalForm", "[", 
+            RowBox[{"HoldForm", "[", 
+             RowBox[{
+              RowBox[{"f", "[", "z", "]"}], "=", 
+              RowBox[{"exp", "[", "z", "]"}]}], "]"}], "]"}], ",", 
+           "\"\<     [-2, 2] \[Times] [0, 2 \[Pi]]\>\""}], "}"}], "]"}]}], 
+       ",", 
+       RowBox[{"5", "\[Rule]", 
+        RowBox[{"Row", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"TraditionalForm", "[", 
+            RowBox[{"HoldForm", "[", 
+             RowBox[{
+              RowBox[{"f", "[", "z", "]"}], "=", 
+              RowBox[{"exp", "[", "z", "]"}]}], "]"}], "]"}], ",", 
+           "\"\<     [-2, 2] \[Times] [-2 \[Pi], 2 \[Pi]]\>\""}], "}"}], 
+         "]"}]}], ",", 
+       RowBox[{"6", "\[Rule]", 
+        RowBox[{"TraditionalForm", "[", 
+         RowBox[{"HoldForm", "[", 
+          RowBox[{
+           RowBox[{"f", "[", "z", "]"}], "=", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              SuperscriptBox["z", "3"], "-", 
+              RowBox[{"3", 
+               SuperscriptBox["z", "2"]}], "-", "1"}], ")"}], "/", 
+            RowBox[{"(", 
+             RowBox[{"1", "+", 
+              RowBox[{"3", " ", "I"}]}], ")"}]}]}], "]"}], "]"}]}]}], "}"}], 
+     ",", 
+     RowBox[{"FieldSize", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"20", ",", "2.5"}], "}"}]}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", "0", ",", "1"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.419173243049148*^9, 3.4191735961164513`*^9}, {
+   3.4191736290227413`*^9, 3.4191736301738567`*^9}, {3.419173750359874*^9, 
+   3.419173803784216*^9}, {3.4191740216540008`*^9, 3.4191740479966345`*^9}, {
+   3.4191740811039453`*^9, 3.419174177212555*^9}, {3.4191742125180855`*^9, 
+   3.4191742276125946`*^9}, {3.4191810236806374`*^9, 
+   3.4191810425455236`*^9}, {3.419796720063841*^9, 3.4197967242730722`*^9}, {
+   3.419796967646663*^9, 3.419796995289356*^9}, {3.419797039643035*^9, 
+   3.419797135597427*^9}, {3.419797171740859*^9, 3.419797293431614*^9}, {
+   3.419877880777251*^9, 3.4198779412783003`*^9}, {3.4198779982079926`*^9, 
+   3.4198781063708076`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`mapchoice$$ = 6, $CellContext`t$$ = 0, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`mapchoice$$], 6, "map"}, {1 -> Row[{
+          TraditionalForm[
+           HoldForm[$CellContext`f[$CellContext`z] = $CellContext`z^2]], 
+          "           (unit disc)"}], 2 -> Row[{
+          TraditionalForm[
+           HoldForm[$CellContext`f[$CellContext`z] = $CellContext`z^2]], 
+          "           (two squares)"}], 3 -> Row[{
+          TraditionalForm[
+           
+           HoldForm[$CellContext`f[$CellContext`z] = \
+$CellContext`exp[$CellContext`z]]], "     [-2, 2] \[Times] [-\[Pi], \[Pi]]"}],
+        4 -> Row[{
+          TraditionalForm[
+           
+           HoldForm[$CellContext`f[$CellContext`z] = \
+$CellContext`exp[$CellContext`z]]], "     [-2, 2] \[Times] [0, 2 \[Pi]]"}], 5 -> 
+       Row[{
+          TraditionalForm[
+           
+           HoldForm[$CellContext`f[$CellContext`z] = \
+$CellContext`exp[$CellContext`z]]], 
+          "     [-2, 2] \[Times] [-2 \[Pi], 2 \[Pi]]"}], 6 -> 
+       TraditionalForm[
+         HoldForm[$CellContext`f[$CellContext`z] = ($CellContext`z^3 - 
+            3 $CellContext`z^2 - 1)/(1 + 3 I)]]}}, {
+      Hold[$CellContext`t$$], 0, 1}}, Typeset`size$$ = {400., {198., 202.}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`mapchoice$699789$$ = False, $CellContext`t$699790$$ = 
+    0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`mapchoice$$ = 6, $CellContext`t$$ = 0}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`mapchoice$$, $CellContext`mapchoice$699789$$, 
+         False], 
+        Hold[$CellContext`t$$, $CellContext`t$699790$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Switch[$CellContext`mapchoice$$, 1, 
+        ParametricPlot[
+         With[{$CellContext`z$ = $CellContext`r Exp[I $CellContext`th]}, 
+          Through[
+           {
+           Re, Im}[(
+              1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ \
+$CellContext`z$^2]]], {$CellContext`r, 0, 1}, {$CellContext`th, -Pi, Pi}, 
+         Mesh -> {5, 10}, ColorFunction -> 
+         Function[{$CellContext`x, $CellContext`y, $CellContext`r, \
+$CellContext`th}, 
+           Blend[{
+             Hue[$CellContext`th], Black}, 0.2]], 
+         BoundaryStyle -> {Black, Thick}, PlotStyle -> Opacity[0.7], 
+         PerformanceGoal -> "Quality", PlotRange -> 3/2, GridLines -> {
+           Range[(-3)/2, 3/2, 1/4], 
+           Range[(-3)/2, 3/2, 1/4]}, GridLinesStyle -> 
+         Directive[Thin, Dotted], ImageSize -> {400, 400}], 2, 
+        ParametricPlot[{
+          With[{$CellContext`z$ = $CellContext`x + I $CellContext`y}, 
+           Through[
+            {
+            Re, Im}[(
+               1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ \
+$CellContext`z$^2]]], 
+          With[{$CellContext`z$ = -$CellContext`x - I $CellContext`y}, 
+           Through[
+            {
+            Re, Im}[(
+               1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ \
+$CellContext`z$^2]]]}, {$CellContext`x, 0, 1}, {$CellContext`y, 0, 1}, 
+         Mesh -> {10, 10}, ColorFunction -> 
+         Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, 
+           Blend[{
+             Hue[$CellContext`x], Black}, 0.2]], 
+         BoundaryStyle -> {Black, Thick}, PlotStyle -> Opacity[0.7], 
+         PerformanceGoal -> "Quality", PlotRange -> 2, GridLines -> {
+           Range[(-7)/4, 7/4, 1/4], 
+           Range[(-7)/4, 7/4, 1/4]}, GridLinesStyle -> 
+         Directive[Thin, Dotted], ImageSize -> {400, 400}], 3, 
+        ParametricPlot[
+         With[{$CellContext`z$ = $CellContext`x + I $CellContext`y}, 
+          Through[
+           {
+           Re, Im}[(1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ 
+             Exp[$CellContext`z$]]]], {$CellContext`x, -2, 
+          2}, {$CellContext`y, -Pi, Pi}, Mesh -> {7, 11}, ColorFunction -> 
+         Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, 
+           Blend[{
+             Hue[$CellContext`x], Black}, 0.2]], 
+         BoundaryStyle -> {Black, Thick}, PlotStyle -> Opacity[0.7], 
+         PerformanceGoal -> "Quality", PlotRange -> 8, GridLines -> {
+           Range[-7, 7, 1], 
+           Range[-7, 7, 1]}, GridLinesStyle -> Directive[Thin, Dotted], Ticks -> 
+         None, ImageSize -> {400, 400}], 4, 
+        ParametricPlot[
+         With[{$CellContext`z$ = $CellContext`x + I $CellContext`y}, 
+          Through[
+           {
+           Re, Im}[(1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ 
+             Exp[$CellContext`z$]]]], {$CellContext`x, -2, 
+          2}, {$CellContext`y, 0, 2 Pi}, Mesh -> {7, 11}, ColorFunction -> 
+         Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, 
+           Blend[{
+             Hue[$CellContext`x], Black}, 0.2]], 
+         BoundaryStyle -> {Black, Thick}, PlotStyle -> Opacity[0.7], 
+         PerformanceGoal -> "Quality", PlotRange -> 8, GridLines -> {
+           Range[-7, 7, 1], 
+           Range[-7, 7, 1]}, GridLinesStyle -> Directive[Thin, Dotted], Ticks -> 
+         None, ImageSize -> {400, 400}], 5, 
+        ParametricPlot[
+         With[{$CellContext`z$ = $CellContext`x + I $CellContext`y}, 
+          Through[
+           {
+           Re, Im}[(1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ 
+             Exp[$CellContext`z$]]]], {$CellContext`x, -2, 
+          2}, {$CellContext`y, (-2) Pi, 2 Pi}, Mesh -> {7, 11}, ColorFunction -> 
+         Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, 
+           Blend[{
+             Hue[$CellContext`x], Black}, 0.2]], 
+         BoundaryStyle -> {Black, Thick}, PlotStyle -> Opacity[0.7], 
+         PerformanceGoal -> "Quality", PlotRange -> 8, GridLines -> {
+           Range[-7, 7, 1], 
+           Range[-7, 7, 1]}, GridLinesStyle -> Directive[Thin, Dotted], Ticks -> 
+         None, ImageSize -> {400, 400}], 6, 
+        Show[
+         ParametricPlot[
+          With[{$CellContext`z$ = $CellContext`x + I $CellContext`y}, 
+           Through[
+            {
+            Re, Im}[(
+               1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ \
+(($CellContext`z$^3 - 3 $CellContext`z$^2 - 1)/(1 + 
+               3 I))]]], {$CellContext`x, (-3)/4, 3/4}, {$CellContext`y, (-3)/
+           4, 3/4}, Mesh -> {23, 23}, ColorFunction -> 
+          Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, 
+            Hue[(2 $CellContext`x + $CellContext`y) (2/9) + 1/2]], 
+          ColorFunctionScaling -> False, BoundaryStyle -> {Black}, PlotStyle -> 
+          Opacity[0.7], PerformanceGoal -> "Quality", PlotRange -> 3/2, 
+          GridLines -> {
+            Range[(-3)/2, 3/2, 1/4], 
+            Range[(-3)/2, 3/2, 1/4]}, GridLinesStyle -> 
+          Directive[Thin, Dotted], RegionFunction -> 
+          Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, 
+            And[Abs[$CellContext`x] > 1/2, Abs[$CellContext`y] > 1/2]], 
+          ImageSize -> {400, 400}], 
+         ParametricPlot[
+          With[{$CellContext`z$ = $CellContext`x + I $CellContext`y}, 
+           Through[
+            {
+            Re, Im}[(
+               1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ \
+(($CellContext`z$^3 - 3 $CellContext`z$^2 - 1)/(1 + 
+               3 I))]]], {$CellContext`x, (-3)/4, 3/4}, {$CellContext`y, (-3)/
+           4, 3/4}, Mesh -> {23, 23}, BoundaryStyle -> {Black}, PlotStyle -> 
+          Opacity[0.1], PerformanceGoal -> "Quality", ColorFunction -> 
+          Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, Black], PlotRange -> {{(-3)/2, 3/2}, {(-3)/2, 3/2}}, 
+          GridLines -> None, ImageSize -> {400, 400}]]], 
+      "Specifications" :> {{{$CellContext`mapchoice$$, 6, "map"}, {1 -> Row[{
+             TraditionalForm[
+              HoldForm[$CellContext`f[$CellContext`z] = $CellContext`z^2]], 
+             "           (unit disc)"}], 2 -> Row[{
+             TraditionalForm[
+              HoldForm[$CellContext`f[$CellContext`z] = $CellContext`z^2]], 
+             "           (two squares)"}], 3 -> Row[{
+             TraditionalForm[
+              
+              HoldForm[$CellContext`f[$CellContext`z] = \
+$CellContext`exp[$CellContext`z]]], "     [-2, 2] \[Times] [-\[Pi], \[Pi]]"}],
+           4 -> Row[{
+             TraditionalForm[
+              
+              HoldForm[$CellContext`f[$CellContext`z] = \
+$CellContext`exp[$CellContext`z]]], "     [-2, 2] \[Times] [0, 2 \[Pi]]"}], 5 -> 
+          Row[{
+             TraditionalForm[
+              
+              HoldForm[$CellContext`f[$CellContext`z] = \
+$CellContext`exp[$CellContext`z]]], 
+             "     [-2, 2] \[Times] [-2 \[Pi], 2 \[Pi]]"}], 6 -> 
+          TraditionalForm[
+            
+            HoldForm[$CellContext`f[$CellContext`z] = ($CellContext`z^3 - 
+               3 $CellContext`z^2 - 1)/(1 + 3 I)]]}, 
+         FieldSize -> {20, 2.5}}, {$CellContext`t$$, 0, 1}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{448., {271., 276.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->145628857]
+}, {2}]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell[TextData[{
+ "This Demonstration visualizes several complex maps by watching the range \
+morph from the identity map to the desired result as the slider goes from 0 \
+to 1. Part of the domain is colored (i.e., the map at ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"t", "=", "0"}], TraditionalForm]], "InlineMath",
+  FormatType->"TraditionalForm"],
+ ") so that you can follow it visually as the plot evolves to the final map."
+}], "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.419177007436023*^9, 3.419177127143571*^9}, {
+   3.419796774392655*^9, 3.4197968542115726`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`mapchoice$$ = 6, $CellContext`t$$ = 1., 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`mapchoice$$], 6, "map"}, {1 -> Row[{
+          TraditionalForm[
+           HoldForm[$CellContext`f[$CellContext`z] = $CellContext`z^2]], 
+          "           (unit disc)"}], 2 -> Row[{
+          TraditionalForm[
+           HoldForm[$CellContext`f[$CellContext`z] = $CellContext`z^2]], 
+          "           (two squares)"}], 3 -> Row[{
+          TraditionalForm[
+           
+           HoldForm[$CellContext`f[$CellContext`z] = \
+$CellContext`exp[$CellContext`z]]], "     [-2, 2] \[Times] [-\[Pi], \[Pi]]"}],
+        4 -> Row[{
+          TraditionalForm[
+           
+           HoldForm[$CellContext`f[$CellContext`z] = \
+$CellContext`exp[$CellContext`z]]], "     [-2, 2] \[Times] [0, 2 \[Pi]]"}], 5 -> 
+       Row[{
+          TraditionalForm[
+           
+           HoldForm[$CellContext`f[$CellContext`z] = \
+$CellContext`exp[$CellContext`z]]], 
+          "     [-2, 2] \[Times] [-2 \[Pi], 2 \[Pi]]"}], 6 -> 
+       TraditionalForm[
+         HoldForm[$CellContext`f[$CellContext`z] = ($CellContext`z^3 - 
+            3 $CellContext`z^2 - 1)/(1 + 3 I)]]}}, {{
+       Hold[$CellContext`t$$], 1.}, 0, 1}}, Typeset`size$$ = {
+    400., {198., 202.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`mapchoice$699844$$ = 
+    False, $CellContext`t$699845$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`mapchoice$$ = 6, $CellContext`t$$ = 1.}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`mapchoice$$, $CellContext`mapchoice$699844$$, 
+         False], 
+        Hold[$CellContext`t$$, $CellContext`t$699845$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Switch[$CellContext`mapchoice$$, 1, 
+        ParametricPlot[
+         With[{$CellContext`z$ = $CellContext`r Exp[I $CellContext`th]}, 
+          Through[
+           {
+           Re, Im}[(
+              1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ \
+$CellContext`z$^2]]], {$CellContext`r, 0, 1}, {$CellContext`th, -Pi, Pi}, 
+         Mesh -> {5, 10}, ColorFunction -> 
+         Function[{$CellContext`x, $CellContext`y, $CellContext`r, \
+$CellContext`th}, 
+           Blend[{
+             Hue[$CellContext`th], Black}, 0.2]], 
+         BoundaryStyle -> {Black, Thick}, PlotStyle -> Opacity[0.7], 
+         PerformanceGoal -> "Quality", PlotRange -> 3/2, GridLines -> {
+           Range[(-3)/2, 3/2, 1/4], 
+           Range[(-3)/2, 3/2, 1/4]}, GridLinesStyle -> 
+         Directive[Thin, Dotted], ImageSize -> {400, 400}], 2, 
+        ParametricPlot[{
+          With[{$CellContext`z$ = $CellContext`x + I $CellContext`y}, 
+           Through[
+            {
+            Re, Im}[(
+               1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ \
+$CellContext`z$^2]]], 
+          With[{$CellContext`z$ = -$CellContext`x - I $CellContext`y}, 
+           Through[
+            {
+            Re, Im}[(
+               1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ \
+$CellContext`z$^2]]]}, {$CellContext`x, 0, 1}, {$CellContext`y, 0, 1}, 
+         Mesh -> {10, 10}, ColorFunction -> 
+         Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, 
+           Blend[{
+             Hue[$CellContext`x], Black}, 0.2]], 
+         BoundaryStyle -> {Black, Thick}, PlotStyle -> Opacity[0.7], 
+         PerformanceGoal -> "Quality", PlotRange -> 2, GridLines -> {
+           Range[(-7)/4, 7/4, 1/4], 
+           Range[(-7)/4, 7/4, 1/4]}, GridLinesStyle -> 
+         Directive[Thin, Dotted], ImageSize -> {400, 400}], 3, 
+        ParametricPlot[
+         With[{$CellContext`z$ = $CellContext`x + I $CellContext`y}, 
+          Through[
+           {
+           Re, Im}[(1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ 
+             Exp[$CellContext`z$]]]], {$CellContext`x, -2, 
+          2}, {$CellContext`y, -Pi, Pi}, Mesh -> {7, 11}, ColorFunction -> 
+         Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, 
+           Blend[{
+             Hue[$CellContext`x], Black}, 0.2]], 
+         BoundaryStyle -> {Black, Thick}, PlotStyle -> Opacity[0.7], 
+         PerformanceGoal -> "Quality", PlotRange -> 8, GridLines -> {
+           Range[-7, 7, 1], 
+           Range[-7, 7, 1]}, GridLinesStyle -> Directive[Thin, Dotted], Ticks -> 
+         None, ImageSize -> {400, 400}], 4, 
+        ParametricPlot[
+         With[{$CellContext`z$ = $CellContext`x + I $CellContext`y}, 
+          Through[
+           {
+           Re, Im}[(1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ 
+             Exp[$CellContext`z$]]]], {$CellContext`x, -2, 
+          2}, {$CellContext`y, 0, 2 Pi}, Mesh -> {7, 11}, ColorFunction -> 
+         Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, 
+           Blend[{
+             Hue[$CellContext`x], Black}, 0.2]], 
+         BoundaryStyle -> {Black, Thick}, PlotStyle -> Opacity[0.7], 
+         PerformanceGoal -> "Quality", PlotRange -> 8, GridLines -> {
+           Range[-7, 7, 1], 
+           Range[-7, 7, 1]}, GridLinesStyle -> Directive[Thin, Dotted], Ticks -> 
+         None, ImageSize -> {400, 400}], 5, 
+        ParametricPlot[
+         With[{$CellContext`z$ = $CellContext`x + I $CellContext`y}, 
+          Through[
+           {
+           Re, Im}[(1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ 
+             Exp[$CellContext`z$]]]], {$CellContext`x, -2, 
+          2}, {$CellContext`y, (-2) Pi, 2 Pi}, Mesh -> {7, 11}, ColorFunction -> 
+         Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, 
+           Blend[{
+             Hue[$CellContext`x], Black}, 0.2]], 
+         BoundaryStyle -> {Black, Thick}, PlotStyle -> Opacity[0.7], 
+         PerformanceGoal -> "Quality", PlotRange -> 8, GridLines -> {
+           Range[-7, 7, 1], 
+           Range[-7, 7, 1]}, GridLinesStyle -> Directive[Thin, Dotted], Ticks -> 
+         None, ImageSize -> {400, 400}], 6, 
+        Show[
+         ParametricPlot[
+          With[{$CellContext`z$ = $CellContext`x + I $CellContext`y}, 
+           Through[
+            {
+            Re, Im}[(
+               1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ \
+(($CellContext`z$^3 - 3 $CellContext`z$^2 - 1)/(1 + 
+               3 I))]]], {$CellContext`x, (-3)/4, 3/4}, {$CellContext`y, (-3)/
+           4, 3/4}, Mesh -> {23, 23}, ColorFunction -> 
+          Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, 
+            Hue[(2 $CellContext`x + $CellContext`y) (2/9) + 1/2]], 
+          ColorFunctionScaling -> False, BoundaryStyle -> {Black}, PlotStyle -> 
+          Opacity[0.7], PerformanceGoal -> "Quality", PlotRange -> 3/2, 
+          GridLines -> {
+            Range[(-3)/2, 3/2, 1/4], 
+            Range[(-3)/2, 3/2, 1/4]}, GridLinesStyle -> 
+          Directive[Thin, Dotted], RegionFunction -> 
+          Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, 
+            And[Abs[$CellContext`x] > 1/2, Abs[$CellContext`y] > 1/2]], 
+          ImageSize -> {400, 400}], 
+         ParametricPlot[
+          With[{$CellContext`z$ = $CellContext`x + I $CellContext`y}, 
+           Through[
+            {
+            Re, Im}[(
+               1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ \
+(($CellContext`z$^3 - 3 $CellContext`z$^2 - 1)/(1 + 
+               3 I))]]], {$CellContext`x, (-3)/4, 3/4}, {$CellContext`y, (-3)/
+           4, 3/4}, Mesh -> {23, 23}, BoundaryStyle -> {Black}, PlotStyle -> 
+          Opacity[0.1], PerformanceGoal -> "Quality", ColorFunction -> 
+          Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, Black], PlotRange -> {{(-3)/2, 3/2}, {(-3)/2, 3/2}}, 
+          GridLines -> None, ImageSize -> {400, 400}]]], 
+      "Specifications" :> {{{$CellContext`mapchoice$$, 6, "map"}, {1 -> Row[{
+             TraditionalForm[
+              HoldForm[$CellContext`f[$CellContext`z] = $CellContext`z^2]], 
+             "           (unit disc)"}], 2 -> Row[{
+             TraditionalForm[
+              HoldForm[$CellContext`f[$CellContext`z] = $CellContext`z^2]], 
+             "           (two squares)"}], 3 -> Row[{
+             TraditionalForm[
+              
+              HoldForm[$CellContext`f[$CellContext`z] = \
+$CellContext`exp[$CellContext`z]]], "     [-2, 2] \[Times] [-\[Pi], \[Pi]]"}],
+           4 -> Row[{
+             TraditionalForm[
+              
+              HoldForm[$CellContext`f[$CellContext`z] = \
+$CellContext`exp[$CellContext`z]]], "     [-2, 2] \[Times] [0, 2 \[Pi]]"}], 5 -> 
+          Row[{
+             TraditionalForm[
+              
+              HoldForm[$CellContext`f[$CellContext`z] = \
+$CellContext`exp[$CellContext`z]]], 
+             "     [-2, 2] \[Times] [-2 \[Pi], 2 \[Pi]]"}], 6 -> 
+          TraditionalForm[
+            
+            HoldForm[$CellContext`f[$CellContext`z] = ($CellContext`z^3 - 
+               3 $CellContext`z^2 - 1)/(1 + 3 I)]]}, 
+         FieldSize -> {20, 2.5}}, {{$CellContext`t$$, 1.}, 0, 1}}, 
+      "Options" :> {}, "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{448., {271., 276.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->475428143]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`mapchoice$$ = 2, $CellContext`t$$ = 0.388, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`mapchoice$$], 2, "map"}, {1 -> Row[{
+          TraditionalForm[
+           HoldForm[$CellContext`f[$CellContext`z] = $CellContext`z^2]], 
+          "           (unit disc)"}], 2 -> Row[{
+          TraditionalForm[
+           HoldForm[$CellContext`f[$CellContext`z] = $CellContext`z^2]], 
+          "           (two squares)"}], 3 -> Row[{
+          TraditionalForm[
+           
+           HoldForm[$CellContext`f[$CellContext`z] = \
+$CellContext`exp[$CellContext`z]]], "     [-2, 2] \[Times] [-\[Pi], \[Pi]]"}],
+        4 -> Row[{
+          TraditionalForm[
+           
+           HoldForm[$CellContext`f[$CellContext`z] = \
+$CellContext`exp[$CellContext`z]]], "     [-2, 2] \[Times] [0, 2 \[Pi]]"}], 5 -> 
+       Row[{
+          TraditionalForm[
+           
+           HoldForm[$CellContext`f[$CellContext`z] = \
+$CellContext`exp[$CellContext`z]]], 
+          "     [-2, 2] \[Times] [-2 \[Pi], 2 \[Pi]]"}], 6 -> 
+       TraditionalForm[
+         HoldForm[$CellContext`f[$CellContext`z] = ($CellContext`z^3 - 
+            3 $CellContext`z^2 - 1)/(1 + 3 I)]]}}, {{
+       Hold[$CellContext`t$$], 0.388}, 0, 1}}, Typeset`size$$ = {
+    400., {198., 202.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`mapchoice$699899$$ = 
+    False, $CellContext`t$699900$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`mapchoice$$ = 2, $CellContext`t$$ = 0.388},
+       "ControllerVariables" :> {
+        Hold[$CellContext`mapchoice$$, $CellContext`mapchoice$699899$$, 
+         False], 
+        Hold[$CellContext`t$$, $CellContext`t$699900$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Switch[$CellContext`mapchoice$$, 1, 
+        ParametricPlot[
+         With[{$CellContext`z$ = $CellContext`r Exp[I $CellContext`th]}, 
+          Through[
+           {
+           Re, Im}[(
+              1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ \
+$CellContext`z$^2]]], {$CellContext`r, 0, 1}, {$CellContext`th, -Pi, Pi}, 
+         Mesh -> {5, 10}, ColorFunction -> 
+         Function[{$CellContext`x, $CellContext`y, $CellContext`r, \
+$CellContext`th}, 
+           Blend[{
+             Hue[$CellContext`th], Black}, 0.2]], 
+         BoundaryStyle -> {Black, Thick}, PlotStyle -> Opacity[0.7], 
+         PerformanceGoal -> "Quality", PlotRange -> 3/2, GridLines -> {
+           Range[(-3)/2, 3/2, 1/4], 
+           Range[(-3)/2, 3/2, 1/4]}, GridLinesStyle -> 
+         Directive[Thin, Dotted], ImageSize -> {400, 400}], 2, 
+        ParametricPlot[{
+          With[{$CellContext`z$ = $CellContext`x + I $CellContext`y}, 
+           Through[
+            {
+            Re, Im}[(
+               1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ \
+$CellContext`z$^2]]], 
+          With[{$CellContext`z$ = -$CellContext`x - I $CellContext`y}, 
+           Through[
+            {
+            Re, Im}[(
+               1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ \
+$CellContext`z$^2]]]}, {$CellContext`x, 0, 1}, {$CellContext`y, 0, 1}, 
+         Mesh -> {10, 10}, ColorFunction -> 
+         Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, 
+           Blend[{
+             Hue[$CellContext`x], Black}, 0.2]], 
+         BoundaryStyle -> {Black, Thick}, PlotStyle -> Opacity[0.7], 
+         PerformanceGoal -> "Quality", PlotRange -> 2, GridLines -> {
+           Range[(-7)/4, 7/4, 1/4], 
+           Range[(-7)/4, 7/4, 1/4]}, GridLinesStyle -> 
+         Directive[Thin, Dotted], ImageSize -> {400, 400}], 3, 
+        ParametricPlot[
+         With[{$CellContext`z$ = $CellContext`x + I $CellContext`y}, 
+          Through[
+           {
+           Re, Im}[(1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ 
+             Exp[$CellContext`z$]]]], {$CellContext`x, -2, 
+          2}, {$CellContext`y, -Pi, Pi}, Mesh -> {7, 11}, ColorFunction -> 
+         Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, 
+           Blend[{
+             Hue[$CellContext`x], Black}, 0.2]], 
+         BoundaryStyle -> {Black, Thick}, PlotStyle -> Opacity[0.7], 
+         PerformanceGoal -> "Quality", PlotRange -> 8, GridLines -> {
+           Range[-7, 7, 1], 
+           Range[-7, 7, 1]}, GridLinesStyle -> Directive[Thin, Dotted], Ticks -> 
+         None, ImageSize -> {400, 400}], 4, 
+        ParametricPlot[
+         With[{$CellContext`z$ = $CellContext`x + I $CellContext`y}, 
+          Through[
+           {
+           Re, Im}[(1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ 
+             Exp[$CellContext`z$]]]], {$CellContext`x, -2, 
+          2}, {$CellContext`y, 0, 2 Pi}, Mesh -> {7, 11}, ColorFunction -> 
+         Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, 
+           Blend[{
+             Hue[$CellContext`x], Black}, 0.2]], 
+         BoundaryStyle -> {Black, Thick}, PlotStyle -> Opacity[0.7], 
+         PerformanceGoal -> "Quality", PlotRange -> 8, GridLines -> {
+           Range[-7, 7, 1], 
+           Range[-7, 7, 1]}, GridLinesStyle -> Directive[Thin, Dotted], Ticks -> 
+         None, ImageSize -> {400, 400}], 5, 
+        ParametricPlot[
+         With[{$CellContext`z$ = $CellContext`x + I $CellContext`y}, 
+          Through[
+           {
+           Re, Im}[(1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ 
+             Exp[$CellContext`z$]]]], {$CellContext`x, -2, 
+          2}, {$CellContext`y, (-2) Pi, 2 Pi}, Mesh -> {7, 11}, ColorFunction -> 
+         Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, 
+           Blend[{
+             Hue[$CellContext`x], Black}, 0.2]], 
+         BoundaryStyle -> {Black, Thick}, PlotStyle -> Opacity[0.7], 
+         PerformanceGoal -> "Quality", PlotRange -> 8, GridLines -> {
+           Range[-7, 7, 1], 
+           Range[-7, 7, 1]}, GridLinesStyle -> Directive[Thin, Dotted], Ticks -> 
+         None, ImageSize -> {400, 400}], 6, 
+        Show[
+         ParametricPlot[
+          With[{$CellContext`z$ = $CellContext`x + I $CellContext`y}, 
+           Through[
+            {
+            Re, Im}[(
+               1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ \
+(($CellContext`z$^3 - 3 $CellContext`z$^2 - 1)/(1 + 
+               3 I))]]], {$CellContext`x, (-3)/4, 3/4}, {$CellContext`y, (-3)/
+           4, 3/4}, Mesh -> {23, 23}, ColorFunction -> 
+          Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, 
+            Hue[(2 $CellContext`x + $CellContext`y) (2/9) + 1/2]], 
+          ColorFunctionScaling -> False, BoundaryStyle -> {Black}, PlotStyle -> 
+          Opacity[0.7], PerformanceGoal -> "Quality", PlotRange -> 3/2, 
+          GridLines -> {
+            Range[(-3)/2, 3/2, 1/4], 
+            Range[(-3)/2, 3/2, 1/4]}, GridLinesStyle -> 
+          Directive[Thin, Dotted], RegionFunction -> 
+          Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, 
+            And[Abs[$CellContext`x] > 1/2, Abs[$CellContext`y] > 1/2]], 
+          ImageSize -> {400, 400}], 
+         ParametricPlot[
+          With[{$CellContext`z$ = $CellContext`x + I $CellContext`y}, 
+           Through[
+            {
+            Re, Im}[(
+               1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ \
+(($CellContext`z$^3 - 3 $CellContext`z$^2 - 1)/(1 + 
+               3 I))]]], {$CellContext`x, (-3)/4, 3/4}, {$CellContext`y, (-3)/
+           4, 3/4}, Mesh -> {23, 23}, BoundaryStyle -> {Black}, PlotStyle -> 
+          Opacity[0.1], PerformanceGoal -> "Quality", ColorFunction -> 
+          Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, Black], PlotRange -> {{(-3)/2, 3/2}, {(-3)/2, 3/2}}, 
+          GridLines -> None, ImageSize -> {400, 400}]]], 
+      "Specifications" :> {{{$CellContext`mapchoice$$, 2, "map"}, {1 -> Row[{
+             TraditionalForm[
+              HoldForm[$CellContext`f[$CellContext`z] = $CellContext`z^2]], 
+             "           (unit disc)"}], 2 -> Row[{
+             TraditionalForm[
+              HoldForm[$CellContext`f[$CellContext`z] = $CellContext`z^2]], 
+             "           (two squares)"}], 3 -> Row[{
+             TraditionalForm[
+              
+              HoldForm[$CellContext`f[$CellContext`z] = \
+$CellContext`exp[$CellContext`z]]], "     [-2, 2] \[Times] [-\[Pi], \[Pi]]"}],
+           4 -> Row[{
+             TraditionalForm[
+              
+              HoldForm[$CellContext`f[$CellContext`z] = \
+$CellContext`exp[$CellContext`z]]], "     [-2, 2] \[Times] [0, 2 \[Pi]]"}], 5 -> 
+          Row[{
+             TraditionalForm[
+              
+              HoldForm[$CellContext`f[$CellContext`z] = \
+$CellContext`exp[$CellContext`z]]], 
+             "     [-2, 2] \[Times] [-2 \[Pi], 2 \[Pi]]"}], 6 -> 
+          TraditionalForm[
+            
+            HoldForm[$CellContext`f[$CellContext`z] = ($CellContext`z^3 - 
+               3 $CellContext`z^2 - 1)/(1 + 3 I)]]}, 
+         FieldSize -> {20, 2.5}}, {{$CellContext`t$$, 0.388}, 0, 1}}, 
+      "Options" :> {}, "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{448., {271., 276.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->99289668],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`mapchoice$$ = 6, $CellContext`t$$ = 1., 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`mapchoice$$], 6, "map"}, {1 -> Row[{
+          TraditionalForm[
+           HoldForm[$CellContext`f[$CellContext`z] = $CellContext`z^2]], 
+          "           (unit disc)"}], 2 -> Row[{
+          TraditionalForm[
+           HoldForm[$CellContext`f[$CellContext`z] = $CellContext`z^2]], 
+          "           (two squares)"}], 3 -> Row[{
+          TraditionalForm[
+           
+           HoldForm[$CellContext`f[$CellContext`z] = \
+$CellContext`exp[$CellContext`z]]], "     [-2, 2] \[Times] [-\[Pi], \[Pi]]"}],
+        4 -> Row[{
+          TraditionalForm[
+           
+           HoldForm[$CellContext`f[$CellContext`z] = \
+$CellContext`exp[$CellContext`z]]], "     [-2, 2] \[Times] [0, 2 \[Pi]]"}], 5 -> 
+       Row[{
+          TraditionalForm[
+           
+           HoldForm[$CellContext`f[$CellContext`z] = \
+$CellContext`exp[$CellContext`z]]], 
+          "     [-2, 2] \[Times] [-2 \[Pi], 2 \[Pi]]"}], 6 -> 
+       TraditionalForm[
+         HoldForm[$CellContext`f[$CellContext`z] = ($CellContext`z^3 - 
+            3 $CellContext`z^2 - 1)/(1 + 3 I)]]}}, {{
+       Hold[$CellContext`t$$], 1.}, 0, 1}}, Typeset`size$$ = Automatic, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`mapchoice$699954$$ = False, $CellContext`t$699955$$ = 
+    0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`mapchoice$$ = 6, $CellContext`t$$ = 1.}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`mapchoice$$, $CellContext`mapchoice$699954$$, 
+         False], 
+        Hold[$CellContext`t$$, $CellContext`t$699955$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Switch[$CellContext`mapchoice$$, 1, 
+        ParametricPlot[
+         With[{$CellContext`z$ = $CellContext`r Exp[I $CellContext`th]}, 
+          Through[
+           {
+           Re, Im}[(
+              1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ \
+$CellContext`z$^2]]], {$CellContext`r, 0, 1}, {$CellContext`th, -Pi, Pi}, 
+         Mesh -> {5, 10}, ColorFunction -> 
+         Function[{$CellContext`x, $CellContext`y, $CellContext`r, \
+$CellContext`th}, 
+           Blend[{
+             Hue[$CellContext`th], Black}, 0.2]], 
+         BoundaryStyle -> {Black, Thick}, PlotStyle -> Opacity[0.7], 
+         PerformanceGoal -> "Quality", PlotRange -> 3/2, GridLines -> {
+           Range[(-3)/2, 3/2, 1/4], 
+           Range[(-3)/2, 3/2, 1/4]}, GridLinesStyle -> 
+         Directive[Thin, Dotted], ImageSize -> {400, 400}], 2, 
+        ParametricPlot[{
+          With[{$CellContext`z$ = $CellContext`x + I $CellContext`y}, 
+           Through[
+            {
+            Re, Im}[(
+               1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ \
+$CellContext`z$^2]]], 
+          With[{$CellContext`z$ = -$CellContext`x - I $CellContext`y}, 
+           Through[
+            {
+            Re, Im}[(
+               1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ \
+$CellContext`z$^2]]]}, {$CellContext`x, 0, 1}, {$CellContext`y, 0, 1}, 
+         Mesh -> {10, 10}, ColorFunction -> 
+         Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, 
+           Blend[{
+             Hue[$CellContext`x], Black}, 0.2]], 
+         BoundaryStyle -> {Black, Thick}, PlotStyle -> Opacity[0.7], 
+         PerformanceGoal -> "Quality", PlotRange -> 2, GridLines -> {
+           Range[(-7)/4, 7/4, 1/4], 
+           Range[(-7)/4, 7/4, 1/4]}, GridLinesStyle -> 
+         Directive[Thin, Dotted], ImageSize -> {400, 400}], 3, 
+        ParametricPlot[
+         With[{$CellContext`z$ = $CellContext`x + I $CellContext`y}, 
+          Through[
+           {
+           Re, Im}[(1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ 
+             Exp[$CellContext`z$]]]], {$CellContext`x, -2, 
+          2}, {$CellContext`y, -Pi, Pi}, Mesh -> {7, 11}, ColorFunction -> 
+         Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, 
+           Blend[{
+             Hue[$CellContext`x], Black}, 0.2]], 
+         BoundaryStyle -> {Black, Thick}, PlotStyle -> Opacity[0.7], 
+         PerformanceGoal -> "Quality", PlotRange -> 8, GridLines -> {
+           Range[-7, 7, 1], 
+           Range[-7, 7, 1]}, GridLinesStyle -> Directive[Thin, Dotted], Ticks -> 
+         None, ImageSize -> {400, 400}], 4, 
+        ParametricPlot[
+         With[{$CellContext`z$ = $CellContext`x + I $CellContext`y}, 
+          Through[
+           {
+           Re, Im}[(1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ 
+             Exp[$CellContext`z$]]]], {$CellContext`x, -2, 
+          2}, {$CellContext`y, 0, 2 Pi}, Mesh -> {7, 11}, ColorFunction -> 
+         Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, 
+           Blend[{
+             Hue[$CellContext`x], Black}, 0.2]], 
+         BoundaryStyle -> {Black, Thick}, PlotStyle -> Opacity[0.7], 
+         PerformanceGoal -> "Quality", PlotRange -> 8, GridLines -> {
+           Range[-7, 7, 1], 
+           Range[-7, 7, 1]}, GridLinesStyle -> Directive[Thin, Dotted], Ticks -> 
+         None, ImageSize -> {400, 400}], 5, 
+        ParametricPlot[
+         With[{$CellContext`z$ = $CellContext`x + I $CellContext`y}, 
+          Through[
+           {
+           Re, Im}[(1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ 
+             Exp[$CellContext`z$]]]], {$CellContext`x, -2, 
+          2}, {$CellContext`y, (-2) Pi, 2 Pi}, Mesh -> {7, 11}, ColorFunction -> 
+         Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, 
+           Blend[{
+             Hue[$CellContext`x], Black}, 0.2]], 
+         BoundaryStyle -> {Black, Thick}, PlotStyle -> Opacity[0.7], 
+         PerformanceGoal -> "Quality", PlotRange -> 8, GridLines -> {
+           Range[-7, 7, 1], 
+           Range[-7, 7, 1]}, GridLinesStyle -> Directive[Thin, Dotted], Ticks -> 
+         None, ImageSize -> {400, 400}], 6, 
+        Show[
+         ParametricPlot[
+          With[{$CellContext`z$ = $CellContext`x + I $CellContext`y}, 
+           Through[
+            {
+            Re, Im}[(
+               1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ \
+(($CellContext`z$^3 - 3 $CellContext`z$^2 - 1)/(1 + 
+               3 I))]]], {$CellContext`x, (-3)/4, 3/4}, {$CellContext`y, (-3)/
+           4, 3/4}, Mesh -> {23, 23}, ColorFunction -> 
+          Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, 
+            Hue[(2 $CellContext`x + $CellContext`y) (2/9) + 1/2]], 
+          ColorFunctionScaling -> False, BoundaryStyle -> {Black}, PlotStyle -> 
+          Opacity[0.7], PerformanceGoal -> "Quality", PlotRange -> 3/2, 
+          GridLines -> {
+            Range[(-3)/2, 3/2, 1/4], 
+            Range[(-3)/2, 3/2, 1/4]}, GridLinesStyle -> 
+          Directive[Thin, Dotted], RegionFunction -> 
+          Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, 
+            And[Abs[$CellContext`x] > 1/2, Abs[$CellContext`y] > 1/2]], 
+          ImageSize -> {400, 400}], 
+         ParametricPlot[
+          With[{$CellContext`z$ = $CellContext`x + I $CellContext`y}, 
+           Through[
+            {
+            Re, Im}[(
+               1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ \
+(($CellContext`z$^3 - 3 $CellContext`z$^2 - 1)/(1 + 
+               3 I))]]], {$CellContext`x, (-3)/4, 3/4}, {$CellContext`y, (-3)/
+           4, 3/4}, Mesh -> {23, 23}, BoundaryStyle -> {Black}, PlotStyle -> 
+          Opacity[0.1], PerformanceGoal -> "Quality", ColorFunction -> 
+          Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, Black], PlotRange -> {{(-3)/2, 3/2}, {(-3)/2, 3/2}}, 
+          GridLines -> None, ImageSize -> {400, 400}]]], 
+      "Specifications" :> {{{$CellContext`mapchoice$$, 6, "map"}, {1 -> Row[{
+             TraditionalForm[
+              HoldForm[$CellContext`f[$CellContext`z] = $CellContext`z^2]], 
+             "           (unit disc)"}], 2 -> Row[{
+             TraditionalForm[
+              HoldForm[$CellContext`f[$CellContext`z] = $CellContext`z^2]], 
+             "           (two squares)"}], 3 -> Row[{
+             TraditionalForm[
+              
+              HoldForm[$CellContext`f[$CellContext`z] = \
+$CellContext`exp[$CellContext`z]]], "     [-2, 2] \[Times] [-\[Pi], \[Pi]]"}],
+           4 -> Row[{
+             TraditionalForm[
+              
+              HoldForm[$CellContext`f[$CellContext`z] = \
+$CellContext`exp[$CellContext`z]]], "     [-2, 2] \[Times] [0, 2 \[Pi]]"}], 5 -> 
+          Row[{
+             TraditionalForm[
+              
+              HoldForm[$CellContext`f[$CellContext`z] = \
+$CellContext`exp[$CellContext`z]]], 
+             "     [-2, 2] \[Times] [-2 \[Pi], 2 \[Pi]]"}], 6 -> 
+          TraditionalForm[
+            
+            HoldForm[$CellContext`f[$CellContext`z] = ($CellContext`z^3 - 
+               3 $CellContext`z^2 - 1)/(1 + 3 I)]]}, 
+         FieldSize -> {20, 2.5}}, {{$CellContext`t$$, 1.}, 0, 1}}, 
+      "Options" :> {}, "DefaultOptions" :> {ControllerLinking -> True}],
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->817639059],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`mapchoice$$ = 5, $CellContext`t$$ = 0.366, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`mapchoice$$], 5, "map"}, {1 -> Row[{
+          TraditionalForm[
+           HoldForm[$CellContext`f[$CellContext`z] = $CellContext`z^2]], 
+          "           (unit disc)"}], 2 -> Row[{
+          TraditionalForm[
+           HoldForm[$CellContext`f[$CellContext`z] = $CellContext`z^2]], 
+          "           (two squares)"}], 3 -> Row[{
+          TraditionalForm[
+           
+           HoldForm[$CellContext`f[$CellContext`z] = \
+$CellContext`exp[$CellContext`z]]], "     [-2, 2] \[Times] [-\[Pi], \[Pi]]"}],
+        4 -> Row[{
+          TraditionalForm[
+           
+           HoldForm[$CellContext`f[$CellContext`z] = \
+$CellContext`exp[$CellContext`z]]], "     [-2, 2] \[Times] [0, 2 \[Pi]]"}], 5 -> 
+       Row[{
+          TraditionalForm[
+           
+           HoldForm[$CellContext`f[$CellContext`z] = \
+$CellContext`exp[$CellContext`z]]], 
+          "     [-2, 2] \[Times] [-2 \[Pi], 2 \[Pi]]"}], 6 -> 
+       TraditionalForm[
+         HoldForm[$CellContext`f[$CellContext`z] = ($CellContext`z^3 - 
+            3 $CellContext`z^2 - 1)/(1 + 3 I)]]}}, {{
+       Hold[$CellContext`t$$], 0.366}, 0, 1}}, Typeset`size$$ = Automatic, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`mapchoice$700009$$ = False, $CellContext`t$700010$$ = 
+    0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`mapchoice$$ = 5, $CellContext`t$$ = 0.366},
+       "ControllerVariables" :> {
+        Hold[$CellContext`mapchoice$$, $CellContext`mapchoice$700009$$, 
+         False], 
+        Hold[$CellContext`t$$, $CellContext`t$700010$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Switch[$CellContext`mapchoice$$, 1, 
+        ParametricPlot[
+         With[{$CellContext`z$ = $CellContext`r Exp[I $CellContext`th]}, 
+          Through[
+           {
+           Re, Im}[(
+              1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ \
+$CellContext`z$^2]]], {$CellContext`r, 0, 1}, {$CellContext`th, -Pi, Pi}, 
+         Mesh -> {5, 10}, ColorFunction -> 
+         Function[{$CellContext`x, $CellContext`y, $CellContext`r, \
+$CellContext`th}, 
+           Blend[{
+             Hue[$CellContext`th], Black}, 0.2]], 
+         BoundaryStyle -> {Black, Thick}, PlotStyle -> Opacity[0.7], 
+         PerformanceGoal -> "Quality", PlotRange -> 3/2, GridLines -> {
+           Range[(-3)/2, 3/2, 1/4], 
+           Range[(-3)/2, 3/2, 1/4]}, GridLinesStyle -> 
+         Directive[Thin, Dotted], ImageSize -> {400, 400}], 2, 
+        ParametricPlot[{
+          With[{$CellContext`z$ = $CellContext`x + I $CellContext`y}, 
+           Through[
+            {
+            Re, Im}[(
+               1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ \
+$CellContext`z$^2]]], 
+          With[{$CellContext`z$ = -$CellContext`x - I $CellContext`y}, 
+           Through[
+            {
+            Re, Im}[(
+               1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ \
+$CellContext`z$^2]]]}, {$CellContext`x, 0, 1}, {$CellContext`y, 0, 1}, 
+         Mesh -> {10, 10}, ColorFunction -> 
+         Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, 
+           Blend[{
+             Hue[$CellContext`x], Black}, 0.2]], 
+         BoundaryStyle -> {Black, Thick}, PlotStyle -> Opacity[0.7], 
+         PerformanceGoal -> "Quality", PlotRange -> 2, GridLines -> {
+           Range[(-7)/4, 7/4, 1/4], 
+           Range[(-7)/4, 7/4, 1/4]}, GridLinesStyle -> 
+         Directive[Thin, Dotted], ImageSize -> {400, 400}], 3, 
+        ParametricPlot[
+         With[{$CellContext`z$ = $CellContext`x + I $CellContext`y}, 
+          Through[
+           {
+           Re, Im}[(1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ 
+             Exp[$CellContext`z$]]]], {$CellContext`x, -2, 
+          2}, {$CellContext`y, -Pi, Pi}, Mesh -> {7, 11}, ColorFunction -> 
+         Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, 
+           Blend[{
+             Hue[$CellContext`x], Black}, 0.2]], 
+         BoundaryStyle -> {Black, Thick}, PlotStyle -> Opacity[0.7], 
+         PerformanceGoal -> "Quality", PlotRange -> 8, GridLines -> {
+           Range[-7, 7, 1], 
+           Range[-7, 7, 1]}, GridLinesStyle -> Directive[Thin, Dotted], Ticks -> 
+         None, ImageSize -> {400, 400}], 4, 
+        ParametricPlot[
+         With[{$CellContext`z$ = $CellContext`x + I $CellContext`y}, 
+          Through[
+           {
+           Re, Im}[(1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ 
+             Exp[$CellContext`z$]]]], {$CellContext`x, -2, 
+          2}, {$CellContext`y, 0, 2 Pi}, Mesh -> {7, 11}, ColorFunction -> 
+         Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, 
+           Blend[{
+             Hue[$CellContext`x], Black}, 0.2]], 
+         BoundaryStyle -> {Black, Thick}, PlotStyle -> Opacity[0.7], 
+         PerformanceGoal -> "Quality", PlotRange -> 8, GridLines -> {
+           Range[-7, 7, 1], 
+           Range[-7, 7, 1]}, GridLinesStyle -> Directive[Thin, Dotted], Ticks -> 
+         None, ImageSize -> {400, 400}], 5, 
+        ParametricPlot[
+         With[{$CellContext`z$ = $CellContext`x + I $CellContext`y}, 
+          Through[
+           {
+           Re, Im}[(1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ 
+             Exp[$CellContext`z$]]]], {$CellContext`x, -2, 
+          2}, {$CellContext`y, (-2) Pi, 2 Pi}, Mesh -> {7, 11}, ColorFunction -> 
+         Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, 
+           Blend[{
+             Hue[$CellContext`x], Black}, 0.2]], 
+         BoundaryStyle -> {Black, Thick}, PlotStyle -> Opacity[0.7], 
+         PerformanceGoal -> "Quality", PlotRange -> 8, GridLines -> {
+           Range[-7, 7, 1], 
+           Range[-7, 7, 1]}, GridLinesStyle -> Directive[Thin, Dotted], Ticks -> 
+         None, ImageSize -> {400, 400}], 6, 
+        Show[
+         ParametricPlot[
+          With[{$CellContext`z$ = $CellContext`x + I $CellContext`y}, 
+           Through[
+            {
+            Re, Im}[(
+               1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ \
+(($CellContext`z$^3 - 3 $CellContext`z$^2 - 1)/(1 + 
+               3 I))]]], {$CellContext`x, (-3)/4, 3/4}, {$CellContext`y, (-3)/
+           4, 3/4}, Mesh -> {23, 23}, ColorFunction -> 
+          Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, 
+            Hue[(2 $CellContext`x + $CellContext`y) (2/9) + 1/2]], 
+          ColorFunctionScaling -> False, BoundaryStyle -> {Black}, PlotStyle -> 
+          Opacity[0.7], PerformanceGoal -> "Quality", PlotRange -> 3/2, 
+          GridLines -> {
+            Range[(-3)/2, 3/2, 1/4], 
+            Range[(-3)/2, 3/2, 1/4]}, GridLinesStyle -> 
+          Directive[Thin, Dotted], RegionFunction -> 
+          Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, 
+            And[Abs[$CellContext`x] > 1/2, Abs[$CellContext`y] > 1/2]], 
+          ImageSize -> {400, 400}], 
+         ParametricPlot[
+          With[{$CellContext`z$ = $CellContext`x + I $CellContext`y}, 
+           Through[
+            {
+            Re, Im}[(
+               1 - $CellContext`t$$) $CellContext`z$ + $CellContext`t$$ \
+(($CellContext`z$^3 - 3 $CellContext`z$^2 - 1)/(1 + 
+               3 I))]]], {$CellContext`x, (-3)/4, 3/4}, {$CellContext`y, (-3)/
+           4, 3/4}, Mesh -> {23, 23}, BoundaryStyle -> {Black}, PlotStyle -> 
+          Opacity[0.1], PerformanceGoal -> "Quality", ColorFunction -> 
+          Function[{$CellContext`u, $CellContext`v, $CellContext`x, \
+$CellContext`y}, Black], PlotRange -> {{(-3)/2, 3/2}, {(-3)/2, 3/2}}, 
+          GridLines -> None, ImageSize -> {400, 400}]]], 
+      "Specifications" :> {{{$CellContext`mapchoice$$, 5, "map"}, {1 -> Row[{
+             TraditionalForm[
+              HoldForm[$CellContext`f[$CellContext`z] = $CellContext`z^2]], 
+             "           (unit disc)"}], 2 -> Row[{
+             TraditionalForm[
+              HoldForm[$CellContext`f[$CellContext`z] = $CellContext`z^2]], 
+             "           (two squares)"}], 3 -> Row[{
+             TraditionalForm[
+              
+              HoldForm[$CellContext`f[$CellContext`z] = \
+$CellContext`exp[$CellContext`z]]], "     [-2, 2] \[Times] [-\[Pi], \[Pi]]"}],
+           4 -> Row[{
+             TraditionalForm[
+              
+              HoldForm[$CellContext`f[$CellContext`z] = \
+$CellContext`exp[$CellContext`z]]], "     [-2, 2] \[Times] [0, 2 \[Pi]]"}], 5 -> 
+          Row[{
+             TraditionalForm[
+              
+              HoldForm[$CellContext`f[$CellContext`z] = \
+$CellContext`exp[$CellContext`z]]], 
+             "     [-2, 2] \[Times] [-2 \[Pi], 2 \[Pi]]"}], 6 -> 
+          TraditionalForm[
+            
+            HoldForm[$CellContext`f[$CellContext`z] = ($CellContext`z^3 - 
+               3 $CellContext`z^2 - 1)/(1 + 3 I)]]}, 
+         FieldSize -> {20, 2.5}}, {{$CellContext`t$$, 0.366}, 0, 1}}, 
+      "Options" :> {}, "DefaultOptions" :> {ControllerLinking -> True}],
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->663090171]
+}, Open  ]],
+
+Cell["", "DetailsSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  ActionDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.419173919295766*^9},
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  ActionDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.3895522232313623`*^9, 
+  3.4191739211119475`*^9},
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell["", "SearchTermsSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "RelatedLinksSection"],
+
+Cell[TextData[ButtonBox["Conformal Mapping",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/ConformalMapping.html"], 
+   None}]], "RelatedLinks",
+ CellID->221906378]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Douglas N. Arnold",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Douglas+N.+\
+Arnold"], None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Douglas+N.+Arnold"]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4191739883596716`*^9, 3.419173990705906*^9}, {
+   3.419794749373263*^9, 3.419794751164442*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{700, Automatic},
+WindowMargins->{{22, Automatic}, {Automatic, 15}},
+FrontEndVersion->"6.0 for Microsoft Windows (64-bit) (March 13, 2008)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[75475, 1759, 373, 9, 22, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[75851, 1770, 677, 16, 22, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[76531, 1788, 339, 11, 22, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[76873, 1801, 636, 15, 22, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[77512, 1818, 843, 21, 22, "ControlSuggestions",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[78358, 1841, 394, 10, 22, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[78755, 1853, 1411, 31, 22, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[80169, 1886, 881, 21, 22, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 82271, 1955},
+ {"RotateAndZoomIn3D", 82380, 1958},
+ {"DragLocators", 82490, 1961},
+ {"CreateAndDeleteLocators", 82606, 1964},
+ {"SliderZoom", 82720, 1967},
+ {"GamepadControls", 82826, 1970},
+ {"AutomaticAnimation", 82940, 1973},
+ {"BookmarkAnimation", 83057, 1976}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[590, 23, 139, 2, 74, "DemoTitle"],
+Cell[732, 27, 33, 0, 156, "InitializationSection"],
+Cell[CellGroupData[{
+Cell[790, 31, 29, 0, 188, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[844, 35, 23712, 622, 1519, "Input"],
+Cell[24559, 659, 10003, 211, 559, "Output",
+ CellID->145628857]
+}, {2}]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[34608, 876, 36, 0, 136, "ManipulateCaptionSection"],
+Cell[34647, 878, 593, 12, 68, "ManipulateCaption"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[35277, 895, 28, 0, 168, "ThumbnailSection"],
+Cell[35308, 897, 10018, 211, 559, "Output",
+ CellID->475428143]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[45363, 1113, 28, 0, 138, "SnapshotsSection"],
+Cell[45394, 1115, 10029, 211, 559, "Output",
+ CellID->99289668],
+Cell[55426, 1328, 9964, 210, 32, "Output",
+ CellID->817639059],
+Cell[65393, 1540, 9976, 210, 32, "Output",
+ CellID->663090171]
+}, Open  ]],
+Cell[75384, 1753, 26, 0, 232, "DetailsSection"],
+Cell[CellGroupData[{
+Cell[75435, 1757, 37, 0, 108, "ControlSuggestionsSection"],
+Cell[75475, 1759, 373, 9, 22, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[75851, 1770, 677, 16, 22, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[76531, 1788, 339, 11, 22, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[76873, 1801, 636, 15, 22, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[77512, 1818, 843, 21, 22, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[78358, 1841, 394, 10, 22, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[78755, 1853, 1411, 31, 22, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[80169, 1886, 881, 21, 22, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[81065, 1910, 30, 0, 152, "SearchTermsSection"],
+Cell[CellGroupData[{
+Cell[81120, 1914, 31, 0, 126, "RelatedLinksSection"],
+Cell[81154, 1916, 195, 5, 22, "RelatedLinks",
+ CellID->221906378]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[81386, 1926, 25, 0, 136, "AuthorSection"],
+Cell[81414, 1928, 450, 12, 22, "Author"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

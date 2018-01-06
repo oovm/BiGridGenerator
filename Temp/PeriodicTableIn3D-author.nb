@@ -1,0 +1,1478 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     60282,       1469]
+NotebookOptionsPosition[     56323,       1347]
+NotebookOutlinePosition[     57931,       1398]
+CellTagsIndexPosition[     57603,       1386]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Periodic Table in 3D", "DemoTitle",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.436104961657854*^9, 3.4361049669373817`*^9}, 
+   3.436109006702318*^9}],
+
+Cell["", "InitializationSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Show", "[", 
+    RowBox[{
+     RowBox[{"BarChart3D", "[", 
+      RowBox[{
+       RowBox[{"Reverse", "/@", 
+        RowBox[{"data", "[", "prop", "]"}]}], ",", 
+       RowBox[{"ChartLayout", "\[Rule]", "\"\<Grid\>\""}], ",", 
+       RowBox[{"ChartElementFunction", "\[Rule]", "chartelem"}], ",", 
+       RowBox[{"BoxRatios", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"18", ",", "10", ",", "5"}], "}"}]}], ",", 
+       RowBox[{"Boxed", "\[Rule]", "boxed"}], ",", 
+       RowBox[{"Method", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"\"\<Canvas\>\"", "\[Rule]", "None"}], "}"}]}], ",", 
+       RowBox[{"Ticks", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"None", ",", "None", ",", 
+          RowBox[{"If", "[", 
+           RowBox[{"framed", ",", "Automatic", ",", "None"}], "]"}]}], 
+         "}"}]}], ",", 
+       RowBox[{"FaceGrids", "\[Rule]", 
+        RowBox[{"If", "[", 
+         RowBox[{"framed", ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"0", ",", 
+              RowBox[{"-", "1"}], ",", "0"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"1", ",", "0", ",", "0"}], "}"}]}], "}"}], ",", 
+          RowBox[{"{", "}"}]}], "]"}]}], ",", 
+       RowBox[{"ViewAngle", "\[Rule]", 
+        RowBox[{"Pi", "/", "4.5"}]}], ",", 
+       RowBox[{"ViewPoint", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", 
+          RowBox[{"1", "/", "5"}], ",", "1"}], "}"}]}], ",", 
+       RowBox[{"ViewVertical", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "0", ",", "1"}], "}"}]}], ",", 
+       RowBox[{"ImageSize", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"500", ",", "300"}], "}"}]}]}], "]"}], ",", 
+     RowBox[{"AxesEdge", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"None", ",", "None", ",", 
+        RowBox[{"If", "[", 
+         RowBox[{"framed", ",", 
+          RowBox[{"{", 
+           RowBox[{"1", ",", 
+            RowBox[{"-", "1"}]}], "}"}], ",", "None"}], "]"}]}], "}"}]}]}], 
+    "]"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Dynamic", "[", 
+    RowBox[{
+     RowBox[{"Row", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Control", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+            "prop", ",", "\"\<AtomicNumber\>\"", ",", 
+             "\"\<element property\>\""}], "}"}], ",", "props"}], "}"}], 
+         "]"}], ",", 
+        RowBox[{"Spacer", "[", "20", "]"}], ",", "\"\<unit: \>\"", ",", 
+        RowBox[{"Dynamic", "[", 
+         RowBox[{"With", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"unit", "=", 
+             RowBox[{"ElementData", "[", 
+              RowBox[{
+              "\"\<H\>\"", ",", "prop", ",", "\"\<UnitsNotation\>\""}], 
+              "]"}]}], "}"}], ",", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{"MatchQ", "[", 
+              RowBox[{"unit", ",", 
+               RowBox[{
+                RowBox[{"HoldPattern", "[", 
+                 RowBox[{"ElementData", "[", "__", "]"}], "]"}], "|", 
+                RowBox[{"Missing", "[", "_", "]"}]}]}], "]"}], ",", 
+             "\"\<not available\>\"", ",", "unit"}], "]"}]}], "]"}], "]"}]}], 
+       "}"}], "]"}], ",", 
+     RowBox[{"SynchronousUpdating", "\[Rule]", "False"}]}], "]"}], ",", 
+   RowBox[{"Row", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Control", "@", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+          "chartelem", ",", "\"\<FadingCube\>\"", ",", "\"\<bar style\>\""}], 
+          "}"}], ",", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"#", "\[Rule]", 
+             RowBox[{"ChartElementData", "[", 
+              RowBox[{"#", ",", "\"\<Name\>\""}], "]"}]}], "&"}], ")"}], "/@", 
+          RowBox[{"{", 
+           RowBox[{
+           "\"\<Cone\>\"", ",", "\"\<Cube\>\"", ",", "\"\<Cylinder\>\"", ",", 
+            "\"\<FadingCube\>\"", ",", "\"\<ProfileCube\>\""}], "}"}]}]}], 
+        "}"}]}], ",", 
+      RowBox[{"Spacer", "[", "15", "]"}], ",", 
+      RowBox[{"Control", "@", 
+       RowBox[{"{", 
+        RowBox[{"boxed", ",", 
+         RowBox[{"{", 
+          RowBox[{"True", ",", "False"}], "}"}]}], "}"}]}], ",", 
+      RowBox[{"Spacer", "[", "15", "]"}], ",", 
+      RowBox[{"Control", "@", 
+       RowBox[{"{", 
+        RowBox[{"framed", ",", 
+         RowBox[{"{", 
+          RowBox[{"True", ",", "False"}], "}"}]}], "}"}]}]}], "}"}], "]"}], 
+   ",", 
+   RowBox[{"SynchronousUpdating", "\[Rule]", "False"}], ",", 
+   RowBox[{"SynchronousInitialization", "\[Rule]", "False"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Initialization", "\[RuleDelayed]", 
+    RowBox[{"(", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"props", "=", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<AtomicNumber\>\"", ",", "\"\<AtomicRadius\>\"", ",", 
+         "\"\<AtomicWeight\>\"", ",", "\"\<BoilingPoint\>\"", ",", 
+         "\"\<CrustAbundance\>\"", ",", "\"\<Density\>\"", ",", 
+         "\"\<ElectronAffinity\>\"", ",", "\"\<Electronegativity\>\"", ",", 
+         "\"\<FusionHeat\>\"", ",", "\"\<MeltingPoint\>\"", ",", 
+         "\"\<OceanAbundance\>\"", ",", "\"\<SolarAbundance\>\"", ",", 
+         "\"\<ThermalConductivity\>\"", ",", "\"\<UniverseAbundance\>\""}], 
+        "}"}]}], ";", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"data", "[", "#", "]"}], "=", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"ColorData", "[", 
+             RowBox[{"\"\<Atoms\>\"", ",", "\"\<Image\>\""}], "]"}], "[", 
+            RowBox[{"[", 
+             RowBox[{"1", ",", "2"}], "]"}], "]"}], "/.", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"color_", ",", 
+                RowBox[{"Rectangle", "[", "__", "]"}], ",", 
+                RowBox[{"Inset", "[", 
+                 RowBox[{
+                  RowBox[{"Style", "[", 
+                   RowBox[{"element_", ",", "__"}], "]"}], ",", "___"}], 
+                 "]"}]}], "}"}], "\[RuleDelayed]", 
+              RowBox[{"With", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"value", "=", 
+                  RowBox[{"ElementData", "[", 
+                   RowBox[{"element", ",", "#"}], "]"}]}], "}"}], ",", 
+                "\[IndentingNewLine]", 
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{"MatchQ", "[", 
+                   RowBox[{"value", ",", 
+                    RowBox[{"Missing", "[", "_", "]"}]}], "]"}], ",", 
+                  "\[IndentingNewLine]", 
+                  RowBox[{"Labeled", "[", 
+                   RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    RowBox[{"Tooltip", "[", 
+                    RowBox[{"0", ",", 
+                    RowBox[{"value", "/.", 
+                    RowBox[{
+                    RowBox[{"Missing", "[", "s_", "]"}], "\[Rule]", "s"}]}]}],
+                     "]"}], ",", "White"}], "]"}], ",", 
+                    RowBox[{"Style", "[", 
+                    RowBox[{"element", ",", "\"\<Label\>\"", ",", "9", ",", 
+                    RowBox[{"Background", "\[Rule]", 
+                    RowBox[{"Opacity", "[", 
+                    RowBox[{".5", ",", "White"}], "]"}]}]}], "]"}], ",", 
+                    "Above"}], "]"}], ",", "\[IndentingNewLine]", 
+                  RowBox[{"Labeled", "[", 
+                   RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"value", ",", "color"}], "]"}], ",", 
+                    RowBox[{"Style", "[", 
+                    RowBox[{"element", ",", "\"\<Label\>\"", ",", "9", ",", 
+                    RowBox[{"Background", "\[Rule]", 
+                    RowBox[{"Opacity", "[", 
+                    RowBox[{".5", ",", "White"}], "]"}]}]}], "]"}], ",", 
+                    "Above"}], "]"}]}], "\[IndentingNewLine]", "]"}]}], 
+               "]"}]}], ",", 
+             RowBox[{
+              RowBox[{"{", "}"}], "\[Rule]", "None"}]}], "}"}]}]}], ")"}], 
+        "&"}], "/@", "props"}], ";"}], "\[IndentingNewLine]", ")"}]}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, 3.4360995576035028`*^9, {3.436101062694997*^9, 
+   3.436101109259653*^9}, {3.436101229171643*^9, 3.436101272437969*^9}, {
+   3.4361013168344083`*^9, 3.436101323962121*^9}, {3.436101475527276*^9, 
+   3.43610148196692*^9}, {3.436101583668089*^9, 3.4361016031730394`*^9}, {
+   3.4361016955322742`*^9, 3.436101703969118*^9}, {3.4361017440301237`*^9, 
+   3.4361018115268726`*^9}, {3.4361018931860375`*^9, 3.43610193551627*^9}, {
+   3.436102068906608*^9, 3.4361020689706144`*^9}, {3.4361021205237694`*^9, 
+   3.436102126051322*^9}, {3.4361024214488583`*^9, 3.4361024889136047`*^9}, {
+   3.4361025998867006`*^9, 3.436102712974008*^9}, {3.4361029931380215`*^9, 
+   3.436103042578965*^9}, {3.4361031697636824`*^9, 3.4361032439230976`*^9}, {
+   3.4361032818068857`*^9, 3.436103437524456*^9}, {3.436105223553041*^9, 
+   3.436105281858871*^9}, {3.4361064784235153`*^9, 3.4361065422588987`*^9}, {
+   3.4361068571033792`*^9, 3.436106888050474*^9}, {3.436106962475916*^9, 
+   3.4361070264303107`*^9}, {3.4361071856552315`*^9, 
+   3.4361071893456006`*^9}, {3.436107268402506*^9, 3.4361073028509502`*^9}, {
+   3.4361073672143855`*^9, 3.4361074224809117`*^9}, {3.436107455714235*^9, 
+   3.4361074816588287`*^9}, {3.4361075442140837`*^9, 3.436107670578719*^9}, {
+   3.436107966968355*^9, 3.4361080152651844`*^9}, {3.4361081214708037`*^9, 
+   3.4361082138280387`*^9}, {3.43610825264592*^9, 3.436108283680023*^9}, {
+   3.4361083569783525`*^9, 3.4361085062252755`*^9}, {3.4361086192785797`*^9, 
+   3.4361086215258045`*^9}, {3.4361087072573767`*^9, 3.436108713634014*^9}, {
+   3.4361220700002317`*^9, 3.4361220749507265`*^9}, {3.4361221062698584`*^9, 
+   3.436122115317763*^9}, {3.4361221496441956`*^9, 3.4361221732425547`*^9}, {
+   3.539704354629957*^9, 3.539704560941988*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`boxed$$ = True, $CellContext`chartelem$$ = 
+    "FadingCube", $CellContext`framed$$ = True, $CellContext`prop$$ = 
+    "AtomicNumber", Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`prop$$], "AtomicNumber", "element property"}, {
+      "AtomicNumber", "AtomicRadius", "AtomicWeight", "BoilingPoint", 
+       "CrustAbundance", "Density", "ElectronAffinity", "Electronegativity", 
+       "FusionHeat", "MeltingPoint", "OceanAbundance", "SolarAbundance", 
+       "ThermalConductivity", "UniverseAbundance"}}, {
+      Hold[
+       Dynamic[
+        Row[{
+          Manipulate`Place[1], 
+          Spacer[20], "unit: ", 
+          Dynamic[
+           
+           With[{$CellContext`unit = 
+             ElementData["H", $CellContext`prop$$, "UnitsNotation"]}, 
+            If[
+             MatchQ[$CellContext`unit, 
+              Alternatives[
+               HoldPattern[
+                ElementData[
+                 BlankSequence[]]], 
+               Missing[
+                Blank[]]]], "not available", $CellContext`unit]]]}], 
+        SynchronousUpdating -> False]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`chartelem$$], "FadingCube", "bar style"}, {
+      "Cone" -> "cone", "Cube" -> "cube", "Cylinder" -> "cylinder", 
+       "FadingCube" -> "fading cube", "ProfileCube" -> " profile bar"}}, {{
+       Hold[$CellContext`boxed$$], True}, {True, False}}, {{
+       Hold[$CellContext`framed$$], True}, {True, False}}, {
+      Hold[
+       Row[{
+         Manipulate`Place[2], 
+         Spacer[15], 
+         Manipulate`Place[3], 
+         Spacer[15], 
+         Manipulate`Place[4]}]], Manipulate`Dump`ThisIsNotAControl}}, 
+    Typeset`size$$ = {500., {148., 152.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`prop$20403$$ = 0, $CellContext`chartelem$20404$$ = 
+    False, $CellContext`boxed$20405$$ = False, $CellContext`framed$20406$$ = 
+    False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     2, StandardForm, 
+      "Variables" :> {$CellContext`boxed$$ = True, $CellContext`chartelem$$ = 
+        "FadingCube", $CellContext`framed$$ = True, $CellContext`prop$$ = 
+        "AtomicNumber"}, "ControllerVariables" :> {
+        Hold[$CellContext`prop$$, $CellContext`prop$20403$$, 0], 
+        Hold[$CellContext`chartelem$$, $CellContext`chartelem$20404$$, False], 
+        Hold[$CellContext`boxed$$, $CellContext`boxed$20405$$, False], 
+        Hold[$CellContext`framed$$, $CellContext`framed$20406$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Show[
+        BarChart3D[
+         Map[Reverse, 
+          $CellContext`data[$CellContext`prop$$]], ChartLayout -> "Grid", 
+         ChartElementFunction -> $CellContext`chartelem$$, 
+         BoxRatios -> {18, 10, 5}, Boxed -> $CellContext`boxed$$, 
+         Method -> {"Canvas" -> None}, Ticks -> {None, None, 
+           If[$CellContext`framed$$, Automatic, None]}, FaceGrids -> 
+         If[$CellContext`framed$$, {{0, -1, 0}, {1, 0, 0}}, {}], ViewAngle -> 
+         Pi/4.5, ViewPoint -> {0, 1/5, 1}, ViewVertical -> {0, 0, 1}, 
+         ImageSize -> {500, 300}], AxesEdge -> {None, None, 
+          If[$CellContext`framed$$, {1, -1}, None]}], 
+      "Specifications" :> {{{$CellContext`prop$$, "AtomicNumber", 
+          "element property"}, {
+         "AtomicNumber", "AtomicRadius", "AtomicWeight", "BoilingPoint", 
+          "CrustAbundance", "Density", "ElectronAffinity", 
+          "Electronegativity", "FusionHeat", "MeltingPoint", "OceanAbundance",
+           "SolarAbundance", "ThermalConductivity", "UniverseAbundance"}, 
+         ControlPlacement -> 1}, 
+        Dynamic[
+         Row[{
+           Manipulate`Place[1], 
+           Spacer[20], "unit: ", 
+           Dynamic[
+            
+            With[{$CellContext`unit = 
+              ElementData["H", $CellContext`prop$$, "UnitsNotation"]}, 
+             If[
+              MatchQ[$CellContext`unit, 
+               Alternatives[
+                HoldPattern[
+                 ElementData[
+                  BlankSequence[]]], 
+                Missing[
+                 Blank[]]]], "not available", $CellContext`unit]]]}], 
+         SynchronousUpdating -> 
+         False], {{$CellContext`chartelem$$, "FadingCube", "bar style"}, {
+         "Cone" -> "cone", "Cube" -> "cube", "Cylinder" -> "cylinder", 
+          "FadingCube" -> "fading cube", "ProfileCube" -> " profile bar"}, 
+         ControlPlacement -> 2}, {{$CellContext`boxed$$, True}, {True, False},
+          ControlPlacement -> 3}, {{$CellContext`framed$$, True}, {
+         True, False}, ControlPlacement -> 4}, 
+        Row[{
+          Manipulate`Place[2], 
+          Spacer[15], 
+          Manipulate`Place[3], 
+          Spacer[15], 
+          Manipulate`Place[4]}]}, 
+      "Options" :> {
+       SynchronousUpdating -> False, SynchronousInitialization -> False}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{543., {203., 209.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>(($CellContext`props = {
+        "AtomicNumber", "AtomicRadius", "AtomicWeight", "BoilingPoint", 
+         "CrustAbundance", "Density", "ElectronAffinity", "Electronegativity",
+          "FusionHeat", "MeltingPoint", "OceanAbundance", "SolarAbundance", 
+         "ThermalConductivity", "UniverseAbundance"}; 
+      Map[($CellContext`data[#] = ReplaceAll[
+          Part[
+           ColorData["Atoms", "Image"], 1, 2], {{
+             Pattern[$CellContext`color, 
+              Blank[]], 
+             Rectangle[
+              BlankSequence[]], 
+             Inset[
+              Style[
+               Pattern[$CellContext`element, 
+                Blank[]], 
+               BlankSequence[]], 
+              BlankNullSequence[]]} :> 
+           With[{$CellContext`value = ElementData[$CellContext`element, #]}, 
+             If[
+              MatchQ[$CellContext`value, 
+               Missing[
+                Blank[]]], 
+              Labeled[
+               Style[
+                Tooltip[0, 
+                 ReplaceAll[$CellContext`value, Missing[
+                    Pattern[$CellContext`s, 
+                    Blank[]]] -> $CellContext`s]], White], 
+               
+               Style[$CellContext`element, "Label", 9, Background -> 
+                Opacity[0.5, White]], Above], 
+              Labeled[
+               Style[$CellContext`value, $CellContext`color], 
+               
+               Style[$CellContext`element, "Label", 9, Background -> 
+                Opacity[0.5, White]], Above]]], {} -> 
+           None}])& , $CellContext`props]; Null); Typeset`initDone$$ = True),
+    SynchronousInitialization->False,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->854613394]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell["\<\
+This Demonstration shows 3D bar charts of the periodic table with various \
+element property values.\
+\>", "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.436108824543104*^9, 3.436108861072757*^9}, {
+   3.4361089151871676`*^9, 3.4361089385485034`*^9}, {3.4361346662495737`*^9, 
+   3.4361346664214497`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`boxed$$ = True, $CellContext`chartelem$$ = 
+    "FadingCube", $CellContext`framed$$ = True, $CellContext`prop$$ = 
+    "AtomicNumber", Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`prop$$], "AtomicNumber", "element property"}, {
+      "AtomicNumber", "AtomicRadius", "AtomicWeight", "BoilingPoint", 
+       "CrustAbundance", "Density", "ElectronAffinity", "Electronegativity", 
+       "FusionHeat", "MeltingPoint", "OceanAbundance", "SolarAbundance", 
+       "ThermalConductivity", "UniverseAbundance"}}, {
+      Hold[
+       Dynamic[
+        Row[{
+          Manipulate`Place[1], 
+          Spacer[20], "unit: ", 
+          Dynamic[
+           
+           With[{$CellContext`unit = 
+             ElementData["H", $CellContext`prop$$, "UnitsNotation"]}, 
+            If[
+             MatchQ[$CellContext`unit, 
+              Alternatives[
+               HoldPattern[
+                ElementData[
+                 BlankSequence[]]], 
+               Missing[
+                Blank[]]]], "not available", $CellContext`unit]]]}], 
+        SynchronousUpdating -> False]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`chartelem$$], "FadingCube", "bar style"}, {
+      "Cone" -> "cone", "Cube" -> "cube", "Cylinder" -> "cylinder", 
+       "FadingCube" -> "fading cube", "ProfileCube" -> " profile bar"}}, {
+      Hold[$CellContext`boxed$$], {True, False}}, {
+      Hold[$CellContext`framed$$], {True, False}}, {
+      Hold[
+       Row[{
+         Manipulate`Place[2], 
+         Spacer[15], 
+         Manipulate`Place[3], 
+         Spacer[15], 
+         Manipulate`Place[4]}]], Manipulate`Dump`ThisIsNotAControl}}, 
+    Typeset`size$$ = {500., {148., 152.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`prop$20464$$ = 0, $CellContext`chartelem$20465$$ = 
+    False, $CellContext`boxed$20466$$ = False, $CellContext`framed$20467$$ = 
+    False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     2, StandardForm, 
+      "Variables" :> {$CellContext`boxed$$ = True, $CellContext`chartelem$$ = 
+        "FadingCube", $CellContext`framed$$ = True, $CellContext`prop$$ = 
+        "AtomicNumber"}, "ControllerVariables" :> {
+        Hold[$CellContext`prop$$, $CellContext`prop$20464$$, 0], 
+        Hold[$CellContext`chartelem$$, $CellContext`chartelem$20465$$, False], 
+        Hold[$CellContext`boxed$$, $CellContext`boxed$20466$$, False], 
+        Hold[$CellContext`framed$$, $CellContext`framed$20467$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Show[
+        BarChart3D[
+         Map[Reverse, 
+          $CellContext`data[$CellContext`prop$$]], ChartLayout -> "Grid", 
+         ChartElementFunction -> $CellContext`chartelem$$, 
+         BoxRatios -> {18, 10, 5}, Boxed -> $CellContext`boxed$$, 
+         Method -> {"Canvas" -> None}, Ticks -> {None, None, 
+           If[$CellContext`framed$$, Automatic, None]}, FaceGrids -> 
+         If[$CellContext`framed$$, {{0, -1, 0}, {1, 0, 0}}, {}], ViewAngle -> 
+         Pi/4.5, ViewPoint -> {0, 1/5, 1}, ViewVertical -> {0, 0, 1}, 
+         ImageSize -> {500, 300}], AxesEdge -> {None, None, 
+          If[$CellContext`framed$$, {1, -1}, None]}], 
+      "Specifications" :> {{{$CellContext`prop$$, "AtomicNumber", 
+          "element property"}, {
+         "AtomicNumber", "AtomicRadius", "AtomicWeight", "BoilingPoint", 
+          "CrustAbundance", "Density", "ElectronAffinity", 
+          "Electronegativity", "FusionHeat", "MeltingPoint", "OceanAbundance",
+           "SolarAbundance", "ThermalConductivity", "UniverseAbundance"}, 
+         ControlPlacement -> 1}, 
+        Dynamic[
+         Row[{
+           Manipulate`Place[1], 
+           Spacer[20], "unit: ", 
+           Dynamic[
+            
+            With[{$CellContext`unit = 
+              ElementData["H", $CellContext`prop$$, "UnitsNotation"]}, 
+             If[
+              MatchQ[$CellContext`unit, 
+               Alternatives[
+                HoldPattern[
+                 ElementData[
+                  BlankSequence[]]], 
+                Missing[
+                 Blank[]]]], "not available", $CellContext`unit]]]}], 
+         SynchronousUpdating -> 
+         False], {{$CellContext`chartelem$$, "FadingCube", "bar style"}, {
+         "Cone" -> "cone", "Cube" -> "cube", "Cylinder" -> "cylinder", 
+          "FadingCube" -> "fading cube", "ProfileCube" -> " profile bar"}, 
+         ControlPlacement -> 2}, {$CellContext`boxed$$, {True, False}, 
+         ControlPlacement -> 3}, {$CellContext`framed$$, {True, False}, 
+         ControlPlacement -> 4}, 
+        Row[{
+          Manipulate`Place[2], 
+          Spacer[15], 
+          Manipulate`Place[3], 
+          Spacer[15], 
+          Manipulate`Place[4]}]}, 
+      "Options" :> {
+       SynchronousUpdating -> False, SynchronousInitialization -> False}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{543., {203., 209.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>(($CellContext`props = {
+        "AtomicNumber", "AtomicRadius", "AtomicWeight", "BoilingPoint", 
+         "CrustAbundance", "Density", "ElectronAffinity", "Electronegativity",
+          "FusionHeat", "MeltingPoint", "OceanAbundance", "SolarAbundance", 
+         "ThermalConductivity", "UniverseAbundance"}; 
+      Map[($CellContext`data[#] = ReplaceAll[
+          Part[
+           ColorData["Atoms", "Image"], 1, 2], {{
+             Pattern[$CellContext`color, 
+              Blank[]], 
+             Rectangle[
+              BlankSequence[]], 
+             Inset[
+              Style[
+               Pattern[$CellContext`element, 
+                Blank[]], 
+               BlankSequence[]], 
+              BlankNullSequence[]]} :> 
+           With[{$CellContext`value = ElementData[$CellContext`element, #]}, 
+             If[
+              MatchQ[$CellContext`value, 
+               Missing[
+                Blank[]]], 
+              Labeled[
+               Style[
+                Tooltip[0, 
+                 ReplaceAll[$CellContext`value, Missing[
+                    Pattern[$CellContext`s, 
+                    Blank[]]] -> $CellContext`s]], White], 
+               
+               Style[$CellContext`element, "Label", 9, Background -> 
+                Opacity[0.5, White]], Above], 
+              Labeled[
+               Style[$CellContext`value, $CellContext`color], 
+               
+               Style[$CellContext`element, "Label", 9, Background -> 
+                Opacity[0.5, White]], Above]]], {} -> 
+           None}])& , $CellContext`props]; Null); Typeset`initDone$$ = True),
+    SynchronousInitialization->False,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->1116681822]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`boxed$$ = True, $CellContext`chartelem$$ = 
+    "FadingCube", $CellContext`framed$$ = True, $CellContext`prop$$ = 
+    "AtomicNumber", Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`prop$$], "AtomicNumber", "element property"}, {
+      "AtomicNumber", "AtomicRadius", "AtomicWeight", "BoilingPoint", 
+       "CrustAbundance", "Density", "ElectronAffinity", "Electronegativity", 
+       "FusionHeat", "MeltingPoint", "OceanAbundance", "SolarAbundance", 
+       "ThermalConductivity", "UniverseAbundance"}}, {
+      Hold[
+       Dynamic[
+        Row[{
+          Manipulate`Place[1], 
+          Spacer[20], "unit: ", 
+          Dynamic[
+           
+           With[{$CellContext`unit = 
+             ElementData["H", $CellContext`prop$$, "UnitsNotation"]}, 
+            If[
+             MatchQ[$CellContext`unit, 
+              Alternatives[
+               HoldPattern[
+                ElementData[
+                 BlankSequence[]]], 
+               Missing[
+                Blank[]]]], "not available", $CellContext`unit]]]}], 
+        SynchronousUpdating -> False]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`chartelem$$], "FadingCube", "bar style"}, {
+      "Cone" -> "cone", "Cube" -> "cube", "Cylinder" -> "cylinder", 
+       "FadingCube" -> "fading cube", "ProfileCube" -> " profile bar"}}, {
+      Hold[$CellContext`boxed$$], {True, False}}, {
+      Hold[$CellContext`framed$$], {True, False}}, {
+      Hold[
+       Row[{
+         Manipulate`Place[2], 
+         Spacer[15], 
+         Manipulate`Place[3], 
+         Spacer[15], 
+         Manipulate`Place[4]}]], Manipulate`Dump`ThisIsNotAControl}}, 
+    Typeset`size$$ = {500., {148., 152.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`prop$20525$$ = 0, $CellContext`chartelem$20526$$ = 
+    False, $CellContext`boxed$20527$$ = False, $CellContext`framed$20528$$ = 
+    False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     2, StandardForm, 
+      "Variables" :> {$CellContext`boxed$$ = True, $CellContext`chartelem$$ = 
+        "FadingCube", $CellContext`framed$$ = True, $CellContext`prop$$ = 
+        "AtomicNumber"}, "ControllerVariables" :> {
+        Hold[$CellContext`prop$$, $CellContext`prop$20525$$, 0], 
+        Hold[$CellContext`chartelem$$, $CellContext`chartelem$20526$$, False], 
+        Hold[$CellContext`boxed$$, $CellContext`boxed$20527$$, False], 
+        Hold[$CellContext`framed$$, $CellContext`framed$20528$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Show[
+        BarChart3D[
+         Map[Reverse, 
+          $CellContext`data[$CellContext`prop$$]], ChartLayout -> "Grid", 
+         ChartElementFunction -> $CellContext`chartelem$$, 
+         BoxRatios -> {18, 10, 5}, Boxed -> $CellContext`boxed$$, 
+         Method -> {"Canvas" -> None}, Ticks -> {None, None, 
+           If[$CellContext`framed$$, Automatic, None]}, FaceGrids -> 
+         If[$CellContext`framed$$, {{0, -1, 0}, {1, 0, 0}}, {}], ViewAngle -> 
+         Pi/4.5, ViewPoint -> {0, 1/5, 1}, ViewVertical -> {0, 0, 1}, 
+         ImageSize -> {500, 300}], AxesEdge -> {None, None, 
+          If[$CellContext`framed$$, {1, -1}, None]}], 
+      "Specifications" :> {{{$CellContext`prop$$, "AtomicNumber", 
+          "element property"}, {
+         "AtomicNumber", "AtomicRadius", "AtomicWeight", "BoilingPoint", 
+          "CrustAbundance", "Density", "ElectronAffinity", 
+          "Electronegativity", "FusionHeat", "MeltingPoint", "OceanAbundance",
+           "SolarAbundance", "ThermalConductivity", "UniverseAbundance"}, 
+         ControlPlacement -> 1}, 
+        Dynamic[
+         Row[{
+           Manipulate`Place[1], 
+           Spacer[20], "unit: ", 
+           Dynamic[
+            
+            With[{$CellContext`unit = 
+              ElementData["H", $CellContext`prop$$, "UnitsNotation"]}, 
+             If[
+              MatchQ[$CellContext`unit, 
+               Alternatives[
+                HoldPattern[
+                 ElementData[
+                  BlankSequence[]]], 
+                Missing[
+                 Blank[]]]], "not available", $CellContext`unit]]]}], 
+         SynchronousUpdating -> 
+         False], {{$CellContext`chartelem$$, "FadingCube", "bar style"}, {
+         "Cone" -> "cone", "Cube" -> "cube", "Cylinder" -> "cylinder", 
+          "FadingCube" -> "fading cube", "ProfileCube" -> " profile bar"}, 
+         ControlPlacement -> 2}, {$CellContext`boxed$$, {True, False}, 
+         ControlPlacement -> 3}, {$CellContext`framed$$, {True, False}, 
+         ControlPlacement -> 4}, 
+        Row[{
+          Manipulate`Place[2], 
+          Spacer[15], 
+          Manipulate`Place[3], 
+          Spacer[15], 
+          Manipulate`Place[4]}]}, 
+      "Options" :> {
+       SynchronousUpdating -> False, SynchronousInitialization -> False}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{543., {203., 209.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>(($CellContext`props = {
+        "AtomicNumber", "AtomicRadius", "AtomicWeight", "BoilingPoint", 
+         "CrustAbundance", "Density", "ElectronAffinity", "Electronegativity",
+          "FusionHeat", "MeltingPoint", "OceanAbundance", "SolarAbundance", 
+         "ThermalConductivity", "UniverseAbundance"}; 
+      Map[($CellContext`data[#] = ReplaceAll[
+          Part[
+           ColorData["Atoms", "Image"], 1, 2], {{
+             Pattern[$CellContext`color, 
+              Blank[]], 
+             Rectangle[
+              BlankSequence[]], 
+             Inset[
+              Style[
+               Pattern[$CellContext`element, 
+                Blank[]], 
+               BlankSequence[]], 
+              BlankNullSequence[]]} :> 
+           With[{$CellContext`value = ElementData[$CellContext`element, #]}, 
+             If[
+              MatchQ[$CellContext`value, 
+               Missing[
+                Blank[]]], 
+              Labeled[
+               Style[
+                Tooltip[0, 
+                 ReplaceAll[$CellContext`value, Missing[
+                    Pattern[$CellContext`s, 
+                    Blank[]]] -> $CellContext`s]], White], 
+               
+               Style[$CellContext`element, "Label", 9, Background -> 
+                Opacity[0.5, White]], Above], 
+              Labeled[
+               Style[$CellContext`value, $CellContext`color], 
+               
+               Style[$CellContext`element, "Label", 9, Background -> 
+                Opacity[0.5, White]], Above]]], {} -> 
+           None}])& , $CellContext`props]; Null); Typeset`initDone$$ = True),
+    SynchronousInitialization->False,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->1211791221],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`boxed$$ = True, $CellContext`chartelem$$ = 
+    "FadingCube", $CellContext`framed$$ = True, $CellContext`prop$$ = 
+    "BoilingPoint", Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`prop$$], "BoilingPoint", "element property"}, {
+      "AtomicNumber", "AtomicRadius", "AtomicWeight", "BoilingPoint", 
+       "CrustAbundance", "Density", "ElectronAffinity", "Electronegativity", 
+       "FusionHeat", "MeltingPoint", "OceanAbundance", "SolarAbundance", 
+       "ThermalConductivity", "UniverseAbundance"}}, {
+      Hold[
+       Dynamic[
+        Row[{
+          Manipulate`Place[1], 
+          Spacer[20], "unit: ", 
+          Dynamic[
+           
+           With[{$CellContext`unit = 
+             ElementData["H", $CellContext`prop$$, "UnitsNotation"]}, 
+            If[
+             MatchQ[$CellContext`unit, 
+              Alternatives[
+               HoldPattern[
+                ElementData[
+                 BlankSequence[]]], 
+               Missing[
+                Blank[]]]], "not available", $CellContext`unit]]]}], 
+        SynchronousUpdating -> False]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`chartelem$$], "FadingCube", "bar style"}, {
+      "Cone" -> "cone", "Cube" -> "cube", "Cylinder" -> "cylinder", 
+       "FadingCube" -> "fading cube", "ProfileCube" -> " profile bar"}}, {
+      Hold[$CellContext`boxed$$], {True, False}}, {
+      Hold[$CellContext`framed$$], {True, False}}, {
+      Hold[
+       Row[{
+         Manipulate`Place[2], 
+         Spacer[15], 
+         Manipulate`Place[3], 
+         Spacer[15], 
+         Manipulate`Place[4]}]], Manipulate`Dump`ThisIsNotAControl}}, 
+    Typeset`size$$ = {500., {148., 152.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`prop$20586$$ = 0, $CellContext`chartelem$20587$$ = 
+    False, $CellContext`boxed$20588$$ = False, $CellContext`framed$20589$$ = 
+    False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     2, StandardForm, 
+      "Variables" :> {$CellContext`boxed$$ = True, $CellContext`chartelem$$ = 
+        "FadingCube", $CellContext`framed$$ = True, $CellContext`prop$$ = 
+        "BoilingPoint"}, "ControllerVariables" :> {
+        Hold[$CellContext`prop$$, $CellContext`prop$20586$$, 0], 
+        Hold[$CellContext`chartelem$$, $CellContext`chartelem$20587$$, False], 
+        Hold[$CellContext`boxed$$, $CellContext`boxed$20588$$, False], 
+        Hold[$CellContext`framed$$, $CellContext`framed$20589$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Show[
+        BarChart3D[
+         Map[Reverse, 
+          $CellContext`data[$CellContext`prop$$]], ChartLayout -> "Grid", 
+         ChartElementFunction -> $CellContext`chartelem$$, 
+         BoxRatios -> {18, 10, 5}, Boxed -> $CellContext`boxed$$, 
+         Method -> {"Canvas" -> None}, Ticks -> {None, None, 
+           If[$CellContext`framed$$, Automatic, None]}, FaceGrids -> 
+         If[$CellContext`framed$$, {{0, -1, 0}, {1, 0, 0}}, {}], ViewAngle -> 
+         Pi/4.5, ViewPoint -> {0, 1/5, 1}, ViewVertical -> {0, 0, 1}, 
+         ImageSize -> {500, 300}], AxesEdge -> {None, None, 
+          If[$CellContext`framed$$, {1, -1}, None]}], 
+      "Specifications" :> {{{$CellContext`prop$$, "BoilingPoint", 
+          "element property"}, {
+         "AtomicNumber", "AtomicRadius", "AtomicWeight", "BoilingPoint", 
+          "CrustAbundance", "Density", "ElectronAffinity", 
+          "Electronegativity", "FusionHeat", "MeltingPoint", "OceanAbundance",
+           "SolarAbundance", "ThermalConductivity", "UniverseAbundance"}, 
+         ControlPlacement -> 1}, 
+        Dynamic[
+         Row[{
+           Manipulate`Place[1], 
+           Spacer[20], "unit: ", 
+           Dynamic[
+            
+            With[{$CellContext`unit = 
+              ElementData["H", $CellContext`prop$$, "UnitsNotation"]}, 
+             If[
+              MatchQ[$CellContext`unit, 
+               Alternatives[
+                HoldPattern[
+                 ElementData[
+                  BlankSequence[]]], 
+                Missing[
+                 Blank[]]]], "not available", $CellContext`unit]]]}], 
+         SynchronousUpdating -> 
+         False], {{$CellContext`chartelem$$, "FadingCube", "bar style"}, {
+         "Cone" -> "cone", "Cube" -> "cube", "Cylinder" -> "cylinder", 
+          "FadingCube" -> "fading cube", "ProfileCube" -> " profile bar"}, 
+         ControlPlacement -> 2}, {$CellContext`boxed$$, {True, False}, 
+         ControlPlacement -> 3}, {$CellContext`framed$$, {True, False}, 
+         ControlPlacement -> 4}, 
+        Row[{
+          Manipulate`Place[2], 
+          Spacer[15], 
+          Manipulate`Place[3], 
+          Spacer[15], 
+          Manipulate`Place[4]}]}, 
+      "Options" :> {
+       SynchronousUpdating -> False, SynchronousInitialization -> False}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{543., {203., 209.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>(($CellContext`props = {
+        "AtomicNumber", "AtomicRadius", "AtomicWeight", "BoilingPoint", 
+         "CrustAbundance", "Density", "ElectronAffinity", "Electronegativity",
+          "FusionHeat", "MeltingPoint", "OceanAbundance", "SolarAbundance", 
+         "ThermalConductivity", "UniverseAbundance"}; 
+      Map[($CellContext`data[#] = ReplaceAll[
+          Part[
+           ColorData["Atoms", "Image"], 1, 2], {{
+             Pattern[$CellContext`color, 
+              Blank[]], 
+             Rectangle[
+              BlankSequence[]], 
+             Inset[
+              Style[
+               Pattern[$CellContext`element, 
+                Blank[]], 
+               BlankSequence[]], 
+              BlankNullSequence[]]} :> 
+           With[{$CellContext`value = ElementData[$CellContext`element, #]}, 
+             If[
+              MatchQ[$CellContext`value, 
+               Missing[
+                Blank[]]], 
+              Labeled[
+               Style[
+                Tooltip[0, 
+                 ReplaceAll[$CellContext`value, Missing[
+                    Pattern[$CellContext`s, 
+                    Blank[]]] -> $CellContext`s]], White], 
+               
+               Style[$CellContext`element, "Label", 9, Background -> 
+                Opacity[0.5, White]], Above], 
+              Labeled[
+               Style[$CellContext`value, $CellContext`color], 
+               
+               Style[$CellContext`element, "Label", 9, Background -> 
+                Opacity[0.5, White]], Above]]], {} -> 
+           None}])& , $CellContext`props]; Null); Typeset`initDone$$ = True),
+    SynchronousInitialization->False,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->1987626846],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`boxed$$ = True, $CellContext`chartelem$$ = 
+    "Cylinder", $CellContext`framed$$ = True, $CellContext`prop$$ = 
+    "BoilingPoint", Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`prop$$], "BoilingPoint", "element property"}, {
+      "AtomicNumber", "AtomicRadius", "AtomicWeight", "BoilingPoint", 
+       "CrustAbundance", "Density", "ElectronAffinity", "Electronegativity", 
+       "FusionHeat", "MeltingPoint", "OceanAbundance", "SolarAbundance", 
+       "ThermalConductivity", "UniverseAbundance"}}, {
+      Hold[
+       Dynamic[
+        Row[{
+          Manipulate`Place[1], 
+          Spacer[20], "unit: ", 
+          Dynamic[
+           
+           With[{$CellContext`unit = 
+             ElementData["H", $CellContext`prop$$, "UnitsNotation"]}, 
+            If[
+             MatchQ[$CellContext`unit, 
+              Alternatives[
+               HoldPattern[
+                ElementData[
+                 BlankSequence[]]], 
+               Missing[
+                Blank[]]]], "not available", $CellContext`unit]]]}], 
+        SynchronousUpdating -> False]], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`chartelem$$], "Cylinder", "bar style"}, {
+      "Cone" -> "cone", "Cube" -> "cube", "Cylinder" -> "cylinder", 
+       "FadingCube" -> "fading cube", "ProfileCube" -> " profile bar"}}, {
+      Hold[$CellContext`boxed$$], {True, False}}, {
+      Hold[$CellContext`framed$$], {True, False}}, {
+      Hold[
+       Row[{
+         Manipulate`Place[2], 
+         Spacer[15], 
+         Manipulate`Place[3], 
+         Spacer[15], 
+         Manipulate`Place[4]}]], Manipulate`Dump`ThisIsNotAControl}}, 
+    Typeset`size$$ = {500., {148., 152.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`prop$20647$$ = 0, $CellContext`chartelem$20648$$ = 
+    False, $CellContext`boxed$20649$$ = False, $CellContext`framed$20650$$ = 
+    False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     2, StandardForm, 
+      "Variables" :> {$CellContext`boxed$$ = True, $CellContext`chartelem$$ = 
+        "Cylinder", $CellContext`framed$$ = True, $CellContext`prop$$ = 
+        "BoilingPoint"}, "ControllerVariables" :> {
+        Hold[$CellContext`prop$$, $CellContext`prop$20647$$, 0], 
+        Hold[$CellContext`chartelem$$, $CellContext`chartelem$20648$$, False], 
+        Hold[$CellContext`boxed$$, $CellContext`boxed$20649$$, False], 
+        Hold[$CellContext`framed$$, $CellContext`framed$20650$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Show[
+        BarChart3D[
+         Map[Reverse, 
+          $CellContext`data[$CellContext`prop$$]], ChartLayout -> "Grid", 
+         ChartElementFunction -> $CellContext`chartelem$$, 
+         BoxRatios -> {18, 10, 5}, Boxed -> $CellContext`boxed$$, 
+         Method -> {"Canvas" -> None}, Ticks -> {None, None, 
+           If[$CellContext`framed$$, Automatic, None]}, FaceGrids -> 
+         If[$CellContext`framed$$, {{0, -1, 0}, {1, 0, 0}}, {}], ViewAngle -> 
+         Pi/4.5, ViewPoint -> {0, 1/5, 1}, ViewVertical -> {0, 0, 1}, 
+         ImageSize -> {500, 300}], AxesEdge -> {None, None, 
+          If[$CellContext`framed$$, {1, -1}, None]}], 
+      "Specifications" :> {{{$CellContext`prop$$, "BoilingPoint", 
+          "element property"}, {
+         "AtomicNumber", "AtomicRadius", "AtomicWeight", "BoilingPoint", 
+          "CrustAbundance", "Density", "ElectronAffinity", 
+          "Electronegativity", "FusionHeat", "MeltingPoint", "OceanAbundance",
+           "SolarAbundance", "ThermalConductivity", "UniverseAbundance"}, 
+         ControlPlacement -> 1}, 
+        Dynamic[
+         Row[{
+           Manipulate`Place[1], 
+           Spacer[20], "unit: ", 
+           Dynamic[
+            
+            With[{$CellContext`unit = 
+              ElementData["H", $CellContext`prop$$, "UnitsNotation"]}, 
+             If[
+              MatchQ[$CellContext`unit, 
+               Alternatives[
+                HoldPattern[
+                 ElementData[
+                  BlankSequence[]]], 
+                Missing[
+                 Blank[]]]], "not available", $CellContext`unit]]]}], 
+         SynchronousUpdating -> 
+         False], {{$CellContext`chartelem$$, "Cylinder", "bar style"}, {
+         "Cone" -> "cone", "Cube" -> "cube", "Cylinder" -> "cylinder", 
+          "FadingCube" -> "fading cube", "ProfileCube" -> " profile bar"}, 
+         ControlPlacement -> 2}, {$CellContext`boxed$$, {True, False}, 
+         ControlPlacement -> 3}, {$CellContext`framed$$, {True, False}, 
+         ControlPlacement -> 4}, 
+        Row[{
+          Manipulate`Place[2], 
+          Spacer[15], 
+          Manipulate`Place[3], 
+          Spacer[15], 
+          Manipulate`Place[4]}]}, 
+      "Options" :> {
+       SynchronousUpdating -> False, SynchronousInitialization -> False}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{543., {203., 209.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>(($CellContext`props = {
+        "AtomicNumber", "AtomicRadius", "AtomicWeight", "BoilingPoint", 
+         "CrustAbundance", "Density", "ElectronAffinity", "Electronegativity",
+          "FusionHeat", "MeltingPoint", "OceanAbundance", "SolarAbundance", 
+         "ThermalConductivity", "UniverseAbundance"}; 
+      Map[($CellContext`data[#] = ReplaceAll[
+          Part[
+           ColorData["Atoms", "Image"], 1, 2], {{
+             Pattern[$CellContext`color, 
+              Blank[]], 
+             Rectangle[
+              BlankSequence[]], 
+             Inset[
+              Style[
+               Pattern[$CellContext`element, 
+                Blank[]], 
+               BlankSequence[]], 
+              BlankNullSequence[]]} :> 
+           With[{$CellContext`value = ElementData[$CellContext`element, #]}, 
+             If[
+              MatchQ[$CellContext`value, 
+               Missing[
+                Blank[]]], 
+              Labeled[
+               Style[
+                Tooltip[0, 
+                 ReplaceAll[$CellContext`value, Missing[
+                    Pattern[$CellContext`s, 
+                    Blank[]]] -> $CellContext`s]], White], 
+               
+               Style[$CellContext`element, "Label", 9, Background -> 
+                Opacity[0.5, White]], Above], 
+              Labeled[
+               Style[$CellContext`value, $CellContext`color], 
+               
+               Style[$CellContext`element, "Label", 9, Background -> 
+                Opacity[0.5, White]], Above]]], {} -> 
+           None}])& , $CellContext`props]; Null); Typeset`initDone$$ = True),
+    SynchronousInitialization->False,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->1936271637]
+}, Open  ]],
+
+Cell["", "DetailsSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.43610898782343*^9},
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.3895522232313623`*^9},
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SearchTermsSection"],
+
+Cell["periodic table", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4361089613017783`*^9, 3.436108963533002*^9}},
+ CellID->160572117],
+
+Cell["elements", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.436108965445193*^9, 3.4361089668293314`*^9}},
+ CellID->39225792],
+
+Cell["element data", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.436108967437392*^9, 3.4361089685805063`*^9}},
+ CellID->202408235],
+
+Cell["bar chart", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.436108974997148*^9, 3.4361089766773157`*^9}},
+ CellID->165239778],
+
+Cell["barchart", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.436108977190367*^9, 3.436108979605609*^9}},
+ CellID->308562]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "RelatedLinksSection"],
+
+Cell[TextData[ButtonBox["Properties of the Elements",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://demonstrations.wolfram.com/PropertiesOfTheElements/"], None},
+ ButtonNote->
+  "http://demonstrations.wolfram.com/PropertiesOfTheElements/"]], \
+"RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4361053418678713`*^9, 3.436105360864771*^9}},
+ CellID->34240964]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Yu-Sung Chang",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Yu-Sung+Chang"],
+     None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Yu-Sung+Chang"],
+ " and ",
+ ButtonBox["Brett Champion",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Brett+Champion"]\
+, None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Brett+Champion"]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4361053634840326`*^9, 3.436105371907875*^9}}],
+
+Cell[TextData[{
+ "After work by: ",
+ ButtonBox["Theodore Gray",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Theodore+Gray"],
+     None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Theodore+Gray"]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.43610539926061*^9, 3.4361054325359373`*^9}},
+ CellID->510187046]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{978, 867},
+WindowMargins->{{10, Automatic}, {Automatic, 0}},
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (February 23, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "AutomaticAnimation"->{
+  Cell[51618, 1203, 1412, 31, 29, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[53033, 1236, 882, 21, 29, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]},
+ "CreateAndDeleteLocators"->{
+  Cell[49759, 1152, 637, 15, 29, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "DragLocators"->{
+  Cell[49416, 1139, 340, 11, 29, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "GamepadControls"->{
+  Cell[51246, 1192, 369, 9, 29, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "ResizeImages"->{
+  Cell[48359, 1110, 312, 8, 29, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[48674, 1120, 739, 17, 29, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "SliderZoom"->{
+  Cell[50399, 1169, 844, 21, 29, "ControlSuggestions",
+   CellTags->"SliderZoom"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"AutomaticAnimation", 56710, 1359},
+ {"BookmarkAnimation", 56827, 1362},
+ {"CreateAndDeleteLocators", 56948, 1365},
+ {"DragLocators", 57064, 1368},
+ {"GamepadControls", 57172, 1371},
+ {"ResizeImages", 57279, 1374},
+ {"RotateAndZoomIn3D", 57388, 1377},
+ {"SliderZoom", 57496, 1380}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 159, 3, 74, "DemoTitle"],
+Cell[729, 27, 33, 0, 266, "InitializationSection"],
+Cell[CellGroupData[{
+Cell[787, 31, 29, 0, 188, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[841, 35, 10129, 231, 386, "Input"],
+Cell[10973, 268, 7371, 160, 424, "Output",
+ CellID->854613394]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18393, 434, 36, 0, 166, "ManipulateCaptionSection"],
+Cell[18432, 436, 335, 7, 21, "ManipulateCaption"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18804, 448, 28, 0, 168, "ThumbnailSection"],
+Cell[18835, 450, 7338, 160, 424, "Output",
+ CellID->1116681822]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26210, 615, 28, 0, 138, "SnapshotsSection"],
+Cell[26241, 617, 7338, 160, 424, "Output",
+ CellID->1211791221],
+Cell[33582, 779, 7338, 160, 424, "Output",
+ CellID->1987626846],
+Cell[40923, 941, 7330, 160, 424, "Output",
+ CellID->1936271637]
+}, Open  ]],
+Cell[48268, 1104, 26, 0, 332, "DetailsSection"],
+Cell[CellGroupData[{
+Cell[48319, 1108, 37, 0, 108, "ControlSuggestionsSection"],
+Cell[48359, 1110, 312, 8, 29, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[48674, 1120, 739, 17, 29, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[49416, 1139, 340, 11, 29, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[49759, 1152, 637, 15, 29, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[50399, 1169, 844, 21, 29, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[51246, 1192, 369, 9, 29, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[51618, 1203, 1412, 31, 29, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[53033, 1236, 882, 21, 29, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[53952, 1262, 30, 0, 152, "SearchTermsSection"],
+Cell[53985, 1264, 149, 3, 21, "SearchTerms",
+ CellID->160572117],
+Cell[54137, 1269, 142, 3, 21, "SearchTerms",
+ CellID->39225792],
+Cell[54282, 1274, 147, 3, 21, "SearchTerms",
+ CellID->202408235],
+Cell[54432, 1279, 144, 3, 21, "SearchTerms",
+ CellID->165239778],
+Cell[54579, 1284, 138, 3, 21, "SearchTerms",
+ CellID->308562]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[54754, 1292, 31, 0, 138, "RelatedLinksSection"],
+Cell[54788, 1294, 379, 9, 21, "RelatedLinks",
+ CellID->34240964]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[55204, 1308, 25, 0, 136, "AuthorSection"],
+Cell[55232, 1310, 651, 19, 21, "Author"],
+Cell[55886, 1331, 409, 12, 21, "Author",
+ CellID->510187046]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

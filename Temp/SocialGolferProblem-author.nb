@@ -1,0 +1,2268 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[    103410,       2259]
+NotebookOptionsPosition[     96686,       2046]
+NotebookOutlinePosition[     98310,       2097]
+CellTagsIndexPosition[     97982,       2085]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Social Golfer Problem", "DemoTitle",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.434990884726675*^9, 3.4349908929323807`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["", "InitializationSection"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"doub08", " ", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "7", ",", 
+     "\"\<AB CD EF GH\nAC BD EG FH\nAD BC EH FG\nAE BF CG DH\nAF BE CH DG\nAG \
+BH CE DF\nAH BG CF DE\>\""}], "}"}]}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.3967211693515253`*^9, 3.3967211817899065`*^9}, 
+   3.3967220402805605`*^9, 3.3986985103920784`*^9, {3.4342193058369155`*^9, 
+   3.434219310533716*^9}, 3.4342194047100744`*^9, {3.43421956793641*^9, 
+   3.43421956842712*^9}, {3.434987963998129*^9, 3.4349879645597396`*^9}},
+ CellID->81661009],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"doub10", " ", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "9", ",", 
+     "\"\<AB CD EF GH IJ\nAC BD EG FI HJ\nAD BC EJ FG HI\nAE BF CH DI GJ\nAF \
+BE CJ DH GI\nAG BI CE DJ FH\nAH BG CI DE FJ\nAJ BH CF DG EI\nAI BJ CG DF EH\>\
+\""}], "}"}]}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.3967211860962706`*^9, 3.3967211914241447`*^9}, 
+   3.396721227888031*^9, 3.396722038387763*^9, {3.4342193036537547`*^9, 
+   3.434219312416442*^9}, {3.43421940118497*^9, 3.4342194017758255`*^9}, {
+   3.434219565112321*^9, 3.4342195654127555`*^9}, {3.4349879613148775`*^9, 
+   3.434987962219695*^9}},
+ CellID->917188924],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"doub12", " ", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "11", ",", 
+     "\"\<AB CD EF GH IJ KL\nAC BD EG FH IK JL\nAD BC EH FG IL JK\nAE BF CI \
+DJ GK HL\nAF BE CJ DI GL HK\nAK BL CE DF GI HJ\nAL BK CF DE GJ HI\nAG BH CK \
+DL EI FJ\nAH BG CL DK EJ FI\nAI BJ CG DH EK FL\nAJ BI CH DG EL FK\>\""}], 
+    "}"}]}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.3967211860962706`*^9, 3.3967212342975035`*^9}, 
+   3.396722036735321*^9, {3.4342193016208115`*^9, 3.434219314178994*^9}, {
+   3.4342193984810553`*^9, 3.4342193987514467`*^9}, {3.4342195549876614`*^9, 
+   3.4342195553581977`*^9}, {3.4349879572743998`*^9, 3.434987958085615*^9}},
+ CellID->108777613],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"doub14", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "13", ",", 
+     "\"\<AB CD EF GH IJ KL MN\nAC BD EG FH IK JM LN\nAD BC EH FG IN JK LM\n\
+AE BF CG DH IL JN KM\nAF BE CH DG IM JL KN\nAI BJ CE DK FL GM HN\nAJ BI CK DE \
+FN GL HM\nAK BM CF DI EJ GN HL\nAL BN CI DF EM GJ HK\nAG BK CL DN EI FM HJ\n\
+AM BG CJ DL EN FK HI\nAH BL CN DM EK FJ GI\nAN BH CM DJ EL FI GK\>\""}], 
+    "}"}]}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.3967211860962706`*^9, 3.39672120917037*^9}, 
+   3.396721241618322*^9, 3.396722035102909*^9, {3.434219299477708*^9, 
+   3.434219316161865*^9}, {3.4342193953665457`*^9, 3.4342193961476765`*^9}, {
+   3.434219546024684*^9, 3.434219546515394*^9}, {3.4349879545599475`*^9, 
+   3.434987955386763*^9}},
+ CellID->376179544],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"doub16", " ", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "15", ",", 
+     "\"\<AB CD EF GH IJ KL MN OP\nAC BD EG FH IK JL MO NP\nAD BC EH FG IL JK \
+MP NO\nAE BF CG DH IM JN KO LP\nAF BE CH DG IN JM KP LO\nAG BH CE DF IO JP KM \
+LN\nAH BG CF DE IP JO KN LM\nAI BJ CK DL EM FN GO HP\nAJ BI CL DK EN FM GP HO\
+\nAK BL CI DJ EO FP GM HN\nAL BK CJ DI EP FO GN HM\nAM BN CO DP EI FJ GK HL\n\
+AN BM CP DO EJ FI GL HK\nAO BP CM DN EK FL GI HJ\nAP BO CN DM EL FK GJ \
+HI\>\""}], "}"}]}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.3967211860962706`*^9, 3.396721211804262*^9}, 
+   3.3967212493096886`*^9, 3.3967220335706444`*^9, {3.434219288952469*^9, 
+   3.434219317914403*^9}, {3.4342195353792706`*^9, 3.4342195369315176`*^9}, {
+   3.4349879515646896`*^9, 3.4349879523759055`*^9}},
+ CellID->163348084],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"doub18", " ", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "17", ",", 
+     "\"\<AB CD EF GH IJ KL MN OP QR\nAC BD EG FH IK JL MO NQ PR\nAD BC EH FG \
+IL JK MR NO PQ\nAE BF CG DH IM JN KP LQ OR\nAF BE CH DG IN JM KR LP OQ\nAG BH \
+CE DF IO JQ KM LR NP\nAH BG CF DE IP JO KQ LM NR\nAI BJ CK DL EN FO GP HR MQ\n\
+AJ BI CL DK EO FN GR HQ MP\nAK BM CI DJ EQ FR GN HP LO\nAM BK CJ DI ER FP GQ \
+HO LN\nAL BP CQ DR EI FJ GM HN KO\nAP BL CR DQ EJ FI GO HM KN\nAN BO CM DP EK \
+FQ GI HL JR\nAQ BR CN DO EM FK GL HI JP\nAO BQ CP DN EL FM GJ HK IR\nAR BN CO \
+DM EP FL GK HJ IQ\>\""}], "}"}]}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.3967211860962706`*^9, 3.3967212143880806`*^9}, 
+   3.396722030696397*^9, {3.434300877148783*^9, 3.434300906702753*^9}, {
+   3.434987948351028*^9, 3.434987949177844*^9}},
+ CellID->207520608],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"trip12", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{
+    "4", ",", 
+     "\"\<ABC DEF GHI JKL\nADG BEJ CHK FIL\nAHJ BDL CEI FGK\nAIK BFH CDJ \
+EGL\>\""}], "}"}]}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.396722020070694*^9, 3.396722029664872*^9}, 
+   3.396722083304141*^9, 3.4342192809809265`*^9, 3.434219320007433*^9, {
+   3.434219389538107*^9, 3.4342193903693104`*^9}, {3.434219505496002*^9, 
+   3.434219517293083*^9}, {3.4349879455585747`*^9, 3.43498794636979*^9}},
+ CellID->39353025],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"trip15", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{
+    "7", ",", 
+     "\"\<ABC DEF GHI JKL MNO\nADG BEJ CFM HKN ILO\nAEN BDO CHL FIK GJM\nAIM \
+BGL CDK EHO FJN\nAHJ BKM CEI DLN FGO\nAFL BIN CJO DHM EGK\nAKO BFH CGN DIJ \
+ELM\>\""}], "}"}]}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.396722020070694*^9, 3.3967220593988132`*^9}, 
+   3.396722091586381*^9, 3.434219278537389*^9, 3.4342193220003185`*^9, {
+   3.434219386213293*^9, 3.434219386884264*^9}, {3.4342195014401293`*^9, 
+   3.434219501970898*^9}, {3.434987942251311*^9, 3.434987943078127*^9}},
+ CellID->61368859],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"trip18", " ", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "8", ",", " ", 
+     "\"\<ABC DEF GHI ahf dbi gec\nAbc Def Ghi aHF dBI gEC\nabC deF ghI AHf \
+DBi GEc\naBc dEf gHi AhF DbI GeC\nADG BEH CFI aei bfg cdh\nAdg Beh Cfi aEI \
+bFG cDH\nadG beH cfI AEi BFg CDh\naDg bEh cFi AeI BfG CdH\>\""}], "}"}]}], 
+  ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.396722020070694*^9, 3.396722029664872*^9}, 
+   3.396722061842425*^9, 3.396722098316326*^9, 3.4342192763642426`*^9, 
+   3.4342193240933495`*^9, {3.4342193830587254`*^9, 3.4342193838999434`*^9}, {
+   3.4342194922267895`*^9, 3.434219492697471*^9}, {3.434987938710043*^9, 
+   3.434987939755263*^9}},
+ CellID->107764695],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"trip21", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{
+    "10", ",", 
+     "\"\<ABF EGM DKR INP CJT HOU LQS\nDEJ HIK BNO AQR CLU FMS GPT\nAHL JKO \
+EIQ CNR BGS DMT FPU\nBCD FHN ELP GOQ AKT IMU JRS\nEFK IGL COM BRP AJU DNS HQT\
+\nBIJ KLM FGR AOP CHS ENT DQU\nCAE DIO FJQ HMR BLT GNU KPS\nFDL GHJ AMN CPQ \
+BKU EOS IRT\nCGK LJN DHP BMQ AIS FOT ERU\nSTU ADG BEH CFI JMP KNQ LOR\>\""}], 
+    "}"}]}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.396722020070694*^9, 3.396722029664872*^9}, {
+   3.3967220645564356`*^9, 3.39672206481682*^9}, 3.3967221061679296`*^9, 
+   3.434219274281226*^9, 3.434219326006119*^9, {3.4342193803748393`*^9, 
+   3.434219380605173*^9}, {3.4342194847159147`*^9, 3.434219485467002*^9}, {
+   3.4349879361983943`*^9, 3.4349879370408106`*^9}},
+ CellID->110116896],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"trip24", " ", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "11", ",", " ", 
+     "\"\<ABC DEF GHI JKL MNO PQR STU VWX\nJOT ESB API DML HCV QWN FKU GRX\n\
+DVK SFO JQI EHL PTG WRC BMU ANX\nEGM FBV DWI SPL QKA RNT OHU JCX\nSAH BOG ERI \
+FQL WMJ NCK VPU DTX\nFJP OVA SNI BWL RHD CTM GQU EKX\nBDQ VGJ FCI ORL NPE TKH \
+AWU SMX\nOEW GAD BTI VNL CQS KMP JRU FHX\nVSR AJE OKI GCL TWF MHQ DNU BPX\n\
+GFN JDS VMI ATL KRB HPW ECU OQX\nAFMR BNHJ CPOD EQVT GKSW IXUL\>\""}], 
+    "}"}]}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.396722020070694*^9, 3.396722029664872*^9}, {
+   3.3967220672103577`*^9, 3.3967220675108013`*^9}, 3.39672211390937*^9, 
+   3.434219272128109*^9, 3.4342193278888445`*^9, {3.4342193763289814`*^9, 
+   3.434219376999953*^9}, {3.434219481521289*^9, 3.4342194819619274`*^9}, {
+   3.434987933000333*^9, 3.4349879336711454`*^9}},
+ CellID->30397328],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"trip27", " ", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "13", ",", 
+     "\"\<YZ+ ABC DEF GHI JKL MNO PQR STU VWX\nMTR DW+ SLZ ANU VBF EOY GJP \
+IXC HKQ\nJQO PIZ VKR SWC BLY AT+ DGM FUX EHN\nSBX KUY JE+ ARZ GTC DHL OFI NQW \
+MPV\nAHF JNR QCY PK+ GXZ MBI SVD ULO TWE\nGNL SHO PTX WIY VQ+ MFZ CRU BEK ADJ\
+\nPWU GB+ VOZ DQX AEI HRY KNT JMS LCF\nVEC NXY MH+ DUZ JWF GKO PSA RIL QTB\n\
+DKI MQU TFY SN+ JCZ PEL WBH VAG XOR\nMEX JTI DBR AQL VHU PNF OC+ KWZ SGY\nGQF \
+AWO VNI SER MKC JBU LX+ HTZ PDY\nVTL SKF PBO JHX GWR DNC EQZ MAY IU+\nPHC MWL \
+GEU DTO AKX SQI JVY FR+ BNZ\>\""}], "}"}]}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.396722020070694*^9, 3.396722029664872*^9}, {
+   3.3967220700645757`*^9, 3.396722071156189*^9}, {3.396722123683815*^9, 
+   3.396722150343212*^9}, {3.3987032701870995`*^9, 3.398703297473193*^9}, {
+   3.4342192591993895`*^9, 3.434219265548582*^9}, 3.4342193297214985`*^9, {
+   3.434219477555547*^9, 3.434219478176446*^9}, {3.4349879303326817`*^9, 
+   3.434987930987894*^9}},
+ CellID->17725469],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"quad16", " ", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "4", ",", 
+     "\"\<AEIM BFJN CGKO DHLP\nAFKP BELO CHIN DGJM\nAGLN BHKM CEJP DFIO\nAHJO \
+BGIP CFLM DEKN\>\""}], "}"}]}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.3967237069936504`*^9, 3.3967237157165413`*^9}, 
+   3.396723746712347*^9, 3.434219256625663*^9, {3.434219332004804*^9, 
+   3.4342193580425043`*^9}, {3.434219467220583*^9, 3.434219467801424*^9}, {
+   3.4349879248725767`*^9, 3.4349879255433893`*^9}},
+ CellID->11299344],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"quad20", " ", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "5", ",", 
+     "\"\<ABCD EFGH IJKL MNOP QRST\nAEIM BFJQ CGNR DKOS HLPT\nAFOT BELR CIPS \
+DGJM HKNQ\nAJPR BHMS CEKT DFIN GLOQ\nALNS BGIT CHJO DEPQ FKMR\>\""}], "}"}]}],
+   ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.3967237069936504`*^9, 3.3967237536425886`*^9}, 
+   3.4342192550433717`*^9, {3.4342193339976892`*^9, 3.434219354056733*^9}, {
+   3.4342194642362623`*^9, 3.4342194647770452`*^9}, {3.4349879218461185`*^9, 
+   3.434987922704135*^9}},
+ CellID->127784664],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"quad24", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "7", ",", 
+     "\"\<ABKU IJSE QRCM DGFX HLNO PTVW\nACLV IKTF QSDN EHGR BMOP JUWX\nADMW \
+ILUG QTEO FBHS CJNP KRVX\nAENX IMVH QUFP GCBT DJKO LRSW\nAFOR INWB QVGJ HDCU \
+EKLP MSTX\nAGPS IOXC QWHK BEDV FJLM NRTU\nAHJT IPRD QXBL CFEW GKMN \
+OSUV\>\""}], "}"}]}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.3967237069936504`*^9, 3.3967237299475718`*^9}, 
+   3.39672376209508*^9, 3.3987035742020826`*^9, 3.43421925337095*^9, {
+   3.434219336010604*^9, 3.4342193513528185`*^9}, {3.4342194572461414`*^9, 
+   3.4342194578269825`*^9}, {3.43498791878846*^9, 3.434987919693277*^9}},
+ CellID->28823072],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"quad28", " ", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "9", ",", " ", 
+     "\"\<ABCD EFGH IJKL MNab cdef ghij klmn\nAEgk BFMc Ndhl GIem HJai CKbn \
+DLfj\nAFjn BEae bfim HKcl GLMh CINk DJdg\nAIci BJNn EKMj FLdm begl CGaf DHhk\n\
+AGbd BHgm ELNi achn FKfk CJej DIMl\nAKeh BLbk FIag EJfl Ncjm CHMd DGin\nAHNf \
+BGjl FJbh Meik EIdn CLcg DKam\nALal BKdi GJck Mfgn HIbj CEhm DFNe\nAJMm BIfh \
+CFil DEbc GKNg HLen adjk\>\""}], "}"}]}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.3967237069936504`*^9, 3.396723732861879*^9}, 
+   3.3967237700568457`*^9, 3.434219251688514*^9, {3.4342193376730113`*^9, 
+   3.434219347677497*^9}, {3.4342194535307617`*^9, 3.4342194540715446`*^9}, {
+   3.434987915122389*^9, 3.4349879160896077`*^9}},
+ CellID->403669670],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"quad32", " ", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "10", ",", 
+     "\"\<ABCD EFGH IJKL MNPO abcd efgh ijkl mnop\nAEIm BgcH DFKp kPdf Maei \
+ChbG jNoL lJnO\nAlof Bhkm DNGi FaLO MbHK CPeJ Ejcp gIdn\nAciL BjdK DkbJ FgoP \
+fGOp CIla EhMn NeHm\nAgNK BElP DIoH hdiO beLp Cjfm FMcJ kaGn\nAhJp BFin DcmO \
+INbf leGK CMod EgkL jPaH\nAFde BoGJ DEaf hlNc PiKm CHLn gjbO IkMp\nAPbn BNap \
+DglM koce fHiJ CEKO FhIj dGLm\nAjMG BIeO DhPL gaJm cfKn CFkN Eobi ldHp\nAkHO \
+BMfL Djen Flbm IPcG Cgip ENdJ hoaK\>\""}], "}"}]}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.3967237069936504`*^9, 3.3967237366875324`*^9}, 
+   3.396723780312001*^9, {3.434218874292082*^9, 3.4342188804209557`*^9}, {
+   3.4342192349743137`*^9, 3.4342192441676245`*^9}, {3.434219449715237*^9, 
+   3.4342194503862085`*^9}, {3.4349879119711285`*^9, 3.4349879126575413`*^9}},
+ CellID->333837028],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"quad36", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{
+    "11", ",", 
+     "\"\<BCNP HRlm Dkor Fhnp AJaj KLEG QIcd Mbfi Oqeg\nCDOQ IAmn Elpa Gioq \
+BKbk LMFH RJde Ncgj Prfh\nDEPR JBno Fmqb Hjpr CLcl MNGI AKef Odhk Qagi\nEFQA \
+KCop Gnrc Ikqa DMdm NOHJ BLfg Peil Rbhj\nFGRB LDpq Hoad Jlrb ENen OPIK CMgh \
+Qfjm Acik\nGHAC MEqr Ipbe Kmac FOfo PQJL DNhi Rgkn Bdjl\nHIBD NFra Jqcf Lnbd \
+GPgp QRKM EOij Ahlo Cekm\nIJCE OGab Krdg Moce HQhq RALN FPjk Bimp Dfln\nJKDF \
+PHbc Laeh Npdf IRir ABMO GQkl Cjnq Egmo\nBEch DGej FIgl HKin JMkp LOmr NQob \
+PAqd RCaf\nCFdi EHfk GJhm ILjo KNlq MPna ORpc QBre ADbg\>\""}], "}"}]}], 
+  ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.434985290736222*^9, 3.434985323964648*^9}, {
+  3.4349879088510685`*^9, 3.4349879099586897`*^9}},
+ CellID->379860360],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"sglists", "=", 
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "doub08", ",", "doub10", ",", "doub12", ",", "doub14", ",", "doub16", 
+       ",", "doub18"}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+      "trip12", ",", "trip15", ",", "trip18", ",", "trip21", ",", "trip24", 
+       ",", "trip27"}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+      "quad16", ",", "quad20", ",", "quad24", ",", "quad28", ",", "quad32", 
+       ",", " ", "quad36"}], "}"}]}], "}"}]}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.3986984794785275`*^9, 3.398698613874815*^9}, {
+   3.3987034656088405`*^9, 3.3987034746273804`*^9}, 3.398704805486745*^9, {
+   3.434218759265535*^9, 3.4342188164783735`*^9}, 3.4342190695748315`*^9, {
+   3.434301039820804*^9, 3.4343010424146633`*^9}, {3.4343064974034853`*^9, 
+   3.4343065280594006`*^9}, {3.4349783054647226`*^9, 
+   3.4349783096455765`*^9}, {3.4349867361029515`*^9, 3.4349867478655777`*^9}},
+ CellID->190213028]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{"firstday", ">", 
+       RowBox[{"sglists", "[", 
+        RowBox[{"[", 
+         RowBox[{
+          RowBox[{"groupsize", "-", "1"}], ",", 
+          RowBox[{"numberofgroups", "-", "3"}], ",", "1"}], "]"}], "]"}]}], 
+      ",", 
+      RowBox[{"firstday", "=", "1"}]}], "]"}], ";", "\[IndentingNewLine]", 
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{"secondday", ">", 
+       RowBox[{"sglists", "[", 
+        RowBox[{"[", 
+         RowBox[{
+          RowBox[{"groupsize", "-", "1"}], ",", 
+          RowBox[{"numberofgroups", "-", "3"}], ",", "1"}], "]"}], "]"}]}], 
+      ",", 
+      RowBox[{"secondday", "=", "2"}]}], "]"}], ";", "\[IndentingNewLine]", 
+    RowBox[{"With", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"pick", " ", "=", " ", 
+        RowBox[{"sglists", "[", 
+         RowBox[{"[", 
+          RowBox[{
+           RowBox[{"groupsize", "-", "1"}], ",", 
+           RowBox[{"numberofgroups", "-", "3"}]}], "]"}], "]"}]}], "}"}], ",",
+       "\[IndentingNewLine]", 
+      RowBox[{"With", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"schedule", " ", "=", " ", 
+          RowBox[{"StringSplit", "/@", 
+           RowBox[{"StringSplit", "[", 
+            RowBox[{
+             RowBox[{"pick", "[", 
+              RowBox[{"[", "2", "]"}], "]"}], ",", "\"\<\\n\>\""}], "]"}]}]}],
+          "}"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"With", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"edges", " ", "=", " ", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"Flatten", "[", 
+               RowBox[{"#", ",", "1"}], "]"}], "&"}], "/@", 
+             RowBox[{"Map", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"Subsets", "[", 
+                 RowBox[{"#", ",", 
+                  RowBox[{"{", "2", "}"}]}], "]"}], "&"}], ",", 
+               RowBox[{"Characters", "/@", "\[IndentingNewLine]", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"schedule", "[", 
+                   RowBox[{"[", "firstday", "]"}], "]"}], ",", 
+                  RowBox[{"schedule", "[", 
+                   RowBox[{"[", "secondday", "]"}], "]"}]}], "}"}]}], ",", 
+               RowBox[{"{", "2", "}"}]}], "]"}]}]}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Pane", "[", 
+           RowBox[{
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"displaytype", "==", "\"\<schedule\>\""}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"Text", "@", 
+               RowBox[{"Grid", "[", 
+                RowBox[{
+                 RowBox[{"MapIndexed", "[", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"Prepend", "[", 
+                    RowBox[{"#1", ",", 
+                    RowBox[{"\"\<day \>\"", "<>", 
+                    RowBox[{"ToString", "[", 
+                    RowBox[{"#2", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], "]"}], "<>", 
+                    "\"\<: \>\""}]}], "]"}], "&"}], ",", "schedule"}], "]"}], 
+                 ",", 
+                 RowBox[{"Background", "\[Rule]", 
+                  RowBox[{"{", 
+                   RowBox[{"None", ",", 
+                    RowBox[{"ReplacePart", "[", 
+                    RowBox[{
+                    RowBox[{"Table", "[", 
+                    RowBox[{"White", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"sglists", "[", 
+                    RowBox[{"[", 
+                    RowBox[{
+                    RowBox[{"groupsize", "-", "1"}], ",", 
+                    RowBox[{"numberofgroups", "-", "3"}], ",", "1"}], "]"}], 
+                    "]"}], "}"}]}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"firstday", "\[Rule]", 
+                    RowBox[{"RGBColor", "[", 
+                    RowBox[{".6", ",", ".73", ",", ".36"}], "]"}]}], ",", 
+                    RowBox[{"secondday", "\[Rule]", 
+                    RowBox[{"RGBColor", "[", 
+                    RowBox[{".9", ",", ".42", ",", ".17"}], "]"}]}]}], 
+                    "}"}]}], "]"}]}], "}"}]}]}], " ", "]"}]}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"GraphPlot", "[", 
+               RowBox[{
+                RowBox[{"Rule", "@@@", 
+                 RowBox[{"Flatten", "[", 
+                  RowBox[{"edges", ",", "1"}], "]"}]}], ",", 
+                RowBox[{"VertexLabeling", "\[Rule]", " ", "True"}], ",", 
+                "\[IndentingNewLine]", 
+                RowBox[{"EdgeRenderingFunction", "\[Rule]", 
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"If", " ", "[", 
+                    RowBox[{
+                    RowBox[{"MemberQ", "[", 
+                    RowBox[{
+                    RowBox[{"edges", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], ",", 
+                    RowBox[{"List", "@@@", "#2"}]}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"RGBColor", "[", 
+                    RowBox[{".6", ",", ".73", ",", ".36"}], "]"}], ",", " ", 
+                    RowBox[{"Line", "[", "#1", "]"}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"RGBColor", "[", 
+                    RowBox[{".9", ",", ".42", ",", ".17"}], "]"}], ",", " ", 
+                    RowBox[{"Line", "[", "#1", "]"}]}], "}"}]}], "]"}], "&"}],
+                   ")"}]}]}], "]"}]}], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"600", ",", "350"}], "}"}], ",", 
+            RowBox[{"Alignment", "\[Rule]", 
+             RowBox[{"{", 
+              RowBox[{"Center", ",", "Center"}], "}"}]}]}], "]"}]}], "]"}]}], 
+       "]"}]}], "]"}]}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"groupsize", ",", " ", "3", ",", "\"\<golfers per group\>\""}], 
+      "}"}], ",", 
+     RowBox[{"Range", "[", 
+      RowBox[{"2", ",", "4"}], "]"}], ",", 
+     RowBox[{"ControlType", "\[Rule]", " ", "SetterBar"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"numberofgroups", ",", "7", ",", "\"\<number of groups\>\""}], 
+      "}"}], ",", 
+     RowBox[{"Range", "[", 
+      RowBox[{"4", ",", "9"}], "]"}], ",", 
+     RowBox[{"ControlType", "\[Rule]", " ", "SetterBar"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "displaytype", ",", "\"\<schedule\>\"", ",", "\"\<display type\>\""}], 
+      "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\"\<schedule\>\"", ",", "\"\<graph 2 days\>\""}], "}"}], ",", 
+     RowBox[{"ControlType", "\[Rule]", " ", "SetterBar"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"firstday", ",", "1", ",", "\"\<day in green\>\""}], "}"}], ",", 
+     RowBox[{"Range", "[", 
+      RowBox[{"1", ",", 
+       RowBox[{"sglists", "[", 
+        RowBox[{"[", 
+         RowBox[{
+          RowBox[{"groupsize", "-", "1"}], ",", 
+          RowBox[{"numberofgroups", "-", "3"}], ",", "1"}], "]"}], "]"}]}], 
+      "]"}], ",", 
+     RowBox[{"ControlType", "\[Rule]", " ", "SetterBar"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"secondday", ",", "2", ",", "\"\<day in orange\>\""}], "}"}], 
+     ",", 
+     RowBox[{"Range", "[", 
+      RowBox[{"1", ",", 
+       RowBox[{"sglists", "[", 
+        RowBox[{"[", 
+         RowBox[{
+          RowBox[{"groupsize", "-", "1"}], ",", 
+          RowBox[{"numberofgroups", "-", "3"}], ",", "1"}], "]"}], "]"}]}], 
+      "]"}], ",", 
+     RowBox[{"ControlType", "\[Rule]", " ", "SetterBar"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"SaveDefinitions", "\[Rule]", " ", "True"}], ",", 
+   RowBox[{"AutorunSequencing", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "2", ",", "3"}], "}"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, 3.434990942650218*^9, {3.4349969470108986`*^9, 
+   3.4349969478629837`*^9}, {3.4349970712513213`*^9, 
+   3.4349970716753635`*^9}, {3.4354964540315623`*^9, 
+   3.4354964711920023`*^9}, {3.4354976791528068`*^9, 
+   3.4354977405902643`*^9}, {3.4354979668543143`*^9, 3.435497982624945*^9}, {
+   3.4354983524722843`*^9, 3.435498354423479*^9}, {3.435498404188455*^9, 
+   3.4354984742094564`*^9}, {3.435499884172964*^9, 3.4354999256487937`*^9}, {
+   3.435499970364688*^9, 3.435499977824837*^9}, {3.435500011005501*^9, 
+   3.435500041589159*^9}, {3.435500148040803*^9, 3.435500176282627*^9}, {
+   3.4355002325902567`*^9, 3.435500382942291*^9}, {3.4355004969206877`*^9, 
+   3.43550050554555*^9}, {3.4355138389090567`*^9, 3.4355139109502597`*^9}, {
+   3.4355139508142457`*^9, 3.4355139541515794`*^9}, {3.4360302350639715`*^9, 
+   3.436030247107176*^9}, 3.615213424398296*^9}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`displaytype$$ = 
+    "schedule", $CellContext`firstday$$ = 1, $CellContext`groupsize$$ = 
+    4, $CellContext`numberofgroups$$ = 9, $CellContext`secondday$$ = 2, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`groupsize$$], 4, "golfers per group"}, {2, 3, 4}}, {{
+       Hold[$CellContext`numberofgroups$$], 9, "number of groups"}, {4, 5, 6, 
+      7, 8, 9}}, {{
+       Hold[$CellContext`displaytype$$], "schedule", "display type"}, {
+      "schedule", "graph 2 days"}}, {{
+       Hold[$CellContext`firstday$$], 1, "day in green"}, 
+      Dynamic[
+       Range[1, 
+        Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+         1, $CellContext`numberofgroups$$ - 3, 1]]]}, {{
+       Hold[$CellContext`secondday$$], 2, "day in orange"}, 
+      Dynamic[
+       Range[1, 
+        Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+         1, $CellContext`numberofgroups$$ - 3, 1]]]}}, Typeset`size$$ = {
+    600., {172., 178.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`groupsize$1084$$ = 
+    0, $CellContext`numberofgroups$1085$$ = 
+    0, $CellContext`displaytype$1086$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`displaytype$$ = 
+        "schedule", $CellContext`firstday$$ = 1, $CellContext`groupsize$$ = 
+        4, $CellContext`numberofgroups$$ = 9, $CellContext`secondday$$ = 2}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`groupsize$$, $CellContext`groupsize$1084$$, 0], 
+        Hold[$CellContext`numberofgroups$$, \
+$CellContext`numberofgroups$1085$$, 0], 
+        Hold[$CellContext`displaytype$$, $CellContext`displaytype$1086$$, 
+         False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (
+       If[$CellContext`firstday$$ > 
+         Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+           1, $CellContext`numberofgroups$$ - 3, 1], $CellContext`firstday$$ = 
+         1]; If[$CellContext`secondday$$ > 
+         Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+           1, $CellContext`numberofgroups$$ - 3, 1], $CellContext`secondday$$ = 
+         2]; With[{$CellContext`pick$ = 
+          Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+            1, $CellContext`numberofgroups$$ - 3]}, 
+         With[{$CellContext`schedule$ = Map[StringSplit, 
+             StringSplit[
+              Part[$CellContext`pick$, 2], "\n"]]}, 
+          With[{$CellContext`edges$ = Map[Flatten[#, 1]& , 
+              Map[Subsets[#, {2}]& , 
+               Map[Characters, {
+                 Part[$CellContext`schedule$, $CellContext`firstday$$], 
+                 Part[$CellContext`schedule$, $CellContext`secondday$$]}], {
+               2}]]}, 
+           Pane[
+            If[$CellContext`displaytype$$ == "schedule", 
+             Text[
+              Grid[
+               MapIndexed[Prepend[#, 
+                 StringJoin["day ", 
+                  ToString[
+                   Part[#2, 1]], ": "]]& , $CellContext`schedule$], 
+               Background -> {None, 
+                 ReplacePart[
+                  Table[White, {
+                    
+                    Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+                    1, $CellContext`numberofgroups$$ - 3, 
+                    1]}], {$CellContext`firstday$$ -> 
+                   RGBColor[0.6, 0.73, 0.36], $CellContext`secondday$$ -> 
+                   RGBColor[0.9, 0.42, 0.17]}]}]], 
+             GraphPlot[
+              Apply[Rule, 
+               Flatten[$CellContext`edges$, 1], {1}], VertexLabeling -> True, 
+              EdgeRenderingFunction -> (If[
+                MemberQ[
+                 Part[$CellContext`edges$, 1], 
+                 Apply[List, #2, {1}]], {
+                 RGBColor[0.6, 0.73, 0.36], 
+                 Line[#]}, {
+                 RGBColor[0.9, 0.42, 0.17], 
+                 Line[#]}]& )]], {600, 350}, 
+            Alignment -> {Center, Center}]]]]), 
+      "Specifications" :> {{{$CellContext`groupsize$$, 4, 
+          "golfers per group"}, {2, 3, 4}, ControlType -> 
+         SetterBar}, {{$CellContext`numberofgroups$$, 9, 
+          "number of groups"}, {4, 5, 6, 7, 8, 9}, ControlType -> 
+         SetterBar}, {{$CellContext`displaytype$$, "schedule", 
+          "display type"}, {"schedule", "graph 2 days"}, ControlType -> 
+         SetterBar}, {{$CellContext`firstday$$, 1, "day in green"}, 
+         Dynamic[
+          Range[1, 
+           
+           Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+            1, $CellContext`numberofgroups$$ - 3, 1]]], ControlType -> 
+         SetterBar}, {{$CellContext`secondday$$, 2, "day in orange"}, 
+         Dynamic[
+          Range[1, 
+           
+           Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+            1, $CellContext`numberofgroups$$ - 3, 1]]], ControlType -> 
+         SetterBar}}, "Options" :> {AutorunSequencing -> {1, 2, 3}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{645., {264., 269.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`sglists = {{{
+          7, "AB CD EF GH\nAC BD EG FH\nAD BC EH FG\nAE BF CG DH\nAF BE CH DG\
+\nAG BH CE DF\nAH BG CF DE"}, {
+          9, "AB CD EF GH IJ\nAC BD EG FI HJ\nAD BC EJ FG HI\nAE BF CH DI GJ\n\
+AF BE CJ DH GI\nAG BI CE DJ FH\nAH BG CI DE FJ\nAJ BH CF DG EI\nAI BJ CG DF \
+EH"}, {11, 
+           "AB CD EF GH IJ KL\nAC BD EG FH IK JL\nAD BC EH FG IL JK\nAE BF CI \
+DJ GK HL\nAF BE CJ DI GL HK\nAK BL CE DF GI HJ\nAL BK CF DE GJ HI\nAG BH CK \
+DL EI FJ\nAH BG CL DK EJ FI\nAI BJ CG DH EK FL\nAJ BI CH DG EL FK"}, {
+          13, "AB CD EF GH IJ KL MN\nAC BD EG FH IK JM LN\nAD BC EH FG IN JK \
+LM\nAE BF CG DH IL JN KM\nAF BE CH DG IM JL KN\nAI BJ CE DK FL GM HN\nAJ BI \
+CK DE FN GL HM\nAK BM CF DI EJ GN HL\nAL BN CI DF EM GJ HK\nAG BK CL DN EI FM \
+HJ\nAM BG CJ DL EN FK HI\nAH BL CN DM EK FJ GI\nAN BH CM DJ EL FI GK"}, {
+          15, "AB CD EF GH IJ KL MN OP\nAC BD EG FH IK JL MO NP\nAD BC EH FG \
+IL JK MP NO\nAE BF CG DH IM JN KO LP\nAF BE CH DG IN JM KP LO\nAG BH CE DF IO \
+JP KM LN\nAH BG CF DE IP JO KN LM\nAI BJ CK DL EM FN GO HP\nAJ BI CL DK EN FM \
+GP HO\nAK BL CI DJ EO FP GM HN\nAL BK CJ DI EP FO GN HM\nAM BN CO DP EI FJ GK \
+HL\nAN BM CP DO EJ FI GL HK\nAO BP CM DN EK FL GI HJ\nAP BO CN DM EL FK GJ \
+HI"}, {17, 
+           "AB CD EF GH IJ KL MN OP QR\nAC BD EG FH IK JL MO NQ PR\nAD BC EH \
+FG IL JK MR NO PQ\nAE BF CG DH IM JN KP LQ OR\nAF BE CH DG IN JM KR LP OQ\nAG \
+BH CE DF IO JQ KM LR NP\nAH BG CF DE IP JO KQ LM NR\nAI BJ CK DL EN FO GP HR \
+MQ\nAJ BI CL DK EO FN GR HQ MP\nAK BM CI DJ EQ FR GN HP LO\nAM BK CJ DI ER FP \
+GQ HO LN\nAL BP CQ DR EI FJ GM HN KO\nAP BL CR DQ EJ FI GO HM KN\nAN BO CM DP \
+EK FQ GI HL JR\nAQ BR CN DO EM FK GL HI JP\nAO BQ CP DN EL FM GJ HK IR\nAR BN \
+CO DM EP FL GK HJ IQ"}}, {{
+          4, "ABC DEF GHI JKL\nADG BEJ CHK FIL\nAHJ BDL CEI FGK\nAIK BFH CDJ \
+EGL"}, {7, 
+           "ABC DEF GHI JKL MNO\nADG BEJ CFM HKN ILO\nAEN BDO CHL FIK GJM\n\
+AIM BGL CDK EHO FJN\nAHJ BKM CEI DLN FGO\nAFL BIN CJO DHM EGK\nAKO BFH CGN \
+DIJ ELM"}, {
+          8, "ABC DEF GHI ahf dbi gec\nAbc Def Ghi aHF dBI gEC\nabC deF ghI \
+AHf DBi GEc\naBc dEf gHi AhF DbI GeC\nADG BEH CFI aei bfg cdh\nAdg Beh Cfi \
+aEI bFG cDH\nadG beH cfI AEi BFg CDh\naDg bEh cFi AeI BfG CdH"}, {
+          10, "ABF EGM DKR INP CJT HOU LQS\nDEJ HIK BNO AQR CLU FMS GPT\nAHL \
+JKO EIQ CNR BGS DMT FPU\nBCD FHN ELP GOQ AKT IMU JRS\nEFK IGL COM BRP AJU DNS \
+HQT\nBIJ KLM FGR AOP CHS ENT DQU\nCAE DIO FJQ HMR BLT GNU KPS\nFDL GHJ AMN \
+CPQ BKU EOS IRT\nCGK LJN DHP BMQ AIS FOT ERU\nSTU ADG BEH CFI JMP KNQ LOR"}, {
+          11, "ABC DEF GHI JKL MNO PQR STU VWX\nJOT ESB API DML HCV QWN FKU \
+GRX\nDVK SFO JQI EHL PTG WRC BMU ANX\nEGM FBV DWI SPL QKA RNT OHU JCX\nSAH \
+BOG ERI FQL WMJ NCK VPU DTX\nFJP OVA SNI BWL RHD CTM GQU EKX\nBDQ VGJ FCI ORL \
+NPE TKH AWU SMX\nOEW GAD BTI VNL CQS KMP JRU FHX\nVSR AJE OKI GCL TWF MHQ DNU \
+BPX\nGFN JDS VMI ATL KRB HPW ECU OQX\nAFMR BNHJ CPOD EQVT GKSW IXUL"}, {
+          13, "YZ+ ABC DEF GHI JKL MNO PQR STU VWX\nMTR DW+ SLZ ANU VBF EOY \
+GJP IXC HKQ\nJQO PIZ VKR SWC BLY AT+ DGM FUX EHN\nSBX KUY JE+ ARZ GTC DHL OFI \
+NQW MPV\nAHF JNR QCY PK+ GXZ MBI SVD ULO TWE\nGNL SHO PTX WIY VQ+ MFZ CRU BEK \
+ADJ\nPWU GB+ VOZ DQX AEI HRY KNT JMS LCF\nVEC NXY MH+ DUZ JWF GKO PSA RIL QTB\
+\nDKI MQU TFY SN+ JCZ PEL WBH VAG XOR\nMEX JTI DBR AQL VHU PNF OC+ KWZ SGY\n\
+GQF AWO VNI SER MKC JBU LX+ HTZ PDY\nVTL SKF PBO JHX GWR DNC EQZ MAY IU+\nPHC \
+MWL GEU DTO AKX SQI JVY FR+ BNZ"}}, {{
+          4, "AEIM BFJN CGKO DHLP\nAFKP BELO CHIN DGJM\nAGLN BHKM CEJP DFIO\n\
+AHJO BGIP CFLM DEKN"}, {
+          5, "ABCD EFGH IJKL MNOP QRST\nAEIM BFJQ CGNR DKOS HLPT\nAFOT BELR \
+CIPS DGJM HKNQ\nAJPR BHMS CEKT DFIN GLOQ\nALNS BGIT CHJO DEPQ FKMR"}, {
+          7, "ABKU IJSE QRCM DGFX HLNO PTVW\nACLV IKTF QSDN EHGR BMOP JUWX\n\
+ADMW ILUG QTEO FBHS CJNP KRVX\nAENX IMVH QUFP GCBT DJKO LRSW\nAFOR INWB QVGJ \
+HDCU EKLP MSTX\nAGPS IOXC QWHK BEDV FJLM NRTU\nAHJT IPRD QXBL CFEW GKMN \
+OSUV"}, {9, 
+           "ABCD EFGH IJKL MNab cdef ghij klmn\nAEgk BFMc Ndhl GIem HJai CKbn \
+DLfj\nAFjn BEae bfim HKcl GLMh CINk DJdg\nAIci BJNn EKMj FLdm begl CGaf DHhk\n\
+AGbd BHgm ELNi achn FKfk CJej DIMl\nAKeh BLbk FIag EJfl Ncjm CHMd DGin\nAHNf \
+BGjl FJbh Meik EIdn CLcg DKam\nALal BKdi GJck Mfgn HIbj CEhm DFNe\nAJMm BIfh \
+CFil DEbc GKNg HLen adjk"}, {
+          10, "ABCD EFGH IJKL MNPO abcd efgh ijkl mnop\nAEIm BgcH DFKp kPdf \
+Maei ChbG jNoL lJnO\nAlof Bhkm DNGi FaLO MbHK CPeJ Ejcp gIdn\nAciL BjdK DkbJ \
+FgoP fGOp CIla EhMn NeHm\nAgNK BElP DIoH hdiO beLp Cjfm FMcJ kaGn\nAhJp BFin \
+DcmO INbf leGK CMod EgkL jPaH\nAFde BoGJ DEaf hlNc PiKm CHLn gjbO IkMp\nAPbn \
+BNap DglM koce fHiJ CEKO FhIj dGLm\nAjMG BIeO DhPL gaJm cfKn CFkN Eobi ldHp\n\
+AkHO BMfL Djen Flbm IPcG Cgip ENdJ hoaK"}, {
+          11, "BCNP HRlm Dkor Fhnp AJaj KLEG QIcd Mbfi Oqeg\nCDOQ IAmn Elpa \
+Gioq BKbk LMFH RJde Ncgj Prfh\nDEPR JBno Fmqb Hjpr CLcl MNGI AKef Odhk Qagi\n\
+EFQA KCop Gnrc Ikqa DMdm NOHJ BLfg Peil Rbhj\nFGRB LDpq Hoad Jlrb ENen OPIK \
+CMgh Qfjm Acik\nGHAC MEqr Ipbe Kmac FOfo PQJL DNhi Rgkn Bdjl\nHIBD NFra Jqcf \
+Lnbd GPgp QRKM EOij Ahlo Cekm\nIJCE OGab Krdg Moce HQhq RALN FPjk Bimp Dfln\n\
+JKDF PHbc Laeh Npdf IRir ABMO GQkl Cjnq Egmo\nBEch DGej FIgl HKin JMkp LOmr \
+NQob PAqd RCaf\nCFdi EHfk GJhm ILjo KNlq MPna ORpc QBre ADbg"}}}}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->109467634]
+}, {2}]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell["\<\
+A group consists of 32 golfers who want to play in groups of four for several \
+days. Can they play for ten days, with no pair of golfers in the same group \
+twice? (The reader may want to skip the next three paragraphs.)\
+\>", "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4349912403449497`*^9, 3.434991296755273*^9}, {
+   3.434991385598412*^9, 3.4349915883698115`*^9}, {3.4349924115506516`*^9, 
+   3.434992447665346*^9}, {3.4350071861666293`*^9, 3.4350071868695917`*^9}, {
+   3.505062490863468*^9, 3.505062496396353*^9}, {3.5050677853491297`*^9, 
+   3.5050677985081577`*^9}}],
+
+Cell[TextData[{
+ "In 1850, Reverend Thomas Kirkman sent a related query to the readers of a \
+popular math magazine, ",
+ StyleBox["Lady's and Gentleman's Diary",
+  FontSlant->"Italic"],
+ ": Fifteen young ladies in a school walk out three abreast for seven days in \
+succession: it is required to arrange them daily, so that no two will walk \
+twice abreast. Arthur Cayley and Jakob Steiner solved the problem. For groups \
+of three, solutions are called either a resolvable Steiner triple system \
+(RSTS) or a Kirkman triple system (KTS)."
+}], "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.434991609180478*^9, 3.4349916195702114`*^9}, 
+   3.4349916594287224`*^9, {3.434991700831653*^9, 3.4349918265224648`*^9}, {
+   3.435007351237458*^9, 3.435007351659233*^9}, {3.4350077494700737`*^9, 
+   3.4350077503455553`*^9}, {3.5050634484399977`*^9, 3.505063469710033*^9}},
+ CellID->295080508],
+
+Cell[TextData[{
+ "How about 18 golfers (A\[Dash]I & a\[Dash]i), playing in triples? Can they \
+play for eight days? They cannot play for nine days, since each golfer can \
+only meet 17 other golfers. In eight days, each golfer misses playing with \
+one of the other golfers, so use 9 couples, Aa\[Dash]Ii, with each golfer \
+playing with everyone but their spouse. When it is not possible for all \
+golfers to play with each other, and there are no repetitions, it is called a \
+Kirkman packing design. Other names include: 3-resolvable group divisible \
+design (3-RGDD) of type ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["2", "9"], TraditionalForm]], "InlineMath"],
+ ", Oberwolfach problem ",
+ Cell[BoxData[
+  FormBox["OP", TraditionalForm]], "InlineMath"],
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", 
+    SuperscriptBox["3", "6"]}], TraditionalForm]], "InlineMath"],
+ "), and nearly Kirkman triple system NKTS(18)."
+}], "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, 3.434991900015007*^9, {3.4349920663952336`*^9, 
+   3.4349920909827795`*^9}, {3.435007785943263*^9, 3.4350077867249427`*^9}, {
+   3.4350078340791173`*^9, 3.43500783482953*^9}, {3.505062724004467*^9, 
+   3.505062731911231*^9}, {3.5050634833472853`*^9, 3.50506349076746*^9}, {
+   3.5050635362314997`*^9, 3.5050635558791943`*^9}, {3.50506358880722*^9, 
+   3.505063601469967*^9}, {3.505063963300839*^9, 3.505064001692775*^9}, 
+   3.5050641549926577`*^9, {3.505067763821122*^9, 3.50506776411095*^9}, {
+   3.505067934573083*^9, 3.50506793590878*^9}},
+ CellID->44950759],
+
+Cell[TextData[{
+ "Can 16 golfers each play in foursomes for five days? This is sometimes \
+called a resolvable Steiner quadruple system (RSQS). When 32 golfers play in \
+foursomes for 10 days, that is a 4-RGDD (resolvable group divisible design) \
+of type ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["2", "16"], TraditionalForm]], "InlineMath"],
+ ". Solutions might instead be listed under a name containing the words \
+block, frame, configuration, or parallel class."
+}], "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4349922586989117`*^9, 3.4349923244073753`*^9}, {
+   3.4349948391991663`*^9, 3.4349949650237474`*^9}, {3.4350078644395685`*^9, 
+   3.435007885669997*^9}, {3.505063649143211*^9, 3.50506366007003*^9}},
+ CellID->822730793],
+
+Cell["\<\
+What does the poor golf organizer do? These are incredibly difficult \
+problems, even for mathematicians. Many are unsolved, and solutions that do \
+exist are strangely named within math journals that are hard to obtain. The \
+solutions often point back to earlier papers, which upon consultation end \
+with \"the construction is self-explanatory\". For 8 groups of threesomes, \
+that explanation did not help, so a near solution with foursomes on the last \
+day is given.\
+\>", "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4349923704282603`*^9, 3.4349923958723497`*^9}, {
+   3.4349924591627665`*^9, 3.4349926571617746`*^9}, {3.434992690889623*^9, 
+   3.4349927177377396`*^9}, {3.4349927658334646`*^9, 3.434992919963703*^9}, {
+   3.4349930601677017`*^9, 3.434993191739788*^9}, {3.4350072366081295`*^9, 
+   3.4350072919702454`*^9}, {3.5050637117500553`*^9, 3.505063714237482*^9}},
+ CellID->132691998],
+
+Cell["\<\
+Happily, many best-possible solutions are given here, for a variety of \
+tournament schedules. Either select the schedule, or take a look at a graph \
+that combines two days.\
+\>", "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4349929941944556`*^9, 3.4349929969088907`*^9}, {
+   3.4349932009439063`*^9, 3.434993260677072*^9}, {3.4349933525310497`*^9, 
+   3.43499336816245*^9}, {3.4349949914323883`*^9, 3.4349950041656613`*^9}, {
+   3.435007307779001*^9, 3.435007308560066*^9}, {3.505063758157118*^9, 
+   3.5050637700258102`*^9}},
+ CellID->422607116]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`displaytype$$ = 
+    "schedule", $CellContext`firstday$$ = 6, $CellContext`groupsize$$ = 
+    4, $CellContext`numberofgroups$$ = 9, $CellContext`secondday$$ = 7, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`groupsize$$], 4, "golfers per group"}, {2, 3, 4}}, {{
+       Hold[$CellContext`numberofgroups$$], 9, "number of groups"}, {4, 5, 6, 
+      7, 8, 9}}, {{
+       Hold[$CellContext`displaytype$$], "schedule", "display type"}, {
+      "schedule", "graph 2 days"}}, {{
+       Hold[$CellContext`firstday$$], 6, "day in green"}, 
+      Dynamic[
+       Range[1, 
+        Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+         1, $CellContext`numberofgroups$$ - 3, 1]]]}, {{
+       Hold[$CellContext`secondday$$], 7, "day in orange"}, 
+      Dynamic[
+       Range[1, 
+        Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+         1, $CellContext`numberofgroups$$ - 3, 1]]]}}, Typeset`size$$ = {
+    600., {172., 178.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`groupsize$1153$$ = 
+    0, $CellContext`numberofgroups$1154$$ = 
+    0, $CellContext`displaytype$1155$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`displaytype$$ = 
+        "schedule", $CellContext`firstday$$ = 6, $CellContext`groupsize$$ = 
+        4, $CellContext`numberofgroups$$ = 9, $CellContext`secondday$$ = 7}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`groupsize$$, $CellContext`groupsize$1153$$, 0], 
+        Hold[$CellContext`numberofgroups$$, \
+$CellContext`numberofgroups$1154$$, 0], 
+        Hold[$CellContext`displaytype$$, $CellContext`displaytype$1155$$, 
+         False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (
+       If[$CellContext`firstday$$ > 
+         Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+           1, $CellContext`numberofgroups$$ - 3, 1], $CellContext`firstday$$ = 
+         1]; If[$CellContext`secondday$$ > 
+         Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+           1, $CellContext`numberofgroups$$ - 3, 1], $CellContext`secondday$$ = 
+         2]; With[{$CellContext`pick$ = 
+          Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+            1, $CellContext`numberofgroups$$ - 3]}, 
+         With[{$CellContext`schedule$ = Map[StringSplit, 
+             StringSplit[
+              Part[$CellContext`pick$, 2], "\n"]]}, 
+          With[{$CellContext`edges$ = Map[Flatten[#, 1]& , 
+              Map[Subsets[#, {2}]& , 
+               Map[Characters, {
+                 Part[$CellContext`schedule$, $CellContext`firstday$$], 
+                 Part[$CellContext`schedule$, $CellContext`secondday$$]}], {
+               2}]]}, 
+           Pane[
+            If[$CellContext`displaytype$$ == "schedule", 
+             Text[
+              Grid[
+               MapIndexed[Prepend[#, 
+                 StringJoin["day ", 
+                  ToString[
+                   Part[#2, 1]], ": "]]& , $CellContext`schedule$], 
+               Background -> {None, 
+                 ReplacePart[
+                  Table[White, {
+                    
+                    Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+                    1, $CellContext`numberofgroups$$ - 3, 
+                    1]}], {$CellContext`firstday$$ -> 
+                   RGBColor[0.6, 0.73, 0.36], $CellContext`secondday$$ -> 
+                   RGBColor[0.9, 0.42, 0.17]}]}]], 
+             GraphPlot[
+              Apply[Rule, 
+               Flatten[$CellContext`edges$, 1], {1}], VertexLabeling -> True, 
+              EdgeRenderingFunction -> (If[
+                MemberQ[
+                 Part[$CellContext`edges$, 1], 
+                 Apply[List, #2, {1}]], {
+                 RGBColor[0.6, 0.73, 0.36], 
+                 Line[#]}, {
+                 RGBColor[0.9, 0.42, 0.17], 
+                 Line[#]}]& )]], {600, 350}, 
+            Alignment -> {Center, Center}]]]]), 
+      "Specifications" :> {{{$CellContext`groupsize$$, 4, 
+          "golfers per group"}, {2, 3, 4}, ControlType -> 
+         SetterBar}, {{$CellContext`numberofgroups$$, 9, 
+          "number of groups"}, {4, 5, 6, 7, 8, 9}, ControlType -> 
+         SetterBar}, {{$CellContext`displaytype$$, "schedule", 
+          "display type"}, {"schedule", "graph 2 days"}, ControlType -> 
+         SetterBar}, {{$CellContext`firstday$$, 6, "day in green"}, 
+         Dynamic[
+          Range[1, 
+           
+           Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+            1, $CellContext`numberofgroups$$ - 3, 1]]], ControlType -> 
+         SetterBar}, {{$CellContext`secondday$$, 7, "day in orange"}, 
+         Dynamic[
+          Range[1, 
+           
+           Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+            1, $CellContext`numberofgroups$$ - 3, 1]]], ControlType -> 
+         SetterBar}}, "Options" :> {AutorunSequencing -> {1, 2, 3}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{645., {264., 269.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`sglists = {{{
+          7, "AB CD EF GH\nAC BD EG FH\nAD BC EH FG\nAE BF CG DH\nAF BE CH DG\
+\nAG BH CE DF\nAH BG CF DE"}, {
+          9, "AB CD EF GH IJ\nAC BD EG FI HJ\nAD BC EJ FG HI\nAE BF CH DI GJ\n\
+AF BE CJ DH GI\nAG BI CE DJ FH\nAH BG CI DE FJ\nAJ BH CF DG EI\nAI BJ CG DF \
+EH"}, {11, 
+           "AB CD EF GH IJ KL\nAC BD EG FH IK JL\nAD BC EH FG IL JK\nAE BF CI \
+DJ GK HL\nAF BE CJ DI GL HK\nAK BL CE DF GI HJ\nAL BK CF DE GJ HI\nAG BH CK \
+DL EI FJ\nAH BG CL DK EJ FI\nAI BJ CG DH EK FL\nAJ BI CH DG EL FK"}, {
+          13, "AB CD EF GH IJ KL MN\nAC BD EG FH IK JM LN\nAD BC EH FG IN JK \
+LM\nAE BF CG DH IL JN KM\nAF BE CH DG IM JL KN\nAI BJ CE DK FL GM HN\nAJ BI \
+CK DE FN GL HM\nAK BM CF DI EJ GN HL\nAL BN CI DF EM GJ HK\nAG BK CL DN EI FM \
+HJ\nAM BG CJ DL EN FK HI\nAH BL CN DM EK FJ GI\nAN BH CM DJ EL FI GK"}, {
+          15, "AB CD EF GH IJ KL MN OP\nAC BD EG FH IK JL MO NP\nAD BC EH FG \
+IL JK MP NO\nAE BF CG DH IM JN KO LP\nAF BE CH DG IN JM KP LO\nAG BH CE DF IO \
+JP KM LN\nAH BG CF DE IP JO KN LM\nAI BJ CK DL EM FN GO HP\nAJ BI CL DK EN FM \
+GP HO\nAK BL CI DJ EO FP GM HN\nAL BK CJ DI EP FO GN HM\nAM BN CO DP EI FJ GK \
+HL\nAN BM CP DO EJ FI GL HK\nAO BP CM DN EK FL GI HJ\nAP BO CN DM EL FK GJ \
+HI"}, {17, 
+           "AB CD EF GH IJ KL MN OP QR\nAC BD EG FH IK JL MO NQ PR\nAD BC EH \
+FG IL JK MR NO PQ\nAE BF CG DH IM JN KP LQ OR\nAF BE CH DG IN JM KR LP OQ\nAG \
+BH CE DF IO JQ KM LR NP\nAH BG CF DE IP JO KQ LM NR\nAI BJ CK DL EN FO GP HR \
+MQ\nAJ BI CL DK EO FN GR HQ MP\nAK BM CI DJ EQ FR GN HP LO\nAM BK CJ DI ER FP \
+GQ HO LN\nAL BP CQ DR EI FJ GM HN KO\nAP BL CR DQ EJ FI GO HM KN\nAN BO CM DP \
+EK FQ GI HL JR\nAQ BR CN DO EM FK GL HI JP\nAO BQ CP DN EL FM GJ HK IR\nAR BN \
+CO DM EP FL GK HJ IQ"}}, {{
+          4, "ABC DEF GHI JKL\nADG BEJ CHK FIL\nAHJ BDL CEI FGK\nAIK BFH CDJ \
+EGL"}, {7, 
+           "ABC DEF GHI JKL MNO\nADG BEJ CFM HKN ILO\nAEN BDO CHL FIK GJM\n\
+AIM BGL CDK EHO FJN\nAHJ BKM CEI DLN FGO\nAFL BIN CJO DHM EGK\nAKO BFH CGN \
+DIJ ELM"}, {
+          8, "ABC DEF GHI ahf dbi gec\nAbc Def Ghi aHF dBI gEC\nabC deF ghI \
+AHf DBi GEc\naBc dEf gHi AhF DbI GeC\nADG BEH CFI aei bfg cdh\nAdg Beh Cfi \
+aEI bFG cDH\nadG beH cfI AEi BFg CDh\naDg bEh cFi AeI BfG CdH"}, {
+          10, "ABF EGM DKR INP CJT HOU LQS\nDEJ HIK BNO AQR CLU FMS GPT\nAHL \
+JKO EIQ CNR BGS DMT FPU\nBCD FHN ELP GOQ AKT IMU JRS\nEFK IGL COM BRP AJU DNS \
+HQT\nBIJ KLM FGR AOP CHS ENT DQU\nCAE DIO FJQ HMR BLT GNU KPS\nFDL GHJ AMN \
+CPQ BKU EOS IRT\nCGK LJN DHP BMQ AIS FOT ERU\nSTU ADG BEH CFI JMP KNQ LOR"}, {
+          11, "ABC DEF GHI JKL MNO PQR STU VWX\nJOT ESB API DML HCV QWN FKU \
+GRX\nDVK SFO JQI EHL PTG WRC BMU ANX\nEGM FBV DWI SPL QKA RNT OHU JCX\nSAH \
+BOG ERI FQL WMJ NCK VPU DTX\nFJP OVA SNI BWL RHD CTM GQU EKX\nBDQ VGJ FCI ORL \
+NPE TKH AWU SMX\nOEW GAD BTI VNL CQS KMP JRU FHX\nVSR AJE OKI GCL TWF MHQ DNU \
+BPX\nGFN JDS VMI ATL KRB HPW ECU OQX\nAFMR BNHJ CPOD EQVT GKSW IXUL"}, {
+          13, "YZ+ ABC DEF GHI JKL MNO PQR STU VWX\nMTR DW+ SLZ ANU VBF EOY \
+GJP IXC HKQ\nJQO PIZ VKR SWC BLY AT+ DGM FUX EHN\nSBX KUY JE+ ARZ GTC DHL OFI \
+NQW MPV\nAHF JNR QCY PK+ GXZ MBI SVD ULO TWE\nGNL SHO PTX WIY VQ+ MFZ CRU BEK \
+ADJ\nPWU GB+ VOZ DQX AEI HRY KNT JMS LCF\nVEC NXY MH+ DUZ JWF GKO PSA RIL QTB\
+\nDKI MQU TFY SN+ JCZ PEL WBH VAG XOR\nMEX JTI DBR AQL VHU PNF OC+ KWZ SGY\n\
+GQF AWO VNI SER MKC JBU LX+ HTZ PDY\nVTL SKF PBO JHX GWR DNC EQZ MAY IU+\nPHC \
+MWL GEU DTO AKX SQI JVY FR+ BNZ"}}, {{
+          4, "AEIM BFJN CGKO DHLP\nAFKP BELO CHIN DGJM\nAGLN BHKM CEJP DFIO\n\
+AHJO BGIP CFLM DEKN"}, {
+          5, "ABCD EFGH IJKL MNOP QRST\nAEIM BFJQ CGNR DKOS HLPT\nAFOT BELR \
+CIPS DGJM HKNQ\nAJPR BHMS CEKT DFIN GLOQ\nALNS BGIT CHJO DEPQ FKMR"}, {
+          7, "ABKU IJSE QRCM DGFX HLNO PTVW\nACLV IKTF QSDN EHGR BMOP JUWX\n\
+ADMW ILUG QTEO FBHS CJNP KRVX\nAENX IMVH QUFP GCBT DJKO LRSW\nAFOR INWB QVGJ \
+HDCU EKLP MSTX\nAGPS IOXC QWHK BEDV FJLM NRTU\nAHJT IPRD QXBL CFEW GKMN \
+OSUV"}, {9, 
+           "ABCD EFGH IJKL MNab cdef ghij klmn\nAEgk BFMc Ndhl GIem HJai CKbn \
+DLfj\nAFjn BEae bfim HKcl GLMh CINk DJdg\nAIci BJNn EKMj FLdm begl CGaf DHhk\n\
+AGbd BHgm ELNi achn FKfk CJej DIMl\nAKeh BLbk FIag EJfl Ncjm CHMd DGin\nAHNf \
+BGjl FJbh Meik EIdn CLcg DKam\nALal BKdi GJck Mfgn HIbj CEhm DFNe\nAJMm BIfh \
+CFil DEbc GKNg HLen adjk"}, {
+          10, "ABCD EFGH IJKL MNPO abcd efgh ijkl mnop\nAEIm BgcH DFKp kPdf \
+Maei ChbG jNoL lJnO\nAlof Bhkm DNGi FaLO MbHK CPeJ Ejcp gIdn\nAciL BjdK DkbJ \
+FgoP fGOp CIla EhMn NeHm\nAgNK BElP DIoH hdiO beLp Cjfm FMcJ kaGn\nAhJp BFin \
+DcmO INbf leGK CMod EgkL jPaH\nAFde BoGJ DEaf hlNc PiKm CHLn gjbO IkMp\nAPbn \
+BNap DglM koce fHiJ CEKO FhIj dGLm\nAjMG BIeO DhPL gaJm cfKn CFkN Eobi ldHp\n\
+AkHO BMfL Djen Flbm IPcG Cgip ENdJ hoaK"}, {
+          11, "BCNP HRlm Dkor Fhnp AJaj KLEG QIcd Mbfi Oqeg\nCDOQ IAmn Elpa \
+Gioq BKbk LMFH RJde Ncgj Prfh\nDEPR JBno Fmqb Hjpr CLcl MNGI AKef Odhk Qagi\n\
+EFQA KCop Gnrc Ikqa DMdm NOHJ BLfg Peil Rbhj\nFGRB LDpq Hoad Jlrb ENen OPIK \
+CMgh Qfjm Acik\nGHAC MEqr Ipbe Kmac FOfo PQJL DNhi Rgkn Bdjl\nHIBD NFra Jqcf \
+Lnbd GPgp QRKM EOij Ahlo Cekm\nIJCE OGab Krdg Moce HQhq RALN FPjk Bimp Dfln\n\
+JKDF PHbc Laeh Npdf IRir ABMO GQkl Cjnq Egmo\nBEch DGej FIgl HKin JMkp LOmr \
+NQob PAqd RCaf\nCFdi EHfk GJhm ILjo KNlq MPna ORpc QBre ADbg"}}}}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->577692187]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`displaytype$$ = 
+    "schedule", $CellContext`firstday$$ = 3, $CellContext`groupsize$$ = 
+    3, $CellContext`numberofgroups$$ = 9, $CellContext`secondday$$ = 7, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`groupsize$$], 3, "golfers per group"}, {2, 3, 4}}, {{
+       Hold[$CellContext`numberofgroups$$], 9, "number of groups"}, {4, 5, 6, 
+      7, 8, 9}}, {{
+       Hold[$CellContext`displaytype$$], "schedule", "display type"}, {
+      "schedule", "graph 2 days"}}, {{
+       Hold[$CellContext`firstday$$], 3, "day in green"}, 
+      Dynamic[
+       Range[1, 
+        Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+         1, $CellContext`numberofgroups$$ - 3, 1]]]}, {{
+       Hold[$CellContext`secondday$$], 7, "day in orange"}, 
+      Dynamic[
+       Range[1, 
+        Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+         1, $CellContext`numberofgroups$$ - 3, 1]]]}}, Typeset`size$$ = {
+    600., {172., 178.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`groupsize$1222$$ = 
+    0, $CellContext`numberofgroups$1223$$ = 
+    0, $CellContext`displaytype$1224$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`displaytype$$ = 
+        "schedule", $CellContext`firstday$$ = 3, $CellContext`groupsize$$ = 
+        3, $CellContext`numberofgroups$$ = 9, $CellContext`secondday$$ = 7}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`groupsize$$, $CellContext`groupsize$1222$$, 0], 
+        Hold[$CellContext`numberofgroups$$, \
+$CellContext`numberofgroups$1223$$, 0], 
+        Hold[$CellContext`displaytype$$, $CellContext`displaytype$1224$$, 
+         False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (
+       If[$CellContext`firstday$$ > 
+         Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+           1, $CellContext`numberofgroups$$ - 3, 1], $CellContext`firstday$$ = 
+         1]; If[$CellContext`secondday$$ > 
+         Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+           1, $CellContext`numberofgroups$$ - 3, 1], $CellContext`secondday$$ = 
+         2]; With[{$CellContext`pick$ = 
+          Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+            1, $CellContext`numberofgroups$$ - 3]}, 
+         With[{$CellContext`schedule$ = Map[StringSplit, 
+             StringSplit[
+              Part[$CellContext`pick$, 2], "\n"]]}, 
+          With[{$CellContext`edges$ = Map[Flatten[#, 1]& , 
+              Map[Subsets[#, {2}]& , 
+               Map[Characters, {
+                 Part[$CellContext`schedule$, $CellContext`firstday$$], 
+                 Part[$CellContext`schedule$, $CellContext`secondday$$]}], {
+               2}]]}, 
+           Pane[
+            If[$CellContext`displaytype$$ == "schedule", 
+             Text[
+              Grid[
+               MapIndexed[Prepend[#, 
+                 StringJoin["day ", 
+                  ToString[
+                   Part[#2, 1]], ": "]]& , $CellContext`schedule$], 
+               Background -> {None, 
+                 ReplacePart[
+                  Table[White, {
+                    
+                    Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+                    1, $CellContext`numberofgroups$$ - 3, 
+                    1]}], {$CellContext`firstday$$ -> 
+                   RGBColor[0.6, 0.73, 0.36], $CellContext`secondday$$ -> 
+                   RGBColor[0.9, 0.42, 0.17]}]}]], 
+             GraphPlot[
+              Apply[Rule, 
+               Flatten[$CellContext`edges$, 1], {1}], VertexLabeling -> True, 
+              EdgeRenderingFunction -> (If[
+                MemberQ[
+                 Part[$CellContext`edges$, 1], 
+                 Apply[List, #2, {1}]], {
+                 RGBColor[0.6, 0.73, 0.36], 
+                 Line[#]}, {
+                 RGBColor[0.9, 0.42, 0.17], 
+                 Line[#]}]& )]], {600, 350}, 
+            Alignment -> {Center, Center}]]]]), 
+      "Specifications" :> {{{$CellContext`groupsize$$, 3, 
+          "golfers per group"}, {2, 3, 4}, ControlType -> 
+         SetterBar}, {{$CellContext`numberofgroups$$, 9, 
+          "number of groups"}, {4, 5, 6, 7, 8, 9}, ControlType -> 
+         SetterBar}, {{$CellContext`displaytype$$, "schedule", 
+          "display type"}, {"schedule", "graph 2 days"}, ControlType -> 
+         SetterBar}, {{$CellContext`firstday$$, 3, "day in green"}, 
+         Dynamic[
+          Range[1, 
+           
+           Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+            1, $CellContext`numberofgroups$$ - 3, 1]]], ControlType -> 
+         SetterBar}, {{$CellContext`secondday$$, 7, "day in orange"}, 
+         Dynamic[
+          Range[1, 
+           
+           Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+            1, $CellContext`numberofgroups$$ - 3, 1]]], ControlType -> 
+         SetterBar}}, "Options" :> {AutorunSequencing -> {1, 2, 3}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{645., {264., 269.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`sglists = {{{
+          7, "AB CD EF GH\nAC BD EG FH\nAD BC EH FG\nAE BF CG DH\nAF BE CH DG\
+\nAG BH CE DF\nAH BG CF DE"}, {
+          9, "AB CD EF GH IJ\nAC BD EG FI HJ\nAD BC EJ FG HI\nAE BF CH DI GJ\n\
+AF BE CJ DH GI\nAG BI CE DJ FH\nAH BG CI DE FJ\nAJ BH CF DG EI\nAI BJ CG DF \
+EH"}, {11, 
+           "AB CD EF GH IJ KL\nAC BD EG FH IK JL\nAD BC EH FG IL JK\nAE BF CI \
+DJ GK HL\nAF BE CJ DI GL HK\nAK BL CE DF GI HJ\nAL BK CF DE GJ HI\nAG BH CK \
+DL EI FJ\nAH BG CL DK EJ FI\nAI BJ CG DH EK FL\nAJ BI CH DG EL FK"}, {
+          13, "AB CD EF GH IJ KL MN\nAC BD EG FH IK JM LN\nAD BC EH FG IN JK \
+LM\nAE BF CG DH IL JN KM\nAF BE CH DG IM JL KN\nAI BJ CE DK FL GM HN\nAJ BI \
+CK DE FN GL HM\nAK BM CF DI EJ GN HL\nAL BN CI DF EM GJ HK\nAG BK CL DN EI FM \
+HJ\nAM BG CJ DL EN FK HI\nAH BL CN DM EK FJ GI\nAN BH CM DJ EL FI GK"}, {
+          15, "AB CD EF GH IJ KL MN OP\nAC BD EG FH IK JL MO NP\nAD BC EH FG \
+IL JK MP NO\nAE BF CG DH IM JN KO LP\nAF BE CH DG IN JM KP LO\nAG BH CE DF IO \
+JP KM LN\nAH BG CF DE IP JO KN LM\nAI BJ CK DL EM FN GO HP\nAJ BI CL DK EN FM \
+GP HO\nAK BL CI DJ EO FP GM HN\nAL BK CJ DI EP FO GN HM\nAM BN CO DP EI FJ GK \
+HL\nAN BM CP DO EJ FI GL HK\nAO BP CM DN EK FL GI HJ\nAP BO CN DM EL FK GJ \
+HI"}, {17, 
+           "AB CD EF GH IJ KL MN OP QR\nAC BD EG FH IK JL MO NQ PR\nAD BC EH \
+FG IL JK MR NO PQ\nAE BF CG DH IM JN KP LQ OR\nAF BE CH DG IN JM KR LP OQ\nAG \
+BH CE DF IO JQ KM LR NP\nAH BG CF DE IP JO KQ LM NR\nAI BJ CK DL EN FO GP HR \
+MQ\nAJ BI CL DK EO FN GR HQ MP\nAK BM CI DJ EQ FR GN HP LO\nAM BK CJ DI ER FP \
+GQ HO LN\nAL BP CQ DR EI FJ GM HN KO\nAP BL CR DQ EJ FI GO HM KN\nAN BO CM DP \
+EK FQ GI HL JR\nAQ BR CN DO EM FK GL HI JP\nAO BQ CP DN EL FM GJ HK IR\nAR BN \
+CO DM EP FL GK HJ IQ"}}, {{
+          4, "ABC DEF GHI JKL\nADG BEJ CHK FIL\nAHJ BDL CEI FGK\nAIK BFH CDJ \
+EGL"}, {7, 
+           "ABC DEF GHI JKL MNO\nADG BEJ CFM HKN ILO\nAEN BDO CHL FIK GJM\n\
+AIM BGL CDK EHO FJN\nAHJ BKM CEI DLN FGO\nAFL BIN CJO DHM EGK\nAKO BFH CGN \
+DIJ ELM"}, {
+          8, "ABC DEF GHI ahf dbi gec\nAbc Def Ghi aHF dBI gEC\nabC deF ghI \
+AHf DBi GEc\naBc dEf gHi AhF DbI GeC\nADG BEH CFI aei bfg cdh\nAdg Beh Cfi \
+aEI bFG cDH\nadG beH cfI AEi BFg CDh\naDg bEh cFi AeI BfG CdH"}, {
+          10, "ABF EGM DKR INP CJT HOU LQS\nDEJ HIK BNO AQR CLU FMS GPT\nAHL \
+JKO EIQ CNR BGS DMT FPU\nBCD FHN ELP GOQ AKT IMU JRS\nEFK IGL COM BRP AJU DNS \
+HQT\nBIJ KLM FGR AOP CHS ENT DQU\nCAE DIO FJQ HMR BLT GNU KPS\nFDL GHJ AMN \
+CPQ BKU EOS IRT\nCGK LJN DHP BMQ AIS FOT ERU\nSTU ADG BEH CFI JMP KNQ LOR"}, {
+          11, "ABC DEF GHI JKL MNO PQR STU VWX\nJOT ESB API DML HCV QWN FKU \
+GRX\nDVK SFO JQI EHL PTG WRC BMU ANX\nEGM FBV DWI SPL QKA RNT OHU JCX\nSAH \
+BOG ERI FQL WMJ NCK VPU DTX\nFJP OVA SNI BWL RHD CTM GQU EKX\nBDQ VGJ FCI ORL \
+NPE TKH AWU SMX\nOEW GAD BTI VNL CQS KMP JRU FHX\nVSR AJE OKI GCL TWF MHQ DNU \
+BPX\nGFN JDS VMI ATL KRB HPW ECU OQX\nAFMR BNHJ CPOD EQVT GKSW IXUL"}, {
+          13, "YZ+ ABC DEF GHI JKL MNO PQR STU VWX\nMTR DW+ SLZ ANU VBF EOY \
+GJP IXC HKQ\nJQO PIZ VKR SWC BLY AT+ DGM FUX EHN\nSBX KUY JE+ ARZ GTC DHL OFI \
+NQW MPV\nAHF JNR QCY PK+ GXZ MBI SVD ULO TWE\nGNL SHO PTX WIY VQ+ MFZ CRU BEK \
+ADJ\nPWU GB+ VOZ DQX AEI HRY KNT JMS LCF\nVEC NXY MH+ DUZ JWF GKO PSA RIL QTB\
+\nDKI MQU TFY SN+ JCZ PEL WBH VAG XOR\nMEX JTI DBR AQL VHU PNF OC+ KWZ SGY\n\
+GQF AWO VNI SER MKC JBU LX+ HTZ PDY\nVTL SKF PBO JHX GWR DNC EQZ MAY IU+\nPHC \
+MWL GEU DTO AKX SQI JVY FR+ BNZ"}}, {{
+          4, "AEIM BFJN CGKO DHLP\nAFKP BELO CHIN DGJM\nAGLN BHKM CEJP DFIO\n\
+AHJO BGIP CFLM DEKN"}, {
+          5, "ABCD EFGH IJKL MNOP QRST\nAEIM BFJQ CGNR DKOS HLPT\nAFOT BELR \
+CIPS DGJM HKNQ\nAJPR BHMS CEKT DFIN GLOQ\nALNS BGIT CHJO DEPQ FKMR"}, {
+          7, "ABKU IJSE QRCM DGFX HLNO PTVW\nACLV IKTF QSDN EHGR BMOP JUWX\n\
+ADMW ILUG QTEO FBHS CJNP KRVX\nAENX IMVH QUFP GCBT DJKO LRSW\nAFOR INWB QVGJ \
+HDCU EKLP MSTX\nAGPS IOXC QWHK BEDV FJLM NRTU\nAHJT IPRD QXBL CFEW GKMN \
+OSUV"}, {9, 
+           "ABCD EFGH IJKL MNab cdef ghij klmn\nAEgk BFMc Ndhl GIem HJai CKbn \
+DLfj\nAFjn BEae bfim HKcl GLMh CINk DJdg\nAIci BJNn EKMj FLdm begl CGaf DHhk\n\
+AGbd BHgm ELNi achn FKfk CJej DIMl\nAKeh BLbk FIag EJfl Ncjm CHMd DGin\nAHNf \
+BGjl FJbh Meik EIdn CLcg DKam\nALal BKdi GJck Mfgn HIbj CEhm DFNe\nAJMm BIfh \
+CFil DEbc GKNg HLen adjk"}, {
+          10, "ABCD EFGH IJKL MNPO abcd efgh ijkl mnop\nAEIm BgcH DFKp kPdf \
+Maei ChbG jNoL lJnO\nAlof Bhkm DNGi FaLO MbHK CPeJ Ejcp gIdn\nAciL BjdK DkbJ \
+FgoP fGOp CIla EhMn NeHm\nAgNK BElP DIoH hdiO beLp Cjfm FMcJ kaGn\nAhJp BFin \
+DcmO INbf leGK CMod EgkL jPaH\nAFde BoGJ DEaf hlNc PiKm CHLn gjbO IkMp\nAPbn \
+BNap DglM koce fHiJ CEKO FhIj dGLm\nAjMG BIeO DhPL gaJm cfKn CFkN Eobi ldHp\n\
+AkHO BMfL Djen Flbm IPcG Cgip ENdJ hoaK"}, {
+          11, "BCNP HRlm Dkor Fhnp AJaj KLEG QIcd Mbfi Oqeg\nCDOQ IAmn Elpa \
+Gioq BKbk LMFH RJde Ncgj Prfh\nDEPR JBno Fmqb Hjpr CLcl MNGI AKef Odhk Qagi\n\
+EFQA KCop Gnrc Ikqa DMdm NOHJ BLfg Peil Rbhj\nFGRB LDpq Hoad Jlrb ENen OPIK \
+CMgh Qfjm Acik\nGHAC MEqr Ipbe Kmac FOfo PQJL DNhi Rgkn Bdjl\nHIBD NFra Jqcf \
+Lnbd GPgp QRKM EOij Ahlo Cekm\nIJCE OGab Krdg Moce HQhq RALN FPjk Bimp Dfln\n\
+JKDF PHbc Laeh Npdf IRir ABMO GQkl Cjnq Egmo\nBEch DGej FIgl HKin JMkp LOmr \
+NQob PAqd RCaf\nCFdi EHfk GJhm ILjo KNlq MPna ORpc QBre ADbg"}}}}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->200550297],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`displaytype$$ = 
+    "graph 2 days", $CellContext`firstday$$ = 4, $CellContext`groupsize$$ = 
+    4, $CellContext`numberofgroups$$ = 6, $CellContext`secondday$$ = 5, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`groupsize$$], 4, "golfers per group"}, {2, 3, 4}}, {{
+       Hold[$CellContext`numberofgroups$$], 6, "number of groups"}, {4, 5, 6, 
+      7, 8, 9}}, {{
+       Hold[$CellContext`displaytype$$], "graph 2 days", "display type"}, {
+      "schedule", "graph 2 days"}}, {{
+       Hold[$CellContext`firstday$$], 4, "day in green"}, 
+      Dynamic[
+       Range[1, 
+        Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+         1, $CellContext`numberofgroups$$ - 3, 1]]]}, {{
+       Hold[$CellContext`secondday$$], 5, "day in orange"}, 
+      Dynamic[
+       Range[1, 
+        Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+         1, $CellContext`numberofgroups$$ - 3, 1]]]}}, Typeset`size$$ = {
+    600., {172., 178.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`groupsize$1291$$ = 
+    0, $CellContext`numberofgroups$1292$$ = 
+    0, $CellContext`displaytype$1293$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`displaytype$$ = 
+        "graph 2 days", $CellContext`firstday$$ = 4, $CellContext`groupsize$$ = 
+        4, $CellContext`numberofgroups$$ = 6, $CellContext`secondday$$ = 5}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`groupsize$$, $CellContext`groupsize$1291$$, 0], 
+        Hold[$CellContext`numberofgroups$$, \
+$CellContext`numberofgroups$1292$$, 0], 
+        Hold[$CellContext`displaytype$$, $CellContext`displaytype$1293$$, 
+         False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (
+       If[$CellContext`firstday$$ > 
+         Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+           1, $CellContext`numberofgroups$$ - 3, 1], $CellContext`firstday$$ = 
+         1]; If[$CellContext`secondday$$ > 
+         Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+           1, $CellContext`numberofgroups$$ - 3, 1], $CellContext`secondday$$ = 
+         2]; With[{$CellContext`pick$ = 
+          Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+            1, $CellContext`numberofgroups$$ - 3]}, 
+         With[{$CellContext`schedule$ = Map[StringSplit, 
+             StringSplit[
+              Part[$CellContext`pick$, 2], "\n"]]}, 
+          With[{$CellContext`edges$ = Map[Flatten[#, 1]& , 
+              Map[Subsets[#, {2}]& , 
+               Map[Characters, {
+                 Part[$CellContext`schedule$, $CellContext`firstday$$], 
+                 Part[$CellContext`schedule$, $CellContext`secondday$$]}], {
+               2}]]}, 
+           Pane[
+            If[$CellContext`displaytype$$ == "schedule", 
+             Text[
+              Grid[
+               MapIndexed[Prepend[#, 
+                 StringJoin["day ", 
+                  ToString[
+                   Part[#2, 1]], ": "]]& , $CellContext`schedule$], 
+               Background -> {None, 
+                 ReplacePart[
+                  Table[White, {
+                    
+                    Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+                    1, $CellContext`numberofgroups$$ - 3, 
+                    1]}], {$CellContext`firstday$$ -> 
+                   RGBColor[0.6, 0.73, 0.36], $CellContext`secondday$$ -> 
+                   RGBColor[0.9, 0.42, 0.17]}]}]], 
+             GraphPlot[
+              Apply[Rule, 
+               Flatten[$CellContext`edges$, 1], {1}], VertexLabeling -> True, 
+              EdgeRenderingFunction -> (If[
+                MemberQ[
+                 Part[$CellContext`edges$, 1], 
+                 Apply[List, #2, {1}]], {
+                 RGBColor[0.6, 0.73, 0.36], 
+                 Line[#]}, {
+                 RGBColor[0.9, 0.42, 0.17], 
+                 Line[#]}]& )]], {600, 350}, 
+            Alignment -> {Center, Center}]]]]), 
+      "Specifications" :> {{{$CellContext`groupsize$$, 4, 
+          "golfers per group"}, {2, 3, 4}, ControlType -> 
+         SetterBar}, {{$CellContext`numberofgroups$$, 6, 
+          "number of groups"}, {4, 5, 6, 7, 8, 9}, ControlType -> 
+         SetterBar}, {{$CellContext`displaytype$$, "graph 2 days", 
+          "display type"}, {"schedule", "graph 2 days"}, ControlType -> 
+         SetterBar}, {{$CellContext`firstday$$, 4, "day in green"}, 
+         Dynamic[
+          Range[1, 
+           
+           Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+            1, $CellContext`numberofgroups$$ - 3, 1]]], ControlType -> 
+         SetterBar}, {{$CellContext`secondday$$, 5, "day in orange"}, 
+         Dynamic[
+          Range[1, 
+           
+           Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+            1, $CellContext`numberofgroups$$ - 3, 1]]], ControlType -> 
+         SetterBar}}, "Options" :> {AutorunSequencing -> {1, 2, 3}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{645., {264., 269.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`sglists = {{{
+          7, "AB CD EF GH\nAC BD EG FH\nAD BC EH FG\nAE BF CG DH\nAF BE CH DG\
+\nAG BH CE DF\nAH BG CF DE"}, {
+          9, "AB CD EF GH IJ\nAC BD EG FI HJ\nAD BC EJ FG HI\nAE BF CH DI GJ\n\
+AF BE CJ DH GI\nAG BI CE DJ FH\nAH BG CI DE FJ\nAJ BH CF DG EI\nAI BJ CG DF \
+EH"}, {11, 
+           "AB CD EF GH IJ KL\nAC BD EG FH IK JL\nAD BC EH FG IL JK\nAE BF CI \
+DJ GK HL\nAF BE CJ DI GL HK\nAK BL CE DF GI HJ\nAL BK CF DE GJ HI\nAG BH CK \
+DL EI FJ\nAH BG CL DK EJ FI\nAI BJ CG DH EK FL\nAJ BI CH DG EL FK"}, {
+          13, "AB CD EF GH IJ KL MN\nAC BD EG FH IK JM LN\nAD BC EH FG IN JK \
+LM\nAE BF CG DH IL JN KM\nAF BE CH DG IM JL KN\nAI BJ CE DK FL GM HN\nAJ BI \
+CK DE FN GL HM\nAK BM CF DI EJ GN HL\nAL BN CI DF EM GJ HK\nAG BK CL DN EI FM \
+HJ\nAM BG CJ DL EN FK HI\nAH BL CN DM EK FJ GI\nAN BH CM DJ EL FI GK"}, {
+          15, "AB CD EF GH IJ KL MN OP\nAC BD EG FH IK JL MO NP\nAD BC EH FG \
+IL JK MP NO\nAE BF CG DH IM JN KO LP\nAF BE CH DG IN JM KP LO\nAG BH CE DF IO \
+JP KM LN\nAH BG CF DE IP JO KN LM\nAI BJ CK DL EM FN GO HP\nAJ BI CL DK EN FM \
+GP HO\nAK BL CI DJ EO FP GM HN\nAL BK CJ DI EP FO GN HM\nAM BN CO DP EI FJ GK \
+HL\nAN BM CP DO EJ FI GL HK\nAO BP CM DN EK FL GI HJ\nAP BO CN DM EL FK GJ \
+HI"}, {17, 
+           "AB CD EF GH IJ KL MN OP QR\nAC BD EG FH IK JL MO NQ PR\nAD BC EH \
+FG IL JK MR NO PQ\nAE BF CG DH IM JN KP LQ OR\nAF BE CH DG IN JM KR LP OQ\nAG \
+BH CE DF IO JQ KM LR NP\nAH BG CF DE IP JO KQ LM NR\nAI BJ CK DL EN FO GP HR \
+MQ\nAJ BI CL DK EO FN GR HQ MP\nAK BM CI DJ EQ FR GN HP LO\nAM BK CJ DI ER FP \
+GQ HO LN\nAL BP CQ DR EI FJ GM HN KO\nAP BL CR DQ EJ FI GO HM KN\nAN BO CM DP \
+EK FQ GI HL JR\nAQ BR CN DO EM FK GL HI JP\nAO BQ CP DN EL FM GJ HK IR\nAR BN \
+CO DM EP FL GK HJ IQ"}}, {{
+          4, "ABC DEF GHI JKL\nADG BEJ CHK FIL\nAHJ BDL CEI FGK\nAIK BFH CDJ \
+EGL"}, {7, 
+           "ABC DEF GHI JKL MNO\nADG BEJ CFM HKN ILO\nAEN BDO CHL FIK GJM\n\
+AIM BGL CDK EHO FJN\nAHJ BKM CEI DLN FGO\nAFL BIN CJO DHM EGK\nAKO BFH CGN \
+DIJ ELM"}, {
+          8, "ABC DEF GHI ahf dbi gec\nAbc Def Ghi aHF dBI gEC\nabC deF ghI \
+AHf DBi GEc\naBc dEf gHi AhF DbI GeC\nADG BEH CFI aei bfg cdh\nAdg Beh Cfi \
+aEI bFG cDH\nadG beH cfI AEi BFg CDh\naDg bEh cFi AeI BfG CdH"}, {
+          10, "ABF EGM DKR INP CJT HOU LQS\nDEJ HIK BNO AQR CLU FMS GPT\nAHL \
+JKO EIQ CNR BGS DMT FPU\nBCD FHN ELP GOQ AKT IMU JRS\nEFK IGL COM BRP AJU DNS \
+HQT\nBIJ KLM FGR AOP CHS ENT DQU\nCAE DIO FJQ HMR BLT GNU KPS\nFDL GHJ AMN \
+CPQ BKU EOS IRT\nCGK LJN DHP BMQ AIS FOT ERU\nSTU ADG BEH CFI JMP KNQ LOR"}, {
+          11, "ABC DEF GHI JKL MNO PQR STU VWX\nJOT ESB API DML HCV QWN FKU \
+GRX\nDVK SFO JQI EHL PTG WRC BMU ANX\nEGM FBV DWI SPL QKA RNT OHU JCX\nSAH \
+BOG ERI FQL WMJ NCK VPU DTX\nFJP OVA SNI BWL RHD CTM GQU EKX\nBDQ VGJ FCI ORL \
+NPE TKH AWU SMX\nOEW GAD BTI VNL CQS KMP JRU FHX\nVSR AJE OKI GCL TWF MHQ DNU \
+BPX\nGFN JDS VMI ATL KRB HPW ECU OQX\nAFMR BNHJ CPOD EQVT GKSW IXUL"}, {
+          13, "YZ+ ABC DEF GHI JKL MNO PQR STU VWX\nMTR DW+ SLZ ANU VBF EOY \
+GJP IXC HKQ\nJQO PIZ VKR SWC BLY AT+ DGM FUX EHN\nSBX KUY JE+ ARZ GTC DHL OFI \
+NQW MPV\nAHF JNR QCY PK+ GXZ MBI SVD ULO TWE\nGNL SHO PTX WIY VQ+ MFZ CRU BEK \
+ADJ\nPWU GB+ VOZ DQX AEI HRY KNT JMS LCF\nVEC NXY MH+ DUZ JWF GKO PSA RIL QTB\
+\nDKI MQU TFY SN+ JCZ PEL WBH VAG XOR\nMEX JTI DBR AQL VHU PNF OC+ KWZ SGY\n\
+GQF AWO VNI SER MKC JBU LX+ HTZ PDY\nVTL SKF PBO JHX GWR DNC EQZ MAY IU+\nPHC \
+MWL GEU DTO AKX SQI JVY FR+ BNZ"}}, {{
+          4, "AEIM BFJN CGKO DHLP\nAFKP BELO CHIN DGJM\nAGLN BHKM CEJP DFIO\n\
+AHJO BGIP CFLM DEKN"}, {
+          5, "ABCD EFGH IJKL MNOP QRST\nAEIM BFJQ CGNR DKOS HLPT\nAFOT BELR \
+CIPS DGJM HKNQ\nAJPR BHMS CEKT DFIN GLOQ\nALNS BGIT CHJO DEPQ FKMR"}, {
+          7, "ABKU IJSE QRCM DGFX HLNO PTVW\nACLV IKTF QSDN EHGR BMOP JUWX\n\
+ADMW ILUG QTEO FBHS CJNP KRVX\nAENX IMVH QUFP GCBT DJKO LRSW\nAFOR INWB QVGJ \
+HDCU EKLP MSTX\nAGPS IOXC QWHK BEDV FJLM NRTU\nAHJT IPRD QXBL CFEW GKMN \
+OSUV"}, {9, 
+           "ABCD EFGH IJKL MNab cdef ghij klmn\nAEgk BFMc Ndhl GIem HJai CKbn \
+DLfj\nAFjn BEae bfim HKcl GLMh CINk DJdg\nAIci BJNn EKMj FLdm begl CGaf DHhk\n\
+AGbd BHgm ELNi achn FKfk CJej DIMl\nAKeh BLbk FIag EJfl Ncjm CHMd DGin\nAHNf \
+BGjl FJbh Meik EIdn CLcg DKam\nALal BKdi GJck Mfgn HIbj CEhm DFNe\nAJMm BIfh \
+CFil DEbc GKNg HLen adjk"}, {
+          10, "ABCD EFGH IJKL MNPO abcd efgh ijkl mnop\nAEIm BgcH DFKp kPdf \
+Maei ChbG jNoL lJnO\nAlof Bhkm DNGi FaLO MbHK CPeJ Ejcp gIdn\nAciL BjdK DkbJ \
+FgoP fGOp CIla EhMn NeHm\nAgNK BElP DIoH hdiO beLp Cjfm FMcJ kaGn\nAhJp BFin \
+DcmO INbf leGK CMod EgkL jPaH\nAFde BoGJ DEaf hlNc PiKm CHLn gjbO IkMp\nAPbn \
+BNap DglM koce fHiJ CEKO FhIj dGLm\nAjMG BIeO DhPL gaJm cfKn CFkN Eobi ldHp\n\
+AkHO BMfL Djen Flbm IPcG Cgip ENdJ hoaK"}, {
+          11, "BCNP HRlm Dkor Fhnp AJaj KLEG QIcd Mbfi Oqeg\nCDOQ IAmn Elpa \
+Gioq BKbk LMFH RJde Ncgj Prfh\nDEPR JBno Fmqb Hjpr CLcl MNGI AKef Odhk Qagi\n\
+EFQA KCop Gnrc Ikqa DMdm NOHJ BLfg Peil Rbhj\nFGRB LDpq Hoad Jlrb ENen OPIK \
+CMgh Qfjm Acik\nGHAC MEqr Ipbe Kmac FOfo PQJL DNhi Rgkn Bdjl\nHIBD NFra Jqcf \
+Lnbd GPgp QRKM EOij Ahlo Cekm\nIJCE OGab Krdg Moce HQhq RALN FPjk Bimp Dfln\n\
+JKDF PHbc Laeh Npdf IRir ABMO GQkl Cjnq Egmo\nBEch DGej FIgl HKin JMkp LOmr \
+NQob PAqd RCaf\nCFdi EHfk GJhm ILjo KNlq MPna ORpc QBre ADbg"}}}}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->417249721],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`displaytype$$ = 
+    "graph 2 days", $CellContext`firstday$$ = 1, $CellContext`groupsize$$ = 
+    4, $CellContext`numberofgroups$$ = 4, $CellContext`secondday$$ = 2, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`groupsize$$], 4, "golfers per group"}, {2, 3, 4}}, {{
+       Hold[$CellContext`numberofgroups$$], 4, "number of groups"}, {4, 5, 6, 
+      7, 8, 9}}, {{
+       Hold[$CellContext`displaytype$$], "graph 2 days", "display type"}, {
+      "schedule", "graph 2 days"}}, {{
+       Hold[$CellContext`firstday$$], 1, "day in green"}, 
+      Dynamic[
+       Range[1, 
+        Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+         1, $CellContext`numberofgroups$$ - 3, 1]]]}, {{
+       Hold[$CellContext`secondday$$], 2, "day in orange"}, 
+      Dynamic[
+       Range[1, 
+        Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+         1, $CellContext`numberofgroups$$ - 3, 1]]]}}, Typeset`size$$ = {
+    600., {172., 178.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`groupsize$1360$$ = 
+    0, $CellContext`numberofgroups$1361$$ = 
+    0, $CellContext`displaytype$1362$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`displaytype$$ = 
+        "graph 2 days", $CellContext`firstday$$ = 1, $CellContext`groupsize$$ = 
+        4, $CellContext`numberofgroups$$ = 4, $CellContext`secondday$$ = 2}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`groupsize$$, $CellContext`groupsize$1360$$, 0], 
+        Hold[$CellContext`numberofgroups$$, \
+$CellContext`numberofgroups$1361$$, 0], 
+        Hold[$CellContext`displaytype$$, $CellContext`displaytype$1362$$, 
+         False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (
+       If[$CellContext`firstday$$ > 
+         Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+           1, $CellContext`numberofgroups$$ - 3, 1], $CellContext`firstday$$ = 
+         1]; If[$CellContext`secondday$$ > 
+         Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+           1, $CellContext`numberofgroups$$ - 3, 1], $CellContext`secondday$$ = 
+         2]; With[{$CellContext`pick$ = 
+          Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+            1, $CellContext`numberofgroups$$ - 3]}, 
+         With[{$CellContext`schedule$ = Map[StringSplit, 
+             StringSplit[
+              Part[$CellContext`pick$, 2], "\n"]]}, 
+          With[{$CellContext`edges$ = Map[Flatten[#, 1]& , 
+              Map[Subsets[#, {2}]& , 
+               Map[Characters, {
+                 Part[$CellContext`schedule$, $CellContext`firstday$$], 
+                 Part[$CellContext`schedule$, $CellContext`secondday$$]}], {
+               2}]]}, 
+           Pane[
+            If[$CellContext`displaytype$$ == "schedule", 
+             Text[
+              Grid[
+               MapIndexed[Prepend[#, 
+                 StringJoin["day ", 
+                  ToString[
+                   Part[#2, 1]], ": "]]& , $CellContext`schedule$], 
+               Background -> {None, 
+                 ReplacePart[
+                  Table[White, {
+                    
+                    Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+                    1, $CellContext`numberofgroups$$ - 3, 
+                    1]}], {$CellContext`firstday$$ -> 
+                   RGBColor[0.6, 0.73, 0.36], $CellContext`secondday$$ -> 
+                   RGBColor[0.9, 0.42, 0.17]}]}]], 
+             GraphPlot[
+              Apply[Rule, 
+               Flatten[$CellContext`edges$, 1], {1}], VertexLabeling -> True, 
+              EdgeRenderingFunction -> (If[
+                MemberQ[
+                 Part[$CellContext`edges$, 1], 
+                 Apply[List, #2, {1}]], {
+                 RGBColor[0.6, 0.73, 0.36], 
+                 Line[#]}, {
+                 RGBColor[0.9, 0.42, 0.17], 
+                 Line[#]}]& )]], {600, 350}, 
+            Alignment -> {Center, Center}]]]]), 
+      "Specifications" :> {{{$CellContext`groupsize$$, 4, 
+          "golfers per group"}, {2, 3, 4}, ControlType -> 
+         SetterBar}, {{$CellContext`numberofgroups$$, 4, 
+          "number of groups"}, {4, 5, 6, 7, 8, 9}, ControlType -> 
+         SetterBar}, {{$CellContext`displaytype$$, "graph 2 days", 
+          "display type"}, {"schedule", "graph 2 days"}, ControlType -> 
+         SetterBar}, {{$CellContext`firstday$$, 1, "day in green"}, 
+         Dynamic[
+          Range[1, 
+           
+           Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+            1, $CellContext`numberofgroups$$ - 3, 1]]], ControlType -> 
+         SetterBar}, {{$CellContext`secondday$$, 2, "day in orange"}, 
+         Dynamic[
+          Range[1, 
+           
+           Part[$CellContext`sglists, $CellContext`groupsize$$ - 
+            1, $CellContext`numberofgroups$$ - 3, 1]]], ControlType -> 
+         SetterBar}}, "Options" :> {AutorunSequencing -> {1, 2, 3}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{645., {264., 269.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`sglists = {{{
+          7, "AB CD EF GH\nAC BD EG FH\nAD BC EH FG\nAE BF CG DH\nAF BE CH DG\
+\nAG BH CE DF\nAH BG CF DE"}, {
+          9, "AB CD EF GH IJ\nAC BD EG FI HJ\nAD BC EJ FG HI\nAE BF CH DI GJ\n\
+AF BE CJ DH GI\nAG BI CE DJ FH\nAH BG CI DE FJ\nAJ BH CF DG EI\nAI BJ CG DF \
+EH"}, {11, 
+           "AB CD EF GH IJ KL\nAC BD EG FH IK JL\nAD BC EH FG IL JK\nAE BF CI \
+DJ GK HL\nAF BE CJ DI GL HK\nAK BL CE DF GI HJ\nAL BK CF DE GJ HI\nAG BH CK \
+DL EI FJ\nAH BG CL DK EJ FI\nAI BJ CG DH EK FL\nAJ BI CH DG EL FK"}, {
+          13, "AB CD EF GH IJ KL MN\nAC BD EG FH IK JM LN\nAD BC EH FG IN JK \
+LM\nAE BF CG DH IL JN KM\nAF BE CH DG IM JL KN\nAI BJ CE DK FL GM HN\nAJ BI \
+CK DE FN GL HM\nAK BM CF DI EJ GN HL\nAL BN CI DF EM GJ HK\nAG BK CL DN EI FM \
+HJ\nAM BG CJ DL EN FK HI\nAH BL CN DM EK FJ GI\nAN BH CM DJ EL FI GK"}, {
+          15, "AB CD EF GH IJ KL MN OP\nAC BD EG FH IK JL MO NP\nAD BC EH FG \
+IL JK MP NO\nAE BF CG DH IM JN KO LP\nAF BE CH DG IN JM KP LO\nAG BH CE DF IO \
+JP KM LN\nAH BG CF DE IP JO KN LM\nAI BJ CK DL EM FN GO HP\nAJ BI CL DK EN FM \
+GP HO\nAK BL CI DJ EO FP GM HN\nAL BK CJ DI EP FO GN HM\nAM BN CO DP EI FJ GK \
+HL\nAN BM CP DO EJ FI GL HK\nAO BP CM DN EK FL GI HJ\nAP BO CN DM EL FK GJ \
+HI"}, {17, 
+           "AB CD EF GH IJ KL MN OP QR\nAC BD EG FH IK JL MO NQ PR\nAD BC EH \
+FG IL JK MR NO PQ\nAE BF CG DH IM JN KP LQ OR\nAF BE CH DG IN JM KR LP OQ\nAG \
+BH CE DF IO JQ KM LR NP\nAH BG CF DE IP JO KQ LM NR\nAI BJ CK DL EN FO GP HR \
+MQ\nAJ BI CL DK EO FN GR HQ MP\nAK BM CI DJ EQ FR GN HP LO\nAM BK CJ DI ER FP \
+GQ HO LN\nAL BP CQ DR EI FJ GM HN KO\nAP BL CR DQ EJ FI GO HM KN\nAN BO CM DP \
+EK FQ GI HL JR\nAQ BR CN DO EM FK GL HI JP\nAO BQ CP DN EL FM GJ HK IR\nAR BN \
+CO DM EP FL GK HJ IQ"}}, {{
+          4, "ABC DEF GHI JKL\nADG BEJ CHK FIL\nAHJ BDL CEI FGK\nAIK BFH CDJ \
+EGL"}, {7, 
+           "ABC DEF GHI JKL MNO\nADG BEJ CFM HKN ILO\nAEN BDO CHL FIK GJM\n\
+AIM BGL CDK EHO FJN\nAHJ BKM CEI DLN FGO\nAFL BIN CJO DHM EGK\nAKO BFH CGN \
+DIJ ELM"}, {
+          8, "ABC DEF GHI ahf dbi gec\nAbc Def Ghi aHF dBI gEC\nabC deF ghI \
+AHf DBi GEc\naBc dEf gHi AhF DbI GeC\nADG BEH CFI aei bfg cdh\nAdg Beh Cfi \
+aEI bFG cDH\nadG beH cfI AEi BFg CDh\naDg bEh cFi AeI BfG CdH"}, {
+          10, "ABF EGM DKR INP CJT HOU LQS\nDEJ HIK BNO AQR CLU FMS GPT\nAHL \
+JKO EIQ CNR BGS DMT FPU\nBCD FHN ELP GOQ AKT IMU JRS\nEFK IGL COM BRP AJU DNS \
+HQT\nBIJ KLM FGR AOP CHS ENT DQU\nCAE DIO FJQ HMR BLT GNU KPS\nFDL GHJ AMN \
+CPQ BKU EOS IRT\nCGK LJN DHP BMQ AIS FOT ERU\nSTU ADG BEH CFI JMP KNQ LOR"}, {
+          11, "ABC DEF GHI JKL MNO PQR STU VWX\nJOT ESB API DML HCV QWN FKU \
+GRX\nDVK SFO JQI EHL PTG WRC BMU ANX\nEGM FBV DWI SPL QKA RNT OHU JCX\nSAH \
+BOG ERI FQL WMJ NCK VPU DTX\nFJP OVA SNI BWL RHD CTM GQU EKX\nBDQ VGJ FCI ORL \
+NPE TKH AWU SMX\nOEW GAD BTI VNL CQS KMP JRU FHX\nVSR AJE OKI GCL TWF MHQ DNU \
+BPX\nGFN JDS VMI ATL KRB HPW ECU OQX\nAFMR BNHJ CPOD EQVT GKSW IXUL"}, {
+          13, "YZ+ ABC DEF GHI JKL MNO PQR STU VWX\nMTR DW+ SLZ ANU VBF EOY \
+GJP IXC HKQ\nJQO PIZ VKR SWC BLY AT+ DGM FUX EHN\nSBX KUY JE+ ARZ GTC DHL OFI \
+NQW MPV\nAHF JNR QCY PK+ GXZ MBI SVD ULO TWE\nGNL SHO PTX WIY VQ+ MFZ CRU BEK \
+ADJ\nPWU GB+ VOZ DQX AEI HRY KNT JMS LCF\nVEC NXY MH+ DUZ JWF GKO PSA RIL QTB\
+\nDKI MQU TFY SN+ JCZ PEL WBH VAG XOR\nMEX JTI DBR AQL VHU PNF OC+ KWZ SGY\n\
+GQF AWO VNI SER MKC JBU LX+ HTZ PDY\nVTL SKF PBO JHX GWR DNC EQZ MAY IU+\nPHC \
+MWL GEU DTO AKX SQI JVY FR+ BNZ"}}, {{
+          4, "AEIM BFJN CGKO DHLP\nAFKP BELO CHIN DGJM\nAGLN BHKM CEJP DFIO\n\
+AHJO BGIP CFLM DEKN"}, {
+          5, "ABCD EFGH IJKL MNOP QRST\nAEIM BFJQ CGNR DKOS HLPT\nAFOT BELR \
+CIPS DGJM HKNQ\nAJPR BHMS CEKT DFIN GLOQ\nALNS BGIT CHJO DEPQ FKMR"}, {
+          7, "ABKU IJSE QRCM DGFX HLNO PTVW\nACLV IKTF QSDN EHGR BMOP JUWX\n\
+ADMW ILUG QTEO FBHS CJNP KRVX\nAENX IMVH QUFP GCBT DJKO LRSW\nAFOR INWB QVGJ \
+HDCU EKLP MSTX\nAGPS IOXC QWHK BEDV FJLM NRTU\nAHJT IPRD QXBL CFEW GKMN \
+OSUV"}, {9, 
+           "ABCD EFGH IJKL MNab cdef ghij klmn\nAEgk BFMc Ndhl GIem HJai CKbn \
+DLfj\nAFjn BEae bfim HKcl GLMh CINk DJdg\nAIci BJNn EKMj FLdm begl CGaf DHhk\n\
+AGbd BHgm ELNi achn FKfk CJej DIMl\nAKeh BLbk FIag EJfl Ncjm CHMd DGin\nAHNf \
+BGjl FJbh Meik EIdn CLcg DKam\nALal BKdi GJck Mfgn HIbj CEhm DFNe\nAJMm BIfh \
+CFil DEbc GKNg HLen adjk"}, {
+          10, "ABCD EFGH IJKL MNPO abcd efgh ijkl mnop\nAEIm BgcH DFKp kPdf \
+Maei ChbG jNoL lJnO\nAlof Bhkm DNGi FaLO MbHK CPeJ Ejcp gIdn\nAciL BjdK DkbJ \
+FgoP fGOp CIla EhMn NeHm\nAgNK BElP DIoH hdiO beLp Cjfm FMcJ kaGn\nAhJp BFin \
+DcmO INbf leGK CMod EgkL jPaH\nAFde BoGJ DEaf hlNc PiKm CHLn gjbO IkMp\nAPbn \
+BNap DglM koce fHiJ CEKO FhIj dGLm\nAjMG BIeO DhPL gaJm cfKn CFkN Eobi ldHp\n\
+AkHO BMfL Djen Flbm IPcG Cgip ENdJ hoaK"}, {
+          11, "BCNP HRlm Dkor Fhnp AJaj KLEG QIcd Mbfi Oqeg\nCDOQ IAmn Elpa \
+Gioq BKbk LMFH RJde Ncgj Prfh\nDEPR JBno Fmqb Hjpr CLcl MNGI AKef Odhk Qagi\n\
+EFQA KCop Gnrc Ikqa DMdm NOHJ BLfg Peil Rbhj\nFGRB LDpq Hoad Jlrb ENen OPIK \
+CMgh Qfjm Acik\nGHAC MEqr Ipbe Kmac FOfo PQJL DNhi Rgkn Bdjl\nHIBD NFra Jqcf \
+Lnbd GPgp QRKM EOij Ahlo Cekm\nIJCE OGab Krdg Moce HQhq RALN FPjk Bimp Dfln\n\
+JKDF PHbc Laeh Npdf IRir ABMO GQkl Cjnq Egmo\nBEch DGej FIgl HKin JMkp LOmr \
+NQob PAqd RCaf\nCFdi EHfk GJhm ILjo KNlq MPna ORpc QBre ADbg"}}}}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->322168784]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "DetailsSection"],
+
+Cell["Reference", "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.435588965249955*^9, 3.435588965250955*^9}, {
+   3.505063808039742*^9, 3.505063812015635*^9}},
+ CellID->929429874],
+
+Cell["[1] E. Pegg Jr. \"Social Golfer Problem.\" (Aug 14, 2007)", \
+"DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.435588965249955*^9, 3.435588965250955*^9}, {
+   3.505063808039742*^9, 3.505063818244265*^9}, {3.505063877680254*^9, 
+   3.5050638790602703`*^9}, {3.592335203704048*^9, 3.5923352037090483`*^9}},
+ CellID->1300482592],
+
+Cell[TextData[{
+ ButtonBox["http://www.mathpuzzle.com/MAA/54-Golf Tournaments/mathgames_08_ \
+14_ 07.html",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://www.mathpuzzle.com/MAA/54-Golf%20Tournaments/mathgames_08_14_\
+07.html"], None},
+  ButtonNote->
+   "http://www.mathpuzzle.com/MAA/54-Golf%20Tournaments/mathgames_08_14_07.\
+html"],
+ "."
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.435588965249955*^9, 3.435588965250955*^9}, {
+   3.505063808039742*^9, 3.505063818244265*^9}, {3.505063877680254*^9, 
+   3.5050638790602703`*^9}, {3.592335203704048*^9, 3.592335262598937*^9}},
+ CellID->437824063]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.3895522232313623`*^9},
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SearchTermsSection"],
+
+Cell["Kirkman Packing Design", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4349942386701193`*^9, 3.4349942408653393`*^9}},
+ CellID->195884351],
+
+Cell["Kirkman Quadruple System (KQS)", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4349943394311943`*^9, 3.4349943445187035`*^9}},
+ CellID->321879958],
+
+Cell["Kirkman Triple System (KTS)", "SearchTerms",
+ CellID->23339130],
+
+Cell["Nearly Kirkman Triple System (NKTS)", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4349942902222743`*^9, 3.434994292293481*^9}},
+ CellID->342657336],
+
+Cell["Oberwolfach Problem (OP)", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.434994274271679*^9, 3.4349942769149437`*^9}},
+ CellID->110607107],
+
+Cell["Resolvable Steiner Quadruple System (RSQS)", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4349943625625076`*^9, 3.4349943685661077`*^9}},
+ CellID->49051874],
+
+Cell["Resolvable Steiner Triple System (RSTS)", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.434994194832736*^9, 3.4349942009873514`*^9}},
+ CellID->26048421],
+
+Cell["Resolvable Group Divisible Design (RGDD)", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4349942585321054`*^9, 3.434994258712124*^9}},
+ CellID->52732475]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "RelatedLinksSection"],
+
+Cell[TextData[ButtonBox["Kirkman's Schoolgirl Problem",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/KirkmansSchoolgirlProblem.html"], 
+   None}]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4349940946457186`*^9, 3.4349941315524087`*^9}, {
+   3.435588983191749*^9, 3.435588983223752*^9}},
+ CellID->60429625],
+
+Cell[TextData[ButtonBox["Kirkman Triple System",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/KirkmanTripleSystem.html"], 
+   None}]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4349940303822927`*^9, 3.4349940408273373`*^9}},
+ CellID->110404547],
+
+Cell[TextData[ButtonBox["Social Golfer Problem",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/SocialGolferProblem.html"], 
+   None}]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4349940606423187`*^9, 3.4349940773969936`*^9}},
+ CellID->731121491],
+
+Cell[TextData[ButtonBox["Steiner Quadruple System",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/SteinerQuadrupleSystem.html"], 
+   None}]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.434993921885444*^9, 3.4349939338386393`*^9}},
+ CellID->554025268],
+
+Cell[TextData[ButtonBox["Steiner Triple System",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/SteinerTripleSystem.html"], 
+   None}]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4349940063158865`*^9, 3.4349940174109955`*^9}},
+ CellID->731436322],
+
+Cell[TextData[ButtonBox["Steiner System",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/SteinerSystem.html"], 
+   None}]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.434993944634719*^9, 3.4349939541356688`*^9}},
+ CellID->471173950]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Ed Pegg Jr",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Ed+Pegg+Jr"], 
+    None}]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4349936047897377`*^9, 3.4349936080180607`*^9}, {
+   3.434993670706329*^9, 3.434993670707329*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{919, 853},
+WindowMargins->{{107, Automatic}, {Automatic, 14}},
+ShowSelection->True,
+FrontEndVersion->"9.0 for Microsoft Windows (64-bit) (January 25, 2013)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[87496, 1776, 312, 8, 22, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[87811, 1786, 678, 16, 22, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[88492, 1804, 340, 11, 22, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[88835, 1817, 637, 15, 22, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[89475, 1834, 844, 21, 22, "ControlSuggestions",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[90322, 1857, 369, 9, 22, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[90694, 1868, 1412, 31, 22, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[92109, 1901, 882, 21, 22, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 97083, 2058},
+ {"RotateAndZoomIn3D", 97192, 2061},
+ {"DragLocators", 97302, 2064},
+ {"CreateAndDeleteLocators", 97418, 2067},
+ {"SliderZoom", 97532, 2070},
+ {"GamepadControls", 97638, 2073},
+ {"AutomaticAnimation", 97751, 2076},
+ {"BookmarkAnimation", 97868, 2079}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 134, 2, 74, "DemoTitle"],
+Cell[CellGroupData[{
+Cell[726, 28, 33, 0, 287, "InitializationSection"],
+Cell[762, 30, 575, 13, 148, "Input",
+ InitializationCell->True,
+ CellID->81661009],
+Cell[1340, 45, 658, 15, 188, "Input",
+ InitializationCell->True,
+ CellID->917188924],
+Cell[2001, 62, 708, 15, 228, "Input",
+ InitializationCell->True,
+ CellID->108777613],
+Cell[2712, 79, 799, 17, 268, "Input",
+ InitializationCell->True,
+ CellID->376179544],
+Cell[3514, 98, 849, 17, 308, "Input",
+ InitializationCell->True,
+ CellID->163348084],
+Cell[4366, 117, 870, 17, 348, "Input",
+ InitializationCell->True,
+ CellID->207520608],
+Cell[5239, 136, 550, 13, 88, "Input",
+ InitializationCell->True,
+ CellID->39353025],
+Cell[5792, 151, 632, 14, 148, "Input",
+ InitializationCell->True,
+ CellID->61368859],
+Cell[6427, 167, 719, 16, 168, "Input",
+ InitializationCell->True,
+ CellID->107764695],
+Cell[7149, 185, 839, 17, 208, "Input",
+ InitializationCell->True,
+ CellID->110116896],
+Cell[7991, 204, 911, 18, 228, "Input",
+ InitializationCell->True,
+ CellID->30397328],
+Cell[8905, 224, 1076, 20, 268, "Input",
+ InitializationCell->True,
+ CellID->17725469],
+Cell[9984, 246, 544, 13, 88, "Input",
+ InitializationCell->True,
+ CellID->11299344],
+Cell[10531, 261, 576, 14, 108, "Input",
+ InitializationCell->True,
+ CellID->127784664],
+Cell[11110, 277, 697, 15, 148, "Input",
+ InitializationCell->True,
+ CellID->28823072],
+Cell[11810, 294, 798, 16, 188, "Input",
+ InitializationCell->True,
+ CellID->403669670],
+Cell[12611, 312, 910, 17, 208, "Input",
+ InitializationCell->True,
+ CellID->333837028],
+Cell[13524, 331, 835, 17, 228, "Input",
+ InitializationCell->True,
+ CellID->379860360],
+Cell[14362, 350, 1097, 24, 88, "Input",
+ InitializationCell->True,
+ CellID->190213028]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[15496, 379, 29, 0, 194, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[15550, 383, 9097, 219, 428, "Input"],
+Cell[24650, 604, 11185, 199, 545, "Output",
+ CellID->109467634]
+}, {2}]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[35881, 809, 36, 0, 169, "ManipulateCaptionSection"],
+Cell[35920, 811, 608, 10, 37, "ManipulateCaption"],
+Cell[36531, 823, 904, 16, 67, "ManipulateCaption",
+ CellID->295080508],
+Cell[37438, 841, 1551, 30, 86, "ManipulateCaption",
+ CellID->44950759],
+Cell[38992, 873, 761, 15, 53, "ManipulateCaption",
+ CellID->822730793],
+Cell[39756, 890, 931, 15, 67, "ManipulateCaption",
+ CellID->132691998],
+Cell[40690, 907, 580, 11, 37, "ManipulateCaption",
+ CellID->422607116]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[41307, 923, 28, 0, 173, "ThumbnailSection"],
+Cell[41338, 925, 11185, 199, 545, "Output",
+ CellID->577692187]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[52560, 1129, 28, 0, 143, "SnapshotsSection"],
+Cell[52591, 1131, 11185, 199, 545, "Output",
+ CellID->200550297],
+Cell[63779, 1332, 11201, 199, 545, "Output",
+ CellID->417249721],
+Cell[74983, 1533, 11201, 199, 545, "Output",
+ CellID->322168784]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[86221, 1737, 26, 0, 336, "DetailsSection"],
+Cell[86250, 1739, 192, 4, 22, "DetailNotes",
+ CellID->929429874],
+Cell[86445, 1745, 343, 6, 22, "DetailNotes",
+ CellID->1300482592],
+Cell[86791, 1753, 628, 16, 22, "DetailNotes",
+ CellID->437824063]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[87456, 1774, 37, 0, 126, "ControlSuggestionsSection"],
+Cell[87496, 1776, 312, 8, 22, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[87811, 1786, 678, 16, 22, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[88492, 1804, 340, 11, 22, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[88835, 1817, 637, 15, 22, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[89475, 1834, 844, 21, 22, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[90322, 1857, 369, 9, 22, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[90694, 1868, 1412, 31, 22, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[92109, 1901, 882, 21, 22, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[93028, 1927, 30, 0, 155, "SearchTermsSection"],
+Cell[93061, 1929, 159, 3, 22, "SearchTerms",
+ CellID->195884351],
+Cell[93223, 1934, 167, 3, 22, "SearchTerms",
+ CellID->321879958],
+Cell[93393, 1939, 69, 1, 22, "SearchTerms",
+ CellID->23339130],
+Cell[93465, 1942, 170, 3, 22, "SearchTerms",
+ CellID->342657336],
+Cell[93638, 1947, 159, 3, 22, "SearchTerms",
+ CellID->110607107],
+Cell[93800, 1952, 178, 3, 22, "SearchTerms",
+ CellID->49051874],
+Cell[93981, 1957, 173, 3, 22, "SearchTerms",
+ CellID->26048421],
+Cell[94157, 1962, 174, 3, 22, "SearchTerms",
+ CellID->52732475]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[94368, 1970, 31, 0, 141, "RelatedLinksSection"],
+Cell[94402, 1972, 358, 8, 22, "RelatedLinks",
+ CellID->60429625],
+Cell[94763, 1982, 296, 7, 22, "RelatedLinks",
+ CellID->110404547],
+Cell[95062, 1991, 296, 7, 22, "RelatedLinks",
+ CellID->731121491],
+Cell[95361, 2000, 300, 7, 22, "RelatedLinks",
+ CellID->554025268],
+Cell[95664, 2009, 296, 7, 22, "RelatedLinks",
+ CellID->731436322],
+Cell[95963, 2018, 281, 7, 22, "RelatedLinks",
+ CellID->471173950]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[96281, 2030, 25, 0, 141, "AuthorSection"],
+Cell[96309, 2032, 349, 10, 22, "Author"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

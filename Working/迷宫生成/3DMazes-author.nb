@@ -1,0 +1,3747 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[    159169,       3739]
+NotebookOptionsPosition[    152812,       3615]
+NotebookOutlinePosition[    154878,       3666]
+CellTagsIndexPosition[    154542,       3654]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["3D Mazes", "DemoTitle",
+ CellChangeTimes->{{3.595222313734375*^9, 
+  3.595222323578125*^9}},ExpressionUUID->"77d062d5-3dd2-44e6-8325-\
+78d874f3cf65"],
+
+Cell["", "InitializationSection",ExpressionUUID->"4d6821f5-94ae-4a5c-ba85-a89eb6dd7ba8"],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection",ExpressionUUID->"0ef81493-c286-48d5-b070-2cf12a375d56"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"SeedRandom", "[", "ranint", "]"}], ";", "\[IndentingNewLine]", 
+    RowBox[{"With", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"tt", "=", 
+        RowBox[{"Labyrinth3D", "[", 
+         RowBox[{"num", ",", 
+          RowBox[{"m", "+", "1"}], ",", 
+          RowBox[{"n", "+", "1"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"0", ",", "0"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"1", ",", "0"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"0", ",", "1"}], "}"}]}], "]"}]}], "}"}], ",", 
+      RowBox[{"Pane", "[", 
+       RowBox[{
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"!", "help"}], ",", 
+          RowBox[{"tt", "[", 
+           RowBox[{"[", "1", "]"}], "]"}], ",", 
+          RowBox[{"tt", "[", 
+           RowBox[{"[", "2", "]"}], "]"}]}], " ", "]"}], ",", 
+        RowBox[{"Alignment", "\[Rule]", "Center"}], ",", 
+        RowBox[{"ImageSize", "->", 
+         RowBox[{"{", 
+          RowBox[{"550", ",", "400"}], "}"}]}]}], "]"}]}], "]"}]}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"ranint", ",", 
+       RowBox[{"RandomInteger", "[", "1007", "]"}]}], "}"}], ",", 
+     RowBox[{"ControlType", "\[Rule]", "None"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Row", "[", 
+    RowBox[{"{", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"Spacer", "[", "60", "]"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"Column", "[", 
+       RowBox[{
+        RowBox[{"{", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"Control", "@", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"m", ",", "4", ",", "\"\<x dimension\>\""}], "}"}], ",",
+              "3", ",", "5", ",", "1", ",", "SetterBar"}], "}"}]}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Control", "@", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"n", ",", "5", ",", "\"\<y dimension\>\""}], "}"}], ",",
+              "3", ",", "5", ",", "1", ",", "SetterBar"}], "}"}]}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Control", "@", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"num", ",", "3", ",", "\"\<z dimension\>\""}], "}"}], 
+             ",", "2", ",", "4", ",", "1", ",", "SetterBar"}], "}"}]}], ","}],
+          "\[IndentingNewLine]", "}"}], ",", 
+        RowBox[{"Alignment", "\[Rule]", "Right"}]}], "]"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Spacer", "[", "40", "]"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"Control", "@", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"help", ",", "False", ",", "\"\<show solution\>\""}], "}"}],
+          ",", 
+         RowBox[{"{", 
+          RowBox[{"True", ",", "False"}], "}"}], ",", 
+         RowBox[{"ControlPlacement", "\[Rule]", "Top"}]}], "}"}]}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Spacer", "[", "40", "]"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"Button", "[", 
+       RowBox[{"\"\<new maze\>\"", ",", 
+        RowBox[{
+         RowBox[{"ranint", "=", 
+          RowBox[{"RandomInteger", "[", 
+           RowBox[{"{", 
+            RowBox[{"1", ",", "1377"}], "}"}], "]"}]}], ";", 
+         RowBox[{"help", "=", "False"}]}]}], "]"}]}], "\[IndentingNewLine]", 
+     "}"}], "]"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Initialization", "\[RuleDelayed]", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"Quiet", "@", " ", 
+       RowBox[{"Get", "[", "\"\<Combinatorica`\>\"", "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"izboroddaljenih", "[", "drev_", "]"}], ":=", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"n", "=", 
+            RowBox[{"Length", "[", 
+             RowBox[{"Union", "[", 
+              RowBox[{"Flatten", "[", "drev", "]"}], "]"}], "]"}]}], ",", 
+           "listi", ",", "list", ",", "zacetna", ",", "koncna"}], "}"}], ",", 
+         RowBox[{
+          RowBox[{"listi", "=", 
+           RowBox[{"Select", "[", 
+            RowBox[{
+             RowBox[{"Range", "[", "n", "]"}], ",", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"Count", "[", 
+                RowBox[{
+                 RowBox[{"Flatten", "[", 
+                  RowBox[{"drev", ",", "1"}], "]"}], ",", "#1"}], "]"}], 
+               "\[Equal]", "1"}], "&"}]}], "]"}]}], ";", 
+          RowBox[{"list", "=", 
+           RowBox[{"listi", "\[LeftDoubleBracket]", 
+            RowBox[{"RandomInteger", "[", 
+             RowBox[{"{", 
+              RowBox[{"1", ",", 
+               RowBox[{"Length", "[", "listi", "]"}]}], "}"}], "]"}], 
+            "\[RightDoubleBracket]"}]}], ";", 
+          RowBox[{"zacetna", "=", 
+           RowBox[{"najboljoddaljena", "[", 
+            RowBox[{"list", ",", "drev", ",", "n"}], "]"}]}], ";", 
+          RowBox[{"koncna", "=", 
+           RowBox[{"najboljoddaljena", "[", 
+            RowBox[{"zacetna", ",", "drev", ",", "n"}], "]"}]}], ";", 
+          RowBox[{"{", 
+           RowBox[{"zacetna", ",", "koncna"}], "}"}]}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"najboljoddaljena", "[", 
+        RowBox[{"a_", ",", "drev_", ",", "n_"}], "]"}], ":=", 
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"tekoca", "=", 
+            RowBox[{"{", "a", "}"}]}], ",", 
+           RowBox[{"ostanek", "=", 
+            RowBox[{"Complement", "[", 
+             RowBox[{
+              RowBox[{"Range", "[", "n", "]"}], ",", 
+              RowBox[{"{", "a", "}"}]}], "]"}]}], ",", "x", ",", "i", ",", 
+           "sosedi"}], "}"}], ",", 
+         RowBox[{
+          RowBox[{"While", "[", 
+           RowBox[{
+            RowBox[{"!", 
+             RowBox[{"ostanek", "\[Equal]", 
+              RowBox[{"{", "}"}]}]}], ",", 
+            RowBox[{
+             RowBox[{"sosedi", "=", 
+              RowBox[{"Union", "[", 
+               RowBox[{"Flatten", "[", 
+                RowBox[{"Table", "[", 
+                 RowBox[{
+                  RowBox[{"Select", "[", 
+                   RowBox[{"ostanek", ",", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"MemberQ", "[", 
+                    RowBox[{"drev", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"#1", ",", 
+                    RowBox[{
+                    "tekoca", "\[LeftDoubleBracket]", "i", 
+                    "\[RightDoubleBracket]"}]}], "}"}]}], "]"}], "||", 
+                    RowBox[{"MemberQ", "[", 
+                    RowBox[{"drev", ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    "tekoca", "\[LeftDoubleBracket]", "i", 
+                    "\[RightDoubleBracket]"}], ",", "#1"}], "}"}]}], "]"}]}], 
+                    "&"}]}], "]"}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{"i", ",", "1", ",", 
+                    RowBox[{"Length", "[", "tekoca", "]"}]}], "}"}]}], "]"}], 
+                "]"}], "]"}]}], ";", 
+             RowBox[{"ostanek", "=", 
+              RowBox[{"Complement", "[", 
+               RowBox[{"ostanek", ",", "sosedi"}], "]"}]}], ";", 
+             RowBox[{"tekoca", "=", "sosedi"}]}]}], "]"}], ";", 
+          RowBox[{"sosedi", "\[LeftDoubleBracket]", 
+           RowBox[{"RandomInteger", "[", 
+            RowBox[{"{", 
+             RowBox[{"1", ",", 
+              RowBox[{"Length", "[", "sosedi", "]"}]}], "}"}], "]"}], 
+           "\[RightDoubleBracket]"}]}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"dodajzadnji", "[", "sez_", "]"}], ":=", 
+       RowBox[{"Block", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"newsez", "=", "sez"}], ",", "nw", ",", "i"}], "}"}], ",", 
+         "\n", "\t\t", 
+         RowBox[{
+          RowBox[{"Do", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"nw", "=", 
+              RowBox[{"Append", "[", 
+               RowBox[{
+                RowBox[{"sez", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}], ",", 
+                RowBox[{"First", "[", 
+                 RowBox[{"sez", "[", 
+                  RowBox[{"[", "i", "]"}], "]"}], "]"}]}], "]"}]}], ";", 
+             RowBox[{"newsez", "=", "\n", "\t\t\t", 
+              RowBox[{"ReplacePart", "[", 
+               RowBox[{"newsez", ",", "nw", ",", "i"}], "]"}]}]}], ",", 
+            RowBox[{"{", 
+             RowBox[{"i", ",", "1", ",", 
+              RowBox[{"Length", "[", "sez", "]"}]}], "}"}]}], "]"}], ";", 
+          "newsez"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"izbor", "[", 
+        RowBox[{"pove_", ",", "conc_"}], "]"}], ":=", 
+       RowBox[{"Select", "[", 
+        RowBox[{"pove", ",", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"MemberQ", "[", 
+               RowBox[{"conc", ",", 
+                RowBox[{"First", "[", "#", "]"}]}], "]"}], " ", "&&", " ", 
+              RowBox[{"!", 
+               RowBox[{"MemberQ", "[", 
+                RowBox[{"conc", ",", 
+                 RowBox[{"Last", "[", "#", "]"}]}], "]"}]}]}], ")"}], "||", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"MemberQ", "[", 
+               RowBox[{"conc", ",", 
+                RowBox[{"Last", "[", "#", "]"}]}], "]"}], " ", "&&", " ", 
+              RowBox[{"!", 
+               RowBox[{"MemberQ", "[", 
+                RowBox[{"conc", ",", 
+                 RowBox[{"First", "[", "#", "]"}]}], "]"}]}]}], ")"}]}], 
+           ")"}], "&"}]}], "]"}]}], ";", "\[IndentingNewLine]", "\t", 
+      RowBox[{
+       RowBox[{"TreeFromPairs3", "[", 
+        RowBox[{
+        "pove_", ",", "SelectFirst_", ",", "SelectPred_", ",", 
+         "SelectSucc_"}], "]"}], ":=", 
+       RowBox[{"Block", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+          "e", ",", "bfi", ",", "selectfrom", ",", "b", ",", "lis", ",", "j", 
+           ",", "i", ",", "edges", ",", 
+           RowBox[{"cnt", "=", "1"}], ",", "selectfrom1", ",", "ta", ",", 
+           "te1", ",", "lis1", ",", "maksi", ",", "g"}], "}"}], ",", 
+         RowBox[{
+          RowBox[{"edges", "=", 
+           RowBox[{"{", 
+            RowBox[{"pove", "\[LeftDoubleBracket]", 
+             RowBox[{"RandomInteger", "[", 
+              RowBox[{"{", 
+               RowBox[{"1", ",", 
+                RowBox[{"Length", "[", "pove", "]"}]}], "}"}], "]"}], 
+             "\[RightDoubleBracket]"}], "}"}]}], ";", 
+          RowBox[{"g", "=", 
+           RowBox[{"Combinatorica`FromUnorderedPairs", "[", "pove", "]"}]}], 
+          ";", 
+          RowBox[{"bfi", "=", 
+           RowBox[{"Table", "[", 
+            RowBox[{"0", ",", 
+             RowBox[{"{", 
+              RowBox[{"Combinatorica`V", "[", "g", "]"}], "}"}]}], "]"}]}], 
+          ";", 
+          RowBox[{"e", "=", 
+           RowBox[{"Combinatorica`ToAdjacencyLists", "[", "g", "]"}]}], ";", 
+          RowBox[{"a", "=", 
+           RowBox[{"edges", "\[LeftDoubleBracket]", 
+            RowBox[{"1", ",", "1"}], "\[RightDoubleBracket]"}]}], ";", 
+          RowBox[{"b", "=", 
+           RowBox[{"edges", "\[LeftDoubleBracket]", 
+            RowBox[{"1", ",", "2"}], "\[RightDoubleBracket]"}]}], ";", 
+          RowBox[{
+           RowBox[{
+           "bfi", "\[LeftDoubleBracket]", "a", "\[RightDoubleBracket]"}], "=",
+            "1"}], ";", 
+          RowBox[{
+           RowBox[{
+           "bfi", "\[LeftDoubleBracket]", "b", "\[RightDoubleBracket]"}], "=",
+            "2"}], ";", 
+          RowBox[{"e", "=", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"Complement", "[", 
+               RowBox[{"#1", ",", 
+                RowBox[{"{", 
+                 RowBox[{"a", ",", "b"}], "}"}]}], "]"}], "&"}], ")"}], "/@", 
+            "e"}]}], ";", 
+          RowBox[{"j", "=", "1"}], ";", 
+          RowBox[{"te1", "=", 
+           RowBox[{"Length", "/@", 
+            RowBox[{"Combinatorica`ToAdjacencyLists", "[", "g", "]"}]}]}], 
+          ";", 
+          RowBox[{"ta", "=", 
+           RowBox[{"Join", "[", 
+            RowBox[{
+             RowBox[{"Table", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                "edges", "\[LeftDoubleBracket]", "i", 
+                 "\[RightDoubleBracket]"}], "\[LeftDoubleBracket]", "1", 
+                "\[RightDoubleBracket]"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"i", ",", "1", ",", "j"}], "}"}]}], "]"}], ",", 
+             RowBox[{"Table", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                "edges", "\[LeftDoubleBracket]", "i", 
+                 "\[RightDoubleBracket]"}], "\[LeftDoubleBracket]", "1", 
+                "\[RightDoubleBracket]"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"i", ",", "1", ",", "j"}], "}"}]}], "]"}]}], "]"}]}], 
+          ";", 
+          RowBox[{"lis1", "=", 
+           RowBox[{"Cases", "[", 
+            RowBox[{
+             RowBox[{"Range", "[", 
+              RowBox[{"Combinatorica`V", "[", "g", "]"}], "]"}], ",", 
+             RowBox[{"x_", "/;", 
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{
+                 "te1", "\[LeftDoubleBracket]", "x", 
+                  "\[RightDoubleBracket]"}], "-", 
+                 RowBox[{"Count", "[", 
+                  RowBox[{"ta", ",", "x"}], "]"}]}], ">", "0"}], "&&", 
+               RowBox[{
+                RowBox[{
+                "bfi", "\[LeftDoubleBracket]", "x", "\[RightDoubleBracket]"}],
+                 ">", "0"}], "&&", 
+               RowBox[{
+                RowBox[{
+                "e", "\[LeftDoubleBracket]", "x", "\[RightDoubleBracket]"}], 
+                "\[NotEqual]", 
+                RowBox[{"{", "}"}]}]}]}]}], "]"}]}], ";", 
+          RowBox[{"maksi", "=", 
+           RowBox[{"Max", "[", 
+            RowBox[{"Map", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                "te1", "\[LeftDoubleBracket]", "#1", 
+                 "\[RightDoubleBracket]"}], "-", 
+                RowBox[{"Count", "[", 
+                 RowBox[{"ta", ",", "#1"}], "]"}]}], "&"}], ",", "lis1", ",", 
+              RowBox[{"{", "1", "}"}]}], "]"}], "]"}]}], ";", 
+          RowBox[{"lis", "=", 
+           RowBox[{"Cases", "[", 
+            RowBox[{"lis1", ",", 
+             RowBox[{"x_", "/;", 
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                "te1", "\[LeftDoubleBracket]", "x", "\[RightDoubleBracket]"}],
+                 "-", 
+                RowBox[{"Count", "[", 
+                 RowBox[{"ta", ",", "x"}], "]"}]}], "\[Equal]", "maksi"}]}]}],
+             "]"}]}], ";", 
+          RowBox[{"While", "[", 
+           RowBox[{
+            RowBox[{"lis", "\[NotEqual]", 
+             RowBox[{"{", "}"}]}], ",", 
+            RowBox[{
+             RowBox[{"a", "=", 
+              RowBox[{"SelectPred", "[", 
+               RowBox[{"g", ",", "e", ",", "lis", ",", "bfi", ",", "cnt"}], 
+               "]"}]}], ";", 
+             RowBox[{"b", "=", 
+              RowBox[{"SelectSucc", "[", 
+               RowBox[{"g", ",", "e", ",", 
+                RowBox[{
+                "e", "\[LeftDoubleBracket]", "a", "\[RightDoubleBracket]"}], 
+                ",", "_", ",", "_"}], "]"}]}], ";", 
+             RowBox[{"j", "=", 
+              RowBox[{"j", "+", "1"}]}], ";", 
+             RowBox[{
+              RowBox[{
+              "bfi", "\[LeftDoubleBracket]", "b", "\[RightDoubleBracket]"}], 
+              "=", 
+              RowBox[{"j", "+", "1"}]}], ";", 
+             RowBox[{"AppendTo", "[", 
+              RowBox[{"edges", ",", 
+               RowBox[{"{", 
+                RowBox[{"a", ",", "b"}], "}"}]}], "]"}], ";", 
+             RowBox[{"e", "=", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"Complement", "[", 
+                  RowBox[{"#1", ",", 
+                   RowBox[{"{", "b", "}"}]}], "]"}], "&"}], ")"}], "/@", 
+               "e"}]}], ";", 
+             RowBox[{"te1", "=", 
+              RowBox[{"Length", "/@", 
+               RowBox[{"Combinatorica`ToAdjacencyLists", "[", "g", "]"}]}]}], 
+             ";", 
+             RowBox[{"ta", "=", 
+              RowBox[{"Join", "[", 
+               RowBox[{
+                RowBox[{"Table", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                   "edges", "\[LeftDoubleBracket]", "i", 
+                    "\[RightDoubleBracket]"}], "\[LeftDoubleBracket]", "1", 
+                   "\[RightDoubleBracket]"}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{"i", ",", "1", ",", "j"}], "}"}]}], "]"}], ",", 
+                RowBox[{"Table", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                   "edges", "\[LeftDoubleBracket]", "i", 
+                    "\[RightDoubleBracket]"}], "\[LeftDoubleBracket]", "2", 
+                   "\[RightDoubleBracket]"}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{"i", ",", "1", ",", "j"}], "}"}]}], "]"}]}], 
+               "]"}]}], ";", 
+             RowBox[{"lis1", "=", 
+              RowBox[{"Cases", "[", 
+               RowBox[{
+                RowBox[{"Range", "[", 
+                 RowBox[{"Combinatorica`V", "[", "g", "]"}], "]"}], ",", 
+                RowBox[{"x_", "/;", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{
+                    "te1", "\[LeftDoubleBracket]", "x", 
+                    "\[RightDoubleBracket]"}], "-", 
+                    RowBox[{"Count", "[", 
+                    RowBox[{"ta", ",", "x"}], "]"}]}], ">", "0"}], "&&", 
+                  RowBox[{
+                   RowBox[{
+                   "bfi", "\[LeftDoubleBracket]", "x", 
+                    "\[RightDoubleBracket]"}], ">", "0"}], "&&", 
+                  RowBox[{
+                   RowBox[{
+                   "e", "\[LeftDoubleBracket]", "x", 
+                    "\[RightDoubleBracket]"}], "\[NotEqual]", 
+                   RowBox[{"{", "}"}]}]}]}]}], "]"}]}], ";", 
+             RowBox[{"maksi", "=", 
+              RowBox[{"Max", "[", 
+               RowBox[{"Map", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                   "te1", "\[LeftDoubleBracket]", "#1", 
+                    "\[RightDoubleBracket]"}], "-", 
+                   RowBox[{"Count", "[", 
+                    RowBox[{"ta", ",", "#1"}], "]"}]}], "&"}], ",", "lis1", 
+                 ",", 
+                 RowBox[{"{", "1", "}"}]}], "]"}], "]"}]}], ";", 
+             RowBox[{"lis", "=", 
+              RowBox[{"Cases", "[", 
+               RowBox[{"lis1", ",", 
+                RowBox[{"x_", "/;", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                   "te1", "\[LeftDoubleBracket]", "x", 
+                    "\[RightDoubleBracket]"}], "-", 
+                   RowBox[{"Count", "[", 
+                    RowBox[{"ta", ",", "x"}], "]"}]}], "\[Equal]", 
+                  "maksi"}]}]}], "]"}]}], ";", 
+             RowBox[{"ta", "=", 
+              RowBox[{"Join", "[", 
+               RowBox[{
+                RowBox[{"Table", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                   "edges", "\[LeftDoubleBracket]", "i", 
+                    "\[RightDoubleBracket]"}], "\[LeftDoubleBracket]", "1", 
+                   "\[RightDoubleBracket]"}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{"i", ",", "1", ",", "j"}], "}"}]}], "]"}], ",", 
+                RowBox[{"Table", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                   "edges", "\[LeftDoubleBracket]", "i", 
+                    "\[RightDoubleBracket]"}], "\[LeftDoubleBracket]", "2", 
+                   "\[RightDoubleBracket]"}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{"i", ",", "1", ",", "j"}], "}"}]}], "]"}]}], 
+               "]"}]}], ";"}]}], "]"}], ";", 
+          RowBox[{"{", 
+           RowBox[{"edges", ",", "bfi"}], "}"}]}]}], "]"}]}], ";", "\n", 
+      RowBox[{
+       RowBox[{"SelectFr4", "[", 
+        RowBox[{"g_", ",", "e_", ",", "list_", ",", "bfi_", ",", "cnt_"}], 
+        "]"}], ":=", 
+       RowBox[{"list", "\[LeftDoubleBracket]", 
+        RowBox[{"RandomInteger", "[", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", 
+           RowBox[{"Length", "[", "list", "]"}]}], "}"}], "]"}], 
+        "\[RightDoubleBracket]"}]}], ";", 
+      RowBox[{
+       RowBox[{"SelectPr3", "[", 
+        RowBox[{"g_", ",", "e_", ",", "list_", ",", "bfi_", ",", "cnt_"}], 
+        "]"}], ":=", 
+       RowBox[{"list", "\[LeftDoubleBracket]", 
+        RowBox[{"RandomInteger", "[", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", 
+           RowBox[{"Length", "[", "list", "]"}]}], "}"}], "]"}], 
+        "\[RightDoubleBracket]"}]}], ";", " ", 
+      RowBox[{
+       RowBox[{"SelectSu3", "[", 
+        RowBox[{"g_", ",", "e_", ",", "list_", ",", "bfi_", ",", "cnt_"}], 
+        "]"}], ":=", 
+       RowBox[{"list", "\[LeftDoubleBracket]", 
+        RowBox[{"RandomInteger", "[", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", 
+           RowBox[{"Length", "[", "list", "]"}]}], "}"}], "]"}], 
+        "\[RightDoubleBracket]"}]}], ";", 
+      RowBox[{"(*", 
+       RowBox[{
+        RowBox[{
+        "program", " ", "za", " ", "subdivizijo", " ", "vej", " ", "na", " ", 
+         "d", " ", "delov"}], ",", " ", 
+        RowBox[{"dani", " ", "so", " ", "cikli"}]}], "*)"}], 
+      RowBox[{
+       RowBox[{"EdgesOnFace", "[", "lice_", "]"}], ":=", 
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", "i", "}"}], ",", 
+         RowBox[{"(*", 
+          RowBox[{"iz", " ", "cikla", " ", "dobimo", " ", "veje"}], "*)"}], 
+         RowBox[{"Append", "[", 
+          RowBox[{
+           RowBox[{"Table", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"lice", "[", 
+                RowBox[{"[", "i", "]"}], "]"}], ",", 
+               RowBox[{"lice", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", "+", "1"}], "]"}], "]"}]}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"i", ",", "1", ",", 
+               RowBox[{
+                RowBox[{"Length", "[", "lice", "]"}], "-", "1"}]}], "}"}]}], 
+            "]"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"Last", "[", "lice", "]"}], ",", 
+             RowBox[{"First", "[", "lice", "]"}]}], "}"}]}], "]"}]}], "]"}]}],
+       ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"EdgesOnFaces", "[", "cic_", "]"}], ":=", 
+       RowBox[{"Block", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"edgs", "=", 
+            RowBox[{"{", "}"}]}], ",", 
+           RowBox[{"n", "=", 
+            RowBox[{"Length", "[", "cic", "]"}]}], ",", "ed", ",", "i"}], 
+          "}"}], ",", 
+         RowBox[{"(*", 
+          RowBox[{"vse", " ", "veje", " ", "iz", " ", "ciklov"}], "*)"}], 
+         "\n", "\t\t", 
+         RowBox[{
+          RowBox[{"Do", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"ed", "=", 
+              RowBox[{"EdgesOnFace", "[", 
+               RowBox[{"cic", "[", 
+                RowBox[{"[", "i", "]"}], "]"}], "]"}]}], ";", 
+             RowBox[{"edgs", "=", 
+              RowBox[{"Union", "[", 
+               RowBox[{"edgs", ",", "ed"}], "]"}]}]}], ",", "\n", "\t\t\t", 
+            RowBox[{"{", 
+             RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}], ";", "\n", 
+          "\t\t", 
+          RowBox[{"edgs", "=", 
+           RowBox[{"Union", "[", 
+            RowBox[{"Map", "[", 
+             RowBox[{"Sort", ",", "edgs", ",", "1"}], "]"}], "]"}]}]}]}], 
+        "]"}]}], ";", "\n", 
+      RowBox[{
+       RowBox[{"Povprecje", "[", "cic_", "]"}], ":=", 
+       RowBox[{
+        RowBox[{"Apply", "[", 
+         RowBox[{"Plus", ",", "cic"}], "]"}], "/", 
+        RowBox[{"Length", "[", "cic", "]"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ClosedLine", "[", "a_", "]"}], ":=", 
+       RowBox[{"Line", "[", 
+        RowBox[{"Append", "[", 
+         RowBox[{"a", ",", 
+          RowBox[{"First", "[", "a", "]"}]}], "]"}], "]"}]}], ";", "\n", 
+      RowBox[{
+       RowBox[{"Labyrinth3D", "[", 
+        RowBox[{
+        "num_", ",", "m_", ",", "n_", ",", "v_", ",", "x_", ",", "y_"}], 
+        "]"}], ":=", 
+       RowBox[{"Block", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"drevo", ",", "c1", ",", "nal1", ",", "res1", ",", 
+           RowBox[{"solid", "=", 
+            RowBox[{"NPravokotniGrafText2", "[", 
+             RowBox[{
+             "num", ",", "m", ",", "n", ",", "v", ",", "x", ",", "y"}], 
+             "]"}]}], ",", "vertcoor1", ",", "edgs", ",", "f", ",", "pove1", 
+           ",", "allpov", ",", "slika4", ",", "slika9", ",", "slika10", ",", 
+           "zadnja1", ",", "prva", ",", "zadnja", ",", "pot1", ",", "g1", ",",
+            "zadnjicikel", ",", "zatt", ",", "kont", ",", "prvicikel", ",", 
+           "vertsolut", ",", "zat", ",", "bele", ",", "sive", ",", 
+           "slikasive", ",", "edbele", ",", "edgb", ",", "edgc", ",", 
+           "slikaE"}], "}"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"c1", "=", 
+           RowBox[{"solid", "[", 
+            RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"edgs", "=", 
+           RowBox[{"EdgesOnFaces", "[", "c1", "]"}]}], ";", 
+          RowBox[{"vertcoor1", "=", 
+           RowBox[{"solid", "[", 
+            RowBox[{"[", "2", "]"}], "]"}]}], ";", 
+          RowBox[{"f", "=", 
+           RowBox[{"Length", "[", "c1", "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"allpov", "=", 
+           RowBox[{"Apply", "[", 
+            RowBox[{"Union", ",", 
+             RowBox[{"Table", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"a", ",", "b"}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"a", ",", "1", ",", 
+                 RowBox[{"f", "-", "1"}]}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"b", ",", 
+                 RowBox[{"a", "+", "1"}], ",", "f"}], "}"}]}], "]"}]}], 
+            "]"}]}], ";", 
+          RowBox[{"pove1", "=", 
+           RowBox[{"Cases", "[", 
+            RowBox[{"allpov", ",", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"i_", ",", "j_"}], "}"}], "/;", 
+              RowBox[{
+               RowBox[{"adj", "[", 
+                RowBox[{"num", ",", "m", ",", "n"}], "]"}], "[", 
+               RowBox[{"i", ",", "j"}], "]"}]}]}], "]"}]}], ";", 
+          RowBox[{"drevo", "=", 
+           RowBox[{"First", "[", 
+            RowBox[{"TreeFromPairs3", "[", 
+             RowBox[{
+             "pove1", ",", "SelectFr4", ",", "SelectPr3", ",", "SelectSu3"}], 
+             "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"bele", "=", 
+           RowBox[{"Map", "[", 
+            RowBox[{"Min", ",", 
+             RowBox[{"Select", "[", 
+              RowBox[{"drevo", ",", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"adj2", "[", 
+                   RowBox[{"num", ",", "m", ",", "n"}], "]"}], "[", 
+                  RowBox[{
+                   RowBox[{"#", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], ",", 
+                   RowBox[{"#", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}], "]"}], "||", 
+                 RowBox[{
+                  RowBox[{"adj2", "[", 
+                   RowBox[{"num", ",", "m", ",", "n"}], "]"}], "[", 
+                  RowBox[{
+                   RowBox[{"#", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}], ",", 
+                   RowBox[{"#", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}]}], "]"}]}], "&"}]}], 
+              "]"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"sive", "=", 
+           RowBox[{"Complement", "[", 
+            RowBox[{
+             RowBox[{"Range", "[", "f", "]"}], ",", "bele"}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"slikasive", "=", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"GrayLevel", "[", "0.75", "]"}], ",", 
+             RowBox[{"Table", "[", 
+              RowBox[{
+               RowBox[{"Polygon", "[", 
+                RowBox[{"Map", "[", 
+                 RowBox[{"vert", ",", 
+                  RowBox[{"c1", "[", 
+                   RowBox[{"[", 
+                    RowBox[{"sive", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], "]"}], "]"}]}], "]"}], 
+                "]"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"i", ",", "1", ",", 
+                 RowBox[{"Length", "[", "sive", "]"}]}], "}"}]}], "]"}]}], 
+            "}"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"edbele", "=", 
+           RowBox[{"Select", "[", 
+            RowBox[{"drevo", ",", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"adj1", "[", 
+                RowBox[{"num", ",", "m", ",", "n"}], "]"}], "[", 
+               RowBox[{
+                RowBox[{"#", "[", 
+                 RowBox[{"[", "1", "]"}], "]"}], ",", 
+                RowBox[{"#", "[", 
+                 RowBox[{"[", "2", "]"}], "]"}]}], "]"}], "&"}]}], "]"}]}], 
+          ";", "\[IndentingNewLine]", 
+          RowBox[{"edgb", "=", 
+           RowBox[{"Table", "[", 
+            RowBox[{
+             RowBox[{"Intersection", "[", 
+              RowBox[{
+               RowBox[{"c1", "[", 
+                RowBox[{"[", 
+                 RowBox[{"edbele", "[", 
+                  RowBox[{"[", 
+                   RowBox[{"i", ",", "1"}], "]"}], "]"}], "]"}], "]"}], ",", 
+               RowBox[{"c1", "[", 
+                RowBox[{"[", 
+                 RowBox[{"edbele", "[", 
+                  RowBox[{"[", 
+                   RowBox[{"i", ",", "2"}], "]"}], "]"}], "]"}], "]"}]}], 
+              "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"i", ",", "1", ",", 
+               RowBox[{"Length", "[", "edbele", "]"}]}], "}"}]}], "]"}]}], 
+          ";", "\[IndentingNewLine]", 
+          RowBox[{"edgc", "=", 
+           RowBox[{"Complement", "[", 
+            RowBox[{"edgs", ",", "edgb"}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"slikaE", "=", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"Thickness", "[", "0.01", "]"}], ",", 
+             RowBox[{"Table", "[", 
+              RowBox[{
+               RowBox[{"Line", "[", 
+                RowBox[{"Map", "[", 
+                 RowBox[{"vert", ",", 
+                  RowBox[{"edgc", "[", 
+                   RowBox[{"[", "i", "]"}], "]"}]}], "]"}], "]"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"i", ",", "1", ",", 
+                 RowBox[{"Length", "[", "edgc", "]"}]}], "}"}]}], "]"}]}], 
+            "}"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"zadnja1", "=", 
+           RowBox[{
+            RowBox[{"Last", "[", "drevo", "]"}], "\[LeftDoubleBracket]", "2", 
+            "\[RightDoubleBracket]"}]}], ";", 
+          RowBox[{"g1", "=", 
+           RowBox[{"Combinatorica`FromUnorderedPairs", "[", "drevo", "]"}]}], 
+          ";", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"prva", ",", "zadnja"}], "}"}], "=", 
+           RowBox[{"izboroddaljenih", "[", "drevo", "]"}]}], ";", 
+          RowBox[{"pot1", "=", 
+           RowBox[{"Combinatorica`ShortestPath", "[", 
+            RowBox[{"g1", ",", "prva", ",", "zadnja"}], "]"}]}], ";", 
+          RowBox[{"prvicikel", "=", 
+           RowBox[{
+           "c1", "\[LeftDoubleBracket]", "prva", "\[RightDoubleBracket]"}]}], 
+          ";", 
+          RowBox[{"zadnjicikel", "=", 
+           RowBox[{
+           "c1", "\[LeftDoubleBracket]", "zadnja", 
+            "\[RightDoubleBracket]"}]}], ";", 
+          RowBox[{"solut", "=", 
+           RowBox[{"Length", "[", "pot1", "]"}]}], ";", 
+          RowBox[{"vert", "=", 
+           RowBox[{
+            RowBox[{
+            "vertcoor1", "\[LeftDoubleBracket]", "#1", 
+             "\[RightDoubleBracket]"}], "&"}]}], ";", 
+          RowBox[{"zatt", "=", 
+           RowBox[{
+            RowBox[{"0.25`", " ", 
+             RowBox[{"Plus", "@@", 
+              RowBox[{"Map", "[", 
+               RowBox[{"vert", ",", 
+                RowBox[{
+                "c1", "\[LeftDoubleBracket]", "#1", "\[RightDoubleBracket]"}],
+                 ",", 
+                RowBox[{"{", "1", "}"}]}], "]"}]}]}], "&"}]}], ";", 
+          RowBox[{"zat", "=", 
+           RowBox[{"zatt", "[", "prva", "]"}]}], ";", 
+          RowBox[{"kont", "=", 
+           RowBox[{"zatt", "[", "zadnja", "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"slika4", "=", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"AbsolutePointSize", "[", "10", "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"Red", ",", 
+               RowBox[{"Point", "[", "zat", "]"}]}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"Green", ",", 
+               RowBox[{"Point", "[", "kont", "]"}]}], "}"}]}], "}"}]}], ";", 
+          RowBox[{"slika9", "=", 
+           RowBox[{"Table", "[", 
+            RowBox[{
+             RowBox[{"Text", "[", 
+              RowBox[{
+               RowBox[{"Style", "[", 
+                RowBox[{
+                 RowBox[{"ToString", "[", "i", "]"}], ",", 
+                 RowBox[{"FontSize", "\[Rule]", "12"}]}], "]"}], ",", 
+               RowBox[{"zatt", "[", 
+                RowBox[{
+                "pot1", "\[LeftDoubleBracket]", "i", 
+                 "\[RightDoubleBracket]"}], "]"}]}], "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"i", ",", "1", ",", 
+               RowBox[{"Length", "[", "pot1", "]"}]}], "}"}]}], "]"}]}], ";", 
+          RowBox[{"slika10", "=", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"GrayLevel", "[", "0.9", "]"}], ",", 
+             RowBox[{"Map", "[", 
+              RowBox[{"ClosedLine", ",", 
+               RowBox[{"Map", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"solid", "[", 
+                   RowBox[{"[", 
+                    RowBox[{"2", ",", "#"}], "]"}], "]"}], "&"}], ",", 
+                 RowBox[{"solid", "[", 
+                  RowBox[{"[", "1", "]"}], "]"}]}], "]"}]}], "]"}]}], "}"}]}],
+           ";", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Graphics", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+               "slikasive", ",", "slika10", ",", "slikaE", ",", "slika4"}], 
+               "}"}], ",", 
+              RowBox[{"ImageSize", "\[Rule]", 
+               RowBox[{"{", 
+                RowBox[{"450", ",", "450"}], "}"}]}]}], "]"}], ",", 
+            RowBox[{"Graphics", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+               "slikasive", ",", "slika10", ",", "slikaE", ",", "slika4", ",",
+                 "slika9"}], "}"}], ",", 
+              RowBox[{"ImageSize", "\[Rule]", 
+               RowBox[{"{", 
+                RowBox[{"450", ",", "450"}], "}"}]}]}], "]"}], ",", 
+            RowBox[{"Length", "[", "pot1", "]"}]}], "}"}]}]}], "]"}]}], ";", 
+      RowBox[{
+       RowBox[{"NPravokotniGrafText2", "[", 
+        RowBox[{
+        "num_", ",", "m_", ",", "n_", ",", "v_", ",", "x_", ",", "y_"}], 
+        "]"}], ":=", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"Flatten", "[", 
+          RowBox[{
+           RowBox[{"Table", "[", 
+            RowBox[{
+             RowBox[{"Table", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"j", "-", "1"}], ")"}], "m"}], "+", "i", "+", 
+                  RowBox[{"m", " ", "n", " ", "k"}]}], ",", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"j", "-", "1"}], ")"}], "m"}], "+", "i", "+", "1",
+                   "+", 
+                  RowBox[{"m", " ", "n", " ", "k"}]}], ",", 
+                 RowBox[{
+                  RowBox[{"j", " ", "m"}], "+", "i", "+", "1", "+", 
+                  RowBox[{"m", " ", "n", " ", "k"}]}], ",", 
+                 RowBox[{
+                  RowBox[{"j", " ", "m"}], "+", "i", "+", 
+                  RowBox[{"m", " ", "n", " ", "k"}]}]}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"j", ",", "1", ",", 
+                 RowBox[{"n", "-", "1"}]}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"i", ",", "1", ",", 
+                 RowBox[{"m", "-", "1"}]}], "}"}]}], "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"k", ",", "0", ",", 
+               RowBox[{"num", "-", "1"}]}], "}"}]}], "]"}], ",", "2"}], "]"}],
+          ",", 
+         RowBox[{"Flatten", "[", 
+          RowBox[{
+           RowBox[{"Table", "[", 
+            RowBox[{
+             RowBox[{"Table", "[", 
+              RowBox[{
+               RowBox[{"v", "+", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"i", "-", "1"}], ")"}], "x"}], "+", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"j", "-", "1"}], ")"}], "y"}], "+", 
+                RowBox[{"m", " ", "k", " ", "x"}], "+", 
+                RowBox[{"2", "x"}]}], ",", 
+               RowBox[{"{", 
+                RowBox[{"j", ",", "1", ",", "n"}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"i", ",", "1", ",", "m"}], "}"}]}], "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"k", ",", "0", ",", 
+               RowBox[{"num", "-", "1"}]}], "}"}]}], "]"}], ",", "2"}], 
+          "]"}]}], "}"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"solidf", "[", 
+        RowBox[{"num_", ",", "m_", ",", "n_"}], "]"}], ":=", 
+       RowBox[{"Flatten", "[", 
+        RowBox[{
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"Table", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"j", "-", "1"}], ")"}], "m"}], "+", "i", "+", 
+                RowBox[{"m", " ", "n", " ", "k"}]}], ",", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"j", "-", "1"}], ")"}], "m"}], "+", "i", "+", "1", 
+                "+", 
+                RowBox[{"m", " ", "n", " ", "k"}]}], ",", 
+               RowBox[{
+                RowBox[{"j", " ", "m"}], "+", "i", "+", "1", "+", 
+                RowBox[{"m", " ", "n", " ", "k"}]}], ",", 
+               RowBox[{
+                RowBox[{"j", " ", "m"}], "+", "i", "+", 
+                RowBox[{"m", " ", "n", " ", "k"}]}]}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"j", ",", "1", ",", 
+               RowBox[{"n", "-", "1"}]}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"i", ",", "1", ",", 
+               RowBox[{"m", "-", "1"}]}], "}"}]}], "]"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"k", ",", "0", ",", 
+             RowBox[{"num", "-", "1"}]}], "}"}]}], "]"}], ",", "2"}], "]"}]}],
+       ";", "\n", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"adj1", "[", 
+         RowBox[{"num_", ",", "m_", ",", "n_"}], "]"}], "[", 
+        RowBox[{"i_", ",", "j_"}], "]"}], ":=", 
+       RowBox[{"With", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"solid", "=", 
+           RowBox[{"solidf", "[", 
+            RowBox[{"num", ",", "m", ",", "n"}], "]"}]}], "}"}], ",", 
+         RowBox[{
+          RowBox[{"Length", "[", 
+           RowBox[{"Intersection", "[", 
+            RowBox[{
+             RowBox[{"solid", "[", 
+              RowBox[{"[", "i", "]"}], "]"}], ",", 
+             RowBox[{"solid", "[", 
+              RowBox[{"[", "j", "]"}], "]"}]}], "]"}], "]"}], "\[Equal]", 
+          "2"}]}], "]"}]}], ";", "\n", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"adj2", "[", 
+         RowBox[{"num_", ",", "m_", ",", "n_"}], "]"}], "[", 
+        RowBox[{"i_", ",", "j_"}], "]"}], ":=", 
+       RowBox[{"With", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"solid", "=", 
+           RowBox[{"solidf", "[", 
+            RowBox[{"num", ",", "m", ",", "n"}], "]"}]}], "}"}], ",", 
+         RowBox[{
+          RowBox[{"Abs", "[", 
+           RowBox[{
+            RowBox[{"solid", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", ",", "1"}], "]"}], "]"}], "-", 
+            RowBox[{"solid", "[", 
+             RowBox[{"[", 
+              RowBox[{"j", ",", "1"}], "]"}], "]"}]}], "]"}], "\[Equal]", 
+          RowBox[{"m", " ", "n"}]}]}], "]"}]}], ";", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"adj", "[", 
+         RowBox[{"num_", ",", "m_", ",", "n_"}], "]"}], "[", 
+        RowBox[{"i_", ",", "j_"}], "]"}], ":=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"adj1", "[", 
+          RowBox[{"num", ",", "m", ",", "n"}], "]"}], "[", 
+         RowBox[{"i", ",", "j"}], "]"}], "||", 
+        RowBox[{
+         RowBox[{"adj2", "[", 
+          RowBox[{"num", ",", "m", ",", "n"}], "]"}], "[", 
+         RowBox[{"i", ",", "j"}], "]"}]}]}]}], ")"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.595222336765625*^9, 3.59522234309375*^9}, {
+   3.595223051734375*^9, 3.595223051984375*^9}, {3.595223769546875*^9, 
+   3.59522380259375*^9}, 3.59522385659375*^9, {3.5952239165*^9, 
+   3.595223984296875*^9}, {3.595440392421875*^9, 3.59544039375*^9}, 
+   3.59544044*^9, {3.598541194944927*^9, 3.598541211795164*^9}, {
+   3.598541313233131*^9, 3.598541322754797*^9}, {3.598541445184711*^9, 
+   3.5985415422219687`*^9}, {3.598541657047968*^9, 3.59854169981348*^9}, {
+   3.598541749246161*^9, 3.5985418462062407`*^9}, {3.59854188909025*^9, 
+   3.598541934997163*^9}, {3.598541992928155*^9, 
+   3.598542043168386*^9}},ExpressionUUID->"2c01bb63-5b15-43dd-9150-\
+d84bcddd2cf5"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`help$$ = False, $CellContext`m$$ = 
+    4, $CellContext`n$$ = 5, $CellContext`num$$ = 3, $CellContext`ranint$$ = 
+    157, Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`ranint$$], 157}}, {{
+       Hold[$CellContext`m$$], 4, "x dimension"}, 3, 5, 1}, {{
+       Hold[$CellContext`n$$], 5, "y dimension"}, 3, 5, 1}, {{
+       Hold[$CellContext`num$$], 3, "z dimension"}, 2, 4, 1}, {{
+       Hold[$CellContext`help$$], False, "show solution"}, {True, False}}, {
+      Hold[
+       Row[{
+         Spacer[60], 
+         Column[{
+           Manipulate`Place[1], 
+           Manipulate`Place[2], 
+           Manipulate`Place[3], Null}, Alignment -> Right], 
+         Spacer[40], 
+         Manipulate`Place[4], 
+         Spacer[40], 
+         Button[
+         "new maze", $CellContext`ranint$$ = 
+           RandomInteger[{1, 1377}]; $CellContext`help$$ = False]}]], 
+      Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    550., {196., 204.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`m$1151365$$ = 
+    0, $CellContext`n$1151366$$ = 0, $CellContext`num$1151367$$ = 
+    0, $CellContext`help$1151368$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     2, StandardForm, 
+      "Variables" :> {$CellContext`help$$ = False, $CellContext`m$$ = 
+        4, $CellContext`n$$ = 5, $CellContext`num$$ = 
+        3, $CellContext`ranint$$ = 157}, "ControllerVariables" :> {
+        Hold[$CellContext`m$$, $CellContext`m$1151365$$, 0], 
+        Hold[$CellContext`n$$, $CellContext`n$1151366$$, 0], 
+        Hold[$CellContext`num$$, $CellContext`num$1151367$$, 0], 
+        Hold[$CellContext`help$$, $CellContext`help$1151368$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (SeedRandom[$CellContext`ranint$$]; 
+       With[{$CellContext`tt$ = $CellContext`Labyrinth3D[$CellContext`num$$, \
+$CellContext`m$$ + 1, $CellContext`n$$ + 1, {0, 0}, {1, 0}, {0, 1}]}, 
+         Pane[
+          If[
+           Not[$CellContext`help$$], 
+           Part[$CellContext`tt$, 1], 
+           Part[$CellContext`tt$, 2]], Alignment -> Center, 
+          ImageSize -> {550, 400}]]), 
+      "Specifications" :> {{{$CellContext`ranint$$, 157}, ControlType -> 
+         None}, {{$CellContext`m$$, 4, "x dimension"}, 3, 5, 1, ControlType -> 
+         SetterBar, ControlPlacement -> 
+         1}, {{$CellContext`n$$, 5, "y dimension"}, 3, 5, 1, ControlType -> 
+         SetterBar, ControlPlacement -> 
+         2}, {{$CellContext`num$$, 3, "z dimension"}, 2, 4, 1, ControlType -> 
+         SetterBar, ControlPlacement -> 
+         3}, {{$CellContext`help$$, False, "show solution"}, {True, False}, 
+         ControlPlacement -> 4}, 
+        Row[{
+          Spacer[60], 
+          Column[{
+            Manipulate`Place[1], 
+            Manipulate`Place[2], 
+            Manipulate`Place[3], Null}, Alignment -> Right], 
+          Spacer[40], 
+          Manipulate`Place[4], 
+          Spacer[40], 
+          Button[
+          "new maze", $CellContext`ranint$$ = 
+            RandomInteger[{1, 1377}]; $CellContext`help$$ = False]}]}, 
+      "Options" :> {}, "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{599., {277., 284.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>((Quiet[
+        Get["Combinatorica`"]]; $CellContext`izboroddaljenih[
+         Pattern[$CellContext`drev, 
+          Blank[]]] := Module[{$CellContext`n = Length[
+            Union[
+             
+             Flatten[$CellContext`drev]]], $CellContext`listi, \
+$CellContext`list, $CellContext`zacetna, $CellContext`koncna}, \
+$CellContext`listi = Select[
+            Range[$CellContext`n], Count[
+              Flatten[$CellContext`drev, 1], #] == 1& ]; $CellContext`list = 
+          Part[$CellContext`listi, 
+            RandomInteger[{1, 
+              
+              Length[$CellContext`listi]}]]; $CellContext`zacetna = \
+$CellContext`najboljoddaljena[$CellContext`list, $CellContext`drev, \
+$CellContext`n]; $CellContext`koncna = \
+$CellContext`najboljoddaljena[$CellContext`zacetna, $CellContext`drev, \
+$CellContext`n]; {$CellContext`zacetna, $CellContext`koncna}]; \
+$CellContext`najboljoddaljena[
+         Pattern[$CellContext`a, 
+          Blank[]], 
+         Pattern[$CellContext`drev, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]]] := 
+       Module[{$CellContext`tekoca = {$CellContext`a}, $CellContext`ostanek = 
+          Complement[
+            
+            Range[$CellContext`n], {$CellContext`a}], $CellContext`x, \
+$CellContext`i, $CellContext`sosedi}, While[
+           Not[$CellContext`ostanek == {}], $CellContext`sosedi = Union[
+              Flatten[
+               Table[
+                Select[$CellContext`ostanek, Or[
+                  MemberQ[$CellContext`drev, {#, 
+                    Part[$CellContext`tekoca, $CellContext`i]}], 
+                  MemberQ[$CellContext`drev, {
+                    
+                    Part[$CellContext`tekoca, $CellContext`i], #}]]& ], \
+{$CellContext`i, 1, 
+                 Length[$CellContext`tekoca]}]]]; $CellContext`ostanek = 
+            Complement[$CellContext`ostanek, $CellContext`sosedi]; \
+$CellContext`tekoca = $CellContext`sosedi]; Part[$CellContext`sosedi, 
+           RandomInteger[{1, 
+             Length[$CellContext`sosedi]}]]]; $CellContext`dodajzadnji[
+         Pattern[$CellContext`sez, 
+          Blank[]]] := 
+       Block[{$CellContext`newsez = $CellContext`sez, $CellContext`nw, \
+$CellContext`i}, Do[$CellContext`nw = Append[
+              Part[$CellContext`sez, $CellContext`i], 
+              First[
+               Part[$CellContext`sez, $CellContext`i]]]; $CellContext`newsez = 
+            ReplacePart[$CellContext`newsez, $CellContext`nw, \
+$CellContext`i], {$CellContext`i, 1, 
+            
+            Length[$CellContext`sez]}]; $CellContext`newsez]; \
+$CellContext`izbor[
+         Pattern[$CellContext`pove, 
+          Blank[]], 
+         Pattern[$CellContext`conc, 
+          Blank[]]] := Select[$CellContext`pove, Or[
+          And[
+           MemberQ[$CellContext`conc, 
+            First[#]], 
+           Not[
+            MemberQ[$CellContext`conc, 
+             Last[#]]]], 
+          And[
+           MemberQ[$CellContext`conc, 
+            Last[#]], 
+           Not[
+            MemberQ[$CellContext`conc, 
+             First[#]]]]]& ]; $CellContext`TreeFromPairs3[
+         Pattern[$CellContext`pove, 
+          Blank[]], 
+         Pattern[$CellContext`SelectFirst, 
+          Blank[]], 
+         Pattern[$CellContext`SelectPred, 
+          Blank[]], 
+         Pattern[$CellContext`SelectSucc, 
+          Blank[]]] := 
+       Block[{$CellContext`e, $CellContext`bfi, $CellContext`selectfrom, \
+$CellContext`b, $CellContext`lis, $CellContext`j, $CellContext`i, \
+$CellContext`edges, $CellContext`cnt = 
+          1, $CellContext`selectfrom1, $CellContext`ta, $CellContext`te1, \
+$CellContext`lis1, $CellContext`maksi, $CellContext`g}, $CellContext`edges = {
+            Part[$CellContext`pove, 
+             RandomInteger[{1, 
+               Length[$CellContext`pove]}]]}; $CellContext`g = 
+          Combinatorica`FromUnorderedPairs[$CellContext`pove]; \
+$CellContext`bfi = Table[0, {
+             Combinatorica`V[$CellContext`g]}]; $CellContext`e = 
+          Combinatorica`ToAdjacencyLists[$CellContext`g]; $CellContext`a = 
+          Part[$CellContext`edges, 1, 1]; $CellContext`b = 
+          Part[$CellContext`edges, 1, 2]; 
+         Part[$CellContext`bfi, $CellContext`a] = 1; 
+         Part[$CellContext`bfi, $CellContext`b] = 2; $CellContext`e = 
+          Map[Complement[#, {$CellContext`a, $CellContext`b}]& , \
+$CellContext`e]; $CellContext`j = 1; $CellContext`te1 = Map[Length, 
+            Combinatorica`ToAdjacencyLists[$CellContext`g]]; $CellContext`ta = 
+          Join[
+            Table[
+             Part[
+              Part[$CellContext`edges, $CellContext`i], 1], {$CellContext`i, 
+              1, $CellContext`j}], 
+            Table[
+             Part[
+              Part[$CellContext`edges, $CellContext`i], 1], {$CellContext`i, 
+              1, $CellContext`j}]]; $CellContext`lis1 = Cases[
+            Range[
+             Combinatorica`V[$CellContext`g]], 
+            Condition[
+             Pattern[$CellContext`x, 
+              Blank[]], 
+             And[
+             Part[$CellContext`te1, $CellContext`x] - 
+               Count[$CellContext`ta, $CellContext`x] > 0, 
+              Part[$CellContext`bfi, $CellContext`x] > 0, 
+              Part[$CellContext`e, $CellContext`x] != {}]]]; \
+$CellContext`maksi = Max[
+            Map[
+            Part[$CellContext`te1, #] - 
+             Count[$CellContext`ta, #]& , $CellContext`lis1, {
+             1}]]; $CellContext`lis = Cases[$CellContext`lis1, 
+            Condition[
+             Pattern[$CellContext`x, 
+              Blank[]], 
+             Part[$CellContext`te1, $CellContext`x] - 
+              Count[$CellContext`ta, $CellContext`x] == $CellContext`maksi]]; 
+         While[$CellContext`lis != {}, $CellContext`a = \
+$CellContext`SelectPred[$CellContext`g, $CellContext`e, $CellContext`lis, \
+$CellContext`bfi, $CellContext`cnt]; $CellContext`b = \
+$CellContext`SelectSucc[$CellContext`g, $CellContext`e, 
+              Part[$CellContext`e, $CellContext`a], 
+              Blank[], 
+              Blank[]]; $CellContext`j = $CellContext`j + 1; 
+           Part[$CellContext`bfi, $CellContext`b] = $CellContext`j + 1; 
+           AppendTo[$CellContext`edges, {$CellContext`a, $CellContext`b}]; \
+$CellContext`e = 
+            Map[Complement[#, {$CellContext`b}]& , $CellContext`e]; \
+$CellContext`te1 = Map[Length, 
+              
+              Combinatorica`ToAdjacencyLists[$CellContext`g]]; \
+$CellContext`ta = Join[
+              Table[
+               Part[
+                Part[$CellContext`edges, $CellContext`i], 1], {$CellContext`i,
+                 1, $CellContext`j}], 
+              Table[
+               Part[
+                Part[$CellContext`edges, $CellContext`i], 2], {$CellContext`i,
+                 1, $CellContext`j}]]; $CellContext`lis1 = Cases[
+              Range[
+               Combinatorica`V[$CellContext`g]], 
+              Condition[
+               Pattern[$CellContext`x, 
+                Blank[]], 
+               And[
+               Part[$CellContext`te1, $CellContext`x] - 
+                 Count[$CellContext`ta, $CellContext`x] > 0, 
+                Part[$CellContext`bfi, $CellContext`x] > 0, 
+                Part[$CellContext`e, $CellContext`x] != {}]]]; \
+$CellContext`maksi = Max[
+              Map[
+              Part[$CellContext`te1, #] - 
+               Count[$CellContext`ta, #]& , $CellContext`lis1, {
+               1}]]; $CellContext`lis = Cases[$CellContext`lis1, 
+              Condition[
+               Pattern[$CellContext`x, 
+                Blank[]], 
+               Part[$CellContext`te1, $CellContext`x] - 
+                Count[$CellContext`ta, $CellContext`x] == \
+$CellContext`maksi]]; $CellContext`ta = Join[
+              Table[
+               Part[
+                Part[$CellContext`edges, $CellContext`i], 1], {$CellContext`i,
+                 1, $CellContext`j}], 
+              Table[
+               Part[
+                Part[$CellContext`edges, $CellContext`i], 2], {$CellContext`i,
+                 1, $CellContext`j}]]; 
+           Null]; {$CellContext`edges, $CellContext`bfi}]; \
+$CellContext`SelectFr4[
+         Pattern[$CellContext`g, 
+          Blank[]], 
+         Pattern[$CellContext`e, 
+          Blank[]], 
+         Pattern[$CellContext`list, 
+          Blank[]], 
+         Pattern[$CellContext`bfi, 
+          Blank[]], 
+         Pattern[$CellContext`cnt, 
+          Blank[]]] := Part[$CellContext`list, 
+         RandomInteger[{1, 
+           Length[$CellContext`list]}]]; $CellContext`SelectPr3[
+         Pattern[$CellContext`g, 
+          Blank[]], 
+         Pattern[$CellContext`e, 
+          Blank[]], 
+         Pattern[$CellContext`list, 
+          Blank[]], 
+         Pattern[$CellContext`bfi, 
+          Blank[]], 
+         Pattern[$CellContext`cnt, 
+          Blank[]]] := Part[$CellContext`list, 
+         RandomInteger[{1, 
+           Length[$CellContext`list]}]]; $CellContext`SelectSu3[
+         Pattern[$CellContext`g, 
+          Blank[]], 
+         Pattern[$CellContext`e, 
+          Blank[]], 
+         Pattern[$CellContext`list, 
+          Blank[]], 
+         Pattern[$CellContext`bfi, 
+          Blank[]], 
+         Pattern[$CellContext`cnt, 
+          Blank[]]] := Part[$CellContext`list, 
+         RandomInteger[{1, 
+           Length[$CellContext`list]}]]; $CellContext`EdgesOnFace[
+         Pattern[$CellContext`lice, 
+          Blank[]]] := Module[{$CellContext`i}, 
+         Append[
+          Table[{
+            Part[$CellContext`lice, $CellContext`i], 
+            Part[$CellContext`lice, $CellContext`i + 1]}, {$CellContext`i, 1, 
+            Length[$CellContext`lice] - 1}], {
+           Last[$CellContext`lice], 
+           First[$CellContext`lice]}]]; $CellContext`EdgesOnFaces[
+         Pattern[$CellContext`cic$, 
+          Blank[]]] := 
+       Block[{$CellContext`edgs = {}, $CellContext`n$$ = 
+          Length[$CellContext`cic$], $CellContext`ed, $CellContext`i}, 
+         Do[$CellContext`ed = $CellContext`EdgesOnFace[
+              Part[$CellContext`cic$, $CellContext`i]]; $CellContext`edgs = 
+            Union[$CellContext`edgs, $CellContext`ed], {$CellContext`i, 
+            1, $CellContext`n$$}]; $CellContext`edgs = Union[
+            Map[Sort, $CellContext`edgs, 1]]]; $CellContext`Povprecje[
+         Pattern[$CellContext`cic, 
+          Blank[]]] := 
+       Apply[Plus, $CellContext`cic]/
+        Length[$CellContext`cic]; $CellContext`ClosedLine[
+         Pattern[$CellContext`a, 
+          Blank[]]] := Line[
+         Append[$CellContext`a, 
+          First[$CellContext`a]]]; $CellContext`Labyrinth3D[
+         Pattern[$CellContext`num, 
+          Blank[]], 
+         Pattern[$CellContext`m, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]], 
+         Pattern[$CellContext`v, 
+          Blank[]], 
+         Pattern[$CellContext`x, 
+          Blank[]], 
+         Pattern[$CellContext`y, 
+          Blank[]]] := 
+       Block[{$CellContext`drevo, $CellContext`c1, $CellContext`nal1, \
+$CellContext`res1, $CellContext`solid = \
+$CellContext`NPravokotniGrafText2[$CellContext`num, $CellContext`m, \
+$CellContext`n, $CellContext`v, $CellContext`x, $CellContext`y], \
+$CellContext`vertcoor1, $CellContext`edgs, $CellContext`f, \
+$CellContext`pove1, $CellContext`allpov, $CellContext`slika4, \
+$CellContext`slika9, $CellContext`slika10, $CellContext`zadnja1, \
+$CellContext`prva, $CellContext`zadnja, $CellContext`pot1, $CellContext`g1, \
+$CellContext`zadnjicikel, $CellContext`zatt, $CellContext`kont, \
+$CellContext`prvicikel, $CellContext`vertsolut, $CellContext`zat, \
+$CellContext`bele, $CellContext`sive, $CellContext`slikasive, \
+$CellContext`edbele, $CellContext`edgb, $CellContext`edgc, \
+$CellContext`slikaE}, $CellContext`c1 = 
+          Part[$CellContext`solid, 
+            1]; $CellContext`edgs = \
+$CellContext`EdgesOnFaces[$CellContext`c1]; $CellContext`vertcoor1 = 
+          Part[$CellContext`solid, 2]; $CellContext`f = 
+          Length[$CellContext`c1]; $CellContext`allpov = Apply[Union, 
+            
+            Table[{$CellContext`a, $CellContext`b}, {$CellContext`a, 
+              1, $CellContext`f - 1}, {$CellContext`b, $CellContext`a + 
+              1, $CellContext`f}]]; $CellContext`pove1 = 
+          Cases[$CellContext`allpov, 
+            Condition[{
+              Pattern[$CellContext`i, 
+               Blank[]], 
+              Pattern[$CellContext`j, 
+               Blank[]]}, 
+             $CellContext`adj[$CellContext`num, $CellContext`m, \
+$CellContext`n][$CellContext`i, $CellContext`j]]]; $CellContext`drevo = First[
+            $CellContext`TreeFromPairs3[$CellContext`pove1, \
+$CellContext`SelectFr4, $CellContext`SelectPr3, $CellContext`SelectSu3]]; \
+$CellContext`bele = Map[Min, 
+            Select[$CellContext`drevo, Or[
+              $CellContext`adj2[$CellContext`num, $CellContext`m, \
+$CellContext`n][
+               Part[#, 1], 
+               Part[#, 2]], 
+              $CellContext`adj2[$CellContext`num, $CellContext`m, \
+$CellContext`n][
+               Part[#, 2], 
+               Part[#, 1]]]& ]]; $CellContext`sive = Complement[
+            Range[$CellContext`f], $CellContext`bele]; $CellContext`slikasive = {
+            GrayLevel[0.75], 
+            Table[
+             Polygon[
+              Map[$CellContext`vert, 
+               Part[$CellContext`c1, 
+                Part[$CellContext`sive, $CellContext`i]]]], {$CellContext`i, 
+              1, 
+              Length[$CellContext`sive]}]}; $CellContext`edbele = 
+          Select[$CellContext`drevo, $CellContext`adj1[$CellContext`num, \
+$CellContext`m, $CellContext`n][
+             Part[#, 1], 
+             Part[#, 2]]& ]; $CellContext`edgb = Table[
+            Intersection[
+             Part[$CellContext`c1, 
+              Part[$CellContext`edbele, $CellContext`i, 1]], 
+             Part[$CellContext`c1, 
+              Part[$CellContext`edbele, $CellContext`i, 2]]], {$CellContext`i,
+              1, 
+             Length[$CellContext`edbele]}]; $CellContext`edgc = 
+          Complement[$CellContext`edgs, $CellContext`edgb]; \
+$CellContext`slikaE = {
+            Thickness[0.01], 
+            Table[
+             Line[
+              Map[$CellContext`vert, 
+               Part[$CellContext`edgc, $CellContext`i]]], {$CellContext`i, 1, 
+              Length[$CellContext`edgc]}]}; $CellContext`zadnja1 = Part[
+            Last[$CellContext`drevo], 2]; $CellContext`g1 = 
+          Combinatorica`FromUnorderedPairs[$CellContext`drevo]; \
+{$CellContext`prva, $CellContext`zadnja} = \
+$CellContext`izboroddaljenih[$CellContext`drevo]; $CellContext`pot1 = 
+          Combinatorica`ShortestPath[$CellContext`g1, $CellContext`prva, \
+$CellContext`zadnja]; $CellContext`prvicikel = 
+          Part[$CellContext`c1, $CellContext`prva]; $CellContext`zadnjicikel = 
+          Part[$CellContext`c1, $CellContext`zadnja]; $CellContext`solut = 
+          Length[$CellContext`pot1]; $CellContext`vert = 
+          Part[$CellContext`vertcoor1, #]& ; $CellContext`zatt = 
+          0.25 Apply[Plus, 
+             Map[$CellContext`vert, 
+              Part[$CellContext`c1, #], {
+              1}]]& ; $CellContext`zat = $CellContext`zatt[$CellContext`prva]; \
+$CellContext`kont = $CellContext`zatt[$CellContext`zadnja]; \
+$CellContext`slika4 = {
+            AbsolutePointSize[10], {Red, 
+             Point[$CellContext`zat]}, {Green, 
+             Point[$CellContext`kont]}}; $CellContext`slika9 = Table[
+            Text[
+             Style[
+              ToString[$CellContext`i], FontSize -> 12], 
+             $CellContext`zatt[
+              Part[$CellContext`pot1, $CellContext`i]]], {$CellContext`i, 1, 
+             Length[$CellContext`pot1]}]; $CellContext`slika10 = {
+            GrayLevel[0.9], 
+            Map[$CellContext`ClosedLine, 
+             Map[Part[$CellContext`solid, 2, #]& , 
+              Part[$CellContext`solid, 1]]]}; {
+           
+           Graphics[{$CellContext`slikasive, $CellContext`slika10, \
+$CellContext`slikaE, $CellContext`slika4}, ImageSize -> {450, 450}], 
+           
+           Graphics[{$CellContext`slikasive, $CellContext`slika10, \
+$CellContext`slikaE, $CellContext`slika4, $CellContext`slika9}, 
+            ImageSize -> {450, 450}], 
+           Length[$CellContext`pot1]}]; $CellContext`NPravokotniGrafText2[
+         Pattern[$CellContext`num, 
+          Blank[]], 
+         Pattern[$CellContext`m, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]], 
+         Pattern[$CellContext`v, 
+          Blank[]], 
+         Pattern[$CellContext`x, 
+          Blank[]], 
+         Pattern[$CellContext`y, 
+          Blank[]]] := {
+         Flatten[
+          Table[
+           
+           Table[{($CellContext`j - 
+               1) $CellContext`m + $CellContext`i + ($CellContext`m \
+$CellContext`n) $CellContext`k, ($CellContext`j - 
+               1) $CellContext`m + $CellContext`i + 
+             1 + ($CellContext`m $CellContext`n) $CellContext`k, \
+$CellContext`j $CellContext`m + $CellContext`i + 
+             1 + ($CellContext`m $CellContext`n) $CellContext`k, \
+$CellContext`j $CellContext`m + $CellContext`i + ($CellContext`m \
+$CellContext`n) $CellContext`k}, {$CellContext`j, 1, $CellContext`n - 
+             1}, {$CellContext`i, 1, $CellContext`m - 1}], {$CellContext`k, 
+            0, $CellContext`num - 1}], 2], 
+         Flatten[
+          Table[
+           
+           Table[$CellContext`v + ($CellContext`i - 
+              1) $CellContext`x + ($CellContext`j - 
+              1) $CellContext`y + ($CellContext`m $CellContext`k) \
+$CellContext`x + 
+            2 $CellContext`x, {$CellContext`j, 
+             1, $CellContext`n}, {$CellContext`i, 
+             1, $CellContext`m}], {$CellContext`k, 0, $CellContext`num - 1}], 
+          2]}; $CellContext`solidf[
+         Pattern[$CellContext`num, 
+          Blank[]], 
+         Pattern[$CellContext`m, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]]] := Flatten[
+         Table[
+          
+          Table[{($CellContext`j - 
+              1) $CellContext`m + $CellContext`i + ($CellContext`m \
+$CellContext`n) $CellContext`k, ($CellContext`j - 
+              1) $CellContext`m + $CellContext`i + 
+            1 + ($CellContext`m $CellContext`n) $CellContext`k, \
+$CellContext`j $CellContext`m + $CellContext`i + 
+            1 + ($CellContext`m $CellContext`n) $CellContext`k, \
+$CellContext`j $CellContext`m + $CellContext`i + ($CellContext`m \
+$CellContext`n) $CellContext`k}, {$CellContext`j, 1, $CellContext`n - 
+            1}, {$CellContext`i, 1, $CellContext`m - 1}], {$CellContext`k, 
+           0, $CellContext`num - 1}], 2]; $CellContext`adj1[
+         Pattern[$CellContext`num, 
+          Blank[]], 
+         Pattern[$CellContext`m, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]]][
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]]] := 
+       With[{$CellContext`solid = $CellContext`solidf[$CellContext`num, \
+$CellContext`m, $CellContext`n]}, Length[
+           Intersection[
+            Part[$CellContext`solid, $CellContext`i], 
+            Part[$CellContext`solid, $CellContext`j]]] == 
+         2]; $CellContext`adj2[
+         Pattern[$CellContext`num, 
+          Blank[]], 
+         Pattern[$CellContext`m, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]]][
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]]] := 
+       With[{$CellContext`solid = $CellContext`solidf[$CellContext`num, \
+$CellContext`m, $CellContext`n]}, 
+         Abs[Part[$CellContext`solid, $CellContext`i, 1] - 
+           Part[$CellContext`solid, $CellContext`j, 
+            1]] == $CellContext`m $CellContext`n]; $CellContext`adj[
+         Pattern[$CellContext`num, 
+          Blank[]], 
+         Pattern[$CellContext`m, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]]][
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]]] := Or[
+         $CellContext`adj1[$CellContext`num, $CellContext`m, \
+$CellContext`n][$CellContext`i, $CellContext`j], 
+         $CellContext`adj2[$CellContext`num, $CellContext`m, \
+$CellContext`n][$CellContext`i, $CellContext`j]]); Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->417435993,ExpressionUUID->"4435915e-e62f-4f56-aff3-c8c965f29950"]
+}, {2}]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection",ExpressionUUID->"da11db75-29a3-403a-997c-432516d8c97b"],
+
+Cell["\<\
+Layers of a 3D maze are shown from top to bottom. You can move horizontally \
+within a layer if there is no wall between compartments. You can move from a \
+compartment with white floor to the the compartment immediately below it and \
+back. Find the shortest path from the red to the green point.\
+\>", "ManipulateCaption",
+ CellChangeTimes->{{3.595222372140625*^9, 3.5952224304375*^9}, {
+  3.595222464015625*^9, 3.59522247559375*^9}, {3.59522252178125*^9, 
+  3.5952227791875*^9}, {3.595222997046875*^9, 3.595223005265625*^9}, {
+  3.595223038796875*^9, 3.5952230423125*^9}, {3.595224187984375*^9, 
+  3.595224193671875*^9}, {3.5962194729949627`*^9, 3.596219473498963*^9}, {
+  3.598542101054249*^9, 3.5985421713873587`*^9}, {3.5987773464406443`*^9, 
+  3.5987773769999743`*^9}},ExpressionUUID->"cedae6d3-f839-4c97-9449-\
+610ecc4496d5"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection",ExpressionUUID->"1b02d327-7f3b-40ed-84d9-06988a4b281b"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`help$$ = False, $CellContext`m$$ = 
+    4, $CellContext`n$$ = 5, $CellContext`num$$ = 3, $CellContext`ranint$$ = 
+    31, Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`ranint$$], 31}}, {{
+       Hold[$CellContext`m$$], 4, "x dimension"}, 3, 5, 1}, {{
+       Hold[$CellContext`n$$], 5, "y dimension"}, 3, 5, 1}, {{
+       Hold[$CellContext`num$$], 3, "z dimension"}, 2, 4, 1}, {{
+       Hold[$CellContext`help$$], False, "show solution"}, {True, False}}, {
+      Hold[
+       Row[{
+         Spacer[60], 
+         Column[{
+           Manipulate`Place[1], 
+           Manipulate`Place[2], 
+           Manipulate`Place[3], Null}, Alignment -> Right], 
+         Spacer[40], 
+         Manipulate`Place[4], 
+         Spacer[40], 
+         Button[
+         "new maze", $CellContext`ranint$$ = 
+           RandomInteger[{1, 1377}]; $CellContext`help$$ = False]}]], 
+      Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    550., {197., 203.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`m$1151437$$ = 
+    0, $CellContext`n$1151438$$ = 0, $CellContext`num$1151439$$ = 
+    0, $CellContext`help$1151440$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     2, StandardForm, 
+      "Variables" :> {$CellContext`help$$ = False, $CellContext`m$$ = 
+        4, $CellContext`n$$ = 5, $CellContext`num$$ = 
+        3, $CellContext`ranint$$ = 31}, "ControllerVariables" :> {
+        Hold[$CellContext`m$$, $CellContext`m$1151437$$, 0], 
+        Hold[$CellContext`n$$, $CellContext`n$1151438$$, 0], 
+        Hold[$CellContext`num$$, $CellContext`num$1151439$$, 0], 
+        Hold[$CellContext`help$$, $CellContext`help$1151440$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (SeedRandom[$CellContext`ranint$$]; 
+       With[{$CellContext`tt$ = $CellContext`Labyrinth3D[$CellContext`num$$, \
+$CellContext`m$$ + 1, $CellContext`n$$ + 1, {0, 0}, {1, 0}, {0, 1}]}, 
+         Pane[
+          If[
+           Not[$CellContext`help$$], 
+           Part[$CellContext`tt$, 1], 
+           Part[$CellContext`tt$, 2]], Alignment -> Center, 
+          ImageSize -> {550, 400}]]), 
+      "Specifications" :> {{{$CellContext`ranint$$, 31}, ControlType -> 
+         None}, {{$CellContext`m$$, 4, "x dimension"}, 3, 5, 1, ControlType -> 
+         SetterBar, ControlPlacement -> 
+         1}, {{$CellContext`n$$, 5, "y dimension"}, 3, 5, 1, ControlType -> 
+         SetterBar, ControlPlacement -> 
+         2}, {{$CellContext`num$$, 3, "z dimension"}, 2, 4, 1, ControlType -> 
+         SetterBar, ControlPlacement -> 
+         3}, {{$CellContext`help$$, False, "show solution"}, {True, False}, 
+         ControlPlacement -> 4}, 
+        Row[{
+          Spacer[60], 
+          Column[{
+            Manipulate`Place[1], 
+            Manipulate`Place[2], 
+            Manipulate`Place[3], Null}, Alignment -> Right], 
+          Spacer[40], 
+          Manipulate`Place[4], 
+          Spacer[40], 
+          Button[
+          "new maze", $CellContext`ranint$$ = 
+            RandomInteger[{1, 1377}]; $CellContext`help$$ = False]}]}, 
+      "Options" :> {}, "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{599., {277., 284.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>((Quiet[
+        Get["Combinatorica`"]]; $CellContext`izboroddaljenih[
+         Pattern[$CellContext`drev, 
+          Blank[]]] := Module[{$CellContext`n = Length[
+            Union[
+             
+             Flatten[$CellContext`drev]]], $CellContext`listi, \
+$CellContext`list, $CellContext`zacetna, $CellContext`koncna}, \
+$CellContext`listi = Select[
+            Range[$CellContext`n], Count[
+              Flatten[$CellContext`drev, 1], #] == 1& ]; $CellContext`list = 
+          Part[$CellContext`listi, 
+            RandomInteger[{1, 
+              
+              Length[$CellContext`listi]}]]; $CellContext`zacetna = \
+$CellContext`najboljoddaljena[$CellContext`list, $CellContext`drev, \
+$CellContext`n]; $CellContext`koncna = \
+$CellContext`najboljoddaljena[$CellContext`zacetna, $CellContext`drev, \
+$CellContext`n]; {$CellContext`zacetna, $CellContext`koncna}]; \
+$CellContext`najboljoddaljena[
+         Pattern[$CellContext`a, 
+          Blank[]], 
+         Pattern[$CellContext`drev, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]]] := 
+       Module[{$CellContext`tekoca = {$CellContext`a}, $CellContext`ostanek = 
+          Complement[
+            
+            Range[$CellContext`n], {$CellContext`a}], $CellContext`x, \
+$CellContext`i, $CellContext`sosedi}, While[
+           Not[$CellContext`ostanek == {}], $CellContext`sosedi = Union[
+              Flatten[
+               Table[
+                Select[$CellContext`ostanek, Or[
+                  MemberQ[$CellContext`drev, {#, 
+                    Part[$CellContext`tekoca, $CellContext`i]}], 
+                  MemberQ[$CellContext`drev, {
+                    
+                    Part[$CellContext`tekoca, $CellContext`i], #}]]& ], \
+{$CellContext`i, 1, 
+                 Length[$CellContext`tekoca]}]]]; $CellContext`ostanek = 
+            Complement[$CellContext`ostanek, $CellContext`sosedi]; \
+$CellContext`tekoca = $CellContext`sosedi]; Part[$CellContext`sosedi, 
+           RandomInteger[{1, 
+             Length[$CellContext`sosedi]}]]]; $CellContext`dodajzadnji[
+         Pattern[$CellContext`sez, 
+          Blank[]]] := 
+       Block[{$CellContext`newsez = $CellContext`sez, $CellContext`nw, \
+$CellContext`i}, Do[$CellContext`nw = Append[
+              Part[$CellContext`sez, $CellContext`i], 
+              First[
+               Part[$CellContext`sez, $CellContext`i]]]; $CellContext`newsez = 
+            ReplacePart[$CellContext`newsez, $CellContext`nw, \
+$CellContext`i], {$CellContext`i, 1, 
+            
+            Length[$CellContext`sez]}]; $CellContext`newsez]; \
+$CellContext`izbor[
+         Pattern[$CellContext`pove, 
+          Blank[]], 
+         Pattern[$CellContext`conc, 
+          Blank[]]] := Select[$CellContext`pove, Or[
+          And[
+           MemberQ[$CellContext`conc, 
+            First[#]], 
+           Not[
+            MemberQ[$CellContext`conc, 
+             Last[#]]]], 
+          And[
+           MemberQ[$CellContext`conc, 
+            Last[#]], 
+           Not[
+            MemberQ[$CellContext`conc, 
+             First[#]]]]]& ]; $CellContext`TreeFromPairs3[
+         Pattern[$CellContext`pove, 
+          Blank[]], 
+         Pattern[$CellContext`SelectFirst, 
+          Blank[]], 
+         Pattern[$CellContext`SelectPred, 
+          Blank[]], 
+         Pattern[$CellContext`SelectSucc, 
+          Blank[]]] := 
+       Block[{$CellContext`e, $CellContext`bfi, $CellContext`selectfrom, \
+$CellContext`b, $CellContext`lis, $CellContext`j, $CellContext`i, \
+$CellContext`edges, $CellContext`cnt = 
+          1, $CellContext`selectfrom1, $CellContext`ta, $CellContext`te1, \
+$CellContext`lis1, $CellContext`maksi, $CellContext`g}, $CellContext`edges = {
+            Part[$CellContext`pove, 
+             RandomInteger[{1, 
+               Length[$CellContext`pove]}]]}; $CellContext`g = 
+          Combinatorica`FromUnorderedPairs[$CellContext`pove]; \
+$CellContext`bfi = Table[0, {
+             Combinatorica`V[$CellContext`g]}]; $CellContext`e = 
+          Combinatorica`ToAdjacencyLists[$CellContext`g]; $CellContext`a = 
+          Part[$CellContext`edges, 1, 1]; $CellContext`b = 
+          Part[$CellContext`edges, 1, 2]; 
+         Part[$CellContext`bfi, $CellContext`a] = 1; 
+         Part[$CellContext`bfi, $CellContext`b] = 2; $CellContext`e = 
+          Map[Complement[#, {$CellContext`a, $CellContext`b}]& , \
+$CellContext`e]; $CellContext`j = 1; $CellContext`te1 = Map[Length, 
+            Combinatorica`ToAdjacencyLists[$CellContext`g]]; $CellContext`ta = 
+          Join[
+            Table[
+             Part[
+              Part[$CellContext`edges, $CellContext`i], 1], {$CellContext`i, 
+              1, $CellContext`j}], 
+            Table[
+             Part[
+              Part[$CellContext`edges, $CellContext`i], 1], {$CellContext`i, 
+              1, $CellContext`j}]]; $CellContext`lis1 = Cases[
+            Range[
+             Combinatorica`V[$CellContext`g]], 
+            Condition[
+             Pattern[$CellContext`x, 
+              Blank[]], 
+             And[
+             Part[$CellContext`te1, $CellContext`x] - 
+               Count[$CellContext`ta, $CellContext`x] > 0, 
+              Part[$CellContext`bfi, $CellContext`x] > 0, 
+              Part[$CellContext`e, $CellContext`x] != {}]]]; \
+$CellContext`maksi = Max[
+            Map[
+            Part[$CellContext`te1, #] - 
+             Count[$CellContext`ta, #]& , $CellContext`lis1, {
+             1}]]; $CellContext`lis = Cases[$CellContext`lis1, 
+            Condition[
+             Pattern[$CellContext`x, 
+              Blank[]], 
+             Part[$CellContext`te1, $CellContext`x] - 
+              Count[$CellContext`ta, $CellContext`x] == $CellContext`maksi]]; 
+         While[$CellContext`lis != {}, $CellContext`a = \
+$CellContext`SelectPred[$CellContext`g, $CellContext`e, $CellContext`lis, \
+$CellContext`bfi, $CellContext`cnt]; $CellContext`b = \
+$CellContext`SelectSucc[$CellContext`g, $CellContext`e, 
+              Part[$CellContext`e, $CellContext`a], 
+              Blank[], 
+              Blank[]]; $CellContext`j = $CellContext`j + 1; 
+           Part[$CellContext`bfi, $CellContext`b] = $CellContext`j + 1; 
+           AppendTo[$CellContext`edges, {$CellContext`a, $CellContext`b}]; \
+$CellContext`e = 
+            Map[Complement[#, {$CellContext`b}]& , $CellContext`e]; \
+$CellContext`te1 = Map[Length, 
+              
+              Combinatorica`ToAdjacencyLists[$CellContext`g]]; \
+$CellContext`ta = Join[
+              Table[
+               Part[
+                Part[$CellContext`edges, $CellContext`i], 1], {$CellContext`i,
+                 1, $CellContext`j}], 
+              Table[
+               Part[
+                Part[$CellContext`edges, $CellContext`i], 2], {$CellContext`i,
+                 1, $CellContext`j}]]; $CellContext`lis1 = Cases[
+              Range[
+               Combinatorica`V[$CellContext`g]], 
+              Condition[
+               Pattern[$CellContext`x, 
+                Blank[]], 
+               And[
+               Part[$CellContext`te1, $CellContext`x] - 
+                 Count[$CellContext`ta, $CellContext`x] > 0, 
+                Part[$CellContext`bfi, $CellContext`x] > 0, 
+                Part[$CellContext`e, $CellContext`x] != {}]]]; \
+$CellContext`maksi = Max[
+              Map[
+              Part[$CellContext`te1, #] - 
+               Count[$CellContext`ta, #]& , $CellContext`lis1, {
+               1}]]; $CellContext`lis = Cases[$CellContext`lis1, 
+              Condition[
+               Pattern[$CellContext`x, 
+                Blank[]], 
+               Part[$CellContext`te1, $CellContext`x] - 
+                Count[$CellContext`ta, $CellContext`x] == \
+$CellContext`maksi]]; $CellContext`ta = Join[
+              Table[
+               Part[
+                Part[$CellContext`edges, $CellContext`i], 1], {$CellContext`i,
+                 1, $CellContext`j}], 
+              Table[
+               Part[
+                Part[$CellContext`edges, $CellContext`i], 2], {$CellContext`i,
+                 1, $CellContext`j}]]; 
+           Null]; {$CellContext`edges, $CellContext`bfi}]; \
+$CellContext`SelectFr4[
+         Pattern[$CellContext`g, 
+          Blank[]], 
+         Pattern[$CellContext`e, 
+          Blank[]], 
+         Pattern[$CellContext`list, 
+          Blank[]], 
+         Pattern[$CellContext`bfi, 
+          Blank[]], 
+         Pattern[$CellContext`cnt, 
+          Blank[]]] := Part[$CellContext`list, 
+         RandomInteger[{1, 
+           Length[$CellContext`list]}]]; $CellContext`SelectPr3[
+         Pattern[$CellContext`g, 
+          Blank[]], 
+         Pattern[$CellContext`e, 
+          Blank[]], 
+         Pattern[$CellContext`list, 
+          Blank[]], 
+         Pattern[$CellContext`bfi, 
+          Blank[]], 
+         Pattern[$CellContext`cnt, 
+          Blank[]]] := Part[$CellContext`list, 
+         RandomInteger[{1, 
+           Length[$CellContext`list]}]]; $CellContext`SelectSu3[
+         Pattern[$CellContext`g, 
+          Blank[]], 
+         Pattern[$CellContext`e, 
+          Blank[]], 
+         Pattern[$CellContext`list, 
+          Blank[]], 
+         Pattern[$CellContext`bfi, 
+          Blank[]], 
+         Pattern[$CellContext`cnt, 
+          Blank[]]] := Part[$CellContext`list, 
+         RandomInteger[{1, 
+           Length[$CellContext`list]}]]; $CellContext`EdgesOnFace[
+         Pattern[$CellContext`lice, 
+          Blank[]]] := Module[{$CellContext`i}, 
+         Append[
+          Table[{
+            Part[$CellContext`lice, $CellContext`i], 
+            Part[$CellContext`lice, $CellContext`i + 1]}, {$CellContext`i, 1, 
+            Length[$CellContext`lice] - 1}], {
+           Last[$CellContext`lice], 
+           First[$CellContext`lice]}]]; $CellContext`EdgesOnFaces[
+         Pattern[$CellContext`cic$, 
+          Blank[]]] := 
+       Block[{$CellContext`edgs = {}, $CellContext`n$$ = 
+          Length[$CellContext`cic$], $CellContext`ed, $CellContext`i}, 
+         Do[$CellContext`ed = $CellContext`EdgesOnFace[
+              Part[$CellContext`cic$, $CellContext`i]]; $CellContext`edgs = 
+            Union[$CellContext`edgs, $CellContext`ed], {$CellContext`i, 
+            1, $CellContext`n$$}]; $CellContext`edgs = Union[
+            Map[Sort, $CellContext`edgs, 1]]]; $CellContext`Povprecje[
+         Pattern[$CellContext`cic, 
+          Blank[]]] := 
+       Apply[Plus, $CellContext`cic]/
+        Length[$CellContext`cic]; $CellContext`ClosedLine[
+         Pattern[$CellContext`a, 
+          Blank[]]] := Line[
+         Append[$CellContext`a, 
+          First[$CellContext`a]]]; $CellContext`Labyrinth3D[
+         Pattern[$CellContext`num, 
+          Blank[]], 
+         Pattern[$CellContext`m, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]], 
+         Pattern[$CellContext`v, 
+          Blank[]], 
+         Pattern[$CellContext`x, 
+          Blank[]], 
+         Pattern[$CellContext`y, 
+          Blank[]]] := 
+       Block[{$CellContext`drevo, $CellContext`c1, $CellContext`nal1, \
+$CellContext`res1, $CellContext`solid = \
+$CellContext`NPravokotniGrafText2[$CellContext`num, $CellContext`m, \
+$CellContext`n, $CellContext`v, $CellContext`x, $CellContext`y], \
+$CellContext`vertcoor1, $CellContext`edgs, $CellContext`f, \
+$CellContext`pove1, $CellContext`allpov, $CellContext`slika4, \
+$CellContext`slika9, $CellContext`slika10, $CellContext`zadnja1, \
+$CellContext`prva, $CellContext`zadnja, $CellContext`pot1, $CellContext`g1, \
+$CellContext`zadnjicikel, $CellContext`zatt, $CellContext`kont, \
+$CellContext`prvicikel, $CellContext`vertsolut, $CellContext`zat, \
+$CellContext`bele, $CellContext`sive, $CellContext`slikasive, \
+$CellContext`edbele, $CellContext`edgb, $CellContext`edgc, \
+$CellContext`slikaE}, $CellContext`c1 = 
+          Part[$CellContext`solid, 
+            1]; $CellContext`edgs = \
+$CellContext`EdgesOnFaces[$CellContext`c1]; $CellContext`vertcoor1 = 
+          Part[$CellContext`solid, 2]; $CellContext`f = 
+          Length[$CellContext`c1]; $CellContext`allpov = Apply[Union, 
+            
+            Table[{$CellContext`a, $CellContext`b}, {$CellContext`a, 
+              1, $CellContext`f - 1}, {$CellContext`b, $CellContext`a + 
+              1, $CellContext`f}]]; $CellContext`pove1 = 
+          Cases[$CellContext`allpov, 
+            Condition[{
+              Pattern[$CellContext`i, 
+               Blank[]], 
+              Pattern[$CellContext`j, 
+               Blank[]]}, 
+             $CellContext`adj[$CellContext`num, $CellContext`m, \
+$CellContext`n][$CellContext`i, $CellContext`j]]]; $CellContext`drevo = First[
+            $CellContext`TreeFromPairs3[$CellContext`pove1, \
+$CellContext`SelectFr4, $CellContext`SelectPr3, $CellContext`SelectSu3]]; \
+$CellContext`bele = Map[Min, 
+            Select[$CellContext`drevo, Or[
+              $CellContext`adj2[$CellContext`num, $CellContext`m, \
+$CellContext`n][
+               Part[#, 1], 
+               Part[#, 2]], 
+              $CellContext`adj2[$CellContext`num, $CellContext`m, \
+$CellContext`n][
+               Part[#, 2], 
+               Part[#, 1]]]& ]]; $CellContext`sive = Complement[
+            Range[$CellContext`f], $CellContext`bele]; $CellContext`slikasive = {
+            GrayLevel[0.75], 
+            Table[
+             Polygon[
+              Map[$CellContext`vert, 
+               Part[$CellContext`c1, 
+                Part[$CellContext`sive, $CellContext`i]]]], {$CellContext`i, 
+              1, 
+              Length[$CellContext`sive]}]}; $CellContext`edbele = 
+          Select[$CellContext`drevo, $CellContext`adj1[$CellContext`num, \
+$CellContext`m, $CellContext`n][
+             Part[#, 1], 
+             Part[#, 2]]& ]; $CellContext`edgb = Table[
+            Intersection[
+             Part[$CellContext`c1, 
+              Part[$CellContext`edbele, $CellContext`i, 1]], 
+             Part[$CellContext`c1, 
+              Part[$CellContext`edbele, $CellContext`i, 2]]], {$CellContext`i,
+              1, 
+             Length[$CellContext`edbele]}]; $CellContext`edgc = 
+          Complement[$CellContext`edgs, $CellContext`edgb]; \
+$CellContext`slikaE = {
+            Thickness[0.01], 
+            Table[
+             Line[
+              Map[$CellContext`vert, 
+               Part[$CellContext`edgc, $CellContext`i]]], {$CellContext`i, 1, 
+              Length[$CellContext`edgc]}]}; $CellContext`zadnja1 = Part[
+            Last[$CellContext`drevo], 2]; $CellContext`g1 = 
+          Combinatorica`FromUnorderedPairs[$CellContext`drevo]; \
+{$CellContext`prva, $CellContext`zadnja} = \
+$CellContext`izboroddaljenih[$CellContext`drevo]; $CellContext`pot1 = 
+          Combinatorica`ShortestPath[$CellContext`g1, $CellContext`prva, \
+$CellContext`zadnja]; $CellContext`prvicikel = 
+          Part[$CellContext`c1, $CellContext`prva]; $CellContext`zadnjicikel = 
+          Part[$CellContext`c1, $CellContext`zadnja]; $CellContext`solut = 
+          Length[$CellContext`pot1]; $CellContext`vert = 
+          Part[$CellContext`vertcoor1, #]& ; $CellContext`zatt = 
+          0.25 Apply[Plus, 
+             Map[$CellContext`vert, 
+              Part[$CellContext`c1, #], {
+              1}]]& ; $CellContext`zat = $CellContext`zatt[$CellContext`prva]; \
+$CellContext`kont = $CellContext`zatt[$CellContext`zadnja]; \
+$CellContext`slika4 = {
+            AbsolutePointSize[10], {Red, 
+             Point[$CellContext`zat]}, {Green, 
+             Point[$CellContext`kont]}}; $CellContext`slika9 = Table[
+            Text[
+             Style[
+              ToString[$CellContext`i], FontSize -> 12], 
+             $CellContext`zatt[
+              Part[$CellContext`pot1, $CellContext`i]]], {$CellContext`i, 1, 
+             Length[$CellContext`pot1]}]; $CellContext`slika10 = {
+            GrayLevel[0.9], 
+            Map[$CellContext`ClosedLine, 
+             Map[Part[$CellContext`solid, 2, #]& , 
+              Part[$CellContext`solid, 1]]]}; {
+           
+           Graphics[{$CellContext`slikasive, $CellContext`slika10, \
+$CellContext`slikaE, $CellContext`slika4}, ImageSize -> {450, 450}], 
+           
+           Graphics[{$CellContext`slikasive, $CellContext`slika10, \
+$CellContext`slikaE, $CellContext`slika4, $CellContext`slika9}, 
+            ImageSize -> {450, 450}], 
+           Length[$CellContext`pot1]}]; $CellContext`NPravokotniGrafText2[
+         Pattern[$CellContext`num, 
+          Blank[]], 
+         Pattern[$CellContext`m, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]], 
+         Pattern[$CellContext`v, 
+          Blank[]], 
+         Pattern[$CellContext`x, 
+          Blank[]], 
+         Pattern[$CellContext`y, 
+          Blank[]]] := {
+         Flatten[
+          Table[
+           
+           Table[{($CellContext`j - 
+               1) $CellContext`m + $CellContext`i + ($CellContext`m \
+$CellContext`n) $CellContext`k, ($CellContext`j - 
+               1) $CellContext`m + $CellContext`i + 
+             1 + ($CellContext`m $CellContext`n) $CellContext`k, \
+$CellContext`j $CellContext`m + $CellContext`i + 
+             1 + ($CellContext`m $CellContext`n) $CellContext`k, \
+$CellContext`j $CellContext`m + $CellContext`i + ($CellContext`m \
+$CellContext`n) $CellContext`k}, {$CellContext`j, 1, $CellContext`n - 
+             1}, {$CellContext`i, 1, $CellContext`m - 1}], {$CellContext`k, 
+            0, $CellContext`num - 1}], 2], 
+         Flatten[
+          Table[
+           
+           Table[$CellContext`v + ($CellContext`i - 
+              1) $CellContext`x + ($CellContext`j - 
+              1) $CellContext`y + ($CellContext`m $CellContext`k) \
+$CellContext`x + 
+            2 $CellContext`x, {$CellContext`j, 
+             1, $CellContext`n}, {$CellContext`i, 
+             1, $CellContext`m}], {$CellContext`k, 0, $CellContext`num - 1}], 
+          2]}; $CellContext`solidf[
+         Pattern[$CellContext`num, 
+          Blank[]], 
+         Pattern[$CellContext`m, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]]] := Flatten[
+         Table[
+          
+          Table[{($CellContext`j - 
+              1) $CellContext`m + $CellContext`i + ($CellContext`m \
+$CellContext`n) $CellContext`k, ($CellContext`j - 
+              1) $CellContext`m + $CellContext`i + 
+            1 + ($CellContext`m $CellContext`n) $CellContext`k, \
+$CellContext`j $CellContext`m + $CellContext`i + 
+            1 + ($CellContext`m $CellContext`n) $CellContext`k, \
+$CellContext`j $CellContext`m + $CellContext`i + ($CellContext`m \
+$CellContext`n) $CellContext`k}, {$CellContext`j, 1, $CellContext`n - 
+            1}, {$CellContext`i, 1, $CellContext`m - 1}], {$CellContext`k, 
+           0, $CellContext`num - 1}], 2]; $CellContext`adj1[
+         Pattern[$CellContext`num, 
+          Blank[]], 
+         Pattern[$CellContext`m, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]]][
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]]] := 
+       With[{$CellContext`solid = $CellContext`solidf[$CellContext`num, \
+$CellContext`m, $CellContext`n]}, Length[
+           Intersection[
+            Part[$CellContext`solid, $CellContext`i], 
+            Part[$CellContext`solid, $CellContext`j]]] == 
+         2]; $CellContext`adj2[
+         Pattern[$CellContext`num, 
+          Blank[]], 
+         Pattern[$CellContext`m, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]]][
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]]] := 
+       With[{$CellContext`solid = $CellContext`solidf[$CellContext`num, \
+$CellContext`m, $CellContext`n]}, 
+         Abs[Part[$CellContext`solid, $CellContext`i, 1] - 
+           Part[$CellContext`solid, $CellContext`j, 
+            1]] == $CellContext`m $CellContext`n]; $CellContext`adj[
+         Pattern[$CellContext`num, 
+          Blank[]], 
+         Pattern[$CellContext`m, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]]][
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]]] := Or[
+         $CellContext`adj1[$CellContext`num, $CellContext`m, \
+$CellContext`n][$CellContext`i, $CellContext`j], 
+         $CellContext`adj2[$CellContext`num, $CellContext`m, \
+$CellContext`n][$CellContext`i, $CellContext`j]]); Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->17659602,ExpressionUUID->"2e439d91-3556-4467-8432-32ac9811731f"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection",ExpressionUUID->"1a6b431e-ef97-4530-886a-5cae1eca9f92"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`help$$ = False, $CellContext`m$$ = 
+    4, $CellContext`n$$ = 4, $CellContext`num$$ = 4, $CellContext`ranint$$ = 
+    181, Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`ranint$$], 181}}, {{
+       Hold[$CellContext`m$$], 4, "x dimension"}, 3, 5, 1}, {{
+       Hold[$CellContext`n$$], 4, "y dimension"}, 3, 5, 1}, {{
+       Hold[$CellContext`num$$], 4, "z dimension"}, 2, 4, 1}, {{
+       Hold[$CellContext`help$$], False, "show solution"}, {True, False}}, {
+      Hold[
+       Row[{
+         Spacer[60], 
+         Column[{
+           Manipulate`Place[1], 
+           Manipulate`Place[2], 
+           Manipulate`Place[3], Null}, Alignment -> Right], 
+         Spacer[40], 
+         Manipulate`Place[4], 
+         Spacer[40], 
+         Button[
+         "new maze", $CellContext`ranint$$ = 
+           RandomInteger[{1, 1377}]; $CellContext`help$$ = False]}]], 
+      Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    550., {197., 203.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`m$1151509$$ = 
+    0, $CellContext`n$1151510$$ = 0, $CellContext`num$1151511$$ = 
+    0, $CellContext`help$1151512$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     2, StandardForm, 
+      "Variables" :> {$CellContext`help$$ = False, $CellContext`m$$ = 
+        4, $CellContext`n$$ = 4, $CellContext`num$$ = 
+        4, $CellContext`ranint$$ = 181}, "ControllerVariables" :> {
+        Hold[$CellContext`m$$, $CellContext`m$1151509$$, 0], 
+        Hold[$CellContext`n$$, $CellContext`n$1151510$$, 0], 
+        Hold[$CellContext`num$$, $CellContext`num$1151511$$, 0], 
+        Hold[$CellContext`help$$, $CellContext`help$1151512$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (SeedRandom[$CellContext`ranint$$]; 
+       With[{$CellContext`tt$ = $CellContext`Labyrinth3D[$CellContext`num$$, \
+$CellContext`m$$ + 1, $CellContext`n$$ + 1, {0, 0}, {1, 0}, {0, 1}]}, 
+         Pane[
+          If[
+           Not[$CellContext`help$$], 
+           Part[$CellContext`tt$, 1], 
+           Part[$CellContext`tt$, 2]], Alignment -> Center, 
+          ImageSize -> {550, 400}]]), 
+      "Specifications" :> {{{$CellContext`ranint$$, 181}, ControlType -> 
+         None}, {{$CellContext`m$$, 4, "x dimension"}, 3, 5, 1, ControlType -> 
+         SetterBar, ControlPlacement -> 
+         1}, {{$CellContext`n$$, 4, "y dimension"}, 3, 5, 1, ControlType -> 
+         SetterBar, ControlPlacement -> 
+         2}, {{$CellContext`num$$, 4, "z dimension"}, 2, 4, 1, ControlType -> 
+         SetterBar, ControlPlacement -> 
+         3}, {{$CellContext`help$$, False, "show solution"}, {True, False}, 
+         ControlPlacement -> 4}, 
+        Row[{
+          Spacer[60], 
+          Column[{
+            Manipulate`Place[1], 
+            Manipulate`Place[2], 
+            Manipulate`Place[3], Null}, Alignment -> Right], 
+          Spacer[40], 
+          Manipulate`Place[4], 
+          Spacer[40], 
+          Button[
+          "new maze", $CellContext`ranint$$ = 
+            RandomInteger[{1, 1377}]; $CellContext`help$$ = False]}]}, 
+      "Options" :> {}, "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{599., {277., 284.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>((Quiet[
+        Get["Combinatorica`"]]; $CellContext`izboroddaljenih[
+         Pattern[$CellContext`drev, 
+          Blank[]]] := Module[{$CellContext`n = Length[
+            Union[
+             
+             Flatten[$CellContext`drev]]], $CellContext`listi, \
+$CellContext`list, $CellContext`zacetna, $CellContext`koncna}, \
+$CellContext`listi = Select[
+            Range[$CellContext`n], Count[
+              Flatten[$CellContext`drev, 1], #] == 1& ]; $CellContext`list = 
+          Part[$CellContext`listi, 
+            RandomInteger[{1, 
+              
+              Length[$CellContext`listi]}]]; $CellContext`zacetna = \
+$CellContext`najboljoddaljena[$CellContext`list, $CellContext`drev, \
+$CellContext`n]; $CellContext`koncna = \
+$CellContext`najboljoddaljena[$CellContext`zacetna, $CellContext`drev, \
+$CellContext`n]; {$CellContext`zacetna, $CellContext`koncna}]; \
+$CellContext`najboljoddaljena[
+         Pattern[$CellContext`a, 
+          Blank[]], 
+         Pattern[$CellContext`drev, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]]] := 
+       Module[{$CellContext`tekoca = {$CellContext`a}, $CellContext`ostanek = 
+          Complement[
+            
+            Range[$CellContext`n], {$CellContext`a}], $CellContext`x, \
+$CellContext`i, $CellContext`sosedi}, While[
+           Not[$CellContext`ostanek == {}], $CellContext`sosedi = Union[
+              Flatten[
+               Table[
+                Select[$CellContext`ostanek, Or[
+                  MemberQ[$CellContext`drev, {#, 
+                    Part[$CellContext`tekoca, $CellContext`i]}], 
+                  MemberQ[$CellContext`drev, {
+                    
+                    Part[$CellContext`tekoca, $CellContext`i], #}]]& ], \
+{$CellContext`i, 1, 
+                 Length[$CellContext`tekoca]}]]]; $CellContext`ostanek = 
+            Complement[$CellContext`ostanek, $CellContext`sosedi]; \
+$CellContext`tekoca = $CellContext`sosedi]; Part[$CellContext`sosedi, 
+           RandomInteger[{1, 
+             Length[$CellContext`sosedi]}]]]; $CellContext`dodajzadnji[
+         Pattern[$CellContext`sez, 
+          Blank[]]] := 
+       Block[{$CellContext`newsez = $CellContext`sez, $CellContext`nw, \
+$CellContext`i}, Do[$CellContext`nw = Append[
+              Part[$CellContext`sez, $CellContext`i], 
+              First[
+               Part[$CellContext`sez, $CellContext`i]]]; $CellContext`newsez = 
+            ReplacePart[$CellContext`newsez, $CellContext`nw, \
+$CellContext`i], {$CellContext`i, 1, 
+            
+            Length[$CellContext`sez]}]; $CellContext`newsez]; \
+$CellContext`izbor[
+         Pattern[$CellContext`pove, 
+          Blank[]], 
+         Pattern[$CellContext`conc, 
+          Blank[]]] := Select[$CellContext`pove, Or[
+          And[
+           MemberQ[$CellContext`conc, 
+            First[#]], 
+           Not[
+            MemberQ[$CellContext`conc, 
+             Last[#]]]], 
+          And[
+           MemberQ[$CellContext`conc, 
+            Last[#]], 
+           Not[
+            MemberQ[$CellContext`conc, 
+             First[#]]]]]& ]; $CellContext`TreeFromPairs3[
+         Pattern[$CellContext`pove, 
+          Blank[]], 
+         Pattern[$CellContext`SelectFirst, 
+          Blank[]], 
+         Pattern[$CellContext`SelectPred, 
+          Blank[]], 
+         Pattern[$CellContext`SelectSucc, 
+          Blank[]]] := 
+       Block[{$CellContext`e, $CellContext`bfi, $CellContext`selectfrom, \
+$CellContext`b, $CellContext`lis, $CellContext`j, $CellContext`i, \
+$CellContext`edges, $CellContext`cnt = 
+          1, $CellContext`selectfrom1, $CellContext`ta, $CellContext`te1, \
+$CellContext`lis1, $CellContext`maksi, $CellContext`g}, $CellContext`edges = {
+            Part[$CellContext`pove, 
+             RandomInteger[{1, 
+               Length[$CellContext`pove]}]]}; $CellContext`g = 
+          Combinatorica`FromUnorderedPairs[$CellContext`pove]; \
+$CellContext`bfi = Table[0, {
+             Combinatorica`V[$CellContext`g]}]; $CellContext`e = 
+          Combinatorica`ToAdjacencyLists[$CellContext`g]; $CellContext`a = 
+          Part[$CellContext`edges, 1, 1]; $CellContext`b = 
+          Part[$CellContext`edges, 1, 2]; 
+         Part[$CellContext`bfi, $CellContext`a] = 1; 
+         Part[$CellContext`bfi, $CellContext`b] = 2; $CellContext`e = 
+          Map[Complement[#, {$CellContext`a, $CellContext`b}]& , \
+$CellContext`e]; $CellContext`j = 1; $CellContext`te1 = Map[Length, 
+            Combinatorica`ToAdjacencyLists[$CellContext`g]]; $CellContext`ta = 
+          Join[
+            Table[
+             Part[
+              Part[$CellContext`edges, $CellContext`i], 1], {$CellContext`i, 
+              1, $CellContext`j}], 
+            Table[
+             Part[
+              Part[$CellContext`edges, $CellContext`i], 1], {$CellContext`i, 
+              1, $CellContext`j}]]; $CellContext`lis1 = Cases[
+            Range[
+             Combinatorica`V[$CellContext`g]], 
+            Condition[
+             Pattern[$CellContext`x, 
+              Blank[]], 
+             And[
+             Part[$CellContext`te1, $CellContext`x] - 
+               Count[$CellContext`ta, $CellContext`x] > 0, 
+              Part[$CellContext`bfi, $CellContext`x] > 0, 
+              Part[$CellContext`e, $CellContext`x] != {}]]]; \
+$CellContext`maksi = Max[
+            Map[
+            Part[$CellContext`te1, #] - 
+             Count[$CellContext`ta, #]& , $CellContext`lis1, {
+             1}]]; $CellContext`lis = Cases[$CellContext`lis1, 
+            Condition[
+             Pattern[$CellContext`x, 
+              Blank[]], 
+             Part[$CellContext`te1, $CellContext`x] - 
+              Count[$CellContext`ta, $CellContext`x] == $CellContext`maksi]]; 
+         While[$CellContext`lis != {}, $CellContext`a = \
+$CellContext`SelectPred[$CellContext`g, $CellContext`e, $CellContext`lis, \
+$CellContext`bfi, $CellContext`cnt]; $CellContext`b = \
+$CellContext`SelectSucc[$CellContext`g, $CellContext`e, 
+              Part[$CellContext`e, $CellContext`a], 
+              Blank[], 
+              Blank[]]; $CellContext`j = $CellContext`j + 1; 
+           Part[$CellContext`bfi, $CellContext`b] = $CellContext`j + 1; 
+           AppendTo[$CellContext`edges, {$CellContext`a, $CellContext`b}]; \
+$CellContext`e = 
+            Map[Complement[#, {$CellContext`b}]& , $CellContext`e]; \
+$CellContext`te1 = Map[Length, 
+              
+              Combinatorica`ToAdjacencyLists[$CellContext`g]]; \
+$CellContext`ta = Join[
+              Table[
+               Part[
+                Part[$CellContext`edges, $CellContext`i], 1], {$CellContext`i,
+                 1, $CellContext`j}], 
+              Table[
+               Part[
+                Part[$CellContext`edges, $CellContext`i], 2], {$CellContext`i,
+                 1, $CellContext`j}]]; $CellContext`lis1 = Cases[
+              Range[
+               Combinatorica`V[$CellContext`g]], 
+              Condition[
+               Pattern[$CellContext`x, 
+                Blank[]], 
+               And[
+               Part[$CellContext`te1, $CellContext`x] - 
+                 Count[$CellContext`ta, $CellContext`x] > 0, 
+                Part[$CellContext`bfi, $CellContext`x] > 0, 
+                Part[$CellContext`e, $CellContext`x] != {}]]]; \
+$CellContext`maksi = Max[
+              Map[
+              Part[$CellContext`te1, #] - 
+               Count[$CellContext`ta, #]& , $CellContext`lis1, {
+               1}]]; $CellContext`lis = Cases[$CellContext`lis1, 
+              Condition[
+               Pattern[$CellContext`x, 
+                Blank[]], 
+               Part[$CellContext`te1, $CellContext`x] - 
+                Count[$CellContext`ta, $CellContext`x] == \
+$CellContext`maksi]]; $CellContext`ta = Join[
+              Table[
+               Part[
+                Part[$CellContext`edges, $CellContext`i], 1], {$CellContext`i,
+                 1, $CellContext`j}], 
+              Table[
+               Part[
+                Part[$CellContext`edges, $CellContext`i], 2], {$CellContext`i,
+                 1, $CellContext`j}]]; 
+           Null]; {$CellContext`edges, $CellContext`bfi}]; \
+$CellContext`SelectFr4[
+         Pattern[$CellContext`g, 
+          Blank[]], 
+         Pattern[$CellContext`e, 
+          Blank[]], 
+         Pattern[$CellContext`list, 
+          Blank[]], 
+         Pattern[$CellContext`bfi, 
+          Blank[]], 
+         Pattern[$CellContext`cnt, 
+          Blank[]]] := Part[$CellContext`list, 
+         RandomInteger[{1, 
+           Length[$CellContext`list]}]]; $CellContext`SelectPr3[
+         Pattern[$CellContext`g, 
+          Blank[]], 
+         Pattern[$CellContext`e, 
+          Blank[]], 
+         Pattern[$CellContext`list, 
+          Blank[]], 
+         Pattern[$CellContext`bfi, 
+          Blank[]], 
+         Pattern[$CellContext`cnt, 
+          Blank[]]] := Part[$CellContext`list, 
+         RandomInteger[{1, 
+           Length[$CellContext`list]}]]; $CellContext`SelectSu3[
+         Pattern[$CellContext`g, 
+          Blank[]], 
+         Pattern[$CellContext`e, 
+          Blank[]], 
+         Pattern[$CellContext`list, 
+          Blank[]], 
+         Pattern[$CellContext`bfi, 
+          Blank[]], 
+         Pattern[$CellContext`cnt, 
+          Blank[]]] := Part[$CellContext`list, 
+         RandomInteger[{1, 
+           Length[$CellContext`list]}]]; $CellContext`EdgesOnFace[
+         Pattern[$CellContext`lice, 
+          Blank[]]] := Module[{$CellContext`i}, 
+         Append[
+          Table[{
+            Part[$CellContext`lice, $CellContext`i], 
+            Part[$CellContext`lice, $CellContext`i + 1]}, {$CellContext`i, 1, 
+            Length[$CellContext`lice] - 1}], {
+           Last[$CellContext`lice], 
+           First[$CellContext`lice]}]]; $CellContext`EdgesOnFaces[
+         Pattern[$CellContext`cic$, 
+          Blank[]]] := 
+       Block[{$CellContext`edgs = {}, $CellContext`n$$ = 
+          Length[$CellContext`cic$], $CellContext`ed, $CellContext`i}, 
+         Do[$CellContext`ed = $CellContext`EdgesOnFace[
+              Part[$CellContext`cic$, $CellContext`i]]; $CellContext`edgs = 
+            Union[$CellContext`edgs, $CellContext`ed], {$CellContext`i, 
+            1, $CellContext`n$$}]; $CellContext`edgs = Union[
+            Map[Sort, $CellContext`edgs, 1]]]; $CellContext`Povprecje[
+         Pattern[$CellContext`cic, 
+          Blank[]]] := 
+       Apply[Plus, $CellContext`cic]/
+        Length[$CellContext`cic]; $CellContext`ClosedLine[
+         Pattern[$CellContext`a, 
+          Blank[]]] := Line[
+         Append[$CellContext`a, 
+          First[$CellContext`a]]]; $CellContext`Labyrinth3D[
+         Pattern[$CellContext`num, 
+          Blank[]], 
+         Pattern[$CellContext`m, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]], 
+         Pattern[$CellContext`v, 
+          Blank[]], 
+         Pattern[$CellContext`x, 
+          Blank[]], 
+         Pattern[$CellContext`y, 
+          Blank[]]] := 
+       Block[{$CellContext`drevo, $CellContext`c1, $CellContext`nal1, \
+$CellContext`res1, $CellContext`solid = \
+$CellContext`NPravokotniGrafText2[$CellContext`num, $CellContext`m, \
+$CellContext`n, $CellContext`v, $CellContext`x, $CellContext`y], \
+$CellContext`vertcoor1, $CellContext`edgs, $CellContext`f, \
+$CellContext`pove1, $CellContext`allpov, $CellContext`slika4, \
+$CellContext`slika9, $CellContext`slika10, $CellContext`zadnja1, \
+$CellContext`prva, $CellContext`zadnja, $CellContext`pot1, $CellContext`g1, \
+$CellContext`zadnjicikel, $CellContext`zatt, $CellContext`kont, \
+$CellContext`prvicikel, $CellContext`vertsolut, $CellContext`zat, \
+$CellContext`bele, $CellContext`sive, $CellContext`slikasive, \
+$CellContext`edbele, $CellContext`edgb, $CellContext`edgc, \
+$CellContext`slikaE}, $CellContext`c1 = 
+          Part[$CellContext`solid, 
+            1]; $CellContext`edgs = \
+$CellContext`EdgesOnFaces[$CellContext`c1]; $CellContext`vertcoor1 = 
+          Part[$CellContext`solid, 2]; $CellContext`f = 
+          Length[$CellContext`c1]; $CellContext`allpov = Apply[Union, 
+            
+            Table[{$CellContext`a, $CellContext`b}, {$CellContext`a, 
+              1, $CellContext`f - 1}, {$CellContext`b, $CellContext`a + 
+              1, $CellContext`f}]]; $CellContext`pove1 = 
+          Cases[$CellContext`allpov, 
+            Condition[{
+              Pattern[$CellContext`i, 
+               Blank[]], 
+              Pattern[$CellContext`j, 
+               Blank[]]}, 
+             $CellContext`adj[$CellContext`num, $CellContext`m, \
+$CellContext`n][$CellContext`i, $CellContext`j]]]; $CellContext`drevo = First[
+            $CellContext`TreeFromPairs3[$CellContext`pove1, \
+$CellContext`SelectFr4, $CellContext`SelectPr3, $CellContext`SelectSu3]]; \
+$CellContext`bele = Map[Min, 
+            Select[$CellContext`drevo, Or[
+              $CellContext`adj2[$CellContext`num, $CellContext`m, \
+$CellContext`n][
+               Part[#, 1], 
+               Part[#, 2]], 
+              $CellContext`adj2[$CellContext`num, $CellContext`m, \
+$CellContext`n][
+               Part[#, 2], 
+               Part[#, 1]]]& ]]; $CellContext`sive = Complement[
+            Range[$CellContext`f], $CellContext`bele]; $CellContext`slikasive = {
+            GrayLevel[0.75], 
+            Table[
+             Polygon[
+              Map[$CellContext`vert, 
+               Part[$CellContext`c1, 
+                Part[$CellContext`sive, $CellContext`i]]]], {$CellContext`i, 
+              1, 
+              Length[$CellContext`sive]}]}; $CellContext`edbele = 
+          Select[$CellContext`drevo, $CellContext`adj1[$CellContext`num, \
+$CellContext`m, $CellContext`n][
+             Part[#, 1], 
+             Part[#, 2]]& ]; $CellContext`edgb = Table[
+            Intersection[
+             Part[$CellContext`c1, 
+              Part[$CellContext`edbele, $CellContext`i, 1]], 
+             Part[$CellContext`c1, 
+              Part[$CellContext`edbele, $CellContext`i, 2]]], {$CellContext`i,
+              1, 
+             Length[$CellContext`edbele]}]; $CellContext`edgc = 
+          Complement[$CellContext`edgs, $CellContext`edgb]; \
+$CellContext`slikaE = {
+            Thickness[0.01], 
+            Table[
+             Line[
+              Map[$CellContext`vert, 
+               Part[$CellContext`edgc, $CellContext`i]]], {$CellContext`i, 1, 
+              Length[$CellContext`edgc]}]}; $CellContext`zadnja1 = Part[
+            Last[$CellContext`drevo], 2]; $CellContext`g1 = 
+          Combinatorica`FromUnorderedPairs[$CellContext`drevo]; \
+{$CellContext`prva, $CellContext`zadnja} = \
+$CellContext`izboroddaljenih[$CellContext`drevo]; $CellContext`pot1 = 
+          Combinatorica`ShortestPath[$CellContext`g1, $CellContext`prva, \
+$CellContext`zadnja]; $CellContext`prvicikel = 
+          Part[$CellContext`c1, $CellContext`prva]; $CellContext`zadnjicikel = 
+          Part[$CellContext`c1, $CellContext`zadnja]; $CellContext`solut = 
+          Length[$CellContext`pot1]; $CellContext`vert = 
+          Part[$CellContext`vertcoor1, #]& ; $CellContext`zatt = 
+          0.25 Apply[Plus, 
+             Map[$CellContext`vert, 
+              Part[$CellContext`c1, #], {
+              1}]]& ; $CellContext`zat = $CellContext`zatt[$CellContext`prva]; \
+$CellContext`kont = $CellContext`zatt[$CellContext`zadnja]; \
+$CellContext`slika4 = {
+            AbsolutePointSize[10], {Red, 
+             Point[$CellContext`zat]}, {Green, 
+             Point[$CellContext`kont]}}; $CellContext`slika9 = Table[
+            Text[
+             Style[
+              ToString[$CellContext`i], FontSize -> 12], 
+             $CellContext`zatt[
+              Part[$CellContext`pot1, $CellContext`i]]], {$CellContext`i, 1, 
+             Length[$CellContext`pot1]}]; $CellContext`slika10 = {
+            GrayLevel[0.9], 
+            Map[$CellContext`ClosedLine, 
+             Map[Part[$CellContext`solid, 2, #]& , 
+              Part[$CellContext`solid, 1]]]}; {
+           
+           Graphics[{$CellContext`slikasive, $CellContext`slika10, \
+$CellContext`slikaE, $CellContext`slika4}, ImageSize -> {450, 450}], 
+           
+           Graphics[{$CellContext`slikasive, $CellContext`slika10, \
+$CellContext`slikaE, $CellContext`slika4, $CellContext`slika9}, 
+            ImageSize -> {450, 450}], 
+           Length[$CellContext`pot1]}]; $CellContext`NPravokotniGrafText2[
+         Pattern[$CellContext`num, 
+          Blank[]], 
+         Pattern[$CellContext`m, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]], 
+         Pattern[$CellContext`v, 
+          Blank[]], 
+         Pattern[$CellContext`x, 
+          Blank[]], 
+         Pattern[$CellContext`y, 
+          Blank[]]] := {
+         Flatten[
+          Table[
+           
+           Table[{($CellContext`j - 
+               1) $CellContext`m + $CellContext`i + ($CellContext`m \
+$CellContext`n) $CellContext`k, ($CellContext`j - 
+               1) $CellContext`m + $CellContext`i + 
+             1 + ($CellContext`m $CellContext`n) $CellContext`k, \
+$CellContext`j $CellContext`m + $CellContext`i + 
+             1 + ($CellContext`m $CellContext`n) $CellContext`k, \
+$CellContext`j $CellContext`m + $CellContext`i + ($CellContext`m \
+$CellContext`n) $CellContext`k}, {$CellContext`j, 1, $CellContext`n - 
+             1}, {$CellContext`i, 1, $CellContext`m - 1}], {$CellContext`k, 
+            0, $CellContext`num - 1}], 2], 
+         Flatten[
+          Table[
+           
+           Table[$CellContext`v + ($CellContext`i - 
+              1) $CellContext`x + ($CellContext`j - 
+              1) $CellContext`y + ($CellContext`m $CellContext`k) \
+$CellContext`x + 
+            2 $CellContext`x, {$CellContext`j, 
+             1, $CellContext`n}, {$CellContext`i, 
+             1, $CellContext`m}], {$CellContext`k, 0, $CellContext`num - 1}], 
+          2]}; $CellContext`solidf[
+         Pattern[$CellContext`num, 
+          Blank[]], 
+         Pattern[$CellContext`m, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]]] := Flatten[
+         Table[
+          
+          Table[{($CellContext`j - 
+              1) $CellContext`m + $CellContext`i + ($CellContext`m \
+$CellContext`n) $CellContext`k, ($CellContext`j - 
+              1) $CellContext`m + $CellContext`i + 
+            1 + ($CellContext`m $CellContext`n) $CellContext`k, \
+$CellContext`j $CellContext`m + $CellContext`i + 
+            1 + ($CellContext`m $CellContext`n) $CellContext`k, \
+$CellContext`j $CellContext`m + $CellContext`i + ($CellContext`m \
+$CellContext`n) $CellContext`k}, {$CellContext`j, 1, $CellContext`n - 
+            1}, {$CellContext`i, 1, $CellContext`m - 1}], {$CellContext`k, 
+           0, $CellContext`num - 1}], 2]; $CellContext`adj1[
+         Pattern[$CellContext`num, 
+          Blank[]], 
+         Pattern[$CellContext`m, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]]][
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]]] := 
+       With[{$CellContext`solid = $CellContext`solidf[$CellContext`num, \
+$CellContext`m, $CellContext`n]}, Length[
+           Intersection[
+            Part[$CellContext`solid, $CellContext`i], 
+            Part[$CellContext`solid, $CellContext`j]]] == 
+         2]; $CellContext`adj2[
+         Pattern[$CellContext`num, 
+          Blank[]], 
+         Pattern[$CellContext`m, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]]][
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]]] := 
+       With[{$CellContext`solid = $CellContext`solidf[$CellContext`num, \
+$CellContext`m, $CellContext`n]}, 
+         Abs[Part[$CellContext`solid, $CellContext`i, 1] - 
+           Part[$CellContext`solid, $CellContext`j, 
+            1]] == $CellContext`m $CellContext`n]; $CellContext`adj[
+         Pattern[$CellContext`num, 
+          Blank[]], 
+         Pattern[$CellContext`m, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]]][
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]]] := Or[
+         $CellContext`adj1[$CellContext`num, $CellContext`m, \
+$CellContext`n][$CellContext`i, $CellContext`j], 
+         $CellContext`adj2[$CellContext`num, $CellContext`m, \
+$CellContext`n][$CellContext`i, $CellContext`j]]); Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->452187528,ExpressionUUID->"81b9bc0e-2453-4d21-b41d-abfdc969e063"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`help$$ = True, $CellContext`m$$ = 
+    4, $CellContext`n$$ = 4, $CellContext`num$$ = 4, $CellContext`ranint$$ = 
+    181, Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`ranint$$], 181}}, {{
+       Hold[$CellContext`m$$], 4, "x dimension"}, 3, 5, 1}, {{
+       Hold[$CellContext`n$$], 4, "y dimension"}, 3, 5, 1}, {{
+       Hold[$CellContext`num$$], 4, "z dimension"}, 2, 4, 1}, {{
+       Hold[$CellContext`help$$], True, "show solution"}, {True, False}}, {
+      Hold[
+       Row[{
+         Spacer[60], 
+         Column[{
+           Manipulate`Place[1], 
+           Manipulate`Place[2], 
+           Manipulate`Place[3], Null}, Alignment -> Right], 
+         Spacer[40], 
+         Manipulate`Place[4], 
+         Spacer[40], 
+         Button[
+         "new maze", $CellContext`ranint$$ = 
+           RandomInteger[{1, 1377}]; $CellContext`help$$ = False]}]], 
+      Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    550., {197., 203.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`m$1151581$$ = 
+    0, $CellContext`n$1151582$$ = 0, $CellContext`num$1151583$$ = 
+    0, $CellContext`help$1151584$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     2, StandardForm, 
+      "Variables" :> {$CellContext`help$$ = True, $CellContext`m$$ = 
+        4, $CellContext`n$$ = 4, $CellContext`num$$ = 
+        4, $CellContext`ranint$$ = 181}, "ControllerVariables" :> {
+        Hold[$CellContext`m$$, $CellContext`m$1151581$$, 0], 
+        Hold[$CellContext`n$$, $CellContext`n$1151582$$, 0], 
+        Hold[$CellContext`num$$, $CellContext`num$1151583$$, 0], 
+        Hold[$CellContext`help$$, $CellContext`help$1151584$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (SeedRandom[$CellContext`ranint$$]; 
+       With[{$CellContext`tt$ = $CellContext`Labyrinth3D[$CellContext`num$$, \
+$CellContext`m$$ + 1, $CellContext`n$$ + 1, {0, 0}, {1, 0}, {0, 1}]}, 
+         Pane[
+          If[
+           Not[$CellContext`help$$], 
+           Part[$CellContext`tt$, 1], 
+           Part[$CellContext`tt$, 2]], Alignment -> Center, 
+          ImageSize -> {550, 400}]]), 
+      "Specifications" :> {{{$CellContext`ranint$$, 181}, ControlType -> 
+         None}, {{$CellContext`m$$, 4, "x dimension"}, 3, 5, 1, ControlType -> 
+         SetterBar, ControlPlacement -> 
+         1}, {{$CellContext`n$$, 4, "y dimension"}, 3, 5, 1, ControlType -> 
+         SetterBar, ControlPlacement -> 
+         2}, {{$CellContext`num$$, 4, "z dimension"}, 2, 4, 1, ControlType -> 
+         SetterBar, ControlPlacement -> 
+         3}, {{$CellContext`help$$, True, "show solution"}, {True, False}, 
+         ControlPlacement -> 4}, 
+        Row[{
+          Spacer[60], 
+          Column[{
+            Manipulate`Place[1], 
+            Manipulate`Place[2], 
+            Manipulate`Place[3], Null}, Alignment -> Right], 
+          Spacer[40], 
+          Manipulate`Place[4], 
+          Spacer[40], 
+          Button[
+          "new maze", $CellContext`ranint$$ = 
+            RandomInteger[{1, 1377}]; $CellContext`help$$ = False]}]}, 
+      "Options" :> {}, "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{599., {277., 284.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>((Quiet[
+        Get["Combinatorica`"]]; $CellContext`izboroddaljenih[
+         Pattern[$CellContext`drev, 
+          Blank[]]] := Module[{$CellContext`n = Length[
+            Union[
+             
+             Flatten[$CellContext`drev]]], $CellContext`listi, \
+$CellContext`list, $CellContext`zacetna, $CellContext`koncna}, \
+$CellContext`listi = Select[
+            Range[$CellContext`n], Count[
+              Flatten[$CellContext`drev, 1], #] == 1& ]; $CellContext`list = 
+          Part[$CellContext`listi, 
+            RandomInteger[{1, 
+              
+              Length[$CellContext`listi]}]]; $CellContext`zacetna = \
+$CellContext`najboljoddaljena[$CellContext`list, $CellContext`drev, \
+$CellContext`n]; $CellContext`koncna = \
+$CellContext`najboljoddaljena[$CellContext`zacetna, $CellContext`drev, \
+$CellContext`n]; {$CellContext`zacetna, $CellContext`koncna}]; \
+$CellContext`najboljoddaljena[
+         Pattern[$CellContext`a, 
+          Blank[]], 
+         Pattern[$CellContext`drev, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]]] := 
+       Module[{$CellContext`tekoca = {$CellContext`a}, $CellContext`ostanek = 
+          Complement[
+            
+            Range[$CellContext`n], {$CellContext`a}], $CellContext`x, \
+$CellContext`i, $CellContext`sosedi}, While[
+           Not[$CellContext`ostanek == {}], $CellContext`sosedi = Union[
+              Flatten[
+               Table[
+                Select[$CellContext`ostanek, Or[
+                  MemberQ[$CellContext`drev, {#, 
+                    Part[$CellContext`tekoca, $CellContext`i]}], 
+                  MemberQ[$CellContext`drev, {
+                    
+                    Part[$CellContext`tekoca, $CellContext`i], #}]]& ], \
+{$CellContext`i, 1, 
+                 Length[$CellContext`tekoca]}]]]; $CellContext`ostanek = 
+            Complement[$CellContext`ostanek, $CellContext`sosedi]; \
+$CellContext`tekoca = $CellContext`sosedi]; Part[$CellContext`sosedi, 
+           RandomInteger[{1, 
+             Length[$CellContext`sosedi]}]]]; $CellContext`dodajzadnji[
+         Pattern[$CellContext`sez, 
+          Blank[]]] := 
+       Block[{$CellContext`newsez = $CellContext`sez, $CellContext`nw, \
+$CellContext`i}, Do[$CellContext`nw = Append[
+              Part[$CellContext`sez, $CellContext`i], 
+              First[
+               Part[$CellContext`sez, $CellContext`i]]]; $CellContext`newsez = 
+            ReplacePart[$CellContext`newsez, $CellContext`nw, \
+$CellContext`i], {$CellContext`i, 1, 
+            
+            Length[$CellContext`sez]}]; $CellContext`newsez]; \
+$CellContext`izbor[
+         Pattern[$CellContext`pove, 
+          Blank[]], 
+         Pattern[$CellContext`conc, 
+          Blank[]]] := Select[$CellContext`pove, Or[
+          And[
+           MemberQ[$CellContext`conc, 
+            First[#]], 
+           Not[
+            MemberQ[$CellContext`conc, 
+             Last[#]]]], 
+          And[
+           MemberQ[$CellContext`conc, 
+            Last[#]], 
+           Not[
+            MemberQ[$CellContext`conc, 
+             First[#]]]]]& ]; $CellContext`TreeFromPairs3[
+         Pattern[$CellContext`pove, 
+          Blank[]], 
+         Pattern[$CellContext`SelectFirst, 
+          Blank[]], 
+         Pattern[$CellContext`SelectPred, 
+          Blank[]], 
+         Pattern[$CellContext`SelectSucc, 
+          Blank[]]] := 
+       Block[{$CellContext`e, $CellContext`bfi, $CellContext`selectfrom, \
+$CellContext`b, $CellContext`lis, $CellContext`j, $CellContext`i, \
+$CellContext`edges, $CellContext`cnt = 
+          1, $CellContext`selectfrom1, $CellContext`ta, $CellContext`te1, \
+$CellContext`lis1, $CellContext`maksi, $CellContext`g}, $CellContext`edges = {
+            Part[$CellContext`pove, 
+             RandomInteger[{1, 
+               Length[$CellContext`pove]}]]}; $CellContext`g = 
+          Combinatorica`FromUnorderedPairs[$CellContext`pove]; \
+$CellContext`bfi = Table[0, {
+             Combinatorica`V[$CellContext`g]}]; $CellContext`e = 
+          Combinatorica`ToAdjacencyLists[$CellContext`g]; $CellContext`a = 
+          Part[$CellContext`edges, 1, 1]; $CellContext`b = 
+          Part[$CellContext`edges, 1, 2]; 
+         Part[$CellContext`bfi, $CellContext`a] = 1; 
+         Part[$CellContext`bfi, $CellContext`b] = 2; $CellContext`e = 
+          Map[Complement[#, {$CellContext`a, $CellContext`b}]& , \
+$CellContext`e]; $CellContext`j = 1; $CellContext`te1 = Map[Length, 
+            Combinatorica`ToAdjacencyLists[$CellContext`g]]; $CellContext`ta = 
+          Join[
+            Table[
+             Part[
+              Part[$CellContext`edges, $CellContext`i], 1], {$CellContext`i, 
+              1, $CellContext`j}], 
+            Table[
+             Part[
+              Part[$CellContext`edges, $CellContext`i], 1], {$CellContext`i, 
+              1, $CellContext`j}]]; $CellContext`lis1 = Cases[
+            Range[
+             Combinatorica`V[$CellContext`g]], 
+            Condition[
+             Pattern[$CellContext`x, 
+              Blank[]], 
+             And[
+             Part[$CellContext`te1, $CellContext`x] - 
+               Count[$CellContext`ta, $CellContext`x] > 0, 
+              Part[$CellContext`bfi, $CellContext`x] > 0, 
+              Part[$CellContext`e, $CellContext`x] != {}]]]; \
+$CellContext`maksi = Max[
+            Map[
+            Part[$CellContext`te1, #] - 
+             Count[$CellContext`ta, #]& , $CellContext`lis1, {
+             1}]]; $CellContext`lis = Cases[$CellContext`lis1, 
+            Condition[
+             Pattern[$CellContext`x, 
+              Blank[]], 
+             Part[$CellContext`te1, $CellContext`x] - 
+              Count[$CellContext`ta, $CellContext`x] == $CellContext`maksi]]; 
+         While[$CellContext`lis != {}, $CellContext`a = \
+$CellContext`SelectPred[$CellContext`g, $CellContext`e, $CellContext`lis, \
+$CellContext`bfi, $CellContext`cnt]; $CellContext`b = \
+$CellContext`SelectSucc[$CellContext`g, $CellContext`e, 
+              Part[$CellContext`e, $CellContext`a], 
+              Blank[], 
+              Blank[]]; $CellContext`j = $CellContext`j + 1; 
+           Part[$CellContext`bfi, $CellContext`b] = $CellContext`j + 1; 
+           AppendTo[$CellContext`edges, {$CellContext`a, $CellContext`b}]; \
+$CellContext`e = 
+            Map[Complement[#, {$CellContext`b}]& , $CellContext`e]; \
+$CellContext`te1 = Map[Length, 
+              
+              Combinatorica`ToAdjacencyLists[$CellContext`g]]; \
+$CellContext`ta = Join[
+              Table[
+               Part[
+                Part[$CellContext`edges, $CellContext`i], 1], {$CellContext`i,
+                 1, $CellContext`j}], 
+              Table[
+               Part[
+                Part[$CellContext`edges, $CellContext`i], 2], {$CellContext`i,
+                 1, $CellContext`j}]]; $CellContext`lis1 = Cases[
+              Range[
+               Combinatorica`V[$CellContext`g]], 
+              Condition[
+               Pattern[$CellContext`x, 
+                Blank[]], 
+               And[
+               Part[$CellContext`te1, $CellContext`x] - 
+                 Count[$CellContext`ta, $CellContext`x] > 0, 
+                Part[$CellContext`bfi, $CellContext`x] > 0, 
+                Part[$CellContext`e, $CellContext`x] != {}]]]; \
+$CellContext`maksi = Max[
+              Map[
+              Part[$CellContext`te1, #] - 
+               Count[$CellContext`ta, #]& , $CellContext`lis1, {
+               1}]]; $CellContext`lis = Cases[$CellContext`lis1, 
+              Condition[
+               Pattern[$CellContext`x, 
+                Blank[]], 
+               Part[$CellContext`te1, $CellContext`x] - 
+                Count[$CellContext`ta, $CellContext`x] == \
+$CellContext`maksi]]; $CellContext`ta = Join[
+              Table[
+               Part[
+                Part[$CellContext`edges, $CellContext`i], 1], {$CellContext`i,
+                 1, $CellContext`j}], 
+              Table[
+               Part[
+                Part[$CellContext`edges, $CellContext`i], 2], {$CellContext`i,
+                 1, $CellContext`j}]]; 
+           Null]; {$CellContext`edges, $CellContext`bfi}]; \
+$CellContext`SelectFr4[
+         Pattern[$CellContext`g, 
+          Blank[]], 
+         Pattern[$CellContext`e, 
+          Blank[]], 
+         Pattern[$CellContext`list, 
+          Blank[]], 
+         Pattern[$CellContext`bfi, 
+          Blank[]], 
+         Pattern[$CellContext`cnt, 
+          Blank[]]] := Part[$CellContext`list, 
+         RandomInteger[{1, 
+           Length[$CellContext`list]}]]; $CellContext`SelectPr3[
+         Pattern[$CellContext`g, 
+          Blank[]], 
+         Pattern[$CellContext`e, 
+          Blank[]], 
+         Pattern[$CellContext`list, 
+          Blank[]], 
+         Pattern[$CellContext`bfi, 
+          Blank[]], 
+         Pattern[$CellContext`cnt, 
+          Blank[]]] := Part[$CellContext`list, 
+         RandomInteger[{1, 
+           Length[$CellContext`list]}]]; $CellContext`SelectSu3[
+         Pattern[$CellContext`g, 
+          Blank[]], 
+         Pattern[$CellContext`e, 
+          Blank[]], 
+         Pattern[$CellContext`list, 
+          Blank[]], 
+         Pattern[$CellContext`bfi, 
+          Blank[]], 
+         Pattern[$CellContext`cnt, 
+          Blank[]]] := Part[$CellContext`list, 
+         RandomInteger[{1, 
+           Length[$CellContext`list]}]]; $CellContext`EdgesOnFace[
+         Pattern[$CellContext`lice, 
+          Blank[]]] := Module[{$CellContext`i}, 
+         Append[
+          Table[{
+            Part[$CellContext`lice, $CellContext`i], 
+            Part[$CellContext`lice, $CellContext`i + 1]}, {$CellContext`i, 1, 
+            Length[$CellContext`lice] - 1}], {
+           Last[$CellContext`lice], 
+           First[$CellContext`lice]}]]; $CellContext`EdgesOnFaces[
+         Pattern[$CellContext`cic$, 
+          Blank[]]] := 
+       Block[{$CellContext`edgs = {}, $CellContext`n$$ = 
+          Length[$CellContext`cic$], $CellContext`ed, $CellContext`i}, 
+         Do[$CellContext`ed = $CellContext`EdgesOnFace[
+              Part[$CellContext`cic$, $CellContext`i]]; $CellContext`edgs = 
+            Union[$CellContext`edgs, $CellContext`ed], {$CellContext`i, 
+            1, $CellContext`n$$}]; $CellContext`edgs = Union[
+            Map[Sort, $CellContext`edgs, 1]]]; $CellContext`Povprecje[
+         Pattern[$CellContext`cic, 
+          Blank[]]] := 
+       Apply[Plus, $CellContext`cic]/
+        Length[$CellContext`cic]; $CellContext`ClosedLine[
+         Pattern[$CellContext`a, 
+          Blank[]]] := Line[
+         Append[$CellContext`a, 
+          First[$CellContext`a]]]; $CellContext`Labyrinth3D[
+         Pattern[$CellContext`num, 
+          Blank[]], 
+         Pattern[$CellContext`m, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]], 
+         Pattern[$CellContext`v, 
+          Blank[]], 
+         Pattern[$CellContext`x, 
+          Blank[]], 
+         Pattern[$CellContext`y, 
+          Blank[]]] := 
+       Block[{$CellContext`drevo, $CellContext`c1, $CellContext`nal1, \
+$CellContext`res1, $CellContext`solid = \
+$CellContext`NPravokotniGrafText2[$CellContext`num, $CellContext`m, \
+$CellContext`n, $CellContext`v, $CellContext`x, $CellContext`y], \
+$CellContext`vertcoor1, $CellContext`edgs, $CellContext`f, \
+$CellContext`pove1, $CellContext`allpov, $CellContext`slika4, \
+$CellContext`slika9, $CellContext`slika10, $CellContext`zadnja1, \
+$CellContext`prva, $CellContext`zadnja, $CellContext`pot1, $CellContext`g1, \
+$CellContext`zadnjicikel, $CellContext`zatt, $CellContext`kont, \
+$CellContext`prvicikel, $CellContext`vertsolut, $CellContext`zat, \
+$CellContext`bele, $CellContext`sive, $CellContext`slikasive, \
+$CellContext`edbele, $CellContext`edgb, $CellContext`edgc, \
+$CellContext`slikaE}, $CellContext`c1 = 
+          Part[$CellContext`solid, 
+            1]; $CellContext`edgs = \
+$CellContext`EdgesOnFaces[$CellContext`c1]; $CellContext`vertcoor1 = 
+          Part[$CellContext`solid, 2]; $CellContext`f = 
+          Length[$CellContext`c1]; $CellContext`allpov = Apply[Union, 
+            
+            Table[{$CellContext`a, $CellContext`b}, {$CellContext`a, 
+              1, $CellContext`f - 1}, {$CellContext`b, $CellContext`a + 
+              1, $CellContext`f}]]; $CellContext`pove1 = 
+          Cases[$CellContext`allpov, 
+            Condition[{
+              Pattern[$CellContext`i, 
+               Blank[]], 
+              Pattern[$CellContext`j, 
+               Blank[]]}, 
+             $CellContext`adj[$CellContext`num, $CellContext`m, \
+$CellContext`n][$CellContext`i, $CellContext`j]]]; $CellContext`drevo = First[
+            $CellContext`TreeFromPairs3[$CellContext`pove1, \
+$CellContext`SelectFr4, $CellContext`SelectPr3, $CellContext`SelectSu3]]; \
+$CellContext`bele = Map[Min, 
+            Select[$CellContext`drevo, Or[
+              $CellContext`adj2[$CellContext`num, $CellContext`m, \
+$CellContext`n][
+               Part[#, 1], 
+               Part[#, 2]], 
+              $CellContext`adj2[$CellContext`num, $CellContext`m, \
+$CellContext`n][
+               Part[#, 2], 
+               Part[#, 1]]]& ]]; $CellContext`sive = Complement[
+            Range[$CellContext`f], $CellContext`bele]; $CellContext`slikasive = {
+            GrayLevel[0.75], 
+            Table[
+             Polygon[
+              Map[$CellContext`vert, 
+               Part[$CellContext`c1, 
+                Part[$CellContext`sive, $CellContext`i]]]], {$CellContext`i, 
+              1, 
+              Length[$CellContext`sive]}]}; $CellContext`edbele = 
+          Select[$CellContext`drevo, $CellContext`adj1[$CellContext`num, \
+$CellContext`m, $CellContext`n][
+             Part[#, 1], 
+             Part[#, 2]]& ]; $CellContext`edgb = Table[
+            Intersection[
+             Part[$CellContext`c1, 
+              Part[$CellContext`edbele, $CellContext`i, 1]], 
+             Part[$CellContext`c1, 
+              Part[$CellContext`edbele, $CellContext`i, 2]]], {$CellContext`i,
+              1, 
+             Length[$CellContext`edbele]}]; $CellContext`edgc = 
+          Complement[$CellContext`edgs, $CellContext`edgb]; \
+$CellContext`slikaE = {
+            Thickness[0.01], 
+            Table[
+             Line[
+              Map[$CellContext`vert, 
+               Part[$CellContext`edgc, $CellContext`i]]], {$CellContext`i, 1, 
+              Length[$CellContext`edgc]}]}; $CellContext`zadnja1 = Part[
+            Last[$CellContext`drevo], 2]; $CellContext`g1 = 
+          Combinatorica`FromUnorderedPairs[$CellContext`drevo]; \
+{$CellContext`prva, $CellContext`zadnja} = \
+$CellContext`izboroddaljenih[$CellContext`drevo]; $CellContext`pot1 = 
+          Combinatorica`ShortestPath[$CellContext`g1, $CellContext`prva, \
+$CellContext`zadnja]; $CellContext`prvicikel = 
+          Part[$CellContext`c1, $CellContext`prva]; $CellContext`zadnjicikel = 
+          Part[$CellContext`c1, $CellContext`zadnja]; $CellContext`solut = 
+          Length[$CellContext`pot1]; $CellContext`vert = 
+          Part[$CellContext`vertcoor1, #]& ; $CellContext`zatt = 
+          0.25 Apply[Plus, 
+             Map[$CellContext`vert, 
+              Part[$CellContext`c1, #], {
+              1}]]& ; $CellContext`zat = $CellContext`zatt[$CellContext`prva]; \
+$CellContext`kont = $CellContext`zatt[$CellContext`zadnja]; \
+$CellContext`slika4 = {
+            AbsolutePointSize[10], {Red, 
+             Point[$CellContext`zat]}, {Green, 
+             Point[$CellContext`kont]}}; $CellContext`slika9 = Table[
+            Text[
+             Style[
+              ToString[$CellContext`i], FontSize -> 12], 
+             $CellContext`zatt[
+              Part[$CellContext`pot1, $CellContext`i]]], {$CellContext`i, 1, 
+             Length[$CellContext`pot1]}]; $CellContext`slika10 = {
+            GrayLevel[0.9], 
+            Map[$CellContext`ClosedLine, 
+             Map[Part[$CellContext`solid, 2, #]& , 
+              Part[$CellContext`solid, 1]]]}; {
+           
+           Graphics[{$CellContext`slikasive, $CellContext`slika10, \
+$CellContext`slikaE, $CellContext`slika4}, ImageSize -> {450, 450}], 
+           
+           Graphics[{$CellContext`slikasive, $CellContext`slika10, \
+$CellContext`slikaE, $CellContext`slika4, $CellContext`slika9}, 
+            ImageSize -> {450, 450}], 
+           Length[$CellContext`pot1]}]; $CellContext`NPravokotniGrafText2[
+         Pattern[$CellContext`num, 
+          Blank[]], 
+         Pattern[$CellContext`m, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]], 
+         Pattern[$CellContext`v, 
+          Blank[]], 
+         Pattern[$CellContext`x, 
+          Blank[]], 
+         Pattern[$CellContext`y, 
+          Blank[]]] := {
+         Flatten[
+          Table[
+           
+           Table[{($CellContext`j - 
+               1) $CellContext`m + $CellContext`i + ($CellContext`m \
+$CellContext`n) $CellContext`k, ($CellContext`j - 
+               1) $CellContext`m + $CellContext`i + 
+             1 + ($CellContext`m $CellContext`n) $CellContext`k, \
+$CellContext`j $CellContext`m + $CellContext`i + 
+             1 + ($CellContext`m $CellContext`n) $CellContext`k, \
+$CellContext`j $CellContext`m + $CellContext`i + ($CellContext`m \
+$CellContext`n) $CellContext`k}, {$CellContext`j, 1, $CellContext`n - 
+             1}, {$CellContext`i, 1, $CellContext`m - 1}], {$CellContext`k, 
+            0, $CellContext`num - 1}], 2], 
+         Flatten[
+          Table[
+           
+           Table[$CellContext`v + ($CellContext`i - 
+              1) $CellContext`x + ($CellContext`j - 
+              1) $CellContext`y + ($CellContext`m $CellContext`k) \
+$CellContext`x + 
+            2 $CellContext`x, {$CellContext`j, 
+             1, $CellContext`n}, {$CellContext`i, 
+             1, $CellContext`m}], {$CellContext`k, 0, $CellContext`num - 1}], 
+          2]}; $CellContext`solidf[
+         Pattern[$CellContext`num, 
+          Blank[]], 
+         Pattern[$CellContext`m, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]]] := Flatten[
+         Table[
+          
+          Table[{($CellContext`j - 
+              1) $CellContext`m + $CellContext`i + ($CellContext`m \
+$CellContext`n) $CellContext`k, ($CellContext`j - 
+              1) $CellContext`m + $CellContext`i + 
+            1 + ($CellContext`m $CellContext`n) $CellContext`k, \
+$CellContext`j $CellContext`m + $CellContext`i + 
+            1 + ($CellContext`m $CellContext`n) $CellContext`k, \
+$CellContext`j $CellContext`m + $CellContext`i + ($CellContext`m \
+$CellContext`n) $CellContext`k}, {$CellContext`j, 1, $CellContext`n - 
+            1}, {$CellContext`i, 1, $CellContext`m - 1}], {$CellContext`k, 
+           0, $CellContext`num - 1}], 2]; $CellContext`adj1[
+         Pattern[$CellContext`num, 
+          Blank[]], 
+         Pattern[$CellContext`m, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]]][
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]]] := 
+       With[{$CellContext`solid = $CellContext`solidf[$CellContext`num, \
+$CellContext`m, $CellContext`n]}, Length[
+           Intersection[
+            Part[$CellContext`solid, $CellContext`i], 
+            Part[$CellContext`solid, $CellContext`j]]] == 
+         2]; $CellContext`adj2[
+         Pattern[$CellContext`num, 
+          Blank[]], 
+         Pattern[$CellContext`m, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]]][
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]]] := 
+       With[{$CellContext`solid = $CellContext`solidf[$CellContext`num, \
+$CellContext`m, $CellContext`n]}, 
+         Abs[Part[$CellContext`solid, $CellContext`i, 1] - 
+           Part[$CellContext`solid, $CellContext`j, 
+            1]] == $CellContext`m $CellContext`n]; $CellContext`adj[
+         Pattern[$CellContext`num, 
+          Blank[]], 
+         Pattern[$CellContext`m, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]]][
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]]] := Or[
+         $CellContext`adj1[$CellContext`num, $CellContext`m, \
+$CellContext`n][$CellContext`i, $CellContext`j], 
+         $CellContext`adj2[$CellContext`num, $CellContext`m, \
+$CellContext`n][$CellContext`i, $CellContext`j]]); Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->2118640010,ExpressionUUID->"1cff4e86-99ee-4a9d-82ae-a08280316f83"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "DetailsSection",ExpressionUUID->"b7cc0e62-7d13-4a62-99ee-d640e39eefc4"],
+
+Cell["Reference", "DetailNotes",
+ CellChangeTimes->{{3.598899520727914*^9, 3.5988995215753937`*^9}},
+ CellID->1040166630,ExpressionUUID->"b076c011-a874-45d3-b93b-2ab9149495de"],
+
+Cell[TextData[{
+ "[1] M. Gardner, ",
+ StyleBox["The Colossal Book of Short Puzzles and Problems ",
+  FontSlant->"Italic"],
+ "(D. Richards, ed.), New York: W. W. Norton, 2006 pp. 280\[Dash]281."
+}], "DetailNotes",
+ CellChangeTimes->{{3.5952231288125*^9, 3.595223336078125*^9}, {
+  3.598542196749096*^9, 3.598542236311454*^9}, {3.5988995225517807`*^9, 
+  3.598899543503107*^9}},
+ CellID->212357330,ExpressionUUID->"0b1c98a3-ed59-4410-8631-26e088ca4449"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection",ExpressionUUID->"db601f35-076f-4083-81a6-9211b550d461"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[
+   " Resize Images",ExpressionUUID->"61458dad-0312-45a7-9b8a-741e3e1fceb5"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.598542240369191*^9},
+ FontFamily->"Verdana",
+ CellTags->
+  "ResizeImages",ExpressionUUID->"f918714e-000f-478c-a7b0-44a3d1ff229b"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[
+   " Rotate and Zoom in 3D",ExpressionUUID->
+    "d011dfbf-9785-42cd-8d31-be638b2cadf8"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->
+  "RotateAndZoomIn3D",ExpressionUUID->"9d73904f-324d-435b-8d7e-2c06f8f2aade"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[
+   " Drag Locators",ExpressionUUID->"ad0d4347-c7c7-4224-9a3a-8b52fe93370b"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->
+  "DragLocators",ExpressionUUID->"e0e25ea6-5011-4326-ad7f-c9a8c65692e0"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[
+   " Create and Delete Locators",ExpressionUUID->
+    "d613b7b4-182e-4a2a-a9a8-919e61862779"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->
+  "CreateAndDeleteLocators",ExpressionUUID->"1227dca5-b5dd-4afd-b83b-\
+019dfb8c829e"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[
+   " Slider Zoom",ExpressionUUID->"a063a368-3b30-4680-8ff0-3607f7e91165"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->
+  "SliderZoom",ExpressionUUID->"0316c91f-b84b-459e-8451-44af663db90f"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[
+   " Gamepad Controls",ExpressionUUID->
+    "d0e48a37-29e5-455b-bb1b-fc804b1b99e5"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.3895522232313623`*^9},
+ FontFamily->"Verdana",
+ CellTags->
+  "GamepadControls",ExpressionUUID->"571a8ab8-d5ad-4ebd-b259-a11b855c863f"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[
+   " Automatic Animation",ExpressionUUID->
+    "6363a05f-fc33-496e-aa3f-b332688974ff"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0, CellBaseline -> Baseline], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.598542245645294*^9},
+ FontFamily->"Verdana",
+ CellTags->
+  "AutomaticAnimation",ExpressionUUID->"46d1651c-55fd-482e-a2a5-be98c78c221f"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[
+   " Bookmark Animation",ExpressionUUID->
+    "6f66c52c-295a-4bf6-9954-bfb58c79a4f5"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->
+  "BookmarkAnimation",ExpressionUUID->"ef84bd10-462c-4918-a6b5-9719b6efb03b"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SearchTermsSection",ExpressionUUID->"acfe0638-f607-40cd-9af7-e42bcb4fc0cf"],
+
+Cell["maze", "SearchTerms",
+ CellChangeTimes->{{3.595223372796875*^9, 3.595223380515625*^9}},
+ CellID->105549072,ExpressionUUID->"09da6eed-b22b-4a41-a5ae-d4e75208b6ed"],
+
+Cell["3D maze", "SearchTerms",
+ CellChangeTimes->{{3.595223372796875*^9, 3.59522338503125*^9}},
+ CellID->605275035,ExpressionUUID->"c23605e4-e95c-449c-9227-7e5d5291cdd1"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "RelatedLinksSection",ExpressionUUID->"11548d34-8ec2-42c1-b8bd-1f65802b0e24"],
+
+Cell[TextData[ButtonBox["Mazes on Various Surfaces",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://demonstrations.wolfram.com/MazesOnVariousSurfaces/"], None},
+ ButtonNote->
+  "http://demonstrations.wolfram.com/MazesOnVariousSurfaces/"]], \
+"RelatedLinks",
+ CellChangeTimes->{{3.595223515*^9, 3.595223515015625*^9}},
+ CellID->275973422,ExpressionUUID->"b8ecb0d2-45e9-406e-8e74-90e91afb2529"],
+
+Cell[TextData[ButtonBox["Polar Maze",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://demonstrations.wolfram.com/PolarMaze/"], None},
+ ButtonNote->"http://demonstrations.wolfram.com/PolarMaze/"]], "RelatedLinks",
+ CellChangeTimes->{{3.59522356203125*^9, 3.595223562046875*^9}},
+ CellID->171555899,ExpressionUUID->"175c8f0a-8c9b-4fec-866e-11ea3f497f74"],
+
+Cell[TextData[ButtonBox["Maze Generator and Solver",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://demonstrations.wolfram.com/MazeGeneratorAndSolver/"], None},
+ ButtonNote->
+  "http://demonstrations.wolfram.com/MazeGeneratorAndSolver/"]], \
+"RelatedLinks",
+ CellChangeTimes->{{3.595223613828125*^9, 3.595223613828125*^9}},
+ CellID->90121806,ExpressionUUID->"03bf4e0c-1164-4bbb-b6c0-bd36a1ace775"],
+
+Cell[TextData[ButtonBox["Mazes on Polyhedra Seen from Two Viewpoints",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://demonstrations.wolfram.com/\
+MazesOnPolyhedraSeenFromTwoViewpoints/"], None},
+ ButtonNote->
+  "http://demonstrations.wolfram.com/MazesOnPolyhedraSeenFromTwoViewpoints/"]]\
+, "RelatedLinks",
+ CellChangeTimes->{{3.59522367221875*^9, 3.595223672234375*^9}},
+ CellID->1046045645,ExpressionUUID->"1b69f2b6-2302-4db8-ae00-a3f0d23ab906"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection",ExpressionUUID->"2dba1d65-a2ff-4ff0-91e6-12fa5e6d9b2b"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Izidor Hafner",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Izidor+Hafner"],
+     None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Izidor+Hafner"]
+}], "Author",
+ CellChangeTimes->{{3.595223390109375*^9, 
+  3.595223395921875*^9}},ExpressionUUID->"57293adf-bee3-4f3d-be94-\
+fe8dcda3b3e4"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1440, 794},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"11.2 for Microsoft Windows (64-bit) (2017\:5e7410\:67082\
+\:65e5)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[143400, 3365, 470, 11, 29, "ControlSuggestions",ExpressionUUID->"f918714e-000f-478c-a7b0-44a3d1ff229b",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[143873, 3378, 800, 19, 29, "ControlSuggestions",ExpressionUUID->"9d73904f-324d-435b-8d7e-2c06f8f2aade",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[144676, 3399, 457, 13, 29, "ControlSuggestions",ExpressionUUID->"e0e25ea6-5011-4326-ad7f-c9a8c65692e0",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[145136, 3414, 761, 19, 29, "ControlSuggestions",ExpressionUUID->"1227dca5-b5dd-4afd-b83b-019dfb8c829e",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[145900, 3435, 961, 23, 29, "ControlSuggestions",ExpressionUUID->"0316c91f-b84b-459e-8451-44af663db90f",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[146864, 3460, 491, 12, 29, "ControlSuggestions",ExpressionUUID->"571a8ab8-d5ad-4ebd-b259-a11b855c863f",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[147358, 3474, 1627, 35, 29, "ControlSuggestions",ExpressionUUID->"46d1651c-55fd-482e-a2a5-be98c78c221f",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[148988, 3511, 1030, 24, 29, "ControlSuggestions",ExpressionUUID->"ef84bd10-462c-4918-a6b5-9719b6efb03b",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 153192, 3627},
+ {"RotateAndZoomIn3D", 153358, 3630},
+ {"DragLocators", 153524, 3633},
+ {"CreateAndDeleteLocators", 153696, 3636},
+ {"SliderZoom", 153866, 3639},
+ {"GamepadControls", 154028, 3642},
+ {"AutomaticAnimation", 154198, 3645},
+ {"BookmarkAnimation", 154371, 3648}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 155, 3, 74, "DemoTitle",ExpressionUUID->"77d062d5-3dd2-44e6-8325-78d874f3cf65"],
+Cell[737, 27, 88, 0, 268, "InitializationSection",ExpressionUUID->"4d6821f5-94ae-4a5c-ba85-a89eb6dd7ba8"],
+Cell[CellGroupData[{
+Cell[850, 31, 84, 0, 189, "ManipulateSection",ExpressionUUID->"0ef81493-c286-48d5-b070-2cf12a375d56"],
+Cell[CellGroupData[{
+Cell[959, 35, 42771, 1056, 1127, "Input",ExpressionUUID->"2c01bb63-5b15-43dd-9150-d84bcddd2cf5"],
+Cell[43733, 1093, 24390, 552, 573, "Output",ExpressionUUID->"4435915e-e62f-4f56-aff3-c8c965f29950",
+ CellID->417435993]
+}, {2}]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[68169, 1651, 91, 0, 169, "ManipulateCaptionSection",ExpressionUUID->"da11db75-29a3-403a-997c-432516d8c97b"],
+Cell[68263, 1653, 843, 13, 37, "ManipulateCaption",ExpressionUUID->"cedae6d3-f839-4c97-9449-610ecc4496d5"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[69143, 1671, 83, 0, 172, "ThumbnailSection",ExpressionUUID->"1b02d327-7f3b-40ed-84d9-06988a4b281b"],
+Cell[69229, 1673, 24385, 552, 573, "Output",ExpressionUUID->"2e439d91-3556-4467-8432-32ac9811731f",
+ CellID->17659602]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[93651, 2230, 83, 0, 149, "SnapshotsSection",ExpressionUUID->"1a6b431e-ef97-4530-886a-5cae1eca9f92"],
+Cell[93737, 2232, 24390, 552, 563, "Output",ExpressionUUID->"81b9bc0e-2453-4d21-b41d-abfdc969e063",
+ CellID->452187528],
+Cell[118130, 2786, 24387, 552, 563, "Output",ExpressionUUID->"1cff4e86-99ee-4a9d-82ae-a08280316f83",
+ CellID->2118640010]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[142554, 3343, 81, 0, 357, "DetailsSection",ExpressionUUID->"b7cc0e62-7d13-4a62-99ee-d640e39eefc4"],
+Cell[142638, 3345, 176, 2, 23, "DetailNotes",ExpressionUUID->"b076c011-a874-45d3-b93b-2ab9149495de",
+ CellID->1040166630],
+Cell[142817, 3349, 451, 9, 23, "DetailNotes",ExpressionUUID->"0b1c98a3-ed59-4410-8631-26e088ca4449",
+ CellID->212357330]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[143305, 3363, 92, 0, 131, "ControlSuggestionsSection",ExpressionUUID->"db601f35-076f-4083-81a6-9211b550d461"],
+Cell[143400, 3365, 470, 11, 29, "ControlSuggestions",ExpressionUUID->"f918714e-000f-478c-a7b0-44a3d1ff229b",
+ CellTags->"ResizeImages"],
+Cell[143873, 3378, 800, 19, 29, "ControlSuggestions",ExpressionUUID->"9d73904f-324d-435b-8d7e-2c06f8f2aade",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[144676, 3399, 457, 13, 29, "ControlSuggestions",ExpressionUUID->"e0e25ea6-5011-4326-ad7f-c9a8c65692e0",
+ CellTags->"DragLocators"],
+Cell[145136, 3414, 761, 19, 29, "ControlSuggestions",ExpressionUUID->"1227dca5-b5dd-4afd-b83b-019dfb8c829e",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[145900, 3435, 961, 23, 29, "ControlSuggestions",ExpressionUUID->"0316c91f-b84b-459e-8451-44af663db90f",
+ CellTags->"SliderZoom"],
+Cell[146864, 3460, 491, 12, 29, "ControlSuggestions",ExpressionUUID->"571a8ab8-d5ad-4ebd-b259-a11b855c863f",
+ CellTags->"GamepadControls"],
+Cell[147358, 3474, 1627, 35, 29, "ControlSuggestions",ExpressionUUID->"46d1651c-55fd-482e-a2a5-be98c78c221f",
+ CellTags->"AutomaticAnimation"],
+Cell[148988, 3511, 1030, 24, 29, "ControlSuggestions",ExpressionUUID->"ef84bd10-462c-4918-a6b5-9719b6efb03b",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[150055, 3540, 85, 0, 165, "SearchTermsSection",ExpressionUUID->"acfe0638-f607-40cd-9af7-e42bcb4fc0cf"],
+Cell[150143, 3542, 168, 2, 23, "SearchTerms",ExpressionUUID->"09da6eed-b22b-4a41-a5ae-d4e75208b6ed",
+ CellID->105549072],
+Cell[150314, 3546, 170, 2, 23, "SearchTerms",ExpressionUUID->"c23605e4-e95c-449c-9227-7e5d5291cdd1",
+ CellID->605275035]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[150521, 3553, 86, 0, 149, "RelatedLinksSection",ExpressionUUID->"11548d34-8ec2-42c1-b8bd-1f65802b0e24"],
+Cell[150610, 3555, 400, 8, 23, "RelatedLinks",ExpressionUUID->"b8ecb0d2-45e9-406e-8e74-90e91afb2529",
+ CellID->275973422],
+Cell[151013, 3565, 359, 6, 23, "RelatedLinks",ExpressionUUID->"175c8f0a-8c9b-4fec-866e-11ea3f497f74",
+ CellID->171555899],
+Cell[151375, 3573, 405, 8, 23, "RelatedLinks",ExpressionUUID->"03bf4e0c-1164-4bbb-b6c0-bd36a1ace775",
+ CellID->90121806],
+Cell[151783, 3583, 456, 9, 23, "RelatedLinks",ExpressionUUID->"1b69f2b6-2302-4db8-ae00-a3f0d23ab906",
+ CellID->1046045645]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[152276, 3597, 80, 0, 149, "AuthorSection",ExpressionUUID->"2dba1d65-a2ff-4ff0-91e6-12fa5e6d9b2b"],
+Cell[152359, 3599, 425, 12, 23, "Author",ExpressionUUID->"57293adf-bee3-4f3d-be94-fe8dcda3b3e4"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

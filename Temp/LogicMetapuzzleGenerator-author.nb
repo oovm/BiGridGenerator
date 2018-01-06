@@ -1,0 +1,1932 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     80419,       1923]
+NotebookOptionsPosition[     75927,       1783]
+NotebookOutlinePosition[     77529,       1833]
+CellTagsIndexPosition[     77201,       1821]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Logic Metapuzzle Generator", "DemoTitle",
+ CellChangeTimes->{{3.561135957390625*^9, 3.56113597803125*^9}, {
+  3.561217610125*^9, 3.5612176254375*^9}, {3.5612177954375*^9, 
+  3.561217808890625*^9}, {3.561217889234375*^9, 3.56121789275*^9}, {
+  3.564513658715197*^9, 3.5645136895048857`*^9}, {3.564515569478651*^9, 
+  3.564515571233555*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["", "InitializationSection"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"imena", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<A\>\"", ",", "\"\<B\>\"", ",", "\"\<C\>\"", ",", "\"\<D\>\"", ",", 
+     "\"\<E\>\"", ",", "\"\<F\>\"", ",", "\"\<G\>\"", ",", "\"\<H\>\"", ",", 
+     "\"\<I\>\"", ",", "\"\<J\>\"", ",", "\"\<K\>\""}], "}"}]}], 
+  ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{
+  3.45041907390625*^9, 3.450546619834699*^9, 3.561133760921875*^9, {
+   3.5611339918125*^9, 3.56113399753125*^9}, {3.561134363703125*^9, 
+   3.56113449284375*^9}, {3.56121192390625*^9, 3.56121196459375*^9}, 
+   3.561212111921875*^9, {3.561212163453125*^9, 3.561212180796875*^9}, {
+   3.561212423984375*^9, 3.561212432515625*^9}, {3.56121248459375*^9, 
+   3.56121249234375*^9}, 3.5612125535625*^9, {3.561212623328125*^9, 
+   3.5612126279375*^9}, {3.56121267321875*^9, 3.561212674921875*^9}, 
+   3.561212864*^9, {3.561216629640625*^9, 3.56121663853125*^9}, {
+   3.5612167438125*^9, 3.561216753125*^9}, {3.56121738759375*^9, 
+   3.56121738984375*^9}, 3.5645047953125*^9, 3.56450512528125*^9, 
+   3.564514152963232*^9},
+ CellID->102635591],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"problemMEngl", "[", "n_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"d", "=", "0"}], ",", 
+      RowBox[{"pad", "=", 
+       RowBox[{"Random", "[", 
+        RowBox[{"Integer", ",", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "2"}], "}"}]}], "]"}]}], ",", "imen", ",", "raz", 
+      ",", "a", ",", "b", ",", "c", ",", "ata", ",", "atb", ",", "za", ",", 
+      "jj", ",", "an", ",", "bn", ",", "at1", ",", "at2", ",", "at3", ",", 
+      "res", ",", "rezult", ",", "nal"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"imen", "=", 
+      RowBox[{"Take", "[", 
+       RowBox[{"imena", ",", "n"}], "]"}]}], ";", 
+     RowBox[{"st", "=", "0"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"While", "[", 
+      RowBox[{
+       RowBox[{"!", 
+        RowBox[{"d", "===", "1"}]}], ",", 
+       RowBox[{
+        RowBox[{"st", "=", 
+         RowBox[{"st", "+", "1"}]}], ";", 
+        RowBox[{"a", "=", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"RotateRight", "[", 
+            RowBox[{
+             RowBox[{"Join", "[", 
+              RowBox[{
+               RowBox[{"Table", "[", 
+                RowBox[{"1", ",", 
+                 RowBox[{"{", "pad", "}"}]}], "]"}], ",", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"za", "=", 
+                  RowBox[{"Table", "[", 
+                   RowBox[{
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Random", "[", 
+                    RowBox[{"Integer", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "1"}], "}"}]}], "]"}], ">", "0"}], ",", 
+                    "0", ",", "1"}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"n", "-", "pad"}], "}"}]}], "]"}]}], ";", 
+                 RowBox[{"za", "=", 
+                  RowBox[{"If", "[", 
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{"Count", "[", 
+                    RowBox[{"za", ",", "0"}], "]"}], "\[Equal]", 
+                    RowBox[{"n", "-", "pad"}]}], ",", 
+                    RowBox[{"ReplacePart", "[", 
+                    RowBox[{"za", ",", "1", ",", 
+                    RowBox[{"Random", "[", 
+                    RowBox[{"Integer", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", 
+                    RowBox[{"n", "-", "pad"}]}], "}"}]}], "]"}]}], "]"}], ",",
+                     "za"}], "]"}]}]}], ")"}]}], "]"}], ",", 
+             RowBox[{"j", "-", "1"}]}], "]"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"j", ",", "1", ",", "n"}], "}"}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"jj", "=", 
+         RowBox[{"Random", "[", 
+          RowBox[{"Integer", ",", 
+           RowBox[{"{", 
+            RowBox[{"1", ",", 
+             RowBox[{"n", "-", "1"}]}], "}"}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"a", "=", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"EvenQ", "[", 
+            RowBox[{"Count", "[", 
+             RowBox[{
+              RowBox[{"Take", "[", 
+               RowBox[{
+                RowBox[{"a", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"All", ",", "n"}], "]"}], "]"}], ",", 
+                RowBox[{"n", "-", "1"}]}], "]"}], ",", "1"}], "]"}], "]"}], 
+           ",", 
+           RowBox[{"ReplacePart", "[", 
+            RowBox[{"a", ",", 
+             RowBox[{"Mod", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"a", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"jj", ",", "n"}], "]"}], "]"}], "+", "1"}], ",", 
+               "2"}], "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"jj", ",", "n"}], "}"}]}], "]"}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"b", "=", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"Random", "[", 
+            RowBox[{"Integer", ",", 
+             RowBox[{"{", 
+              RowBox[{"0", ",", "1"}], "}"}]}], "]"}], ",", 
+           RowBox[{"{", "n", "}"}]}], "]"}]}], ";", 
+        RowBox[{"d", "=", 
+         RowBox[{"Det", "[", 
+          RowBox[{"a", ",", 
+           RowBox[{"Modulus", "\[Rule]", "2"}]}], "]"}]}]}]}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"an", "=", 
+      RowBox[{"Map", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Mod", "[", 
+          RowBox[{"#", ",", "2"}], "]"}], "&"}], ",", 
+        RowBox[{"Apply", "[", 
+         RowBox[{"Plus", ",", 
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"Take", "[", 
+             RowBox[{
+              RowBox[{"a", "[", 
+               RowBox[{"[", 
+                RowBox[{"All", ",", "i"}], "]"}], "]"}], ",", 
+              RowBox[{"n", "-", "1"}]}], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}], ",", 
+          RowBox[{"{", "1", "}"}]}], "]"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"bn", "=", 
+      RowBox[{"Mod", "[", 
+       RowBox[{
+        RowBox[{"Apply", "[", 
+         RowBox[{"Plus", ",", 
+          RowBox[{"Take", "[", 
+           RowBox[{"b", ",", 
+            RowBox[{"n", "-", "1"}]}], "]"}]}], "]"}], ",", "2"}], "]"}]}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"res", "=", 
+      RowBox[{"LinearSolve", "[", 
+       RowBox[{"a", ",", "b", ",", 
+        RowBox[{"Modulus", "\[Rule]", "2"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"ata", "=", 
+      RowBox[{"Column", "[", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"Row", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"imen", "[", 
+             RowBox[{"[", "j", "]"}], "]"}], ",", " ", "\"\< said: \>\"", 
+            ",", "\"\<In the set \>\"", ",", 
+            RowBox[{"Part", "[", 
+             RowBox[{"imen", ",", 
+              RowBox[{"Select", "[", 
+               RowBox[{
+                RowBox[{"Flatten", "[", 
+                 RowBox[{"Position", "[", 
+                  RowBox[{
+                   RowBox[{"a", "[", 
+                    RowBox[{"[", "j", "]"}], "]"}], ",", "1"}], "]"}], "]"}], 
+                ",", 
+                RowBox[{
+                 RowBox[{"#", "=!=", "j"}], "&"}]}], "]"}]}], "]"}], ",", 
+            "\"\< there are an \>\"", ",", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"b", "[", 
+                RowBox[{"[", "j", "]"}], "]"}], "\[Equal]", "1"}], ",", 
+              "\"\<even\>\"", ",", "\"\<odd\>\""}], "]"}], ",", 
+            "\"\< number of knights.\>\""}], "}"}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"j", ",", "1", ",", 
+           RowBox[{"n", "-", "1"}]}], "}"}]}], "]"}], "]"}]}], ";", 
+     RowBox[{"atb", "=", 
+      RowBox[{"Row", "[", 
+       RowBox[{"{", 
+        RowBox[{"\"\<Then \>\"", ",", 
+         RowBox[{"imen", "[", 
+          RowBox[{"[", "n", "]"}], "]"}], ",", 
+         "\"\< said one of the following three statements:\>\""}], "}"}], 
+       "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"at1", "=", 
+      RowBox[{"Row", "[", 
+       RowBox[{"{", 
+        RowBox[{"\"\<In the set \>\"", ",", 
+         RowBox[{"Part", "[", 
+          RowBox[{"imen", ",", 
+           RowBox[{"Select", "[", 
+            RowBox[{
+             RowBox[{"Flatten", "[", 
+              RowBox[{"Position", "[", 
+               RowBox[{
+                RowBox[{"a", "[", 
+                 RowBox[{"[", "n", "]"}], "]"}], ",", "1"}], "]"}], "]"}], 
+             ",", 
+             RowBox[{
+              RowBox[{"#", "=!=", "n"}], "&"}]}], "]"}]}], "]"}], ",", 
+         "\"\< there are an \>\"", ",", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"b", "[", 
+             RowBox[{"[", "n", "]"}], "]"}], "\[Equal]", "1"}], ",", 
+           "\"\<even\>\"", ",", "\"\<odd\>\""}], "]"}], ",", 
+         "\"\< number of knights.\>\""}], "}"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"at2", "=", 
+      RowBox[{"Row", "[", 
+       RowBox[{"{", 
+        RowBox[{"\"\<In the set \>\"", ",", 
+         RowBox[{"Part", "[", 
+          RowBox[{"imen", ",", 
+           RowBox[{"Select", "[", 
+            RowBox[{
+             RowBox[{"Flatten", "[", 
+              RowBox[{"Position", "[", 
+               RowBox[{"an", ",", "1"}], "]"}], "]"}], ",", 
+             RowBox[{
+              RowBox[{"#", "=!=", "n"}], "&"}]}], "]"}]}], "]"}], ",", 
+         "\"\< there are an \>\"", ",", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"bn", "\[Equal]", "1"}], ",", "\"\<even\>\"", ",", 
+           "\"\<odd\>\""}], "]"}], ",", "\"\< number of knights.\>\""}], 
+        "}"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"at3", "=", 
+      RowBox[{"Row", "[", 
+       RowBox[{"{", 
+        RowBox[{"\"\<In the set \>\"", ",", 
+         RowBox[{"Part", "[", 
+          RowBox[{"imen", ",", 
+           RowBox[{"Select", "[", 
+            RowBox[{
+             RowBox[{"Flatten", "[", 
+              RowBox[{"Position", "[", 
+               RowBox[{"an", ",", "1"}], "]"}], "]"}], ",", 
+             RowBox[{
+              RowBox[{"#", "=!=", "n"}], "&"}]}], "]"}]}], "]"}], ",", 
+         "\"\< there are an \>\"", ",", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"bn", "\[Equal]", "0"}], ",", "\"\<even\>\"", ",", 
+           "\"\<odd\>\""}], "]"}], ",", "\"\< number of knights.\>\""}], 
+        "}"}], "]"}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"nal", "=", 
+      RowBox[{"{", 
+       RowBox[{
+       "\"\<\>\"", ",", "ata", ",", "\"\<\>\"", ",", "atb", ",", "\"\<\>\"", 
+        ",", 
+        RowBox[{"Column", "[", 
+         RowBox[{"RandomSample", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"at1", ",", "at2", ",", "at3"}], "}"}], ",", "3"}], "]"}],
+          "]"}]}], "}"}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"rezult", "=", 
+      RowBox[{"Row", "[", 
+       RowBox[{"{", 
+        RowBox[{"\"\<Knights: \>\"", ",", 
+         RowBox[{"Part", "[", 
+          RowBox[{"imen", ",", 
+           RowBox[{"Flatten", "[", 
+            RowBox[{"Position", "[", 
+             RowBox[{"res", ",", "1"}], "]"}], "]"}]}], "]"}], ",", 
+         "\"\<. Knaves: \>\"", ",", " ", 
+         RowBox[{"Part", "[", 
+          RowBox[{"imen", ",", 
+           RowBox[{"Flatten", "[", 
+            RowBox[{"Position", "[", 
+             RowBox[{"res", ",", "0"}], "]"}], "]"}]}], "]"}], ",", 
+         "\"\<.\>\""}], "}"}], "]"}]}], ";", 
+     RowBox[{"{", 
+      RowBox[{"nal", ",", "rezult"}], "}"}]}]}], "]"}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{
+  3.45041907390625*^9, 3.450546619834699*^9, 3.561133760921875*^9, {
+   3.5611339918125*^9, 3.56113399753125*^9}, {3.561134363703125*^9, 
+   3.56113449284375*^9}, {3.56121192390625*^9, 3.56121196459375*^9}, 
+   3.561212111921875*^9, {3.561212163453125*^9, 3.561212180796875*^9}, {
+   3.561212423984375*^9, 3.561212432515625*^9}, {3.56121248459375*^9, 
+   3.56121249234375*^9}, 3.5612125535625*^9, {3.561212623328125*^9, 
+   3.5612126279375*^9}, {3.56121267321875*^9, 3.561212674921875*^9}, 
+   3.561212864*^9, {3.561216629640625*^9, 3.56121663853125*^9}, {
+   3.5612167438125*^9, 3.561216753125*^9}, {3.56121738759375*^9, 
+   3.56121738984375*^9}, 3.5645047953125*^9, 3.56450512528125*^9, {
+   3.564514152963232*^9, 3.564514167598217*^9}, 3.564514503325654*^9, {
+   3.564514539716709*^9, 3.564514573557851*^9}, {3.564514615407547*^9, 
+   3.5645146764860353`*^9}, {3.5645147420835*^9, 3.564514754637073*^9}, {
+   3.5645150887665987`*^9, 3.56451512391518*^9}, {3.564515166527458*^9, 
+   3.564515176004323*^9}, 3.5645152088661747`*^9, {3.564547106140625*^9, 
+   3.5645471111875*^9}, {3.564547408125*^9, 3.564547409390625*^9}, {
+   3.5645474886875*^9, 3.56454751096875*^9}, {3.56454755825*^9, 
+   3.56454757440625*^9}, {3.564547608828125*^9, 3.56454762596875*^9}, {
+   3.564547683890625*^9, 3.5645477108125*^9}, {3.564547756765625*^9, 
+   3.56454776065625*^9}, {3.56454784815625*^9, 3.564547852609375*^9}, {
+   3.564547905828125*^9, 3.564547924359375*^9}, {3.56454804125*^9, 
+   3.564548050953125*^9}, {3.5645483783125*^9, 3.564548379578125*^9}, {
+   3.564548410671875*^9, 3.56454842953125*^9}, {3.56454846878125*^9, 
+   3.56454848425*^9}, {3.564548559140625*^9, 3.564548717703125*^9}, {
+   3.564548769828125*^9, 3.56454879303125*^9}, {3.564548990390625*^9, 
+   3.564549016109375*^9}, {3.56454904878125*^9, 3.564549120421875*^9}, {
+   3.56454930371875*^9, 3.564549322109375*^9}, {3.5645493940625*^9, 
+   3.564549411546875*^9}, {3.564549589328125*^9, 3.564549596546875*^9}, {
+   3.5645496516875*^9, 3.564549694109375*^9}, {3.564549872578125*^9, 
+   3.564549878859375*^9}, {3.5648414004671264`*^9, 3.5648414053766217`*^9}},
+ CellID->32982266]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Pane", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Style", "[", 
+      RowBox[{
+       RowBox[{"Text", "@", 
+        RowBox[{"With", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"ran", "=", 
+             RowBox[{"SeedRandom", "[", "ranint", "]"}]}], ",", 
+            RowBox[{"nalvse", "=", 
+             RowBox[{"problemMEngl", "[", "n", "]"}]}]}], "}"}], ",", 
+          RowBox[{"With", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"nal", "=", "nalvse"}], "}"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"Column", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"Column", "[", 
+                RowBox[{"nal", "[", 
+                 RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", "\"\<\>\"", ",", 
+               RowBox[{"If", "[", 
+                RowBox[{"shsl", ",", 
+                 RowBox[{"Row", "[", 
+                  RowBox[{"{", 
+                   RowBox[{"\"\<Solution: \>\"", ",", 
+                    RowBox[{"nal", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}], "}"}], "]"}], ",", 
+                 "\"\<Who is a knight and who is a knave?\>\""}], "]"}]}], 
+              "}"}], "]"}]}], "\[IndentingNewLine]", "]"}]}], "]"}]}], ",", 
+       "16"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"500", ",", "420"}], "}"}]}], "]"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"ranint", ",", "23457"}], "}"}], ",", 
+     RowBox[{"ControlType", "\[Rule]", "None"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Row", "[", 
+    RowBox[{"{", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"Control", "@", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"n", ",", "4", ",", "\"\<number of inhabitants\>\""}], 
+          "}"}], ",", 
+         RowBox[{"Range", "[", 
+          RowBox[{"4", ",", "11"}], "]"}]}], "}"}]}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Spacer", "[", "30", "]"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"Control", "@", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"shsl", ",", "False", ",", "\"\<show solution\>\""}], "}"}],
+          ",", 
+         RowBox[{"{", 
+          RowBox[{"True", ",", "False"}], "}"}]}], "}"}]}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Spacer", "[", "50", "]"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"Button", "[", 
+       RowBox[{"\"\<new problem\>\"", ",", 
+        RowBox[{
+         RowBox[{"ranint", "=", 
+          RowBox[{"Random", "[", 
+           RowBox[{"Integer", ",", 
+            RowBox[{"{", 
+             RowBox[{"1", ",", "12356"}], "}"}]}], "]"}]}], ";", 
+         RowBox[{"shsl", "=", "False"}]}]}], "]"}]}], "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", "}"}], "]"}], ",", 
+   RowBox[{"SaveDefinitions", "\[Rule]", "True"}], ",", 
+   RowBox[{"AutorunSequencing", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "2"}], "}"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.561136013828125*^9, 3.561136018015625*^9}, {
+   3.561211816296875*^9, 3.56121184828125*^9}, {3.561212007546875*^9, 
+   3.561212050265625*^9}, {3.56121220771875*^9, 3.56121220828125*^9}, {
+   3.561212999046875*^9, 3.561213043890625*^9}, {3.56121314078125*^9, 
+   3.561213322*^9}, {3.56121335446875*^9, 3.561213394890625*^9}, {
+   3.561216508328125*^9, 3.5612165123125*^9}, 3.561216577203125*^9, {
+   3.56121817246875*^9, 3.56121817334375*^9}, {3.564504300765625*^9, 
+   3.564504362328125*^9}, {3.564504419734375*^9, 3.5645044788125*^9}, {
+   3.56450452459375*^9, 3.56450453296875*^9}, {3.564504566328125*^9, 
+   3.5645047266875*^9}, {3.564504920125*^9, 3.564504921078125*^9}, {
+   3.564513748032372*^9, 3.564513772388912*^9}, {3.564513820832815*^9, 
+   3.564514066409171*^9}, {3.564548075078125*^9, 3.564548099578125*^9}, {
+   3.564549218875*^9, 3.564549226703125*^9}, {3.564549794296875*^9, 
+   3.56454981121875*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 4, $CellContext`ranint$$ = 
+    7283, $CellContext`shsl$$ = False, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`ranint$$], 7283}}, {{
+       Hold[$CellContext`n$$], 4, "number of inhabitants"}, {4, 5, 6, 7, 8, 9,
+       10, 11}}, {{
+       Hold[$CellContext`shsl$$], False, "show solution"}, {True, False}}, {
+      Hold[
+       Row[{
+         Manipulate`Place[1], 
+         Spacer[30], 
+         Manipulate`Place[2], 
+         Spacer[50], 
+         Button[
+         "new problem", $CellContext`ranint$$ = 
+           Random[Integer, {1, 12356}]; $CellContext`shsl$$ = False]}]], 
+      Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    500., {207., 213.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`n$1106$$ = 
+    0, $CellContext`shsl$1107$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     2, StandardForm, 
+      "Variables" :> {$CellContext`n$$ = 4, $CellContext`ranint$$ = 
+        7283, $CellContext`shsl$$ = False}, "ControllerVariables" :> {
+        Hold[$CellContext`n$$, $CellContext`n$1106$$, 0], 
+        Hold[$CellContext`shsl$$, $CellContext`shsl$1107$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Pane[
+        Style[
+         Text[
+          
+          With[{$CellContext`ran$ = 
+            SeedRandom[$CellContext`ranint$$], $CellContext`nalvse$ = \
+$CellContext`problemMEngl[$CellContext`n$$]}, 
+           With[{$CellContext`nal$ = $CellContext`nalvse$}, 
+            Column[{
+              Column[
+               Part[$CellContext`nal$, 1]], "", 
+              If[$CellContext`shsl$$, 
+               Row[{"Solution: ", 
+                 Part[$CellContext`nal$, 2]}], 
+               "Who is a knight and who is a knave?"]}]]]], 16], {500, 420}], 
+      "Specifications" :> {{{$CellContext`ranint$$, 7283}, ControlType -> 
+         None}, {{$CellContext`n$$, 4, "number of inhabitants"}, {4, 5, 6, 7, 
+         8, 9, 10, 11}, ControlPlacement -> 
+         1}, {{$CellContext`shsl$$, False, "show solution"}, {True, False}, 
+         ControlPlacement -> 2}, 
+        Row[{
+          Manipulate`Place[1], 
+          Spacer[30], 
+          Manipulate`Place[2], 
+          Spacer[50], 
+          Button[
+          "new problem", $CellContext`ranint$$ = 
+            Random[Integer, {1, 12356}]; $CellContext`shsl$$ = False]}]}, 
+      "Options" :> {AutorunSequencing -> {1, 2}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{547., {254., 259.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`problemMEngl[
+         Pattern[$CellContext`n, 
+          Blank[]]] := 
+       Module[{$CellContext`d = 0, $CellContext`pad = 
+          Random[Integer, {1, 
+            2}], $CellContext`imen, $CellContext`raz, $CellContext`a, \
+$CellContext`b, $CellContext`c, $CellContext`ata, $CellContext`atb, \
+$CellContext`za, $CellContext`jj, $CellContext`an, $CellContext`bn, \
+$CellContext`at1, $CellContext`at2, $CellContext`at3, $CellContext`res, \
+$CellContext`rezult, $CellContext`nal}, $CellContext`imen = 
+          Take[$CellContext`imena, $CellContext`n]; $CellContext`st = 0; While[
+           
+           Not[$CellContext`d === 
+            1], $CellContext`st = $CellContext`st + 1; $CellContext`a = Table[
+              RotateRight[
+               Join[
+                Table[1, {$CellContext`pad}], $CellContext`za = Table[
+                   If[
+                   Random[Integer, {0, 1}] > 0, 0, 
+                    1], {$CellContext`n - $CellContext`pad}]; $CellContext`za = 
+                 If[
+                  Count[$CellContext`za, 
+                    0] == $CellContext`n - $CellContext`pad, 
+                   ReplacePart[$CellContext`za, 1, 
+                    Random[
+                    Integer, {
+                    1, $CellContext`n - $CellContext`pad}]], \
+$CellContext`za]], $CellContext`j - 1], {$CellContext`j, 
+               1, $CellContext`n}]; $CellContext`jj = 
+            Random[Integer, {1, $CellContext`n - 1}]; $CellContext`a = If[
+              EvenQ[
+               Count[
+                Take[
+                 Part[$CellContext`a, All, $CellContext`n], $CellContext`n - 
+                 1], 1]], 
+              ReplacePart[$CellContext`a, 
+               Mod[
+               Part[$CellContext`a, $CellContext`jj, $CellContext`n] + 1, 
+                2], {$CellContext`jj, $CellContext`n}]]; $CellContext`b = 
+            Table[
+              Random[Integer, {0, 1}], {$CellContext`n}]; $CellContext`d = 
+            Det[$CellContext`a, Modulus -> 2]]; $CellContext`an = 
+          Map[Mod[#, 2]& , 
+            Apply[Plus, 
+             Table[
+              Take[
+               Part[$CellContext`a, All, $CellContext`i], $CellContext`n - 
+               1], {$CellContext`i, 1, $CellContext`n}], {
+             1}]]; $CellContext`bn = Mod[
+            Apply[Plus, 
+             Take[$CellContext`b, $CellContext`n - 1]], 2]; $CellContext`res = 
+          LinearSolve[$CellContext`a, $CellContext`b, Modulus -> 
+            2]; $CellContext`ata = Column[
+            Table[
+             Row[{
+               Part[$CellContext`imen, $CellContext`j], " said: ", 
+               "In the set ", 
+               Part[$CellContext`imen, 
+                Select[
+                 Flatten[
+                  Position[
+                   Part[$CellContext`a, $CellContext`j], 
+                   1]], # =!= $CellContext`j& ]], " there are an ", 
+               If[Part[$CellContext`b, $CellContext`j] == 1, "even", "odd"], 
+               " number of knights."}], {$CellContext`j, 1, $CellContext`n - 
+              1}]]; $CellContext`atb = Row[{"Then ", 
+             Part[$CellContext`imen, $CellContext`n], 
+             
+             " said one of the following three statements:"}]; \
+$CellContext`at1 = Row[{"In the set ", 
+             Part[$CellContext`imen, 
+              Select[
+               Flatten[
+                Position[
+                 Part[$CellContext`a, $CellContext`n], 
+                 1]], # =!= $CellContext`n& ]], " there are an ", 
+             If[Part[$CellContext`b, $CellContext`n] == 1, "even", "odd"], 
+             " number of knights."}]; $CellContext`at2 = Row[{"In the set ", 
+             Part[$CellContext`imen, 
+              Select[
+               Flatten[
+                Position[$CellContext`an, 1]], # =!= $CellContext`n& ]], 
+             " there are an ", 
+             If[$CellContext`bn == 1, "even", "odd"], 
+             " number of knights."}]; $CellContext`at3 = Row[{"In the set ", 
+             Part[$CellContext`imen, 
+              Select[
+               Flatten[
+                Position[$CellContext`an, 1]], # =!= $CellContext`n& ]], 
+             " there are an ", 
+             If[$CellContext`bn == 0, "even", "odd"], 
+             " number of knights."}]; $CellContext`nal = {
+           "", $CellContext`ata, "", $CellContext`atb, "", 
+            Column[
+             
+             RandomSample[{$CellContext`at1, $CellContext`at2, \
+$CellContext`at3}, 3]]}; $CellContext`rezult = Row[{"Knights: ", 
+             Part[$CellContext`imen, 
+              Flatten[
+               Position[$CellContext`res, 1]]], ". Knaves: ", 
+             Part[$CellContext`imen, 
+              Flatten[
+               Position[$CellContext`res, 0]]], 
+             "."}]; {$CellContext`nal, $CellContext`rezult}], \
+$CellContext`ata = {{
+         "\n", "A", " said: ", "In the set {", {"D"}, "} there are an ", 
+          "even", " number of knights."}, {
+         "\n", "B", " said: ", "In the set {", {"A", "D"}, "} there are an ", 
+          "odd", " number of knights."}, {
+         "\n", "C", " said: ", "In the set {", {"A", "B", "D"}, 
+          "} there are an ", "even", 
+          " number of knights."}}, $CellContext`atb = {
+        "Then ", "D", 
+         " said one of the following three statements:"}, $CellContext`imena = \
+{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"}, $CellContext`st = 1}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->76103117]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell["\<\
+This Demonstration provides another generator of knights and knaves logic \
+puzzles. These puzzles are about an island in which some natives called \
+\"knights\" always tell the truth and other natives called \"knaves\" always \
+lie. Assume that every native is either a knight or a knave.\
+\>", "ManipulateCaption",
+ CellChangeTimes->{{3.561136023359375*^9, 3.56113611271875*^9}, {
+   3.561136365015625*^9, 3.561136487234375*^9}, 3.561136858390625*^9, {
+   3.56121747371875*^9, 3.56121750890625*^9}, {3.561217913765625*^9, 
+   3.561217934203125*^9}, {3.561218514046875*^9, 3.561218546125*^9}, 
+   3.56450251303125*^9, 3.564502590046875*^9, {3.564503363234375*^9, 
+   3.56450341325*^9}, {3.564503448203125*^9, 3.564503496265625*^9}, {
+   3.564503535015625*^9, 3.564503537375*^9}, {3.564503586515625*^9, 
+   3.564503635359375*^9}, {3.56450404928125*^9, 3.564504055734375*^9}, {
+   3.5645147980087633`*^9, 3.564514840913869*^9}, {3.56477090405652*^9, 
+   3.564770904381678*^9}},
+ CellID->1438310636],
+
+Cell[TextData[{
+ "In the problem there are ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]], "InlineMath"],
+ " natives, A, B, C, \[Ellipsis], each of whom makes a statement about the \
+number of knights in a set. They know the empty set { } with no knights. \
+Their vocabulary is rather limited; they only talk about even {0, 2, 4, \
+\[Ellipsis]} and odd {1, 3, 5, \[Ellipsis]} numbers. "
+}], "ManipulateCaption",
+ CellChangeTimes->{{3.561136023359375*^9, 3.56113611271875*^9}, {
+   3.561136365015625*^9, 3.561136487234375*^9}, 3.561136858390625*^9, {
+   3.56121747371875*^9, 3.56121750890625*^9}, {3.561217913765625*^9, 
+   3.561217934203125*^9}, {3.561218514046875*^9, 3.561218546125*^9}, 
+   3.56450251303125*^9, 3.564502590046875*^9, {3.564503363234375*^9, 
+   3.56450341325*^9}, {3.564503448203125*^9, 3.564503496265625*^9}, {
+   3.564503535015625*^9, 3.564503537375*^9}, {3.564503586515625*^9, 
+   3.564503635359375*^9}, {3.56450404928125*^9, 3.564504055734375*^9}, {
+   3.5645147980087633`*^9, 3.5645148314966516`*^9}, {3.564514872058878*^9, 
+   3.564514874889843*^9}, 3.564514916806584*^9, {3.564515231799258*^9, 
+   3.564515477160985*^9}, {3.56454990109375*^9, 3.564549904875*^9}, {
+   3.5647709301665983`*^9, 3.564770953209824*^9}, {3.564841486578119*^9, 
+   3.5648414925786133`*^9}, {3.56484161118579*^9, 3.5648416205060387`*^9}},
+ CellID->1610928620],
+
+Cell["\<\
+The statement of the last native was not recorded properly, but a logician \
+who had heard the statement was able to infer who was a knight and who was a \
+knave. Can you infer who is a knight and who is a knave?\
+\>", "ManipulateCaption",
+ CellChangeTimes->{{3.561136023359375*^9, 3.56113611271875*^9}, {
+   3.561136365015625*^9, 3.561136487234375*^9}, 3.561136858390625*^9, {
+   3.56121747371875*^9, 3.56121750890625*^9}, {3.561217913765625*^9, 
+   3.561217934203125*^9}, {3.561218514046875*^9, 3.561218546125*^9}, 
+   3.56450251303125*^9, 3.564502590046875*^9, {3.564503363234375*^9, 
+   3.56450341325*^9}, {3.564503448203125*^9, 3.564503496265625*^9}, {
+   3.564503535015625*^9, 3.564503537375*^9}, {3.564503586515625*^9, 
+   3.564503635359375*^9}, {3.56450404928125*^9, 3.564504055734375*^9}, {
+   3.5645147980087633`*^9, 3.5645148314966516`*^9}, {3.564514872058878*^9, 
+   3.564514874889843*^9}, 3.564514916806584*^9, {3.564515231799258*^9, 
+   3.564515477160985*^9}, {3.56454990109375*^9, 3.564549904875*^9}, {
+   3.5647709301665983`*^9, 3.564770953205791*^9}},
+ CellID->163586062]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 10, $CellContext`ranint$$ = 
+    10426, $CellContext`shsl$$ = False, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`ranint$$], 10426}}, {{
+       Hold[$CellContext`n$$], 10, "number of inhabitants"}, {4, 5, 6, 7, 8, 
+      9, 10, 11}}, {{
+       Hold[$CellContext`shsl$$], False, "show solution"}, {True, False}}, {
+      Hold[
+       Row[{
+         Manipulate`Place[1], 
+         Spacer[30], 
+         Manipulate`Place[2], 
+         Spacer[50], 
+         Button[
+         "new problem", $CellContext`ranint$$ = 
+           Random[Integer, {1, 12356}]; $CellContext`shsl$$ = False]}]], 
+      Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    500., {207., 213.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`n$1169$$ = 
+    0, $CellContext`shsl$1170$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     2, StandardForm, 
+      "Variables" :> {$CellContext`n$$ = 10, $CellContext`ranint$$ = 
+        10426, $CellContext`shsl$$ = False}, "ControllerVariables" :> {
+        Hold[$CellContext`n$$, $CellContext`n$1169$$, 0], 
+        Hold[$CellContext`shsl$$, $CellContext`shsl$1170$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Pane[
+        Style[
+         Text[
+          
+          With[{$CellContext`ran$ = 
+            SeedRandom[$CellContext`ranint$$], $CellContext`nalvse$ = \
+$CellContext`problemMEngl[$CellContext`n$$]}, 
+           With[{$CellContext`nal$ = $CellContext`nalvse$}, 
+            Column[{
+              Column[
+               Part[$CellContext`nal$, 1]], "", 
+              If[$CellContext`shsl$$, 
+               Row[{"Solution: ", 
+                 Part[$CellContext`nal$, 2]}], 
+               "Who is a knight and who is a knave?"]}]]]], 16], {500, 420}], 
+      "Specifications" :> {{{$CellContext`ranint$$, 10426}, ControlType -> 
+         None}, {{$CellContext`n$$, 10, "number of inhabitants"}, {4, 5, 6, 7,
+          8, 9, 10, 11}, ControlPlacement -> 
+         1}, {{$CellContext`shsl$$, False, "show solution"}, {True, False}, 
+         ControlPlacement -> 2}, 
+        Row[{
+          Manipulate`Place[1], 
+          Spacer[30], 
+          Manipulate`Place[2], 
+          Spacer[50], 
+          Button[
+          "new problem", $CellContext`ranint$$ = 
+            Random[Integer, {1, 12356}]; $CellContext`shsl$$ = False]}]}, 
+      "Options" :> {AutorunSequencing -> {1, 2}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{547., {254., 259.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`problemMEngl[
+         Pattern[$CellContext`n, 
+          Blank[]]] := 
+       Module[{$CellContext`d = 0, $CellContext`pad = 
+          Random[Integer, {1, 
+            2}], $CellContext`imen, $CellContext`raz, $CellContext`a, \
+$CellContext`b, $CellContext`c, $CellContext`ata, $CellContext`atb, \
+$CellContext`za, $CellContext`jj, $CellContext`an, $CellContext`bn, \
+$CellContext`at1, $CellContext`at2, $CellContext`at3, $CellContext`res, \
+$CellContext`rezult, $CellContext`nal}, $CellContext`imen = 
+          Take[$CellContext`imena, $CellContext`n]; $CellContext`st = 0; While[
+           
+           Not[$CellContext`d === 
+            1], $CellContext`st = $CellContext`st + 1; $CellContext`a = Table[
+              RotateRight[
+               Join[
+                Table[1, {$CellContext`pad}], $CellContext`za = Table[
+                   If[
+                   Random[Integer, {0, 1}] > 0, 0, 
+                    1], {$CellContext`n - $CellContext`pad}]; $CellContext`za = 
+                 If[
+                  Count[$CellContext`za, 
+                    0] == $CellContext`n - $CellContext`pad, 
+                   ReplacePart[$CellContext`za, 1, 
+                    Random[
+                    Integer, {
+                    1, $CellContext`n - $CellContext`pad}]], \
+$CellContext`za]], $CellContext`j - 1], {$CellContext`j, 
+               1, $CellContext`n}]; $CellContext`jj = 
+            Random[Integer, {1, $CellContext`n - 1}]; $CellContext`a = If[
+              EvenQ[
+               Count[
+                Take[
+                 Part[$CellContext`a, All, $CellContext`n], $CellContext`n - 
+                 1], 1]], 
+              ReplacePart[$CellContext`a, 
+               Mod[
+               Part[$CellContext`a, $CellContext`jj, $CellContext`n] + 1, 
+                2], {$CellContext`jj, $CellContext`n}]]; $CellContext`b = 
+            Table[
+              Random[Integer, {0, 1}], {$CellContext`n}]; $CellContext`d = 
+            Det[$CellContext`a, Modulus -> 2]]; $CellContext`an = 
+          Map[Mod[#, 2]& , 
+            Apply[Plus, 
+             Table[
+              Take[
+               Part[$CellContext`a, All, $CellContext`i], $CellContext`n - 
+               1], {$CellContext`i, 1, $CellContext`n}], {
+             1}]]; $CellContext`bn = Mod[
+            Apply[Plus, 
+             Take[$CellContext`b, $CellContext`n - 1]], 2]; $CellContext`res = 
+          LinearSolve[$CellContext`a, $CellContext`b, Modulus -> 
+            2]; $CellContext`ata = Column[
+            Table[
+             Row[{
+               Part[$CellContext`imen, $CellContext`j], " said: ", 
+               "In the set ", 
+               Part[$CellContext`imen, 
+                Select[
+                 Flatten[
+                  Position[
+                   Part[$CellContext`a, $CellContext`j], 
+                   1]], # =!= $CellContext`j& ]], " there are an ", 
+               If[Part[$CellContext`b, $CellContext`j] == 1, "even", "odd"], 
+               " number of knights."}], {$CellContext`j, 1, $CellContext`n - 
+              1}]]; $CellContext`atb = Row[{"Then ", 
+             Part[$CellContext`imen, $CellContext`n], 
+             
+             " said one of the following three statements:"}]; \
+$CellContext`at1 = Row[{"In the set ", 
+             Part[$CellContext`imen, 
+              Select[
+               Flatten[
+                Position[
+                 Part[$CellContext`a, $CellContext`n], 
+                 1]], # =!= $CellContext`n& ]], " there are an ", 
+             If[Part[$CellContext`b, $CellContext`n] == 1, "even", "odd"], 
+             " number of knights."}]; $CellContext`at2 = Row[{"In the set ", 
+             Part[$CellContext`imen, 
+              Select[
+               Flatten[
+                Position[$CellContext`an, 1]], # =!= $CellContext`n& ]], 
+             " there are an ", 
+             If[$CellContext`bn == 1, "even", "odd"], 
+             " number of knights."}]; $CellContext`at3 = Row[{"In the set ", 
+             Part[$CellContext`imen, 
+              Select[
+               Flatten[
+                Position[$CellContext`an, 1]], # =!= $CellContext`n& ]], 
+             " there are an ", 
+             If[$CellContext`bn == 0, "even", "odd"], 
+             " number of knights."}]; $CellContext`nal = {
+           "", $CellContext`ata, "", $CellContext`atb, "", 
+            Column[
+             
+             RandomSample[{$CellContext`at1, $CellContext`at2, \
+$CellContext`at3}, 3]]}; $CellContext`rezult = Row[{"Knights: ", 
+             Part[$CellContext`imen, 
+              Flatten[
+               Position[$CellContext`res, 1]]], ". Knaves: ", 
+             Part[$CellContext`imen, 
+              Flatten[
+               Position[$CellContext`res, 0]]], 
+             "."}]; {$CellContext`nal, $CellContext`rezult}], \
+$CellContext`ata = {{
+         "\n", "A", " said: ", "In the set {", {"D"}, "} there are an ", 
+          "even", " number of knights."}, {
+         "\n", "B", " said: ", "In the set {", {"A", "D"}, "} there are an ", 
+          "odd", " number of knights."}, {
+         "\n", "C", " said: ", "In the set {", {"A", "B", "D"}, 
+          "} there are an ", "even", 
+          " number of knights."}}, $CellContext`atb = {
+        "Then ", "D", 
+         " said one of the following three statements:"}, $CellContext`imena = \
+{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"}, $CellContext`st = 1}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->822207675]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 7, $CellContext`ranint$$ = 
+    578, $CellContext`shsl$$ = False, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`ranint$$], 578}}, {{
+       Hold[$CellContext`n$$], 7, "number of inhabitants"}, {4, 5, 6, 7, 8, 9,
+       10, 11}}, {{
+       Hold[$CellContext`shsl$$], False, "show solution"}, {True, False}}, {
+      Hold[
+       Row[{
+         Manipulate`Place[1], 
+         Spacer[30], 
+         Manipulate`Place[2], 
+         Spacer[50], 
+         Button[
+         "new problem", $CellContext`ranint$$ = 
+           Random[Integer, {1, 12356}]; $CellContext`shsl$$ = False]}]], 
+      Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    500., {207., 213.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`n$1228$$ = 
+    0, $CellContext`shsl$1229$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     2, StandardForm, 
+      "Variables" :> {$CellContext`n$$ = 7, $CellContext`ranint$$ = 
+        578, $CellContext`shsl$$ = False}, "ControllerVariables" :> {
+        Hold[$CellContext`n$$, $CellContext`n$1228$$, 0], 
+        Hold[$CellContext`shsl$$, $CellContext`shsl$1229$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Pane[
+        Style[
+         Text[
+          
+          With[{$CellContext`ran$ = 
+            SeedRandom[$CellContext`ranint$$], $CellContext`nalvse$ = \
+$CellContext`problemMEngl[$CellContext`n$$]}, 
+           With[{$CellContext`nal$ = $CellContext`nalvse$}, 
+            Column[{
+              Column[
+               Part[$CellContext`nal$, 1]], "", 
+              If[$CellContext`shsl$$, 
+               Row[{"Solution: ", 
+                 Part[$CellContext`nal$, 2]}], 
+               "Who is a knight and who is a knave?"]}]]]], 16], {500, 420}], 
+      "Specifications" :> {{{$CellContext`ranint$$, 578}, ControlType -> 
+         None}, {{$CellContext`n$$, 7, "number of inhabitants"}, {4, 5, 6, 7, 
+         8, 9, 10, 11}, ControlPlacement -> 
+         1}, {{$CellContext`shsl$$, False, "show solution"}, {True, False}, 
+         ControlPlacement -> 2}, 
+        Row[{
+          Manipulate`Place[1], 
+          Spacer[30], 
+          Manipulate`Place[2], 
+          Spacer[50], 
+          Button[
+          "new problem", $CellContext`ranint$$ = 
+            Random[Integer, {1, 12356}]; $CellContext`shsl$$ = False]}]}, 
+      "Options" :> {AutorunSequencing -> {1, 2}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{547., {254., 259.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`problemMEngl[
+         Pattern[$CellContext`n, 
+          Blank[]]] := 
+       Module[{$CellContext`d = 0, $CellContext`pad = 
+          Random[Integer, {1, 
+            2}], $CellContext`imen, $CellContext`raz, $CellContext`a, \
+$CellContext`b, $CellContext`c, $CellContext`ata, $CellContext`atb, \
+$CellContext`za, $CellContext`jj, $CellContext`an, $CellContext`bn, \
+$CellContext`at1, $CellContext`at2, $CellContext`at3, $CellContext`res, \
+$CellContext`rezult, $CellContext`nal}, $CellContext`imen = 
+          Take[$CellContext`imena, $CellContext`n]; $CellContext`st = 0; While[
+           
+           Not[$CellContext`d === 
+            1], $CellContext`st = $CellContext`st + 1; $CellContext`a = Table[
+              RotateRight[
+               Join[
+                Table[1, {$CellContext`pad}], $CellContext`za = Table[
+                   If[
+                   Random[Integer, {0, 1}] > 0, 0, 
+                    1], {$CellContext`n - $CellContext`pad}]; $CellContext`za = 
+                 If[
+                  Count[$CellContext`za, 
+                    0] == $CellContext`n - $CellContext`pad, 
+                   ReplacePart[$CellContext`za, 1, 
+                    Random[
+                    Integer, {
+                    1, $CellContext`n - $CellContext`pad}]], \
+$CellContext`za]], $CellContext`j - 1], {$CellContext`j, 
+               1, $CellContext`n}]; $CellContext`jj = 
+            Random[Integer, {1, $CellContext`n - 1}]; $CellContext`a = If[
+              EvenQ[
+               Count[
+                Take[
+                 Part[$CellContext`a, All, $CellContext`n], $CellContext`n - 
+                 1], 1]], 
+              ReplacePart[$CellContext`a, 
+               Mod[
+               Part[$CellContext`a, $CellContext`jj, $CellContext`n] + 1, 
+                2], {$CellContext`jj, $CellContext`n}]]; $CellContext`b = 
+            Table[
+              Random[Integer, {0, 1}], {$CellContext`n}]; $CellContext`d = 
+            Det[$CellContext`a, Modulus -> 2]]; $CellContext`an = 
+          Map[Mod[#, 2]& , 
+            Apply[Plus, 
+             Table[
+              Take[
+               Part[$CellContext`a, All, $CellContext`i], $CellContext`n - 
+               1], {$CellContext`i, 1, $CellContext`n}], {
+             1}]]; $CellContext`bn = Mod[
+            Apply[Plus, 
+             Take[$CellContext`b, $CellContext`n - 1]], 2]; $CellContext`res = 
+          LinearSolve[$CellContext`a, $CellContext`b, Modulus -> 
+            2]; $CellContext`ata = Column[
+            Table[
+             Row[{
+               Part[$CellContext`imen, $CellContext`j], " said: ", 
+               "In the set ", 
+               Part[$CellContext`imen, 
+                Select[
+                 Flatten[
+                  Position[
+                   Part[$CellContext`a, $CellContext`j], 
+                   1]], # =!= $CellContext`j& ]], " there are an ", 
+               If[Part[$CellContext`b, $CellContext`j] == 1, "even", "odd"], 
+               " number of knights."}], {$CellContext`j, 1, $CellContext`n - 
+              1}]]; $CellContext`atb = Row[{"Then ", 
+             Part[$CellContext`imen, $CellContext`n], 
+             
+             " said one of the following three statements:"}]; \
+$CellContext`at1 = Row[{"In the set ", 
+             Part[$CellContext`imen, 
+              Select[
+               Flatten[
+                Position[
+                 Part[$CellContext`a, $CellContext`n], 
+                 1]], # =!= $CellContext`n& ]], " there are an ", 
+             If[Part[$CellContext`b, $CellContext`n] == 1, "even", "odd"], 
+             " number of knights."}]; $CellContext`at2 = Row[{"In the set ", 
+             Part[$CellContext`imen, 
+              Select[
+               Flatten[
+                Position[$CellContext`an, 1]], # =!= $CellContext`n& ]], 
+             " there are an ", 
+             If[$CellContext`bn == 1, "even", "odd"], 
+             " number of knights."}]; $CellContext`at3 = Row[{"In the set ", 
+             Part[$CellContext`imen, 
+              Select[
+               Flatten[
+                Position[$CellContext`an, 1]], # =!= $CellContext`n& ]], 
+             " there are an ", 
+             If[$CellContext`bn == 0, "even", "odd"], 
+             " number of knights."}]; $CellContext`nal = {
+           "", $CellContext`ata, "", $CellContext`atb, "", 
+            Column[
+             
+             RandomSample[{$CellContext`at1, $CellContext`at2, \
+$CellContext`at3}, 3]]}; $CellContext`rezult = Row[{"Knights: ", 
+             Part[$CellContext`imen, 
+              Flatten[
+               Position[$CellContext`res, 1]]], ". Knaves: ", 
+             Part[$CellContext`imen, 
+              Flatten[
+               Position[$CellContext`res, 0]]], 
+             "."}]; {$CellContext`nal, $CellContext`rezult}], \
+$CellContext`ata = {{
+         "\n", "A", " said: ", "In the set {", {"D"}, "} there are an ", 
+          "even", " number of knights."}, {
+         "\n", "B", " said: ", "In the set {", {"A", "D"}, "} there are an ", 
+          "odd", " number of knights."}, {
+         "\n", "C", " said: ", "In the set {", {"A", "B", "D"}, 
+          "} there are an ", "even", 
+          " number of knights."}}, $CellContext`atb = {
+        "Then ", "D", 
+         " said one of the following three statements:"}, $CellContext`imena = \
+{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"}, $CellContext`st = 1}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->868617038],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 7, $CellContext`ranint$$ = 
+    578, $CellContext`shsl$$ = True, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`ranint$$], 578}}, {{
+       Hold[$CellContext`n$$], 7, "number of inhabitants"}, {4, 5, 6, 7, 8, 9,
+       10, 11}}, {{
+       Hold[$CellContext`shsl$$], True, "show solution"}, {True, False}}, {
+      Hold[
+       Row[{
+         Manipulate`Place[1], 
+         Spacer[30], 
+         Manipulate`Place[2], 
+         Spacer[50], 
+         Button[
+         "new problem", $CellContext`ranint$$ = 
+           Random[Integer, {1, 12356}]; $CellContext`shsl$$ = False]}]], 
+      Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    500., {207., 213.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`n$1287$$ = 
+    0, $CellContext`shsl$1288$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     2, StandardForm, 
+      "Variables" :> {$CellContext`n$$ = 7, $CellContext`ranint$$ = 
+        578, $CellContext`shsl$$ = True}, "ControllerVariables" :> {
+        Hold[$CellContext`n$$, $CellContext`n$1287$$, 0], 
+        Hold[$CellContext`shsl$$, $CellContext`shsl$1288$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Pane[
+        Style[
+         Text[
+          
+          With[{$CellContext`ran$ = 
+            SeedRandom[$CellContext`ranint$$], $CellContext`nalvse$ = \
+$CellContext`problemMEngl[$CellContext`n$$]}, 
+           With[{$CellContext`nal$ = $CellContext`nalvse$}, 
+            Column[{
+              Column[
+               Part[$CellContext`nal$, 1]], "", 
+              If[$CellContext`shsl$$, 
+               Row[{"Solution: ", 
+                 Part[$CellContext`nal$, 2]}], 
+               "Who is a knight and who is a knave?"]}]]]], 16], {500, 420}], 
+      "Specifications" :> {{{$CellContext`ranint$$, 578}, ControlType -> 
+         None}, {{$CellContext`n$$, 7, "number of inhabitants"}, {4, 5, 6, 7, 
+         8, 9, 10, 11}, ControlPlacement -> 
+         1}, {{$CellContext`shsl$$, True, "show solution"}, {True, False}, 
+         ControlPlacement -> 2}, 
+        Row[{
+          Manipulate`Place[1], 
+          Spacer[30], 
+          Manipulate`Place[2], 
+          Spacer[50], 
+          Button[
+          "new problem", $CellContext`ranint$$ = 
+            Random[Integer, {1, 12356}]; $CellContext`shsl$$ = False]}]}, 
+      "Options" :> {AutorunSequencing -> {1, 2}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{547., {254., 259.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`problemMEngl[
+         Pattern[$CellContext`n, 
+          Blank[]]] := 
+       Module[{$CellContext`d = 0, $CellContext`pad = 
+          Random[Integer, {1, 
+            2}], $CellContext`imen, $CellContext`raz, $CellContext`a, \
+$CellContext`b, $CellContext`c, $CellContext`ata, $CellContext`atb, \
+$CellContext`za, $CellContext`jj, $CellContext`an, $CellContext`bn, \
+$CellContext`at1, $CellContext`at2, $CellContext`at3, $CellContext`res, \
+$CellContext`rezult, $CellContext`nal}, $CellContext`imen = 
+          Take[$CellContext`imena, $CellContext`n]; $CellContext`st = 0; While[
+           
+           Not[$CellContext`d === 
+            1], $CellContext`st = $CellContext`st + 1; $CellContext`a = Table[
+              RotateRight[
+               Join[
+                Table[1, {$CellContext`pad}], $CellContext`za = Table[
+                   If[
+                   Random[Integer, {0, 1}] > 0, 0, 
+                    1], {$CellContext`n - $CellContext`pad}]; $CellContext`za = 
+                 If[
+                  Count[$CellContext`za, 
+                    0] == $CellContext`n - $CellContext`pad, 
+                   ReplacePart[$CellContext`za, 1, 
+                    Random[
+                    Integer, {
+                    1, $CellContext`n - $CellContext`pad}]], \
+$CellContext`za]], $CellContext`j - 1], {$CellContext`j, 
+               1, $CellContext`n}]; $CellContext`jj = 
+            Random[Integer, {1, $CellContext`n - 1}]; $CellContext`a = If[
+              EvenQ[
+               Count[
+                Take[
+                 Part[$CellContext`a, All, $CellContext`n], $CellContext`n - 
+                 1], 1]], 
+              ReplacePart[$CellContext`a, 
+               Mod[
+               Part[$CellContext`a, $CellContext`jj, $CellContext`n] + 1, 
+                2], {$CellContext`jj, $CellContext`n}]]; $CellContext`b = 
+            Table[
+              Random[Integer, {0, 1}], {$CellContext`n}]; $CellContext`d = 
+            Det[$CellContext`a, Modulus -> 2]]; $CellContext`an = 
+          Map[Mod[#, 2]& , 
+            Apply[Plus, 
+             Table[
+              Take[
+               Part[$CellContext`a, All, $CellContext`i], $CellContext`n - 
+               1], {$CellContext`i, 1, $CellContext`n}], {
+             1}]]; $CellContext`bn = Mod[
+            Apply[Plus, 
+             Take[$CellContext`b, $CellContext`n - 1]], 2]; $CellContext`res = 
+          LinearSolve[$CellContext`a, $CellContext`b, Modulus -> 
+            2]; $CellContext`ata = Column[
+            Table[
+             Row[{
+               Part[$CellContext`imen, $CellContext`j], " said: ", 
+               "In the set ", 
+               Part[$CellContext`imen, 
+                Select[
+                 Flatten[
+                  Position[
+                   Part[$CellContext`a, $CellContext`j], 
+                   1]], # =!= $CellContext`j& ]], " there are an ", 
+               If[Part[$CellContext`b, $CellContext`j] == 1, "even", "odd"], 
+               " number of knights."}], {$CellContext`j, 1, $CellContext`n - 
+              1}]]; $CellContext`atb = Row[{"Then ", 
+             Part[$CellContext`imen, $CellContext`n], 
+             
+             " said one of the following three statements:"}]; \
+$CellContext`at1 = Row[{"In the set ", 
+             Part[$CellContext`imen, 
+              Select[
+               Flatten[
+                Position[
+                 Part[$CellContext`a, $CellContext`n], 
+                 1]], # =!= $CellContext`n& ]], " there are an ", 
+             If[Part[$CellContext`b, $CellContext`n] == 1, "even", "odd"], 
+             " number of knights."}]; $CellContext`at2 = Row[{"In the set ", 
+             Part[$CellContext`imen, 
+              Select[
+               Flatten[
+                Position[$CellContext`an, 1]], # =!= $CellContext`n& ]], 
+             " there are an ", 
+             If[$CellContext`bn == 1, "even", "odd"], 
+             " number of knights."}]; $CellContext`at3 = Row[{"In the set ", 
+             Part[$CellContext`imen, 
+              Select[
+               Flatten[
+                Position[$CellContext`an, 1]], # =!= $CellContext`n& ]], 
+             " there are an ", 
+             If[$CellContext`bn == 0, "even", "odd"], 
+             " number of knights."}]; $CellContext`nal = {
+           "", $CellContext`ata, "", $CellContext`atb, "", 
+            Column[
+             
+             RandomSample[{$CellContext`at1, $CellContext`at2, \
+$CellContext`at3}, 3]]}; $CellContext`rezult = Row[{"Knights: ", 
+             Part[$CellContext`imen, 
+              Flatten[
+               Position[$CellContext`res, 1]]], ". Knaves: ", 
+             Part[$CellContext`imen, 
+              Flatten[
+               Position[$CellContext`res, 0]]], 
+             "."}]; {$CellContext`nal, $CellContext`rezult}], \
+$CellContext`ata = {{
+         "\n", "A", " said: ", "In the set {", {"D"}, "} there are an ", 
+          "even", " number of knights."}, {
+         "\n", "B", " said: ", "In the set {", {"A", "D"}, "} there are an ", 
+          "odd", " number of knights."}, {
+         "\n", "C", " said: ", "In the set {", {"A", "B", "D"}, 
+          "} there are an ", "even", 
+          " number of knights."}}, $CellContext`atb = {
+        "Then ", "D", 
+         " said one of the following three statements:"}, $CellContext`imena = \
+{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"}, $CellContext`st = 1}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->685030254],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 10, $CellContext`ranint$$ = 
+    578, $CellContext`shsl$$ = False, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`ranint$$], 578}}, {{
+       Hold[$CellContext`n$$], 10, "number of inhabitants"}, {4, 5, 6, 7, 8, 
+      9, 10, 11}}, {{
+       Hold[$CellContext`shsl$$], False, "show solution"}, {True, False}}, {
+      Hold[
+       Row[{
+         Manipulate`Place[1], 
+         Spacer[30], 
+         Manipulate`Place[2], 
+         Spacer[50], 
+         Button[
+         "new problem", $CellContext`ranint$$ = 
+           Random[Integer, {1, 12356}]; $CellContext`shsl$$ = False]}]], 
+      Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    500., {207., 213.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`n$1346$$ = 
+    0, $CellContext`shsl$1347$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     2, StandardForm, 
+      "Variables" :> {$CellContext`n$$ = 10, $CellContext`ranint$$ = 
+        578, $CellContext`shsl$$ = False}, "ControllerVariables" :> {
+        Hold[$CellContext`n$$, $CellContext`n$1346$$, 0], 
+        Hold[$CellContext`shsl$$, $CellContext`shsl$1347$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Pane[
+        Style[
+         Text[
+          
+          With[{$CellContext`ran$ = 
+            SeedRandom[$CellContext`ranint$$], $CellContext`nalvse$ = \
+$CellContext`problemMEngl[$CellContext`n$$]}, 
+           With[{$CellContext`nal$ = $CellContext`nalvse$}, 
+            Column[{
+              Column[
+               Part[$CellContext`nal$, 1]], "", 
+              If[$CellContext`shsl$$, 
+               Row[{"Solution: ", 
+                 Part[$CellContext`nal$, 2]}], 
+               "Who is a knight and who is a knave?"]}]]]], 16], {500, 420}], 
+      "Specifications" :> {{{$CellContext`ranint$$, 578}, ControlType -> 
+         None}, {{$CellContext`n$$, 10, "number of inhabitants"}, {4, 5, 6, 7,
+          8, 9, 10, 11}, ControlPlacement -> 
+         1}, {{$CellContext`shsl$$, False, "show solution"}, {True, False}, 
+         ControlPlacement -> 2}, 
+        Row[{
+          Manipulate`Place[1], 
+          Spacer[30], 
+          Manipulate`Place[2], 
+          Spacer[50], 
+          Button[
+          "new problem", $CellContext`ranint$$ = 
+            Random[Integer, {1, 12356}]; $CellContext`shsl$$ = False]}]}, 
+      "Options" :> {AutorunSequencing -> {1, 2}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{547., {254., 259.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`problemMEngl[
+         Pattern[$CellContext`n, 
+          Blank[]]] := 
+       Module[{$CellContext`d = 0, $CellContext`pad = 
+          Random[Integer, {1, 
+            2}], $CellContext`imen, $CellContext`raz, $CellContext`a, \
+$CellContext`b, $CellContext`c, $CellContext`ata, $CellContext`atb, \
+$CellContext`za, $CellContext`jj, $CellContext`an, $CellContext`bn, \
+$CellContext`at1, $CellContext`at2, $CellContext`at3, $CellContext`res, \
+$CellContext`rezult, $CellContext`nal}, $CellContext`imen = 
+          Take[$CellContext`imena, $CellContext`n]; $CellContext`st = 0; While[
+           
+           Not[$CellContext`d === 
+            1], $CellContext`st = $CellContext`st + 1; $CellContext`a = Table[
+              RotateRight[
+               Join[
+                Table[1, {$CellContext`pad}], $CellContext`za = Table[
+                   If[
+                   Random[Integer, {0, 1}] > 0, 0, 
+                    1], {$CellContext`n - $CellContext`pad}]; $CellContext`za = 
+                 If[
+                  Count[$CellContext`za, 
+                    0] == $CellContext`n - $CellContext`pad, 
+                   ReplacePart[$CellContext`za, 1, 
+                    Random[
+                    Integer, {
+                    1, $CellContext`n - $CellContext`pad}]], \
+$CellContext`za]], $CellContext`j - 1], {$CellContext`j, 
+               1, $CellContext`n}]; $CellContext`jj = 
+            Random[Integer, {1, $CellContext`n - 1}]; $CellContext`a = If[
+              EvenQ[
+               Count[
+                Take[
+                 Part[$CellContext`a, All, $CellContext`n], $CellContext`n - 
+                 1], 1]], 
+              ReplacePart[$CellContext`a, 
+               Mod[
+               Part[$CellContext`a, $CellContext`jj, $CellContext`n] + 1, 
+                2], {$CellContext`jj, $CellContext`n}]]; $CellContext`b = 
+            Table[
+              Random[Integer, {0, 1}], {$CellContext`n}]; $CellContext`d = 
+            Det[$CellContext`a, Modulus -> 2]]; $CellContext`an = 
+          Map[Mod[#, 2]& , 
+            Apply[Plus, 
+             Table[
+              Take[
+               Part[$CellContext`a, All, $CellContext`i], $CellContext`n - 
+               1], {$CellContext`i, 1, $CellContext`n}], {
+             1}]]; $CellContext`bn = Mod[
+            Apply[Plus, 
+             Take[$CellContext`b, $CellContext`n - 1]], 2]; $CellContext`res = 
+          LinearSolve[$CellContext`a, $CellContext`b, Modulus -> 
+            2]; $CellContext`ata = Column[
+            Table[
+             Row[{
+               Part[$CellContext`imen, $CellContext`j], " said: ", 
+               "In the set ", 
+               Part[$CellContext`imen, 
+                Select[
+                 Flatten[
+                  Position[
+                   Part[$CellContext`a, $CellContext`j], 
+                   1]], # =!= $CellContext`j& ]], " there are an ", 
+               If[Part[$CellContext`b, $CellContext`j] == 1, "even", "odd"], 
+               " number of knights."}], {$CellContext`j, 1, $CellContext`n - 
+              1}]]; $CellContext`atb = Row[{"Then ", 
+             Part[$CellContext`imen, $CellContext`n], 
+             
+             " said one of the following three statements:"}]; \
+$CellContext`at1 = Row[{"In the set ", 
+             Part[$CellContext`imen, 
+              Select[
+               Flatten[
+                Position[
+                 Part[$CellContext`a, $CellContext`n], 
+                 1]], # =!= $CellContext`n& ]], " there are an ", 
+             If[Part[$CellContext`b, $CellContext`n] == 1, "even", "odd"], 
+             " number of knights."}]; $CellContext`at2 = Row[{"In the set ", 
+             Part[$CellContext`imen, 
+              Select[
+               Flatten[
+                Position[$CellContext`an, 1]], # =!= $CellContext`n& ]], 
+             " there are an ", 
+             If[$CellContext`bn == 1, "even", "odd"], 
+             " number of knights."}]; $CellContext`at3 = Row[{"In the set ", 
+             Part[$CellContext`imen, 
+              Select[
+               Flatten[
+                Position[$CellContext`an, 1]], # =!= $CellContext`n& ]], 
+             " there are an ", 
+             If[$CellContext`bn == 0, "even", "odd"], 
+             " number of knights."}]; $CellContext`nal = {
+           "", $CellContext`ata, "", $CellContext`atb, "", 
+            Column[
+             
+             RandomSample[{$CellContext`at1, $CellContext`at2, \
+$CellContext`at3}, 3]]}; $CellContext`rezult = Row[{"Knights: ", 
+             Part[$CellContext`imen, 
+              Flatten[
+               Position[$CellContext`res, 1]]], ". Knaves: ", 
+             Part[$CellContext`imen, 
+              Flatten[
+               Position[$CellContext`res, 0]]], 
+             "."}]; {$CellContext`nal, $CellContext`rezult}], \
+$CellContext`ata = {{
+         "\n", "A", " said: ", "In the set {", {"D"}, "} there are an ", 
+          "even", " number of knights."}, {
+         "\n", "B", " said: ", "In the set {", {"A", "D"}, "} there are an ", 
+          "odd", " number of knights."}, {
+         "\n", "C", " said: ", "In the set {", {"A", "B", "D"}, 
+          "} there are an ", "even", 
+          " number of knights."}}, $CellContext`atb = {
+        "Then ", "D", 
+         " said one of the following three statements:"}, $CellContext`imena = \
+{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"}, $CellContext`st = 1}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->803867769]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "DetailsSection"],
+
+Cell["These kinds of logic puzzles are called \"metapuzzles\" [2].", \
+"DetailNotes",
+ CellChangeTimes->{{3.5645026579375*^9, 3.564502699921875*^9}, {
+   3.564503023109375*^9, 3.56450304171875*^9}, 3.564503191484375*^9, {
+   3.5645155213174334`*^9, 3.564515525637106*^9}, {3.5648415970183887`*^9, 
+   3.5648415970183887`*^9}},
+ CellID->1049264126],
+
+Cell["References", "DetailNotes",
+ CellChangeTimes->{{3.5648415972677603`*^9, 3.5648415982964163`*^9}},
+ CellID->79672679],
+
+Cell[TextData[{
+ "[1] R. M. Smullyan, ",
+ StyleBox["What Is the Name of This Book?: The Riddle of Dracula and Other \
+Logical Puzzles",
+  FontSlant->"Italic"],
+ ", Englewood Cliffs, NJ: Prentice\[Dash]Hall, 1978."
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.5645026579375*^9, {3.56450304703125*^9, 3.5645030514375*^9}, {
+   3.5648416828496294`*^9, 3.564841694087063*^9}},
+ CellID->1336360],
+
+Cell[TextData[{
+ "[2] R. M. Smullyan, ",
+ StyleBox["The Lady or the Tiger? And Other Logic Puzzles",
+  FontSlant->"Italic"],
+ ", New York: Alfred A. Knopf, 1983, p. 91."
+}], "DetailNotes",
+ CellChangeTimes->{{3.564503053875*^9, 3.5645031669375*^9}, {
+  3.564515555450144*^9, 3.564515563144907*^9}, {3.5648417477804885`*^9, 
+  3.5648417538901615`*^9}},
+ CellID->38167060]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.3895522232313623`*^9},
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0, CellBaseline -> Baseline], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SearchTermsSection"],
+
+Cell["logic puzzle", "SearchTerms",
+ CellChangeTimes->{{3.561136137109375*^9, 3.561136143609375*^9}, {
+  3.561217985609375*^9, 3.561217993296875*^9}},
+ CellID->458219274],
+
+Cell["contradictory", "SearchTerms",
+ CellChangeTimes->{{3.561136144875*^9, 3.56113615040625*^9}},
+ CellID->293130425]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "RelatedLinksSection"],
+
+Cell[TextData[ButtonBox["Puzzle",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/Puzzle.html"], None},
+ ButtonNote->"http://mathworld.wolfram.com/Puzzle.html"]], "RelatedLinks",
+ CellChangeTimes->{{3.561218313921875*^9, 3.561218313921875*^9}},
+ CellID->357352464],
+
+Cell[TextData[ButtonBox["Knights and Knaves Puzzle Generator",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://demonstrations.wolfram.com/KnightsAndKnavesPuzzleGenerator/"], 
+   None},
+ ButtonNote->
+  "http://demonstrations.wolfram.com/KnightsAndKnavesPuzzleGenerator/"]], \
+"RelatedLinks",
+ CellChangeTimes->{{3.56121839525*^9, 3.56121839525*^9}},
+ CellID->213189783],
+
+Cell[TextData[ButtonBox["Another Knights and Knaves Puzzle Generator",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://demonstrations.wolfram.com/\
+AnotherKnightsAndKnavesPuzzleGenerator/"], None},
+ ButtonNote->
+  "http://demonstrations.wolfram.com/AnotherKnightsAndKnavesPuzzleGenerator/"]\
+], "RelatedLinks",
+ CellChangeTimes->{
+  3.561136741734375*^9, {3.56113679196875*^9, 3.56113679196875*^9}},
+ CellID->23826663]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Izidor Hafner",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Izidor+Hafner"],
+     None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Izidor+Hafner"]
+}], "Author",
+ CellChangeTimes->{{3.56113652815625*^9, 3.561136536296875*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1114, 893},
+WindowMargins->{{Automatic, 40}, {Automatic, 19}},
+FrontEndVersion->"8.0 for Microsoft Windows (32-bit) (October 6, 2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[68366, 1566, 312, 8, 22, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[68681, 1576, 678, 16, 22, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[69362, 1594, 340, 11, 22, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[69705, 1607, 637, 15, 22, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[70345, 1624, 844, 21, 22, "ControlSuggestions",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[71192, 1647, 369, 9, 22, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[71564, 1658, 1464, 31, 22, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[73031, 1691, 908, 21, 22, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 76302, 1794},
+ {"RotateAndZoomIn3D", 76411, 1797},
+ {"DragLocators", 76521, 1800},
+ {"CreateAndDeleteLocators", 76637, 1803},
+ {"SliderZoom", 76751, 1806},
+ {"GamepadControls", 76857, 1809},
+ {"AutomaticAnimation", 76970, 1812},
+ {"BookmarkAnimation", 77087, 1815}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 345, 5, 74, "DemoTitle"],
+Cell[CellGroupData[{
+Cell[949, 31, 33, 0, 287, "InitializationSection"],
+Cell[985, 33, 1101, 22, 27, "Input",
+ InitializationCell->True,
+ CellID->102635591],
+Cell[2089, 57, 13064, 316, 568, "Input",
+ InitializationCell->True,
+ CellID->32982266]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15190, 378, 29, 0, 236, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[15244, 382, 4095, 95, 308, "Input"],
+Cell[19342, 479, 8788, 191, 525, "Output",
+ CellID->76103117]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[28179, 676, 36, 0, 169, "ManipulateCaptionSection"],
+Cell[28218, 678, 1007, 16, 37, "ManipulateCaption",
+ CellID->1438310636],
+Cell[29228, 696, 1364, 22, 38, "ManipulateCaption",
+ CellID->1610928620],
+Cell[30595, 720, 1098, 17, 37, "ManipulateCaption",
+ CellID->163586062]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[31730, 742, 28, 0, 173, "ThumbnailSection"],
+Cell[31761, 744, 8797, 191, 525, "Output",
+ CellID->822207675]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[40595, 940, 28, 0, 143, "SnapshotsSection"],
+Cell[40626, 942, 8785, 191, 525, "Output",
+ CellID->868617038],
+Cell[49414, 1135, 8781, 191, 525, "Output",
+ CellID->685030254],
+Cell[58198, 1328, 8789, 191, 525, "Output",
+ CellID->803867769]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[67024, 1524, 26, 0, 336, "DetailsSection"],
+Cell[67053, 1526, 347, 6, 22, "DetailNotes",
+ CellID->1049264126],
+Cell[67403, 1534, 122, 2, 22, "DetailNotes",
+ CellID->79672679],
+Cell[67528, 1538, 388, 10, 22, "DetailNotes",
+ CellID->1336360],
+Cell[67919, 1550, 370, 9, 22, "DetailNotes",
+ CellID->38167060]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[68326, 1564, 37, 0, 126, "ControlSuggestionsSection"],
+Cell[68366, 1566, 312, 8, 22, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[68681, 1576, 678, 16, 22, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[69362, 1594, 340, 11, 22, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[69705, 1607, 637, 15, 22, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[70345, 1624, 844, 21, 22, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[71192, 1647, 369, 9, 22, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[71564, 1658, 1464, 31, 22, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[73031, 1691, 908, 21, 22, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[73976, 1717, 30, 0, 155, "SearchTermsSection"],
+Cell[74009, 1719, 170, 3, 22, "SearchTerms",
+ CellID->458219274],
+Cell[74182, 1724, 118, 2, 22, "SearchTerms",
+ CellID->293130425]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[74337, 1731, 31, 0, 141, "RelatedLinksSection"],
+Cell[74371, 1733, 293, 6, 22, "RelatedLinks",
+ CellID->357352464],
+Cell[74667, 1741, 375, 9, 22, "RelatedLinks",
+ CellID->213189783],
+Cell[75045, 1752, 425, 10, 22, "RelatedLinks",
+ CellID->23826663]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[75507, 1767, 25, 0, 141, "AuthorSection"],
+Cell[75535, 1769, 364, 10, 22, "Author"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

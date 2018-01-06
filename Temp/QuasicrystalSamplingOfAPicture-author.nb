@@ -1,0 +1,1685 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     67636,       1676]
+NotebookOptionsPosition[     63085,       1531]
+NotebookOutlinePosition[     64708,       1582]
+CellTagsIndexPosition[     64380,       1570]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Quasicrystal Sampling of a Picture", "DemoTitle",
+ CellChangeTimes->{
+  3.580596952541746*^9, {3.5805970035738897`*^9, 3.580597020537622*^9}, 
+   3.5806435129774637`*^9}],
+
+Cell[CellGroupData[{
+
+Cell["", "InitializationSection"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ColorGraph", "[", "t_", "]"}], " ", ":=", " ", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"#1", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"KiteColor", ",", " ", 
+         RowBox[{"#1", "[", 
+          RowBox[{"[", "2", "]"}], "]"}]}], "}"}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"DartColor", ",", " ", 
+         RowBox[{"#1", "[", 
+          RowBox[{"[", "3", "]"}], "]"}]}], "}"}]}], "}"}], " ", "&"}], " ", 
+    ")"}], "[", "\n", "       ", 
+   RowBox[{"Last", "[", 
+    RowBox[{"Reap", "[", 
+     RowBox[{
+      RowBox[{"t", " ", "/.", " ", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"a", "[", 
+           RowBox[{"x_", ",", " ", "y_", ",", " ", "z_"}], "]"}], " ", ":>", 
+          " ", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Sow", "[", 
+             RowBox[{
+              RowBox[{"Line", "[", 
+               RowBox[{"{", 
+                RowBox[{"y", ",", " ", "z", ",", " ", "x"}], "}"}], "]"}], 
+              ",", " ", "\"\<line\>\""}], "]"}], ",", " ", "\n", 
+            "             ", 
+            RowBox[{"Sow", "[", 
+             RowBox[{
+              RowBox[{"Polygon", "[", 
+               RowBox[{"{", 
+                RowBox[{"y", ",", " ", "z", ",", " ", "x"}], "}"}], "]"}], 
+              ",", " ", "\"\<kitepolygon\>\""}], "]"}]}], "}"}]}], ",", " ", 
+         RowBox[{
+          RowBox[{"o", "[", 
+           RowBox[{"x_", ",", " ", "y_", ",", " ", "z_"}], "]"}], " ", ":>", 
+          " ", "\n", "            ", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Sow", "[", 
+             RowBox[{
+              RowBox[{"Line", "[", 
+               RowBox[{"{", 
+                RowBox[{"y", ",", " ", "z", ",", " ", "x"}], "}"}], "]"}], 
+              ",", " ", "\"\<line\>\""}], "]"}], ",", " ", 
+            RowBox[{"Sow", "[", 
+             RowBox[{
+              RowBox[{"Polygon", "[", 
+               RowBox[{"{", 
+                RowBox[{"y", ",", " ", "z", ",", " ", "x"}], "}"}], "]"}], 
+              ",", " ", "\n", "              ", "\"\<dartpolygon\>\""}], 
+             "]"}]}], "}"}]}]}], "}"}]}], ",", " ", 
+      RowBox[{"{", 
+       RowBox[{
+       "\"\<line\>\"", ",", " ", "\"\<kitepolygon\>\"", ",", " ", 
+        "\"\<dartpolygon\>\""}], "}"}]}], "]"}], "]"}], "]"}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.5806521218118563`*^9, 3.580652161354002*^9}},
+ CellID->1560149370],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"KiteColor", " ", "=", " ", 
+   RowBox[{"RGBColor", "[", 
+    RowBox[{"0.2", ",", " ", "0.2", ",", " ", "1."}], "]"}]}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.5806521218118563`*^9, 3.580652176113855*^9}, 
+   3.5806522566211*^9},
+ CellID->655131720],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"DartColor", " ", "=", " ", 
+   RowBox[{"RGBColor", "[", 
+    RowBox[{"0.7", ",", " ", "0.7", ",", " ", "1."}], "]"}]}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.5806521218118563`*^9, 3.580652181244192*^9}, 
+   3.58065225903895*^9},
+ CellID->650159871],
+
+Cell[BoxData[
+ RowBox[{" ", 
+  RowBox[{
+   RowBox[{"Deflate", "[", 
+    RowBox[{"a", "[", 
+     RowBox[{"x_", ",", " ", "y_", ",", " ", "z_"}], "]"}], "]"}], " ", ":=", 
+   " ", 
+   RowBox[{"With", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"d", " ", "=", " ", 
+        RowBox[{
+         RowBox[{"c1", "*", "x"}], " ", "+", " ", 
+         RowBox[{"c2", "*", "y"}]}]}], ",", " ", 
+       RowBox[{"e", " ", "=", " ", 
+        RowBox[{
+         RowBox[{"c1", "*", "y"}], " ", "+", " ", 
+         RowBox[{"c2", "*", "z"}]}]}]}], "}"}], ",", " ", "\n", "       ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"a", "[", 
+        RowBox[{"d", ",", " ", "z", ",", " ", "x"}], "]"}], ",", " ", 
+       RowBox[{"a", "[", 
+        RowBox[{"d", ",", " ", "z", ",", " ", "e"}], "]"}], ",", " ", 
+       RowBox[{"o", "[", 
+        RowBox[{"y", ",", " ", "e", ",", " ", "d"}], "]"}]}], "}"}]}], 
+    "]"}]}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.5806521218118563`*^9, 3.5806521898164663`*^9}},
+ CellID->840155961],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Deflate", "[", 
+   RowBox[{"o", "[", 
+    RowBox[{"x_", ",", " ", "y_", ",", " ", "z_"}], "]"}], "]"}], " ", ":=", 
+  " ", "\n", "      ", 
+  RowBox[{"With", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"d", " ", "=", " ", 
+      RowBox[{
+       RowBox[{"c2", "*", "x"}], " ", "+", " ", 
+       RowBox[{"c1", "*", "z"}]}]}], "}"}], ",", " ", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"o", "[", 
+       RowBox[{"z", ",", " ", "d", ",", " ", "y"}], "]"}], ",", " ", 
+      RowBox[{"a", "[", 
+       RowBox[{"y", ",", " ", "x", ",", " ", "d"}], "]"}]}], "}"}]}], 
+   "]"}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.5806521218118563`*^9, 3.580652193168953*^9}},
+ CellID->796257502],
+
+Cell[BoxData[
+ RowBox[{" ", 
+  RowBox[{
+   RowBox[{"Deflate", "[", "x_List", "]"}], " ", ":=", " ", 
+   RowBox[{"Join", " ", "@@", " ", 
+    RowBox[{"Deflate", " ", "/@", " ", "x"}]}]}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.5806521218118563`*^9, 3.580652202281397*^9}},
+ CellID->1729231657],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Deflate", "[", 
+   RowBox[{"x_", ",", " ", "n_"}], "]"}], " ", ":=", " ", "\n", "      ", 
+  RowBox[{"Nest", "[", 
+   RowBox[{"Deflate", ",", " ", "x", ",", " ", "n"}], "]"}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.5806521218118563`*^9, 3.580652213801916*^9}},
+ CellID->1300264348],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"c1", " ", "=", " ", "0.6180339887498949"}], ";", " ", 
+  RowBox[{"c2", " ", "=", " ", "0.3819660112501051"}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.5806521218118563`*^9, 3.580652221811914*^9}},
+ CellID->749304964]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"With", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"qc1", "=", 
+       RowBox[{"Graphics", "[", 
+        RowBox[{"ColorGraph", "[", "\n", "    ", 
+         RowBox[{"Deflate", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"a", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"1.", ",", " ", "0."}], "}"}], ",", " ", 
+               RowBox[{"{", 
+                RowBox[{"0.", ",", " ", "0."}], "}"}], ",", " ", 
+               RowBox[{"{", 
+                RowBox[{
+                "0.8090169943749475", ",", " ", "0.5877852522924731"}], 
+                "}"}]}], "]"}], ",", " ", "\n", "     ", 
+             RowBox[{"a", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"1.", ",", " ", "0."}], "}"}], ",", " ", 
+               RowBox[{"{", 
+                RowBox[{"0.", ",", " ", "0."}], "}"}], ",", " ", 
+               RowBox[{"{", 
+                RowBox[{"0.8090169943749475", ",", " ", 
+                 RowBox[{"-", "0.5877852522924731"}]}], "}"}]}], "]"}], ",", 
+             " ", "\n", "     ", 
+             RowBox[{"a", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                "0.30901699437494745", ",", " ", "0.9510565162951535"}], 
+                "}"}], ",", " ", 
+               RowBox[{"{", 
+                RowBox[{"0.", ",", " ", "0."}], "}"}], ",", " ", "\n", 
+               "      ", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"-", "0.30901699437494745"}], ",", " ", 
+                 "0.9510565162951535"}], "}"}]}], "]"}], ",", " ", "\n", 
+             "     ", 
+             RowBox[{"a", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                "0.30901699437494745", ",", " ", "0.9510565162951535"}], 
+                "}"}], ",", " ", 
+               RowBox[{"{", 
+                RowBox[{"0.", ",", " ", "0."}], "}"}], ",", " ", "\n", 
+               "      ", 
+               RowBox[{"{", 
+                RowBox[{
+                "0.8090169943749475", ",", " ", "0.5877852522924731"}], 
+                "}"}]}], "]"}], ",", " ", "\n", "     ", 
+             RowBox[{"a", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"-", "0.8090169943749475"}], ",", " ", 
+                 "0.5877852522924731"}], "}"}], ",", " ", 
+               RowBox[{"{", 
+                RowBox[{"0.", ",", " ", "0."}], "}"}], ",", " ", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"-", "1."}], ",", " ", "0."}], "}"}]}], "]"}], ",", 
+             " ", "\n", "     ", 
+             RowBox[{"a", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"-", "0.8090169943749475"}], ",", " ", 
+                 "0.5877852522924731"}], "}"}], ",", " ", 
+               RowBox[{"{", 
+                RowBox[{"0.", ",", " ", "0."}], "}"}], ",", " ", "\n", 
+               "      ", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"-", "0.30901699437494745"}], ",", " ", 
+                 "0.9510565162951535"}], "}"}]}], "]"}], ",", " ", "\n", 
+             "     ", 
+             RowBox[{"a", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"-", "0.8090169943749475"}], ",", " ", 
+                 RowBox[{"-", "0.5877852522924731"}]}], "}"}], ",", " ", 
+               RowBox[{"{", 
+                RowBox[{"0.", ",", " ", "0."}], "}"}], ",", " ", "\n", 
+               "      ", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"-", "0.30901699437494745"}], ",", " ", 
+                 RowBox[{"-", "0.9510565162951535"}]}], "}"}]}], "]"}], ",", 
+             " ", "\n", "     ", 
+             RowBox[{"a", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"-", "0.8090169943749475"}], ",", " ", 
+                 RowBox[{"-", "0.5877852522924731"}]}], "}"}], ",", " ", 
+               RowBox[{"{", 
+                RowBox[{"0.", ",", " ", "0."}], "}"}], ",", " ", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"-", "1."}], ",", " ", "0."}], "}"}]}], "]"}], ",", 
+             " ", "\n", "     ", 
+             RowBox[{"a", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"0.30901699437494745", ",", " ", 
+                 RowBox[{"-", "0.9510565162951535"}]}], "}"}], ",", " ", 
+               RowBox[{"{", 
+                RowBox[{"0.", ",", " ", "0."}], "}"}], ",", " ", "\n", 
+               "      ", 
+               RowBox[{"{", 
+                RowBox[{"0.8090169943749475", ",", " ", 
+                 RowBox[{"-", "0.5877852522924731"}]}], "}"}]}], "]"}], ",", 
+             " ", "\n", "     ", 
+             RowBox[{"a", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"0.30901699437494745", ",", " ", 
+                 RowBox[{"-", "0.9510565162951535"}]}], "}"}], ",", " ", 
+               RowBox[{"{", 
+                RowBox[{"0.", ",", " ", "0."}], "}"}], ",", " ", "\n", 
+               "      ", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"-", "0.30901699437494745"}], ",", " ", 
+                 RowBox[{"-", "0.9510565162951535"}]}], "}"}]}], "]"}]}], 
+            "}"}], ",", " ", "n"}], "]"}], "]"}], "]"}]}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"With", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"lines2", "=", 
+          RowBox[{"Cases", "[", 
+           RowBox[{
+            RowBox[{"qc1", "/.", 
+             RowBox[{
+              RowBox[{"Polygon", "[", "l_", "]"}], ":>", 
+              RowBox[{"Polygon", "[", 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{"l", "+", ".65"}], ")"}], "/", "1.3"}], "]"}]}]}], 
+            ",", 
+            RowBox[{
+             RowBox[{"Polygon", "[", "l_", "]"}], "/;", 
+             RowBox[{
+              RowBox[{"0", "<", 
+               RowBox[{"Part", "[", 
+                RowBox[{
+                 RowBox[{"Mean", "@", "l"}], ",", "1"}], "]"}], "<", "1"}], 
+              "\[And]", 
+              RowBox[{"0", "<", 
+               RowBox[{"Part", "[", 
+                RowBox[{
+                 RowBox[{"Mean", "@", "l"}], ",", "2"}], "]"}], "<", 
+               "1"}]}]}], ",", 
+            RowBox[{"{", "5", "}"}]}], "]"}]}], ",", 
+         RowBox[{"raster", "=", 
+          RowBox[{"ImageCrop", "[", 
+           RowBox[{
+            RowBox[{"ExampleData", "[", 
+             RowBox[{"{", 
+              RowBox[{"\"\<TestImage\>\"", ",", "\"\<Tiffany\>\""}], "}"}], 
+             "]"}], ",", "511", ",", " ", 
+            RowBox[{"{", 
+             RowBox[{"Left", ",", "Bottom"}], "}"}]}], "]"}]}]}], "}"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"With", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"colors", "=", 
+           RowBox[{"Reverse", "@", 
+            RowBox[{"ImageData", "@", 
+             RowBox[{"ImageResize", "[", 
+              RowBox[{"raster", ",", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{
+                 "5", ",", "7", ",", "11", ",", "18", ",", "29", ",", "47", 
+                  ",", "76", ",", "122", ",", "198", ",", "320"}], "}"}], "[", 
+                RowBox[{"[", "n", "]"}], "]"}]}], "]"}]}]}]}], "}"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Graphics", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"RGBColor", "[", 
+                 RowBox[{"colors", "\[LeftDoubleBracket]", 
+                  RowBox[{"Sequence", "@@", 
+                   RowBox[{"Ceiling", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    "5", ",", "7", ",", "11", ",", "18", ",", "29", ",", "47",
+                     ",", "76", ",", "122", ",", "198", ",", "320"}], "}"}], 
+                    "[", 
+                    RowBox[{"[", "n", "]"}], "]"}], " ", 
+                    RowBox[{"Reverse", "[", 
+                    RowBox[{"Mean", "@@", "#1"}], "]"}]}], "]"}]}], 
+                  "\[RightDoubleBracket]"}], "]"}], ",", "#1"}], "}"}], "&"}],
+              ")"}], "/@", "lines2"}], ",", 
+           RowBox[{"ImageSize", "\[Rule]", 
+            RowBox[{"{", 
+             RowBox[{"420", ",", "420"}], "}"}]}]}], "]"}]}], "]"}]}], 
+      "]"}]}], "]"}], ",", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"n", ",", "6", ",", "\"\<steps\>\""}], "}"}], ",", "1", ",", 
+     "8", ",", "1", ",", "Setter"}], "}"}], ",", 
+   RowBox[{"SaveDefinitions", "\[Rule]", "True"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.580307611358459*^9, 3.580307615879627*^9}, {
+   3.580307648263035*^9, 3.5803076524843283`*^9}, 3.5803076994933233`*^9, 
+   3.5803079541502733`*^9, {3.58030807998413*^9, 3.580308091312352*^9}, {
+   3.58030813294707*^9, 3.5803081332849283`*^9}, {3.5803082657106133`*^9, 
+   3.580308270863965*^9}, {3.58030832897009*^9, 3.580308354295351*^9}, {
+   3.580308390585906*^9, 3.5803084706674213`*^9}, {3.580308507150958*^9, 
+   3.580308522018352*^9}, {3.5803085607669773`*^9, 3.580308572107758*^9}, {
+   3.580308794263915*^9, 3.58030880534438*^9}, {3.5803092398730164`*^9, 
+   3.580309266061843*^9}, {3.580309396022271*^9, 3.580309413738865*^9}, {
+   3.58030946915935*^9, 3.580309488194861*^9}, {3.580309523722734*^9, 
+   3.5803095408343163`*^9}, {3.580488293308988*^9, 3.580488298257614*^9}, {
+   3.580488924071838*^9, 3.5804889286377077`*^9}, {3.580489539090516*^9, 
+   3.580489688617318*^9}, {3.5804897253954773`*^9, 3.580489777650505*^9}, {
+   3.580489835815332*^9, 3.580489836623365*^9}, 3.580596745129785*^9, {
+   3.580603132373683*^9, 3.5806031374364567`*^9}, {3.580603435453783*^9, 
+   3.580603452742579*^9}, {3.580603500579022*^9, 3.580603528107683*^9}, {
+   3.580603562004623*^9, 3.580603624963416*^9}, {3.580644874409737*^9, 
+   3.580644931382523*^9}, {3.5806449901310863`*^9, 3.580644998249881*^9}, 
+   3.5806450453452883`*^9, {3.580649164272738*^9, 3.580649193433236*^9}, {
+   3.580649355218665*^9, 3.5806493640157957`*^9}, 3.580649484252254*^9, {
+   3.580649562766129*^9, 3.5806496001272287`*^9}, 3.580649971606592*^9, {
+   3.5806502061167603`*^9, 3.5806502224253407`*^9}, {3.580650660017912*^9, 
+   3.5806506659461718`*^9}, 3.580650974252767*^9, {3.580651085161792*^9, 
+   3.580651105922827*^9}, {3.580651327004397*^9, 3.580651327485799*^9}, {
+   3.580651405614266*^9, 3.580651429509427*^9}, 3.5806515009128838`*^9, {
+   3.580651565793455*^9, 3.580651575499607*^9}, {3.580651631188816*^9, 
+   3.580651637090938*^9}, 3.580651772637405*^9, {3.580651913760734*^9, 
+   3.5806519286332407`*^9}, {3.5806519723945312`*^9, 3.580651973236987*^9}, {
+   3.580652336765057*^9, 3.58065234544989*^9}, {3.580652597946203*^9, 
+   3.580652613469852*^9}, {3.580652750485602*^9, 3.5806527688093147`*^9}, 
+   3.58065822970354*^9, 3.580661655419495*^9, {3.58066169427538*^9, 
+   3.5806617261965723`*^9}, {3.580744027251597*^9, 3.58074405423009*^9}},
+ CellID->571857240],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 6, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`n$$], 6, "steps"}, 1, 8, 1}}, Typeset`size$$ = {
+    420., {208., 212.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`n$6596$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`n$$ = 6}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`n$$, $CellContext`n$6596$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> With[{$CellContext`qc1$ = Graphics[
+           $CellContext`ColorGraph[
+            $CellContext`Deflate[{
+              $CellContext`a[{1., 0.}, {0., 0.}, {0.8090169943749475, 
+               0.5877852522924731}], 
+              $CellContext`a[{1., 0.}, {0., 0.}, {
+               0.8090169943749475, -0.5877852522924731}], 
+              $CellContext`a[{0.30901699437494745`, 0.9510565162951535}, {0., 
+               0.}, {-0.30901699437494745`, 0.9510565162951535}], 
+              $CellContext`a[{0.30901699437494745`, 0.9510565162951535}, {0., 
+               0.}, {0.8090169943749475, 0.5877852522924731}], 
+              $CellContext`a[{-0.8090169943749475, 0.5877852522924731}, {0., 
+               0.}, {-1., 0.}], 
+              $CellContext`a[{-0.8090169943749475, 0.5877852522924731}, {0., 
+               0.}, {-0.30901699437494745`, 0.9510565162951535}], 
+              $CellContext`a[{-0.8090169943749475, -0.5877852522924731}, {0., 
+               0.}, {-0.30901699437494745`, -0.9510565162951535}], 
+              $CellContext`a[{-0.8090169943749475, -0.5877852522924731}, {0., 
+               0.}, {-1., 0.}], 
+              $CellContext`a[{0.30901699437494745`, -0.9510565162951535}, {0.,
+                0.}, {0.8090169943749475, -0.5877852522924731}], 
+              $CellContext`a[{0.30901699437494745`, -0.9510565162951535}, {0.,
+                0.}, {-0.30901699437494745`, -0.9510565162951535}]}, \
+$CellContext`n$$]]]}, 
+        With[{$CellContext`lines2$ = Cases[
+            ReplaceAll[$CellContext`qc1$, Polygon[
+               Pattern[$CellContext`l, 
+                Blank[]]] :> Polygon[($CellContext`l + 0.65)/1.3]], 
+            Condition[
+             Polygon[
+              Pattern[$CellContext`l, 
+               Blank[]]], 
+             And[0 < Part[
+                Mean[$CellContext`l], 1] < 1, 0 < Part[
+                Mean[$CellContext`l], 2] < 1]], {5}], $CellContext`raster$ = 
+          ImageCrop[
+            ExampleData[{"TestImage", "Tiffany"}], 511, {Left, Bottom}]}, 
+         With[{$CellContext`colors$ = Reverse[
+             ImageData[
+              ImageResize[$CellContext`raster$, 
+               
+               Part[{5, 7, 11, 18, 29, 47, 76, 122, 198, 
+                320}, $CellContext`n$$]]]]}, 
+          Graphics[
+           Map[{
+             RGBColor[
+              Part[$CellContext`colors$, 
+               Apply[Sequence, 
+                Ceiling[
+                Part[{5, 7, 11, 18, 29, 47, 76, 122, 198, 
+                   320}, $CellContext`n$$] Reverse[
+                   Apply[Mean, #]]]]]], #}& , $CellContext`lines2$], 
+           ImageSize -> {420, 420}]]]], 
+      "Specifications" :> {{{$CellContext`n$$, 6, "steps"}, 1, 8, 1, 
+         ControlType -> Setter}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{469., {252., 257.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`ColorGraph[
+         Pattern[$CellContext`t, 
+          Blank[]]] := ({
+         Part[#, 1], {$CellContext`KiteColor, 
+          Part[#, 2]}, {$CellContext`DartColor, 
+          Part[#, 3]}}& )[
+         Last[
+          Reap[
+           ReplaceAll[$CellContext`t, {$CellContext`a[
+               Pattern[$CellContext`x, 
+                Blank[]], 
+               Pattern[$CellContext`y, 
+                Blank[]], 
+               Pattern[$CellContext`z, 
+                Blank[]]] :> {
+               Sow[
+                Line[{$CellContext`y, $CellContext`z, $CellContext`x}], 
+                "line"], 
+               Sow[
+                Polygon[{$CellContext`y, $CellContext`z, $CellContext`x}], 
+                "kitepolygon"]}, $CellContext`o[
+               Pattern[$CellContext`x, 
+                Blank[]], 
+               Pattern[$CellContext`y, 
+                Blank[]], 
+               Pattern[$CellContext`z, 
+                Blank[]]] :> {
+               Sow[
+                Line[{$CellContext`y, $CellContext`z, $CellContext`x}], 
+                "line"], 
+               Sow[
+                Polygon[{$CellContext`y, $CellContext`z, $CellContext`x}], 
+                "dartpolygon"]}}], {
+           "line", "kitepolygon", "dartpolygon"}]]], $CellContext`KiteColor = 
+       RGBColor[0.2, 0.2, 1.], $CellContext`DartColor = 
+       RGBColor[0.7, 0.7, 1.], $CellContext`Deflate[
+         $CellContext`a[
+          Pattern[$CellContext`x, 
+           Blank[]], 
+          Pattern[$CellContext`y, 
+           Blank[]], 
+          Pattern[$CellContext`z, 
+           Blank[]]]] := 
+       With[{$CellContext`d = $CellContext`c1 $CellContext`x + \
+$CellContext`c2 $CellContext`y, $CellContext`e = $CellContext`c1 \
+$CellContext`y + $CellContext`c2 $CellContext`z}, {
+          $CellContext`a[$CellContext`d, $CellContext`z, $CellContext`x], 
+          $CellContext`a[$CellContext`d, $CellContext`z, $CellContext`e], 
+          $CellContext`o[$CellContext`y, $CellContext`e, $CellContext`d]}], \
+$CellContext`Deflate[
+         $CellContext`o[
+          Pattern[$CellContext`x, 
+           Blank[]], 
+          Pattern[$CellContext`y, 
+           Blank[]], 
+          Pattern[$CellContext`z, 
+           Blank[]]]] := 
+       With[{$CellContext`d = $CellContext`c2 $CellContext`x + \
+$CellContext`c1 $CellContext`z}, {
+          $CellContext`o[$CellContext`z, $CellContext`d, $CellContext`y], 
+          $CellContext`a[$CellContext`y, $CellContext`x, $CellContext`d]}], \
+$CellContext`Deflate[
+         Pattern[$CellContext`x, 
+          Blank[List]]] := Apply[Join, 
+         Map[$CellContext`Deflate, $CellContext`x]], $CellContext`Deflate[
+         Pattern[$CellContext`x, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]]] := 
+       Nest[$CellContext`Deflate, $CellContext`x, $CellContext`n], \
+$CellContext`c1 = 0.6180339887498949, $CellContext`c2 = 0.3819660112501051}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->198854593]
+}, {2}]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell[TextData[{
+ "This Demonstration shows a picture sampled with points obtained from a \
+quasicrystal after ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]], "InlineMath"],
+ " steps of deflation of the quasicrystal. [1] discusses an analysis of the \
+fidelity of the image reconstruction compared with other techniques in \
+computer graphics."
+}], "ManipulateCaption",
+ CellChangeTimes->{{3.58065410163826*^9, 3.580654269971673*^9}, {
+  3.580654334401421*^9, 3.580654390324829*^9}, {3.58074408007454*^9, 
+  3.58074414567232*^9}, {3.58107287203013*^9, 3.5810728725931864`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 6, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`n$$], 6, "steps"}, 1, 8, 1}}, Typeset`size$$ = {
+    420., {208., 212.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`n$6645$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`n$$ = 6}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`n$$, $CellContext`n$6645$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> With[{$CellContext`qc1$ = Graphics[
+           $CellContext`ColorGraph[
+            $CellContext`Deflate[{
+              $CellContext`a[{1., 0.}, {0., 0.}, {0.8090169943749475, 
+               0.5877852522924731}], 
+              $CellContext`a[{1., 0.}, {0., 0.}, {
+               0.8090169943749475, -0.5877852522924731}], 
+              $CellContext`a[{0.30901699437494745`, 0.9510565162951535}, {0., 
+               0.}, {-0.30901699437494745`, 0.9510565162951535}], 
+              $CellContext`a[{0.30901699437494745`, 0.9510565162951535}, {0., 
+               0.}, {0.8090169943749475, 0.5877852522924731}], 
+              $CellContext`a[{-0.8090169943749475, 0.5877852522924731}, {0., 
+               0.}, {-1., 0.}], 
+              $CellContext`a[{-0.8090169943749475, 0.5877852522924731}, {0., 
+               0.}, {-0.30901699437494745`, 0.9510565162951535}], 
+              $CellContext`a[{-0.8090169943749475, -0.5877852522924731}, {0., 
+               0.}, {-0.30901699437494745`, -0.9510565162951535}], 
+              $CellContext`a[{-0.8090169943749475, -0.5877852522924731}, {0., 
+               0.}, {-1., 0.}], 
+              $CellContext`a[{0.30901699437494745`, -0.9510565162951535}, {0.,
+                0.}, {0.8090169943749475, -0.5877852522924731}], 
+              $CellContext`a[{0.30901699437494745`, -0.9510565162951535}, {0.,
+                0.}, {-0.30901699437494745`, -0.9510565162951535}]}, \
+$CellContext`n$$]]]}, 
+        With[{$CellContext`lines2$ = Cases[
+            ReplaceAll[$CellContext`qc1$, Polygon[
+               Pattern[$CellContext`l, 
+                Blank[]]] :> Polygon[($CellContext`l + 0.65)/1.3]], 
+            Condition[
+             Polygon[
+              Pattern[$CellContext`l, 
+               Blank[]]], 
+             And[0 < Part[
+                Mean[$CellContext`l], 1] < 1, 0 < Part[
+                Mean[$CellContext`l], 2] < 1]], {5}], $CellContext`raster$ = 
+          ImageCrop[
+            ExampleData[{"TestImage", "Tiffany"}], 511, {Left, Bottom}]}, 
+         With[{$CellContext`colors$ = Reverse[
+             ImageData[
+              ImageResize[$CellContext`raster$, 
+               
+               Part[{5, 7, 11, 18, 29, 47, 76, 122, 198, 
+                320}, $CellContext`n$$]]]]}, 
+          Graphics[
+           Map[{
+             RGBColor[
+              Part[$CellContext`colors$, 
+               Apply[Sequence, 
+                Ceiling[
+                Part[{5, 7, 11, 18, 29, 47, 76, 122, 198, 
+                   320}, $CellContext`n$$] Reverse[
+                   Apply[Mean, #]]]]]], #}& , $CellContext`lines2$], 
+           ImageSize -> {420, 420}]]]], 
+      "Specifications" :> {{{$CellContext`n$$, 6, "steps"}, 1, 8, 1, 
+         ControlType -> Setter}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{469., {252., 257.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`ColorGraph[
+         Pattern[$CellContext`t, 
+          Blank[]]] := ({
+         Part[#, 1], {$CellContext`KiteColor, 
+          Part[#, 2]}, {$CellContext`DartColor, 
+          Part[#, 3]}}& )[
+         Last[
+          Reap[
+           ReplaceAll[$CellContext`t, {$CellContext`a[
+               Pattern[$CellContext`x, 
+                Blank[]], 
+               Pattern[$CellContext`y, 
+                Blank[]], 
+               Pattern[$CellContext`z, 
+                Blank[]]] :> {
+               Sow[
+                Line[{$CellContext`y, $CellContext`z, $CellContext`x}], 
+                "line"], 
+               Sow[
+                Polygon[{$CellContext`y, $CellContext`z, $CellContext`x}], 
+                "kitepolygon"]}, $CellContext`o[
+               Pattern[$CellContext`x, 
+                Blank[]], 
+               Pattern[$CellContext`y, 
+                Blank[]], 
+               Pattern[$CellContext`z, 
+                Blank[]]] :> {
+               Sow[
+                Line[{$CellContext`y, $CellContext`z, $CellContext`x}], 
+                "line"], 
+               Sow[
+                Polygon[{$CellContext`y, $CellContext`z, $CellContext`x}], 
+                "dartpolygon"]}}], {
+           "line", "kitepolygon", "dartpolygon"}]]], $CellContext`KiteColor = 
+       RGBColor[0.2, 0.2, 1.], $CellContext`DartColor = 
+       RGBColor[0.7, 0.7, 1.], $CellContext`Deflate[
+         $CellContext`a[
+          Pattern[$CellContext`x, 
+           Blank[]], 
+          Pattern[$CellContext`y, 
+           Blank[]], 
+          Pattern[$CellContext`z, 
+           Blank[]]]] := 
+       With[{$CellContext`d = $CellContext`c1 $CellContext`x + \
+$CellContext`c2 $CellContext`y, $CellContext`e = $CellContext`c1 \
+$CellContext`y + $CellContext`c2 $CellContext`z}, {
+          $CellContext`a[$CellContext`d, $CellContext`z, $CellContext`x], 
+          $CellContext`a[$CellContext`d, $CellContext`z, $CellContext`e], 
+          $CellContext`o[$CellContext`y, $CellContext`e, $CellContext`d]}], \
+$CellContext`Deflate[
+         $CellContext`o[
+          Pattern[$CellContext`x, 
+           Blank[]], 
+          Pattern[$CellContext`y, 
+           Blank[]], 
+          Pattern[$CellContext`z, 
+           Blank[]]]] := 
+       With[{$CellContext`d = $CellContext`c2 $CellContext`x + \
+$CellContext`c1 $CellContext`z}, {
+          $CellContext`o[$CellContext`z, $CellContext`d, $CellContext`y], 
+          $CellContext`a[$CellContext`y, $CellContext`x, $CellContext`d]}], \
+$CellContext`Deflate[
+         Pattern[$CellContext`x, 
+          Blank[List]]] := Apply[Join, 
+         Map[$CellContext`Deflate, $CellContext`x]], $CellContext`Deflate[
+         Pattern[$CellContext`x, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]]] := 
+       Nest[$CellContext`Deflate, $CellContext`x, $CellContext`n], \
+$CellContext`c1 = 0.6180339887498949, $CellContext`c2 = 0.3819660112501051}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->664589819]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 3, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`n$$], 3, "steps"}, 1, 8, 1}}, Typeset`size$$ = {
+    420., {208., 212.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`n$6694$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`n$$ = 3}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`n$$, $CellContext`n$6694$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> With[{$CellContext`qc1$ = Graphics[
+           $CellContext`ColorGraph[
+            $CellContext`Deflate[{
+              $CellContext`a[{1., 0.}, {0., 0.}, {0.8090169943749475, 
+               0.5877852522924731}], 
+              $CellContext`a[{1., 0.}, {0., 0.}, {
+               0.8090169943749475, -0.5877852522924731}], 
+              $CellContext`a[{0.30901699437494745`, 0.9510565162951535}, {0., 
+               0.}, {-0.30901699437494745`, 0.9510565162951535}], 
+              $CellContext`a[{0.30901699437494745`, 0.9510565162951535}, {0., 
+               0.}, {0.8090169943749475, 0.5877852522924731}], 
+              $CellContext`a[{-0.8090169943749475, 0.5877852522924731}, {0., 
+               0.}, {-1., 0.}], 
+              $CellContext`a[{-0.8090169943749475, 0.5877852522924731}, {0., 
+               0.}, {-0.30901699437494745`, 0.9510565162951535}], 
+              $CellContext`a[{-0.8090169943749475, -0.5877852522924731}, {0., 
+               0.}, {-0.30901699437494745`, -0.9510565162951535}], 
+              $CellContext`a[{-0.8090169943749475, -0.5877852522924731}, {0., 
+               0.}, {-1., 0.}], 
+              $CellContext`a[{0.30901699437494745`, -0.9510565162951535}, {0.,
+                0.}, {0.8090169943749475, -0.5877852522924731}], 
+              $CellContext`a[{0.30901699437494745`, -0.9510565162951535}, {0.,
+                0.}, {-0.30901699437494745`, -0.9510565162951535}]}, \
+$CellContext`n$$]]]}, 
+        With[{$CellContext`lines2$ = Cases[
+            ReplaceAll[$CellContext`qc1$, Polygon[
+               Pattern[$CellContext`l, 
+                Blank[]]] :> Polygon[($CellContext`l + 0.65)/1.3]], 
+            Condition[
+             Polygon[
+              Pattern[$CellContext`l, 
+               Blank[]]], 
+             And[0 < Part[
+                Mean[$CellContext`l], 1] < 1, 0 < Part[
+                Mean[$CellContext`l], 2] < 1]], {5}], $CellContext`raster$ = 
+          ImageCrop[
+            ExampleData[{"TestImage", "Tiffany"}], 511, {Left, Bottom}]}, 
+         With[{$CellContext`colors$ = Reverse[
+             ImageData[
+              ImageResize[$CellContext`raster$, 
+               
+               Part[{5, 7, 11, 18, 29, 47, 76, 122, 198, 
+                320}, $CellContext`n$$]]]]}, 
+          Graphics[
+           Map[{
+             RGBColor[
+              Part[$CellContext`colors$, 
+               Apply[Sequence, 
+                Ceiling[
+                Part[{5, 7, 11, 18, 29, 47, 76, 122, 198, 
+                   320}, $CellContext`n$$] Reverse[
+                   Apply[Mean, #]]]]]], #}& , $CellContext`lines2$], 
+           ImageSize -> {420, 420}]]]], 
+      "Specifications" :> {{{$CellContext`n$$, 3, "steps"}, 1, 8, 1, 
+         ControlType -> Setter}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{469., {252., 257.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`ColorGraph[
+         Pattern[$CellContext`t, 
+          Blank[]]] := ({
+         Part[#, 1], {$CellContext`KiteColor, 
+          Part[#, 2]}, {$CellContext`DartColor, 
+          Part[#, 3]}}& )[
+         Last[
+          Reap[
+           ReplaceAll[$CellContext`t, {$CellContext`a[
+               Pattern[$CellContext`x, 
+                Blank[]], 
+               Pattern[$CellContext`y, 
+                Blank[]], 
+               Pattern[$CellContext`z, 
+                Blank[]]] :> {
+               Sow[
+                Line[{$CellContext`y, $CellContext`z, $CellContext`x}], 
+                "line"], 
+               Sow[
+                Polygon[{$CellContext`y, $CellContext`z, $CellContext`x}], 
+                "kitepolygon"]}, $CellContext`o[
+               Pattern[$CellContext`x, 
+                Blank[]], 
+               Pattern[$CellContext`y, 
+                Blank[]], 
+               Pattern[$CellContext`z, 
+                Blank[]]] :> {
+               Sow[
+                Line[{$CellContext`y, $CellContext`z, $CellContext`x}], 
+                "line"], 
+               Sow[
+                Polygon[{$CellContext`y, $CellContext`z, $CellContext`x}], 
+                "dartpolygon"]}}], {
+           "line", "kitepolygon", "dartpolygon"}]]], $CellContext`KiteColor = 
+       RGBColor[0.2, 0.2, 1.], $CellContext`DartColor = 
+       RGBColor[0.7, 0.7, 1.], $CellContext`Deflate[
+         $CellContext`a[
+          Pattern[$CellContext`x, 
+           Blank[]], 
+          Pattern[$CellContext`y, 
+           Blank[]], 
+          Pattern[$CellContext`z, 
+           Blank[]]]] := 
+       With[{$CellContext`d = $CellContext`c1 $CellContext`x + \
+$CellContext`c2 $CellContext`y, $CellContext`e = $CellContext`c1 \
+$CellContext`y + $CellContext`c2 $CellContext`z}, {
+          $CellContext`a[$CellContext`d, $CellContext`z, $CellContext`x], 
+          $CellContext`a[$CellContext`d, $CellContext`z, $CellContext`e], 
+          $CellContext`o[$CellContext`y, $CellContext`e, $CellContext`d]}], \
+$CellContext`Deflate[
+         $CellContext`o[
+          Pattern[$CellContext`x, 
+           Blank[]], 
+          Pattern[$CellContext`y, 
+           Blank[]], 
+          Pattern[$CellContext`z, 
+           Blank[]]]] := 
+       With[{$CellContext`d = $CellContext`c2 $CellContext`x + \
+$CellContext`c1 $CellContext`z}, {
+          $CellContext`o[$CellContext`z, $CellContext`d, $CellContext`y], 
+          $CellContext`a[$CellContext`y, $CellContext`x, $CellContext`d]}], \
+$CellContext`Deflate[
+         Pattern[$CellContext`x, 
+          Blank[List]]] := Apply[Join, 
+         Map[$CellContext`Deflate, $CellContext`x]], $CellContext`Deflate[
+         Pattern[$CellContext`x, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]]] := 
+       Nest[$CellContext`Deflate, $CellContext`x, $CellContext`n], \
+$CellContext`c1 = 0.6180339887498949, $CellContext`c2 = 0.3819660112501051}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->698639886],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 5, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`n$$], 5, "steps"}, 1, 8, 1}}, Typeset`size$$ = {
+    420., {208., 212.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`n$6743$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`n$$ = 5}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`n$$, $CellContext`n$6743$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> With[{$CellContext`qc1$ = Graphics[
+           $CellContext`ColorGraph[
+            $CellContext`Deflate[{
+              $CellContext`a[{1., 0.}, {0., 0.}, {0.8090169943749475, 
+               0.5877852522924731}], 
+              $CellContext`a[{1., 0.}, {0., 0.}, {
+               0.8090169943749475, -0.5877852522924731}], 
+              $CellContext`a[{0.30901699437494745`, 0.9510565162951535}, {0., 
+               0.}, {-0.30901699437494745`, 0.9510565162951535}], 
+              $CellContext`a[{0.30901699437494745`, 0.9510565162951535}, {0., 
+               0.}, {0.8090169943749475, 0.5877852522924731}], 
+              $CellContext`a[{-0.8090169943749475, 0.5877852522924731}, {0., 
+               0.}, {-1., 0.}], 
+              $CellContext`a[{-0.8090169943749475, 0.5877852522924731}, {0., 
+               0.}, {-0.30901699437494745`, 0.9510565162951535}], 
+              $CellContext`a[{-0.8090169943749475, -0.5877852522924731}, {0., 
+               0.}, {-0.30901699437494745`, -0.9510565162951535}], 
+              $CellContext`a[{-0.8090169943749475, -0.5877852522924731}, {0., 
+               0.}, {-1., 0.}], 
+              $CellContext`a[{0.30901699437494745`, -0.9510565162951535}, {0.,
+                0.}, {0.8090169943749475, -0.5877852522924731}], 
+              $CellContext`a[{0.30901699437494745`, -0.9510565162951535}, {0.,
+                0.}, {-0.30901699437494745`, -0.9510565162951535}]}, \
+$CellContext`n$$]]]}, 
+        With[{$CellContext`lines2$ = Cases[
+            ReplaceAll[$CellContext`qc1$, Polygon[
+               Pattern[$CellContext`l, 
+                Blank[]]] :> Polygon[($CellContext`l + 0.65)/1.3]], 
+            Condition[
+             Polygon[
+              Pattern[$CellContext`l, 
+               Blank[]]], 
+             And[0 < Part[
+                Mean[$CellContext`l], 1] < 1, 0 < Part[
+                Mean[$CellContext`l], 2] < 1]], {5}], $CellContext`raster$ = 
+          ImageCrop[
+            ExampleData[{"TestImage", "Tiffany"}], 511, {Left, Bottom}]}, 
+         With[{$CellContext`colors$ = Reverse[
+             ImageData[
+              ImageResize[$CellContext`raster$, 
+               
+               Part[{5, 7, 11, 18, 29, 47, 76, 122, 198, 
+                320}, $CellContext`n$$]]]]}, 
+          Graphics[
+           Map[{
+             RGBColor[
+              Part[$CellContext`colors$, 
+               Apply[Sequence, 
+                Ceiling[
+                Part[{5, 7, 11, 18, 29, 47, 76, 122, 198, 
+                   320}, $CellContext`n$$] Reverse[
+                   Apply[Mean, #]]]]]], #}& , $CellContext`lines2$], 
+           ImageSize -> {420, 420}]]]], 
+      "Specifications" :> {{{$CellContext`n$$, 5, "steps"}, 1, 8, 1, 
+         ControlType -> Setter}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{469., {252., 257.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`ColorGraph[
+         Pattern[$CellContext`t, 
+          Blank[]]] := ({
+         Part[#, 1], {$CellContext`KiteColor, 
+          Part[#, 2]}, {$CellContext`DartColor, 
+          Part[#, 3]}}& )[
+         Last[
+          Reap[
+           ReplaceAll[$CellContext`t, {$CellContext`a[
+               Pattern[$CellContext`x, 
+                Blank[]], 
+               Pattern[$CellContext`y, 
+                Blank[]], 
+               Pattern[$CellContext`z, 
+                Blank[]]] :> {
+               Sow[
+                Line[{$CellContext`y, $CellContext`z, $CellContext`x}], 
+                "line"], 
+               Sow[
+                Polygon[{$CellContext`y, $CellContext`z, $CellContext`x}], 
+                "kitepolygon"]}, $CellContext`o[
+               Pattern[$CellContext`x, 
+                Blank[]], 
+               Pattern[$CellContext`y, 
+                Blank[]], 
+               Pattern[$CellContext`z, 
+                Blank[]]] :> {
+               Sow[
+                Line[{$CellContext`y, $CellContext`z, $CellContext`x}], 
+                "line"], 
+               Sow[
+                Polygon[{$CellContext`y, $CellContext`z, $CellContext`x}], 
+                "dartpolygon"]}}], {
+           "line", "kitepolygon", "dartpolygon"}]]], $CellContext`KiteColor = 
+       RGBColor[0.2, 0.2, 1.], $CellContext`DartColor = 
+       RGBColor[0.7, 0.7, 1.], $CellContext`Deflate[
+         $CellContext`a[
+          Pattern[$CellContext`x, 
+           Blank[]], 
+          Pattern[$CellContext`y, 
+           Blank[]], 
+          Pattern[$CellContext`z, 
+           Blank[]]]] := 
+       With[{$CellContext`d = $CellContext`c1 $CellContext`x + \
+$CellContext`c2 $CellContext`y, $CellContext`e = $CellContext`c1 \
+$CellContext`y + $CellContext`c2 $CellContext`z}, {
+          $CellContext`a[$CellContext`d, $CellContext`z, $CellContext`x], 
+          $CellContext`a[$CellContext`d, $CellContext`z, $CellContext`e], 
+          $CellContext`o[$CellContext`y, $CellContext`e, $CellContext`d]}], \
+$CellContext`Deflate[
+         $CellContext`o[
+          Pattern[$CellContext`x, 
+           Blank[]], 
+          Pattern[$CellContext`y, 
+           Blank[]], 
+          Pattern[$CellContext`z, 
+           Blank[]]]] := 
+       With[{$CellContext`d = $CellContext`c2 $CellContext`x + \
+$CellContext`c1 $CellContext`z}, {
+          $CellContext`o[$CellContext`z, $CellContext`d, $CellContext`y], 
+          $CellContext`a[$CellContext`y, $CellContext`x, $CellContext`d]}], \
+$CellContext`Deflate[
+         Pattern[$CellContext`x, 
+          Blank[List]]] := Apply[Join, 
+         Map[$CellContext`Deflate, $CellContext`x]], $CellContext`Deflate[
+         Pattern[$CellContext`x, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]]] := 
+       Nest[$CellContext`Deflate, $CellContext`x, $CellContext`n], \
+$CellContext`c1 = 0.6180339887498949, $CellContext`c2 = 0.3819660112501051}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->1747465853],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 7, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`n$$], 7, "steps"}, 1, 8, 1}}, Typeset`size$$ = {
+    420., {208., 212.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`n$6792$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`n$$ = 7}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`n$$, $CellContext`n$6792$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> With[{$CellContext`qc1$ = Graphics[
+           $CellContext`ColorGraph[
+            $CellContext`Deflate[{
+              $CellContext`a[{1., 0.}, {0., 0.}, {0.8090169943749475, 
+               0.5877852522924731}], 
+              $CellContext`a[{1., 0.}, {0., 0.}, {
+               0.8090169943749475, -0.5877852522924731}], 
+              $CellContext`a[{0.30901699437494745`, 0.9510565162951535}, {0., 
+               0.}, {-0.30901699437494745`, 0.9510565162951535}], 
+              $CellContext`a[{0.30901699437494745`, 0.9510565162951535}, {0., 
+               0.}, {0.8090169943749475, 0.5877852522924731}], 
+              $CellContext`a[{-0.8090169943749475, 0.5877852522924731}, {0., 
+               0.}, {-1., 0.}], 
+              $CellContext`a[{-0.8090169943749475, 0.5877852522924731}, {0., 
+               0.}, {-0.30901699437494745`, 0.9510565162951535}], 
+              $CellContext`a[{-0.8090169943749475, -0.5877852522924731}, {0., 
+               0.}, {-0.30901699437494745`, -0.9510565162951535}], 
+              $CellContext`a[{-0.8090169943749475, -0.5877852522924731}, {0., 
+               0.}, {-1., 0.}], 
+              $CellContext`a[{0.30901699437494745`, -0.9510565162951535}, {0.,
+                0.}, {0.8090169943749475, -0.5877852522924731}], 
+              $CellContext`a[{0.30901699437494745`, -0.9510565162951535}, {0.,
+                0.}, {-0.30901699437494745`, -0.9510565162951535}]}, \
+$CellContext`n$$]]]}, 
+        With[{$CellContext`lines2$ = Cases[
+            ReplaceAll[$CellContext`qc1$, Polygon[
+               Pattern[$CellContext`l, 
+                Blank[]]] :> Polygon[($CellContext`l + 0.65)/1.3]], 
+            Condition[
+             Polygon[
+              Pattern[$CellContext`l, 
+               Blank[]]], 
+             And[0 < Part[
+                Mean[$CellContext`l], 1] < 1, 0 < Part[
+                Mean[$CellContext`l], 2] < 1]], {5}], $CellContext`raster$ = 
+          ImageCrop[
+            ExampleData[{"TestImage", "Tiffany"}], 511, {Left, Bottom}]}, 
+         With[{$CellContext`colors$ = Reverse[
+             ImageData[
+              ImageResize[$CellContext`raster$, 
+               
+               Part[{5, 7, 11, 18, 29, 47, 76, 122, 198, 
+                320}, $CellContext`n$$]]]]}, 
+          Graphics[
+           Map[{
+             RGBColor[
+              Part[$CellContext`colors$, 
+               Apply[Sequence, 
+                Ceiling[
+                Part[{5, 7, 11, 18, 29, 47, 76, 122, 198, 
+                   320}, $CellContext`n$$] Reverse[
+                   Apply[Mean, #]]]]]], #}& , $CellContext`lines2$], 
+           ImageSize -> {420, 420}]]]], 
+      "Specifications" :> {{{$CellContext`n$$, 7, "steps"}, 1, 8, 1, 
+         ControlType -> Setter}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{469., {252., 257.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`ColorGraph[
+         Pattern[$CellContext`t, 
+          Blank[]]] := ({
+         Part[#, 1], {$CellContext`KiteColor, 
+          Part[#, 2]}, {$CellContext`DartColor, 
+          Part[#, 3]}}& )[
+         Last[
+          Reap[
+           ReplaceAll[$CellContext`t, {$CellContext`a[
+               Pattern[$CellContext`x, 
+                Blank[]], 
+               Pattern[$CellContext`y, 
+                Blank[]], 
+               Pattern[$CellContext`z, 
+                Blank[]]] :> {
+               Sow[
+                Line[{$CellContext`y, $CellContext`z, $CellContext`x}], 
+                "line"], 
+               Sow[
+                Polygon[{$CellContext`y, $CellContext`z, $CellContext`x}], 
+                "kitepolygon"]}, $CellContext`o[
+               Pattern[$CellContext`x, 
+                Blank[]], 
+               Pattern[$CellContext`y, 
+                Blank[]], 
+               Pattern[$CellContext`z, 
+                Blank[]]] :> {
+               Sow[
+                Line[{$CellContext`y, $CellContext`z, $CellContext`x}], 
+                "line"], 
+               Sow[
+                Polygon[{$CellContext`y, $CellContext`z, $CellContext`x}], 
+                "dartpolygon"]}}], {
+           "line", "kitepolygon", "dartpolygon"}]]], $CellContext`KiteColor = 
+       RGBColor[0.2, 0.2, 1.], $CellContext`DartColor = 
+       RGBColor[0.7, 0.7, 1.], $CellContext`Deflate[
+         $CellContext`a[
+          Pattern[$CellContext`x, 
+           Blank[]], 
+          Pattern[$CellContext`y, 
+           Blank[]], 
+          Pattern[$CellContext`z, 
+           Blank[]]]] := 
+       With[{$CellContext`d = $CellContext`c1 $CellContext`x + \
+$CellContext`c2 $CellContext`y, $CellContext`e = $CellContext`c1 \
+$CellContext`y + $CellContext`c2 $CellContext`z}, {
+          $CellContext`a[$CellContext`d, $CellContext`z, $CellContext`x], 
+          $CellContext`a[$CellContext`d, $CellContext`z, $CellContext`e], 
+          $CellContext`o[$CellContext`y, $CellContext`e, $CellContext`d]}], \
+$CellContext`Deflate[
+         $CellContext`o[
+          Pattern[$CellContext`x, 
+           Blank[]], 
+          Pattern[$CellContext`y, 
+           Blank[]], 
+          Pattern[$CellContext`z, 
+           Blank[]]]] := 
+       With[{$CellContext`d = $CellContext`c2 $CellContext`x + \
+$CellContext`c1 $CellContext`z}, {
+          $CellContext`o[$CellContext`z, $CellContext`d, $CellContext`y], 
+          $CellContext`a[$CellContext`y, $CellContext`x, $CellContext`d]}], \
+$CellContext`Deflate[
+         Pattern[$CellContext`x, 
+          Blank[List]]] := Apply[Join, 
+         Map[$CellContext`Deflate, $CellContext`x]], $CellContext`Deflate[
+         Pattern[$CellContext`x, 
+          Blank[]], 
+         Pattern[$CellContext`n, 
+          Blank[]]] := 
+       Nest[$CellContext`Deflate, $CellContext`x, $CellContext`n], \
+$CellContext`c1 = 0.6180339887498949, $CellContext`c2 = 0.3819660112501051}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->672234999]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "DetailsSection"],
+
+Cell["Reference", "DetailNotes",
+ CellChangeTimes->{{3.580654398614826*^9, 3.580654400326692*^9}},
+ CellID->254484209],
+
+Cell[TextData[{
+ "[1] M. Grundland, J. Patera, Z. Mas\[AAcute]\:0301kov\[AAcute]\:0301, and \
+N. A. Dodgson, \"Image Sampling with Quasicrystals,\" ",
+ StyleBox["Symmetry, Integrability and Geometry: Methods and Applications \
+(SIGMA)",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["5",
+  FontWeight->"Bold"],
+ "(075), 2009 pp. 1\[Dash]23. arXiv:",
+ ButtonBox["0907.3604",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://arxiv.org/abs/0907.3604"], None},
+  ButtonNote->"http://arxiv.org/abs/0907.3604"],
+ ". doi:",
+ ButtonBox["10.3842/SIGMA.2009.075",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://dx.doi.org/10.3842/SIGMA.2009.075"], None},
+  ButtonNote->"http://dx.doi.org/10.3842/SIGMA.2009.075"],
+ "."
+}], "DetailNotes",
+ CellChangeTimes->{{3.580597104350506*^9, 3.580597196577589*^9}, {
+  3.580597376858747*^9, 3.580597388248549*^9}, {3.5806544026779413`*^9, 
+  3.580654414737986*^9}, {3.580744166822188*^9, 3.580744173820058*^9}, {
+  3.5810728368816156`*^9, 3.581072839880915*^9}, {3.5810729438933153`*^9, 
+  3.581072971483074*^9}, {3.581073005665365*^9, 3.581073084626365*^9}},
+ CellID->1713854329]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.5805971012783318`*^9},
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{
+  3.35696210375764*^9, 3.3895522232313623`*^9, {3.5807441822652607`*^9, 
+   3.580744185707719*^9}},
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0, CellBaseline -> Baseline], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.5805970974194727`*^9},
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SearchTermsSection"],
+
+Cell["quasicrystal", "SearchTerms",
+ CellChangeTimes->{
+  3.580594849187632*^9, {3.58065363901105*^9, 3.580653641506867*^9}},
+ CellID->1291849518]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "RelatedLinksSection"],
+
+Cell[TextData[ButtonBox["Quasicrystal",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://scienceworld.wolfram.com/physics/Quasicrystal.html"], None},
+ ButtonNote->
+  "http://scienceworld.wolfram.com/physics/Quasicrystal.html"]], \
+"RelatedLinks",
+ CellChangeTimes->{{3.580594784352996*^9, 3.58059478435734*^9}},
+ CellID->850455973]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Enrique Zeleny",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Enrique+Zeleny"]\
+, None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Enrique+Zeleny"]
+}], "Author",
+ CellChangeTimes->{{3.5805960636515503`*^9, 3.580596066044475*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{944, 1002},
+WindowMargins->{{0, Automatic}, {0, Automatic}},
+ShowSelection->True,
+FrontEndVersion->"9.0 for Microsoft Windows (64-bit) (January 25, 2013)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[56287, 1335, 355, 9, 22, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[56645, 1346, 678, 16, 22, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[57326, 1364, 340, 11, 22, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[57669, 1377, 637, 15, 22, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[58309, 1394, 844, 21, 22, "ControlSuggestions",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[59156, 1417, 424, 11, 22, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[59583, 1430, 1507, 32, 22, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[61093, 1464, 908, 21, 22, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 63480, 1543},
+ {"RotateAndZoomIn3D", 63589, 1546},
+ {"DragLocators", 63699, 1549},
+ {"CreateAndDeleteLocators", 63815, 1552},
+ {"SliderZoom", 63929, 1555},
+ {"GamepadControls", 64035, 1558},
+ {"AutomaticAnimation", 64149, 1561},
+ {"BookmarkAnimation", 64266, 1564}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 176, 3, 74, "DemoTitle"],
+Cell[CellGroupData[{
+Cell[780, 29, 33, 0, 287, "InitializationSection"],
+Cell[816, 31, 2565, 69, 108, "Input",
+ InitializationCell->True,
+ CellID->1560149370],
+Cell[3384, 102, 310, 8, 27, "Input",
+ InitializationCell->True,
+ CellID->655131720],
+Cell[3697, 112, 311, 8, 27, "Input",
+ InitializationCell->True,
+ CellID->650159871],
+Cell[4011, 122, 1052, 30, 48, "Input",
+ InitializationCell->True,
+ CellID->840155961],
+Cell[5066, 154, 741, 22, 48, "Input",
+ InitializationCell->True,
+ CellID->796257502],
+Cell[5810, 178, 314, 8, 27, "Input",
+ InitializationCell->True,
+ CellID->1729231657],
+Cell[6127, 188, 338, 8, 48, "Input",
+ InitializationCell->True,
+ CellID->1300264348],
+Cell[6468, 198, 276, 6, 27, "Input",
+ InitializationCell->True,
+ CellID->749304964]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[6781, 209, 29, 0, 194, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[6835, 213, 11509, 257, 508, "Input",
+ CellID->571857240],
+Cell[18347, 472, 7149, 156, 521, "Output",
+ CellID->198854593]
+}, {2}]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[25542, 634, 36, 0, 169, "ManipulateCaptionSection"],
+Cell[25581, 636, 580, 11, 53, "ManipulateCaption"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26198, 652, 28, 0, 173, "ThumbnailSection"],
+Cell[26229, 654, 7149, 156, 521, "Output",
+ CellID->664589819]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[33415, 815, 28, 0, 143, "SnapshotsSection"],
+Cell[33446, 817, 7149, 156, 521, "Output",
+ CellID->698639886],
+Cell[40598, 975, 7150, 156, 521, "Output",
+ CellID->1747465853],
+Cell[47751, 1133, 7149, 156, 521, "Output",
+ CellID->672234999]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[54937, 1294, 26, 0, 336, "DetailsSection"],
+Cell[54966, 1296, 118, 2, 22, "DetailNotes",
+ CellID->254484209],
+Cell[55087, 1300, 1123, 28, 37, "DetailNotes",
+ CellID->1713854329]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[56247, 1333, 37, 0, 126, "ControlSuggestionsSection"],
+Cell[56287, 1335, 355, 9, 22, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[56645, 1346, 678, 16, 22, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[57326, 1364, 340, 11, 22, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[57669, 1377, 637, 15, 22, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[58309, 1394, 844, 21, 22, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[59156, 1417, 424, 11, 22, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[59583, 1430, 1507, 32, 22, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[61093, 1464, 908, 21, 22, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[62038, 1490, 30, 0, 155, "SearchTermsSection"],
+Cell[62071, 1492, 146, 3, 22, "SearchTerms",
+ CellID->1291849518]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[62254, 1500, 31, 0, 141, "RelatedLinksSection"],
+Cell[62288, 1502, 337, 8, 22, "RelatedLinks",
+ CellID->850455973]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[62662, 1515, 25, 0, 141, "AuthorSection"],
+Cell[62690, 1517, 367, 10, 22, "Author"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

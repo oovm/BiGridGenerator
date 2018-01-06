@@ -1,0 +1,3036 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    132951,       3027]
+NotebookOptionsPosition[    128756,       2897]
+NotebookOutlinePosition[    130401,       2948]
+CellTagsIndexPosition[    130065,       2936]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Planar Three-Body Problem", "DemoTitle",
+ CellChangeTimes->{{3.35506529749574*^9, 3.35506531512986*^9}, {
+  3.35738983227393*^9, 3.35738984341014*^9}, {3.36432504098438*^9, 
+  3.36432505207813*^9}, {3.376930985593096*^9, 3.376930986468096*^9}, {
+  3.38295858628435*^9, 3.3829585871906*^9}},
+ CellID->700863240],
+
+Cell["", "InitializationSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"threeBodyTrajectories", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Dynamic", "[", "vxy10", "]"}], ",", 
+       RowBox[{"Dynamic", "[", "vxy20", "]"}], ",", 
+       RowBox[{"Dynamic", "[", "vxy30", "]"}], ",", " ", 
+       RowBox[{"Dynamic", "[", "xy10", "]"}], ",", 
+       RowBox[{"Dynamic", "[", "xy20", "]"}], ",", 
+       RowBox[{"Dynamic", "[", "xy30", "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"vxy10", ",", "vxy20", ",", "vxy30"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"10", "^", "m1Exp"}], ",", " ", 
+       RowBox[{"10", "^", "m2Exp"}], ",", 
+       RowBox[{"10", "^", "m3Exp"}]}], "}"}], ",", " ", "T", ",", 
+     RowBox[{"ImageSize", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"350", ",", "350"}], "}"}]}]}], "]"}], " ", ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"T", ",", "20", ",", "\"\<time\>\""}], "}"}], ",", "0.001", ",",
+      " ", "20", ",", 
+     RowBox[{"ControlType", "\[Rule]", "Animator"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"m1Exp", ",", "0", ",", 
+       RowBox[{"Style", "[", 
+        RowBox[{
+         RowBox[{"Subscript", "[", 
+          RowBox[{
+           RowBox[{"Style", "[", 
+            RowBox[{"\"\<m\>\"", ",", "Italic"}], "]"}], ",", "\"\<1\>\""}], 
+          "]"}], ",", 
+         RowBox[{"RGBColor", "[", 
+          RowBox[{"1", ",", ".2", ",", "0"}], "]"}]}], "]"}]}], "}"}], ",", 
+     RowBox[{"-", "3"}], ",", "3"}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"m2Exp", ",", "0", ",", 
+       RowBox[{"Style", "[", 
+        RowBox[{
+         RowBox[{"Subscript", "[", 
+          RowBox[{
+           RowBox[{"Style", "[", 
+            RowBox[{"\"\<m\>\"", ",", "Italic"}], "]"}], ",", "\"\<2\>\""}], 
+          "]"}], ",", 
+         RowBox[{"RGBColor", "[", 
+          RowBox[{".5", ",", ".8", ",", "0"}], "]"}]}], "]"}]}], "}"}], ",", 
+     RowBox[{"-", "3"}], ",", "3"}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"m3Exp", ",", "0", ",", 
+       RowBox[{"Style", "[", 
+        RowBox[{
+         RowBox[{"Subscript", "[", 
+          RowBox[{
+           RowBox[{"Style", "[", 
+            RowBox[{"\"\<m\>\"", ",", "Italic"}], "]"}], ",", "\"\<3\>\""}], 
+          "]"}], ",", 
+         RowBox[{"RGBColor", "[", 
+          RowBox[{".2", ",", ".6", ",", "1"}], "]"}]}], "]"}]}], "}"}], ",", 
+     RowBox[{"-", "3"}], ",", "3"}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"vxy10", ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"0.93240737", "/", "2"}], ",", 
+         RowBox[{"0.86473146", "/", "2"}]}], "}"}], ",", 
+       "\"\<\!\(\*SubscriptBox[OverscriptBox[\(v\), \(\[RightVector]\)], \
+\(1\)]\)[0]\>\""}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "2"}], ",", 
+       RowBox[{"-", "2"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "2"}], "}"}], ",", 
+     RowBox[{"ControlType", "\[Rule]", "None"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"vxy20", ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"0.93240737", "/", "2"}], ",", 
+         RowBox[{"0.86473146", "/", "2"}]}], "}"}], ",", 
+       "\"\<\!\(\*SubscriptBox[OverscriptBox[\(v\), \(\[RightVector]\)], \
+\(2\)]\)[0]\>\""}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "2"}], ",", 
+       RowBox[{"-", "2"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "2"}], "}"}], ",", 
+     RowBox[{"ControlType", "\[Rule]", "None"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"vxy30", ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "0.93240737"}], ",", 
+         RowBox[{"-", "0.86473146"}]}], "}"}], ",", 
+       "\"\<\!\(\*SubscriptBox[OverscriptBox[\(v\), \(\[RightVector]\)], \
+\(3\)]\)[0]\>\""}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "2"}], ",", 
+       RowBox[{"-", "2"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "2"}], "}"}], ",", 
+     RowBox[{"ControlType", "\[Rule]", "None"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"xy10", ",", 
+       RowBox[{"{", " ", 
+        RowBox[{".7", ",", 
+         RowBox[{"-", "0.5"}]}], "}"}], ",", 
+       "\"\<\!\(\*SubscriptBox[OverscriptBox[\(x\), \(\[RightVector]\)], \
+\(1\)]\)[0]\>\""}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "2"}], ",", 
+       RowBox[{"-", "2"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "2"}], "}"}], ",", 
+     RowBox[{"ControlType", "\[Rule]", "None"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"xy20", ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "0.7"}], ",", "2"}], "}"}], ",", 
+       "\"\<\!\(\*SubscriptBox[OverscriptBox[\(x\), \(\[RightVector]\)], \
+\(2\)]\)[0]\>\""}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "2"}], ",", 
+       RowBox[{"-", "2"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "2"}], "}"}], ",", 
+     RowBox[{"ControlType", "\[Rule]", "None"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"xy30", ",", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "0"}], "}"}], ",", 
+       "\"\<\!\(\*SubscriptBox[OverscriptBox[\(x\), \(\[RightVector]\)], \
+\(3\)]\)[0]\>\""}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "2"}], ",", 
+       RowBox[{"-", "2"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "2"}], "}"}], ",", 
+     RowBox[{"ControlType", "\[Rule]", "None"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"AutorunSequencing", "\[Rule]", 
+    RowBox[{"{", "8", "}"}]}], ",", "\[IndentingNewLine]", 
+   RowBox[{"ControlPlacement", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+     "Top", ",", "Top", ",", "Top", ",", "Top", ",", "Top", ",", "Left", ",", 
+      "Left", ",", "Left"}], "}"}]}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Initialization", "\[RuleDelayed]", 
+    RowBox[{"(", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"threeBodyTrajectories", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Dynamic", "[", "vxy10_", "]"}], ",", 
+          RowBox[{"Dynamic", "[", "vxy20_", "]"}], ",", 
+          RowBox[{"Dynamic", "[", "vxy30_", "]"}], ",", " ", 
+          RowBox[{"Dynamic", "[", "xy10_", "]"}], ",", " ", 
+          RowBox[{"Dynamic", "[", "xy20_", "]"}], ",", " ", 
+          RowBox[{"Dynamic", "[", "xy30_", "]"}]}], "}"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"vx10_", ",", "vy10_"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"vx20_", ",", "vy20_"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"vx30_", ",", "vy30_"}], "}"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"m1_", ",", " ", "m2_", ",", " ", "m3_"}], "}"}], ",", "T_", 
+        ",", "\[IndentingNewLine]", "plotOptions___"}], "]"}], " ", ":=", " ",
+       "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+          "nds", ",", "Tmax", ",", "prolog", ",", "funsToPlot", ",", "x10", 
+           ",", "y10", ",", "x20", ",", "y20", ",", "x30", ",", "y30"}], 
+          "}"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"x10", ",", "y10"}], "}"}], "=", "xy10"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"x20", ",", "y20"}], "}"}], "=", "xy20"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"x30", ",", "y30"}], "}"}], "=", "xy30"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"nds", "=", 
+           RowBox[{"NDSolve", "[", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{"x1", "'"}], "[", "t", "]"}], "\[Equal]", 
+                RowBox[{"vx1", "[", "t", "]"}]}], ",", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"y1", "'"}], "[", "t", "]"}], "\[Equal]", 
+                RowBox[{"vy1", "[", "t", "]"}]}], ",", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"x2", "'"}], "[", "t", "]"}], "\[Equal]", 
+                RowBox[{"vx2", "[", "t", "]"}]}], ",", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"y2", "'"}], "[", "t", "]"}], "\[Equal]", 
+                RowBox[{"vy2", "[", "t", "]"}]}], ",", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"x3", "'"}], "[", "t", "]"}], "\[Equal]", 
+                RowBox[{"vx3", "[", "t", "]"}]}], ",", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"y3", "'"}], "[", "t", "]"}], "\[Equal]", 
+                RowBox[{"vy3", "[", "t", "]"}]}], ",", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{"m1", " ", 
+                 RowBox[{
+                  RowBox[{"vx1", "'"}], "[", "t", "]"}]}], "\[Equal]", 
+                RowBox[{
+                 RowBox[{"-", 
+                  FractionBox[
+                   RowBox[{"m1", " ", "m2", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"x1", "[", "t", "]"}], "-", 
+                    RowBox[{"x2", "[", "t", "]"}]}], ")"}]}], 
+                   SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"x1", "[", "t", "]"}], "-", 
+                    RowBox[{"x2", "[", "t", "]"}]}], ")"}], "2"], "+", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"y1", "[", "t", "]"}], "-", 
+                    RowBox[{"y2", "[", "t", "]"}]}], ")"}], "2"]}], ")"}], 
+                    RowBox[{"3", "/", "2"}]]]}], "-", 
+                 FractionBox[
+                  RowBox[{"m1", " ", "m3", 
+                   RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"x1", "[", "t", "]"}], "-", 
+                    RowBox[{"x3", "[", "t", "]"}]}], ")"}]}], 
+                  SuperscriptBox[
+                   RowBox[{"(", 
+                    RowBox[{
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"x1", "[", "t", "]"}], "-", 
+                    RowBox[{"x3", "[", "t", "]"}]}], ")"}], "2"], "+", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"y1", "[", "t", "]"}], "-", 
+                    RowBox[{"y3", "[", "t", "]"}]}], ")"}], "2"]}], ")"}], 
+                   RowBox[{"3", "/", "2"}]]]}]}], ",", 
+               RowBox[{
+                RowBox[{"m1", " ", 
+                 RowBox[{
+                  RowBox[{"vy1", "'"}], "[", "t", "]"}]}], "\[Equal]", 
+                RowBox[{
+                 RowBox[{"-", 
+                  FractionBox[
+                   RowBox[{"m1", " ", "m2", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"y1", "[", "t", "]"}], "-", 
+                    RowBox[{"y2", "[", "t", "]"}]}], ")"}]}], 
+                   SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"x1", "[", "t", "]"}], "-", 
+                    RowBox[{"x2", "[", "t", "]"}]}], ")"}], "2"], "+", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"y1", "[", "t", "]"}], "-", 
+                    RowBox[{"y2", "[", "t", "]"}]}], ")"}], "2"]}], ")"}], 
+                    RowBox[{"3", "/", "2"}]]]}], "-", 
+                 FractionBox[
+                  RowBox[{"m1", " ", "m3", 
+                   RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"y1", "[", "t", "]"}], "-", 
+                    RowBox[{"y3", "[", "t", "]"}]}], ")"}]}], 
+                  SuperscriptBox[
+                   RowBox[{"(", 
+                    RowBox[{
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"x1", "[", "t", "]"}], "-", 
+                    RowBox[{"x3", "[", "t", "]"}]}], ")"}], "2"], "+", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"y1", "[", "t", "]"}], "-", 
+                    RowBox[{"y3", "[", "t", "]"}]}], ")"}], "2"]}], ")"}], 
+                   RowBox[{"3", "/", "2"}]]]}]}], ",", 
+               RowBox[{
+                RowBox[{"m2", " ", 
+                 RowBox[{
+                  RowBox[{"vx2", "'"}], "[", "t", "]"}]}], "\[Equal]", 
+                RowBox[{
+                 FractionBox[
+                  RowBox[{"m1", " ", "m2", 
+                   RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"x1", "[", "t", "]"}], "-", 
+                    RowBox[{"x2", "[", "t", "]"}]}], ")"}]}], 
+                  SuperscriptBox[
+                   RowBox[{"(", 
+                    RowBox[{
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"x1", "[", "t", "]"}], "-", 
+                    RowBox[{"x2", "[", "t", "]"}]}], ")"}], "2"], "+", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"y1", "[", "t", "]"}], "-", 
+                    RowBox[{"y2", "[", "t", "]"}]}], ")"}], "2"]}], ")"}], 
+                   RowBox[{"3", "/", "2"}]]], "-", 
+                 FractionBox[
+                  RowBox[{"m2", " ", "m3", 
+                   RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"x2", "[", "t", "]"}], "-", 
+                    RowBox[{"x3", "[", "t", "]"}]}], ")"}]}], 
+                  SuperscriptBox[
+                   RowBox[{"(", 
+                    RowBox[{
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"x2", "[", "t", "]"}], "-", 
+                    RowBox[{"x3", "[", "t", "]"}]}], ")"}], "2"], "+", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"y2", "[", "t", "]"}], "-", 
+                    RowBox[{"y3", "[", "t", "]"}]}], ")"}], "2"]}], ")"}], 
+                   RowBox[{"3", "/", "2"}]]]}]}], ",", 
+               RowBox[{
+                RowBox[{"m2", " ", 
+                 RowBox[{
+                  RowBox[{"vy2", "'"}], "[", "t", "]"}]}], "\[Equal]", 
+                RowBox[{
+                 FractionBox[
+                  RowBox[{"m1", " ", "m2", 
+                   RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"y1", "[", "t", "]"}], "-", 
+                    RowBox[{"y2", "[", "t", "]"}]}], ")"}]}], 
+                  SuperscriptBox[
+                   RowBox[{"(", 
+                    RowBox[{
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"x1", "[", "t", "]"}], "-", 
+                    RowBox[{"x2", "[", "t", "]"}]}], ")"}], "2"], "+", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"y1", "[", "t", "]"}], "-", 
+                    RowBox[{"y2", "[", "t", "]"}]}], ")"}], "2"]}], ")"}], 
+                   RowBox[{"3", "/", "2"}]]], "-", 
+                 FractionBox[
+                  RowBox[{"m2", " ", "m3", 
+                   RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"y2", "[", "t", "]"}], "-", 
+                    RowBox[{"y3", "[", "t", "]"}]}], ")"}]}], 
+                  SuperscriptBox[
+                   RowBox[{"(", 
+                    RowBox[{
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"x2", "[", "t", "]"}], "-", 
+                    RowBox[{"x3", "[", "t", "]"}]}], ")"}], "2"], "+", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"y2", "[", "t", "]"}], "-", 
+                    RowBox[{"y3", "[", "t", "]"}]}], ")"}], "2"]}], ")"}], 
+                   RowBox[{"3", "/", "2"}]]]}]}], ",", 
+               RowBox[{
+                RowBox[{"m3", " ", 
+                 RowBox[{
+                  RowBox[{"vx3", "'"}], "[", "t", "]"}]}], "\[Equal]", 
+                RowBox[{
+                 FractionBox[
+                  RowBox[{"m1", " ", "m3", 
+                   RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"x1", "[", "t", "]"}], "-", 
+                    RowBox[{"x3", "[", "t", "]"}]}], ")"}]}], 
+                  SuperscriptBox[
+                   RowBox[{"(", 
+                    RowBox[{
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"x1", "[", "t", "]"}], "-", 
+                    RowBox[{"x3", "[", "t", "]"}]}], ")"}], "2"], "+", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"y1", "[", "t", "]"}], "-", 
+                    RowBox[{"y3", "[", "t", "]"}]}], ")"}], "2"]}], ")"}], 
+                   RowBox[{"3", "/", "2"}]]], "+", 
+                 FractionBox[
+                  RowBox[{"m2", " ", "m3", 
+                   RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"x2", "[", "t", "]"}], "-", 
+                    RowBox[{"x3", "[", "t", "]"}]}], ")"}]}], 
+                  SuperscriptBox[
+                   RowBox[{"(", 
+                    RowBox[{
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"x2", "[", "t", "]"}], "-", 
+                    RowBox[{"x3", "[", "t", "]"}]}], ")"}], "2"], "+", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"y2", "[", "t", "]"}], "-", 
+                    RowBox[{"y3", "[", "t", "]"}]}], ")"}], "2"]}], ")"}], 
+                   RowBox[{"3", "/", "2"}]]]}]}], ",", 
+               RowBox[{
+                RowBox[{"m3", " ", 
+                 RowBox[{
+                  RowBox[{"vy3", "'"}], "[", "t", "]"}]}], "\[Equal]", 
+                RowBox[{
+                 FractionBox[
+                  RowBox[{"m1", " ", "m3", 
+                   RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"y1", "[", "t", "]"}], "-", 
+                    RowBox[{"y3", "[", "t", "]"}]}], ")"}]}], 
+                  SuperscriptBox[
+                   RowBox[{"(", 
+                    RowBox[{
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"x1", "[", "t", "]"}], "-", 
+                    RowBox[{"x3", "[", "t", "]"}]}], ")"}], "2"], "+", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"y1", "[", "t", "]"}], "-", 
+                    RowBox[{"y3", "[", "t", "]"}]}], ")"}], "2"]}], ")"}], 
+                   RowBox[{"3", "/", "2"}]]], "+", 
+                 FractionBox[
+                  RowBox[{"m2", " ", "m3", 
+                   RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"y2", "[", "t", "]"}], "-", 
+                    RowBox[{"y3", "[", "t", "]"}]}], ")"}]}], 
+                  SuperscriptBox[
+                   RowBox[{"(", 
+                    RowBox[{
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"x2", "[", "t", "]"}], "-", 
+                    RowBox[{"x3", "[", "t", "]"}]}], ")"}], "2"], "+", 
+                    SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"y2", "[", "t", "]"}], "-", 
+                    RowBox[{"y3", "[", "t", "]"}]}], ")"}], "2"]}], ")"}], 
+                   RowBox[{"3", "/", "2"}]]]}]}], ",", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{"x1", "[", "0", "]"}], "\[Equal]", "x10"}], ",", 
+               RowBox[{
+                RowBox[{"y1", "[", "0", "]"}], "\[Equal]", "y10"}], ",", 
+               RowBox[{
+                RowBox[{"x2", "[", "0", "]"}], "\[Equal]", "x20"}], ",", 
+               RowBox[{
+                RowBox[{"y2", "[", "0", "]"}], "\[Equal]", "y20"}], ",", 
+               RowBox[{
+                RowBox[{"x3", "[", "0", "]"}], "\[Equal]", "x30"}], ",", 
+               RowBox[{
+                RowBox[{"y3", "[", "0", "]"}], "\[Equal]", "y30"}], ",", 
+               "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{"vx1", "[", "0", "]"}], "\[Equal]", "vx10"}], ",", 
+               RowBox[{
+                RowBox[{"vy1", "[", "0", "]"}], "\[Equal]", "vy10"}], ",", 
+               RowBox[{
+                RowBox[{"vx2", "[", "0", "]"}], "\[Equal]", "vx20"}], ",", 
+               RowBox[{
+                RowBox[{"vy2", "[", "0", "]"}], "\[Equal]", "vy20"}], ",", 
+               RowBox[{
+                RowBox[{"vx3", "[", "0", "]"}], "\[Equal]", "vx30"}], ",", 
+               RowBox[{
+                RowBox[{"vy3", "[", "0", "]"}], "\[Equal]", "vy30"}]}], "}"}],
+              ",", "\[IndentingNewLine]", 
+             RowBox[{"{", 
+              RowBox[{
+              "x1", ",", "x2", ",", "x3", ",", "y1", ",", "y2", ",", "y3", 
+               ",", "vx1", ",", "vx2", ",", "vx3", ",", "vy1", ",", "vy2", 
+               ",", "vy3"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"t", ",", "0", ",", "T"}], "}"}]}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Head", "[", "nds", "]"}], "=!=", "NDSolve"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"Tmax", " ", "=", " ", 
+              RowBox[{"nds", "[", 
+               RowBox[{"[", 
+                RowBox[{
+                "1", ",", " ", "1", ",", " ", "2", ",", " ", "1", ",", " ", 
+                 "1", ",", " ", "2"}], "]"}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"funsToPlot", "=", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"x1", "[", "t", "]"}], ",", 
+                   RowBox[{"y1", "[", "t", "]"}]}], "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"x2", "[", "t", "]"}], ",", 
+                   RowBox[{"y2", "[", "t", "]"}]}], "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"x3", "[", "t", "]"}], ",", 
+                   RowBox[{"y3", "[", "t", "]"}]}], "}"}]}], "}"}], "/.", " ", 
+               RowBox[{"nds", "[", 
+                RowBox[{"[", "1", "]"}], "]"}]}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"prolog", " ", "=", " ", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"PointSize", "[", "0.01", "]"}], ",", 
+                RowBox[{"Transpose", "[", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"RGBColor", "[", 
+                    RowBox[{"1", ",", ".2", ",", "0"}], "]"}], ",", 
+                    RowBox[{"RGBColor", "[", 
+                    RowBox[{".5", ",", ".8", ",", "0"}], "]"}], ",", 
+                    RowBox[{"RGBColor", "[", 
+                    RowBox[{".2", ",", ".6", ",", "1"}], "]"}]}], "}"}], ",", 
+                   RowBox[{"Point", " ", "/@", " ", 
+                    RowBox[{"(", 
+                    RowBox[{"funsToPlot", " ", "/.", " ", 
+                    RowBox[{"t", " ", "\[Rule]", " ", "0"}]}], ")"}]}]}], 
+                  "}"}], "]"}]}], "}"}]}], ";", "\[IndentingNewLine]", 
+             RowBox[{"Show", "[", 
+              RowBox[{
+               RowBox[{"ParametricPlot", "[", 
+                RowBox[{
+                 RowBox[{"Evaluate", "[", "funsToPlot", "]"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"t", ",", "0", ",", "Tmax"}], "}"}], ",", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{"PlotStyle", "\[Rule]", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"RGBColor", "[", 
+                    RowBox[{"1", ",", ".2", ",", "0"}], "]"}], ",", 
+                    RowBox[{"RGBColor", "[", 
+                    RowBox[{".5", ",", ".8", ",", "0"}], "]"}], ",", 
+                    RowBox[{"RGBColor", "[", 
+                    RowBox[{".2", ",", ".6", ",", "1"}], "]"}]}], "}"}]}], 
+                 ",", 
+                 RowBox[{"Frame", "\[Rule]", "False"}], ",", 
+                 RowBox[{"PlotRange", "\[Rule]", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"-", "4"}], ",", "4"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"-", "4"}], ",", "4"}], "}"}]}], "}"}]}], ",", 
+                 RowBox[{"AspectRatio", " ", "\[Rule]", " ", "1"}], ",", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{"Prolog", " ", "\[Rule]", " ", "prolog"}], ",", " ", 
+                 RowBox[{"Frame", " ", "\[Rule]", " ", "True"}], ",", " ", 
+                 RowBox[{"MaxRecursion", "\[Rule]", 
+                  RowBox[{"ControlActive", "[", 
+                   RowBox[{"3", ",", "9"}], "]"}]}], ",", 
+                 RowBox[{"Axes", " ", "\[Rule]", " ", "False"}], ",", " ", 
+                 RowBox[{"FrameTicks", " ", "\[Rule]", " ", "False"}], ",", 
+                 "plotOptions"}], "]"}], ",", 
+               RowBox[{"Graphics", "[", 
+                RowBox[{"{", 
+                 RowBox[{"Dashed", ",", 
+                  RowBox[{"RGBColor", "[", 
+                   RowBox[{"1", ",", ".2", ",", "0"}], "]"}], ",", 
+                  RowBox[{"Dynamic", "[", 
+                   RowBox[{"Arrow", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"xy10", ",", 
+                    RowBox[{"xy10", "+", "vxy10"}]}], "}"}], "]"}], "]"}], 
+                  ",", 
+                  RowBox[{"RGBColor", "[", 
+                   RowBox[{".5", ",", ".8", ",", "0"}], "]"}], ",", 
+                  RowBox[{"Dynamic", "[", 
+                   RowBox[{"Arrow", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"xy20", ",", 
+                    RowBox[{"xy20", "+", "vxy20"}]}], "}"}], "]"}], "]"}], 
+                  ",", 
+                  RowBox[{"RGBColor", "[", 
+                   RowBox[{".2", ",", ".6", ",", "1"}], "]"}], ",", 
+                  RowBox[{"Dynamic", "[", 
+                   RowBox[{"Arrow", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"xy30", ",", 
+                    RowBox[{"xy30", "+", "vxy30"}]}], "}"}], "]"}], "]"}], 
+                  ",", "\[IndentingNewLine]", 
+                  RowBox[{"Locator", "[", 
+                   RowBox[{
+                    RowBox[{"Dynamic", "[", 
+                    RowBox[{
+                    RowBox[{"xy10", "+", "vxy10"}], ",", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"vxy10", "=", 
+                    RowBox[{"#", "-", "xy10"}]}], ")"}], "&"}]}], "]"}], ",", 
+                    RowBox[{"Graphics", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"Point", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0"}], "}"}], "]"}], "}"}], ",", 
+                    RowBox[{"ImageSize", "\[Rule]", "10"}]}], "]"}]}], "]"}], 
+                  ",", "\[IndentingNewLine]", 
+                  RowBox[{"Locator", "[", 
+                   RowBox[{
+                    RowBox[{"Dynamic", "[", 
+                    RowBox[{
+                    RowBox[{"xy20", "+", "vxy20"}], ",", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"vxy20", "=", 
+                    RowBox[{"#", "-", "xy20"}]}], ")"}], "&"}]}], "]"}], ",", 
+                    RowBox[{"Graphics", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"Point", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0"}], "}"}], "]"}], "}"}], ",", 
+                    RowBox[{"ImageSize", "\[Rule]", "10"}]}], "]"}]}], "]"}], 
+                  ",", 
+                  RowBox[{"Locator", "[", 
+                   RowBox[{
+                    RowBox[{"Dynamic", "[", 
+                    RowBox[{
+                    RowBox[{"xy30", "+", "vxy30"}], ",", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"vxy30", "=", 
+                    RowBox[{"#", "-", "xy30"}]}], ")"}], "&"}]}], "]"}], ",", 
+                    RowBox[{"Graphics", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"Point", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0"}], "}"}], "]"}], "}"}], ",", 
+                    RowBox[{"ImageSize", "\[Rule]", "10"}]}], "]"}]}], "]"}], 
+                  ",", 
+                  RowBox[{"Locator", "[", 
+                   RowBox[{"Dynamic", "[", "xy10", "]"}], "]"}], ",", 
+                  RowBox[{"Locator", "[", 
+                   RowBox[{"Dynamic", "[", "xy20", "]"}], "]"}], ",", 
+                  RowBox[{"Locator", "[", 
+                   RowBox[{"Dynamic", "[", "xy30", "]"}], "]"}]}], "}"}], 
+                "]"}]}], "]"}]}], ",", "\[IndentingNewLine]", 
+            RowBox[{
+            "Text", "[", "\"\<Degenerate initial conditions.\>\"", "]"}]}], 
+           "]"}]}]}], "\[IndentingNewLine]", "]"}], "//", "Quiet"}]}], 
+     "\[IndentingNewLine]", ")"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.3550645848406*^9, 3.35506481187168*^9}, {
+   3.35506526971371*^9, 3.35506527368065*^9}, {3.35738763097093*^9, 
+   3.35738801484442*^9}, {3.35738806062788*^9, 3.3573881429792*^9}, {
+   3.35738823419551*^9, 3.35738825528488*^9}, {3.35738835699545*^9, 
+   3.35738839351916*^9}, {3.35738915948464*^9, 3.35738926552211*^9}, {
+   3.35738929739281*^9, 3.35738936830089*^9}, {3.35740801429311*^9, 
+   3.35740801782451*^9}, {3.35740805899823*^9, 3.35740807988979*^9}, {
+   3.35740832944785*^9, 3.35740832951035*^9}, {3.35845519195313*^9, 
+   3.35845525357813*^9}, {3.3584553266875*^9, 3.35845533753125*^9}, {
+   3.36450838804688*^9, 3.364508428125*^9}, {3.36925906109375*^9, 
+   3.36925906123438*^9}, {3.382958556018725*^9, 3.3829585675656*^9}, {
+   3.664712756989604*^9, 3.664712765996505*^9}, {3.6647128197098756`*^9, 
+   3.6647128320541096`*^9}, {3.664712872378142*^9, 3.664712932186122*^9}, 
+   3.6647129959044933`*^9, {3.6647130494218445`*^9, 3.664713270226923*^9}, {
+   3.6647134434632444`*^9, 3.664713464000298*^9}, {3.664713499563854*^9, 
+   3.6647135421331105`*^9}, {3.6647135757134686`*^9, 
+   3.6647136242983265`*^9}, {3.664713688813777*^9, 3.6647136913070264`*^9}, {
+   3.664713733688264*^9, 3.664713741877083*^9}, {3.664713786484543*^9, 
+   3.6647138667175655`*^9}, {3.664714004029296*^9, 3.6647140069085836`*^9}, {
+   3.6647140699188843`*^9, 3.6647140999658885`*^9}, {3.6647144859144793`*^9, 
+   3.6647145844659815`*^9}, {3.664714618811547*^9, 3.6647147092425027`*^9}, {
+   3.664714754587968*^9, 3.664714782593167*^9}, {3.6647152747773695`*^9, 
+   3.6647152773306246`*^9}, {3.6647153435362444`*^9, 
+   3.6647153878286734`*^9}, {3.66471542460135*^9, 3.6647154762355127`*^9}, {
+   3.6647155139832873`*^9, 3.664715516467536*^9}, {3.6647157324241295`*^9, 
+   3.6647157669435806`*^9}, {3.6647158202719135`*^9, 3.664715857280614*^9}, {
+   3.6647158882227077`*^9, 3.6647158919490805`*^9}, {3.664717906201485*^9, 
+   3.6647179101238775`*^9}, {3.6647180638482485`*^9, 3.664718079096773*^9}, {
+   3.6647215160034294`*^9, 3.6647215441472435`*^9}, 3.6647215847343016`*^9, {
+   3.66473922957961*^9, 3.664739286998351*^9}, {3.664796104000434*^9, 
+   3.664796142885614*^9}, {3.6648022464998903`*^9, 3.664802281185774*^9}, {
+   3.664802473505319*^9, 3.66480248530309*^9}, {3.664802537320273*^9, 
+   3.664802540418085*^9}, {3.664802945070461*^9, 3.6648030344623995`*^9}, {
+   3.664803066601613*^9, 3.664803105069459*^9}, {3.664804444784417*^9, 
+   3.6648044889648347`*^9}, {3.6648064111013556`*^9, 3.664806419447623*^9}, {
+   3.6650995728668976`*^9, 3.6650995779361877`*^9}, {3.6651000572626038`*^9, 
+   3.6651001574923363`*^9}, {3.665100320987688*^9, 3.6651003210186896`*^9}},
+ CellID->1886791809],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`m1Exp$$ = 0, $CellContext`m2Exp$$ = 
+    0, $CellContext`m3Exp$$ = 0, $CellContext`T$$ = 
+    11.305082213306425`, $CellContext`vxy10$$ = {0.466203685, 
+    0.43236573}, $CellContext`vxy20$$ = {0.466203685, 
+    0.43236573}, $CellContext`vxy30$$ = {-0.93240737, -0.86473146}, \
+$CellContext`xy10$$ = {
+    0.7, -0.5}, $CellContext`xy20$$ = {-0.7, 2}, $CellContext`xy30$$ = {0, 0},
+     Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`T$$], 11.305082213306425`, "time"}, 0.001, 20}, {{
+       Hold[$CellContext`m1Exp$$], 0, 
+       Style[
+        Subscript[
+         Style["m", Italic], "1"], 
+        RGBColor[1, 0.2, 0]]}, -3, 3}, {{
+       Hold[$CellContext`m2Exp$$], 0, 
+       Style[
+        Subscript[
+         Style["m", Italic], "2"], 
+        RGBColor[0.5, 0.8, 0]]}, -3, 3}, {{
+       Hold[$CellContext`m3Exp$$], 0, 
+       Style[
+        Subscript[
+         Style["m", Italic], "3"], 
+        RGBColor[0.2, 0.6, 1]]}, -3, 3}, {{
+       Hold[$CellContext`vxy10$$], {0.466203685, 0.43236573}, 
+       "\!\(\*SubscriptBox[OverscriptBox[\(v\), \(\[RightVector]\)], \
+\(1\)]\)[0]"}, {-2, -2}, {2, 2}}, {{
+       Hold[$CellContext`vxy20$$], {0.466203685, 0.43236573}, 
+       "\!\(\*SubscriptBox[OverscriptBox[\(v\), \(\[RightVector]\)], \
+\(2\)]\)[0]"}, {-2, -2}, {2, 2}}, {{
+       Hold[$CellContext`vxy30$$], {-0.93240737, -0.86473146}, 
+       "\!\(\*SubscriptBox[OverscriptBox[\(v\), \(\[RightVector]\)], \
+\(3\)]\)[0]"}, {-2, -2}, {2, 2}}, {{
+       Hold[$CellContext`xy10$$], {0.7, -0.5}, 
+       "\!\(\*SubscriptBox[OverscriptBox[\(x\), \(\[RightVector]\)], \
+\(1\)]\)[0]"}, {-2, -2}, {2, 2}}, {{
+       Hold[$CellContext`xy20$$], {-0.7, 2}, 
+       "\!\(\*SubscriptBox[OverscriptBox[\(x\), \(\[RightVector]\)], \
+\(2\)]\)[0]"}, {-2, -2}, {2, 2}}, {{
+       Hold[$CellContext`xy30$$], {0, 0}, 
+       "\!\(\*SubscriptBox[OverscriptBox[\(x\), \(\[RightVector]\)], \
+\(3\)]\)[0]"}, {-2, -2}, {2, 2}}}, Typeset`size$$ = Automatic, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`vxy10$502680$$ = {0, 
+    0}, $CellContext`vxy20$502681$$ = {0, 0}, $CellContext`vxy30$502682$$ = {
+    0, 0}, $CellContext`xy10$502683$$ = {0, 0}, $CellContext`xy20$502684$$ = {
+    0, 0}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`m1Exp$$ = 0, $CellContext`m2Exp$$ = 
+        0, $CellContext`m3Exp$$ = 0, $CellContext`T$$ = 
+        11.305082213306425`, $CellContext`vxy10$$ = {0.466203685, 
+         0.43236573}, $CellContext`vxy20$$ = {0.466203685, 
+         0.43236573}, $CellContext`vxy30$$ = {-0.93240737, -0.86473146}, \
+$CellContext`xy10$$ = {
+         0.7, -0.5}, $CellContext`xy20$$ = {-0.7, 2}, $CellContext`xy30$$ = {
+         0, 0}}, "ControllerVariables" :> {
+        Hold[$CellContext`vxy10$$, $CellContext`vxy10$502680$$, {0, 0}], 
+        Hold[$CellContext`vxy20$$, $CellContext`vxy20$502681$$, {0, 0}], 
+        Hold[$CellContext`vxy30$$, $CellContext`vxy30$502682$$, {0, 0}], 
+        Hold[$CellContext`xy10$$, $CellContext`xy10$502683$$, {0, 0}], 
+        Hold[$CellContext`xy20$$, $CellContext`xy20$502684$$, {0, 0}]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> $CellContext`threeBodyTrajectories[{
+         Dynamic[$CellContext`vxy10$$], 
+         Dynamic[$CellContext`vxy20$$], 
+         Dynamic[$CellContext`vxy30$$], 
+         Dynamic[$CellContext`xy10$$], 
+         Dynamic[$CellContext`xy20$$], 
+         Dynamic[$CellContext`xy30$$]}, {$CellContext`vxy10$$, \
+$CellContext`vxy20$$, $CellContext`vxy30$$}, {
+        10^$CellContext`m1Exp$$, 10^$CellContext`m2Exp$$, 
+         10^$CellContext`m3Exp$$}, $CellContext`T$$, ImageSize -> {350, 350}],
+       "Specifications" :> {{{$CellContext`T$$, 11.305082213306425`, "time"}, 
+         0.001, 20, ControlType -> Animator}, {{$CellContext`m1Exp$$, 0, 
+          Style[
+           Subscript[
+            Style["m", Italic], "1"], 
+           RGBColor[1, 0.2, 0]]}, -3, 3}, {{$CellContext`m2Exp$$, 0, 
+          Style[
+           Subscript[
+            Style["m", Italic], "2"], 
+           RGBColor[0.5, 0.8, 0]]}, -3, 3}, {{$CellContext`m3Exp$$, 0, 
+          Style[
+           Subscript[
+            Style["m", Italic], "3"], 
+           RGBColor[0.2, 0.6, 1]]}, -3, 
+         3}, {{$CellContext`vxy10$$, {0.466203685, 0.43236573}, 
+          "\!\(\*SubscriptBox[OverscriptBox[\(v\), \(\[RightVector]\)], \
+\(1\)]\)[0]"}, {-2, -2}, {2, 2}, ControlType -> 
+         None}, {{$CellContext`vxy20$$, {0.466203685, 0.43236573}, 
+          "\!\(\*SubscriptBox[OverscriptBox[\(v\), \(\[RightVector]\)], \
+\(2\)]\)[0]"}, {-2, -2}, {2, 2}, ControlType -> 
+         None}, {{$CellContext`vxy30$$, {-0.93240737, -0.86473146}, 
+          "\!\(\*SubscriptBox[OverscriptBox[\(v\), \(\[RightVector]\)], \
+\(3\)]\)[0]"}, {-2, -2}, {2, 2}, ControlType -> 
+         None}, {{$CellContext`xy10$$, {0.7, -0.5}, 
+          "\!\(\*SubscriptBox[OverscriptBox[\(x\), \(\[RightVector]\)], \
+\(1\)]\)[0]"}, {-2, -2}, {2, 2}, ControlType -> 
+         None}, {{$CellContext`xy20$$, {-0.7, 2}, 
+          "\!\(\*SubscriptBox[OverscriptBox[\(x\), \(\[RightVector]\)], \
+\(2\)]\)[0]"}, {-2, -2}, {2, 2}, ControlType -> 
+         None}, {{$CellContext`xy30$$, {0, 0}, 
+          "\!\(\*SubscriptBox[OverscriptBox[\(x\), \(\[RightVector]\)], \
+\(3\)]\)[0]"}, {-2, -2}, {2, 2}, ControlType -> None}}, 
+      "Options" :> {
+       AutorunSequencing -> {8}, 
+        ControlPlacement -> {Top, Top, Top, Top, Top, Left, Left, Left}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>($CellContext`threeBodyTrajectories[{
+         Dynamic[
+          Pattern[$CellContext`vxy10, 
+           Blank[]]], 
+         Dynamic[
+          Pattern[$CellContext`vxy20, 
+           Blank[]]], 
+         Dynamic[
+          Pattern[$CellContext`vxy30, 
+           Blank[]]], 
+         Dynamic[
+          Pattern[$CellContext`xy10, 
+           Blank[]]], 
+         Dynamic[
+          Pattern[$CellContext`xy20, 
+           Blank[]]], 
+         Dynamic[
+          Pattern[$CellContext`xy30, 
+           Blank[]]]}, {{
+          Pattern[$CellContext`vx10, 
+           Blank[]], 
+          Pattern[$CellContext`vy10, 
+           Blank[]]}, {
+          Pattern[$CellContext`vx20, 
+           Blank[]], 
+          Pattern[$CellContext`vy20, 
+           Blank[]]}, {
+          Pattern[$CellContext`vx30, 
+           Blank[]], 
+          Pattern[$CellContext`vy30, 
+           Blank[]]}}, {
+         Pattern[$CellContext`m1, 
+          Blank[]], 
+         Pattern[$CellContext`m2, 
+          Blank[]], 
+         Pattern[$CellContext`m3, 
+          Blank[]]}, 
+        Pattern[$CellContext`T, 
+         Blank[]], 
+        Pattern[$CellContext`plotOptions, 
+         BlankNullSequence[]]] := Quiet[
+        Module[{$CellContext`nds, $CellContext`Tmax, $CellContext`prolog, \
+$CellContext`funsToPlot, $CellContext`x10, $CellContext`y10, \
+$CellContext`x20, $CellContext`y20, $CellContext`x30, $CellContext`y30}, \
+{$CellContext`x10, $CellContext`y10} = $CellContext`xy10; {$CellContext`x20, \
+$CellContext`y20} = $CellContext`xy20; {$CellContext`x30, $CellContext`y30} = \
+$CellContext`xy30; $CellContext`nds = 
+          NDSolve[{
+            Derivative[
+              1][$CellContext`x1][$CellContext`t] == \
+$CellContext`vx1[$CellContext`t], 
+             Derivative[
+              1][$CellContext`y1][$CellContext`t] == \
+$CellContext`vy1[$CellContext`t], 
+             Derivative[
+              1][$CellContext`x2][$CellContext`t] == \
+$CellContext`vx2[$CellContext`t], 
+             Derivative[
+              1][$CellContext`y2][$CellContext`t] == \
+$CellContext`vy2[$CellContext`t], 
+             Derivative[
+              1][$CellContext`x3][$CellContext`t] == \
+$CellContext`vx3[$CellContext`t], 
+             Derivative[
+              1][$CellContext`y3][$CellContext`t] == \
+$CellContext`vy3[$CellContext`t], $CellContext`m1 
+              Derivative[
+               1][$CellContext`vx1][$CellContext`t] == -($CellContext`m1 \
+$CellContext`m2 ($CellContext`x1[$CellContext`t] - \
+$CellContext`x2[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x2[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y2[$CellContext`t])^2)^(3/
+                 2)) - $CellContext`m1 $CellContext`m3 \
+($CellContext`x1[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/2), $CellContext`m1 
+              Derivative[
+               1][$CellContext`vy1][$CellContext`t] == -($CellContext`m1 \
+$CellContext`m2 ($CellContext`y1[$CellContext`t] - \
+$CellContext`y2[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x2[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y2[$CellContext`t])^2)^(3/
+                 2)) - $CellContext`m1 $CellContext`m3 \
+($CellContext`y1[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/2), $CellContext`m2 
+              Derivative[
+               1][$CellContext`vx2][$CellContext`t] == $CellContext`m1 \
+$CellContext`m2 ($CellContext`x1[$CellContext`t] - \
+$CellContext`x2[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x2[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y2[$CellContext`t])^2)^(3/
+                2) - $CellContext`m2 $CellContext`m3 \
+($CellContext`x2[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])/(($CellContext`x2[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y2[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/2), $CellContext`m2 
+              Derivative[
+               1][$CellContext`vy2][$CellContext`t] == $CellContext`m1 \
+$CellContext`m2 ($CellContext`y1[$CellContext`t] - \
+$CellContext`y2[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x2[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y2[$CellContext`t])^2)^(3/
+                2) - $CellContext`m2 $CellContext`m3 \
+($CellContext`y2[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])/(($CellContext`x2[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y2[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/2), $CellContext`m3 
+              Derivative[
+               1][$CellContext`vx3][$CellContext`t] == $CellContext`m1 \
+$CellContext`m3 ($CellContext`x1[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/
+                2) + $CellContext`m2 $CellContext`m3 \
+($CellContext`x2[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])/(($CellContext`x2[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y2[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/2), $CellContext`m3 
+              Derivative[
+               1][$CellContext`vy3][$CellContext`t] == $CellContext`m1 \
+$CellContext`m3 ($CellContext`y1[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/
+                2) + $CellContext`m2 $CellContext`m3 \
+($CellContext`y2[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])/(($CellContext`x2[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y2[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/2), $CellContext`x1[
+              0] == $CellContext`x10, $CellContext`y1[
+              0] == $CellContext`y10, $CellContext`x2[
+              0] == $CellContext`x20, $CellContext`y2[
+              0] == $CellContext`y20, $CellContext`x3[
+              0] == $CellContext`x30, $CellContext`y3[
+              0] == $CellContext`y30, $CellContext`vx1[
+              0] == $CellContext`vx10, $CellContext`vy1[
+              0] == $CellContext`vy10, $CellContext`vx2[
+              0] == $CellContext`vx20, $CellContext`vy2[
+              0] == $CellContext`vy20, $CellContext`vx3[
+              0] == $CellContext`vx30, $CellContext`vy3[
+              0] == $CellContext`vy30}, {$CellContext`x1, $CellContext`x2, \
+$CellContext`x3, $CellContext`y1, $CellContext`y2, $CellContext`y3, \
+$CellContext`vx1, $CellContext`vx2, $CellContext`vx3, $CellContext`vy1, \
+$CellContext`vy2, $CellContext`vy3}, {$CellContext`t, 0, $CellContext`T}]; 
+         If[Head[$CellContext`nds] =!= 
+           NDSolve, $CellContext`Tmax = 
+            Part[$CellContext`nds, 1, 1, 2, 1, 1, 2]; $CellContext`funsToPlot = 
+            ReplaceAll[{{
+                $CellContext`x1[$CellContext`t], 
+                $CellContext`y1[$CellContext`t]}, {
+                $CellContext`x2[$CellContext`t], 
+                $CellContext`y2[$CellContext`t]}, {
+                $CellContext`x3[$CellContext`t], 
+                $CellContext`y3[$CellContext`t]}}, 
+              Part[$CellContext`nds, 1]]; $CellContext`prolog = {
+              PointSize[0.01], 
+              Transpose[{{
+                 RGBColor[1, 0.2, 0], 
+                 RGBColor[0.5, 0.8, 0], 
+                 RGBColor[0.2, 0.6, 1]}, 
+                Map[Point, 
+                 ReplaceAll[$CellContext`funsToPlot, $CellContext`t -> 0]]}]}; 
+           Show[
+             ParametricPlot[
+              
+              Evaluate[$CellContext`funsToPlot], {$CellContext`t, 
+               0, $CellContext`Tmax}, PlotStyle -> {
+                RGBColor[1, 0.2, 0], 
+                RGBColor[0.5, 0.8, 0], 
+                RGBColor[0.2, 0.6, 1]}, Frame -> False, 
+              PlotRange -> {{-4, 4}, {-4, 4}}, AspectRatio -> 1, 
+              Prolog -> $CellContext`prolog, Frame -> True, MaxRecursion -> 
+              ControlActive[3, 9], Axes -> False, FrameTicks -> 
+              False, $CellContext`plotOptions], 
+             Graphics[{Dashed, 
+               RGBColor[1, 0.2, 0], 
+               Dynamic[
+                
+                Arrow[{$CellContext`xy10, $CellContext`xy10 + \
+$CellContext`vxy10}]], 
+               RGBColor[0.5, 0.8, 0], 
+               Dynamic[
+                
+                Arrow[{$CellContext`xy20, $CellContext`xy20 + \
+$CellContext`vxy20}]], 
+               RGBColor[0.2, 0.6, 1], 
+               Dynamic[
+                
+                Arrow[{$CellContext`xy30, $CellContext`xy30 + \
+$CellContext`vxy30}]], 
+               Locator[
+                
+                Dynamic[$CellContext`xy10 + $CellContext`vxy10, \
+($CellContext`vxy10 = # - $CellContext`xy10)& ], 
+                Graphics[{
+                  Point[{0, 0}]}, ImageSize -> 10]], 
+               Locator[
+                
+                Dynamic[$CellContext`xy20 + $CellContext`vxy20, \
+($CellContext`vxy20 = # - $CellContext`xy20)& ], 
+                Graphics[{
+                  Point[{0, 0}]}, ImageSize -> 10]], 
+               Locator[
+                
+                Dynamic[$CellContext`xy30 + $CellContext`vxy30, \
+($CellContext`vxy30 = # - $CellContext`xy30)& ], 
+                Graphics[{
+                  Point[{0, 0}]}, ImageSize -> 10]], 
+               Locator[
+                Dynamic[$CellContext`xy10]], 
+               Locator[
+                Dynamic[$CellContext`xy20]], 
+               Locator[
+                Dynamic[$CellContext`xy30]]}]], 
+           Text["Degenerate initial conditions."]]]]; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->308344745]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell[TextData[{
+ "Trajectories of three point masses ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["m", "1"], TraditionalForm]], "InlineMath"],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["m", "2"], TraditionalForm]], "InlineMath"],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["m", "3"], TraditionalForm]], "InlineMath"],
+ " interacting via Newtonian force fields in 2D (planar three\[Hyphen]body \
+problem). This ",
+ "Demonstration",
+ " allows you to vary the initial positions and velocities of the three \
+bodies and their masses. We start the dance with a choreography by Chenciner \
+and Montgomery."
+}], "ManipulateCaption",
+ CellChangeTimes->{{3.35506532679669*^9, 3.35506533752839*^9}, {
+   3.35506536866749*^9, 3.35506541501302*^9}, {3.35738843918812*^9, 
+   3.35738852734015*^9}, {3.35738873499632*^9, 3.35738878248196*^9}, {
+   3.35738958470696*^9, 3.35738959817521*^9}, {3.3573896352544*^9, 
+   3.35738968726003*^9}, {3.35738973504412*^9, 3.35738973715909*^9}, 
+   3.35740850106491*^9, {3.36432481304688*^9, 3.36432481596875*^9}, 
+   3.36459200703125*^9, 3.382936014175742*^9},
+ CellID->1044312921]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`m1Exp$$ = 0, $CellContext`m2Exp$$ = 
+    0, $CellContext`m3Exp$$ = 0, $CellContext`T$$ = 
+    20., $CellContext`vxy10$$ = {0.466203685, 
+    0.43236573}, $CellContext`vxy20$$ = {0.466203685, 
+    0.43236573}, $CellContext`vxy30$$ = {
+    2.580628344285749, -0.510088602857282}, $CellContext`xy10$$ = {
+    0.97000436, -0.24308753}, $CellContext`xy20$$ = {-0.97000436, 
+    0.24308753}, $CellContext`xy30$$ = {-0.608749999999989, 
+    1.740089285714265}, Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`T$$], 20., "time"}, 0.001, 20}, {{
+       Hold[$CellContext`m1Exp$$], 0, 
+       Style[
+        Subscript[
+         Style["m", Italic], "1"], 
+        RGBColor[1, 0.2, 0]]}, -3, 3}, {{
+       Hold[$CellContext`m2Exp$$], 0, 
+       Style[
+        Subscript[
+         Style["m", Italic], "2"], 
+        RGBColor[0.5, 0.8, 0]]}, -3, 3}, {{
+       Hold[$CellContext`m3Exp$$], 0, 
+       Style[
+        Subscript[
+         Style["m", Italic], "3"], 
+        RGBColor[0.2, 0.6, 1]]}, -3, 3}, {{
+       Hold[$CellContext`vxy10$$], {0.466203685, 0.43236573}, 
+       "\!\(\*SubscriptBox[OverscriptBox[\(v\), \(\[RightVector]\)], \
+\(1\)]\)[0]"}, {-2, -2}, {2, 2}}, {{
+       Hold[$CellContext`vxy20$$], {0.466203685, 0.43236573}, 
+       "\!\(\*SubscriptBox[OverscriptBox[\(v\), \(\[RightVector]\)], \
+\(2\)]\)[0]"}, {-2, -2}, {2, 2}}, {{
+       Hold[$CellContext`vxy30$$], {2.580628344285749, -0.510088602857282}, 
+       "\!\(\*SubscriptBox[OverscriptBox[\(v\), \(\[RightVector]\)], \
+\(3\)]\)[0]"}, {-2, -2}, {2, 2}}, {{
+       Hold[$CellContext`xy10$$], {0.97000436, -0.24308753}, 
+       "\!\(\*SubscriptBox[OverscriptBox[\(x\), \(\[RightVector]\)], \
+\(1\)]\)[0]"}, {-2, -2}, {2, 2}}, {{
+       Hold[$CellContext`xy20$$], {-0.97000436, 0.24308753}, 
+       "\!\(\*SubscriptBox[OverscriptBox[\(x\), \(\[RightVector]\)], \
+\(2\)]\)[0]"}, {-2, -2}, {2, 2}}, {{
+       Hold[$CellContext`xy30$$], {-0.608749999999989, 1.740089285714265}, 
+       "\!\(\*SubscriptBox[OverscriptBox[\(x\), \(\[RightVector]\)], \
+\(3\)]\)[0]"}, {-2, -2}, {2, 2}}}, Typeset`size$$ = Automatic, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`vxy10$502771$$ = {0, 
+    0}, $CellContext`vxy20$502772$$ = {0, 0}, $CellContext`vxy30$502773$$ = {
+    0, 0}, $CellContext`xy10$502774$$ = {0, 0}, $CellContext`xy20$502775$$ = {
+    0, 0}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`m1Exp$$ = 0, $CellContext`m2Exp$$ = 
+        0, $CellContext`m3Exp$$ = 0, $CellContext`T$$ = 
+        20., $CellContext`vxy10$$ = {0.466203685, 
+         0.43236573}, $CellContext`vxy20$$ = {0.466203685, 
+         0.43236573}, $CellContext`vxy30$$ = {
+         2.580628344285749, -0.510088602857282}, $CellContext`xy10$$ = {
+         0.97000436, -0.24308753}, $CellContext`xy20$$ = {-0.97000436, 
+         0.24308753}, $CellContext`xy30$$ = {-0.608749999999989, 
+         1.740089285714265}}, "ControllerVariables" :> {
+        Hold[$CellContext`vxy10$$, $CellContext`vxy10$502771$$, {0, 0}], 
+        Hold[$CellContext`vxy20$$, $CellContext`vxy20$502772$$, {0, 0}], 
+        Hold[$CellContext`vxy30$$, $CellContext`vxy30$502773$$, {0, 0}], 
+        Hold[$CellContext`xy10$$, $CellContext`xy10$502774$$, {0, 0}], 
+        Hold[$CellContext`xy20$$, $CellContext`xy20$502775$$, {0, 0}]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> $CellContext`threeBodyTrajectories[{
+         Dynamic[$CellContext`vxy10$$], 
+         Dynamic[$CellContext`vxy20$$], 
+         Dynamic[$CellContext`vxy30$$], 
+         Dynamic[$CellContext`xy10$$], 
+         Dynamic[$CellContext`xy20$$], 
+         Dynamic[$CellContext`xy30$$]}, {$CellContext`vxy10$$, \
+$CellContext`vxy20$$, $CellContext`vxy30$$}, {
+        10^$CellContext`m1Exp$$, 10^$CellContext`m2Exp$$, 
+         10^$CellContext`m3Exp$$}, $CellContext`T$$, ImageSize -> {350, 350}],
+       "Specifications" :> {{{$CellContext`T$$, 20., "time"}, 0.001, 20, 
+         ControlType -> Animator}, {{$CellContext`m1Exp$$, 0, 
+          Style[
+           Subscript[
+            Style["m", Italic], "1"], 
+           RGBColor[1, 0.2, 0]]}, -3, 3}, {{$CellContext`m2Exp$$, 0, 
+          Style[
+           Subscript[
+            Style["m", Italic], "2"], 
+           RGBColor[0.5, 0.8, 0]]}, -3, 3}, {{$CellContext`m3Exp$$, 0, 
+          Style[
+           Subscript[
+            Style["m", Italic], "3"], 
+           RGBColor[0.2, 0.6, 1]]}, -3, 
+         3}, {{$CellContext`vxy10$$, {0.466203685, 0.43236573}, 
+          "\!\(\*SubscriptBox[OverscriptBox[\(v\), \(\[RightVector]\)], \
+\(1\)]\)[0]"}, {-2, -2}, {2, 2}, ControlType -> 
+         None}, {{$CellContext`vxy20$$, {0.466203685, 0.43236573}, 
+          "\!\(\*SubscriptBox[OverscriptBox[\(v\), \(\[RightVector]\)], \
+\(2\)]\)[0]"}, {-2, -2}, {2, 2}, ControlType -> 
+         None}, {{$CellContext`vxy30$$, {
+          2.580628344285749, -0.510088602857282}, 
+          "\!\(\*SubscriptBox[OverscriptBox[\(v\), \(\[RightVector]\)], \
+\(3\)]\)[0]"}, {-2, -2}, {2, 2}, ControlType -> 
+         None}, {{$CellContext`xy10$$, {0.97000436, -0.24308753}, 
+          "\!\(\*SubscriptBox[OverscriptBox[\(x\), \(\[RightVector]\)], \
+\(1\)]\)[0]"}, {-2, -2}, {2, 2}, ControlType -> 
+         None}, {{$CellContext`xy20$$, {-0.97000436, 0.24308753}, 
+          "\!\(\*SubscriptBox[OverscriptBox[\(x\), \(\[RightVector]\)], \
+\(2\)]\)[0]"}, {-2, -2}, {2, 2}, ControlType -> 
+         None}, {{$CellContext`xy30$$, {-0.608749999999989, 
+          1.740089285714265}, 
+          
+          "\!\(\*SubscriptBox[OverscriptBox[\(x\), \(\[RightVector]\)], \
+\(3\)]\)[0]"}, {-2, -2}, {2, 2}, ControlType -> None}}, 
+      "Options" :> {
+       AutorunSequencing -> {8}, 
+        ControlPlacement -> {Top, Top, Top, Top, Top, Left, Left, Left}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>($CellContext`threeBodyTrajectories[{
+         Dynamic[
+          Pattern[$CellContext`vxy10, 
+           Blank[]]], 
+         Dynamic[
+          Pattern[$CellContext`vxy20, 
+           Blank[]]], 
+         Dynamic[
+          Pattern[$CellContext`vxy30, 
+           Blank[]]], 
+         Dynamic[
+          Pattern[$CellContext`xy10, 
+           Blank[]]], 
+         Dynamic[
+          Pattern[$CellContext`xy20, 
+           Blank[]]], 
+         Dynamic[
+          Pattern[$CellContext`xy30, 
+           Blank[]]]}, {{
+          Pattern[$CellContext`vx10, 
+           Blank[]], 
+          Pattern[$CellContext`vy10, 
+           Blank[]]}, {
+          Pattern[$CellContext`vx20, 
+           Blank[]], 
+          Pattern[$CellContext`vy20, 
+           Blank[]]}, {
+          Pattern[$CellContext`vx30, 
+           Blank[]], 
+          Pattern[$CellContext`vy30, 
+           Blank[]]}}, {
+         Pattern[$CellContext`m1, 
+          Blank[]], 
+         Pattern[$CellContext`m2, 
+          Blank[]], 
+         Pattern[$CellContext`m3, 
+          Blank[]]}, 
+        Pattern[$CellContext`T, 
+         Blank[]], 
+        Pattern[$CellContext`plotOptions, 
+         BlankNullSequence[]]] := Quiet[
+        Module[{$CellContext`nds, $CellContext`Tmax, $CellContext`prolog, \
+$CellContext`funsToPlot, $CellContext`x10, $CellContext`y10, \
+$CellContext`x20, $CellContext`y20, $CellContext`x30, $CellContext`y30}, \
+{$CellContext`x10, $CellContext`y10} = $CellContext`xy10; {$CellContext`x20, \
+$CellContext`y20} = $CellContext`xy20; {$CellContext`x30, $CellContext`y30} = \
+$CellContext`xy30; $CellContext`nds = 
+          NDSolve[{
+            Derivative[
+              1][$CellContext`x1][$CellContext`t] == \
+$CellContext`vx1[$CellContext`t], 
+             Derivative[
+              1][$CellContext`y1][$CellContext`t] == \
+$CellContext`vy1[$CellContext`t], 
+             Derivative[
+              1][$CellContext`x2][$CellContext`t] == \
+$CellContext`vx2[$CellContext`t], 
+             Derivative[
+              1][$CellContext`y2][$CellContext`t] == \
+$CellContext`vy2[$CellContext`t], 
+             Derivative[
+              1][$CellContext`x3][$CellContext`t] == \
+$CellContext`vx3[$CellContext`t], 
+             Derivative[
+              1][$CellContext`y3][$CellContext`t] == \
+$CellContext`vy3[$CellContext`t], $CellContext`m1 
+              Derivative[
+               1][$CellContext`vx1][$CellContext`t] == -($CellContext`m1 \
+$CellContext`m2 ($CellContext`x1[$CellContext`t] - \
+$CellContext`x2[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x2[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y2[$CellContext`t])^2)^(3/
+                 2)) - $CellContext`m1 $CellContext`m3 \
+($CellContext`x1[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/2), $CellContext`m1 
+              Derivative[
+               1][$CellContext`vy1][$CellContext`t] == -($CellContext`m1 \
+$CellContext`m2 ($CellContext`y1[$CellContext`t] - \
+$CellContext`y2[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x2[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y2[$CellContext`t])^2)^(3/
+                 2)) - $CellContext`m1 $CellContext`m3 \
+($CellContext`y1[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/2), $CellContext`m2 
+              Derivative[
+               1][$CellContext`vx2][$CellContext`t] == $CellContext`m1 \
+$CellContext`m2 ($CellContext`x1[$CellContext`t] - \
+$CellContext`x2[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x2[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y2[$CellContext`t])^2)^(3/
+                2) - $CellContext`m2 $CellContext`m3 \
+($CellContext`x2[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])/(($CellContext`x2[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y2[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/2), $CellContext`m2 
+              Derivative[
+               1][$CellContext`vy2][$CellContext`t] == $CellContext`m1 \
+$CellContext`m2 ($CellContext`y1[$CellContext`t] - \
+$CellContext`y2[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x2[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y2[$CellContext`t])^2)^(3/
+                2) - $CellContext`m2 $CellContext`m3 \
+($CellContext`y2[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])/(($CellContext`x2[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y2[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/2), $CellContext`m3 
+              Derivative[
+               1][$CellContext`vx3][$CellContext`t] == $CellContext`m1 \
+$CellContext`m3 ($CellContext`x1[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/
+                2) + $CellContext`m2 $CellContext`m3 \
+($CellContext`x2[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])/(($CellContext`x2[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y2[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/2), $CellContext`m3 
+              Derivative[
+               1][$CellContext`vy3][$CellContext`t] == $CellContext`m1 \
+$CellContext`m3 ($CellContext`y1[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/
+                2) + $CellContext`m2 $CellContext`m3 \
+($CellContext`y2[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])/(($CellContext`x2[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y2[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/2), $CellContext`x1[
+              0] == $CellContext`x10, $CellContext`y1[
+              0] == $CellContext`y10, $CellContext`x2[
+              0] == $CellContext`x20, $CellContext`y2[
+              0] == $CellContext`y20, $CellContext`x3[
+              0] == $CellContext`x30, $CellContext`y3[
+              0] == $CellContext`y30, $CellContext`vx1[
+              0] == $CellContext`vx10, $CellContext`vy1[
+              0] == $CellContext`vy10, $CellContext`vx2[
+              0] == $CellContext`vx20, $CellContext`vy2[
+              0] == $CellContext`vy20, $CellContext`vx3[
+              0] == $CellContext`vx30, $CellContext`vy3[
+              0] == $CellContext`vy30}, {$CellContext`x1, $CellContext`x2, \
+$CellContext`x3, $CellContext`y1, $CellContext`y2, $CellContext`y3, \
+$CellContext`vx1, $CellContext`vx2, $CellContext`vx3, $CellContext`vy1, \
+$CellContext`vy2, $CellContext`vy3}, {$CellContext`t, 0, $CellContext`T}]; 
+         If[Head[$CellContext`nds] =!= 
+           NDSolve, $CellContext`Tmax = 
+            Part[$CellContext`nds, 1, 1, 2, 1, 1, 2]; $CellContext`funsToPlot = 
+            ReplaceAll[{{
+                $CellContext`x1[$CellContext`t], 
+                $CellContext`y1[$CellContext`t]}, {
+                $CellContext`x2[$CellContext`t], 
+                $CellContext`y2[$CellContext`t]}, {
+                $CellContext`x3[$CellContext`t], 
+                $CellContext`y3[$CellContext`t]}}, 
+              Part[$CellContext`nds, 1]]; $CellContext`prolog = {
+              PointSize[0.01], 
+              Transpose[{{
+                 RGBColor[1, 0.2, 0], 
+                 RGBColor[0.5, 0.8, 0], 
+                 RGBColor[0.2, 0.6, 1]}, 
+                Map[Point, 
+                 ReplaceAll[$CellContext`funsToPlot, $CellContext`t -> 0]]}]}; 
+           Show[
+             ParametricPlot[
+              
+              Evaluate[$CellContext`funsToPlot], {$CellContext`t, 
+               0, $CellContext`Tmax}, PlotStyle -> {
+                RGBColor[1, 0.2, 0], 
+                RGBColor[0.5, 0.8, 0], 
+                RGBColor[0.2, 0.6, 1]}, Frame -> False, 
+              PlotRange -> {{-4, 4}, {-4, 4}}, AspectRatio -> 1, 
+              Prolog -> $CellContext`prolog, Frame -> True, MaxRecursion -> 
+              ControlActive[3, 9], Axes -> False, FrameTicks -> 
+              False, $CellContext`plotOptions], 
+             Graphics[{Dashed, 
+               RGBColor[1, 0.2, 0], 
+               Dynamic[
+                
+                Arrow[{$CellContext`xy10, $CellContext`xy10 + \
+$CellContext`vxy10}]], 
+               RGBColor[0.5, 0.8, 0], 
+               Dynamic[
+                
+                Arrow[{$CellContext`xy20, $CellContext`xy20 + \
+$CellContext`vxy20}]], 
+               RGBColor[0.2, 0.6, 1], 
+               Dynamic[
+                
+                Arrow[{$CellContext`xy30, $CellContext`xy30 + \
+$CellContext`vxy30}]], 
+               Locator[
+                
+                Dynamic[$CellContext`xy10 + $CellContext`vxy10, \
+($CellContext`vxy10 = # - $CellContext`xy10)& ], 
+                Graphics[{
+                  Point[{0, 0}]}, ImageSize -> 10]], 
+               Locator[
+                
+                Dynamic[$CellContext`xy20 + $CellContext`vxy20, \
+($CellContext`vxy20 = # - $CellContext`xy20)& ], 
+                Graphics[{
+                  Point[{0, 0}]}, ImageSize -> 10]], 
+               Locator[
+                
+                Dynamic[$CellContext`xy30 + $CellContext`vxy30, \
+($CellContext`vxy30 = # - $CellContext`xy30)& ], 
+                Graphics[{
+                  Point[{0, 0}]}, ImageSize -> 10]], 
+               Locator[
+                Dynamic[$CellContext`xy10]], 
+               Locator[
+                Dynamic[$CellContext`xy20]], 
+               Locator[
+                Dynamic[$CellContext`xy30]]}]], 
+           Text["Degenerate initial conditions."]]]]; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->85629580]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`m1Exp$$ = -1.89, $CellContext`m2Exp$$ = 
+    0, $CellContext`m3Exp$$ = 1.5, $CellContext`T$$ = 
+    20., $CellContext`vxy10$$ = {-0.7452248864285664, -0.8019199842857114}, \
+$CellContext`vxy20$$ = {
+    0.3519179707142879, -0.7104914128571422}, $CellContext`vxy30$$ = {
+    0.5304497728571462, 0.09526853999999907}, $CellContext`xy10$$ = {
+    0.10143293142857168`, -0.9059446728571419}, $CellContext`xy20$$ = \
+{-1.3814329314285692`, -0.07691247000000118}, $CellContext`xy30$$ = \
+{-0.1828571428571406, 0.0685714285714294}, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`T$$], 20., "time"}, 0.001, 20}, {{
+       Hold[$CellContext`m1Exp$$], -1.89, 
+       Style[
+        Subscript[
+         Style["m", Italic], "1"], 
+        RGBColor[1, 0.2, 0]]}, -3, 3}, {{
+       Hold[$CellContext`m2Exp$$], 0, 
+       Style[
+        Subscript[
+         Style["m", Italic], "2"], 
+        RGBColor[0.5, 0.8, 0]]}, -3, 3}, {{
+       Hold[$CellContext`m3Exp$$], 1.5, 
+       Style[
+        Subscript[
+         Style["m", Italic], "3"], 
+        RGBColor[0.2, 0.6, 1]]}, -3, 3}, {{
+       Hold[$CellContext`vxy10$$], {-0.7452248864285664, -0.8019199842857114},
+        "\!\(\*SubscriptBox[OverscriptBox[\(v\), \(\[RightVector]\)], \
+\(1\)]\)[0]"}, {-2, -2}, {2, 2}}, {{
+       Hold[$CellContext`vxy20$$], {0.3519179707142879, -0.7104914128571422}, 
+       "\!\(\*SubscriptBox[OverscriptBox[\(v\), \(\[RightVector]\)], \
+\(2\)]\)[0]"}, {-2, -2}, {2, 2}}, {{
+       Hold[$CellContext`vxy30$$], {0.5304497728571462, 0.09526853999999907}, 
+       "\!\(\*SubscriptBox[OverscriptBox[\(v\), \(\[RightVector]\)], \
+\(3\)]\)[0]"}, {-2, -2}, {2, 2}}, {{
+       Hold[$CellContext`xy10$$], {0.10143293142857168`, -0.9059446728571419},
+        "\!\(\*SubscriptBox[OverscriptBox[\(x\), \(\[RightVector]\)], \
+\(1\)]\)[0]"}, {-2, -2}, {2, 2}}, {{
+       Hold[$CellContext`xy20$$], {-1.3814329314285692`, \
+-0.07691247000000118}, 
+       "\!\(\*SubscriptBox[OverscriptBox[\(x\), \(\[RightVector]\)], \
+\(2\)]\)[0]"}, {-2, -2}, {2, 2}}, {{
+       Hold[$CellContext`xy30$$], {-0.1828571428571406, 0.0685714285714294}, 
+       "\!\(\*SubscriptBox[OverscriptBox[\(x\), \(\[RightVector]\)], \
+\(3\)]\)[0]"}, {-2, -2}, {2, 2}}}, Typeset`size$$ = Automatic, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`vxy10$502862$$ = {0, 
+    0}, $CellContext`vxy20$502863$$ = {0, 0}, $CellContext`vxy30$502864$$ = {
+    0, 0}, $CellContext`xy10$502865$$ = {0, 0}, $CellContext`xy20$502866$$ = {
+    0, 0}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`m1Exp$$ = -1.89, $CellContext`m2Exp$$ = 
+        0, $CellContext`m3Exp$$ = 1.5, $CellContext`T$$ = 
+        20., $CellContext`vxy10$$ = {-0.7452248864285664, \
+-0.8019199842857114}, $CellContext`vxy20$$ = {
+         0.3519179707142879, -0.7104914128571422}, $CellContext`vxy30$$ = {
+         0.5304497728571462, 0.09526853999999907}, $CellContext`xy10$$ = {
+         0.10143293142857168`, -0.9059446728571419}, $CellContext`xy20$$ = \
+{-1.3814329314285692`, -0.07691247000000118}, $CellContext`xy30$$ = \
+{-0.1828571428571406, 0.0685714285714294}}, "ControllerVariables" :> {
+        Hold[$CellContext`vxy10$$, $CellContext`vxy10$502862$$, {0, 0}], 
+        Hold[$CellContext`vxy20$$, $CellContext`vxy20$502863$$, {0, 0}], 
+        Hold[$CellContext`vxy30$$, $CellContext`vxy30$502864$$, {0, 0}], 
+        Hold[$CellContext`xy10$$, $CellContext`xy10$502865$$, {0, 0}], 
+        Hold[$CellContext`xy20$$, $CellContext`xy20$502866$$, {0, 0}]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> $CellContext`threeBodyTrajectories[{
+         Dynamic[$CellContext`vxy10$$], 
+         Dynamic[$CellContext`vxy20$$], 
+         Dynamic[$CellContext`vxy30$$], 
+         Dynamic[$CellContext`xy10$$], 
+         Dynamic[$CellContext`xy20$$], 
+         Dynamic[$CellContext`xy30$$]}, {$CellContext`vxy10$$, \
+$CellContext`vxy20$$, $CellContext`vxy30$$}, {
+        10^$CellContext`m1Exp$$, 10^$CellContext`m2Exp$$, 
+         10^$CellContext`m3Exp$$}, $CellContext`T$$, ImageSize -> {350, 350}],
+       "Specifications" :> {{{$CellContext`T$$, 20., "time"}, 0.001, 20, 
+         ControlType -> Animator}, {{$CellContext`m1Exp$$, -1.89, 
+          Style[
+           Subscript[
+            Style["m", Italic], "1"], 
+           RGBColor[1, 0.2, 0]]}, -3, 3}, {{$CellContext`m2Exp$$, 0, 
+          Style[
+           Subscript[
+            Style["m", Italic], "2"], 
+           RGBColor[0.5, 0.8, 0]]}, -3, 3}, {{$CellContext`m3Exp$$, 1.5, 
+          Style[
+           Subscript[
+            Style["m", Italic], "3"], 
+           RGBColor[0.2, 0.6, 1]]}, -3, 
+         3}, {{$CellContext`vxy10$$, {-0.7452248864285664, \
+-0.8019199842857114}, 
+          "\!\(\*SubscriptBox[OverscriptBox[\(v\), \(\[RightVector]\)], \
+\(1\)]\)[0]"}, {-2, -2}, {2, 2}, ControlType -> 
+         None}, {{$CellContext`vxy20$$, {
+          0.3519179707142879, -0.7104914128571422}, 
+          "\!\(\*SubscriptBox[OverscriptBox[\(v\), \(\[RightVector]\)], \
+\(2\)]\)[0]"}, {-2, -2}, {2, 2}, ControlType -> 
+         None}, {{$CellContext`vxy30$$, {0.5304497728571462, 
+          0.09526853999999907}, 
+          "\!\(\*SubscriptBox[OverscriptBox[\(v\), \(\[RightVector]\)], \
+\(3\)]\)[0]"}, {-2, -2}, {2, 2}, ControlType -> 
+         None}, {{$CellContext`xy10$$, {
+          0.10143293142857168`, -0.9059446728571419}, 
+          "\!\(\*SubscriptBox[OverscriptBox[\(x\), \(\[RightVector]\)], \
+\(1\)]\)[0]"}, {-2, -2}, {2, 2}, ControlType -> 
+         None}, {{$CellContext`xy20$$, {-1.3814329314285692`, \
+-0.07691247000000118}, 
+          "\!\(\*SubscriptBox[OverscriptBox[\(x\), \(\[RightVector]\)], \
+\(2\)]\)[0]"}, {-2, -2}, {2, 2}, ControlType -> 
+         None}, {{$CellContext`xy30$$, {-0.1828571428571406, 
+          0.0685714285714294}, 
+          "\!\(\*SubscriptBox[OverscriptBox[\(x\), \(\[RightVector]\)], \
+\(3\)]\)[0]"}, {-2, -2}, {2, 2}, ControlType -> None}}, 
+      "Options" :> {
+       AutorunSequencing -> {8}, 
+        ControlPlacement -> {Top, Top, Top, Top, Top, Left, Left, Left}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>($CellContext`threeBodyTrajectories[{
+         Dynamic[
+          Pattern[$CellContext`vxy10, 
+           Blank[]]], 
+         Dynamic[
+          Pattern[$CellContext`vxy20, 
+           Blank[]]], 
+         Dynamic[
+          Pattern[$CellContext`vxy30, 
+           Blank[]]], 
+         Dynamic[
+          Pattern[$CellContext`xy10, 
+           Blank[]]], 
+         Dynamic[
+          Pattern[$CellContext`xy20, 
+           Blank[]]], 
+         Dynamic[
+          Pattern[$CellContext`xy30, 
+           Blank[]]]}, {{
+          Pattern[$CellContext`vx10, 
+           Blank[]], 
+          Pattern[$CellContext`vy10, 
+           Blank[]]}, {
+          Pattern[$CellContext`vx20, 
+           Blank[]], 
+          Pattern[$CellContext`vy20, 
+           Blank[]]}, {
+          Pattern[$CellContext`vx30, 
+           Blank[]], 
+          Pattern[$CellContext`vy30, 
+           Blank[]]}}, {
+         Pattern[$CellContext`m1, 
+          Blank[]], 
+         Pattern[$CellContext`m2, 
+          Blank[]], 
+         Pattern[$CellContext`m3, 
+          Blank[]]}, 
+        Pattern[$CellContext`T, 
+         Blank[]], 
+        Pattern[$CellContext`plotOptions, 
+         BlankNullSequence[]]] := Quiet[
+        Module[{$CellContext`nds, $CellContext`Tmax, $CellContext`prolog, \
+$CellContext`funsToPlot, $CellContext`x10, $CellContext`y10, \
+$CellContext`x20, $CellContext`y20, $CellContext`x30, $CellContext`y30}, \
+{$CellContext`x10, $CellContext`y10} = $CellContext`xy10; {$CellContext`x20, \
+$CellContext`y20} = $CellContext`xy20; {$CellContext`x30, $CellContext`y30} = \
+$CellContext`xy30; $CellContext`nds = 
+          NDSolve[{
+            Derivative[
+              1][$CellContext`x1][$CellContext`t] == \
+$CellContext`vx1[$CellContext`t], 
+             Derivative[
+              1][$CellContext`y1][$CellContext`t] == \
+$CellContext`vy1[$CellContext`t], 
+             Derivative[
+              1][$CellContext`x2][$CellContext`t] == \
+$CellContext`vx2[$CellContext`t], 
+             Derivative[
+              1][$CellContext`y2][$CellContext`t] == \
+$CellContext`vy2[$CellContext`t], 
+             Derivative[
+              1][$CellContext`x3][$CellContext`t] == \
+$CellContext`vx3[$CellContext`t], 
+             Derivative[
+              1][$CellContext`y3][$CellContext`t] == \
+$CellContext`vy3[$CellContext`t], $CellContext`m1 
+              Derivative[
+               1][$CellContext`vx1][$CellContext`t] == -($CellContext`m1 \
+$CellContext`m2 ($CellContext`x1[$CellContext`t] - \
+$CellContext`x2[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x2[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y2[$CellContext`t])^2)^(3/
+                 2)) - $CellContext`m1 $CellContext`m3 \
+($CellContext`x1[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/2), $CellContext`m1 
+              Derivative[
+               1][$CellContext`vy1][$CellContext`t] == -($CellContext`m1 \
+$CellContext`m2 ($CellContext`y1[$CellContext`t] - \
+$CellContext`y2[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x2[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y2[$CellContext`t])^2)^(3/
+                 2)) - $CellContext`m1 $CellContext`m3 \
+($CellContext`y1[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/2), $CellContext`m2 
+              Derivative[
+               1][$CellContext`vx2][$CellContext`t] == $CellContext`m1 \
+$CellContext`m2 ($CellContext`x1[$CellContext`t] - \
+$CellContext`x2[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x2[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y2[$CellContext`t])^2)^(3/
+                2) - $CellContext`m2 $CellContext`m3 \
+($CellContext`x2[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])/(($CellContext`x2[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y2[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/2), $CellContext`m2 
+              Derivative[
+               1][$CellContext`vy2][$CellContext`t] == $CellContext`m1 \
+$CellContext`m2 ($CellContext`y1[$CellContext`t] - \
+$CellContext`y2[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x2[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y2[$CellContext`t])^2)^(3/
+                2) - $CellContext`m2 $CellContext`m3 \
+($CellContext`y2[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])/(($CellContext`x2[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y2[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/2), $CellContext`m3 
+              Derivative[
+               1][$CellContext`vx3][$CellContext`t] == $CellContext`m1 \
+$CellContext`m3 ($CellContext`x1[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/
+                2) + $CellContext`m2 $CellContext`m3 \
+($CellContext`x2[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])/(($CellContext`x2[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y2[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/2), $CellContext`m3 
+              Derivative[
+               1][$CellContext`vy3][$CellContext`t] == $CellContext`m1 \
+$CellContext`m3 ($CellContext`y1[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/
+                2) + $CellContext`m2 $CellContext`m3 \
+($CellContext`y2[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])/(($CellContext`x2[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y2[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/2), $CellContext`x1[
+              0] == $CellContext`x10, $CellContext`y1[
+              0] == $CellContext`y10, $CellContext`x2[
+              0] == $CellContext`x20, $CellContext`y2[
+              0] == $CellContext`y20, $CellContext`x3[
+              0] == $CellContext`x30, $CellContext`y3[
+              0] == $CellContext`y30, $CellContext`vx1[
+              0] == $CellContext`vx10, $CellContext`vy1[
+              0] == $CellContext`vy10, $CellContext`vx2[
+              0] == $CellContext`vx20, $CellContext`vy2[
+              0] == $CellContext`vy20, $CellContext`vx3[
+              0] == $CellContext`vx30, $CellContext`vy3[
+              0] == $CellContext`vy30}, {$CellContext`x1, $CellContext`x2, \
+$CellContext`x3, $CellContext`y1, $CellContext`y2, $CellContext`y3, \
+$CellContext`vx1, $CellContext`vx2, $CellContext`vx3, $CellContext`vy1, \
+$CellContext`vy2, $CellContext`vy3}, {$CellContext`t, 0, $CellContext`T}]; 
+         If[Head[$CellContext`nds] =!= 
+           NDSolve, $CellContext`Tmax = 
+            Part[$CellContext`nds, 1, 1, 2, 1, 1, 2]; $CellContext`funsToPlot = 
+            ReplaceAll[{{
+                $CellContext`x1[$CellContext`t], 
+                $CellContext`y1[$CellContext`t]}, {
+                $CellContext`x2[$CellContext`t], 
+                $CellContext`y2[$CellContext`t]}, {
+                $CellContext`x3[$CellContext`t], 
+                $CellContext`y3[$CellContext`t]}}, 
+              Part[$CellContext`nds, 1]]; $CellContext`prolog = {
+              PointSize[0.01], 
+              Transpose[{{
+                 RGBColor[1, 0.2, 0], 
+                 RGBColor[0.5, 0.8, 0], 
+                 RGBColor[0.2, 0.6, 1]}, 
+                Map[Point, 
+                 ReplaceAll[$CellContext`funsToPlot, $CellContext`t -> 0]]}]}; 
+           Show[
+             ParametricPlot[
+              
+              Evaluate[$CellContext`funsToPlot], {$CellContext`t, 
+               0, $CellContext`Tmax}, PlotStyle -> {
+                RGBColor[1, 0.2, 0], 
+                RGBColor[0.5, 0.8, 0], 
+                RGBColor[0.2, 0.6, 1]}, Frame -> False, 
+              PlotRange -> {{-4, 4}, {-4, 4}}, AspectRatio -> 1, 
+              Prolog -> $CellContext`prolog, Frame -> True, MaxRecursion -> 
+              ControlActive[3, 9], Axes -> False, FrameTicks -> 
+              False, $CellContext`plotOptions], 
+             Graphics[{Dashed, 
+               RGBColor[1, 0.2, 0], 
+               Dynamic[
+                
+                Arrow[{$CellContext`xy10, $CellContext`xy10 + \
+$CellContext`vxy10}]], 
+               RGBColor[0.5, 0.8, 0], 
+               Dynamic[
+                
+                Arrow[{$CellContext`xy20, $CellContext`xy20 + \
+$CellContext`vxy20}]], 
+               RGBColor[0.2, 0.6, 1], 
+               Dynamic[
+                
+                Arrow[{$CellContext`xy30, $CellContext`xy30 + \
+$CellContext`vxy30}]], 
+               Locator[
+                
+                Dynamic[$CellContext`xy10 + $CellContext`vxy10, \
+($CellContext`vxy10 = # - $CellContext`xy10)& ], 
+                Graphics[{
+                  Point[{0, 0}]}, ImageSize -> 10]], 
+               Locator[
+                
+                Dynamic[$CellContext`xy20 + $CellContext`vxy20, \
+($CellContext`vxy20 = # - $CellContext`xy20)& ], 
+                Graphics[{
+                  Point[{0, 0}]}, ImageSize -> 10]], 
+               Locator[
+                
+                Dynamic[$CellContext`xy30 + $CellContext`vxy30, \
+($CellContext`vxy30 = # - $CellContext`xy30)& ], 
+                Graphics[{
+                  Point[{0, 0}]}, ImageSize -> 10]], 
+               Locator[
+                Dynamic[$CellContext`xy10]], 
+               Locator[
+                Dynamic[$CellContext`xy20]], 
+               Locator[
+                Dynamic[$CellContext`xy30]]}]], 
+           Text["Degenerate initial conditions."]]]]; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->54078971],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`m1Exp$$ = 0, $CellContext`m2Exp$$ = 
+    0, $CellContext`m3Exp$$ = 0, $CellContext`T$$ = 
+    20., $CellContext`vxy10$$ = {0.466203685, 
+    0.43236573}, $CellContext`vxy20$$ = {0.466203685, 
+    0.43236573}, $CellContext`vxy30$$ = {-0.93240737, -0.86473146}, \
+$CellContext`xy10$$ = {
+    0.97000436, -0.24308753}, $CellContext`xy20$$ = {-1.6328615028571356`, 
+    0.22023038714285686`}, $CellContext`xy30$$ = {0, 0}, Typeset`show$$ = 
+    True, Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`T$$], 20., "time"}, 0.001, 20}, {{
+       Hold[$CellContext`m1Exp$$], 0, 
+       Style[
+        Subscript[
+         Style["m", Italic], "1"], 
+        RGBColor[1, 0.2, 0]]}, -3, 3}, {{
+       Hold[$CellContext`m2Exp$$], 0, 
+       Style[
+        Subscript[
+         Style["m", Italic], "2"], 
+        RGBColor[0.5, 0.8, 0]]}, -3, 3}, {{
+       Hold[$CellContext`m3Exp$$], 0, 
+       Style[
+        Subscript[
+         Style["m", Italic], "3"], 
+        RGBColor[0.2, 0.6, 1]]}, -3, 3}, {{
+       Hold[$CellContext`vxy10$$], {0.466203685, 0.43236573}, 
+       "\!\(\*SubscriptBox[OverscriptBox[\(v\), \(\[RightVector]\)], \
+\(1\)]\)[0]"}, {-2, -2}, {2, 2}}, {{
+       Hold[$CellContext`vxy20$$], {0.466203685, 0.43236573}, 
+       "\!\(\*SubscriptBox[OverscriptBox[\(v\), \(\[RightVector]\)], \
+\(2\)]\)[0]"}, {-2, -2}, {2, 2}}, {{
+       Hold[$CellContext`vxy30$$], {-0.93240737, -0.86473146}, 
+       "\!\(\*SubscriptBox[OverscriptBox[\(v\), \(\[RightVector]\)], \
+\(3\)]\)[0]"}, {-2, -2}, {2, 2}}, {{
+       Hold[$CellContext`xy10$$], {0.97000436, -0.24308753}, 
+       "\!\(\*SubscriptBox[OverscriptBox[\(x\), \(\[RightVector]\)], \
+\(1\)]\)[0]"}, {-2, -2}, {2, 2}}, {{
+       Hold[$CellContext`xy20$$], {-1.6328615028571356`, 
+       0.22023038714285686`}, 
+       "\!\(\*SubscriptBox[OverscriptBox[\(x\), \(\[RightVector]\)], \
+\(2\)]\)[0]"}, {-2, -2}, {2, 2}}, {{
+       Hold[$CellContext`xy30$$], {0, 0}, 
+       "\!\(\*SubscriptBox[OverscriptBox[\(x\), \(\[RightVector]\)], \
+\(3\)]\)[0]"}, {-2, -2}, {2, 2}}}, Typeset`size$$ = Automatic, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`vxy10$502953$$ = {0, 
+    0}, $CellContext`vxy20$502954$$ = {0, 0}, $CellContext`vxy30$502955$$ = {
+    0, 0}, $CellContext`xy10$502956$$ = {0, 0}, $CellContext`xy20$502957$$ = {
+    0, 0}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`m1Exp$$ = 0, $CellContext`m2Exp$$ = 
+        0, $CellContext`m3Exp$$ = 0, $CellContext`T$$ = 
+        20., $CellContext`vxy10$$ = {0.466203685, 
+         0.43236573}, $CellContext`vxy20$$ = {0.466203685, 
+         0.43236573}, $CellContext`vxy30$$ = {-0.93240737, -0.86473146}, \
+$CellContext`xy10$$ = {
+         0.97000436, -0.24308753}, $CellContext`xy20$$ = \
+{-1.6328615028571356`, 0.22023038714285686`}, $CellContext`xy30$$ = {0, 0}}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`vxy10$$, $CellContext`vxy10$502953$$, {0, 0}], 
+        Hold[$CellContext`vxy20$$, $CellContext`vxy20$502954$$, {0, 0}], 
+        Hold[$CellContext`vxy30$$, $CellContext`vxy30$502955$$, {0, 0}], 
+        Hold[$CellContext`xy10$$, $CellContext`xy10$502956$$, {0, 0}], 
+        Hold[$CellContext`xy20$$, $CellContext`xy20$502957$$, {0, 0}]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> $CellContext`threeBodyTrajectories[{
+         Dynamic[$CellContext`vxy10$$], 
+         Dynamic[$CellContext`vxy20$$], 
+         Dynamic[$CellContext`vxy30$$], 
+         Dynamic[$CellContext`xy10$$], 
+         Dynamic[$CellContext`xy20$$], 
+         Dynamic[$CellContext`xy30$$]}, {$CellContext`vxy10$$, \
+$CellContext`vxy20$$, $CellContext`vxy30$$}, {
+        10^$CellContext`m1Exp$$, 10^$CellContext`m2Exp$$, 
+         10^$CellContext`m3Exp$$}, $CellContext`T$$, ImageSize -> {350, 350}],
+       "Specifications" :> {{{$CellContext`T$$, 20., "time"}, 0.001, 20, 
+         ControlType -> Animator}, {{$CellContext`m1Exp$$, 0, 
+          Style[
+           Subscript[
+            Style["m", Italic], "1"], 
+           RGBColor[1, 0.2, 0]]}, -3, 3}, {{$CellContext`m2Exp$$, 0, 
+          Style[
+           Subscript[
+            Style["m", Italic], "2"], 
+           RGBColor[0.5, 0.8, 0]]}, -3, 3}, {{$CellContext`m3Exp$$, 0, 
+          Style[
+           Subscript[
+            Style["m", Italic], "3"], 
+           RGBColor[0.2, 0.6, 1]]}, -3, 
+         3}, {{$CellContext`vxy10$$, {0.466203685, 0.43236573}, 
+          "\!\(\*SubscriptBox[OverscriptBox[\(v\), \(\[RightVector]\)], \
+\(1\)]\)[0]"}, {-2, -2}, {2, 2}, ControlType -> 
+         None}, {{$CellContext`vxy20$$, {0.466203685, 0.43236573}, 
+          "\!\(\*SubscriptBox[OverscriptBox[\(v\), \(\[RightVector]\)], \
+\(2\)]\)[0]"}, {-2, -2}, {2, 2}, ControlType -> 
+         None}, {{$CellContext`vxy30$$, {-0.93240737, -0.86473146}, 
+          "\!\(\*SubscriptBox[OverscriptBox[\(v\), \(\[RightVector]\)], \
+\(3\)]\)[0]"}, {-2, -2}, {2, 2}, ControlType -> 
+         None}, {{$CellContext`xy10$$, {0.97000436, -0.24308753}, 
+          "\!\(\*SubscriptBox[OverscriptBox[\(x\), \(\[RightVector]\)], \
+\(1\)]\)[0]"}, {-2, -2}, {2, 2}, ControlType -> 
+         None}, {{$CellContext`xy20$$, {-1.6328615028571356`, 
+          0.22023038714285686`}, 
+          "\!\(\*SubscriptBox[OverscriptBox[\(x\), \(\[RightVector]\)], \
+\(2\)]\)[0]"}, {-2, -2}, {2, 2}, ControlType -> 
+         None}, {{$CellContext`xy30$$, {0, 0}, 
+          "\!\(\*SubscriptBox[OverscriptBox[\(x\), \(\[RightVector]\)], \
+\(3\)]\)[0]"}, {-2, -2}, {2, 2}, ControlType -> None}}, 
+      "Options" :> {
+       AutorunSequencing -> {8}, 
+        ControlPlacement -> {Top, Top, Top, Top, Top, Left, Left, Left}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>($CellContext`threeBodyTrajectories[{
+         Dynamic[
+          Pattern[$CellContext`vxy10, 
+           Blank[]]], 
+         Dynamic[
+          Pattern[$CellContext`vxy20, 
+           Blank[]]], 
+         Dynamic[
+          Pattern[$CellContext`vxy30, 
+           Blank[]]], 
+         Dynamic[
+          Pattern[$CellContext`xy10, 
+           Blank[]]], 
+         Dynamic[
+          Pattern[$CellContext`xy20, 
+           Blank[]]], 
+         Dynamic[
+          Pattern[$CellContext`xy30, 
+           Blank[]]]}, {{
+          Pattern[$CellContext`vx10, 
+           Blank[]], 
+          Pattern[$CellContext`vy10, 
+           Blank[]]}, {
+          Pattern[$CellContext`vx20, 
+           Blank[]], 
+          Pattern[$CellContext`vy20, 
+           Blank[]]}, {
+          Pattern[$CellContext`vx30, 
+           Blank[]], 
+          Pattern[$CellContext`vy30, 
+           Blank[]]}}, {
+         Pattern[$CellContext`m1, 
+          Blank[]], 
+         Pattern[$CellContext`m2, 
+          Blank[]], 
+         Pattern[$CellContext`m3, 
+          Blank[]]}, 
+        Pattern[$CellContext`T, 
+         Blank[]], 
+        Pattern[$CellContext`plotOptions, 
+         BlankNullSequence[]]] := Quiet[
+        Module[{$CellContext`nds, $CellContext`Tmax, $CellContext`prolog, \
+$CellContext`funsToPlot, $CellContext`x10, $CellContext`y10, \
+$CellContext`x20, $CellContext`y20, $CellContext`x30, $CellContext`y30}, \
+{$CellContext`x10, $CellContext`y10} = $CellContext`xy10; {$CellContext`x20, \
+$CellContext`y20} = $CellContext`xy20; {$CellContext`x30, $CellContext`y30} = \
+$CellContext`xy30; $CellContext`nds = 
+          NDSolve[{
+            Derivative[
+              1][$CellContext`x1][$CellContext`t] == \
+$CellContext`vx1[$CellContext`t], 
+             Derivative[
+              1][$CellContext`y1][$CellContext`t] == \
+$CellContext`vy1[$CellContext`t], 
+             Derivative[
+              1][$CellContext`x2][$CellContext`t] == \
+$CellContext`vx2[$CellContext`t], 
+             Derivative[
+              1][$CellContext`y2][$CellContext`t] == \
+$CellContext`vy2[$CellContext`t], 
+             Derivative[
+              1][$CellContext`x3][$CellContext`t] == \
+$CellContext`vx3[$CellContext`t], 
+             Derivative[
+              1][$CellContext`y3][$CellContext`t] == \
+$CellContext`vy3[$CellContext`t], $CellContext`m1 
+              Derivative[
+               1][$CellContext`vx1][$CellContext`t] == -($CellContext`m1 \
+$CellContext`m2 ($CellContext`x1[$CellContext`t] - \
+$CellContext`x2[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x2[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y2[$CellContext`t])^2)^(3/
+                 2)) - $CellContext`m1 $CellContext`m3 \
+($CellContext`x1[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/2), $CellContext`m1 
+              Derivative[
+               1][$CellContext`vy1][$CellContext`t] == -($CellContext`m1 \
+$CellContext`m2 ($CellContext`y1[$CellContext`t] - \
+$CellContext`y2[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x2[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y2[$CellContext`t])^2)^(3/
+                 2)) - $CellContext`m1 $CellContext`m3 \
+($CellContext`y1[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/2), $CellContext`m2 
+              Derivative[
+               1][$CellContext`vx2][$CellContext`t] == $CellContext`m1 \
+$CellContext`m2 ($CellContext`x1[$CellContext`t] - \
+$CellContext`x2[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x2[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y2[$CellContext`t])^2)^(3/
+                2) - $CellContext`m2 $CellContext`m3 \
+($CellContext`x2[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])/(($CellContext`x2[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y2[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/2), $CellContext`m2 
+              Derivative[
+               1][$CellContext`vy2][$CellContext`t] == $CellContext`m1 \
+$CellContext`m2 ($CellContext`y1[$CellContext`t] - \
+$CellContext`y2[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x2[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y2[$CellContext`t])^2)^(3/
+                2) - $CellContext`m2 $CellContext`m3 \
+($CellContext`y2[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])/(($CellContext`x2[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y2[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/2), $CellContext`m3 
+              Derivative[
+               1][$CellContext`vx3][$CellContext`t] == $CellContext`m1 \
+$CellContext`m3 ($CellContext`x1[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/
+                2) + $CellContext`m2 $CellContext`m3 \
+($CellContext`x2[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])/(($CellContext`x2[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y2[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/2), $CellContext`m3 
+              Derivative[
+               1][$CellContext`vy3][$CellContext`t] == $CellContext`m1 \
+$CellContext`m3 ($CellContext`y1[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/
+                2) + $CellContext`m2 $CellContext`m3 \
+($CellContext`y2[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])/(($CellContext`x2[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y2[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/2), $CellContext`x1[
+              0] == $CellContext`x10, $CellContext`y1[
+              0] == $CellContext`y10, $CellContext`x2[
+              0] == $CellContext`x20, $CellContext`y2[
+              0] == $CellContext`y20, $CellContext`x3[
+              0] == $CellContext`x30, $CellContext`y3[
+              0] == $CellContext`y30, $CellContext`vx1[
+              0] == $CellContext`vx10, $CellContext`vy1[
+              0] == $CellContext`vy10, $CellContext`vx2[
+              0] == $CellContext`vx20, $CellContext`vy2[
+              0] == $CellContext`vy20, $CellContext`vx3[
+              0] == $CellContext`vx30, $CellContext`vy3[
+              0] == $CellContext`vy30}, {$CellContext`x1, $CellContext`x2, \
+$CellContext`x3, $CellContext`y1, $CellContext`y2, $CellContext`y3, \
+$CellContext`vx1, $CellContext`vx2, $CellContext`vx3, $CellContext`vy1, \
+$CellContext`vy2, $CellContext`vy3}, {$CellContext`t, 0, $CellContext`T}]; 
+         If[Head[$CellContext`nds] =!= 
+           NDSolve, $CellContext`Tmax = 
+            Part[$CellContext`nds, 1, 1, 2, 1, 1, 2]; $CellContext`funsToPlot = 
+            ReplaceAll[{{
+                $CellContext`x1[$CellContext`t], 
+                $CellContext`y1[$CellContext`t]}, {
+                $CellContext`x2[$CellContext`t], 
+                $CellContext`y2[$CellContext`t]}, {
+                $CellContext`x3[$CellContext`t], 
+                $CellContext`y3[$CellContext`t]}}, 
+              Part[$CellContext`nds, 1]]; $CellContext`prolog = {
+              PointSize[0.01], 
+              Transpose[{{
+                 RGBColor[1, 0.2, 0], 
+                 RGBColor[0.5, 0.8, 0], 
+                 RGBColor[0.2, 0.6, 1]}, 
+                Map[Point, 
+                 ReplaceAll[$CellContext`funsToPlot, $CellContext`t -> 0]]}]}; 
+           Show[
+             ParametricPlot[
+              
+              Evaluate[$CellContext`funsToPlot], {$CellContext`t, 
+               0, $CellContext`Tmax}, PlotStyle -> {
+                RGBColor[1, 0.2, 0], 
+                RGBColor[0.5, 0.8, 0], 
+                RGBColor[0.2, 0.6, 1]}, Frame -> False, 
+              PlotRange -> {{-4, 4}, {-4, 4}}, AspectRatio -> 1, 
+              Prolog -> $CellContext`prolog, Frame -> True, MaxRecursion -> 
+              ControlActive[3, 9], Axes -> False, FrameTicks -> 
+              False, $CellContext`plotOptions], 
+             Graphics[{Dashed, 
+               RGBColor[1, 0.2, 0], 
+               Dynamic[
+                
+                Arrow[{$CellContext`xy10, $CellContext`xy10 + \
+$CellContext`vxy10}]], 
+               RGBColor[0.5, 0.8, 0], 
+               Dynamic[
+                
+                Arrow[{$CellContext`xy20, $CellContext`xy20 + \
+$CellContext`vxy20}]], 
+               RGBColor[0.2, 0.6, 1], 
+               Dynamic[
+                
+                Arrow[{$CellContext`xy30, $CellContext`xy30 + \
+$CellContext`vxy30}]], 
+               Locator[
+                
+                Dynamic[$CellContext`xy10 + $CellContext`vxy10, \
+($CellContext`vxy10 = # - $CellContext`xy10)& ], 
+                Graphics[{
+                  Point[{0, 0}]}, ImageSize -> 10]], 
+               Locator[
+                
+                Dynamic[$CellContext`xy20 + $CellContext`vxy20, \
+($CellContext`vxy20 = # - $CellContext`xy20)& ], 
+                Graphics[{
+                  Point[{0, 0}]}, ImageSize -> 10]], 
+               Locator[
+                
+                Dynamic[$CellContext`xy30 + $CellContext`vxy30, \
+($CellContext`vxy30 = # - $CellContext`xy30)& ], 
+                Graphics[{
+                  Point[{0, 0}]}, ImageSize -> 10]], 
+               Locator[
+                Dynamic[$CellContext`xy10]], 
+               Locator[
+                Dynamic[$CellContext`xy20]], 
+               Locator[
+                Dynamic[$CellContext`xy30]]}]], 
+           Text["Degenerate initial conditions."]]]]; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->95281501],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`m1Exp$$ = 0, $CellContext`m2Exp$$ = 
+    0, $CellContext`m3Exp$$ = 0, $CellContext`T$$ = 
+    20, $CellContext`vxy10$$ = {0.466203685, 
+    0.43236573}, $CellContext`vxy20$$ = {0.466203685, 
+    0.43236573}, $CellContext`vxy30$$ = {-0.93240737, -0.86473146}, \
+$CellContext`xy10$$ = {
+    0.97000436, -0.24308753}, $CellContext`xy20$$ = {-0.97000436, 
+    0.24308753}, $CellContext`xy30$$ = {
+    0.09142857142857252, -1.371428571428556}, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`T$$], 20, "time"}, 0.001, 20}, {{
+       Hold[$CellContext`m1Exp$$], 0, 
+       Style[
+        Subscript[
+         Style["m", Italic], "1"], 
+        RGBColor[1, 0.2, 0]]}, -3, 3}, {{
+       Hold[$CellContext`m2Exp$$], 0, 
+       Style[
+        Subscript[
+         Style["m", Italic], "2"], 
+        RGBColor[0.5, 0.8, 0]]}, -3, 3}, {{
+       Hold[$CellContext`m3Exp$$], 0, 
+       Style[
+        Subscript[
+         Style["m", Italic], "3"], 
+        RGBColor[0.2, 0.6, 1]]}, -3, 3}, {{
+       Hold[$CellContext`vxy10$$], {0.466203685, 0.43236573}, 
+       "\!\(\*SubscriptBox[OverscriptBox[\(v\), \(\[RightVector]\)], \
+\(1\)]\)[0]"}, {-2, -2}, {2, 2}}, {{
+       Hold[$CellContext`vxy20$$], {0.466203685, 0.43236573}, 
+       "\!\(\*SubscriptBox[OverscriptBox[\(v\), \(\[RightVector]\)], \
+\(2\)]\)[0]"}, {-2, -2}, {2, 2}}, {{
+       Hold[$CellContext`vxy30$$], {-0.93240737, -0.86473146}, 
+       "\!\(\*SubscriptBox[OverscriptBox[\(v\), \(\[RightVector]\)], \
+\(3\)]\)[0]"}, {-2, -2}, {2, 2}}, {{
+       Hold[$CellContext`xy10$$], {0.97000436, -0.24308753}, 
+       "\!\(\*SubscriptBox[OverscriptBox[\(x\), \(\[RightVector]\)], \
+\(1\)]\)[0]"}, {-2, -2}, {2, 2}}, {{
+       Hold[$CellContext`xy20$$], {-0.97000436, 0.24308753}, 
+       "\!\(\*SubscriptBox[OverscriptBox[\(x\), \(\[RightVector]\)], \
+\(2\)]\)[0]"}, {-2, -2}, {2, 2}}, {{
+       Hold[$CellContext`xy30$$], {0.09142857142857252, -1.371428571428556}, 
+       "\!\(\*SubscriptBox[OverscriptBox[\(x\), \(\[RightVector]\)], \
+\(3\)]\)[0]"}, {-2, -2}, {2, 2}}}, Typeset`size$$ = Automatic, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`vxy10$503044$$ = {0, 
+    0}, $CellContext`vxy20$503045$$ = {0, 0}, $CellContext`vxy30$503046$$ = {
+    0, 0}, $CellContext`xy10$503047$$ = {0, 0}, $CellContext`xy20$503048$$ = {
+    0, 0}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`m1Exp$$ = 0, $CellContext`m2Exp$$ = 
+        0, $CellContext`m3Exp$$ = 0, $CellContext`T$$ = 
+        20, $CellContext`vxy10$$ = {0.466203685, 
+         0.43236573}, $CellContext`vxy20$$ = {0.466203685, 
+         0.43236573}, $CellContext`vxy30$$ = {-0.93240737, -0.86473146}, \
+$CellContext`xy10$$ = {
+         0.97000436, -0.24308753}, $CellContext`xy20$$ = {-0.97000436, 
+         0.24308753}, $CellContext`xy30$$ = {
+         0.09142857142857252, -1.371428571428556}}, "ControllerVariables" :> {
+        Hold[$CellContext`vxy10$$, $CellContext`vxy10$503044$$, {0, 0}], 
+        Hold[$CellContext`vxy20$$, $CellContext`vxy20$503045$$, {0, 0}], 
+        Hold[$CellContext`vxy30$$, $CellContext`vxy30$503046$$, {0, 0}], 
+        Hold[$CellContext`xy10$$, $CellContext`xy10$503047$$, {0, 0}], 
+        Hold[$CellContext`xy20$$, $CellContext`xy20$503048$$, {0, 0}]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> $CellContext`threeBodyTrajectories[{
+         Dynamic[$CellContext`vxy10$$], 
+         Dynamic[$CellContext`vxy20$$], 
+         Dynamic[$CellContext`vxy30$$], 
+         Dynamic[$CellContext`xy10$$], 
+         Dynamic[$CellContext`xy20$$], 
+         Dynamic[$CellContext`xy30$$]}, {$CellContext`vxy10$$, \
+$CellContext`vxy20$$, $CellContext`vxy30$$}, {
+        10^$CellContext`m1Exp$$, 10^$CellContext`m2Exp$$, 
+         10^$CellContext`m3Exp$$}, $CellContext`T$$, ImageSize -> {350, 350}],
+       "Specifications" :> {{{$CellContext`T$$, 20, "time"}, 0.001, 20, 
+         ControlType -> Animator}, {{$CellContext`m1Exp$$, 0, 
+          Style[
+           Subscript[
+            Style["m", Italic], "1"], 
+           RGBColor[1, 0.2, 0]]}, -3, 3}, {{$CellContext`m2Exp$$, 0, 
+          Style[
+           Subscript[
+            Style["m", Italic], "2"], 
+           RGBColor[0.5, 0.8, 0]]}, -3, 3}, {{$CellContext`m3Exp$$, 0, 
+          Style[
+           Subscript[
+            Style["m", Italic], "3"], 
+           RGBColor[0.2, 0.6, 1]]}, -3, 
+         3}, {{$CellContext`vxy10$$, {0.466203685, 0.43236573}, 
+          "\!\(\*SubscriptBox[OverscriptBox[\(v\), \(\[RightVector]\)], \
+\(1\)]\)[0]"}, {-2, -2}, {2, 2}, ControlType -> 
+         None}, {{$CellContext`vxy20$$, {0.466203685, 0.43236573}, 
+          "\!\(\*SubscriptBox[OverscriptBox[\(v\), \(\[RightVector]\)], \
+\(2\)]\)[0]"}, {-2, -2}, {2, 2}, ControlType -> 
+         None}, {{$CellContext`vxy30$$, {-0.93240737, -0.86473146}, 
+          "\!\(\*SubscriptBox[OverscriptBox[\(v\), \(\[RightVector]\)], \
+\(3\)]\)[0]"}, {-2, -2}, {2, 2}, ControlType -> 
+         None}, {{$CellContext`xy10$$, {0.97000436, -0.24308753}, 
+          "\!\(\*SubscriptBox[OverscriptBox[\(x\), \(\[RightVector]\)], \
+\(1\)]\)[0]"}, {-2, -2}, {2, 2}, ControlType -> 
+         None}, {{$CellContext`xy20$$, {-0.97000436, 0.24308753}, 
+          "\!\(\*SubscriptBox[OverscriptBox[\(x\), \(\[RightVector]\)], \
+\(2\)]\)[0]"}, {-2, -2}, {2, 2}, ControlType -> 
+         None}, {{$CellContext`xy30$$, {
+          0.09142857142857252, -1.371428571428556}, 
+          "\!\(\*SubscriptBox[OverscriptBox[\(x\), \(\[RightVector]\)], \
+\(3\)]\)[0]"}, {-2, -2}, {2, 2}, ControlType -> None}}, 
+      "Options" :> {
+       AutorunSequencing -> {8}, 
+        ControlPlacement -> {Top, Top, Top, Top, Top, Left, Left, Left}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>($CellContext`threeBodyTrajectories[{
+         Dynamic[
+          Pattern[$CellContext`vxy10, 
+           Blank[]]], 
+         Dynamic[
+          Pattern[$CellContext`vxy20, 
+           Blank[]]], 
+         Dynamic[
+          Pattern[$CellContext`vxy30, 
+           Blank[]]], 
+         Dynamic[
+          Pattern[$CellContext`xy10, 
+           Blank[]]], 
+         Dynamic[
+          Pattern[$CellContext`xy20, 
+           Blank[]]], 
+         Dynamic[
+          Pattern[$CellContext`xy30, 
+           Blank[]]]}, {{
+          Pattern[$CellContext`vx10, 
+           Blank[]], 
+          Pattern[$CellContext`vy10, 
+           Blank[]]}, {
+          Pattern[$CellContext`vx20, 
+           Blank[]], 
+          Pattern[$CellContext`vy20, 
+           Blank[]]}, {
+          Pattern[$CellContext`vx30, 
+           Blank[]], 
+          Pattern[$CellContext`vy30, 
+           Blank[]]}}, {
+         Pattern[$CellContext`m1, 
+          Blank[]], 
+         Pattern[$CellContext`m2, 
+          Blank[]], 
+         Pattern[$CellContext`m3, 
+          Blank[]]}, 
+        Pattern[$CellContext`T, 
+         Blank[]], 
+        Pattern[$CellContext`plotOptions, 
+         BlankNullSequence[]]] := Quiet[
+        Module[{$CellContext`nds, $CellContext`Tmax, $CellContext`prolog, \
+$CellContext`funsToPlot, $CellContext`x10, $CellContext`y10, \
+$CellContext`x20, $CellContext`y20, $CellContext`x30, $CellContext`y30}, \
+{$CellContext`x10, $CellContext`y10} = $CellContext`xy10; {$CellContext`x20, \
+$CellContext`y20} = $CellContext`xy20; {$CellContext`x30, $CellContext`y30} = \
+$CellContext`xy30; $CellContext`nds = 
+          NDSolve[{
+            Derivative[
+              1][$CellContext`x1][$CellContext`t] == \
+$CellContext`vx1[$CellContext`t], 
+             Derivative[
+              1][$CellContext`y1][$CellContext`t] == \
+$CellContext`vy1[$CellContext`t], 
+             Derivative[
+              1][$CellContext`x2][$CellContext`t] == \
+$CellContext`vx2[$CellContext`t], 
+             Derivative[
+              1][$CellContext`y2][$CellContext`t] == \
+$CellContext`vy2[$CellContext`t], 
+             Derivative[
+              1][$CellContext`x3][$CellContext`t] == \
+$CellContext`vx3[$CellContext`t], 
+             Derivative[
+              1][$CellContext`y3][$CellContext`t] == \
+$CellContext`vy3[$CellContext`t], $CellContext`m1 
+              Derivative[
+               1][$CellContext`vx1][$CellContext`t] == -($CellContext`m1 \
+$CellContext`m2 ($CellContext`x1[$CellContext`t] - \
+$CellContext`x2[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x2[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y2[$CellContext`t])^2)^(3/
+                 2)) - $CellContext`m1 $CellContext`m3 \
+($CellContext`x1[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/2), $CellContext`m1 
+              Derivative[
+               1][$CellContext`vy1][$CellContext`t] == -($CellContext`m1 \
+$CellContext`m2 ($CellContext`y1[$CellContext`t] - \
+$CellContext`y2[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x2[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y2[$CellContext`t])^2)^(3/
+                 2)) - $CellContext`m1 $CellContext`m3 \
+($CellContext`y1[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/2), $CellContext`m2 
+              Derivative[
+               1][$CellContext`vx2][$CellContext`t] == $CellContext`m1 \
+$CellContext`m2 ($CellContext`x1[$CellContext`t] - \
+$CellContext`x2[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x2[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y2[$CellContext`t])^2)^(3/
+                2) - $CellContext`m2 $CellContext`m3 \
+($CellContext`x2[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])/(($CellContext`x2[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y2[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/2), $CellContext`m2 
+              Derivative[
+               1][$CellContext`vy2][$CellContext`t] == $CellContext`m1 \
+$CellContext`m2 ($CellContext`y1[$CellContext`t] - \
+$CellContext`y2[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x2[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y2[$CellContext`t])^2)^(3/
+                2) - $CellContext`m2 $CellContext`m3 \
+($CellContext`y2[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])/(($CellContext`x2[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y2[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/2), $CellContext`m3 
+              Derivative[
+               1][$CellContext`vx3][$CellContext`t] == $CellContext`m1 \
+$CellContext`m3 ($CellContext`x1[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/
+                2) + $CellContext`m2 $CellContext`m3 \
+($CellContext`x2[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])/(($CellContext`x2[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y2[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/2), $CellContext`m3 
+              Derivative[
+               1][$CellContext`vy3][$CellContext`t] == $CellContext`m1 \
+$CellContext`m3 ($CellContext`y1[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])/(($CellContext`x1[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y1[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/
+                2) + $CellContext`m2 $CellContext`m3 \
+($CellContext`y2[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])/(($CellContext`x2[$CellContext`t] - \
+$CellContext`x3[$CellContext`t])^2 + ($CellContext`y2[$CellContext`t] - \
+$CellContext`y3[$CellContext`t])^2)^(3/2), $CellContext`x1[
+              0] == $CellContext`x10, $CellContext`y1[
+              0] == $CellContext`y10, $CellContext`x2[
+              0] == $CellContext`x20, $CellContext`y2[
+              0] == $CellContext`y20, $CellContext`x3[
+              0] == $CellContext`x30, $CellContext`y3[
+              0] == $CellContext`y30, $CellContext`vx1[
+              0] == $CellContext`vx10, $CellContext`vy1[
+              0] == $CellContext`vy10, $CellContext`vx2[
+              0] == $CellContext`vx20, $CellContext`vy2[
+              0] == $CellContext`vy20, $CellContext`vx3[
+              0] == $CellContext`vx30, $CellContext`vy3[
+              0] == $CellContext`vy30}, {$CellContext`x1, $CellContext`x2, \
+$CellContext`x3, $CellContext`y1, $CellContext`y2, $CellContext`y3, \
+$CellContext`vx1, $CellContext`vx2, $CellContext`vx3, $CellContext`vy1, \
+$CellContext`vy2, $CellContext`vy3}, {$CellContext`t, 0, $CellContext`T}]; 
+         If[Head[$CellContext`nds] =!= 
+           NDSolve, $CellContext`Tmax = 
+            Part[$CellContext`nds, 1, 1, 2, 1, 1, 2]; $CellContext`funsToPlot = 
+            ReplaceAll[{{
+                $CellContext`x1[$CellContext`t], 
+                $CellContext`y1[$CellContext`t]}, {
+                $CellContext`x2[$CellContext`t], 
+                $CellContext`y2[$CellContext`t]}, {
+                $CellContext`x3[$CellContext`t], 
+                $CellContext`y3[$CellContext`t]}}, 
+              Part[$CellContext`nds, 1]]; $CellContext`prolog = {
+              PointSize[0.01], 
+              Transpose[{{
+                 RGBColor[1, 0.2, 0], 
+                 RGBColor[0.5, 0.8, 0], 
+                 RGBColor[0.2, 0.6, 1]}, 
+                Map[Point, 
+                 ReplaceAll[$CellContext`funsToPlot, $CellContext`t -> 0]]}]}; 
+           Show[
+             ParametricPlot[
+              
+              Evaluate[$CellContext`funsToPlot], {$CellContext`t, 
+               0, $CellContext`Tmax}, PlotStyle -> {
+                RGBColor[1, 0.2, 0], 
+                RGBColor[0.5, 0.8, 0], 
+                RGBColor[0.2, 0.6, 1]}, Frame -> False, 
+              PlotRange -> {{-4, 4}, {-4, 4}}, AspectRatio -> 1, 
+              Prolog -> $CellContext`prolog, Frame -> True, MaxRecursion -> 
+              ControlActive[3, 9], Axes -> False, FrameTicks -> 
+              False, $CellContext`plotOptions], 
+             Graphics[{Dashed, 
+               RGBColor[1, 0.2, 0], 
+               Dynamic[
+                
+                Arrow[{$CellContext`xy10, $CellContext`xy10 + \
+$CellContext`vxy10}]], 
+               RGBColor[0.5, 0.8, 0], 
+               Dynamic[
+                
+                Arrow[{$CellContext`xy20, $CellContext`xy20 + \
+$CellContext`vxy20}]], 
+               RGBColor[0.2, 0.6, 1], 
+               Dynamic[
+                
+                Arrow[{$CellContext`xy30, $CellContext`xy30 + \
+$CellContext`vxy30}]], 
+               Locator[
+                
+                Dynamic[$CellContext`xy10 + $CellContext`vxy10, \
+($CellContext`vxy10 = # - $CellContext`xy10)& ], 
+                Graphics[{
+                  Point[{0, 0}]}, ImageSize -> 10]], 
+               Locator[
+                
+                Dynamic[$CellContext`xy20 + $CellContext`vxy20, \
+($CellContext`vxy20 = # - $CellContext`xy20)& ], 
+                Graphics[{
+                  Point[{0, 0}]}, ImageSize -> 10]], 
+               Locator[
+                
+                Dynamic[$CellContext`xy30 + $CellContext`vxy30, \
+($CellContext`vxy30 = # - $CellContext`xy30)& ], 
+                Graphics[{
+                  Point[{0, 0}]}, ImageSize -> 10]], 
+               Locator[
+                Dynamic[$CellContext`xy10]], 
+               Locator[
+                Dynamic[$CellContext`xy20]], 
+               Locator[
+                Dynamic[$CellContext`xy30]]}]], 
+           Text["Degenerate initial conditions."]]]]; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->278587267]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "DetailsSection"],
+
+Cell["\<\
+The three-body problem is one of the simplest mechanical systems that exhibit \
+nonintegrability and chaos. (The two-body problem with retardation is \
+conceptually simpler but trickier to calculate.) Depending on the initial \
+conditions, the system exhibits periodic orbits, escape to infinity in finite \
+time, collision singularities, triple collisions, quasi-bound states, \
+\[Ellipsis]\
+\>", "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3645920331875*^9, 3.36459204053125*^9}, {
+   3.664804582679792*^9, 3.6648046104951887`*^9}, {3.6648046647658377`*^9, 
+   3.6648046649328327`*^9}, {3.664804904404468*^9, 3.66480493941953*^9}, 
+   3.664805819366107*^9},
+ CellID->44434497]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.6648033642303724`*^9},
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.6648032094638977`*^9},
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.664811787822082*^9},
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.6648117889926443`*^9},
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.6648117898821774`*^9},
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SearchTermsSection"],
+
+Cell["chaos", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.36432479020313*^9, 3.36432479126563*^9}},
+ CellID->44921134],
+
+Cell["mechanical systems", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.36432476076563*^9, 3.36432476353125*^9}},
+ CellID->362093259],
+
+Cell["periodic orbits", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.36432477826563*^9, 3.3643247824375005`*^9}},
+ CellID->244062256],
+
+Cell["three-body problem", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3643247489375005`*^9, 3.3643247527812495`*^9}},
+ CellID->465710883]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "RelatedLinksSection"],
+
+Cell[TextData[ButtonBox["Three-Body Problem",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://scienceworld.wolfram.com/physics/Three-BodyProblem.html"], 
+   None}]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.36925908990625*^9, 3.36925910270313*^9}, {
+   3.376930996733721*^9, 3.376930997952471*^9}},
+ CellID->692789892],
+
+Cell[TextData[ButtonBox["Chaos",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/Chaos.html"], None}]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.36925911764063*^9, 3.36925912254688*^9}, {
+   3.376930998936846*^9, 3.376931001155596*^9}},
+ CellID->686944487]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Michael Trott",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Michael+Trott"],
+     None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Michael+Trott"]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.35740822534944*^9, 3.35740823055279*^9}, {
+   3.36345686367178*^9, 3.36345689015615*^9}, 3.36925913401563*^9},
+ CellID->24330156],
+
+Cell[TextData[{
+ "Suggested by: ",
+ ButtonBox["Stephen Wolfram",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Stephen+\
+Wolfram"], None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Stephen+Wolfram"]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.35740822534944*^9, 3.35740823055279*^9}, {
+   3.36345686367178*^9, 3.36345689015615*^9}, 3.3692591365*^9},
+ CellID->93652033]
+}, Open  ]]
+}, Open  ]]
+},
+AutoGeneratedPackage->None,
+WindowSize->{959, 735},
+WindowMargins->{{155, Automatic}, {56, Automatic}},
+FrontEndVersion->"10.2 for Microsoft Windows (64-bit) (July 29, 2015)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "AutomaticAnimation"->{
+  Cell[123980, 2754, 1455, 32, 22, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[125438, 2788, 882, 21, 22, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]},
+ "CreateAndDeleteLocators"->{
+  Cell[122102, 2702, 637, 15, 22, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "DragLocators"->{
+  Cell[121716, 2688, 383, 12, 22, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "GamepadControls"->{
+  Cell[123630, 2743, 347, 9, 22, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "ResizeImages"->{
+  Cell[120676, 2659, 356, 9, 22, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[121035, 2670, 678, 16, 22, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "SliderZoom"->{
+  Cell[122742, 2719, 885, 22, 22, "ControlSuggestions",
+   CellTags->"SliderZoom"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"AutomaticAnimation", 129164, 2909},
+ {"BookmarkAnimation", 129282, 2912},
+ {"CreateAndDeleteLocators", 129404, 2915},
+ {"DragLocators", 129521, 2918},
+ {"GamepadControls", 129630, 2921},
+ {"ResizeImages", 129738, 2924},
+ {"RotateAndZoomIn3D", 129848, 2927},
+ {"SliderZoom", 129957, 2930}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 316, 5, 74, "DemoTitle",
+ CellID->700863240],
+Cell[899, 29, 33, 0, 287, "InitializationSection"],
+Cell[CellGroupData[{
+Cell[957, 33, 29, 0, 192, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[1011, 37, 33849, 782, 1413, "Input",
+ CellID->1886791809],
+Cell[34863, 821, 16467, 347, 37, "Output",
+ CellID->308344745]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[51379, 1174, 36, 0, 169, "ManipulateCaptionSection"],
+Cell[51418, 1176, 1118, 27, 53, "ManipulateCaption",
+ CellID->1044312921]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[52573, 1208, 28, 0, 173, "ThumbnailSection"],
+Cell[52604, 1210, 16765, 352, 37, "Output",
+ CellID->85629580]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[69406, 1567, 28, 0, 143, "SnapshotsSection"],
+Cell[69437, 1569, 17074, 357, 37, "Output",
+ CellID->54078971],
+Cell[86514, 1928, 16621, 351, 37, "Output",
+ CellID->95281501],
+Cell[103138, 2281, 16690, 351, 37, "Output",
+ CellID->278587267]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[119865, 2637, 26, 0, 336, "DetailsSection"],
+Cell[119894, 2639, 705, 13, 52, "DetailNotes",
+ CellID->44434497]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[120636, 2657, 37, 0, 126, "ControlSuggestionsSection"],
+Cell[120676, 2659, 356, 9, 22, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[121035, 2670, 678, 16, 22, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[121716, 2688, 383, 12, 22, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[122102, 2702, 637, 15, 22, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[122742, 2719, 885, 22, 22, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[123630, 2743, 347, 9, 22, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[123980, 2754, 1455, 32, 22, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[125438, 2788, 882, 21, 22, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[126357, 2814, 30, 0, 155, "SearchTermsSection"],
+Cell[126390, 2816, 135, 3, 22, "SearchTerms",
+ CellID->44921134],
+Cell[126528, 2821, 149, 3, 22, "SearchTerms",
+ CellID->362093259],
+Cell[126680, 2826, 149, 3, 22, "SearchTerms",
+ CellID->244062256],
+Cell[126832, 2831, 155, 3, 22, "SearchTerms",
+ CellID->465710883]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[127024, 2839, 31, 0, 141, "RelatedLinksSection"],
+Cell[127058, 2841, 346, 8, 22, "RelatedLinks",
+ CellID->692789892],
+Cell[127407, 2851, 306, 7, 22, "RelatedLinks",
+ CellID->686944487]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[127750, 2863, 25, 0, 141, "AuthorSection"],
+Cell[127778, 2865, 475, 13, 22, "Author",
+ CellID->24330156],
+Cell[128256, 2880, 472, 13, 22, "Author",
+ CellID->93652033]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

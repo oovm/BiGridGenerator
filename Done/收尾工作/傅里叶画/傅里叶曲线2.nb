@@ -1,0 +1,438 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     15401,        430]
+NotebookOptionsPosition[     14242,        402]
+NotebookOutlinePosition[     14599,        418]
+CellTagsIndexPosition[     14556,        415]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"Hyperlink", "[", 
+  RowBox[{
+  "EpicyclePlot", ",", 
+   "\"\<https://mathematica.stackexchange.com/questions/100051/dynamic-\
+epicycles/100138#100138\>\""}], "]"}]], "Input",ExpressionUUID->"18156a17-\
+fc97-4084-9577-e4beb863f61c"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "EpicyclePlot",
+   "https://mathematica.stackexchange.com/questions/100051/dynamic-epicycles/\
+100138#100138"},
+  "HyperlinkURL"]], "Output",
+ CellChangeTimes->{
+  3.7242145282631288`*^9},ExpressionUUID->"11431220-3467-4b27-84a9-\
+2265fd4ab771"]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Options", "[", "EpicyclePlot", "]"}], "=", 
+    RowBox[{"{", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"AnimationRunning", "\[Rule]", "True"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"ColorFunction", "\[Rule]", "Automatic"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"\"\<Frames\>\"", "\[Rule]", "16"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"\"\<Movie\>\"", "\[Rule]", "True"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"\"\<MovieTimeInterval\>\"", "\[Rule]", "Automatic"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"PlotPoints", "\[Rule]", "100"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"\"\<ShowWheels\>\"", "\[Rule]", "True"}]}], 
+     "\[IndentingNewLine]", "}"}]}], ";"}], "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"EpicyclePlot", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"radii_", ",", "speeds_", ",", "offsets_"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"a_", ",", "b_"}], "}"}], ",", 
+    RowBox[{"opts", ":", 
+     RowBox[{"OptionsPattern", "[", "]"}]}]}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"n", "=", 
+       RowBox[{"Length", "[", "radii", "]"}]}], ",", "armEnds", ",", 
+      "centers", ",", "cf", ",", "fr", ",", "frn", ",", "mInt", ",", "pp", 
+      ",", "t"}], "}"}], ",", 
+    RowBox[{
+     RowBox[{"mInt", "=", 
+      RowBox[{
+       RowBox[{"OptionValue", "[", "\"\<MovieTimeInterval\>\"", "]"}], "/.", 
+       RowBox[{"Automatic", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"a", ",", "b"}], "}"}]}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"cf", "=", 
+      RowBox[{
+       RowBox[{"OptionValue", "[", "ColorFunction", "]"}], "/.", 
+       RowBox[{"Automatic", "\[Rule]", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"Lighter", "[", 
+           RowBox[{"Hue", "[", 
+            RowBox[{"#", "/", 
+             RowBox[{"(", 
+              RowBox[{"n", "+", "1"}], ")"}]}], "]"}], "]"}], "&"}], 
+         ")"}]}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"pp", "=", 
+      RowBox[{"ParametricPlot", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"Cos", "[", 
+            RowBox[{
+             RowBox[{"speeds", " ", "t"}], "+", "offsets"}], "]"}], ",", 
+           RowBox[{"Sin", "[", 
+            RowBox[{
+             RowBox[{"speeds", " ", "t"}], "+", "offsets"}], "]"}]}], "}"}], 
+         ".", "radii"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"t", ",", "a", ",", "b"}], "}"}], ",", 
+        RowBox[{"Evaluated", "\[Rule]", "True"}], ",", 
+        RowBox[{"Evaluate", "[", 
+         RowBox[{"Sequence", "@@", 
+          RowBox[{"FilterRules", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"{", "opts", "}"}], "~", "Join", "~", 
+             RowBox[{"Options", "[", "EpicyclePlot", "]"}]}], ",", 
+            RowBox[{"Options", "[", "ParametricPlot", "]"}]}], "]"}]}], "]"}],
+         ",", 
+        RowBox[{"Axes", "\[Rule]", "None"}], ",", 
+        RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"fr", "=", 
+      RowBox[{"OptionValue", "[", "\"\<Frames\>\"", "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"frn", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"armEnds", "=", 
+          RowBox[{"Transpose", "[", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"radii", " ", 
+              RowBox[{"Cos", "[", 
+               RowBox[{
+                RowBox[{"speeds", " ", "t"}], "+", "offsets"}], "]"}]}], ",", 
+             RowBox[{"radii", " ", 
+              RowBox[{"Sin", "[", 
+               RowBox[{
+                RowBox[{"speeds", " ", "t"}], "+", "offsets"}], "]"}]}]}], 
+            "}"}], "]"}]}], ";", "\[IndentingNewLine]", 
+         RowBox[{"centers", "=", 
+          RowBox[{"FoldList", "[", 
+           RowBox[{"Plus", ",", 
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0"}], "}"}], ",", "armEnds"}], "]"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Show", "[", 
+          RowBox[{
+           RowBox[{"Graphics", "[", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"TrueQ", "[", 
+               RowBox[{"OptionValue", "[", "\"\<ShowWheels\>\"", "]"}], "]"}],
+               ",", 
+              RowBox[{"Table", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"Directive", "[", 
+                   RowBox[{
+                    RowBox[{"cf", "[", "i", "]"}], ",", 
+                    RowBox[{"EdgeForm", "[", "Black", "]"}]}], "]"}], ",", 
+                  RowBox[{"Disk", "[", 
+                   RowBox[{
+                    RowBox[{"centers", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], ",", 
+                    RowBox[{"radii", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", "n"}], "}"}]}], "]"}], ",", 
+              RowBox[{"{", "}"}]}], "]"}], "]"}], ",", "pp", ",", 
+           RowBox[{"Graphics", "[", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"AbsoluteThickness", "[", "1", "]"}], ",", 
+              RowBox[{"Line", "[", "centers", "]"}], ",", 
+              RowBox[{"AbsolutePointSize", "[", "5", "]"}], ",", 
+              RowBox[{"Point", "[", "centers", "]"}]}], "}"}], "]"}], ",", 
+           RowBox[{"Sequence", "@@", 
+            RowBox[{"FilterRules", "[", 
+             RowBox[{
+              RowBox[{"{", "opts", "}"}], ",", 
+              RowBox[{"Options", "[", "Graphics", "]"}]}], "]"}]}], ",", 
+           RowBox[{"PlotRange", "\[Rule]", 
+            RowBox[{"(", 
+             RowBox[{"1.15", " ", 
+              RowBox[{"Total", "[", "radii", "]"}]}], ")"}]}]}], "]"}]}], ",", 
+        RowBox[{"{", 
+         RowBox[{"t", ",", 
+          RowBox[{"mInt", "[", 
+           RowBox[{"[", "1", "]"}], "]"}], ",", 
+          RowBox[{"mInt", "[", 
+           RowBox[{"[", "2", "]"}], "]"}], ",", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"mInt", "[", 
+              RowBox[{"[", "2", "]"}], "]"}], "-", 
+             RowBox[{"mInt", "[", 
+              RowBox[{"[", "1", "]"}], "]"}]}], ")"}], "/", 
+           RowBox[{"(", 
+            RowBox[{"fr", "-", 
+             RowBox[{"Boole", "[", 
+              RowBox[{"fr", ">", "1"}], "]"}]}], ")"}]}]}], "}"}]}], "]"}]}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"TrueQ", "[", 
+         RowBox[{"OptionValue", "[", "\"\<Movie\>\"", "]"}], "]"}], "&&", 
+        RowBox[{"fr", ">", "1"}]}], ",", 
+       RowBox[{"ListAnimate", "[", 
+        RowBox[{"frn", ",", 
+         RowBox[{"Sequence", "@@", 
+          RowBox[{"FilterRules", "[", 
+           RowBox[{
+            RowBox[{"{", "opts", "}"}], ",", 
+            RowBox[{"Options", "[", "ListAnimate", "]"}]}], "]"}]}]}], "]"}], 
+       ",", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"fr", ">", "1"}], ",", "frn", ",", 
+         RowBox[{"Last", "[", "frn", "]"}]}], "]"}]}], "]"}]}]}], 
+   "]"}]}]}], "Input",
+ CellChangeTimes->{{3.723683974058992*^9, 3.7236839868438168`*^9}, {
+   3.723889162766671*^9, 3.7238891632953577`*^9}, 
+   3.7238893351992445`*^9},ExpressionUUID->"028f30f9-dbfc-4175-926c-\
+86e6f4ef8dc1"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"EpicyclePlot", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"1", ",", 
+        RowBox[{"1", "/", "2"}], ",", 
+        RowBox[{"1", "/", "3"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", "7", ",", 
+        RowBox[{"-", "17"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "0", ",", 
+        RowBox[{"\[Pi]", "/", "2"}]}], "}"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", 
+      RowBox[{"2", " ", "\[Pi]"}]}], "}"}], ",", 
+    RowBox[{"\"\<Frames\>\"", "\[Rule]", "128"}]}], "]"}], "//", 
+  "TTT"}]], "Input",
+ CellChangeTimes->{{3.7236840304046845`*^9, 3.7236840304086876`*^9}, {
+   3.723684061153569*^9, 3.723684084941141*^9}, 3.723684136754009*^9, {
+   3.7238891011082344`*^9, 3.723889103303427*^9}, 3.7238891668485355`*^9, {
+   3.7238893381827574`*^9, 3.723889339328802*^9}, {3.7242144243198605`*^9, 
+   3.7242144299330063`*^9}, 
+   3.724214493623746*^9},ExpressionUUID->"996184bf-de60-49ad-a65a-\
+dc10028dc91c"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  TagBox["\<\"CPU Time: \"\>",
+   "EchoLabel"], " ", 
+  TemplateBox[{"0.578125`","\"s\"","seconds","\"Seconds\""},
+   "Quantity"]}]], "Echo",
+ CellChangeTimes->{
+  3.724214494604883*^9},ExpressionUUID->"467cfab0-dddf-4ac7-92f3-\
+2677bd8c0355"],
+
+Cell[BoxData[
+ RowBox[{
+  TagBox["\<\"Memory used: \"\>",
+   "EchoLabel"], " ", 
+  TemplateBox[{"0.5890719999999874`","\"MB\"","megabytes","\"Megabytes\""},
+   "Quantity"]}]], "Echo",
+ CellChangeTimes->{
+  3.724214494625409*^9},ExpressionUUID->"273d0aaa-dcdb-4fd3-8390-\
+601cecd80e54"],
+
+Cell[BoxData[
+ RowBox[{
+  TagBox["\<\"All Time: \"\>",
+   "EchoLabel"], " ", "4.2163727`8.076483986212661"}]], "Echo",
+ CellChangeTimes->{
+  3.724214498214484*^9},ExpressionUUID->"47a7fffa-e215-45b9-8093-\
+b60ec289e742"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ep", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"r_", ",", "a_", ",", "o_"}], "}"}], ",", "n_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"fun", "=", 
+       RowBox[{"Function", "[", 
+        RowBox[{"x", ",", 
+         RowBox[{"Accumulate", "@", 
+          RowBox[{"Prepend", "[", 
+           RowBox[{
+            RowBox[{"ReIm", "@", 
+             RowBox[{"MapThread", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"#1", " ", 
+                 RowBox[{"Exp", "[", 
+                  RowBox[{
+                   RowBox[{"I", " ", "#2", " ", "x"}], "+", 
+                   RowBox[{"I", " ", "#3"}]}], "]"}]}], "&"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"r", ",", "a", ",", "o"}], "}"}]}], "]"}]}], ",", 
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0"}], "}"}]}], "]"}]}]}], "]"}]}], ",", 
+      RowBox[{"col", "=", 
+       RowBox[{"RandomColor", "[", 
+        RowBox[{"Length", "@", "r"}], "]"}]}], ",", 
+      RowBox[{"smin", "=", 
+       RowBox[{"Max", "[", 
+        RowBox[{"2", " ", 
+         RowBox[{"Pi", "/", "a"}]}], "]"}]}], ",", "tab", ",", "g"}], "}"}], 
+    ",", 
+    RowBox[{
+     RowBox[{"tab", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"fun", "[", "j", "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"j", ",", "0", ",", "smin", ",", 
+          RowBox[{"smin", "/", "n"}]}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"g", "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Graphics", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Opacity", "[", "0.5", "]"}], ",", 
+            RowBox[{"MapThread", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"#3", ",", 
+                 RowBox[{"Disk", "[", 
+                  RowBox[{"#1", ",", "#2"}], "]"}]}], "}"}], "&"}], ",", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"Most", "@", "#"}], ",", "r", ",", "col"}], "}"}]}], 
+             "]"}], ",", "Red", ",", 
+            RowBox[{"Point", "[", 
+             RowBox[{"Most", "@", "#"}], "]"}], ",", "Purple", ",", 
+            RowBox[{"PointSize", "[", "0.02", "]"}], ",", 
+            RowBox[{"Point", "[", 
+             RowBox[{"Last", "@", "#"}], "]"}], ",", "Blue", ",", 
+            RowBox[{"Line", "@", 
+             RowBox[{"tab", "[", 
+              RowBox[{"[", 
+               RowBox[{"All", ",", 
+                RowBox[{"-", "1"}]}], "]"}], "]"}]}], ",", 
+            RowBox[{"Line", "@", "#"}]}], "}"}], ",", 
+          RowBox[{"PlotRange", "\[Rule]", 
+           RowBox[{"1.15", " ", 
+            RowBox[{"Total", "@", "r"}]}]}]}], "]"}], "&"}], "/@", "tab"}]}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"ListAnimate", "[", "g", "]"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.7242126681213183`*^9, 
+  3.7242126761907616`*^9}},ExpressionUUID->"0c25873e-4fd8-422f-9c3c-\
+9f6200867673"],
+
+Cell[BoxData[
+ RowBox[{"ep", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", 
+       RowBox[{"1", "/", "2"}], ",", 
+       RowBox[{"1", "/", "3"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "7", ",", 
+       RowBox[{"-", "17"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0", ",", 
+       RowBox[{"\[Pi]", "/", "2"}]}], "}"}]}], "}"}], ",", "128"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.7242126777333517`*^9, 3.7242126777383537`*^9}, {
+  3.724212837362717*^9, 
+  3.7242128377069545`*^9}},ExpressionUUID->"58650246-fa97-4be5-8e9c-\
+86e50965544f"]
+},
+WindowSize->{775, 872},
+WindowMargins->{{299, Automatic}, {22, Automatic}},
+FrontEndVersion->"11.2 for Microsoft Windows (64-bit) (2017\:5e7410\:67082\
+\:65e5)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 255, 6, 46, "Input",ExpressionUUID->"18156a17-fc97-4084-9577-e4beb863f61c"],
+Cell[838, 30, 276, 8, 31, "Output",ExpressionUUID->"11431220-3467-4b27-84a9-2265fd4ab771"]
+}, Open  ]],
+Cell[1129, 41, 7517, 190, 514, "Input",ExpressionUUID->"028f30f9-dbfc-4175-926c-86e6f4ef8dc1"],
+Cell[CellGroupData[{
+Cell[8671, 235, 1035, 27, 27, "Input",ExpressionUUID->"996184bf-de60-49ad-a65a-dc10028dc91c"],
+Cell[CellGroupData[{
+Cell[9731, 266, 267, 8, 31, "Echo",ExpressionUUID->"467cfab0-dddf-4ac7-92f3-2677bd8c0355"],
+Cell[10001, 276, 285, 8, 31, "Echo",ExpressionUUID->"273d0aaa-dcdb-4fd3-8390-601cecd80e54"],
+Cell[10289, 286, 220, 6, 22, "Echo",ExpressionUUID->"47a7fffa-e215-45b9-8093-b60ec289e742"]
+}, Open  ]]
+}, Open  ]],
+Cell[10536, 296, 3075, 83, 172, "Input",ExpressionUUID->"0c25873e-4fd8-422f-9c3c-9f6200867673"],
+Cell[13614, 381, 624, 19, 27, "Input",ExpressionUUID->"58650246-fa97-4be5-8e9c-86e50965544f"]
+}
+]
+*)
+

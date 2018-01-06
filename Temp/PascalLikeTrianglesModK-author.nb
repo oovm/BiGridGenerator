@@ -1,0 +1,1656 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     65241,       1647]
+NotebookOptionsPosition[     61070,       1517]
+NotebookOutlinePosition[     62671,       1567]
+CellTagsIndexPosition[     62343,       1555]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[TextData[{
+ "Pascal-like Triangles Mod ",
+ StyleBox["k",
+  FontSlant->"Italic"]
+}], "DemoTitle",
+ CellChangeTimes->{3.35696210375764*^9, 3.3993667622454*^9}],
+
+Cell[CellGroupData[{
+
+Cell["", "InitializationSection"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"ss", "[", 
+    RowBox[{"k2_", ",", "nn_"}], "]"}], ":=", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"cel", ",", 
+       RowBox[{"kk", "=", "k2"}], ",", "a"}], "}"}], ",", 
+     RowBox[{
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"cel", "[", 
+          RowBox[{"1", ",", "n1"}], "]"}], "=", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"n1", "==", 
+            RowBox[{"nn", "+", "1"}]}], ",", "1", ",", "0"}], "]"}]}], ",", 
+        RowBox[{"{", 
+         RowBox[{"n1", ",", "1", ",", 
+          RowBox[{
+           RowBox[{"2", "nn"}], "+", "1"}]}], "}"}]}], "]"}], ";", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"cel", "[", 
+          RowBox[{"n1", ",", 
+           RowBox[{"nn", "+", "2", "-", "n1"}]}], "]"}], "=", 
+         RowBox[{"Floor", "[", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"n1", "+", "kk", "-", "1"}], ")"}], "/", "kk"}], "]"}]}], 
+        ",", 
+        RowBox[{"{", 
+         RowBox[{"n1", ",", "1", ",", "nn"}], "}"}]}], "]"}], ";", "\n", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"cel", "[", 
+          RowBox[{"n1", ",", 
+           RowBox[{"nn", "+", "n1"}]}], "]"}], "=", "1"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"n1", ",", "1", ",", "nn"}], "}"}]}], "]"}], ";", "\n", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"cel", "[", 
+          RowBox[{"n1", ",", "1"}], "]"}], "=", "0"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"n1", ",", "1", ",", 
+          RowBox[{"nn", "-", "1"}]}], "}"}]}], "]"}], ";", "\n", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"cel", "[", 
+          RowBox[{"n1", ",", 
+           RowBox[{
+            RowBox[{"2", "nn"}], "+", "1"}]}], "]"}], "=", "0"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"n1", ",", "1", ",", 
+          RowBox[{"nn", "-", "1"}]}], "}"}]}], "]"}], ";", "\n", 
+      RowBox[{
+       RowBox[{"cel", "[", 
+        RowBox[{"n1_", ",", "m_"}], "]"}], ":=", 
+       RowBox[{
+        RowBox[{"cel", "[", 
+         RowBox[{"n1", ",", "m"}], "]"}], "=", 
+        RowBox[{
+         RowBox[{"cel", "[", 
+          RowBox[{
+           RowBox[{"n1", "-", "1"}], ",", 
+           RowBox[{"m", "-", "1"}]}], "]"}], "+", 
+         RowBox[{"cel", "[", 
+          RowBox[{
+           RowBox[{"n1", "-", "1"}], ",", 
+           RowBox[{"m", "+", "1"}]}], "]"}]}]}]}], ";", "\n", 
+      RowBox[{"Join", "[", 
+       RowBox[{
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"Table", "[", 
+           RowBox[{"0", ",", 
+            RowBox[{"{", 
+             RowBox[{"m", ",", "1", ",", 
+              RowBox[{
+               RowBox[{"2", "nn"}], "+", "1"}]}], "}"}]}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"n1", ",", "1", ",", 
+            RowBox[{
+             RowBox[{"Floor", "[", 
+              RowBox[{
+               RowBox[{"(", "nn", ")"}], "/", "2"}], "]"}], "+", "3"}]}], 
+           "}"}]}], "]"}], ",", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"cel", "[", 
+             RowBox[{"n1", ",", "m"}], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"m", ",", "1", ",", 
+              RowBox[{
+               RowBox[{"2", "nn"}], "+", "1"}]}], "}"}]}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"n1", ",", "1", ",", 
+            RowBox[{"nn", "-", "1"}]}], "}"}]}], "]"}], ",", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"Table", "[", 
+           RowBox[{"0", ",", 
+            RowBox[{"{", 
+             RowBox[{"m", ",", "1", ",", 
+              RowBox[{
+               RowBox[{"2", "nn"}], "+", "1"}]}], "}"}]}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"n1", ",", "1", ",", 
+            RowBox[{
+             RowBox[{"Floor", "[", 
+              RowBox[{
+               RowBox[{"(", "nn", ")"}], "/", "2"}], "]"}], "+", "3"}]}], 
+           "}"}]}], "]"}]}], "]"}]}]}], "]"}]}], ";", 
+  RowBox[{
+   RowBox[{"sh", "[", 
+    RowBox[{"p2_", ",", "n2_", ",", "m2_", ",", "v2_"}], "]"}], ":=", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"t2", ",", "u"}], "}"}], ",", 
+     RowBox[{
+      RowBox[{"t2", "=", 
+       RowBox[{"IntegerPart", "[", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"1", "+", "p2", "-", "m2", "+", "n2", "-", "v2"}], ")"}], 
+         "/", "p2"}], "]"}]}], ";", 
+      RowBox[{"u", "=", 
+       RowBox[{"(", 
+        RowBox[{
+         UnderoverscriptBox["\[Sum]", 
+          RowBox[{"z", "=", "0"}], 
+          RowBox[{"t2", "-", "1"}]], 
+         RowBox[{"Binomial", "[", 
+          RowBox[{
+           RowBox[{"n2", "-", "v2", "-", 
+            RowBox[{"p2", "*", "z"}]}], ",", 
+           RowBox[{"m2", "-", "1"}]}], "]"}]}], ")"}]}]}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"tri2", "[", 
+   RowBox[{"t_", ",", "nn_", ",", "k_"}], "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"s", ",", "mm"}], "}"}], ",", 
+    RowBox[{
+     RowBox[{"mm", "=", 
+      RowBox[{"t", "/", "50"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"s", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"Mod", "[", 
+         RowBox[{
+          RowBox[{"sh", "[", 
+           RowBox[{"nn", ",", "n", ",", "m", ",", "1"}], "]"}], ",", "k"}], 
+         "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"n", ",", "1", ",", "t"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"m", ",", "1", ",", "n"}], "}"}]}], "]"}]}], ";", 
+     RowBox[{"Graphics", "[", 
+      RowBox[{
+       RowBox[{"Evaluate", "[", 
+        RowBox[{"Join", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"RGBColor", "[", 
+             RowBox[{"1", ",", "1", ",", "1"}], "]"}], ",", 
+            RowBox[{"Polygon", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"0.3", ",", "0.3"}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"-", "25.4"}], "mm"}], ",", 
+                 RowBox[{
+                  RowBox[{"-", "50.7"}], "mm"}]}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"25.9", "mm"}], ",", 
+                 RowBox[{
+                  RowBox[{"-", "50.7"}], "mm"}]}], "}"}]}], "}"}], "]"}]}], 
+           "}"}], ",", "\n", 
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Hue", "[", 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{"6", "+", 
+                  RowBox[{"s", "[", 
+                   RowBox[{"[", 
+                    RowBox[{"x", ",", "y"}], "]"}], "]"}]}], ")"}], "/", 
+                "4"}], "]"}], ",", 
+              RowBox[{"Text", "[", 
+               RowBox[{
+                RowBox[{"s", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"x", ",", "y"}], "]"}], "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"-", "0.5"}], "x"}], "+", "y"}], ",", 
+                  RowBox[{"-", "x"}]}], "}"}]}], "]"}]}], "}"}], ",", "\n", 
+            RowBox[{"{", 
+             RowBox[{"x", ",", "1", ",", "t"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"y", ",", "1", ",", "x"}], "}"}]}], "]"}]}], "]"}], 
+        "]"}], ",", 
+       RowBox[{"AspectRatio", "\[Rule]", "Automatic"}], ",", 
+       RowBox[{"ImageSize", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"400", ",", "400"}], "}"}]}], ",", 
+       RowBox[{"Background", "\[Rule]", "Black"}]}], "]"}]}]}], 
+   "]"}]}]}], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.399371801238434*^9, 3.3993718013165827`*^9}, {
+   3.3996349203764944`*^9, 3.3996349424701033`*^9}, {3.3996405445748744`*^9, 
+   3.399640551465455*^9}, 3.3996406047151146`*^9, 3.3996406389961452`*^9},
+ CellID->699097317]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{"pp", ">", "n"}], ",", 
+      RowBox[{"pp", "=", "n"}]}], "]"}], ";", 
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{"se", "\[Equal]", "1"}], ",", 
+      RowBox[{"ArrayPlot", "[", 
+       RowBox[{
+        RowBox[{"Map", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Mod", "[", 
+            RowBox[{"#", ",", "k"}], "]"}], "&"}], ",", 
+          RowBox[{"ss", "[", 
+           RowBox[{"pp", ",", "n"}], "]"}]}], "]"}], ",", 
+        RowBox[{"ColorRules", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"1", "\[Rule]", 
+            RowBox[{"Hue", "[", "0.6", "]"}]}], ",", 
+           RowBox[{"2", "\[Rule]", 
+            RowBox[{"Hue", "[", "0.8", "]"}]}], ",", 
+           RowBox[{"3", "\[Rule]", 
+            RowBox[{"Hue", "[", "0.4", "]"}]}], ",", 
+           RowBox[{"4", "\[Rule]", 
+            RowBox[{"Hue", "[", "0.2", "]"}]}], ",", 
+           RowBox[{"5", "\[Rule]", 
+            RowBox[{"Hue", "[", "0.9", "]"}]}], ",", 
+           RowBox[{"6", "\[Rule]", 
+            RowBox[{"Hue", "[", "1.0", "]"}]}], ",", 
+           RowBox[{"_", "\[Rule]", "White"}]}], "}"}]}], ",", 
+        RowBox[{"Frame", "\[Rule]", "False"}], ",", 
+        RowBox[{"ImageSize", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"400", ",", "400"}], "}"}]}]}], "]"}], ",", 
+      RowBox[{"tri2", "[", 
+       RowBox[{"n", ",", "pp", ",", "k"}], "]"}]}], "]"}]}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"se", ",", "1", ",", "\"\<\>\""}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"1", "\[Rule]", "\"\<arrays\>\""}], ",", 
+       RowBox[{"2", "\[Rule]", "\"\<numbers\>\""}]}], "}"}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Tiny"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"pp", ",", "3", ",", "\"\<players\>\""}], "}"}], ",", "2", ",", 
+     "n", ",", "1", ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Tiny"}], ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"k", ",", "3", ",", "\"\<modulus\>\""}], "}"}], ",", "2", ",", 
+     "7", ",", "1", ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Tiny"}], ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"n", ",", "30", ",", "\"\<rows\>\""}], "}"}], ",", "20", ",", 
+     "50", ",", "1", ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Tiny"}], ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   RowBox[{"SaveDefinitions", "\[Rule]", "True"}], ",", 
+   RowBox[{"ControlPlacement", "\[Rule]", "Left"}]}], "]"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, 3.3993667998258*^9, {3.399376927717515*^9, 
+   3.3993769393303823`*^9}, {3.399376998176203*^9, 3.3993770192762976`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`k$$ = 3, $CellContext`n$$ = 
+    30, $CellContext`pp$$ = 3, $CellContext`se$$ = 1, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`se$$], 1, ""}, {1 -> "arrays", 2 -> "numbers"}}, {{
+       Hold[$CellContext`pp$$], 3, "players"}, 2, 
+      Dynamic[$CellContext`n$$], 1}, {{
+       Hold[$CellContext`k$$], 3, "modulus"}, 2, 7, 1}, {{
+       Hold[$CellContext`n$$], 30, "rows"}, 20, 50, 1}}, Typeset`size$$ = {
+    400., {198., 202.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`se$222129$$ = 
+    False, $CellContext`pp$222130$$ = 0, $CellContext`k$222131$$ = 
+    0, $CellContext`n$222132$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`k$$ = 3, $CellContext`n$$ = 
+        30, $CellContext`pp$$ = 3, $CellContext`se$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`se$$, $CellContext`se$222129$$, False], 
+        Hold[$CellContext`pp$$, $CellContext`pp$222130$$, 0], 
+        Hold[$CellContext`k$$, $CellContext`k$222131$$, 0], 
+        Hold[$CellContext`n$$, $CellContext`n$222132$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (
+       If[$CellContext`pp$$ > $CellContext`n$$, $CellContext`pp$$ = \
+$CellContext`n$$]; If[$CellContext`se$$ == 1, 
+         ArrayPlot[
+          Map[Mod[#, $CellContext`k$$]& , 
+           $CellContext`ss[$CellContext`pp$$, $CellContext`n$$]], 
+          ColorRules -> {
+           1 -> Hue[0.6], 2 -> Hue[0.8], 3 -> Hue[0.4], 4 -> Hue[0.2], 5 -> 
+            Hue[0.9], 6 -> Hue[1.], Blank[] -> White}, Frame -> False, 
+          ImageSize -> {400, 400}], 
+         $CellContext`tri2[$CellContext`n$$, $CellContext`pp$$, \
+$CellContext`k$$]]), 
+      "Specifications" :> {{{$CellContext`se$$, 1, ""}, {
+         1 -> "arrays", 2 -> "numbers"}, ImageSize -> 
+         Tiny}, {{$CellContext`pp$$, 3, "players"}, 2, 
+         Dynamic[$CellContext`n$$], 1, ImageSize -> Tiny, Appearance -> 
+         "Labeled"}, {{$CellContext`k$$, 3, "modulus"}, 2, 7, 1, ImageSize -> 
+         Tiny, Appearance -> "Labeled"}, {{$CellContext`n$$, 30, "rows"}, 20, 
+         50, 1, ImageSize -> Tiny, Appearance -> "Labeled"}}, 
+      "Options" :> {ControlPlacement -> Left}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{634., {228., 233.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`ss[
+         Pattern[$CellContext`k2, 
+          Blank[]], 
+         Pattern[$CellContext`nn, 
+          Blank[]]] := 
+       Block[{$CellContext`cel, $CellContext`kk = $CellContext`k2, \
+$CellContext`a}, 
+         Table[$CellContext`cel[1, $CellContext`n1] = 
+           If[$CellContext`n1 == $CellContext`nn + 1, 1, 0], {$CellContext`n1,
+             1, 2 $CellContext`nn + 1}]; 
+         Table[$CellContext`cel[$CellContext`n1, $CellContext`nn + 
+             2 - $CellContext`n1] = 
+           Floor[($CellContext`n1 + $CellContext`kk - 
+              1)/$CellContext`kk], {$CellContext`n1, 1, $CellContext`nn}]; 
+         Table[$CellContext`cel[$CellContext`n1, $CellContext`nn + \
+$CellContext`n1] = 1, {$CellContext`n1, 1, $CellContext`nn}]; 
+         Table[$CellContext`cel[$CellContext`n1, 1] = 
+           0, {$CellContext`n1, 1, $CellContext`nn - 1}]; 
+         Table[$CellContext`cel[$CellContext`n1, 2 $CellContext`nn + 1] = 
+           0, {$CellContext`n1, 1, $CellContext`nn - 1}]; $CellContext`cel[
+            Pattern[$CellContext`n1, 
+             Blank[]], 
+            Pattern[$CellContext`m, 
+             
+             Blank[]]] := ($CellContext`cel[$CellContext`n1, $CellContext`m] = \
+$CellContext`cel[$CellContext`n1 - 1, $CellContext`m - 
+              1] + $CellContext`cel[$CellContext`n1 - 1, $CellContext`m + 1]); 
+         Join[
+           Table[
+            Table[
+            0, {$CellContext`m, 1, 2 $CellContext`nn + 1}], {$CellContext`n1, 
+             1, Floor[$CellContext`nn/2] + 3}], 
+           Table[
+            Table[
+             $CellContext`cel[$CellContext`n1, $CellContext`m], \
+{$CellContext`m, 1, 2 $CellContext`nn + 1}], {$CellContext`n1, 
+             1, $CellContext`nn - 1}], 
+           Table[
+            Table[
+            0, {$CellContext`m, 1, 2 $CellContext`nn + 1}], {$CellContext`n1, 
+             1, Floor[$CellContext`nn/2] + 3}]]], $CellContext`tri2[
+         Pattern[$CellContext`t$, 
+          Blank[]], 
+         Pattern[$CellContext`nn$, 
+          Blank[]], 
+         Pattern[$CellContext`k$, 
+          Blank[]]] := 
+       Block[{$CellContext`s, $CellContext`mm}, $CellContext`mm = \
+$CellContext`t$/50; $CellContext`s = Table[
+            Mod[
+             $CellContext`sh[$CellContext`nn$, FE`n$$790, $CellContext`m, 
+              1], $CellContext`k$], {
+            FE`n$$790, 1, $CellContext`t$}, {$CellContext`m, 1, FE`n$$790}]; 
+         Graphics[
+           Evaluate[
+            Join[{
+              RGBColor[1, 1, 1], 
+              
+              Polygon[{{0.3, 
+                0.3}, {(-25.4) $CellContext`mm, (-50.7) $CellContext`mm}, {
+                25.9 $CellContext`mm, (-50.7) $CellContext`mm}}]}, 
+             Table[{
+               
+               Hue[(6 + Part[$CellContext`s, $CellContext`x, $CellContext`y])/
+                4], 
+               Text[
+                
+                Part[$CellContext`s, $CellContext`x, $CellContext`y], {(-0.5) \
+$CellContext`x + $CellContext`y, -$CellContext`x}]}, {$CellContext`x, 
+               1, $CellContext`t$}, {$CellContext`y, 1, $CellContext`x}]]], 
+           AspectRatio -> Automatic, ImageSize -> {400, 400}, Background -> 
+           Black]], $CellContext`sh[
+         Pattern[$CellContext`p2, 
+          Blank[]], 
+         Pattern[$CellContext`n2, 
+          Blank[]], 
+         Pattern[$CellContext`m2, 
+          Blank[]], 
+         Pattern[$CellContext`v2, 
+          Blank[]]] := 
+       Block[{$CellContext`t2, $CellContext`u}, $CellContext`t2 = 
+          IntegerPart[(
+             1 + $CellContext`p2 - $CellContext`m2 + $CellContext`n2 - \
+$CellContext`v2)/$CellContext`p2]; $CellContext`u = Sum[
+            
+            Binomial[$CellContext`n2 - $CellContext`v2 - $CellContext`p2 \
+$CellContext`z, $CellContext`m2 - 1], {$CellContext`z, 0, $CellContext`t2 - 
+             1}]], FE`n$$790 = 30}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->78672762]
+}, {2}]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell[TextData[{
+ "This Demonstration shows Pascal-like triangles reduced modulo ",
+ Cell[BoxData[
+  FormBox["k", TraditionalForm]], "InlineMath"],
+ ", where ",
+ Cell[BoxData[
+  FormBox["k", TraditionalForm]], "InlineMath"],
+ " can vary between 2 and 7. These arrays are made from the probabilities of \
+winning a ",
+ Cell[BoxData[
+  FormBox["p", TraditionalForm]], "InlineMath"],
+ "-player game described in Details. "
+}], "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3988968216802*^9, 3.3988969229709997`*^9}, {
+   3.3990274005026426`*^9, 3.3990274133306856`*^9}, {3.399149929629307*^9, 
+   3.3991499521763268`*^9}, {3.3991500035516553`*^9, 
+   3.3991501052241807`*^9}, {3.399400926521206*^9, 3.399400946816392*^9}},
+ CellID->226343718]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`k$$ = 3, $CellContext`n$$ = 
+    30, $CellContext`pp$$ = 3, $CellContext`se$$ = 1, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`se$$], 1, ""}, {1 -> "arrays", 2 -> "numbers"}}, {{
+       Hold[$CellContext`pp$$], 3, "players"}, 2, 
+      Dynamic[$CellContext`n$$], 1}, {{
+       Hold[$CellContext`k$$], 3, "modulus"}, 2, 7, 1}, {{
+       Hold[$CellContext`n$$], 30, "rows"}, 20, 50, 1}}, Typeset`size$$ = {
+    400., {198., 202.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`se$222199$$ = 
+    False, $CellContext`pp$222200$$ = 0, $CellContext`k$222201$$ = 
+    0, $CellContext`n$222202$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`k$$ = 3, $CellContext`n$$ = 
+        30, $CellContext`pp$$ = 3, $CellContext`se$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`se$$, $CellContext`se$222199$$, False], 
+        Hold[$CellContext`pp$$, $CellContext`pp$222200$$, 0], 
+        Hold[$CellContext`k$$, $CellContext`k$222201$$, 0], 
+        Hold[$CellContext`n$$, $CellContext`n$222202$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (
+       If[$CellContext`pp$$ > $CellContext`n$$, $CellContext`pp$$ = \
+$CellContext`n$$]; If[$CellContext`se$$ == 1, 
+         ArrayPlot[
+          Map[Mod[#, $CellContext`k$$]& , 
+           $CellContext`ss[$CellContext`pp$$, $CellContext`n$$]], 
+          ColorRules -> {
+           1 -> Hue[0.6], 2 -> Hue[0.8], 3 -> Hue[0.4], 4 -> Hue[0.2], 5 -> 
+            Hue[0.9], 6 -> Hue[1.], Blank[] -> White}, Frame -> False, 
+          ImageSize -> {400, 400}], 
+         $CellContext`tri2[$CellContext`n$$, $CellContext`pp$$, \
+$CellContext`k$$]]), 
+      "Specifications" :> {{{$CellContext`se$$, 1, ""}, {
+         1 -> "arrays", 2 -> "numbers"}, ImageSize -> 
+         Tiny}, {{$CellContext`pp$$, 3, "players"}, 2, 
+         Dynamic[$CellContext`n$$], 1, ImageSize -> Tiny, Appearance -> 
+         "Labeled"}, {{$CellContext`k$$, 3, "modulus"}, 2, 7, 1, ImageSize -> 
+         Tiny, Appearance -> "Labeled"}, {{$CellContext`n$$, 30, "rows"}, 20, 
+         50, 1, ImageSize -> Tiny, Appearance -> "Labeled"}}, 
+      "Options" :> {ControlPlacement -> Left}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{634., {228., 233.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`ss[
+         Pattern[$CellContext`k2, 
+          Blank[]], 
+         Pattern[$CellContext`nn, 
+          Blank[]]] := 
+       Block[{$CellContext`cel, $CellContext`kk = $CellContext`k2, \
+$CellContext`a}, 
+         Table[$CellContext`cel[1, $CellContext`n1] = 
+           If[$CellContext`n1 == $CellContext`nn + 1, 1, 0], {$CellContext`n1,
+             1, 2 $CellContext`nn + 1}]; 
+         Table[$CellContext`cel[$CellContext`n1, $CellContext`nn + 
+             2 - $CellContext`n1] = 
+           Floor[($CellContext`n1 + $CellContext`kk - 
+              1)/$CellContext`kk], {$CellContext`n1, 1, $CellContext`nn}]; 
+         Table[$CellContext`cel[$CellContext`n1, $CellContext`nn + \
+$CellContext`n1] = 1, {$CellContext`n1, 1, $CellContext`nn}]; 
+         Table[$CellContext`cel[$CellContext`n1, 1] = 
+           0, {$CellContext`n1, 1, $CellContext`nn - 1}]; 
+         Table[$CellContext`cel[$CellContext`n1, 2 $CellContext`nn + 1] = 
+           0, {$CellContext`n1, 1, $CellContext`nn - 1}]; $CellContext`cel[
+            Pattern[$CellContext`n1, 
+             Blank[]], 
+            Pattern[$CellContext`m, 
+             
+             Blank[]]] := ($CellContext`cel[$CellContext`n1, $CellContext`m] = \
+$CellContext`cel[$CellContext`n1 - 1, $CellContext`m - 
+              1] + $CellContext`cel[$CellContext`n1 - 1, $CellContext`m + 1]); 
+         Join[
+           Table[
+            Table[
+            0, {$CellContext`m, 1, 2 $CellContext`nn + 1}], {$CellContext`n1, 
+             1, Floor[$CellContext`nn/2] + 3}], 
+           Table[
+            Table[
+             $CellContext`cel[$CellContext`n1, $CellContext`m], \
+{$CellContext`m, 1, 2 $CellContext`nn + 1}], {$CellContext`n1, 
+             1, $CellContext`nn - 1}], 
+           Table[
+            Table[
+            0, {$CellContext`m, 1, 2 $CellContext`nn + 1}], {$CellContext`n1, 
+             1, Floor[$CellContext`nn/2] + 3}]]], $CellContext`tri2[
+         Pattern[$CellContext`t$, 
+          Blank[]], 
+         Pattern[$CellContext`nn$, 
+          Blank[]], 
+         Pattern[$CellContext`k$, 
+          Blank[]]] := 
+       Block[{$CellContext`s, $CellContext`mm}, $CellContext`mm = \
+$CellContext`t$/50; $CellContext`s = Table[
+            Mod[
+             $CellContext`sh[$CellContext`nn$, FE`n$$790, $CellContext`m, 
+              1], $CellContext`k$], {
+            FE`n$$790, 1, $CellContext`t$}, {$CellContext`m, 1, FE`n$$790}]; 
+         Graphics[
+           Evaluate[
+            Join[{
+              RGBColor[1, 1, 1], 
+              
+              Polygon[{{0.3, 
+                0.3}, {(-25.4) $CellContext`mm, (-50.7) $CellContext`mm}, {
+                25.9 $CellContext`mm, (-50.7) $CellContext`mm}}]}, 
+             Table[{
+               
+               Hue[(6 + Part[$CellContext`s, $CellContext`x, $CellContext`y])/
+                4], 
+               Text[
+                
+                Part[$CellContext`s, $CellContext`x, $CellContext`y], {(-0.5) \
+$CellContext`x + $CellContext`y, -$CellContext`x}]}, {$CellContext`x, 
+               1, $CellContext`t$}, {$CellContext`y, 1, $CellContext`x}]]], 
+           AspectRatio -> Automatic, ImageSize -> {400, 400}, Background -> 
+           Black]], $CellContext`sh[
+         Pattern[$CellContext`p2, 
+          Blank[]], 
+         Pattern[$CellContext`n2, 
+          Blank[]], 
+         Pattern[$CellContext`m2, 
+          Blank[]], 
+         Pattern[$CellContext`v2, 
+          Blank[]]] := 
+       Block[{$CellContext`t2, $CellContext`u}, $CellContext`t2 = 
+          IntegerPart[(
+             1 + $CellContext`p2 - $CellContext`m2 + $CellContext`n2 - \
+$CellContext`v2)/$CellContext`p2]; $CellContext`u = Sum[
+            
+            Binomial[$CellContext`n2 - $CellContext`v2 - $CellContext`p2 \
+$CellContext`z, $CellContext`m2 - 1], {$CellContext`z, 0, $CellContext`t2 - 
+             1}]], FE`n$$790 = 30}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->150591440]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`k$$ = 4, $CellContext`n$$ = 
+    30, $CellContext`pp$$ = 4, $CellContext`se$$ = 1, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`se$$], 1, ""}, {1 -> "arrays", 2 -> "numbers"}}, {{
+       Hold[$CellContext`pp$$], 4, "players"}, 2, 
+      Dynamic[$CellContext`n$$], 1}, {{
+       Hold[$CellContext`k$$], 4, "modulus"}, 2, 7, 1}, {{
+       Hold[$CellContext`n$$], 30, "rows"}, 20, 50, 1}}, Typeset`size$$ = {
+    400., {198., 202.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`se$222269$$ = 
+    False, $CellContext`pp$222270$$ = 0, $CellContext`k$222271$$ = 
+    0, $CellContext`n$222272$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`k$$ = 4, $CellContext`n$$ = 
+        30, $CellContext`pp$$ = 4, $CellContext`se$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`se$$, $CellContext`se$222269$$, False], 
+        Hold[$CellContext`pp$$, $CellContext`pp$222270$$, 0], 
+        Hold[$CellContext`k$$, $CellContext`k$222271$$, 0], 
+        Hold[$CellContext`n$$, $CellContext`n$222272$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (
+       If[$CellContext`pp$$ > $CellContext`n$$, $CellContext`pp$$ = \
+$CellContext`n$$]; If[$CellContext`se$$ == 1, 
+         ArrayPlot[
+          Map[Mod[#, $CellContext`k$$]& , 
+           $CellContext`ss[$CellContext`pp$$, $CellContext`n$$]], 
+          ColorRules -> {
+           1 -> Hue[0.6], 2 -> Hue[0.8], 3 -> Hue[0.4], 4 -> Hue[0.2], 5 -> 
+            Hue[0.9], 6 -> Hue[1.], Blank[] -> White}, Frame -> False, 
+          ImageSize -> {400, 400}], 
+         $CellContext`tri2[$CellContext`n$$, $CellContext`pp$$, \
+$CellContext`k$$]]), 
+      "Specifications" :> {{{$CellContext`se$$, 1, ""}, {
+         1 -> "arrays", 2 -> "numbers"}, ImageSize -> 
+         Tiny}, {{$CellContext`pp$$, 4, "players"}, 2, 
+         Dynamic[$CellContext`n$$], 1, ImageSize -> Tiny, Appearance -> 
+         "Labeled"}, {{$CellContext`k$$, 4, "modulus"}, 2, 7, 1, ImageSize -> 
+         Tiny, Appearance -> "Labeled"}, {{$CellContext`n$$, 30, "rows"}, 20, 
+         50, 1, ImageSize -> Tiny, Appearance -> "Labeled"}}, 
+      "Options" :> {ControlPlacement -> Left}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{634., {228., 233.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`ss[
+         Pattern[$CellContext`k2, 
+          Blank[]], 
+         Pattern[$CellContext`nn, 
+          Blank[]]] := 
+       Block[{$CellContext`cel, $CellContext`kk = $CellContext`k2, \
+$CellContext`a}, 
+         Table[$CellContext`cel[1, $CellContext`n1] = 
+           If[$CellContext`n1 == $CellContext`nn + 1, 1, 0], {$CellContext`n1,
+             1, 2 $CellContext`nn + 1}]; 
+         Table[$CellContext`cel[$CellContext`n1, $CellContext`nn + 
+             2 - $CellContext`n1] = 
+           Floor[($CellContext`n1 + $CellContext`kk - 
+              1)/$CellContext`kk], {$CellContext`n1, 1, $CellContext`nn}]; 
+         Table[$CellContext`cel[$CellContext`n1, $CellContext`nn + \
+$CellContext`n1] = 1, {$CellContext`n1, 1, $CellContext`nn}]; 
+         Table[$CellContext`cel[$CellContext`n1, 1] = 
+           0, {$CellContext`n1, 1, $CellContext`nn - 1}]; 
+         Table[$CellContext`cel[$CellContext`n1, 2 $CellContext`nn + 1] = 
+           0, {$CellContext`n1, 1, $CellContext`nn - 1}]; $CellContext`cel[
+            Pattern[$CellContext`n1, 
+             Blank[]], 
+            Pattern[$CellContext`m, 
+             
+             Blank[]]] := ($CellContext`cel[$CellContext`n1, $CellContext`m] = \
+$CellContext`cel[$CellContext`n1 - 1, $CellContext`m - 
+              1] + $CellContext`cel[$CellContext`n1 - 1, $CellContext`m + 1]); 
+         Join[
+           Table[
+            Table[
+            0, {$CellContext`m, 1, 2 $CellContext`nn + 1}], {$CellContext`n1, 
+             1, Floor[$CellContext`nn/2] + 3}], 
+           Table[
+            Table[
+             $CellContext`cel[$CellContext`n1, $CellContext`m], \
+{$CellContext`m, 1, 2 $CellContext`nn + 1}], {$CellContext`n1, 
+             1, $CellContext`nn - 1}], 
+           Table[
+            Table[
+            0, {$CellContext`m, 1, 2 $CellContext`nn + 1}], {$CellContext`n1, 
+             1, Floor[$CellContext`nn/2] + 3}]]], $CellContext`tri2[
+         Pattern[$CellContext`t$, 
+          Blank[]], 
+         Pattern[$CellContext`nn$, 
+          Blank[]], 
+         Pattern[$CellContext`k$, 
+          Blank[]]] := 
+       Block[{$CellContext`s, $CellContext`mm}, $CellContext`mm = \
+$CellContext`t$/50; $CellContext`s = Table[
+            Mod[
+             $CellContext`sh[$CellContext`nn$, FE`n$$790, $CellContext`m, 
+              1], $CellContext`k$], {
+            FE`n$$790, 1, $CellContext`t$}, {$CellContext`m, 1, FE`n$$790}]; 
+         Graphics[
+           Evaluate[
+            Join[{
+              RGBColor[1, 1, 1], 
+              
+              Polygon[{{0.3, 
+                0.3}, {(-25.4) $CellContext`mm, (-50.7) $CellContext`mm}, {
+                25.9 $CellContext`mm, (-50.7) $CellContext`mm}}]}, 
+             Table[{
+               
+               Hue[(6 + Part[$CellContext`s, $CellContext`x, $CellContext`y])/
+                4], 
+               Text[
+                
+                Part[$CellContext`s, $CellContext`x, $CellContext`y], {(-0.5) \
+$CellContext`x + $CellContext`y, -$CellContext`x}]}, {$CellContext`x, 
+               1, $CellContext`t$}, {$CellContext`y, 1, $CellContext`x}]]], 
+           AspectRatio -> Automatic, ImageSize -> {400, 400}, Background -> 
+           Black]], $CellContext`sh[
+         Pattern[$CellContext`p2, 
+          Blank[]], 
+         Pattern[$CellContext`n2, 
+          Blank[]], 
+         Pattern[$CellContext`m2, 
+          Blank[]], 
+         Pattern[$CellContext`v2, 
+          Blank[]]] := 
+       Block[{$CellContext`t2, $CellContext`u}, $CellContext`t2 = 
+          IntegerPart[(
+             1 + $CellContext`p2 - $CellContext`m2 + $CellContext`n2 - \
+$CellContext`v2)/$CellContext`p2]; $CellContext`u = Sum[
+            
+            Binomial[$CellContext`n2 - $CellContext`v2 - $CellContext`p2 \
+$CellContext`z, $CellContext`m2 - 1], {$CellContext`z, 0, $CellContext`t2 - 
+             1}]], FE`n$$790 = 30}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->254279181],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`k$$ = 6, $CellContext`n$$ = 
+    30, $CellContext`pp$$ = 3, $CellContext`se$$ = 1, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`se$$], 1, ""}, {1 -> "arrays", 2 -> "numbers"}}, {{
+       Hold[$CellContext`pp$$], 3, "players"}, 2, 
+      Dynamic[$CellContext`n$$], 1}, {{
+       Hold[$CellContext`k$$], 6, "modulus"}, 2, 7, 1}, {{
+       Hold[$CellContext`n$$], 30, "rows"}, 20, 50, 1}}, Typeset`size$$ = {
+    400., {198., 202.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`se$222339$$ = 
+    False, $CellContext`pp$222340$$ = 0, $CellContext`k$222341$$ = 
+    0, $CellContext`n$222342$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`k$$ = 6, $CellContext`n$$ = 
+        30, $CellContext`pp$$ = 3, $CellContext`se$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`se$$, $CellContext`se$222339$$, False], 
+        Hold[$CellContext`pp$$, $CellContext`pp$222340$$, 0], 
+        Hold[$CellContext`k$$, $CellContext`k$222341$$, 0], 
+        Hold[$CellContext`n$$, $CellContext`n$222342$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (
+       If[$CellContext`pp$$ > $CellContext`n$$, $CellContext`pp$$ = \
+$CellContext`n$$]; If[$CellContext`se$$ == 1, 
+         ArrayPlot[
+          Map[Mod[#, $CellContext`k$$]& , 
+           $CellContext`ss[$CellContext`pp$$, $CellContext`n$$]], 
+          ColorRules -> {
+           1 -> Hue[0.6], 2 -> Hue[0.8], 3 -> Hue[0.4], 4 -> Hue[0.2], 5 -> 
+            Hue[0.9], 6 -> Hue[1.], Blank[] -> White}, Frame -> False, 
+          ImageSize -> {400, 400}], 
+         $CellContext`tri2[$CellContext`n$$, $CellContext`pp$$, \
+$CellContext`k$$]]), 
+      "Specifications" :> {{{$CellContext`se$$, 1, ""}, {
+         1 -> "arrays", 2 -> "numbers"}, ImageSize -> 
+         Tiny}, {{$CellContext`pp$$, 3, "players"}, 2, 
+         Dynamic[$CellContext`n$$], 1, ImageSize -> Tiny, Appearance -> 
+         "Labeled"}, {{$CellContext`k$$, 6, "modulus"}, 2, 7, 1, ImageSize -> 
+         Tiny, Appearance -> "Labeled"}, {{$CellContext`n$$, 30, "rows"}, 20, 
+         50, 1, ImageSize -> Tiny, Appearance -> "Labeled"}}, 
+      "Options" :> {ControlPlacement -> Left}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{634., {228., 233.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`ss[
+         Pattern[$CellContext`k2, 
+          Blank[]], 
+         Pattern[$CellContext`nn, 
+          Blank[]]] := 
+       Block[{$CellContext`cel, $CellContext`kk = $CellContext`k2, \
+$CellContext`a}, 
+         Table[$CellContext`cel[1, $CellContext`n1] = 
+           If[$CellContext`n1 == $CellContext`nn + 1, 1, 0], {$CellContext`n1,
+             1, 2 $CellContext`nn + 1}]; 
+         Table[$CellContext`cel[$CellContext`n1, $CellContext`nn + 
+             2 - $CellContext`n1] = 
+           Floor[($CellContext`n1 + $CellContext`kk - 
+              1)/$CellContext`kk], {$CellContext`n1, 1, $CellContext`nn}]; 
+         Table[$CellContext`cel[$CellContext`n1, $CellContext`nn + \
+$CellContext`n1] = 1, {$CellContext`n1, 1, $CellContext`nn}]; 
+         Table[$CellContext`cel[$CellContext`n1, 1] = 
+           0, {$CellContext`n1, 1, $CellContext`nn - 1}]; 
+         Table[$CellContext`cel[$CellContext`n1, 2 $CellContext`nn + 1] = 
+           0, {$CellContext`n1, 1, $CellContext`nn - 1}]; $CellContext`cel[
+            Pattern[$CellContext`n1, 
+             Blank[]], 
+            Pattern[$CellContext`m, 
+             
+             Blank[]]] := ($CellContext`cel[$CellContext`n1, $CellContext`m] = \
+$CellContext`cel[$CellContext`n1 - 1, $CellContext`m - 
+              1] + $CellContext`cel[$CellContext`n1 - 1, $CellContext`m + 1]); 
+         Join[
+           Table[
+            Table[
+            0, {$CellContext`m, 1, 2 $CellContext`nn + 1}], {$CellContext`n1, 
+             1, Floor[$CellContext`nn/2] + 3}], 
+           Table[
+            Table[
+             $CellContext`cel[$CellContext`n1, $CellContext`m], \
+{$CellContext`m, 1, 2 $CellContext`nn + 1}], {$CellContext`n1, 
+             1, $CellContext`nn - 1}], 
+           Table[
+            Table[
+            0, {$CellContext`m, 1, 2 $CellContext`nn + 1}], {$CellContext`n1, 
+             1, Floor[$CellContext`nn/2] + 3}]]], $CellContext`tri2[
+         Pattern[$CellContext`t$, 
+          Blank[]], 
+         Pattern[$CellContext`nn$, 
+          Blank[]], 
+         Pattern[$CellContext`k$, 
+          Blank[]]] := 
+       Block[{$CellContext`s, $CellContext`mm}, $CellContext`mm = \
+$CellContext`t$/50; $CellContext`s = Table[
+            Mod[
+             $CellContext`sh[$CellContext`nn$, FE`n$$790, $CellContext`m, 
+              1], $CellContext`k$], {
+            FE`n$$790, 1, $CellContext`t$}, {$CellContext`m, 1, FE`n$$790}]; 
+         Graphics[
+           Evaluate[
+            Join[{
+              RGBColor[1, 1, 1], 
+              
+              Polygon[{{0.3, 
+                0.3}, {(-25.4) $CellContext`mm, (-50.7) $CellContext`mm}, {
+                25.9 $CellContext`mm, (-50.7) $CellContext`mm}}]}, 
+             Table[{
+               
+               Hue[(6 + Part[$CellContext`s, $CellContext`x, $CellContext`y])/
+                4], 
+               Text[
+                
+                Part[$CellContext`s, $CellContext`x, $CellContext`y], {(-0.5) \
+$CellContext`x + $CellContext`y, -$CellContext`x}]}, {$CellContext`x, 
+               1, $CellContext`t$}, {$CellContext`y, 1, $CellContext`x}]]], 
+           AspectRatio -> Automatic, ImageSize -> {400, 400}, Background -> 
+           Black]], $CellContext`sh[
+         Pattern[$CellContext`p2, 
+          Blank[]], 
+         Pattern[$CellContext`n2, 
+          Blank[]], 
+         Pattern[$CellContext`m2, 
+          Blank[]], 
+         Pattern[$CellContext`v2, 
+          Blank[]]] := 
+       Block[{$CellContext`t2, $CellContext`u}, $CellContext`t2 = 
+          IntegerPart[(
+             1 + $CellContext`p2 - $CellContext`m2 + $CellContext`n2 - \
+$CellContext`v2)/$CellContext`p2]; $CellContext`u = Sum[
+            
+            Binomial[$CellContext`n2 - $CellContext`v2 - $CellContext`p2 \
+$CellContext`z, $CellContext`m2 - 1], {$CellContext`z, 0, $CellContext`t2 - 
+             1}]], FE`n$$790 = 30}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->529501169],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`k$$ = 2, $CellContext`n$$ = 
+    30, $CellContext`pp$$ = 4, $CellContext`se$$ = 2, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`se$$], 2, ""}, {1 -> "arrays", 2 -> "numbers"}}, {{
+       Hold[$CellContext`pp$$], 4, "players"}, 2, 
+      Dynamic[$CellContext`n$$], 1}, {{
+       Hold[$CellContext`k$$], 2, "modulus"}, 2, 7, 1}, {{
+       Hold[$CellContext`n$$], 30, "rows"}, 20, 50, 1}}, Typeset`size$$ = {
+    400., {198., 202.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`se$222409$$ = 
+    False, $CellContext`pp$222410$$ = 0, $CellContext`k$222411$$ = 
+    0, $CellContext`n$222412$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`k$$ = 2, $CellContext`n$$ = 
+        30, $CellContext`pp$$ = 4, $CellContext`se$$ = 2}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`se$$, $CellContext`se$222409$$, False], 
+        Hold[$CellContext`pp$$, $CellContext`pp$222410$$, 0], 
+        Hold[$CellContext`k$$, $CellContext`k$222411$$, 0], 
+        Hold[$CellContext`n$$, $CellContext`n$222412$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (
+       If[$CellContext`pp$$ > $CellContext`n$$, $CellContext`pp$$ = \
+$CellContext`n$$]; If[$CellContext`se$$ == 1, 
+         ArrayPlot[
+          Map[Mod[#, $CellContext`k$$]& , 
+           $CellContext`ss[$CellContext`pp$$, $CellContext`n$$]], 
+          ColorRules -> {
+           1 -> Hue[0.6], 2 -> Hue[0.8], 3 -> Hue[0.4], 4 -> Hue[0.2], 5 -> 
+            Hue[0.9], 6 -> Hue[1.], Blank[] -> White}, Frame -> False, 
+          ImageSize -> {400, 400}], 
+         $CellContext`tri2[$CellContext`n$$, $CellContext`pp$$, \
+$CellContext`k$$]]), 
+      "Specifications" :> {{{$CellContext`se$$, 2, ""}, {
+         1 -> "arrays", 2 -> "numbers"}, ImageSize -> 
+         Tiny}, {{$CellContext`pp$$, 4, "players"}, 2, 
+         Dynamic[$CellContext`n$$], 1, ImageSize -> Tiny, Appearance -> 
+         "Labeled"}, {{$CellContext`k$$, 2, "modulus"}, 2, 7, 1, ImageSize -> 
+         Tiny, Appearance -> "Labeled"}, {{$CellContext`n$$, 30, "rows"}, 20, 
+         50, 1, ImageSize -> Tiny, Appearance -> "Labeled"}}, 
+      "Options" :> {ControlPlacement -> Left}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{634., {228., 233.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`ss[
+         Pattern[$CellContext`k2, 
+          Blank[]], 
+         Pattern[$CellContext`nn, 
+          Blank[]]] := 
+       Block[{$CellContext`cel, $CellContext`kk = $CellContext`k2, \
+$CellContext`a}, 
+         Table[$CellContext`cel[1, $CellContext`n1] = 
+           If[$CellContext`n1 == $CellContext`nn + 1, 1, 0], {$CellContext`n1,
+             1, 2 $CellContext`nn + 1}]; 
+         Table[$CellContext`cel[$CellContext`n1, $CellContext`nn + 
+             2 - $CellContext`n1] = 
+           Floor[($CellContext`n1 + $CellContext`kk - 
+              1)/$CellContext`kk], {$CellContext`n1, 1, $CellContext`nn}]; 
+         Table[$CellContext`cel[$CellContext`n1, $CellContext`nn + \
+$CellContext`n1] = 1, {$CellContext`n1, 1, $CellContext`nn}]; 
+         Table[$CellContext`cel[$CellContext`n1, 1] = 
+           0, {$CellContext`n1, 1, $CellContext`nn - 1}]; 
+         Table[$CellContext`cel[$CellContext`n1, 2 $CellContext`nn + 1] = 
+           0, {$CellContext`n1, 1, $CellContext`nn - 1}]; $CellContext`cel[
+            Pattern[$CellContext`n1, 
+             Blank[]], 
+            Pattern[$CellContext`m, 
+             
+             Blank[]]] := ($CellContext`cel[$CellContext`n1, $CellContext`m] = \
+$CellContext`cel[$CellContext`n1 - 1, $CellContext`m - 
+              1] + $CellContext`cel[$CellContext`n1 - 1, $CellContext`m + 1]); 
+         Join[
+           Table[
+            Table[
+            0, {$CellContext`m, 1, 2 $CellContext`nn + 1}], {$CellContext`n1, 
+             1, Floor[$CellContext`nn/2] + 3}], 
+           Table[
+            Table[
+             $CellContext`cel[$CellContext`n1, $CellContext`m], \
+{$CellContext`m, 1, 2 $CellContext`nn + 1}], {$CellContext`n1, 
+             1, $CellContext`nn - 1}], 
+           Table[
+            Table[
+            0, {$CellContext`m, 1, 2 $CellContext`nn + 1}], {$CellContext`n1, 
+             1, Floor[$CellContext`nn/2] + 3}]]], $CellContext`tri2[
+         Pattern[$CellContext`t$, 
+          Blank[]], 
+         Pattern[$CellContext`nn$, 
+          Blank[]], 
+         Pattern[$CellContext`k$, 
+          Blank[]]] := 
+       Block[{$CellContext`s, $CellContext`mm}, $CellContext`mm = \
+$CellContext`t$/50; $CellContext`s = Table[
+            Mod[
+             $CellContext`sh[$CellContext`nn$, FE`n$$790, $CellContext`m, 
+              1], $CellContext`k$], {
+            FE`n$$790, 1, $CellContext`t$}, {$CellContext`m, 1, FE`n$$790}]; 
+         Graphics[
+           Evaluate[
+            Join[{
+              RGBColor[1, 1, 1], 
+              
+              Polygon[{{0.3, 
+                0.3}, {(-25.4) $CellContext`mm, (-50.7) $CellContext`mm}, {
+                25.9 $CellContext`mm, (-50.7) $CellContext`mm}}]}, 
+             Table[{
+               
+               Hue[(6 + Part[$CellContext`s, $CellContext`x, $CellContext`y])/
+                4], 
+               Text[
+                
+                Part[$CellContext`s, $CellContext`x, $CellContext`y], {(-0.5) \
+$CellContext`x + $CellContext`y, -$CellContext`x}]}, {$CellContext`x, 
+               1, $CellContext`t$}, {$CellContext`y, 1, $CellContext`x}]]], 
+           AspectRatio -> Automatic, ImageSize -> {400, 400}, Background -> 
+           Black]], $CellContext`sh[
+         Pattern[$CellContext`p2, 
+          Blank[]], 
+         Pattern[$CellContext`n2, 
+          Blank[]], 
+         Pattern[$CellContext`m2, 
+          Blank[]], 
+         Pattern[$CellContext`v2, 
+          Blank[]]] := 
+       Block[{$CellContext`t2, $CellContext`u}, $CellContext`t2 = 
+          IntegerPart[(
+             1 + $CellContext`p2 - $CellContext`m2 + $CellContext`n2 - \
+$CellContext`v2)/$CellContext`p2]; $CellContext`u = Sum[
+            
+            Binomial[$CellContext`n2 - $CellContext`v2 - $CellContext`p2 \
+$CellContext`z, $CellContext`m2 - 1], {$CellContext`z, 0, $CellContext`t2 - 
+             1}]], FE`n$$790 = 30}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->309982976]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "DetailsSection"],
+
+Cell[TextData[{
+ "Besides the colored pixels, you can also see numbers for  the Pascal-like \
+triangles reduced modulo ",
+ Cell[BoxData[
+  FormBox["k", TraditionalForm]], "InlineMath"],
+ ". Please see the third snapshot."
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3988969329393997`*^9, 3.3988970017978*^9}, 
+   3.3990274161587925`*^9, {3.3991502190530343`*^9, 3.3991502842722015`*^9}},
+ CellID->178197041],
+
+Cell[TextData[{
+ "Let ",
+ Cell[BoxData[
+  FormBox["p", TraditionalForm]], "InlineMath"],
+ ", ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]], "InlineMath"],
+ ", ",
+ Cell[BoxData[
+  FormBox["m", TraditionalForm]], "InlineMath"],
+ " be fixed natural numbers such that ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"m", "\[LessEqual]", "n"}], TraditionalForm]], "InlineMath"],
+ ". There are ",
+ Cell[BoxData[
+  FormBox["p", TraditionalForm]], "InlineMath"],
+ " players seated in a circle. The game begins with the first player. \
+Proceeding in order around the circle, a box of cards is passed from hand to \
+hand. The box contains ",
+ Cell[BoxData[
+  FormBox["m", TraditionalForm]], "InlineMath"],
+ " red cards and ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"n", "-", "m"}], TraditionalForm]], "InlineMath"],
+ " white cards. A player draws a card when the box is received. Once a card \
+is drawn, it will not be returned to the box. If a red card is drawn, the \
+player loses and the game ends. Let ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"F", 
+    RowBox[{"(", 
+     RowBox[{"p", ",", "n", ",", "m", ",", "v"}], ")"}]}], TraditionalForm]], 
+  "InlineMath"],
+ " be the probability of the ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["v", "th"], TraditionalForm]], "InlineMath"],
+ " player losing the game. Then for fixed numbers ",
+ Cell[BoxData[
+  FormBox["p", TraditionalForm]], "InlineMath"],
+ " and ",
+ Cell[BoxData[
+  FormBox["v", TraditionalForm]], "InlineMath"],
+ " with ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"v", "\[LessEqual]", "p"}], TraditionalForm]], "InlineMath"],
+ ", the list ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"F", 
+      RowBox[{"(", 
+       RowBox[{"p", ",", "n", ",", "m", ",", "v"}], ")"}]}], ",", " ", 
+     RowBox[{"n", "=", "1"}], ",", "2", ",", 
+     RowBox[{
+      RowBox[{"...", " ", "and", " ", "m"}], " ", "\[LessEqual]", " ", 
+      "n"}]}], "}"}], TraditionalForm]], "InlineMath"],
+ " forms a Pascal-like triangle."
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, 3.3985051977148*^9, {3.3985058494862003`*^9, 
+   3.3985059260042*^9}, {3.3988350215880003`*^9, 3.3988350292008*^9}, {
+   3.3988352815308*^9, 3.3988353319812*^9}, {3.3988363751376*^9, 
+   3.3988363846692*^9}, {3.3988464955257998`*^9, 3.3988465078966*^9}, {
+   3.398847095843*^9, 3.398847116903*^9}, {3.3988950248472*^9, 
+   3.3988950332088003`*^9}, {3.3990272800659137`*^9, 
+   3.3990273243468804`*^9}, {3.3990273655341167`*^9, 
+   3.3990273880183477`*^9}, {3.399150296850407*^9, 3.3991504186324368`*^9}, {
+   3.3994009693926387`*^9, 3.399401069462437*^9}},
+ CellID->17208522],
+
+Cell[TextData[{
+ "The denominators of the list form Pascal-like triangles, and these \
+triangles, reduced modulo ",
+ Cell[BoxData[
+  FormBox["k", TraditionalForm]], "InlineMath"],
+ ", are displayed. These triangles depend on the number ",
+ Cell[BoxData[
+  FormBox["p", TraditionalForm]], "InlineMath"],
+ " of players. To make the situation simple, ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"v", " ", "=", " ", "1"}], TraditionalForm]], "InlineMath"],
+ "."
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.398847151691*^9, 3.3988471651226*^9}, {
+   3.3988472401898003`*^9, 3.3988473809642*^9}, 3.3988923410358*^9, {
+   3.3988930463922*^9, 3.3988930463922*^9}, {3.3988957727390003`*^9, 
+   3.3988957764674*^9}, {3.3990273359874306`*^9, 3.3990273655497417`*^9}, 
+   3.399150443085718*^9, {3.399401104896989*^9, 3.399401118895824*^9}},
+ CellID->401346832],
+
+Cell[TextData[{
+ "If you want to know the mathematical background of the game, see R. \
+Miyadera, T. Hashiba, Y. Nakagawa, T. Yamauchi, H. Matsui, S. Hashiba, D. \
+Minematsu, and M. Sakaguchi,",
+ " \"Pascal-like Triangles and Sierpinski-like Gaskets,\" ",
+ StyleBox["Visual Mathematics: Art and Science Electric Journal of \
+ISIS-Symmetry",
+  FontSlant->"Italic"],
+ " [online], ",
+ StyleBox["9",
+  FontWeight->"Bold"],
+ "(1), 2007."
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.399401138300459*^9, 3.39940117200078*^9}, {
+   3.576603917657152*^9, 3.5766039275501413`*^9}},
+ CellID->650547843],
+
+Cell["\<\
+Because of the Pascal-like property, the triangles can be made by a kind of \
+cellular automaton that has a kind of boundary condition.\
+\>", "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, 3.398835310422*^9, {3.3988363996452*^9, 
+   3.398836437288*^9}, 3.3988473984986*^9, {3.398847570941*^9, 
+   3.398847576557*^9}, {3.3994012017326813`*^9, 3.3994012035450306`*^9}},
+ CellID->203919166]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.399371860990777*^9},
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.3895522232313623`*^9},
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SearchTermsSection"],
+
+Cell["Pascal' s triangle mod k ", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3985045153014*^9, 3.3985045153014*^9}, {
+   3.399371930746128*^9, 3.3993719331062126`*^9}},
+ CellID->455909080],
+
+Cell["Pascal-like triangles", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, 3.3985045161126003`*^9, {3.3985049262092*^9, 
+   3.3985049324648*^9}, {3.3993719355131865`*^9, 3.3993719376075664`*^9}},
+ CellID->186301388]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "RelatedLinksSection"],
+
+Cell[TextData[ButtonBox["Pascal's Triangle",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/PascalsTriangle.html"], 
+   None}]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3993719178203664`*^9, 3.3993719264010715`*^9}},
+ CellID->349144713]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Hiroshi Matsui",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Hiroshi+Matsui"]\
+, None}],
+ ", ",
+ ButtonBox["Toshiyuki Yamauchi",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Toshiyuki+\
+Yamauchi"], None}],
+ ", ",
+ ButtonBox["Daisuke Minematsu",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Daisuke+\
+Minematsu"], None}],
+ ", and ",
+ ButtonBox["Ryohei Miyadera",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Ryohei+\
+Miyadera"], None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Ryohei+Miyadera"]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, 3.3993708210334*^9, {3.399808738294072*^9, 
+   3.399808803762822*^9}, {3.576840425744568*^9, 3.576840455787572*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{822, 702},
+WindowMargins->{{24, Automatic}, {Automatic, 8}},
+FrontEndVersion->"9.0 for Microsoft Windows (64-bit) (January 25, 2013)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[53570, 1298, 374, 9, 22, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[53947, 1309, 678, 16, 22, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[54628, 1327, 340, 11, 22, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[54971, 1340, 637, 15, 22, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[55611, 1357, 844, 21, 22, "ControlSuggestions",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[56458, 1380, 369, 9, 22, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[56830, 1391, 1412, 31, 22, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[58245, 1424, 882, 21, 22, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 61444, 1528},
+ {"RotateAndZoomIn3D", 61553, 1531},
+ {"DragLocators", 61663, 1534},
+ {"CreateAndDeleteLocators", 61779, 1537},
+ {"SliderZoom", 61893, 1540},
+ {"GamepadControls", 61999, 1543},
+ {"AutomaticAnimation", 62112, 1546},
+ {"BookmarkAnimation", 62229, 1549}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 162, 5, 74, "DemoTitle"],
+Cell[CellGroupData[{
+Cell[754, 31, 33, 0, 287, "InitializationSection"],
+Cell[790, 33, 8219, 235, 70, "Input",
+ CellID->699097317]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[9046, 273, 29, 0, 194, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[9100, 277, 3013, 76, 70, "Input"],
+Cell[12116, 355, 7076, 150, 473, "Output",
+ CellID->78672762]
+}, {2}]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[19238, 511, 36, 0, 169, "ManipulateCaptionSection"],
+Cell[19277, 513, 759, 18, 39, "ManipulateCaption",
+ CellID->226343718]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[20073, 536, 28, 0, 173, "ThumbnailSection"],
+Cell[20104, 538, 7077, 150, 473, "Output",
+ CellID->150591440]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[27218, 693, 28, 0, 143, "SnapshotsSection"],
+Cell[27249, 695, 7077, 150, 473, "Output",
+ CellID->254279181],
+Cell[34329, 847, 7077, 150, 473, "Output",
+ CellID->529501169],
+Cell[41409, 999, 7077, 150, 473, "Output",
+ CellID->309982976]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[48523, 1154, 26, 0, 336, "DetailsSection"],
+Cell[48552, 1156, 428, 10, 38, "DetailNotes",
+ CellID->178197041],
+Cell[48983, 1168, 2616, 73, 101, "DetailNotes",
+ CellID->17208522],
+Cell[51602, 1243, 865, 20, 39, "DetailNotes",
+ CellID->401346832],
+Cell[52470, 1265, 612, 16, 52, "DetailNotes",
+ CellID->650547843],
+Cell[53085, 1283, 408, 8, 37, "DetailNotes",
+ CellID->203919166]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[53530, 1296, 37, 0, 126, "ControlSuggestionsSection"],
+Cell[53570, 1298, 374, 9, 22, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[53947, 1309, 678, 16, 22, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[54628, 1327, 340, 11, 22, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[54971, 1340, 637, 15, 22, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[55611, 1357, 844, 21, 22, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[56458, 1380, 369, 9, 22, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[56830, 1391, 1412, 31, 22, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[58245, 1424, 882, 21, 22, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[59164, 1450, 30, 0, 155, "SearchTermsSection"],
+Cell[59197, 1452, 206, 4, 22, "SearchTerms",
+ CellID->455909080],
+Cell[59406, 1458, 228, 4, 22, "SearchTerms",
+ CellID->186301388]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[59671, 1467, 31, 0, 141, "RelatedLinksSection"],
+Cell[59705, 1469, 288, 7, 22, "RelatedLinks",
+ CellID->349144713]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[60030, 1481, 25, 0, 141, "AuthorSection"],
+Cell[60058, 1483, 984, 30, 22, "Author"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

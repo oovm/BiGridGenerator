@@ -1,0 +1,1422 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     60137,       1413]
+NotebookOptionsPosition[     56204,       1293]
+NotebookOutlinePosition[     57811,       1344]
+CellTagsIndexPosition[     57483,       1332]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Collatz Sequence Computed by a Turing Machine", "DemoTitle",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.5040821282638807`*^9, 3.5040821432555075`*^9}}],
+
+Cell["", "InitializationSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"computation", "=", 
+       RowBox[{"TuringMachine", "[", 
+        RowBox[{
+         RowBox[{"{", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0"}], "}"}], "\[RuleDelayed]", 
+            RowBox[{"{", 
+             RowBox[{"0", ",", "2", ",", 
+              RowBox[{"-", "1"}]}], "}"}]}], ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"0", ",", "1"}], "}"}], "\[RuleDelayed]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"0", ",", "1", ",", "1"}], "}"}], ",", "0", ",", 
+              RowBox[{"-", "1"}]}], "}"}]}], ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"1", ",", "0"}], "}"}], ",", "2"}], "}"}], 
+            "\[RuleDelayed]", 
+            RowBox[{"{", 
+             RowBox[{"1", ",", "2", ",", "1"}], "}"}]}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"1", ",", "1"}], "}"}], ",", "2"}], "}"}], 
+            "\[RuleDelayed]", 
+            RowBox[{"{", 
+             RowBox[{"1", ",", "1", ",", "1"}], "}"}]}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"1", ",", "2"}], "}"}], "\[RuleDelayed]", 
+            RowBox[{"{", 
+             RowBox[{"0", ",", "2", ",", 
+              RowBox[{"-", "1"}]}], "}"}]}], ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"1", ",", "x_"}], "}"}], "\[RuleDelayed]", 
+            RowBox[{"{", 
+             RowBox[{"1", ",", "x", ",", "1"}], "}"}]}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"0", ",", "x_", ",", "r_"}], "}"}], ",", "2"}], "}"}], 
+            "\[RuleDelayed]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"1", ",", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"x", "+", "r"}], ")"}], "/.", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"1", "\[Rule]", "0"}], ",", 
+                   RowBox[{"2", "\[Rule]", "1"}]}], "}"}]}]}], "}"}], ",", 
+              RowBox[{"Mod", "[", 
+               RowBox[{
+                RowBox[{"x", "+", "r"}], ",", "2"}], "]"}], ",", 
+              RowBox[{"-", "1"}]}], "}"}]}], ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"0", ",", "x_", ",", "r_"}], "}"}], ",", "y_"}], "}"}],
+             "\[RuleDelayed]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"0", ",", "y", ",", 
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"x", "+", "y", "+", "r"}], ")"}], "/.", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"1", "\[Rule]", "0"}], ",", 
+                   RowBox[{
+                    RowBox[{"2", "|", "3"}], "\[Rule]", "1"}]}], "}"}]}]}], 
+               "}"}], ",", 
+              RowBox[{"Mod", "[", 
+               RowBox[{
+                RowBox[{"x", "+", "y", "+", "r"}], ",", "2"}], "]"}], ",", 
+              RowBox[{"-", "1"}]}], "}"}]}]}], "\[IndentingNewLine]", "}"}], 
+         ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"0", ",", 
+             RowBox[{"Length", "[", 
+              RowBox[{"IntegerDigits", "[", 
+               RowBox[{"initial", ",", "2"}], "]"}], "]"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"IntegerDigits", "[", 
+              RowBox[{"initial", ",", "2"}], "]"}], ",", "2"}], "}"}]}], 
+          "}"}], ",", "steps"}], "]"}]}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"If", "[", 
+       RowBox[{"showCompressed", ",", 
+        RowBox[{"computation", "=", 
+         RowBox[{"Select", "[", 
+          RowBox[{"computation", ",", 
+           RowBox[{
+            RowBox[{"MatchQ", "[", 
+             RowBox[{"#", ",", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"0", ",", "__"}], "}"}], ",", "_"}], "}"}]}], "]"}], 
+            "&"}]}], "]"}]}]}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"With", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"positions", "=", 
+          RowBox[{"Flatten", "[", 
+           RowBox[{"Position", "[", 
+            RowBox[{"computation", ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"0", ",", "__"}], "}"}], ",", "_"}], "}"}]}], "]"}], 
+           "]"}]}], "}"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"ArrayPlot", "[", 
+         RowBox[{
+          RowBox[{"Last", "/@", "computation"}], ",", 
+          RowBox[{"Epilog", "\[Rule]", 
+           RowBox[{"If", "[", 
+            RowBox[{"showHead", ",", 
+             RowBox[{"{", 
+              RowBox[{"Black", ",", 
+               RowBox[{"MapIndexed", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"Translate", "[", 
+                   RowBox[{
+                    RowBox[{"Rotate", "[", 
+                    RowBox[{
+                    RowBox[{"With", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"r", "=", ".18"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Disk", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0"}], "}"}], ",", "r"}], "]"}], ",", 
+                    RowBox[{"Polygon", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"r", ",", "0"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"-", "r"}], ",", "0"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", ".6"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"r", ",", "0"}], "}"}]}], "}"}], "]"}]}], "}"}]}],
+                     "]"}], ",", 
+                    RowBox[{"2", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"1", ",", "1"}], "]"}], "]"}], "/.", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", "0"}], "}"}], "\[Rule]", "2"}], ",", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", "1"}], "}"}], "\[Rule]", "3"}], ",", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0", ",", "0"}], "}"}], "\[Rule]", 
+                    "4"}], ",", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0", ",", "1"}], "}"}], "\[Rule]", 
+                    "5"}], ",", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "1", ",", "0"}], "}"}], "\[Rule]", 
+                    "6"}], ",", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "1", ",", "1"}], "}"}], "\[Rule]", 
+                    "7"}]}], "}"}]}], ")"}], 
+                    RowBox[{"\[Pi]", "/", "8"}]}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0"}], "}"}]}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"1", ",", "2"}], "]"}], "]"}], "-", 
+                    RowBox[{"1", "/", "2"}]}], ",", 
+                    RowBox[{
+                    RowBox[{"Length", "[", "computation", "]"}], "-", 
+                    RowBox[{"First", "[", "#2", "]"}], "+", 
+                    RowBox[{"1", "/", "2"}]}]}], "}"}]}], "]"}], "&"}], ",", 
+                 "computation"}], "]"}]}], "}"}], ",", 
+             RowBox[{"{", "}"}]}], "]"}]}], ",", 
+          RowBox[{"ImageSize", "\[Rule]", "300"}], ",", 
+          RowBox[{"Mesh", "\[Rule]", "True"}], ",", 
+          RowBox[{"MeshStyle", "\[Rule]", "White"}], ",", 
+          RowBox[{"Frame", "\[Rule]", "True"}], ",", 
+          RowBox[{"FrameStyle", "\[Rule]", "White"}], ",", 
+          RowBox[{"FrameTicksStyle", "\[Rule]", "Black"}], ",", 
+          RowBox[{"FrameTicks", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"#", ",", 
+                 RowBox[{"Style", "[", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"ToString", "[", 
+                    RowBox[{"FromDigits", "[", 
+                    RowBox[{
+                    RowBox[{"DeleteCases", "[", 
+                    RowBox[{
+                    RowBox[{"Last", "[", 
+                    RowBox[{"computation", "[", 
+                    RowBox[{"[", "#", "]"}], "]"}], "]"}], ",", "2"}], "]"}], 
+                    ",", "2"}], "]"}], "]"}], "~~", "\"\<:\>\""}], ",", 
+                   "\"\<Label\>\""}], "]"}], ",", "0"}], "}"}], "&"}], "/@", 
+              "positions"}], ",", "None", ",", "None", ",", "None"}], "}"}]}],
+           ",", 
+          RowBox[{"ColorRules", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"2", "\[Rule]", "White"}], ",", 
+             RowBox[{"1", "\[Rule]", "Orange"}], ",", 
+             RowBox[{"0", "\[Rule]", "Yellow"}]}], "}"}]}]}], "]"}]}], 
+       "]"}]}]}], "]"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"initial", ",", "1", ",", "\"\<initial condition\>\""}], "}"}], 
+     ",", "1", ",", "128", ",", "1", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{"steps", ",", "20", ",", "100", ",", "1", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "showHead", ",", "True", ",", " ", "\"\<show machine head\>\""}], "}"}],
+      ",", 
+     RowBox[{"{", 
+      RowBox[{"True", ",", "False"}], "}"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "showCompressed", ",", "False", ",", " ", 
+       "\"\<compressed evolution\>\""}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"True", ",", "False"}], "}"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"ContentSize", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"400", ",", "400"}], "}"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.5042881961481314`*^9, 3.5042882317126875`*^9}, {
+   3.527115270927352*^9, 3.527115271147352*^9}, {3.5271153065634093`*^9, 
+   3.5271153221050344`*^9}, {3.527115780062089*^9, 3.527115883740259*^9}, {
+   3.527116293284531*^9, 3.527116302550947*^9}},
+ CellID->161588350],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`initial$$ = 
+    1, $CellContext`showCompressed$$ = False, $CellContext`showHead$$ = 
+    True, $CellContext`steps$$ = 20, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`initial$$], 1, "initial condition"}, 1, 128, 1}, {
+      Hold[$CellContext`steps$$], 20, 100, 1}, {{
+       Hold[$CellContext`showHead$$], True, "show machine head"}, {
+      True, False}}, {{
+       Hold[$CellContext`showCompressed$$], False, "compressed evolution"}, {
+      True, False}}}, Typeset`size$$ = {300., {364., 369.}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`initial$14623$$ = 0, $CellContext`steps$14624$$ = 
+    0, $CellContext`showHead$14625$$ = 
+    False, $CellContext`showCompressed$14626$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`initial$$ = 
+        1, $CellContext`showCompressed$$ = False, $CellContext`showHead$$ = 
+        True, $CellContext`steps$$ = 20}, "ControllerVariables" :> {
+        Hold[$CellContext`initial$$, $CellContext`initial$14623$$, 0], 
+        Hold[$CellContext`steps$$, $CellContext`steps$14624$$, 0], 
+        Hold[$CellContext`showHead$$, $CellContext`showHead$14625$$, False], 
+        Hold[$CellContext`showCompressed$$, \
+$CellContext`showCompressed$14626$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`computation$ = 
+         TuringMachine[{{0, 0} :> {0, 2, -1}, {0, 
+             1} :> {{0, 1, 1}, 0, -1}, {{1, 0}, 2} :> {1, 2, 
+             1}, {{1, 1}, 2} :> {1, 1, 1}, {1, 2} :> {0, 2, -1}, {1, 
+              Pattern[$CellContext`x, 
+               Blank[]]} :> {1, $CellContext`x, 1}, {{0, 
+               Pattern[$CellContext`x, 
+                Blank[]], 
+               Pattern[$CellContext`r, 
+                Blank[]]}, 2} :> {{1, 
+               ReplaceAll[$CellContext`x + $CellContext`r, {1 -> 0, 2 -> 1}]}, 
+              Mod[$CellContext`x + $CellContext`r, 2], -1}, {{0, 
+               Pattern[$CellContext`x, 
+                Blank[]], 
+               Pattern[$CellContext`r, 
+                Blank[]]}, 
+              Pattern[$CellContext`y, 
+               Blank[]]} :> {{0, $CellContext`y, 
+               
+               ReplaceAll[$CellContext`x + $CellContext`y + $CellContext`r, {
+                1 -> 0, Alternatives[2, 3] -> 1}]}, 
+              
+              Mod[$CellContext`x + $CellContext`y + $CellContext`r, 
+               2], -1}}, {{0, 
+             Length[
+              IntegerDigits[$CellContext`initial$$, 2]]}, {
+             IntegerDigits[$CellContext`initial$$, 2], 
+             2}}, $CellContext`steps$$]}, 
+        If[$CellContext`showCompressed$$, $CellContext`computation$ = 
+          Select[$CellContext`computation$, MatchQ[#, {{0, 
+               BlankSequence[]}, 
+              Blank[]}]& ]]; With[{$CellContext`positions$ = Flatten[
+             Position[$CellContext`computation$, {{0, 
+                BlankSequence[]}, 
+               Blank[]}]]}, 
+          ArrayPlot[
+           Map[Last, $CellContext`computation$], Epilog -> 
+           If[$CellContext`showHead$$, {Black, 
+              MapIndexed[Translate[
+                Rotate[
+                 With[{$CellContext`r = 0.18}, {
+                   Disk[{0, 0}, $CellContext`r], 
+                   
+                   Polygon[{{$CellContext`r, 0}, {-$CellContext`r, 0}, {
+                    0, 0.6}, {$CellContext`r, 0}}]}], (2 ReplaceAll[
+                    
+                    Part[#, 1, 1], {{1, 0} -> 2, {1, 1} -> 3, {0, 0, 0} -> 
+                    4, {0, 0, 1} -> 5, {0, 1, 0} -> 6, {0, 1, 1} -> 7}]) (Pi/
+                  8), {0, 0}], {
+                Part[#, 1, 2] - 1/2, Length[$CellContext`computation$] - 
+                 First[#2] + 1/2}]& , $CellContext`computation$]}, {}], 
+           ImageSize -> 300, Mesh -> True, MeshStyle -> White, Frame -> True, 
+           FrameStyle -> White, FrameTicksStyle -> Black, FrameTicks -> {
+             Map[{#, 
+               Style[
+                StringExpression[
+                 ToString[
+                  FromDigits[
+                   DeleteCases[
+                    Last[
+                    Part[$CellContext`computation$, #]], 2], 2]], ":"], 
+                "Label"], 0}& , $CellContext`positions$], None, None, None}, 
+           ColorRules -> {2 -> White, 1 -> Orange, 0 -> Yellow}]]], 
+      "Specifications" :> {{{$CellContext`initial$$, 1, "initial condition"}, 
+         1, 128, 1, Appearance -> "Labeled"}, {$CellContext`steps$$, 20, 100, 
+         1, Appearance -> 
+         "Labeled"}, {{$CellContext`showHead$$, True, "show machine head"}, {
+         True, False}}, {{$CellContext`showCompressed$$, False, 
+          "compressed evolution"}, {True, False}}}, 
+      "Options" :> {ContentSize -> {400, 400}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{414., {266., 271.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.35696210375764*^9, 3.5271169375045033`*^9},
+ CellID->150948996]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell[TextData[{
+ "The Collatz sequence is formed by an iteration of numbers produced by the \
+following rule: If ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]], "InlineMath"],
+ " is even, then replace ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]], "InlineMath"],
+ " by ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"n", "/", "2"}], TraditionalForm]], "InlineMath"],
+ "; if ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]], "InlineMath"],
+ " is odd then replace ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]], "InlineMath"],
+ " by ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"3", "n"}], "+", "1"}], TraditionalForm]], "InlineMath"],
+ ". This Demonstration implements an 8-state 3-color Turing machine that \
+computes this sequence."
+}], "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.504099557605774*^9, 3.5040995738454027`*^9}, {
+   3.5040996448567266`*^9, 3.5040997088324394`*^9}, {3.504099819717434*^9, 
+   3.5040998380630665`*^9}, {3.5040999495730624`*^9, 3.504099955813073*^9}, {
+   3.5041000522368426`*^9, 3.504100065918067*^9}, {3.5041001222653656`*^9, 
+   3.5041001510942163`*^9}, {3.504100362692988*^9, 3.504100398604251*^9}, {
+   3.5041004772751894`*^9, 3.5041005045908375`*^9}, {3.5041005767097635`*^9, 
+   3.5041006682975245`*^9}, 3.5041021227041388`*^9, {3.5041216755215693`*^9, 
+   3.5041216928375998`*^9}, {3.504121811179407*^9, 3.5041218207890244`*^9}, {
+   3.504121937092866*^9, 3.504121957435302*^9}, {3.5041220085877914`*^9, 
+   3.504122038274644*^9}, {3.504122088537932*^9, 3.5041220938263416`*^9}, {
+   3.5041236948640685`*^9, 3.5041237136465015`*^9}, {3.5041250563383503`*^9, 
+   3.5041250606751585`*^9}, {3.504145290142187*^9, 3.504145290472187*^9}, {
+   3.5041919933748555`*^9, 3.5041920233737087`*^9}, {3.5041924867219224`*^9, 
+   3.504192497719942*^9}, {3.5042882589144073`*^9, 3.5042882669952154`*^9}, {
+   3.5049818335583076`*^9, 3.504981949226797*^9}, 3.5049822056127443`*^9, {
+   3.5272825763103228`*^9, 3.527282613104475*^9}},
+ CellID->118974970],
+
+Cell[TextData[{
+ "The machine works like this: Write an initial number ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]], "InlineMath"],
+ " in base 2 on the blank tape. The head of the machine is initially located \
+over the least significant byte of the number. "
+}], "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.504099557605774*^9, 3.5040995738454027`*^9}, {
+   3.5040996448567266`*^9, 3.5040997088324394`*^9}, {3.504099819717434*^9, 
+   3.5040998380630665`*^9}, {3.5040999495730624`*^9, 3.504099955813073*^9}, {
+   3.5041000522368426`*^9, 3.504100065918067*^9}, {3.5041001222653656`*^9, 
+   3.5041001510942163`*^9}, {3.504100362692988*^9, 3.504100398604251*^9}, {
+   3.5041004772751894`*^9, 3.5041005045908375`*^9}, {3.5041005767097635`*^9, 
+   3.5041006682975245`*^9}, 3.5041021227041388`*^9, {3.5041216755215693`*^9, 
+   3.5041216928375998`*^9}, {3.504121811179407*^9, 3.5041218207890244`*^9}, {
+   3.504121937092866*^9, 3.504121957435302*^9}, {3.5041220085877914`*^9, 
+   3.504122038274644*^9}, {3.504122088537932*^9, 3.504122092016738*^9}, {
+   3.504192026618514*^9, 3.504192026618514*^9}, {3.504192396335364*^9, 
+   3.504192462105079*^9}, {3.5041925026495504`*^9, 3.50419250809396*^9}, 
+   3.5041930644221373`*^9, 3.5042882707435904`*^9, {3.504981954491715*^9, 
+   3.504981966945676*^9}, {3.5049821313400393`*^9, 3.504982131486163*^9}, {
+   3.504982179152192*^9, 3.504982201100738*^9}, {3.5272826206071653`*^9, 
+   3.527282649328169*^9}},
+ CellID->42689303],
+
+Cell[TextData[{
+ "If ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]], "InlineMath"],
+ " is even, the head erases the digit 0 and moves to the left, so that it \
+lies over the less significant byte of ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"n", "/", "2"}], TraditionalForm]], "InlineMath"],
+ "."
+}], "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.504100664303918*^9, 3.5041006763627386`*^9}, {
+   3.504100775610113*^9, 3.5041008269810033`*^9}, {3.50412204750986*^9, 
+   3.5041220490230627`*^9}, {3.5041221116883726`*^9, 
+   3.5041221411880245`*^9}, {3.504122238456479*^9, 3.5041222406092825`*^9}, {
+   3.5041228826632414`*^9, 3.504122895845265*^9}, {3.5041229769810076`*^9, 
+   3.5041229942346373`*^9}, {3.5041231677693424`*^9, 3.504123181138566*^9}, {
+   3.5041278929391317`*^9, 3.5041279105359626`*^9}, {3.504128038518587*^9, 
+   3.5041280806386614`*^9}, {3.504146155534808*^9, 3.504146166344824*^9}, {
+   3.5041461969148664`*^9, 3.5041461992648697`*^9}, {3.5041920285529175`*^9, 
+   3.5041920285529175`*^9}, {3.504192220554255*^9, 3.5041922373398843`*^9}, 
+   3.504193199689975*^9, {3.5042882743949547`*^9, 3.5042882781893344`*^9}, {
+   3.504982217649969*^9, 3.504982257845533*^9}},
+ CellID->164392448],
+
+Cell[TextData[{
+ "If ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]], "InlineMath"],
+ " is odd, the machine performs the sum ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"n", "+", 
+    RowBox[{"2", "n"}], "+", "1"}], TraditionalForm]], "InlineMath"],
+ " by adding the number with itself shifted one position to the left plus \
+one. To do this, the head writes 0, saves the digit 0 and the residue 1 and \
+then moves to the left. Now, the head repeatedly adds the current digit plus \
+the saved digit plus the residue saved in the head and saves the residue of \
+the operation and the current digit in the head, then moves to the left. When \
+the addition is done, the head returns to the position of the least \
+significant byte of ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"3", "n"}], "+", "1"}], TraditionalForm]], "InlineMath"],
+ "."
+}], "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.5041007990569544`*^9, 3.5041008305846095`*^9}, {
+   3.5041020588688264`*^9, 3.5041020717388487`*^9}, {3.5041065575730333`*^9, 
+   3.504106601169181*^9}, {3.504106800966177*^9, 3.504106887063066*^9}, 
+   3.5041220505674653`*^9, {3.5041229043472795`*^9, 3.5041229128024945`*^9}, {
+   3.504123202744604*^9, 3.504123236768264*^9}, {3.50412328575235*^9, 
+   3.5041233392292433`*^9}, {3.504123441971024*^9, 3.5041234673834686`*^9}, {
+   3.5041241458920603`*^9, 3.504124147389663*^9}, {3.5041244668002243`*^9, 
+   3.5041244840070543`*^9}, {3.5041250829987974`*^9, 
+   3.5041251138868513`*^9}, {3.504126437632345*^9, 3.5041264598623843`*^9}, {
+   3.504126803250188*^9, 3.504126803593388*^9}, {3.5041279287099943`*^9, 
+   3.504127933592803*^9}, {3.5041462250449057`*^9, 3.5041462320449157`*^9}, {
+   3.5041906003374352`*^9, 3.5041906269709587`*^9}, {3.504190657472172*^9, 
+   3.504190729604656*^9}, {3.5041907824278164`*^9, 3.5041908251218834`*^9}, {
+   3.504190875987805*^9, 3.5041909039657235`*^9}, {3.5041909352715926`*^9, 
+   3.5041909605641365`*^9}, {3.5041911456123357`*^9, 3.504191168159876*^9}, {
+   3.50419228041156*^9, 3.5041923004575953`*^9}, {3.504192335495257*^9, 
+   3.5041923392548637`*^9}, 3.504193431443982*^9, {3.504288280573573*^9, 
+   3.504288294660981*^9}, {3.504982266204481*^9, 3.504982340904125*^9}, {
+   3.5271166697894335`*^9, 3.5271166698050337`*^9}, {3.527282716852532*^9, 
+   3.527282717378789*^9}},
+ CellID->501642286],
+
+Cell[TextData[{
+ "The computation does not stop at ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"n", "=", "1"}], TraditionalForm]], "InlineMath",
+  FormatType->"TraditionalForm"],
+ ". It keeps computing the periodic sequence 1, 2, 4, 1, \[Ellipsis], which \
+can be interpreted as stopping."
+}], "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.5271166706006346`*^9, 3.527116864199975*^9}, {
+   3.5272827231395807`*^9, 3.527282777892214*^9}},
+ CellID->131477910]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`initial$$ = 
+    27, $CellContext`showCompressed$$ = False, $CellContext`showHead$$ = 
+    True, $CellContext`steps$$ = 90, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`initial$$], 27, "initial condition"}, 1, 128, 1}, {{
+       Hold[$CellContext`steps$$], 90}, 20, 100, 1}, {{
+       Hold[$CellContext`showHead$$], True, "show machine head"}, {
+      True, False}}, {{
+       Hold[$CellContext`showCompressed$$], False, "compressed evolution"}, {
+      True, False}}}, Typeset`size$$ = {300., {804., 809.}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`initial$13878$$ = 0, $CellContext`steps$13879$$ = 
+    0, $CellContext`showHead$13880$$ = 
+    False, $CellContext`showCompressed$13881$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`initial$$ = 
+        27, $CellContext`showCompressed$$ = False, $CellContext`showHead$$ = 
+        True, $CellContext`steps$$ = 90}, "ControllerVariables" :> {
+        Hold[$CellContext`initial$$, $CellContext`initial$13878$$, 0], 
+        Hold[$CellContext`steps$$, $CellContext`steps$13879$$, 0], 
+        Hold[$CellContext`showHead$$, $CellContext`showHead$13880$$, False], 
+        Hold[$CellContext`showCompressed$$, \
+$CellContext`showCompressed$13881$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`computation$ = 
+         TuringMachine[{{0, 0} :> {0, 2, -1}, {0, 
+             1} :> {{0, 1, 1}, 0, -1}, {{1, 0}, 2} :> {1, 2, 
+             1}, {{1, 1}, 2} :> {1, 1, 1}, {1, 2} :> {0, 2, -1}, {1, 
+              Pattern[$CellContext`x, 
+               Blank[]]} :> {1, $CellContext`x, 1}, {{0, 
+               Pattern[$CellContext`x, 
+                Blank[]], 
+               Pattern[$CellContext`r, 
+                Blank[]]}, 2} :> {{1, 
+               ReplaceAll[$CellContext`x + $CellContext`r, {1 -> 0, 2 -> 1}]}, 
+              Mod[$CellContext`x + $CellContext`r, 2], -1}, {{0, 
+               Pattern[$CellContext`x, 
+                Blank[]], 
+               Pattern[$CellContext`r, 
+                Blank[]]}, 
+              Pattern[$CellContext`y, 
+               Blank[]]} :> {{0, $CellContext`y, 
+               
+               ReplaceAll[$CellContext`x + $CellContext`y + $CellContext`r, {
+                1 -> 0, Alternatives[2, 3] -> 1}]}, 
+              
+              Mod[$CellContext`x + $CellContext`y + $CellContext`r, 
+               2], -1}}, {{0, 
+             Length[
+              IntegerDigits[$CellContext`initial$$, 2]]}, {
+             IntegerDigits[$CellContext`initial$$, 2], 
+             2}}, $CellContext`steps$$]}, 
+        If[$CellContext`showCompressed$$, $CellContext`computation$ = 
+          Select[$CellContext`computation$, MatchQ[#, {{0, 
+               BlankSequence[]}, 
+              Blank[]}]& ]]; With[{$CellContext`positions$ = Flatten[
+             Position[$CellContext`computation$, {{0, 
+                BlankSequence[]}, 
+               Blank[]}]]}, 
+          ArrayPlot[
+           Map[Last, $CellContext`computation$], Epilog -> 
+           If[$CellContext`showHead$$, {Black, 
+              MapIndexed[Translate[
+                Rotate[
+                 With[{$CellContext`r = 0.18}, {
+                   Disk[{0, 0}, $CellContext`r], 
+                   
+                   Polygon[{{$CellContext`r, 0}, {-$CellContext`r, 0}, {
+                    0, 0.6}, {$CellContext`r, 0}}]}], (2 ReplaceAll[
+                    
+                    Part[#, 1, 1], {{1, 0} -> 2, {1, 1} -> 3, {0, 0, 0} -> 
+                    4, {0, 0, 1} -> 5, {0, 1, 0} -> 6, {0, 1, 1} -> 7}]) (Pi/
+                  8), {0, 0}], {
+                Part[#, 1, 2] - 1/2, Length[$CellContext`computation$] - 
+                 First[#2] + 1/2}]& , $CellContext`computation$]}, {}], 
+           ImageSize -> 300, Mesh -> True, MeshStyle -> White, Frame -> True, 
+           FrameStyle -> White, FrameTicksStyle -> Black, FrameTicks -> {
+             Map[{#, 
+               Style[
+                StringExpression[
+                 ToString[
+                  FromDigits[
+                   DeleteCases[
+                    Last[
+                    Part[$CellContext`computation$, #]], 2], 2]], ":"], 
+                "Label"], 0}& , $CellContext`positions$], None, None, None}, 
+           ColorRules -> {2 -> White, 1 -> Orange, 0 -> Yellow}]]], 
+      "Specifications" :> {{{$CellContext`initial$$, 27, "initial condition"},
+          1, 128, 1, Appearance -> "Labeled"}, {{$CellContext`steps$$, 90}, 
+         20, 100, 1, Appearance -> 
+         "Labeled"}, {{$CellContext`showHead$$, True, "show machine head"}, {
+         True, False}}, {{$CellContext`showCompressed$$, False, 
+          "compressed evolution"}, {True, False}}}, 
+      "Options" :> {ContentSize -> {400, 400}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{414., {266., 271.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->230032682]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`initial$$ = 
+    60, $CellContext`showCompressed$$ = False, $CellContext`showHead$$ = 
+    True, $CellContext`steps$$ = 43, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`initial$$], 60, "initial condition"}, 1, 128, 1}, {{
+       Hold[$CellContext`steps$$], 43}, 20, 100, 1}, {{
+       Hold[$CellContext`showHead$$], True, "show machine head"}, {
+      True, False}}, {{
+       Hold[$CellContext`showCompressed$$], False, "compressed evolution"}, {
+      True, False}}}, Typeset`size$$ = {300., {498., 503.}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`initial$13947$$ = 0, $CellContext`steps$13948$$ = 
+    0, $CellContext`showHead$13949$$ = 
+    False, $CellContext`showCompressed$13950$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`initial$$ = 
+        60, $CellContext`showCompressed$$ = False, $CellContext`showHead$$ = 
+        True, $CellContext`steps$$ = 43}, "ControllerVariables" :> {
+        Hold[$CellContext`initial$$, $CellContext`initial$13947$$, 0], 
+        Hold[$CellContext`steps$$, $CellContext`steps$13948$$, 0], 
+        Hold[$CellContext`showHead$$, $CellContext`showHead$13949$$, False], 
+        Hold[$CellContext`showCompressed$$, \
+$CellContext`showCompressed$13950$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`computation$ = 
+         TuringMachine[{{0, 0} :> {0, 2, -1}, {0, 
+             1} :> {{0, 1, 1}, 0, -1}, {{1, 0}, 2} :> {1, 2, 
+             1}, {{1, 1}, 2} :> {1, 1, 1}, {1, 2} :> {0, 2, -1}, {1, 
+              Pattern[$CellContext`x, 
+               Blank[]]} :> {1, $CellContext`x, 1}, {{0, 
+               Pattern[$CellContext`x, 
+                Blank[]], 
+               Pattern[$CellContext`r, 
+                Blank[]]}, 2} :> {{1, 
+               ReplaceAll[$CellContext`x + $CellContext`r, {1 -> 0, 2 -> 1}]}, 
+              Mod[$CellContext`x + $CellContext`r, 2], -1}, {{0, 
+               Pattern[$CellContext`x, 
+                Blank[]], 
+               Pattern[$CellContext`r, 
+                Blank[]]}, 
+              Pattern[$CellContext`y, 
+               Blank[]]} :> {{0, $CellContext`y, 
+               
+               ReplaceAll[$CellContext`x + $CellContext`y + $CellContext`r, {
+                1 -> 0, Alternatives[2, 3] -> 1}]}, 
+              
+              Mod[$CellContext`x + $CellContext`y + $CellContext`r, 
+               2], -1}}, {{0, 
+             Length[
+              IntegerDigits[$CellContext`initial$$, 2]]}, {
+             IntegerDigits[$CellContext`initial$$, 2], 
+             2}}, $CellContext`steps$$]}, 
+        If[$CellContext`showCompressed$$, $CellContext`computation$ = 
+          Select[$CellContext`computation$, MatchQ[#, {{0, 
+               BlankSequence[]}, 
+              Blank[]}]& ]]; With[{$CellContext`positions$ = Flatten[
+             Position[$CellContext`computation$, {{0, 
+                BlankSequence[]}, 
+               Blank[]}]]}, 
+          ArrayPlot[
+           Map[Last, $CellContext`computation$], Epilog -> 
+           If[$CellContext`showHead$$, {Black, 
+              MapIndexed[Translate[
+                Rotate[
+                 With[{$CellContext`r = 0.18}, {
+                   Disk[{0, 0}, $CellContext`r], 
+                   
+                   Polygon[{{$CellContext`r, 0}, {-$CellContext`r, 0}, {
+                    0, 0.6}, {$CellContext`r, 0}}]}], (2 ReplaceAll[
+                    
+                    Part[#, 1, 1], {{1, 0} -> 2, {1, 1} -> 3, {0, 0, 0} -> 
+                    4, {0, 0, 1} -> 5, {0, 1, 0} -> 6, {0, 1, 1} -> 7}]) (Pi/
+                  8), {0, 0}], {
+                Part[#, 1, 2] - 1/2, Length[$CellContext`computation$] - 
+                 First[#2] + 1/2}]& , $CellContext`computation$]}, {}], 
+           ImageSize -> 300, Mesh -> True, MeshStyle -> White, Frame -> True, 
+           FrameStyle -> White, FrameTicksStyle -> Black, FrameTicks -> {
+             Map[{#, 
+               Style[
+                StringExpression[
+                 ToString[
+                  FromDigits[
+                   DeleteCases[
+                    Last[
+                    Part[$CellContext`computation$, #]], 2], 2]], ":"], 
+                "Label"], 0}& , $CellContext`positions$], None, None, None}, 
+           ColorRules -> {2 -> White, 1 -> Orange, 0 -> Yellow}]]], 
+      "Specifications" :> {{{$CellContext`initial$$, 60, "initial condition"},
+          1, 128, 1, Appearance -> "Labeled"}, {{$CellContext`steps$$, 43}, 
+         20, 100, 1, Appearance -> 
+         "Labeled"}, {{$CellContext`showHead$$, True, "show machine head"}, {
+         True, False}}, {{$CellContext`showCompressed$$, False, 
+          "compressed evolution"}, {True, False}}}, 
+      "Options" :> {ContentSize -> {400, 400}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{414., {266., 271.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->183202933],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`initial$$ = 
+    80, $CellContext`showCompressed$$ = False, $CellContext`showHead$$ = 
+    True, $CellContext`steps$$ = 57, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`initial$$], 80, "initial condition"}, 1, 128, 1}, {{
+       Hold[$CellContext`steps$$], 57}, 20, 100, 1}, {{
+       Hold[$CellContext`showHead$$], True, "show machine head"}, {
+      True, False}}, {{
+       Hold[$CellContext`showCompressed$$], False, "compressed evolution"}, {
+      True, False}}}, Typeset`size$$ = {300., {415., 420.}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`initial$14016$$ = 0, $CellContext`steps$14017$$ = 
+    0, $CellContext`showHead$14018$$ = 
+    False, $CellContext`showCompressed$14019$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`initial$$ = 
+        80, $CellContext`showCompressed$$ = False, $CellContext`showHead$$ = 
+        True, $CellContext`steps$$ = 57}, "ControllerVariables" :> {
+        Hold[$CellContext`initial$$, $CellContext`initial$14016$$, 0], 
+        Hold[$CellContext`steps$$, $CellContext`steps$14017$$, 0], 
+        Hold[$CellContext`showHead$$, $CellContext`showHead$14018$$, False], 
+        Hold[$CellContext`showCompressed$$, \
+$CellContext`showCompressed$14019$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`computation$ = 
+         TuringMachine[{{0, 0} :> {0, 2, -1}, {0, 
+             1} :> {{0, 1, 1}, 0, -1}, {{1, 0}, 2} :> {1, 2, 
+             1}, {{1, 1}, 2} :> {1, 1, 1}, {1, 2} :> {0, 2, -1}, {1, 
+              Pattern[$CellContext`x, 
+               Blank[]]} :> {1, $CellContext`x, 1}, {{0, 
+               Pattern[$CellContext`x, 
+                Blank[]], 
+               Pattern[$CellContext`r, 
+                Blank[]]}, 2} :> {{1, 
+               ReplaceAll[$CellContext`x + $CellContext`r, {1 -> 0, 2 -> 1}]}, 
+              Mod[$CellContext`x + $CellContext`r, 2], -1}, {{0, 
+               Pattern[$CellContext`x, 
+                Blank[]], 
+               Pattern[$CellContext`r, 
+                Blank[]]}, 
+              Pattern[$CellContext`y, 
+               Blank[]]} :> {{0, $CellContext`y, 
+               
+               ReplaceAll[$CellContext`x + $CellContext`y + $CellContext`r, {
+                1 -> 0, Alternatives[2, 3] -> 1}]}, 
+              
+              Mod[$CellContext`x + $CellContext`y + $CellContext`r, 
+               2], -1}}, {{0, 
+             Length[
+              IntegerDigits[$CellContext`initial$$, 2]]}, {
+             IntegerDigits[$CellContext`initial$$, 2], 
+             2}}, $CellContext`steps$$]}, 
+        If[$CellContext`showCompressed$$, $CellContext`computation$ = 
+          Select[$CellContext`computation$, MatchQ[#, {{0, 
+               BlankSequence[]}, 
+              Blank[]}]& ]]; With[{$CellContext`positions$ = Flatten[
+             Position[$CellContext`computation$, {{0, 
+                BlankSequence[]}, 
+               Blank[]}]]}, 
+          ArrayPlot[
+           Map[Last, $CellContext`computation$], Epilog -> 
+           If[$CellContext`showHead$$, {Black, 
+              MapIndexed[Translate[
+                Rotate[
+                 With[{$CellContext`r = 0.18}, {
+                   Disk[{0, 0}, $CellContext`r], 
+                   
+                   Polygon[{{$CellContext`r, 0}, {-$CellContext`r, 0}, {
+                    0, 0.6}, {$CellContext`r, 0}}]}], (2 ReplaceAll[
+                    
+                    Part[#, 1, 1], {{1, 0} -> 2, {1, 1} -> 3, {0, 0, 0} -> 
+                    4, {0, 0, 1} -> 5, {0, 1, 0} -> 6, {0, 1, 1} -> 7}]) (Pi/
+                  8), {0, 0}], {
+                Part[#, 1, 2] - 1/2, Length[$CellContext`computation$] - 
+                 First[#2] + 1/2}]& , $CellContext`computation$]}, {}], 
+           ImageSize -> 300, Mesh -> True, MeshStyle -> White, Frame -> True, 
+           FrameStyle -> White, FrameTicksStyle -> Black, FrameTicks -> {
+             Map[{#, 
+               Style[
+                StringExpression[
+                 ToString[
+                  FromDigits[
+                   DeleteCases[
+                    Last[
+                    Part[$CellContext`computation$, #]], 2], 2]], ":"], 
+                "Label"], 0}& , $CellContext`positions$], None, None, None}, 
+           ColorRules -> {2 -> White, 1 -> Orange, 0 -> Yellow}]]], 
+      "Specifications" :> {{{$CellContext`initial$$, 80, "initial condition"},
+          1, 128, 1, Appearance -> "Labeled"}, {{$CellContext`steps$$, 57}, 
+         20, 100, 1, Appearance -> 
+         "Labeled"}, {{$CellContext`showHead$$, True, "show machine head"}, {
+         True, False}}, {{$CellContext`showCompressed$$, False, 
+          "compressed evolution"}, {True, False}}}, 
+      "Options" :> {ContentSize -> {400, 400}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{414., {266., 271.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->1542505],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`initial$$ = 
+    27, $CellContext`showCompressed$$ = True, $CellContext`showHead$$ = 
+    True, $CellContext`steps$$ = 100, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`initial$$], 27, "initial condition"}, 1, 128, 1}, {{
+       Hold[$CellContext`steps$$], 100}, 20, 100, 1}, {{
+       Hold[$CellContext`showHead$$], True, "show machine head"}, {
+      True, False}}, {{
+       Hold[$CellContext`showCompressed$$], True, "compressed evolution"}, {
+      True, False}}}, Typeset`size$$ = {300., {103., 107.}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`initial$14085$$ = 0, $CellContext`steps$14086$$ = 
+    0, $CellContext`showHead$14087$$ = 
+    False, $CellContext`showCompressed$14088$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`initial$$ = 
+        27, $CellContext`showCompressed$$ = True, $CellContext`showHead$$ = 
+        True, $CellContext`steps$$ = 100}, "ControllerVariables" :> {
+        Hold[$CellContext`initial$$, $CellContext`initial$14085$$, 0], 
+        Hold[$CellContext`steps$$, $CellContext`steps$14086$$, 0], 
+        Hold[$CellContext`showHead$$, $CellContext`showHead$14087$$, False], 
+        Hold[$CellContext`showCompressed$$, \
+$CellContext`showCompressed$14088$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`computation$ = 
+         TuringMachine[{{0, 0} :> {0, 2, -1}, {0, 
+             1} :> {{0, 1, 1}, 0, -1}, {{1, 0}, 2} :> {1, 2, 
+             1}, {{1, 1}, 2} :> {1, 1, 1}, {1, 2} :> {0, 2, -1}, {1, 
+              Pattern[$CellContext`x, 
+               Blank[]]} :> {1, $CellContext`x, 1}, {{0, 
+               Pattern[$CellContext`x, 
+                Blank[]], 
+               Pattern[$CellContext`r, 
+                Blank[]]}, 2} :> {{1, 
+               ReplaceAll[$CellContext`x + $CellContext`r, {1 -> 0, 2 -> 1}]}, 
+              Mod[$CellContext`x + $CellContext`r, 2], -1}, {{0, 
+               Pattern[$CellContext`x, 
+                Blank[]], 
+               Pattern[$CellContext`r, 
+                Blank[]]}, 
+              Pattern[$CellContext`y, 
+               Blank[]]} :> {{0, $CellContext`y, 
+               
+               ReplaceAll[$CellContext`x + $CellContext`y + $CellContext`r, {
+                1 -> 0, Alternatives[2, 3] -> 1}]}, 
+              
+              Mod[$CellContext`x + $CellContext`y + $CellContext`r, 
+               2], -1}}, {{0, 
+             Length[
+              IntegerDigits[$CellContext`initial$$, 2]]}, {
+             IntegerDigits[$CellContext`initial$$, 2], 
+             2}}, $CellContext`steps$$]}, 
+        If[$CellContext`showCompressed$$, $CellContext`computation$ = 
+          Select[$CellContext`computation$, MatchQ[#, {{0, 
+               BlankSequence[]}, 
+              Blank[]}]& ]]; With[{$CellContext`positions$ = Flatten[
+             Position[$CellContext`computation$, {{0, 
+                BlankSequence[]}, 
+               Blank[]}]]}, 
+          ArrayPlot[
+           Map[Last, $CellContext`computation$], Epilog -> 
+           If[$CellContext`showHead$$, {Black, 
+              MapIndexed[Translate[
+                Rotate[
+                 With[{$CellContext`r = 0.18}, {
+                   Disk[{0, 0}, $CellContext`r], 
+                   
+                   Polygon[{{$CellContext`r, 0}, {-$CellContext`r, 0}, {
+                    0, 0.6}, {$CellContext`r, 0}}]}], (2 ReplaceAll[
+                    
+                    Part[#, 1, 1], {{1, 0} -> 2, {1, 1} -> 3, {0, 0, 0} -> 
+                    4, {0, 0, 1} -> 5, {0, 1, 0} -> 6, {0, 1, 1} -> 7}]) (Pi/
+                  8), {0, 0}], {
+                Part[#, 1, 2] - 1/2, Length[$CellContext`computation$] - 
+                 First[#2] + 1/2}]& , $CellContext`computation$]}, {}], 
+           ImageSize -> 300, Mesh -> True, MeshStyle -> White, Frame -> True, 
+           FrameStyle -> White, FrameTicksStyle -> Black, FrameTicks -> {
+             Map[{#, 
+               Style[
+                StringExpression[
+                 ToString[
+                  FromDigits[
+                   DeleteCases[
+                    Last[
+                    Part[$CellContext`computation$, #]], 2], 2]], ":"], 
+                "Label"], 0}& , $CellContext`positions$], None, None, None}, 
+           ColorRules -> {2 -> White, 1 -> Orange, 0 -> Yellow}]]], 
+      "Specifications" :> {{{$CellContext`initial$$, 27, "initial condition"},
+          1, 128, 1, Appearance -> "Labeled"}, {{$CellContext`steps$$, 100}, 
+         20, 100, 1, Appearance -> 
+         "Labeled"}, {{$CellContext`showHead$$, True, "show machine head"}, {
+         True, False}}, {{$CellContext`showCompressed$$, True, 
+          "compressed evolution"}, {True, False}}}, 
+      "Options" :> {ContentSize -> {400, 400}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{414., {266., 271.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->594217839]
+}, Open  ]],
+
+Cell["", "DetailsSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.5042883015646715`*^9},
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.3895522232313623`*^9, 
+  3.5042883074292583`*^9},
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0, CellBaseline -> Baseline], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell["", "SearchTermsSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "RelatedLinksSection"],
+
+Cell[TextData[ButtonBox["Turing Machines",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://www.wolframscience.com/nksonline/page-888"], None},
+ ButtonNote->
+  "http://www.wolframscience.com/nksonline/page-888"]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.5042883195344687`*^9, 3.5042883195354686`*^9}},
+ CellID->177325537],
+
+Cell[TextData[ButtonBox["Collatz Problem",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/CollatzProblem.html"], None},
+ ButtonNote->
+  "http://mathworld.wolfram.com/CollatzProblem.html"]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.5042883314616613`*^9, 3.5042883314626613`*^9}},
+ CellID->391527989]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Emmanuel Garces Medina",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Emmanuel+Garces+\
+Medina"], None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Emmanuel+Garces+\
+Medina"]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.504082959792438*^9, 3.5040829643476458`*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{700, Automatic},
+WindowMargins->{{10, Automatic}, {0, 0}},
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (February 23, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[49226, 1095, 376, 9, 29, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[49605, 1106, 678, 16, 29, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[50286, 1124, 340, 11, 29, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[50629, 1137, 637, 15, 29, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[51269, 1154, 844, 21, 29, "ControlSuggestions",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[52116, 1177, 395, 10, 29, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[52514, 1189, 1464, 31, 29, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[53981, 1222, 908, 21, 29, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 56583, 1305},
+ {"RotateAndZoomIn3D", 56692, 1308},
+ {"DragLocators", 56802, 1311},
+ {"CreateAndDeleteLocators", 56918, 1314},
+ {"SliderZoom", 57032, 1317},
+ {"GamepadControls", 57138, 1320},
+ {"AutomaticAnimation", 57252, 1323},
+ {"BookmarkAnimation", 57369, 1326}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 160, 2, 104, "DemoTitle"],
+Cell[730, 26, 33, 0, 266, "InitializationSection"],
+Cell[CellGroupData[{
+Cell[788, 30, 29, 0, 188, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[842, 34, 11727, 294, 521, "Input",
+ CellID->161588350],
+Cell[12572, 330, 5788, 116, 549, "Output",
+ CellID->150948996]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18409, 452, 36, 0, 166, "ManipulateCaptionSection"],
+Cell[18448, 454, 2014, 43, 52, "ManipulateCaption",
+ CellID->118974970],
+Cell[20465, 499, 1488, 24, 37, "ManipulateCaption",
+ CellID->42689303],
+Cell[21956, 525, 1228, 24, 37, "ManipulateCaption",
+ CellID->164392448],
+Cell[23187, 551, 2356, 43, 95, "ManipulateCaption",
+ CellID->501642286],
+Cell[25546, 596, 474, 12, 37, "ManipulateCaption",
+ CellID->131477910]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26057, 613, 28, 0, 168, "ThumbnailSection"],
+Cell[26088, 615, 5740, 115, 549, "Output",
+ CellID->230032682]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[31865, 735, 28, 0, 138, "SnapshotsSection"],
+Cell[31896, 737, 5740, 115, 549, "Output",
+ CellID->183202933],
+Cell[37639, 854, 5738, 115, 549, "Output",
+ CellID->1542505],
+Cell[43380, 971, 5740, 115, 549, "Output",
+ CellID->594217839]
+}, Open  ]],
+Cell[49135, 1089, 26, 0, 332, "DetailsSection"],
+Cell[CellGroupData[{
+Cell[49186, 1093, 37, 0, 108, "ControlSuggestionsSection"],
+Cell[49226, 1095, 376, 9, 29, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[49605, 1106, 678, 16, 29, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[50286, 1124, 340, 11, 29, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[50629, 1137, 637, 15, 29, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[51269, 1154, 844, 21, 29, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[52116, 1177, 395, 10, 29, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[52514, 1189, 1464, 31, 29, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[53981, 1222, 908, 21, 29, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[54904, 1246, 30, 0, 152, "SearchTermsSection"],
+Cell[CellGroupData[{
+Cell[54959, 1250, 31, 0, 126, "RelatedLinksSection"],
+Cell[54993, 1252, 349, 8, 21, "RelatedLinks",
+ CellID->177325537],
+Cell[55345, 1262, 349, 8, 21, "RelatedLinks",
+ CellID->391527989]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[55731, 1275, 25, 0, 136, "AuthorSection"],
+Cell[55759, 1277, 417, 12, 21, "Author"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

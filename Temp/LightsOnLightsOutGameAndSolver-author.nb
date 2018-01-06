@@ -1,0 +1,2302 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     97984,       2293]
+NotebookOptionsPosition[     94014,       2171]
+NotebookOutlinePosition[     95617,       2221]
+CellTagsIndexPosition[     95289,       2209]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Lights On/Lights Out Game and Solver", "DemoTitle",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4627141631859756`*^9, 3.4627141752948856`*^9}, {
+   3.462715283764969*^9, 3.4627152925771303`*^9}, {3.462715547911075*^9, 
+   3.462715556192007*^9}, {3.462716957504138*^9, 3.462716991159619*^9}, {
+   3.4628870538122416`*^9, 3.4628870559216027`*^9}, {3.4629006217214613`*^9, 
+   3.462900623086522*^9}}],
+
+Cell["", "InitializationSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"gameSquare", " ", "=", 
+     RowBox[{"allgames", "[", 
+      RowBox[{"[", 
+       RowBox[{"g", ",", "All", ",", "All"}], "]"}], "]"}]}], ";", 
+    RowBox[{"Switch", "[", 
+     RowBox[{"state", ",", "1", ",", 
+      RowBox[{"EventHandler", "[", 
+       RowBox[{
+        RowBox[{"Graphics", "[", 
+         RowBox[{
+          RowBox[{"Dynamic", "@", 
+           RowBox[{"Table", "[", 
+            RowBox[{
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{"EvenQ", "[", 
+                RowBox[{"getShowValue", "[", 
+                 RowBox[{
+                 "i", ",", "j", ",", "w", ",", "h", ",", "gameSquare"}], 
+                 "]"}], "]"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"Gray", ",", 
+                 RowBox[{"showSquare", "[", 
+                  RowBox[{"{", 
+                   RowBox[{"i", ",", "j"}], "}"}], "]"}]}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"RGBColor", "[", 
+                  RowBox[{".79", ",", ".71", ",", ".26"}], "]"}], ",", 
+                 RowBox[{"showSquare", "[", 
+                  RowBox[{"{", 
+                   RowBox[{"i", ",", "j"}], "}"}], "]"}]}], "}"}]}], "]"}], 
+             ",", 
+             RowBox[{"{", 
+              RowBox[{"i", ",", "1", ",", "w"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"j", ",", "1", ",", "h"}], "}"}]}], "]"}]}], ",", 
+          RowBox[{"Background", "\[Rule]", 
+           RowBox[{"RGBColor", "[", 
+            RowBox[{".48", ",", ".11", ",", ".56"}], "]"}]}], ",", 
+          RowBox[{"ImageSize", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{"400", ",", "400"}], "}"}]}]}], "]"}], ",", 
+        RowBox[{"\"\<MouseDown\>\"", "\[RuleDelayed]", 
+         RowBox[{"updateGameSquare", "[", 
+          RowBox[{
+           RowBox[{"Floor", "[", 
+            RowBox[{"MousePosition", "[", "\"\<Graphics\>\"", "]"}], "]"}], 
+           ",", "gameSquare"}], "]"}]}]}], "]"}], ",", "2", ",", 
+      RowBox[{"(", 
+       RowBox[{"Dynamic", "[", 
+        RowBox[{
+         RowBox[{"sluoff", "=", 
+          RowBox[{"Quiet", "@", 
+           RowBox[{"Solve", "[", 
+            RowBox[{
+             RowBox[{"Flatten", "@", 
+              RowBox[{"Table", "[", 
+               RowBox[{
+                RowBox[{"offEquation", "[", 
+                 RowBox[{
+                 "i", ",", "j", ",", "w", ",", "h", ",", "gameSquare"}], 
+                 "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", "1", ",", "w"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"j", ",", "1", ",", "h"}], "}"}]}], "]"}]}], ",", 
+             RowBox[{"allVariables", "[", 
+              RowBox[{"w", ",", "h"}], "]"}], ",", 
+             RowBox[{"Modulus", "\[Rule]", "2"}]}], "]"}]}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Graphics", "[", 
+          RowBox[{
+           RowBox[{"Dynamic", "@", 
+            RowBox[{"Table", "[", 
+             RowBox[{
+              RowBox[{"If", "[", 
+               RowBox[{
+                RowBox[{"EvenQ", "[", 
+                 RowBox[{"First", "[", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"var", "[", 
+                    RowBox[{"i", ",", "j"}], "]"}], "/.", "sluoff"}], "/.", 
+                   RowBox[{"allVariablesDefaultValue", "[", 
+                    RowBox[{"w", ",", "h"}], "]"}]}], "]"}], "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"Gray", ",", 
+                  RowBox[{"showSquare", "[", 
+                   RowBox[{"{", 
+                    RowBox[{"i", ",", "j"}], "}"}], "]"}]}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"RGBColor", "[", 
+                   RowBox[{".49", ",", "0", ",", "0"}], "]"}], ",", 
+                  RowBox[{"showSquare", "[", 
+                   RowBox[{"{", 
+                    RowBox[{"i", ",", "j"}], "}"}], "]"}]}], "}"}]}], "]"}], 
+              ",", 
+              RowBox[{"{", 
+               RowBox[{"i", ",", "1", ",", "w"}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"j", ",", "1", ",", "h"}], "}"}]}], "]"}]}], ",", 
+           RowBox[{"Background", "\[Rule]", 
+            RowBox[{"RGBColor", "[", 
+             RowBox[{".48", ",", ".11", ",", ".56"}], "]"}]}], ",", 
+           RowBox[{"ImageSize", "\[Rule]", 
+            RowBox[{"{", 
+             RowBox[{"400", ",", "400"}], "}"}]}]}], "]"}]}], "]"}], ")"}], 
+      ",", "\[IndentingNewLine]", "3", ",", 
+      RowBox[{"(", 
+       RowBox[{"Dynamic", "[", 
+        RowBox[{
+         RowBox[{"sluon", "=", 
+          RowBox[{"Quiet", "@", 
+           RowBox[{"Solve", "[", 
+            RowBox[{
+             RowBox[{"Flatten", "@", 
+              RowBox[{"Table", "[", 
+               RowBox[{
+                RowBox[{"onEquation", "[", 
+                 RowBox[{
+                 "i", ",", "j", ",", "w", ",", "h", ",", "gameSquare"}], 
+                 "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", "1", ",", "w"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"j", ",", "1", ",", "h"}], "}"}]}], "]"}]}], ",", 
+             RowBox[{"allVariables", "[", 
+              RowBox[{"w", ",", "h"}], "]"}], ",", 
+             RowBox[{"Modulus", "\[Rule]", "2"}]}], "]"}]}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Graphics", "[", 
+          RowBox[{
+           RowBox[{"Dynamic", "@", 
+            RowBox[{"Table", "[", 
+             RowBox[{
+              RowBox[{"If", "[", 
+               RowBox[{
+                RowBox[{"EvenQ", "[", 
+                 RowBox[{"First", "[", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"var", "[", 
+                    RowBox[{"i", ",", "j"}], "]"}], "/.", "sluon"}], "/.", 
+                   RowBox[{"allVariablesDefaultValue", "[", 
+                    RowBox[{"w", ",", "h"}], "]"}]}], "]"}], "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"Gray", ",", 
+                  RowBox[{"showSquare", "[", 
+                   RowBox[{"{", 
+                    RowBox[{"i", ",", "j"}], "}"}], "]"}]}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"RGBColor", "[", 
+                   RowBox[{".49", ",", "0", ",", "0"}], "]"}], ",", 
+                  RowBox[{"showSquare", "[", 
+                   RowBox[{"{", 
+                    RowBox[{"i", ",", "j"}], "}"}], "]"}]}], "}"}]}], "]"}], 
+              ",", 
+              RowBox[{"{", 
+               RowBox[{"i", ",", "1", ",", "w"}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"j", ",", "1", ",", "h"}], "}"}]}], "]"}]}], ",", 
+           RowBox[{"Background", "\[Rule]", 
+            RowBox[{"RGBColor", "[", 
+             RowBox[{".48", ",", ".11", ",", ".56"}], "]"}]}], ",", 
+           RowBox[{"ImageSize", "\[Rule]", 
+            RowBox[{"{", 
+             RowBox[{"400", ",", "400"}], "}"}]}]}], "]"}]}], "]"}], ")"}]}], 
+     "]"}]}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"w", ",", "5", ",", "\"\<width\>\""}], "}"}], ",", "3", ",", 
+     "8", ",", "1", ",", 
+     RowBox[{"ControlType", "\[Rule]", "RadioButton"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"h", ",", "5", ",", "\"\<height\>\""}], "}"}], ",", "3", ",", 
+     "8", ",", "1", ",", 
+     RowBox[{"ControlType", "\[Rule]", "RadioButton"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"g", ",", "20", ",", "\"\<game\>\""}], "}"}], ",", "1", ",", 
+     "100", ",", "1", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"state", ",", "1", ",", "\"\<\>\""}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"1", "\[Rule]", "\"\<the game\>\""}], ",", 
+       RowBox[{"2", "\[Rule]", "\"\<all off solution\>\""}], ",", 
+       RowBox[{"3", "\[Rule]", "\"\<all on solution\>\""}]}], "}"}]}], "}"}], 
+   ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"gameSquare", ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+          "1", ",", "0", ",", "0", ",", "0", ",", "1", ",", "1", ",", "1", 
+           ",", "0"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+          "0", ",", "1", ",", "1", ",", "1", ",", "1", ",", "1", ",", "0", 
+           ",", "0"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+          "1", ",", "1", ",", "0", ",", "0", ",", "0", ",", "1", ",", "1", 
+           ",", "1"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+          "0", ",", "0", ",", "0", ",", "1", ",", "1", ",", "0", ",", "0", 
+           ",", "1"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+          "1", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", 
+           ",", "0"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+          "1", ",", "0", ",", "1", ",", "1", ",", "0", ",", "0", ",", "1", 
+           ",", "1"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+          "1", ",", "0", ",", "0", ",", "1", ",", "1", ",", "0", ",", "1", 
+           ",", "0"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+          "0", ",", "1", ",", "0", ",", "0", ",", "0", ",", "0", ",", "1", 
+           ",", "0"}], "}"}]}], "}"}]}], "}"}], ",", 
+     RowBox[{"ControlType", "\[Rule]", "None"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"SynchronousUpdating", "\[Rule]", "False"}], ",", 
+   RowBox[{"Alignment", "\[Rule]", "Center"}], ",", 
+   RowBox[{"TrackedSymbols", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"AutorunSequencing", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "2", ",", "3", ",", "4"}], "}"}]}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Initialization", "\[RuleDelayed]", 
+    RowBox[{"(", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"maxWidth", " ", "=", "8"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"maxHeight", " ", "=", " ", "8"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"maxNumGames", " ", "=", " ", "100"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"allgames", " ", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"Random", "[", "Integer", "]"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"i", ",", "1", ",", "maxWidth"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"j", ",", "1", ",", "maxHeight"}], "}"}]}], "]"}], ",", 
+         RowBox[{"{", "maxNumGames", "}"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"SetAttributes", "[", 
+       RowBox[{"updateGameSquare", ",", "HoldRest"}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"updateGameSquare", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"i_", ",", "j_"}], "}"}], ",", "gs_"}], "]"}], ":=", " ", 
+       RowBox[{
+        RowBox[{"gs", "[", 
+         RowBox[{"[", 
+          RowBox[{"i", ",", "j"}], "]"}], "]"}], " ", "=", " ", 
+        RowBox[{"1", "-", 
+         RowBox[{"gs", "[", 
+          RowBox[{"[", 
+           RowBox[{"i", ",", "j"}], "]"}], "]"}]}]}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"showSquare", "[", 
+        RowBox[{"{", 
+         RowBox[{"i_", ",", "j_"}], "}"}], "]"}], ":=", 
+       RowBox[{"Rectangle", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"i", "+", "0.02"}], ",", 
+           RowBox[{"j", "+", "0.02"}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"i", "+", "0.98"}], ",", 
+           RowBox[{"j", "+", "0.98"}]}], "}"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"getSquareValue", "[", 
+        RowBox[{"i_", ",", "j_", ",", "w_", ",", "h_", ",", "gs_"}], "]"}], ":=", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"i", "\[GreaterEqual]", "1"}], "&&", 
+          RowBox[{"i", "\[LessEqual]", "w"}], "&&", 
+          RowBox[{"j", "\[GreaterEqual]", "1"}], "&&", 
+          RowBox[{"j", "\[LessEqual]", "h"}]}], ",", 
+         RowBox[{"gs", "[", 
+          RowBox[{"[", 
+           RowBox[{"i", ",", "j"}], "]"}], "]"}], ",", "0"}], "]"}]}], ";", 
+      RowBox[{
+       RowBox[{"getShowValue", "[", 
+        RowBox[{"i_", ",", "j_", ",", "w_", ",", "h_", ",", "gs_"}], "]"}], ":=", 
+       RowBox[{
+        RowBox[{"getSquareValue", "[", 
+         RowBox[{"i", ",", "j", ",", "w", ",", "h", ",", "gs"}], "]"}], "+", 
+        RowBox[{"getSquareValue", "[", 
+         RowBox[{"i", ",", 
+          RowBox[{"j", "+", "1"}], ",", "w", ",", "h", ",", "gs"}], "]"}], 
+        "+", 
+        RowBox[{"getSquareValue", "[", 
+         RowBox[{"i", ",", 
+          RowBox[{"j", "-", "1"}], ",", "w", ",", "h", ",", "gs"}], "]"}], 
+        "+", 
+        RowBox[{"getSquareValue", "[", 
+         RowBox[{
+          RowBox[{"i", "-", "1"}], ",", "j", ",", "w", ",", "h", ",", "gs"}], 
+         "]"}], "+", 
+        RowBox[{"getSquareValue", "[", 
+         RowBox[{
+          RowBox[{"i", "+", "1"}], ",", "j", ",", "w", ",", "h", ",", "gs"}], 
+         "]"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"var", "[", 
+        RowBox[{"i_", ",", "j_"}], "]"}], ":=", 
+       RowBox[{"x", "[", 
+        RowBox[{"i", ",", "j"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"variable", "[", 
+        RowBox[{"i_", ",", "j_", ",", "w_", ",", "h_"}], "]"}], ":=", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"i", "\[GreaterEqual]", "1"}], "&&", 
+          RowBox[{"i", "\[LessEqual]", "w"}], "&&", 
+          RowBox[{"j", "\[GreaterEqual]", "1"}], "&&", 
+          RowBox[{"j", "\[LessEqual]", "h"}]}], ",", 
+         RowBox[{"var", "[", 
+          RowBox[{"i", ",", "j"}], "]"}], ",", "0"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"allVariables", "[", 
+        RowBox[{"w_", ",", "h_"}], "]"}], ":=", 
+       RowBox[{"Flatten", "@", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"var", "[", 
+           RowBox[{"i", ",", "j"}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "1", ",", "w"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"j", ",", "1", ",", "h"}], "}"}]}], "]"}]}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"allVariablesDefaultValue", "[", 
+        RowBox[{"w_", ",", "h_"}], "]"}], ":=", 
+       RowBox[{"Flatten", "@", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"var", "[", 
+            RowBox[{"i", ",", "j"}], "]"}], "\[Rule]", "0"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "1", ",", "w"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"j", ",", "1", ",", "h"}], "}"}]}], "]"}]}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"onEquation", "[", 
+        RowBox[{"i_", ",", "j_", ",", "w_", ",", "h_", ",", "gs_"}], "]"}], ":=", 
+       RowBox[{
+        RowBox[{"getShowValue", "[", 
+         RowBox[{"i", ",", "j", ",", "w", ",", "h", ",", "gs"}], "]"}], 
+        "\[Equal]", 
+        RowBox[{"1", "+", 
+         RowBox[{"variable", "[", 
+          RowBox[{"i", ",", "j", ",", "w", ",", "h"}], "]"}], "+", 
+         RowBox[{"variable", "[", 
+          RowBox[{
+           RowBox[{"i", "-", "1"}], ",", "j", ",", "w", ",", "h"}], "]"}], 
+         "+", 
+         RowBox[{"variable", "[", 
+          RowBox[{"i", ",", 
+           RowBox[{"j", "-", "1"}], ",", "w", ",", "h"}], "]"}], "+", 
+         RowBox[{"variable", "[", 
+          RowBox[{
+           RowBox[{"i", "+", "1"}], ",", "j", ",", "w", ",", "h"}], "]"}], 
+         "+", 
+         RowBox[{"variable", "[", 
+          RowBox[{"i", ",", 
+           RowBox[{"j", "+", "1"}], ",", "w", ",", "h"}], "]"}]}]}]}], ";", 
+      RowBox[{
+       RowBox[{"offEquation", "[", 
+        RowBox[{"i_", ",", "j_", ",", "w_", ",", "h_", ",", "gs_"}], "]"}], ":=", 
+       RowBox[{
+        RowBox[{"getShowValue", "[", 
+         RowBox[{"i", ",", "j", ",", "w", ",", "h", ",", "gs"}], "]"}], 
+        "\[Equal]", 
+        RowBox[{
+         RowBox[{"variable", "[", 
+          RowBox[{"i", ",", "j", ",", "w", ",", "h"}], "]"}], "+", 
+         RowBox[{"variable", "[", 
+          RowBox[{
+           RowBox[{"i", "-", "1"}], ",", "j", ",", "w", ",", "h"}], "]"}], 
+         "+", 
+         RowBox[{"variable", "[", 
+          RowBox[{"i", ",", 
+           RowBox[{"j", "-", "1"}], ",", "w", ",", "h"}], "]"}], "+", 
+         RowBox[{"variable", "[", 
+          RowBox[{
+           RowBox[{"i", "+", "1"}], ",", "j", ",", "w", ",", "h"}], "]"}], 
+         "+", 
+         RowBox[{"variable", "[", 
+          RowBox[{"i", ",", 
+           RowBox[{"j", "+", "1"}], ",", "w", ",", "h"}], "]"}]}]}]}], ";"}], 
+     "\[IndentingNewLine]", ")"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, 3.462714151983281*^9, {3.4627153989480457`*^9, 
+   3.462715399666768*^9}, {3.4627155615980496`*^9, 3.462715562113655*^9}, {
+   3.4627266070404167`*^9, 3.462726611151828*^9}, {3.462726787451456*^9, 
+   3.462726916551365*^9}, {3.462727050156724*^9, 3.462727098171525*^9}, {
+   3.462886767687603*^9, 3.462886878921978*^9}, {3.462886982312603*^9, 
+   3.4628870232968116`*^9}, {3.4631467496151314`*^9, 3.463146750013171*^9}, {
+   3.4631538586145535`*^9, 3.4631538646471567`*^9}, {3.5576800465302353`*^9, 
+   3.5576800619208517`*^9}, {3.5576801377226405`*^9, 3.557680150505026*^9}, {
+   3.558895204361844*^9, 3.55889524301971*^9}, {3.5612334985766277`*^9, 
+   3.5612335541314325`*^9}, {3.5612337371857257`*^9, 3.561233761707197*^9}, {
+   3.5612338176805553`*^9, 3.561233817890568*^9}, {3.561233947656353*^9, 
+   3.561233960087099*^9}, {3.5612340964252787`*^9, 3.561234291034822*^9}, {
+   3.5613006429670773`*^9, 3.561300652733241*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`g$$ = 20, $CellContext`gameSquare$$ = {{1, 
+    1, 0, 0, 0, 1, 1, 1}, {0, 0, 1, 1, 0, 0, 1, 1}, {0, 1, 1, 1, 0, 1, 0, 
+    0}, {0, 1, 0, 0, 1, 1, 1, 1}, {1, 1, 0, 1, 0, 0, 0, 1}, {1, 0, 1, 1, 0, 1,
+     1, 1}, {0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 1, 1, 1, 1, 0, 
+    0}}, $CellContext`h$$ = 5, $CellContext`state$$ = 1, $CellContext`w$$ = 5,
+     Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`w$$], 5, "width"}, 3, 8, 1}, {{
+       Hold[$CellContext`h$$], 5, "height"}, 3, 8, 1}, {{
+       Hold[$CellContext`g$$], 20, "game"}, 1, 100, 1}, {{
+       Hold[$CellContext`state$$], 1, ""}, {
+      1 -> "the game", 2 -> "all off solution", 3 -> "all on solution"}}, {{
+       Hold[$CellContext`gameSquare$$], {{0, 0, 0, 0, 0, 0, 0, 1}, {1, 1, 1, 
+       1, 1, 1, 0, 1}, {1, 1, 0, 1, 0, 1, 1, 0}, {1, 1, 0, 1, 0, 1, 1, 0}, {0,
+        0, 1, 1, 1, 0, 1, 0}, {0, 0, 0, 1, 1, 0, 0, 0}, {0, 0, 1, 0, 0, 1, 0, 
+       0}, {1, 0, 1, 1, 1, 0, 0, 0}}}}}, Typeset`size$$ = {
+    400., {198., 202.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`w$1292496$$ = 
+    0, $CellContext`h$1292497$$ = 0, $CellContext`g$1292498$$ = 
+    0, $CellContext`state$1292499$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`g$$ = 
+        20, $CellContext`gameSquare$$ = {{0, 0, 0, 0, 0, 0, 0, 1}, {1, 1, 1, 
+         1, 1, 1, 0, 1}, {1, 1, 0, 1, 0, 1, 1, 0}, {1, 1, 0, 1, 0, 1, 1, 0}, {
+         0, 0, 1, 1, 1, 0, 1, 0}, {0, 0, 0, 1, 1, 0, 0, 0}, {0, 0, 1, 0, 0, 1,
+          0, 0}, {1, 0, 1, 1, 1, 0, 0, 0}}, $CellContext`h$$ = 
+        5, $CellContext`state$$ = 1, $CellContext`w$$ = 5}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`w$$, $CellContext`w$1292496$$, 0], 
+        Hold[$CellContext`h$$, $CellContext`h$1292497$$, 0], 
+        Hold[$CellContext`g$$, $CellContext`g$1292498$$, 0], 
+        Hold[$CellContext`state$$, $CellContext`state$1292499$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> ($CellContext`gameSquare$$ = 
+        Part[$CellContext`allgames, $CellContext`g$$, All, All]; 
+       Switch[$CellContext`state$$, 1, 
+         EventHandler[
+          Graphics[
+           Dynamic[
+            Table[
+             If[
+              EvenQ[
+               $CellContext`getShowValue[$CellContext`i, $CellContext`j, \
+$CellContext`w$$, $CellContext`h$$, $CellContext`gameSquare$$]], {Gray, 
+               $CellContext`showSquare[{$CellContext`i, $CellContext`j}]}, {
+               RGBColor[0.79, 0.71, 0.26], 
+               $CellContext`showSquare[{$CellContext`i, $CellContext`j}]}], \
+{$CellContext`i, 1, $CellContext`w$$}, {$CellContext`j, 
+              1, $CellContext`h$$}]], Background -> 
+           RGBColor[0.48, 0.11, 0.56], ImageSize -> {400, 400}], 
+          "MouseDown" :> $CellContext`updateGameSquare[
+            Floor[
+             MousePosition["Graphics"]], $CellContext`gameSquare$$]], 2, 
+         Dynamic[$CellContext`sluoff = Quiet[
+             Solve[
+              Flatten[
+               Table[
+                $CellContext`offEquation[$CellContext`i, $CellContext`j, \
+$CellContext`w$$, $CellContext`h$$, $CellContext`gameSquare$$], \
+{$CellContext`i, 1, $CellContext`w$$}, {$CellContext`j, 
+                 1, $CellContext`h$$}]], 
+              $CellContext`allVariables[$CellContext`w$$, $CellContext`h$$], 
+              Modulus -> 2]]; Graphics[
+            Dynamic[
+             Table[
+              If[
+               EvenQ[
+                First[
+                 ReplaceAll[
+                  ReplaceAll[
+                   $CellContext`var[$CellContext`i, $CellContext`j], \
+$CellContext`sluoff], 
+                  $CellContext`allVariablesDefaultValue[$CellContext`w$$, \
+$CellContext`h$$]]]], {Gray, 
+                $CellContext`showSquare[{$CellContext`i, $CellContext`j}]}, {
+                RGBColor[0.49, 0, 0], 
+                $CellContext`showSquare[{$CellContext`i, $CellContext`j}]}], \
+{$CellContext`i, 1, $CellContext`w$$}, {$CellContext`j, 
+               1, $CellContext`h$$}]], Background -> 
+            RGBColor[0.48, 0.11, 0.56], ImageSize -> {400, 400}]], 3, 
+         Dynamic[$CellContext`sluon = Quiet[
+             Solve[
+              Flatten[
+               Table[
+                $CellContext`onEquation[$CellContext`i, $CellContext`j, \
+$CellContext`w$$, $CellContext`h$$, $CellContext`gameSquare$$], \
+{$CellContext`i, 1, $CellContext`w$$}, {$CellContext`j, 
+                 1, $CellContext`h$$}]], 
+              $CellContext`allVariables[$CellContext`w$$, $CellContext`h$$], 
+              Modulus -> 2]]; Graphics[
+            Dynamic[
+             Table[
+              If[
+               EvenQ[
+                First[
+                 ReplaceAll[
+                  ReplaceAll[
+                   $CellContext`var[$CellContext`i, $CellContext`j], \
+$CellContext`sluon], 
+                  $CellContext`allVariablesDefaultValue[$CellContext`w$$, \
+$CellContext`h$$]]]], {Gray, 
+                $CellContext`showSquare[{$CellContext`i, $CellContext`j}]}, {
+                RGBColor[0.49, 0, 0], 
+                $CellContext`showSquare[{$CellContext`i, $CellContext`j}]}], \
+{$CellContext`i, 1, $CellContext`w$$}, {$CellContext`j, 
+               1, $CellContext`h$$}]], Background -> 
+            RGBColor[0.48, 0.11, 0.56], ImageSize -> {400, 400}]]]), 
+      "Specifications" :> {{{$CellContext`w$$, 5, "width"}, 3, 8, 1, 
+         ControlType -> RadioButton}, {{$CellContext`h$$, 5, "height"}, 3, 8, 
+         1, ControlType -> RadioButton}, {{$CellContext`g$$, 20, "game"}, 1, 
+         100, 1, Appearance -> "Labeled"}, {{$CellContext`state$$, 1, ""}, {
+         1 -> "the game", 2 -> "all off solution", 3 -> 
+          "all on solution"}}, {{$CellContext`gameSquare$$, {{0, 0, 0, 0, 0, 
+          0, 0, 1}, {1, 1, 1, 1, 1, 1, 0, 1}, {1, 1, 0, 1, 0, 1, 1, 0}, {1, 1,
+           0, 1, 0, 1, 1, 0}, {0, 0, 1, 1, 1, 0, 1, 0}, {0, 0, 0, 1, 1, 0, 0, 
+          0}, {0, 0, 1, 0, 0, 1, 0, 0}, {1, 0, 1, 1, 1, 0, 0, 0}}}, 
+         ControlType -> None}}, 
+      "Options" :> {
+       SynchronousUpdating -> False, Alignment -> Center, TrackedSymbols -> 
+        True, AutorunSequencing -> {1, 2, 3, 4}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{449., {273., 278.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>(($CellContext`maxWidth = 8; $CellContext`maxHeight = 
+       8; $CellContext`maxNumGames = 100; $CellContext`allgames = Table[
+         Table[
+          Random[
+          Integer], {$CellContext`i, 
+           1, $CellContext`maxWidth}, {$CellContext`j, 
+           1, $CellContext`maxHeight}], {$CellContext`maxNumGames}]; 
+      SetAttributes[$CellContext`updateGameSquare, 
+        HoldRest]; $CellContext`updateGameSquare[{
+          Pattern[$CellContext`i, 
+           Blank[]], 
+          Pattern[$CellContext`j, 
+           Blank[]]}, 
+         Pattern[$CellContext`gs, 
+          Blank[]]] := (Part[$CellContext`gs, $CellContext`i, $CellContext`j] = 
+        1 - Part[$CellContext`gs, $CellContext`i, $CellContext`j]); \
+$CellContext`showSquare[{
+          Pattern[$CellContext`i, 
+           Blank[]], 
+          Pattern[$CellContext`j, 
+           Blank[]]}] := 
+       Rectangle[{$CellContext`i + 0.02, $CellContext`j + 
+          0.02}, {$CellContext`i + 0.98, $CellContext`j + 
+          0.98}]; $CellContext`getSquareValue[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]], 
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Pattern[$CellContext`gs, 
+          Blank[]]] := If[
+         And[$CellContext`i >= 
+          1, $CellContext`i <= $CellContext`w, $CellContext`j >= 
+          1, $CellContext`j <= $CellContext`h], 
+         Part[$CellContext`gs, $CellContext`i, $CellContext`j], 
+         0]; $CellContext`getShowValue[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]], 
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Pattern[$CellContext`gs, 
+          
+          Blank[]]] := $CellContext`getSquareValue[$CellContext`i, \
+$CellContext`j, $CellContext`w, $CellContext`h, $CellContext`gs] + \
+$CellContext`getSquareValue[$CellContext`i, $CellContext`j + 
+          1, $CellContext`w, $CellContext`h, $CellContext`gs] + \
+$CellContext`getSquareValue[$CellContext`i, $CellContext`j - 
+          1, $CellContext`w, $CellContext`h, $CellContext`gs] + \
+$CellContext`getSquareValue[$CellContext`i - 
+          1, $CellContext`j, $CellContext`w, $CellContext`h, $CellContext`gs] + \
+$CellContext`getSquareValue[$CellContext`i + 
+          1, $CellContext`j, $CellContext`w, $CellContext`h, $CellContext`gs]; \
+$CellContext`var[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          
+          Blank[]]] := $CellContext`x[$CellContext`i, $CellContext`j]; \
+$CellContext`variable[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]], 
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]]] := If[
+         And[$CellContext`i >= 
+          1, $CellContext`i <= $CellContext`w, $CellContext`j >= 
+          1, $CellContext`j <= $CellContext`h], 
+         $CellContext`var[$CellContext`i, $CellContext`j], 
+         0]; $CellContext`allVariables[
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]]] := Flatten[
+         Table[
+          $CellContext`var[$CellContext`i, $CellContext`j], {$CellContext`i, 
+           1, $CellContext`w}, {$CellContext`j, 
+           1, $CellContext`h}]]; $CellContext`allVariablesDefaultValue[
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]]] := Flatten[
+         Table[$CellContext`var[$CellContext`i, $CellContext`j] -> 
+          0, {$CellContext`i, 1, $CellContext`w}, {$CellContext`j, 
+           1, $CellContext`h}]]; $CellContext`onEquation[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]], 
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Pattern[$CellContext`gs, 
+          
+          Blank[]]] := $CellContext`getShowValue[$CellContext`i, \
+$CellContext`j, $CellContext`w, $CellContext`h, $CellContext`gs] == 
+        1 + $CellContext`variable[$CellContext`i, $CellContext`j, \
+$CellContext`w, $CellContext`h] + $CellContext`variable[$CellContext`i - 
+           1, $CellContext`j, $CellContext`w, $CellContext`h] + \
+$CellContext`variable[$CellContext`i, $CellContext`j - 
+           1, $CellContext`w, $CellContext`h] + \
+$CellContext`variable[$CellContext`i + 
+           1, $CellContext`j, $CellContext`w, $CellContext`h] + \
+$CellContext`variable[$CellContext`i, $CellContext`j + 
+           1, $CellContext`w, $CellContext`h]; $CellContext`offEquation[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]], 
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Pattern[$CellContext`gs, 
+          
+          Blank[]]] := $CellContext`getShowValue[$CellContext`i, \
+$CellContext`j, $CellContext`w, $CellContext`h, $CellContext`gs] == \
+$CellContext`variable[$CellContext`i, $CellContext`j, $CellContext`w, \
+$CellContext`h] + $CellContext`variable[$CellContext`i - 
+           1, $CellContext`j, $CellContext`w, $CellContext`h] + \
+$CellContext`variable[$CellContext`i, $CellContext`j - 
+           1, $CellContext`w, $CellContext`h] + \
+$CellContext`variable[$CellContext`i + 
+           1, $CellContext`j, $CellContext`w, $CellContext`h] + \
+$CellContext`variable[$CellContext`i, $CellContext`j + 
+           1, $CellContext`w, $CellContext`h]; Null); 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->73605352]
+}, {2}]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell["\<\
+Lights On/Lights Out is a puzzle game. Given a set of random lights, press \
+one of the lights to toggle it and its four adjacent lights on and off. The \
+objective of the game is to switch all the lights on or off. This \
+Demonstration gives an instant solution to the puzzle.\
+\>", "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4627154909132643`*^9, 3.462715533130393*^9}, {
+   3.462715631782854*^9, 3.4627157151859016`*^9}, {3.462715792542306*^9, 
+   3.462715856789839*^9}, {3.4627169285225954`*^9, 3.4627169414814405`*^9}, {
+   3.462718735381792*^9, 3.462718749943733*^9}, {3.4627195270857105`*^9, 
+   3.4627195276950626`*^9}, {3.462887045609169*^9, 3.46288717360835*^9}, {
+   3.462900635337329*^9, 3.462900636830475*^9}, 3.462901651543991*^9},
+ CellID->304264452]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`g$$ = 20, $CellContext`gameSquare$$ = {{1, 
+    1, 0, 0, 0, 1, 1, 1}, {0, 0, 1, 1, 0, 0, 1, 1}, {0, 1, 1, 1, 0, 1, 0, 
+    0}, {0, 1, 0, 0, 1, 1, 1, 1}, {1, 1, 0, 1, 0, 0, 0, 1}, {1, 0, 1, 1, 0, 1,
+     1, 1}, {0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 1, 1, 1, 1, 0, 
+    0}}, $CellContext`h$$ = 5, $CellContext`state$$ = 1, $CellContext`w$$ = 5,
+     Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`w$$], 5, "width"}, 3, 8, 1}, {{
+       Hold[$CellContext`h$$], 5, "height"}, 3, 8, 1}, {{
+       Hold[$CellContext`g$$], 20, "game"}, 1, 100, 1}, {{
+       Hold[$CellContext`state$$], 1, ""}, {
+      1 -> "the game", 2 -> "all off solution", 3 -> "all on solution"}}, {{
+       Hold[$CellContext`gameSquare$$], {{1, 1, 1, 1, 1, 0, 0, 0}, {1, 0, 0, 
+       0, 1, 1, 1, 0}, {1, 0, 0, 0, 0, 0, 1, 1}, {1, 0, 0, 0, 0, 1, 1, 0}, {1,
+        1, 1, 1, 1, 0, 1, 0}, {0, 1, 0, 1, 1, 1, 1, 1}, {1, 1, 1, 0, 0, 0, 0, 
+       0}, {1, 1, 1, 1, 0, 1, 0, 0}}}}}, Typeset`size$$ = {
+    400., {198., 202.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`w$1292568$$ = 
+    0, $CellContext`h$1292569$$ = 0, $CellContext`g$1292570$$ = 
+    0, $CellContext`state$1292571$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`g$$ = 
+        20, $CellContext`gameSquare$$ = {{1, 1, 1, 1, 1, 0, 0, 0}, {1, 0, 0, 
+         0, 1, 1, 1, 0}, {1, 0, 0, 0, 0, 0, 1, 1}, {1, 0, 0, 0, 0, 1, 1, 0}, {
+         1, 1, 1, 1, 1, 0, 1, 0}, {0, 1, 0, 1, 1, 1, 1, 1}, {1, 1, 1, 0, 0, 0,
+          0, 0}, {1, 1, 1, 1, 0, 1, 0, 0}}, $CellContext`h$$ = 
+        5, $CellContext`state$$ = 1, $CellContext`w$$ = 5}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`w$$, $CellContext`w$1292568$$, 0], 
+        Hold[$CellContext`h$$, $CellContext`h$1292569$$, 0], 
+        Hold[$CellContext`g$$, $CellContext`g$1292570$$, 0], 
+        Hold[$CellContext`state$$, $CellContext`state$1292571$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> ($CellContext`gameSquare$$ = 
+        Part[$CellContext`allgames, $CellContext`g$$, All, All]; 
+       Switch[$CellContext`state$$, 1, 
+         EventHandler[
+          Graphics[
+           Dynamic[
+            Table[
+             If[
+              EvenQ[
+               $CellContext`getShowValue[$CellContext`i, $CellContext`j, \
+$CellContext`w$$, $CellContext`h$$, $CellContext`gameSquare$$]], {Gray, 
+               $CellContext`showSquare[{$CellContext`i, $CellContext`j}]}, {
+               RGBColor[0.79, 0.71, 0.26], 
+               $CellContext`showSquare[{$CellContext`i, $CellContext`j}]}], \
+{$CellContext`i, 1, $CellContext`w$$}, {$CellContext`j, 
+              1, $CellContext`h$$}]], Background -> 
+           RGBColor[0.48, 0.11, 0.56], ImageSize -> {400, 400}], 
+          "MouseDown" :> $CellContext`updateGameSquare[
+            Floor[
+             MousePosition["Graphics"]], $CellContext`gameSquare$$]], 2, 
+         Dynamic[$CellContext`sluoff = Quiet[
+             Solve[
+              Flatten[
+               Table[
+                $CellContext`offEquation[$CellContext`i, $CellContext`j, \
+$CellContext`w$$, $CellContext`h$$, $CellContext`gameSquare$$], \
+{$CellContext`i, 1, $CellContext`w$$}, {$CellContext`j, 
+                 1, $CellContext`h$$}]], 
+              $CellContext`allVariables[$CellContext`w$$, $CellContext`h$$], 
+              Modulus -> 2]]; Graphics[
+            Dynamic[
+             Table[
+              If[
+               EvenQ[
+                First[
+                 ReplaceAll[
+                  ReplaceAll[
+                   $CellContext`var[$CellContext`i, $CellContext`j], \
+$CellContext`sluoff], 
+                  $CellContext`allVariablesDefaultValue[$CellContext`w$$, \
+$CellContext`h$$]]]], {Gray, 
+                $CellContext`showSquare[{$CellContext`i, $CellContext`j}]}, {
+                RGBColor[0.49, 0, 0], 
+                $CellContext`showSquare[{$CellContext`i, $CellContext`j}]}], \
+{$CellContext`i, 1, $CellContext`w$$}, {$CellContext`j, 
+               1, $CellContext`h$$}]], Background -> 
+            RGBColor[0.48, 0.11, 0.56], ImageSize -> {400, 400}]], 3, 
+         Dynamic[$CellContext`sluon = Quiet[
+             Solve[
+              Flatten[
+               Table[
+                $CellContext`onEquation[$CellContext`i, $CellContext`j, \
+$CellContext`w$$, $CellContext`h$$, $CellContext`gameSquare$$], \
+{$CellContext`i, 1, $CellContext`w$$}, {$CellContext`j, 
+                 1, $CellContext`h$$}]], 
+              $CellContext`allVariables[$CellContext`w$$, $CellContext`h$$], 
+              Modulus -> 2]]; Graphics[
+            Dynamic[
+             Table[
+              If[
+               EvenQ[
+                First[
+                 ReplaceAll[
+                  ReplaceAll[
+                   $CellContext`var[$CellContext`i, $CellContext`j], \
+$CellContext`sluon], 
+                  $CellContext`allVariablesDefaultValue[$CellContext`w$$, \
+$CellContext`h$$]]]], {Gray, 
+                $CellContext`showSquare[{$CellContext`i, $CellContext`j}]}, {
+                RGBColor[0.49, 0, 0], 
+                $CellContext`showSquare[{$CellContext`i, $CellContext`j}]}], \
+{$CellContext`i, 1, $CellContext`w$$}, {$CellContext`j, 
+               1, $CellContext`h$$}]], Background -> 
+            RGBColor[0.48, 0.11, 0.56], ImageSize -> {400, 400}]]]), 
+      "Specifications" :> {{{$CellContext`w$$, 5, "width"}, 3, 8, 1, 
+         ControlType -> RadioButton}, {{$CellContext`h$$, 5, "height"}, 3, 8, 
+         1, ControlType -> RadioButton}, {{$CellContext`g$$, 20, "game"}, 1, 
+         100, 1, Appearance -> "Labeled"}, {{$CellContext`state$$, 1, ""}, {
+         1 -> "the game", 2 -> "all off solution", 3 -> 
+          "all on solution"}}, {{$CellContext`gameSquare$$, {{1, 1, 1, 1, 1, 
+          0, 0, 0}, {1, 0, 0, 0, 1, 1, 1, 0}, {1, 0, 0, 0, 0, 0, 1, 1}, {1, 0,
+           0, 0, 0, 1, 1, 0}, {1, 1, 1, 1, 1, 0, 1, 0}, {0, 1, 0, 1, 1, 1, 1, 
+          1}, {1, 1, 1, 0, 0, 0, 0, 0}, {1, 1, 1, 1, 0, 1, 0, 0}}}, 
+         ControlType -> None}}, 
+      "Options" :> {
+       SynchronousUpdating -> False, Alignment -> Center, TrackedSymbols -> 
+        True, AutorunSequencing -> {1, 2, 3, 4}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{449., {273., 278.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>(($CellContext`maxWidth = 8; $CellContext`maxHeight = 
+       8; $CellContext`maxNumGames = 100; $CellContext`allgames = Table[
+         Table[
+          Random[
+          Integer], {$CellContext`i, 
+           1, $CellContext`maxWidth}, {$CellContext`j, 
+           1, $CellContext`maxHeight}], {$CellContext`maxNumGames}]; 
+      SetAttributes[$CellContext`updateGameSquare, 
+        HoldRest]; $CellContext`updateGameSquare[{
+          Pattern[$CellContext`i, 
+           Blank[]], 
+          Pattern[$CellContext`j, 
+           Blank[]]}, 
+         Pattern[$CellContext`gs, 
+          Blank[]]] := (Part[$CellContext`gs, $CellContext`i, $CellContext`j] = 
+        1 - Part[$CellContext`gs, $CellContext`i, $CellContext`j]); \
+$CellContext`showSquare[{
+          Pattern[$CellContext`i, 
+           Blank[]], 
+          Pattern[$CellContext`j, 
+           Blank[]]}] := 
+       Rectangle[{$CellContext`i + 0.02, $CellContext`j + 
+          0.02}, {$CellContext`i + 0.98, $CellContext`j + 
+          0.98}]; $CellContext`getSquareValue[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]], 
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Pattern[$CellContext`gs, 
+          Blank[]]] := If[
+         And[$CellContext`i >= 
+          1, $CellContext`i <= $CellContext`w, $CellContext`j >= 
+          1, $CellContext`j <= $CellContext`h], 
+         Part[$CellContext`gs, $CellContext`i, $CellContext`j], 
+         0]; $CellContext`getShowValue[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]], 
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Pattern[$CellContext`gs, 
+          
+          Blank[]]] := $CellContext`getSquareValue[$CellContext`i, \
+$CellContext`j, $CellContext`w, $CellContext`h, $CellContext`gs] + \
+$CellContext`getSquareValue[$CellContext`i, $CellContext`j + 
+          1, $CellContext`w, $CellContext`h, $CellContext`gs] + \
+$CellContext`getSquareValue[$CellContext`i, $CellContext`j - 
+          1, $CellContext`w, $CellContext`h, $CellContext`gs] + \
+$CellContext`getSquareValue[$CellContext`i - 
+          1, $CellContext`j, $CellContext`w, $CellContext`h, $CellContext`gs] + \
+$CellContext`getSquareValue[$CellContext`i + 
+          1, $CellContext`j, $CellContext`w, $CellContext`h, $CellContext`gs]; \
+$CellContext`var[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          
+          Blank[]]] := $CellContext`x[$CellContext`i, $CellContext`j]; \
+$CellContext`variable[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]], 
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]]] := If[
+         And[$CellContext`i >= 
+          1, $CellContext`i <= $CellContext`w, $CellContext`j >= 
+          1, $CellContext`j <= $CellContext`h], 
+         $CellContext`var[$CellContext`i, $CellContext`j], 
+         0]; $CellContext`allVariables[
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]]] := Flatten[
+         Table[
+          $CellContext`var[$CellContext`i, $CellContext`j], {$CellContext`i, 
+           1, $CellContext`w}, {$CellContext`j, 
+           1, $CellContext`h}]]; $CellContext`allVariablesDefaultValue[
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]]] := Flatten[
+         Table[$CellContext`var[$CellContext`i, $CellContext`j] -> 
+          0, {$CellContext`i, 1, $CellContext`w}, {$CellContext`j, 
+           1, $CellContext`h}]]; $CellContext`onEquation[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]], 
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Pattern[$CellContext`gs, 
+          
+          Blank[]]] := $CellContext`getShowValue[$CellContext`i, \
+$CellContext`j, $CellContext`w, $CellContext`h, $CellContext`gs] == 
+        1 + $CellContext`variable[$CellContext`i, $CellContext`j, \
+$CellContext`w, $CellContext`h] + $CellContext`variable[$CellContext`i - 
+           1, $CellContext`j, $CellContext`w, $CellContext`h] + \
+$CellContext`variable[$CellContext`i, $CellContext`j - 
+           1, $CellContext`w, $CellContext`h] + \
+$CellContext`variable[$CellContext`i + 
+           1, $CellContext`j, $CellContext`w, $CellContext`h] + \
+$CellContext`variable[$CellContext`i, $CellContext`j + 
+           1, $CellContext`w, $CellContext`h]; $CellContext`offEquation[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]], 
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Pattern[$CellContext`gs, 
+          
+          Blank[]]] := $CellContext`getShowValue[$CellContext`i, \
+$CellContext`j, $CellContext`w, $CellContext`h, $CellContext`gs] == \
+$CellContext`variable[$CellContext`i, $CellContext`j, $CellContext`w, \
+$CellContext`h] + $CellContext`variable[$CellContext`i - 
+           1, $CellContext`j, $CellContext`w, $CellContext`h] + \
+$CellContext`variable[$CellContext`i, $CellContext`j - 
+           1, $CellContext`w, $CellContext`h] + \
+$CellContext`variable[$CellContext`i + 
+           1, $CellContext`j, $CellContext`w, $CellContext`h] + \
+$CellContext`variable[$CellContext`i, $CellContext`j + 
+           1, $CellContext`w, $CellContext`h]; Null); 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->209527112]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`g$$ = 44, $CellContext`gameSquare$$ = {{1, 
+    1, 0, 1, 1, 0, 1, 0}, {0, 0, 0, 0, 0, 1, 0, 0}, {0, 1, 1, 0, 1, 1, 1, 
+    0}, {0, 1, 0, 0, 0, 1, 0, 0}, {1, 0, 0, 1, 0, 0, 1, 1}, {0, 0, 0, 1, 1, 0,
+     0, 1}, {1, 1, 1, 0, 1, 1, 1, 1}, {0, 0, 0, 0, 0, 1, 1, 
+    0}}, $CellContext`h$$ = 5, $CellContext`state$$ = 1, $CellContext`w$$ = 5,
+     Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`w$$], 5, "width"}, 3, 8, 1}, {{
+       Hold[$CellContext`h$$], 5, "height"}, 3, 8, 1}, {{
+       Hold[$CellContext`g$$], 44, "game"}, 1, 100, 1}, {{
+       Hold[$CellContext`state$$], 1, ""}, {
+      1 -> "the game", 2 -> "all off solution", 3 -> "all on solution"}}, {{
+       Hold[$CellContext`gameSquare$$], {{1, 1, 0, 1, 1, 0, 1, 0}, {0, 0, 0, 
+       0, 0, 1, 0, 0}, {0, 1, 1, 0, 1, 1, 1, 0}, {0, 1, 0, 0, 0, 1, 0, 0}, {1,
+        0, 0, 1, 0, 0, 1, 1}, {0, 0, 0, 1, 1, 0, 0, 1}, {1, 1, 1, 0, 1, 1, 1, 
+       1}, {0, 0, 0, 0, 0, 1, 1, 0}}}}}, Typeset`size$$ = Automatic, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`w$1292640$$ = 0, $CellContext`h$1292641$$ = 
+    0, $CellContext`g$1292642$$ = 0, $CellContext`state$1292643$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`g$$ = 
+        44, $CellContext`gameSquare$$ = {{1, 1, 0, 1, 1, 0, 1, 0}, {0, 0, 0, 
+         0, 0, 1, 0, 0}, {0, 1, 1, 0, 1, 1, 1, 0}, {0, 1, 0, 0, 0, 1, 0, 0}, {
+         1, 0, 0, 1, 0, 0, 1, 1}, {0, 0, 0, 1, 1, 0, 0, 1}, {1, 1, 1, 0, 1, 1,
+          1, 1}, {0, 0, 0, 0, 0, 1, 1, 0}}, $CellContext`h$$ = 
+        5, $CellContext`state$$ = 1, $CellContext`w$$ = 5}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`w$$, $CellContext`w$1292640$$, 0], 
+        Hold[$CellContext`h$$, $CellContext`h$1292641$$, 0], 
+        Hold[$CellContext`g$$, $CellContext`g$1292642$$, 0], 
+        Hold[$CellContext`state$$, $CellContext`state$1292643$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> ($CellContext`gameSquare$$ = 
+        Part[$CellContext`allgames, $CellContext`g$$, All, All]; 
+       Switch[$CellContext`state$$, 1, 
+         EventHandler[
+          Graphics[
+           Dynamic[
+            Table[
+             If[
+              EvenQ[
+               $CellContext`getShowValue[$CellContext`i, $CellContext`j, \
+$CellContext`w$$, $CellContext`h$$, $CellContext`gameSquare$$]], {Gray, 
+               $CellContext`showSquare[{$CellContext`i, $CellContext`j}]}, {
+               RGBColor[0.79, 0.71, 0.26], 
+               $CellContext`showSquare[{$CellContext`i, $CellContext`j}]}], \
+{$CellContext`i, 1, $CellContext`w$$}, {$CellContext`j, 
+              1, $CellContext`h$$}]], Background -> 
+           RGBColor[0.48, 0.11, 0.56], ImageSize -> {400, 400}], 
+          "MouseDown" :> $CellContext`updateGameSquare[
+            Floor[
+             MousePosition["Graphics"]], $CellContext`gameSquare$$]], 2, 
+         Dynamic[$CellContext`sluoff = Quiet[
+             Solve[
+              Flatten[
+               Table[
+                $CellContext`offEquation[$CellContext`i, $CellContext`j, \
+$CellContext`w$$, $CellContext`h$$, $CellContext`gameSquare$$], \
+{$CellContext`i, 1, $CellContext`w$$}, {$CellContext`j, 
+                 1, $CellContext`h$$}]], 
+              $CellContext`allVariables[$CellContext`w$$, $CellContext`h$$], 
+              Modulus -> 2]]; Graphics[
+            Dynamic[
+             Table[
+              If[
+               EvenQ[
+                First[
+                 ReplaceAll[
+                  ReplaceAll[
+                   $CellContext`var[$CellContext`i, $CellContext`j], \
+$CellContext`sluoff], 
+                  $CellContext`allVariablesDefaultValue[$CellContext`w$$, \
+$CellContext`h$$]]]], {Gray, 
+                $CellContext`showSquare[{$CellContext`i, $CellContext`j}]}, {
+                RGBColor[0.49, 0, 0], 
+                $CellContext`showSquare[{$CellContext`i, $CellContext`j}]}], \
+{$CellContext`i, 1, $CellContext`w$$}, {$CellContext`j, 
+               1, $CellContext`h$$}]], Background -> 
+            RGBColor[0.48, 0.11, 0.56], ImageSize -> {400, 400}]], 3, 
+         Dynamic[$CellContext`sluon = Quiet[
+             Solve[
+              Flatten[
+               Table[
+                $CellContext`onEquation[$CellContext`i, $CellContext`j, \
+$CellContext`w$$, $CellContext`h$$, $CellContext`gameSquare$$], \
+{$CellContext`i, 1, $CellContext`w$$}, {$CellContext`j, 
+                 1, $CellContext`h$$}]], 
+              $CellContext`allVariables[$CellContext`w$$, $CellContext`h$$], 
+              Modulus -> 2]]; Graphics[
+            Dynamic[
+             Table[
+              If[
+               EvenQ[
+                First[
+                 ReplaceAll[
+                  ReplaceAll[
+                   $CellContext`var[$CellContext`i, $CellContext`j], \
+$CellContext`sluon], 
+                  $CellContext`allVariablesDefaultValue[$CellContext`w$$, \
+$CellContext`h$$]]]], {Gray, 
+                $CellContext`showSquare[{$CellContext`i, $CellContext`j}]}, {
+                RGBColor[0.49, 0, 0], 
+                $CellContext`showSquare[{$CellContext`i, $CellContext`j}]}], \
+{$CellContext`i, 1, $CellContext`w$$}, {$CellContext`j, 
+               1, $CellContext`h$$}]], Background -> 
+            RGBColor[0.48, 0.11, 0.56], ImageSize -> {400, 400}]]]), 
+      "Specifications" :> {{{$CellContext`w$$, 5, "width"}, 3, 8, 1, 
+         ControlType -> RadioButton}, {{$CellContext`h$$, 5, "height"}, 3, 8, 
+         1, ControlType -> RadioButton}, {{$CellContext`g$$, 44, "game"}, 1, 
+         100, 1, Appearance -> "Labeled"}, {{$CellContext`state$$, 1, ""}, {
+         1 -> "the game", 2 -> "all off solution", 3 -> 
+          "all on solution"}}, {{$CellContext`gameSquare$$, {{1, 1, 0, 1, 1, 
+          0, 1, 0}, {0, 0, 0, 0, 0, 1, 0, 0}, {0, 1, 1, 0, 1, 1, 1, 0}, {0, 1,
+           0, 0, 0, 1, 0, 0}, {1, 0, 0, 1, 0, 0, 1, 1}, {0, 0, 0, 1, 1, 0, 0, 
+          1}, {1, 1, 1, 0, 1, 1, 1, 1}, {0, 0, 0, 0, 0, 1, 1, 0}}}, 
+         ControlType -> None}}, 
+      "Options" :> {
+       SynchronousUpdating -> False, Alignment -> Center, TrackedSymbols -> 
+        True, AutorunSequencing -> {1, 2, 3, 4}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>(($CellContext`maxWidth = 8; $CellContext`maxHeight = 
+       8; $CellContext`maxNumGames = 100; $CellContext`allgames = Table[
+         Table[
+          Random[
+          Integer], {$CellContext`i, 
+           1, $CellContext`maxWidth}, {$CellContext`j, 
+           1, $CellContext`maxHeight}], {$CellContext`maxNumGames}]; 
+      SetAttributes[$CellContext`updateGameSquare, 
+        HoldRest]; $CellContext`updateGameSquare[{
+          Pattern[$CellContext`i, 
+           Blank[]], 
+          Pattern[$CellContext`j, 
+           Blank[]]}, 
+         Pattern[$CellContext`gs, 
+          Blank[]]] := (Part[$CellContext`gs, $CellContext`i, $CellContext`j] = 
+        1 - Part[$CellContext`gs, $CellContext`i, $CellContext`j]); \
+$CellContext`showSquare[{
+          Pattern[$CellContext`i, 
+           Blank[]], 
+          Pattern[$CellContext`j, 
+           Blank[]]}] := 
+       Rectangle[{$CellContext`i + 0.02, $CellContext`j + 
+          0.02}, {$CellContext`i + 0.98, $CellContext`j + 
+          0.98}]; $CellContext`getSquareValue[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]], 
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Pattern[$CellContext`gs, 
+          Blank[]]] := If[
+         And[$CellContext`i >= 
+          1, $CellContext`i <= $CellContext`w, $CellContext`j >= 
+          1, $CellContext`j <= $CellContext`h], 
+         Part[$CellContext`gs, $CellContext`i, $CellContext`j], 
+         0]; $CellContext`getShowValue[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]], 
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Pattern[$CellContext`gs, 
+          
+          Blank[]]] := $CellContext`getSquareValue[$CellContext`i, \
+$CellContext`j, $CellContext`w, $CellContext`h, $CellContext`gs] + \
+$CellContext`getSquareValue[$CellContext`i, $CellContext`j + 
+          1, $CellContext`w, $CellContext`h, $CellContext`gs] + \
+$CellContext`getSquareValue[$CellContext`i, $CellContext`j - 
+          1, $CellContext`w, $CellContext`h, $CellContext`gs] + \
+$CellContext`getSquareValue[$CellContext`i - 
+          1, $CellContext`j, $CellContext`w, $CellContext`h, $CellContext`gs] + \
+$CellContext`getSquareValue[$CellContext`i + 
+          1, $CellContext`j, $CellContext`w, $CellContext`h, $CellContext`gs]; \
+$CellContext`var[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          
+          Blank[]]] := $CellContext`x[$CellContext`i, $CellContext`j]; \
+$CellContext`variable[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]], 
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]]] := If[
+         And[$CellContext`i >= 
+          1, $CellContext`i <= $CellContext`w, $CellContext`j >= 
+          1, $CellContext`j <= $CellContext`h], 
+         $CellContext`var[$CellContext`i, $CellContext`j], 
+         0]; $CellContext`allVariables[
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]]] := Flatten[
+         Table[
+          $CellContext`var[$CellContext`i, $CellContext`j], {$CellContext`i, 
+           1, $CellContext`w}, {$CellContext`j, 
+           1, $CellContext`h}]]; $CellContext`allVariablesDefaultValue[
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]]] := Flatten[
+         Table[$CellContext`var[$CellContext`i, $CellContext`j] -> 
+          0, {$CellContext`i, 1, $CellContext`w}, {$CellContext`j, 
+           1, $CellContext`h}]]; $CellContext`onEquation[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]], 
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Pattern[$CellContext`gs, 
+          
+          Blank[]]] := $CellContext`getShowValue[$CellContext`i, \
+$CellContext`j, $CellContext`w, $CellContext`h, $CellContext`gs] == 
+        1 + $CellContext`variable[$CellContext`i, $CellContext`j, \
+$CellContext`w, $CellContext`h] + $CellContext`variable[$CellContext`i - 
+           1, $CellContext`j, $CellContext`w, $CellContext`h] + \
+$CellContext`variable[$CellContext`i, $CellContext`j - 
+           1, $CellContext`w, $CellContext`h] + \
+$CellContext`variable[$CellContext`i + 
+           1, $CellContext`j, $CellContext`w, $CellContext`h] + \
+$CellContext`variable[$CellContext`i, $CellContext`j + 
+           1, $CellContext`w, $CellContext`h]; $CellContext`offEquation[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]], 
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Pattern[$CellContext`gs, 
+          
+          Blank[]]] := $CellContext`getShowValue[$CellContext`i, \
+$CellContext`j, $CellContext`w, $CellContext`h, $CellContext`gs] == \
+$CellContext`variable[$CellContext`i, $CellContext`j, $CellContext`w, \
+$CellContext`h] + $CellContext`variable[$CellContext`i - 
+           1, $CellContext`j, $CellContext`w, $CellContext`h] + \
+$CellContext`variable[$CellContext`i, $CellContext`j - 
+           1, $CellContext`w, $CellContext`h] + \
+$CellContext`variable[$CellContext`i + 
+           1, $CellContext`j, $CellContext`w, $CellContext`h] + \
+$CellContext`variable[$CellContext`i, $CellContext`j + 
+           1, $CellContext`w, $CellContext`h]; Null); 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->3516874],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`g$$ = 66, $CellContext`gameSquare$$ = {{1, 
+    0, 0, 1, 1, 1, 1, 0}, {1, 1, 1, 0, 1, 0, 0, 0}, {1, 0, 1, 0, 1, 0, 1, 
+    0}, {0, 0, 0, 1, 0, 0, 0, 0}, {0, 1, 0, 1, 0, 1, 0, 1}, {0, 1, 0, 1, 1, 1,
+     0, 1}, {0, 0, 1, 1, 0, 0, 1, 1}, {0, 0, 0, 1, 1, 0, 1, 
+    1}}, $CellContext`h$$ = 7, $CellContext`state$$ = 1, $CellContext`w$$ = 7,
+     Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`w$$], 7, "width"}, 3, 8, 1}, {{
+       Hold[$CellContext`h$$], 7, "height"}, 3, 8, 1}, {{
+       Hold[$CellContext`g$$], 66, "game"}, 1, 100, 1}, {{
+       Hold[$CellContext`state$$], 1, ""}, {
+      1 -> "the game", 2 -> "all off solution", 3 -> "all on solution"}}, {{
+       Hold[$CellContext`gameSquare$$], {{1, 0, 0, 1, 1, 1, 1, 0}, {1, 1, 1, 
+       0, 1, 0, 0, 0}, {1, 0, 1, 0, 1, 0, 1, 0}, {0, 0, 0, 1, 0, 0, 0, 0}, {0,
+        1, 0, 1, 0, 1, 0, 1}, {0, 1, 0, 1, 1, 1, 0, 1}, {0, 0, 1, 1, 0, 0, 1, 
+       1}, {0, 0, 0, 1, 1, 0, 1, 1}}}}}, Typeset`size$$ = Automatic, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`w$1292712$$ = 0, $CellContext`h$1292713$$ = 
+    0, $CellContext`g$1292714$$ = 0, $CellContext`state$1292715$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`g$$ = 
+        66, $CellContext`gameSquare$$ = {{1, 0, 0, 1, 1, 1, 1, 0}, {1, 1, 1, 
+         0, 1, 0, 0, 0}, {1, 0, 1, 0, 1, 0, 1, 0}, {0, 0, 0, 1, 0, 0, 0, 0}, {
+         0, 1, 0, 1, 0, 1, 0, 1}, {0, 1, 0, 1, 1, 1, 0, 1}, {0, 0, 1, 1, 0, 0,
+          1, 1}, {0, 0, 0, 1, 1, 0, 1, 1}}, $CellContext`h$$ = 
+        7, $CellContext`state$$ = 1, $CellContext`w$$ = 7}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`w$$, $CellContext`w$1292712$$, 0], 
+        Hold[$CellContext`h$$, $CellContext`h$1292713$$, 0], 
+        Hold[$CellContext`g$$, $CellContext`g$1292714$$, 0], 
+        Hold[$CellContext`state$$, $CellContext`state$1292715$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> ($CellContext`gameSquare$$ = 
+        Part[$CellContext`allgames, $CellContext`g$$, All, All]; 
+       Switch[$CellContext`state$$, 1, 
+         EventHandler[
+          Graphics[
+           Dynamic[
+            Table[
+             If[
+              EvenQ[
+               $CellContext`getShowValue[$CellContext`i, $CellContext`j, \
+$CellContext`w$$, $CellContext`h$$, $CellContext`gameSquare$$]], {Gray, 
+               $CellContext`showSquare[{$CellContext`i, $CellContext`j}]}, {
+               RGBColor[0.79, 0.71, 0.26], 
+               $CellContext`showSquare[{$CellContext`i, $CellContext`j}]}], \
+{$CellContext`i, 1, $CellContext`w$$}, {$CellContext`j, 
+              1, $CellContext`h$$}]], Background -> 
+           RGBColor[0.48, 0.11, 0.56], ImageSize -> {400, 400}], 
+          "MouseDown" :> $CellContext`updateGameSquare[
+            Floor[
+             MousePosition["Graphics"]], $CellContext`gameSquare$$]], 2, 
+         Dynamic[$CellContext`sluoff = Quiet[
+             Solve[
+              Flatten[
+               Table[
+                $CellContext`offEquation[$CellContext`i, $CellContext`j, \
+$CellContext`w$$, $CellContext`h$$, $CellContext`gameSquare$$], \
+{$CellContext`i, 1, $CellContext`w$$}, {$CellContext`j, 
+                 1, $CellContext`h$$}]], 
+              $CellContext`allVariables[$CellContext`w$$, $CellContext`h$$], 
+              Modulus -> 2]]; Graphics[
+            Dynamic[
+             Table[
+              If[
+               EvenQ[
+                First[
+                 ReplaceAll[
+                  ReplaceAll[
+                   $CellContext`var[$CellContext`i, $CellContext`j], \
+$CellContext`sluoff], 
+                  $CellContext`allVariablesDefaultValue[$CellContext`w$$, \
+$CellContext`h$$]]]], {Gray, 
+                $CellContext`showSquare[{$CellContext`i, $CellContext`j}]}, {
+                RGBColor[0.49, 0, 0], 
+                $CellContext`showSquare[{$CellContext`i, $CellContext`j}]}], \
+{$CellContext`i, 1, $CellContext`w$$}, {$CellContext`j, 
+               1, $CellContext`h$$}]], Background -> 
+            RGBColor[0.48, 0.11, 0.56], ImageSize -> {400, 400}]], 3, 
+         Dynamic[$CellContext`sluon = Quiet[
+             Solve[
+              Flatten[
+               Table[
+                $CellContext`onEquation[$CellContext`i, $CellContext`j, \
+$CellContext`w$$, $CellContext`h$$, $CellContext`gameSquare$$], \
+{$CellContext`i, 1, $CellContext`w$$}, {$CellContext`j, 
+                 1, $CellContext`h$$}]], 
+              $CellContext`allVariables[$CellContext`w$$, $CellContext`h$$], 
+              Modulus -> 2]]; Graphics[
+            Dynamic[
+             Table[
+              If[
+               EvenQ[
+                First[
+                 ReplaceAll[
+                  ReplaceAll[
+                   $CellContext`var[$CellContext`i, $CellContext`j], \
+$CellContext`sluon], 
+                  $CellContext`allVariablesDefaultValue[$CellContext`w$$, \
+$CellContext`h$$]]]], {Gray, 
+                $CellContext`showSquare[{$CellContext`i, $CellContext`j}]}, {
+                RGBColor[0.49, 0, 0], 
+                $CellContext`showSquare[{$CellContext`i, $CellContext`j}]}], \
+{$CellContext`i, 1, $CellContext`w$$}, {$CellContext`j, 
+               1, $CellContext`h$$}]], Background -> 
+            RGBColor[0.48, 0.11, 0.56], ImageSize -> {400, 400}]]]), 
+      "Specifications" :> {{{$CellContext`w$$, 7, "width"}, 3, 8, 1, 
+         ControlType -> RadioButton}, {{$CellContext`h$$, 7, "height"}, 3, 8, 
+         1, ControlType -> RadioButton}, {{$CellContext`g$$, 66, "game"}, 1, 
+         100, 1, Appearance -> "Labeled"}, {{$CellContext`state$$, 1, ""}, {
+         1 -> "the game", 2 -> "all off solution", 3 -> 
+          "all on solution"}}, {{$CellContext`gameSquare$$, {{1, 0, 0, 1, 1, 
+          1, 1, 0}, {1, 1, 1, 0, 1, 0, 0, 0}, {1, 0, 1, 0, 1, 0, 1, 0}, {0, 0,
+           0, 1, 0, 0, 0, 0}, {0, 1, 0, 1, 0, 1, 0, 1}, {0, 1, 0, 1, 1, 1, 0, 
+          1}, {0, 0, 1, 1, 0, 0, 1, 1}, {0, 0, 0, 1, 1, 0, 1, 1}}}, 
+         ControlType -> None}}, 
+      "Options" :> {
+       SynchronousUpdating -> False, Alignment -> Center, TrackedSymbols -> 
+        True, AutorunSequencing -> {1, 2, 3, 4}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>(($CellContext`maxWidth = 8; $CellContext`maxHeight = 
+       8; $CellContext`maxNumGames = 100; $CellContext`allgames = Table[
+         Table[
+          Random[
+          Integer], {$CellContext`i, 
+           1, $CellContext`maxWidth}, {$CellContext`j, 
+           1, $CellContext`maxHeight}], {$CellContext`maxNumGames}]; 
+      SetAttributes[$CellContext`updateGameSquare, 
+        HoldRest]; $CellContext`updateGameSquare[{
+          Pattern[$CellContext`i, 
+           Blank[]], 
+          Pattern[$CellContext`j, 
+           Blank[]]}, 
+         Pattern[$CellContext`gs, 
+          Blank[]]] := (Part[$CellContext`gs, $CellContext`i, $CellContext`j] = 
+        1 - Part[$CellContext`gs, $CellContext`i, $CellContext`j]); \
+$CellContext`showSquare[{
+          Pattern[$CellContext`i, 
+           Blank[]], 
+          Pattern[$CellContext`j, 
+           Blank[]]}] := 
+       Rectangle[{$CellContext`i + 0.02, $CellContext`j + 
+          0.02}, {$CellContext`i + 0.98, $CellContext`j + 
+          0.98}]; $CellContext`getSquareValue[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]], 
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Pattern[$CellContext`gs, 
+          Blank[]]] := If[
+         And[$CellContext`i >= 
+          1, $CellContext`i <= $CellContext`w, $CellContext`j >= 
+          1, $CellContext`j <= $CellContext`h], 
+         Part[$CellContext`gs, $CellContext`i, $CellContext`j], 
+         0]; $CellContext`getShowValue[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]], 
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Pattern[$CellContext`gs, 
+          
+          Blank[]]] := $CellContext`getSquareValue[$CellContext`i, \
+$CellContext`j, $CellContext`w, $CellContext`h, $CellContext`gs] + \
+$CellContext`getSquareValue[$CellContext`i, $CellContext`j + 
+          1, $CellContext`w, $CellContext`h, $CellContext`gs] + \
+$CellContext`getSquareValue[$CellContext`i, $CellContext`j - 
+          1, $CellContext`w, $CellContext`h, $CellContext`gs] + \
+$CellContext`getSquareValue[$CellContext`i - 
+          1, $CellContext`j, $CellContext`w, $CellContext`h, $CellContext`gs] + \
+$CellContext`getSquareValue[$CellContext`i + 
+          1, $CellContext`j, $CellContext`w, $CellContext`h, $CellContext`gs]; \
+$CellContext`var[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          
+          Blank[]]] := $CellContext`x[$CellContext`i, $CellContext`j]; \
+$CellContext`variable[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]], 
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]]] := If[
+         And[$CellContext`i >= 
+          1, $CellContext`i <= $CellContext`w, $CellContext`j >= 
+          1, $CellContext`j <= $CellContext`h], 
+         $CellContext`var[$CellContext`i, $CellContext`j], 
+         0]; $CellContext`allVariables[
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]]] := Flatten[
+         Table[
+          $CellContext`var[$CellContext`i, $CellContext`j], {$CellContext`i, 
+           1, $CellContext`w}, {$CellContext`j, 
+           1, $CellContext`h}]]; $CellContext`allVariablesDefaultValue[
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]]] := Flatten[
+         Table[$CellContext`var[$CellContext`i, $CellContext`j] -> 
+          0, {$CellContext`i, 1, $CellContext`w}, {$CellContext`j, 
+           1, $CellContext`h}]]; $CellContext`onEquation[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]], 
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Pattern[$CellContext`gs, 
+          
+          Blank[]]] := $CellContext`getShowValue[$CellContext`i, \
+$CellContext`j, $CellContext`w, $CellContext`h, $CellContext`gs] == 
+        1 + $CellContext`variable[$CellContext`i, $CellContext`j, \
+$CellContext`w, $CellContext`h] + $CellContext`variable[$CellContext`i - 
+           1, $CellContext`j, $CellContext`w, $CellContext`h] + \
+$CellContext`variable[$CellContext`i, $CellContext`j - 
+           1, $CellContext`w, $CellContext`h] + \
+$CellContext`variable[$CellContext`i + 
+           1, $CellContext`j, $CellContext`w, $CellContext`h] + \
+$CellContext`variable[$CellContext`i, $CellContext`j + 
+           1, $CellContext`w, $CellContext`h]; $CellContext`offEquation[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]], 
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Pattern[$CellContext`gs, 
+          
+          Blank[]]] := $CellContext`getShowValue[$CellContext`i, \
+$CellContext`j, $CellContext`w, $CellContext`h, $CellContext`gs] == \
+$CellContext`variable[$CellContext`i, $CellContext`j, $CellContext`w, \
+$CellContext`h] + $CellContext`variable[$CellContext`i - 
+           1, $CellContext`j, $CellContext`w, $CellContext`h] + \
+$CellContext`variable[$CellContext`i, $CellContext`j - 
+           1, $CellContext`w, $CellContext`h] + \
+$CellContext`variable[$CellContext`i + 
+           1, $CellContext`j, $CellContext`w, $CellContext`h] + \
+$CellContext`variable[$CellContext`i, $CellContext`j + 
+           1, $CellContext`w, $CellContext`h]; Null); 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->851722102],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`g$$ = 66, $CellContext`gameSquare$$ = {{1, 
+    0, 0, 1, 1, 1, 1, 0}, {1, 1, 1, 0, 1, 0, 0, 0}, {1, 0, 1, 0, 1, 0, 1, 
+    0}, {0, 0, 0, 1, 0, 0, 0, 0}, {0, 1, 0, 1, 0, 1, 0, 1}, {0, 1, 0, 1, 1, 1,
+     0, 1}, {0, 0, 1, 1, 0, 0, 1, 1}, {0, 0, 0, 1, 1, 0, 1, 
+    1}}, $CellContext`h$$ = 8, $CellContext`state$$ = 1, $CellContext`w$$ = 8,
+     Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`w$$], 8, "width"}, 3, 8, 1}, {{
+       Hold[$CellContext`h$$], 8, "height"}, 3, 8, 1}, {{
+       Hold[$CellContext`g$$], 66, "game"}, 1, 100, 1}, {{
+       Hold[$CellContext`state$$], 1, ""}, {
+      1 -> "the game", 2 -> "all off solution", 3 -> "all on solution"}}, {{
+       Hold[$CellContext`gameSquare$$], {{1, 0, 0, 1, 1, 1, 1, 0}, {1, 1, 1, 
+       0, 1, 0, 0, 0}, {1, 0, 1, 0, 1, 0, 1, 0}, {0, 0, 0, 1, 0, 0, 0, 0}, {0,
+        1, 0, 1, 0, 1, 0, 1}, {0, 1, 0, 1, 1, 1, 0, 1}, {0, 0, 1, 1, 0, 0, 1, 
+       1}, {0, 0, 0, 1, 1, 0, 1, 1}}}}}, Typeset`size$$ = Automatic, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`w$1292784$$ = 0, $CellContext`h$1292785$$ = 
+    0, $CellContext`g$1292786$$ = 0, $CellContext`state$1292787$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`g$$ = 
+        66, $CellContext`gameSquare$$ = {{1, 0, 0, 1, 1, 1, 1, 0}, {1, 1, 1, 
+         0, 1, 0, 0, 0}, {1, 0, 1, 0, 1, 0, 1, 0}, {0, 0, 0, 1, 0, 0, 0, 0}, {
+         0, 1, 0, 1, 0, 1, 0, 1}, {0, 1, 0, 1, 1, 1, 0, 1}, {0, 0, 1, 1, 0, 0,
+          1, 1}, {0, 0, 0, 1, 1, 0, 1, 1}}, $CellContext`h$$ = 
+        8, $CellContext`state$$ = 1, $CellContext`w$$ = 8}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`w$$, $CellContext`w$1292784$$, 0], 
+        Hold[$CellContext`h$$, $CellContext`h$1292785$$, 0], 
+        Hold[$CellContext`g$$, $CellContext`g$1292786$$, 0], 
+        Hold[$CellContext`state$$, $CellContext`state$1292787$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> ($CellContext`gameSquare$$ = 
+        Part[$CellContext`allgames, $CellContext`g$$, All, All]; 
+       Switch[$CellContext`state$$, 1, 
+         EventHandler[
+          Graphics[
+           Dynamic[
+            Table[
+             If[
+              EvenQ[
+               $CellContext`getShowValue[$CellContext`i, $CellContext`j, \
+$CellContext`w$$, $CellContext`h$$, $CellContext`gameSquare$$]], {Gray, 
+               $CellContext`showSquare[{$CellContext`i, $CellContext`j}]}, {
+               RGBColor[0.79, 0.71, 0.26], 
+               $CellContext`showSquare[{$CellContext`i, $CellContext`j}]}], \
+{$CellContext`i, 1, $CellContext`w$$}, {$CellContext`j, 
+              1, $CellContext`h$$}]], Background -> 
+           RGBColor[0.48, 0.11, 0.56], ImageSize -> {400, 400}], 
+          "MouseDown" :> $CellContext`updateGameSquare[
+            Floor[
+             MousePosition["Graphics"]], $CellContext`gameSquare$$]], 2, 
+         Dynamic[$CellContext`sluoff = Quiet[
+             Solve[
+              Flatten[
+               Table[
+                $CellContext`offEquation[$CellContext`i, $CellContext`j, \
+$CellContext`w$$, $CellContext`h$$, $CellContext`gameSquare$$], \
+{$CellContext`i, 1, $CellContext`w$$}, {$CellContext`j, 
+                 1, $CellContext`h$$}]], 
+              $CellContext`allVariables[$CellContext`w$$, $CellContext`h$$], 
+              Modulus -> 2]]; Graphics[
+            Dynamic[
+             Table[
+              If[
+               EvenQ[
+                First[
+                 ReplaceAll[
+                  ReplaceAll[
+                   $CellContext`var[$CellContext`i, $CellContext`j], \
+$CellContext`sluoff], 
+                  $CellContext`allVariablesDefaultValue[$CellContext`w$$, \
+$CellContext`h$$]]]], {Gray, 
+                $CellContext`showSquare[{$CellContext`i, $CellContext`j}]}, {
+                RGBColor[0.49, 0, 0], 
+                $CellContext`showSquare[{$CellContext`i, $CellContext`j}]}], \
+{$CellContext`i, 1, $CellContext`w$$}, {$CellContext`j, 
+               1, $CellContext`h$$}]], Background -> 
+            RGBColor[0.48, 0.11, 0.56], ImageSize -> {400, 400}]], 3, 
+         Dynamic[$CellContext`sluon = Quiet[
+             Solve[
+              Flatten[
+               Table[
+                $CellContext`onEquation[$CellContext`i, $CellContext`j, \
+$CellContext`w$$, $CellContext`h$$, $CellContext`gameSquare$$], \
+{$CellContext`i, 1, $CellContext`w$$}, {$CellContext`j, 
+                 1, $CellContext`h$$}]], 
+              $CellContext`allVariables[$CellContext`w$$, $CellContext`h$$], 
+              Modulus -> 2]]; Graphics[
+            Dynamic[
+             Table[
+              If[
+               EvenQ[
+                First[
+                 ReplaceAll[
+                  ReplaceAll[
+                   $CellContext`var[$CellContext`i, $CellContext`j], \
+$CellContext`sluon], 
+                  $CellContext`allVariablesDefaultValue[$CellContext`w$$, \
+$CellContext`h$$]]]], {Gray, 
+                $CellContext`showSquare[{$CellContext`i, $CellContext`j}]}, {
+                RGBColor[0.49, 0, 0], 
+                $CellContext`showSquare[{$CellContext`i, $CellContext`j}]}], \
+{$CellContext`i, 1, $CellContext`w$$}, {$CellContext`j, 
+               1, $CellContext`h$$}]], Background -> 
+            RGBColor[0.48, 0.11, 0.56], ImageSize -> {400, 400}]]]), 
+      "Specifications" :> {{{$CellContext`w$$, 8, "width"}, 3, 8, 1, 
+         ControlType -> RadioButton}, {{$CellContext`h$$, 8, "height"}, 3, 8, 
+         1, ControlType -> RadioButton}, {{$CellContext`g$$, 66, "game"}, 1, 
+         100, 1, Appearance -> "Labeled"}, {{$CellContext`state$$, 1, ""}, {
+         1 -> "the game", 2 -> "all off solution", 3 -> 
+          "all on solution"}}, {{$CellContext`gameSquare$$, {{1, 0, 0, 1, 1, 
+          1, 1, 0}, {1, 1, 1, 0, 1, 0, 0, 0}, {1, 0, 1, 0, 1, 0, 1, 0}, {0, 0,
+           0, 1, 0, 0, 0, 0}, {0, 1, 0, 1, 0, 1, 0, 1}, {0, 1, 0, 1, 1, 1, 0, 
+          1}, {0, 0, 1, 1, 0, 0, 1, 1}, {0, 0, 0, 1, 1, 0, 1, 1}}}, 
+         ControlType -> None}}, 
+      "Options" :> {
+       SynchronousUpdating -> False, Alignment -> Center, TrackedSymbols -> 
+        True, AutorunSequencing -> {1, 2, 3, 4}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>(($CellContext`maxWidth = 8; $CellContext`maxHeight = 
+       8; $CellContext`maxNumGames = 100; $CellContext`allgames = Table[
+         Table[
+          Random[
+          Integer], {$CellContext`i, 
+           1, $CellContext`maxWidth}, {$CellContext`j, 
+           1, $CellContext`maxHeight}], {$CellContext`maxNumGames}]; 
+      SetAttributes[$CellContext`updateGameSquare, 
+        HoldRest]; $CellContext`updateGameSquare[{
+          Pattern[$CellContext`i, 
+           Blank[]], 
+          Pattern[$CellContext`j, 
+           Blank[]]}, 
+         Pattern[$CellContext`gs, 
+          Blank[]]] := (Part[$CellContext`gs, $CellContext`i, $CellContext`j] = 
+        1 - Part[$CellContext`gs, $CellContext`i, $CellContext`j]); \
+$CellContext`showSquare[{
+          Pattern[$CellContext`i, 
+           Blank[]], 
+          Pattern[$CellContext`j, 
+           Blank[]]}] := 
+       Rectangle[{$CellContext`i + 0.02, $CellContext`j + 
+          0.02}, {$CellContext`i + 0.98, $CellContext`j + 
+          0.98}]; $CellContext`getSquareValue[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]], 
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Pattern[$CellContext`gs, 
+          Blank[]]] := If[
+         And[$CellContext`i >= 
+          1, $CellContext`i <= $CellContext`w, $CellContext`j >= 
+          1, $CellContext`j <= $CellContext`h], 
+         Part[$CellContext`gs, $CellContext`i, $CellContext`j], 
+         0]; $CellContext`getShowValue[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]], 
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Pattern[$CellContext`gs, 
+          
+          Blank[]]] := $CellContext`getSquareValue[$CellContext`i, \
+$CellContext`j, $CellContext`w, $CellContext`h, $CellContext`gs] + \
+$CellContext`getSquareValue[$CellContext`i, $CellContext`j + 
+          1, $CellContext`w, $CellContext`h, $CellContext`gs] + \
+$CellContext`getSquareValue[$CellContext`i, $CellContext`j - 
+          1, $CellContext`w, $CellContext`h, $CellContext`gs] + \
+$CellContext`getSquareValue[$CellContext`i - 
+          1, $CellContext`j, $CellContext`w, $CellContext`h, $CellContext`gs] + \
+$CellContext`getSquareValue[$CellContext`i + 
+          1, $CellContext`j, $CellContext`w, $CellContext`h, $CellContext`gs]; \
+$CellContext`var[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          
+          Blank[]]] := $CellContext`x[$CellContext`i, $CellContext`j]; \
+$CellContext`variable[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]], 
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]]] := If[
+         And[$CellContext`i >= 
+          1, $CellContext`i <= $CellContext`w, $CellContext`j >= 
+          1, $CellContext`j <= $CellContext`h], 
+         $CellContext`var[$CellContext`i, $CellContext`j], 
+         0]; $CellContext`allVariables[
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]]] := Flatten[
+         Table[
+          $CellContext`var[$CellContext`i, $CellContext`j], {$CellContext`i, 
+           1, $CellContext`w}, {$CellContext`j, 
+           1, $CellContext`h}]]; $CellContext`allVariablesDefaultValue[
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]]] := Flatten[
+         Table[$CellContext`var[$CellContext`i, $CellContext`j] -> 
+          0, {$CellContext`i, 1, $CellContext`w}, {$CellContext`j, 
+           1, $CellContext`h}]]; $CellContext`onEquation[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]], 
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Pattern[$CellContext`gs, 
+          
+          Blank[]]] := $CellContext`getShowValue[$CellContext`i, \
+$CellContext`j, $CellContext`w, $CellContext`h, $CellContext`gs] == 
+        1 + $CellContext`variable[$CellContext`i, $CellContext`j, \
+$CellContext`w, $CellContext`h] + $CellContext`variable[$CellContext`i - 
+           1, $CellContext`j, $CellContext`w, $CellContext`h] + \
+$CellContext`variable[$CellContext`i, $CellContext`j - 
+           1, $CellContext`w, $CellContext`h] + \
+$CellContext`variable[$CellContext`i + 
+           1, $CellContext`j, $CellContext`w, $CellContext`h] + \
+$CellContext`variable[$CellContext`i, $CellContext`j + 
+           1, $CellContext`w, $CellContext`h]; $CellContext`offEquation[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`j, 
+          Blank[]], 
+         Pattern[$CellContext`w, 
+          Blank[]], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Pattern[$CellContext`gs, 
+          
+          Blank[]]] := $CellContext`getShowValue[$CellContext`i, \
+$CellContext`j, $CellContext`w, $CellContext`h, $CellContext`gs] == \
+$CellContext`variable[$CellContext`i, $CellContext`j, $CellContext`w, \
+$CellContext`h] + $CellContext`variable[$CellContext`i - 
+           1, $CellContext`j, $CellContext`w, $CellContext`h] + \
+$CellContext`variable[$CellContext`i, $CellContext`j - 
+           1, $CellContext`w, $CellContext`h] + \
+$CellContext`variable[$CellContext`i + 
+           1, $CellContext`j, $CellContext`w, $CellContext`h] + \
+$CellContext`variable[$CellContext`i, $CellContext`j + 
+           1, $CellContext`w, $CellContext`h]; Null); 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->309911892]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "DetailsSection"],
+
+Cell[TextData[{
+ "Suppose the puzzle has ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"M", "\[Times]", "N"}], TraditionalForm]], "InlineMath"],
+ " squares. The solver sets up a system of ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"M", "\[Times]", "N"}], TraditionalForm]], "InlineMath"],
+ " linear equations in ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"M", "\[Times]", "N"}], TraditionalForm]], "InlineMath"],
+ " variables and uses the ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " built-in function ",
+ StyleBox["Solve", "MR"],
+ " to find a solution. The solution page marks the squares that need to be \
+pressed in red."
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4627163647547073`*^9, 3.4627165805745444`*^9}, {
+   3.462716618776202*^9, 3.462716629853902*^9}, {3.4627166898047247`*^9, 
+   3.462716692538995*^9}, {3.462716734271767*^9, 3.4627168031909957`*^9}, {
+   3.4627168440956745`*^9, 3.462716864641761*^9}, {3.462726948772587*^9, 
+   3.462726970094719*^9}, {3.462886703718853*^9, 3.462886748937603*^9}, {
+   3.4628872111706095`*^9, 3.462887214795586*^9}},
+ CellID->17700305],
+
+Cell[TextData[{
+ "For more information, see the Wikipedia entry for ",
+ ButtonBox["Lights Out",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://en.wikipedia.org/wiki/Lights_Out_(game)"], None},
+  ButtonNote->"http://en.wikipedia.org/wiki/Lights_Out_(game)"],
+ "."
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4628873038418913`*^9, 3.4628873190605435`*^9}, {
+   3.4629008859688673`*^9, 3.462900909822674*^9}},
+ CellID->296880346]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.3895522232313623`*^9},
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0, CellBaseline -> Baseline], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SearchTermsSection"],
+
+Cell["Solve", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4627144385904365`*^9, 3.4627144478713303`*^9}, {
+   3.46271448199502*^9, 3.462714518399872*^9}, {3.462716268649023*^9, 
+   3.4627162713364196`*^9}, {3.4627269749522047`*^9, 3.4627269790076103`*^9}},
+ CellID->324720799],
+
+Cell["Modulus", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4627144385904365`*^9, 3.4627144478713303`*^9}, {
+   3.46271448199502*^9, 3.462714518399872*^9}, {3.462716268649023*^9, 
+   3.4627162713364196`*^9}, {3.4627269749522047`*^9, 3.46272697900661*^9}},
+ CellID->61107764],
+
+Cell["EventHandler", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4627144385904365`*^9, 3.4627144478713303`*^9}, {
+   3.46271448199502*^9, 3.462714518399872*^9}, {3.462716268649023*^9, 
+   3.4627162713364196`*^9}, {3.4627269749522047`*^9, 3.462726981757885*^9}},
+ CellID->561415012],
+
+Cell["MousePosition", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4627144385904365`*^9, 3.4627144478713303`*^9}, {
+   3.46271448199502*^9, 3.462714518399872*^9}, {3.462716268649023*^9, 
+   3.4627162713364196`*^9}, {3.4627269749522047`*^9, 3.4627269838800974`*^9}},
+ CellID->134182899],
+
+Cell["TabView ", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4627144385904365`*^9, 3.4627144478713303`*^9}, {
+   3.46271448199502*^9, 3.462714518399872*^9}, {3.462716268649023*^9, 
+   3.4627162713364196`*^9}, {3.4627269749522047`*^9, 3.462726983872096*^9}},
+ CellID->245577259]
+}, Open  ]],
+
+Cell["", "RelatedLinksSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Xiangdong Wen",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Xiangdong+Wen"],
+     None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Xiangdong+Wen"]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.462714373186698*^9, 3.462714388811098*^9}, {
+   3.4627162275099773`*^9, 3.462716255337034*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1680, 879},
+WindowMargins->{{-14, Automatic}, {Automatic, 32}},
+FrontEndVersion->"8.0 for Microsoft Windows (64-bit) (October 6, 2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[86314, 1960, 312, 8, 22, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[86629, 1970, 678, 16, 22, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[87310, 1988, 340, 11, 22, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[87653, 2001, 637, 15, 22, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[88293, 2018, 844, 21, 22, "ControlSuggestions",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[89140, 2041, 369, 9, 22, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[89512, 2052, 1464, 31, 22, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[90979, 2085, 908, 21, 22, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 94390, 2182},
+ {"RotateAndZoomIn3D", 94499, 2185},
+ {"DragLocators", 94609, 2188},
+ {"CreateAndDeleteLocators", 94725, 2191},
+ {"SliderZoom", 94839, 2194},
+ {"GamepadControls", 94945, 2197},
+ {"AutomaticAnimation", 95058, 2200},
+ {"BookmarkAnimation", 95175, 2203}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 405, 6, 74, "DemoTitle"],
+Cell[987, 30, 33, 0, 287, "InitializationSection"],
+Cell[CellGroupData[{
+Cell[1045, 34, 29, 0, 194, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[1099, 38, 18268, 446, 688, "Input"],
+Cell[19370, 486, 12877, 277, 563, "Output",
+ CellID->73605352]
+}, {2}]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[32293, 769, 36, 0, 169, "ManipulateCaptionSection"],
+Cell[32332, 771, 799, 13, 37, "ManipulateCaption",
+ CellID->304264452]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[33168, 789, 28, 0, 173, "ThumbnailSection"],
+Cell[33199, 791, 12878, 277, 563, "Output",
+ CellID->209527112]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[46114, 1073, 28, 0, 143, "SnapshotsSection"],
+Cell[46145, 1075, 12817, 275, 29, "Output",
+ CellID->3516874],
+Cell[58965, 1352, 12819, 275, 29, "Output",
+ CellID->851722102],
+Cell[71787, 1629, 12819, 275, 29, "Output",
+ CellID->309911892]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[84643, 1909, 26, 0, 336, "DetailsSection"],
+Cell[84672, 1911, 1104, 28, 38, "DetailNotes",
+ CellID->17700305],
+Cell[85779, 1941, 458, 12, 22, "DetailNotes",
+ CellID->296880346]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[86274, 1958, 37, 0, 126, "ControlSuggestionsSection"],
+Cell[86314, 1960, 312, 8, 22, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[86629, 1970, 678, 16, 22, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[87310, 1988, 340, 11, 22, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[87653, 2001, 637, 15, 22, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[88293, 2018, 844, 21, 22, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[89140, 2041, 369, 9, 22, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[89512, 2052, 1464, 31, 22, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[90979, 2085, 908, 21, 22, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[91924, 2111, 30, 0, 155, "SearchTermsSection"],
+Cell[91957, 2113, 293, 5, 22, "SearchTerms",
+ CellID->324720799],
+Cell[92253, 2120, 291, 5, 22, "SearchTerms",
+ CellID->61107764],
+Cell[92547, 2127, 298, 5, 22, "SearchTerms",
+ CellID->561415012],
+Cell[92848, 2134, 301, 5, 22, "SearchTerms",
+ CellID->134182899],
+Cell[93152, 2141, 294, 5, 22, "SearchTerms",
+ CellID->245577259]
+}, Open  ]],
+Cell[93461, 2149, 31, 0, 141, "RelatedLinksSection"],
+Cell[CellGroupData[{
+Cell[93517, 2153, 25, 0, 129, "AuthorSection"],
+Cell[93545, 2155, 441, 12, 22, "Author"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

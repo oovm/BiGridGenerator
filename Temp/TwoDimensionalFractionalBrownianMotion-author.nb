@@ -1,0 +1,2235 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     91911,       2226]
+NotebookOptionsPosition[     87352,       2083]
+NotebookOutlinePosition[     88946,       2133]
+CellTagsIndexPosition[     88618,       2121]
+WindowFrame->Normal
+ContainsDynamic->True *)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Two-Dimensional Fractional Brownian Motion", "DemoTitle",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.36879604666713*^9, 3.36879605241835*^9}, {
+   3.36896627289954*^9, 3.36896627394476*^9}, {3.377269695230528*^9, 
+   3.377269720839502*^9}, {3.37735156406283*^9, 3.377351564455749*^9}},
+ CellID->700863240],
+
+Cell[CellGroupData[{
+
+Cell["", "InitializationSection"],
+
+Cell[BoxData[
+ RowBox[{"With", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"nd", "=", 
+      RowBox[{"NormalDistribution", "[", "]"}]}], ",", 
+     RowBox[{"pi2", "=", 
+      RowBox[{"N", "[", 
+       RowBox[{"2", "Pi"}], "]"}]}]}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"gauss", ":=", 
+     RowBox[{"Random", "[", "nd", "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"randPhase", ":=", 
+     RowBox[{"Exp", "[", 
+      RowBox[{"I", " ", 
+       RowBox[{"RandomReal", "[", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "pi2"}], "}"}], "]"}]}], "]"}]}], ";"}]}], 
+  "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, 3.383291729520122*^9, {3.383292061104055*^9, 
+   3.38329206475366*^9}, 3.383292298154213*^9},
+ CellID->784550105],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"fBmRA", "[", 
+   RowBox[{"mat_List", ",", "n_Integer", ",", "h_", ",", 
+    RowBox[{"r_:", 
+     RowBox[{"1", "/", "2"}]}]}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"x", "=", "mat"}], "}"}], ",", 
+    RowBox[{
+     RowBox[{"While", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Length", "[", "x", "]"}], "<", "n"}], ",", 
+       RowBox[{"x", "=", 
+        RowBox[{"fBmRAStep", "[", 
+         RowBox[{"x", ",", "h", ",", 
+          RowBox[{"Max", "[", 
+           RowBox[{"r", ",", 
+            RowBox[{
+             RowBox[{"Length", "[", "x", "]"}], "/", "n"}]}], "]"}]}], 
+         "]"}]}]}], "]"}], ";", "\[IndentingNewLine]", "x"}]}], 
+   "]"}]}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"fBmRA", "[", 
+    RowBox[{"e_Integer", ",", "args__"}], "]"}], ":=", 
+   RowBox[{"fBmRA", "[", 
+    RowBox[{
+     RowBox[{"Array", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"gauss", "/", "2"}], "&"}], ",", 
+       RowBox[{"Table", "[", 
+        RowBox[{"2", ",", 
+         RowBox[{"{", "e", "}"}]}], "]"}]}], "]"}], ",", "args"}], "]"}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{3.377267664449229*^9},
+ CellID->430911127],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"fBmRAStep", "[", 
+   RowBox[{"mat_List", ",", "h_", ",", 
+    RowBox[{"r_:", 
+     RowBox[{"1", "/", "2"}]}]}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"t", ",", "T", ",", "odims", ",", "ndims"}], "}"}], ",", 
+    RowBox[{
+     RowBox[{"odims", "=", 
+      RowBox[{"Dimensions", "[", "mat", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"ndims", "=", 
+      RowBox[{"Ceiling", "[", 
+       RowBox[{"odims", "/", "r"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"t", "=", 
+      RowBox[{"1.0", "/", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"Max", "[", "ndims", "]"}], "-", "1"}], ")"}]}]}], ";", 
+     RowBox[{"T", "=", 
+      RowBox[{"1.0", "/", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"Max", "[", "odims", "]"}], "-", "1"}], ")"}]}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"With", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"delta", "=", 
+         RowBox[{
+          RowBox[{"Sqrt", "[", "0.5", "]"}], " ", 
+          RowBox[{"Sqrt", "[", 
+           RowBox[{"1", "-", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"t", "/", "T"}], ")"}], "^", 
+             RowBox[{"(", 
+              RowBox[{"2", "-", 
+               RowBox[{"2", "h"}]}], ")"}]}]}], "]"}], " ", 
+          RowBox[{"t", "^", "h"}]}]}], "}"}], ",", 
+       RowBox[{"Map", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"delta", " ", "gauss"}], "+", "#"}], "&"}], ",", 
+         RowBox[{"interpolate", "[", 
+          RowBox[{"mat", ",", "ndims"}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"-", "1"}], "}"}]}], "]"}]}], "]"}]}]}], "]"}]}]], "Input",
+ CellID->1477580908],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"interpolate", "[", 
+   RowBox[{"x_", ",", "ndims_List"}], "]"}], ":=", 
+  RowBox[{"With", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"e", "=", 
+      RowBox[{"TensorRank", "[", "x", "]"}]}], "}"}], ",", 
+    RowBox[{"With", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"trans", "=", 
+        RowBox[{"RotateRight", "[", 
+         RowBox[{"Range", "[", "e", "]"}], "]"}]}], "}"}], ",", 
+      RowBox[{"Fold", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Map", "[", 
+          RowBox[{
+           RowBox[{"Function", "[", 
+            RowBox[{"slice", ",", 
+             RowBox[{"inter", "[", 
+              RowBox[{"slice", ",", "#2"}], "]"}]}], "]"}], ",", 
+           RowBox[{"Transpose", "[", 
+            RowBox[{"#1", ",", "trans"}], "]"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"e", "-", "1"}], "}"}]}], "]"}], "&"}], ",", "x", ",", 
+        "ndims"}], "]"}]}], "]"}]}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"inter", "[", 
+   RowBox[{"x_", ",", "m_"}], "]"}], ":=", 
+  RowBox[{"With", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"interpol", "=", 
+       RowBox[{"Interpolation", "[", 
+        RowBox[{"x", ",", 
+         RowBox[{"InterpolationOrder", "\[Rule]", "1"}]}], "]"}]}], ",", 
+      RowBox[{"n", "=", 
+       RowBox[{"Length", "[", "x", "]"}]}]}], "}"}], ",", 
+    RowBox[{"interpol", "[", 
+     RowBox[{"Range", "[", 
+      RowBox[{"1", ",", "n", ",", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"n", "-", "1"}], ")"}], "/", 
+        RowBox[{"(", 
+         RowBox[{"m", "-", "1"}], ")"}]}]}], "]"}], "]"}]}], 
+   "]"}]}]}], "Input",
+ CellChangeTimes->{3.377267654552128*^9},
+ CellID->684517028],
+
+Cell[BoxData[
+ RowBox[{"With", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"pi2", "=", 
+     RowBox[{"N", "[", 
+      RowBox[{"2", "Pi"}], "]"}]}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"freq2", "=", 
+     RowBox[{"Compile", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"i", ",", "_Integer"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"j", ",", "_Integer"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"exp", ",", "_Real"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"nmax", ",", "_Integer"}], "}"}]}], "}"}], ",", 
+       RowBox[{"Which", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"i", "\[Equal]", "0"}], "&&", 
+          RowBox[{"j", "\[Equal]", "0"}]}], ",", "0", ",", 
+         RowBox[{
+          RowBox[{"i", ">", "nmax"}], "||", 
+          RowBox[{"j", ">", "nmax"}]}], ",", "0", ",", "True", ",", 
+         RowBox[{"gauss", " ", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"i", "^", "2"}], "+", 
+             RowBox[{"j", "^", "2"}]}], ")"}], "^", "exp"}], " ", 
+          RowBox[{"Exp", "[", 
+           RowBox[{"I", " ", 
+            RowBox[{"RandomReal", "[", 
+             RowBox[{"{", 
+              RowBox[{"0", ",", "pi2"}], "}"}], "]"}]}], "]"}]}]}], "]"}], 
+       ",", 
+       RowBox[{"{", 
+        RowBox[{"{", 
+         RowBox[{"gauss", ",", "_Real"}], "}"}], "}"}]}], "]"}]}], ";"}]}], 
+  "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, 3.377350211000564*^9, {3.383291480521444*^9, 
+   3.38329155239307*^9}, {3.383291655281366*^9, 3.383291659717128*^9}, {
+   3.383291882883415*^9, 3.383291927115237*^9}, 3.383291989006874*^9, 
+   3.383292244905425*^9},
+ CellID->1764517223],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"fBmFourier", "[", 
+   RowBox[{"2", ",", 
+    RowBox[{"n_", "?", "EvenQ"}], ",", "h_", ",", 
+    RowBox[{"maxn_:", "Automatic"}]}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "line0", ",", "half1", ",", "linem", ",", "half2", ",", "full", ",", 
+      RowBox[{"n2", "=", 
+       RowBox[{"n", "/", "2"}]}], ",", 
+      RowBox[{"mbeta2", "=", 
+       RowBox[{
+        RowBox[{"-", 
+         RowBox[{"(", 
+          RowBox[{"h", "+", "1"}], ")"}]}], "/", "2.0"}]}], ",", "i", ",", 
+      "j", ",", 
+      RowBox[{"nmax", "=", "maxn"}]}], "}"}], ",", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"nmax", "===", "Automatic"}], ",", 
+       RowBox[{"nmax", "=", "n"}]}], "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"nmax", "=", 
+      RowBox[{"Round", "[", 
+       RowBox[{"nmax", "/", "2"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"line0", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"freq2", "[", 
+         RowBox[{"0", ",", "j", ",", "mbeta2", ",", "nmax"}], "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"j", ",", "0", ",", "n2"}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"line0", "[", 
+       RowBox[{"[", 
+        RowBox[{"-", "1"}], "]"}], "]"}], "=", 
+      RowBox[{"Re", "[", 
+       RowBox[{"line0", "[", 
+        RowBox[{"[", 
+         RowBox[{"-", "1"}], "]"}], "]"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"line0", "=", 
+      RowBox[{"Join", "[", 
+       RowBox[{"line0", ",", 
+        RowBox[{"Conjugate", "[", 
+         RowBox[{"Reverse", "[", 
+          RowBox[{"Take", "[", 
+           RowBox[{"line0", ",", 
+            RowBox[{"{", 
+             RowBox[{"2", ",", 
+              RowBox[{"-", "2"}]}], "}"}]}], "]"}], "]"}], "]"}]}], "]"}]}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"half1", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"freq2", "[", 
+         RowBox[{"i", ",", 
+          RowBox[{"Min", "[", 
+           RowBox[{"j", ",", 
+            RowBox[{"n", "-", "j"}]}], "]"}], ",", "mbeta2", ",", "nmax"}], 
+         "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", 
+          RowBox[{"n2", "-", "1"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"j", ",", "0", ",", 
+          RowBox[{"n", "-", "1"}]}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"linem", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"freq2", "[", 
+         RowBox[{"n2", ",", "j", ",", "mbeta2", ",", "nmax"}], "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"j", ",", "0", ",", "n2"}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"linem", "[", 
+       RowBox[{"[", "1", "]"}], "]"}], "=", 
+      RowBox[{"Re", "[", 
+       RowBox[{"linem", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"linem", "[", 
+       RowBox[{"[", 
+        RowBox[{"-", "1"}], "]"}], "]"}], "=", 
+      RowBox[{"Re", "[", 
+       RowBox[{"linem", "[", 
+        RowBox[{"[", 
+         RowBox[{"-", "1"}], "]"}], "]"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"linem", "=", 
+      RowBox[{"Join", "[", 
+       RowBox[{"linem", ",", 
+        RowBox[{"Conjugate", "[", 
+         RowBox[{"Reverse", "[", 
+          RowBox[{"Take", "[", 
+           RowBox[{"linem", ",", 
+            RowBox[{"{", 
+             RowBox[{"2", ",", 
+              RowBox[{"-", "2"}]}], "}"}]}], "]"}], "]"}], "]"}]}], "]"}]}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"half2", "=", 
+      RowBox[{"RotateLeft", "/@", "half1"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"half2", "=", 
+      RowBox[{"Reverse", "[", 
+       RowBox[{"Reverse", "/@", "half2"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"half2", "=", 
+      RowBox[{"Conjugate", "[", "half2", "]"}]}], ";", "\[IndentingNewLine]", 
+     
+     RowBox[{"full", "=", 
+      RowBox[{"Join", "[", 
+       RowBox[{
+        RowBox[{"{", "line0", "}"}], ",", "half1", ",", 
+        RowBox[{"{", "linem", "}"}], ",", "half2"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"N", "[", 
+       RowBox[{"Sqrt", "[", "n", "]"}], "]"}], " ", 
+      RowBox[{"Chop", "[", 
+       RowBox[{"InverseFourier", "[", "full", "]"}], "]"}]}]}]}], 
+   "]"}]}]], "Input",
+ CellID->2138423562]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"BlockRandom", "[", 
+    RowBox[{
+     RowBox[{"SeedRandom", "[", "rand", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"ListPlot3D", "[", 
+      RowBox[{
+       RowBox[{"meth", "[", 
+        RowBox[{"2", ",", "n", ",", "h"}], "]"}], ",", 
+       RowBox[{"ColorFunction", "\[Rule]", "\"\<GreenBrownTerrain\>\""}], ",",
+        
+       RowBox[{"MeshFunctions", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"#3", "&"}], "}"}]}], ",", 
+       RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+       RowBox[{"Axes", "\[Rule]", "False"}], ",", 
+       RowBox[{"Filling", "\[Rule]", "Bottom"}], ",", 
+       RowBox[{"FillingStyle", "\[Rule]", "Brown"}], ",", 
+       RowBox[{"Mesh", "\[Rule]", 
+        RowBox[{"ControlActive", "[", 
+         RowBox[{"5", ",", "Automatic"}], "]"}]}]}], "]"}]}], "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"meth", ",", "fBmFourier", ",", "\"\<method\>\""}], "}"}], ",", 
+     
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"fBmRA", "\[Rule]", "\"\<random additions\>\""}], ",", 
+       RowBox[{"fBmFourier", "\[Rule]", "\"\<Fourier synthesis\>\""}]}], 
+      "}"}]}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"n", ",", "20", ",", "\"\<points\>\""}], "}"}], ",", "10", ",", 
+     "100", ",", "10", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"h", ",", "0.5", ",", "\"\<Hurst exponent h\>\""}], "}"}], ",", 
+     "0.1", ",", "0.9", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"rand", ",", "0", ",", "\"\<\>\""}], "}"}], ",", 
+     RowBox[{
+      RowBox[{"Button", "[", 
+       RowBox[{"\"\<randomize\>\"", ",", 
+        RowBox[{"rand", "=", 
+         RowBox[{"RandomInteger", "[", 
+          RowBox[{
+           RowBox[{"2", "^", "64"}], "-", "1"}], "]"}]}]}], "]"}], "&"}]}], 
+    "}"}], ",", " ", 
+   RowBox[{"SaveDefinitions", "\[Rule]", "True"}]}], "\[IndentingNewLine]", 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.377267706290063*^9, 3.377267779945635*^9}, {
+   3.37726787936078*^9, 3.377267894911359*^9}, {3.377267931530131*^9, 
+   3.377267939922223*^9}, {3.377268007729777*^9, 3.377268067345134*^9}, {
+   3.377268114562125*^9, 3.377268130285432*^9}, {3.377268308390828*^9, 
+   3.37726831033565*^9}, {3.377268355728442*^9, 3.377268425549101*^9}, {
+   3.377268498612368*^9, 3.377268511222976*^9}, 3.377268581120786*^9, {
+   3.377268720701213*^9, 3.377268721283721*^9}, 3.377269778026945*^9, 
+   3.377350242126928*^9, {3.377351425207413*^9, 3.37735143712617*^9}, {
+   3.3773759533739557`*^9, 3.3773759544677057`*^9}, {3.3773760293583307`*^9, 
+   3.3773760456083307`*^9}, {3.3773761712802057`*^9, 
+   3.3773761723739557`*^9}, {3.3773770439677057`*^9, 
+   3.3773770534520807`*^9}, {3.37742789359166*^9, 3.3774279447616*^9}, 
+   3.377428183338299*^9, {3.377428307684658*^9, 3.377428314182511*^9}, {
+   3.377428406133975*^9, 3.377428440600837*^9}, 3.377428531061813*^9, {
+   3.3774285932474*^9, 3.37742862523125*^9}, 3.377860736942725*^9, {
+   3.3797915935063677`*^9, 3.379791619363756*^9}, {3.3797951852689*^9, 
+   3.379795206878275*^9}, {3.379795256847025*^9, 3.379795257284525*^9}, {
+   3.380735435046875*^9, 3.38073544509375*^9}, {3.383230199109375*^9, 
+   3.383230211265625*^9}, 3.38323025753125*^9, {3.38329116416083*^9, 
+   3.383291164414489*^9}, {3.383291200593471*^9, 3.383291202253238*^9}, 
+   3.3842577217573586`*^9},
+ CellID->836397690],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`h$$ = 
+    0.5, $CellContext`meth$$ = $CellContext`fBmFourier, $CellContext`n$$ = 
+    20, $CellContext`rand$$ = 0, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`meth$$], $CellContext`fBmFourier, 
+       "method"}, {$CellContext`fBmRA -> 
+       "random additions", $CellContext`fBmFourier -> 
+       "Fourier synthesis"}}, {{
+       Hold[$CellContext`n$$], 20, "points"}, 10, 100, 10}, {{
+       Hold[$CellContext`h$$], 0.5, "Hurst exponent h"}, 0.1, 0.9}, {{
+       Hold[$CellContext`rand$$], 0, ""}, 
+      Dynamic[
+      Button["randomize", $CellContext`rand$$ = RandomInteger[2^64 - 1]]& ]}},
+     Typeset`size$$ = {360., {144., 148.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`meth$59881$$ = False, $CellContext`n$59882$$ = 
+    0, $CellContext`h$59883$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`h$$ = 
+        0.5, $CellContext`meth$$ = $CellContext`fBmFourier, $CellContext`n$$ = 
+        20, $CellContext`rand$$ = 0}, "ControllerVariables" :> {
+        Hold[$CellContext`meth$$, $CellContext`meth$59881$$, False], 
+        Hold[$CellContext`n$$, $CellContext`n$59882$$, 0], 
+        Hold[$CellContext`h$$, $CellContext`h$59883$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      BlockRandom[SeedRandom[$CellContext`rand$$]; ListPlot3D[
+          $CellContext`meth$$[2, $CellContext`n$$, $CellContext`h$$], 
+          ColorFunction -> "GreenBrownTerrain", MeshFunctions -> {#3& }, 
+          PlotRange -> All, Axes -> False, Filling -> Bottom, FillingStyle -> 
+          Brown, Mesh -> ControlActive[5, Automatic]]], 
+      "Specifications" :> {{{$CellContext`meth$$, $CellContext`fBmFourier, 
+          "method"}, {$CellContext`fBmRA -> 
+          "random additions", $CellContext`fBmFourier -> 
+          "Fourier synthesis"}}, {{$CellContext`n$$, 20, "points"}, 10, 100, 
+         10, Appearance -> 
+         "Labeled"}, {{$CellContext`h$$, 0.5, "Hurst exponent h"}, 0.1, 0.9, 
+         Appearance -> "Labeled"}, {{$CellContext`rand$$, 0, ""}, 
+         Dynamic[
+         Button["randomize", $CellContext`rand$$ = 
+           RandomInteger[2^64 - 1]]& ]}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{404., {226., 231.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({
+      Attributes[PlotRange] = {ReadProtected}, 
+       Attributes[ControlActive] = {
+        HoldAll, ReadProtected}, $CellContext`fBmFourier[1, 
+         PatternTest[
+          Pattern[$CellContext`n, 
+           Blank[]], EvenQ], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Optional[
+          Pattern[$CellContext`maxn, 
+           Blank[]], Automatic]] := 
+       Module[{$CellContext`ff, $CellContext`n2 = $CellContext`n/
+           2, $CellContext`mbeta2 = -((2 $CellContext`h + 1)/
+            2.), $CellContext`i, $CellContext`nmax = $CellContext`maxn}, 
+         If[$CellContext`nmax === 
+           Automatic, $CellContext`nmax = $CellContext`n]; $CellContext`nmax = 
+          Round[$CellContext`nmax/2]; $CellContext`ff = Table[
+            $CellContext`freq1[$CellContext`i, $CellContext`mbeta2, \
+$CellContext`nmax], {$CellContext`i, 0, $CellContext`n2}]; 
+         Part[$CellContext`ff, -1] = Re[
+            Part[$CellContext`ff, -1]]; $CellContext`ff = 
+          Join[$CellContext`ff, 
+            Reverse[
+             Conjugate[
+              Take[$CellContext`ff, {2, -2}]]]]; $CellContext`n Chop[
+            InverseFourier[$CellContext`ff]]], $CellContext`fBmFourier[2, 
+         PatternTest[
+          Pattern[$CellContext`n, 
+           Blank[]], EvenQ], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Optional[
+          Pattern[$CellContext`maxn, 
+           Blank[]], Automatic]] := 
+       Module[{$CellContext`line0, $CellContext`half1, $CellContext`linem, \
+$CellContext`half2, $CellContext`full, $CellContext`n2 = $CellContext`n/
+           2, $CellContext`mbeta2 = -(($CellContext`h + 1)/
+            2.), $CellContext`i, $CellContext`j, $CellContext`nmax = \
+$CellContext`maxn}, 
+         If[$CellContext`nmax === 
+           Automatic, $CellContext`nmax = $CellContext`n]; $CellContext`nmax = 
+          Round[$CellContext`nmax/2]; $CellContext`line0 = Table[
+            $CellContext`freq2[
+            0, $CellContext`j, $CellContext`mbeta2, $CellContext`nmax], \
+{$CellContext`j, 0, $CellContext`n2}]; Part[$CellContext`line0, -1] = Re[
+            Part[$CellContext`line0, -1]]; $CellContext`line0 = 
+          Join[$CellContext`line0, 
+            Conjugate[
+             Reverse[
+              Take[$CellContext`line0, {2, -2}]]]]; $CellContext`half1 = 
+          Table[
+            $CellContext`freq2[$CellContext`i, 
+             
+             Min[$CellContext`j, $CellContext`n - $CellContext`j], \
+$CellContext`mbeta2, $CellContext`nmax], {$CellContext`i, 1, $CellContext`n2 - 
+             1}, {$CellContext`j, 0, $CellContext`n - 1}]; $CellContext`linem = 
+          Table[
+            $CellContext`freq2[$CellContext`n2, $CellContext`j, \
+$CellContext`mbeta2, $CellContext`nmax], {$CellContext`j, 
+             0, $CellContext`n2}]; Part[$CellContext`linem, 1] = Re[
+            Part[$CellContext`linem, 1]]; Part[$CellContext`linem, -1] = Re[
+            Part[$CellContext`linem, -1]]; $CellContext`linem = 
+          Join[$CellContext`linem, 
+            Conjugate[
+             Reverse[
+              Take[$CellContext`linem, {2, -2}]]]]; $CellContext`half2 = 
+          Map[RotateLeft, $CellContext`half1]; $CellContext`half2 = Reverse[
+            Map[Reverse, $CellContext`half2]]; $CellContext`half2 = 
+          Conjugate[$CellContext`half2]; $CellContext`full = 
+          Join[{$CellContext`line0}, $CellContext`half1, \
+{$CellContext`linem}, $CellContext`half2]; N[
+            Sqrt[$CellContext`n]] Chop[
+            InverseFourier[$CellContext`full]]], $CellContext`freq1[0, 
+         Pattern[$CellContext`exp, 
+          Blank[]], 
+         Pattern[$CellContext`nmax, 
+          Blank[]]] := 0, Condition[
+         $CellContext`freq1[
+          Pattern[$CellContext`i, 
+           Blank[]], 
+          Pattern[$CellContext`exp, 
+           Blank[]], 
+          Pattern[$CellContext`nmax, 
+           Blank[]]], $CellContext`i > $CellContext`nmax] := 
+       0, $CellContext`freq1[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`exp, 
+          Blank[]], 
+         Pattern[$CellContext`nmax, 
+          
+          Blank[]]] := ($CellContext`gauss $CellContext`i^$CellContext`exp) \
+$CellContext`randPhase, $CellContext`gauss := Random[
+         NormalDistribution[0, 1]], $CellContext`randPhase := 
+       Exp[I RandomReal[{0, 6.283185307179586}]], $CellContext`freq2 = 
+       CompiledFunction[{
+          Blank[Integer], 
+          Blank[Integer], 
+          Blank[Real], 
+          Blank[Integer]}, {{2, 0, 0}, {2, 0, 1}, {3, 0, 0}, {2, 0, 2}, {4, 0,
+          0}}, {5, 8, 6, 3, 
+         0}, {{1, 5}, {7, 0, 3}, {33, 0, 3, 0}, {3, 0, 5}, {7, 0, 3}, {33, 1, 
+          3, 1}, {10, 1, 3}, {4, 3}, {6, False, 2}, {10, 2, 3}, {3, 3, 7}, {7,
+           0, 3}, {15, 0, 3, 1}, {8, 0., 2}, {16, 1, 2, 2}, {13, 2, 0}, {4, 
+          38}, {36, 2, 0, 0}, {3, 0, 4}, {6, True, 1}, {10, 1, 4}, {4, 3}, {
+          36, 2, 1, 2}, {10, 2, 4}, {3, 4, 7}, {7, 0, 4}, {15, 0, 4, 1}, {
+          8, 0., 2}, {16, 1, 2, 2}, {13, 2, 1}, {4, 23}, {54, 
+           
+           Function[{$CellContext`i, $CellContext`j, $CellContext`exp, \
+$CellContext`nmax}, $CellContext`gauss], 2, 0, 0, 2, 0, 1, 3, 0, 0, 2, 0, 2, 
+           3, 0, 1}, {7, 2, 5}, {94, 264, 2, 0, 0, 2, 0, 5, 2, 0, 6}, {7, 2, 
+          5}, {94, 264, 2, 0, 1, 2, 0, 5, 2, 0, 7}, {17, 6, 7, 6}, {94, 264, 
+          2, 0, 6, 3, 0, 0, 3, 0, 2}, {9, 0., 1., 0}, {7, 0, 6}, {15, 0, 6, 
+          3}, {8, 6.283185307179586, 4}, {59, 3, 3, 4, 5}, {8, 0., 3}, {16, 5,
+           3, 1}, {22, 0, 1, 0}, {93, 34, 4, 0, 0, 4, 0, 1}, {8, 0., 5}, {16, 
+          1, 5, 0}, {8, 0., 3}, {16, 2, 3, 2}, {22, 0, 2, 1, 0}, {13, 0, 1}, {
+          13, 1, 0}, {2}}, 
+         Function[{$CellContext`i, $CellContext`j, $CellContext`exp, \
+$CellContext`nmax}, 
+          Which[
+           And[$CellContext`i == 0, $CellContext`j == 0], 0, 
+           
+           Or[$CellContext`i > $CellContext`nmax, $CellContext`j > \
+$CellContext`nmax], 0, 
+           True, ($CellContext`gauss ($CellContext`i^2 + \
+$CellContext`j^2)^$CellContext`exp) 
+           Exp[I RandomReal[{0, 6.283185307179586}]]]], 
+         Evaluate], $CellContext`fBmRA[
+         Pattern[$CellContext`mat, 
+          Blank[List]], 
+         Pattern[$CellContext`n, 
+          Blank[Integer]], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Optional[
+          Pattern[$CellContext`r, 
+           Blank[]], 1/2]] := 
+       Module[{$CellContext`x = $CellContext`mat}, 
+         While[Length[$CellContext`x] < $CellContext`n, $CellContext`x = \
+$CellContext`fBmRAStep[$CellContext`x, $CellContext`h, 
+             
+             Max[$CellContext`r, 
+              Length[$CellContext`x]/$CellContext`n]]]; $CellContext`x], \
+$CellContext`fBmRA[
+         Pattern[$CellContext`e, 
+          Blank[Integer]], 
+         Pattern[$CellContext`args, 
+          BlankSequence[]]] := $CellContext`fBmRA[
+         Array[$CellContext`gauss/2& , 
+          Table[
+          2, {$CellContext`e}]], $CellContext`args], $CellContext`fBmRAStep[
+         Pattern[$CellContext`mat, 
+          Blank[List]], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Optional[
+          Pattern[$CellContext`r, 
+           Blank[]], 1/2]] := 
+       Module[{$CellContext`t, $CellContext`T, $CellContext`odims, \
+$CellContext`ndims}, $CellContext`odims = 
+          Dimensions[$CellContext`mat]; $CellContext`ndims = 
+          Ceiling[$CellContext`odims/$CellContext`r]; $CellContext`t = 
+          1./(Max[$CellContext`ndims] - 1); $CellContext`T = 
+          1./(Max[$CellContext`odims] - 1); 
+         With[{$CellContext`delta = (Sqrt[0.5] 
+              Sqrt[1 - ($CellContext`t/$CellContext`T)^(2 - 
+                 2 $CellContext`h)]) $CellContext`t^$CellContext`h}, 
+           Map[$CellContext`delta $CellContext`gauss + #& , 
+            $CellContext`interpolate[$CellContext`mat, $CellContext`ndims], \
+{-1}]]], $CellContext`interpolate[
+         Pattern[$CellContext`x, 
+          Blank[]], 
+         Pattern[$CellContext`ndims, 
+          Blank[List]]] := 
+       With[{$CellContext`e = TensorRank[$CellContext`x]}, 
+         With[{$CellContext`trans = RotateRight[
+             Range[$CellContext`e]]}, 
+          Fold[Map[
+            Function[$CellContext`slice, 
+             $CellContext`inter[$CellContext`slice, #2]], 
+            
+            Transpose[#, $CellContext`trans], {$CellContext`e - 
+             1}]& , $CellContext`x, $CellContext`ndims]]], $CellContext`inter[
+        
+         Pattern[$CellContext`x, 
+          Blank[]], 
+         Pattern[$CellContext`m, 
+          Blank[]]] := 
+       With[{$CellContext`interpol = 
+          Interpolation[$CellContext`x, InterpolationOrder -> 
+            1], $CellContext`n = Length[$CellContext`x]}, 
+         $CellContext`interpol[
+          Range[
+          1, $CellContext`n, ($CellContext`n - 1)/($CellContext`m - 1)]]]}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->284724664]
+}, {2}]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell[TextData[{
+ "Two methods for generating a fractional Brownian motion to simulate",
+ " a natural surface are demonstrated here. The ",
+ StyleBox["Hurst exponent",
+  FontSlant->"Italic"],
+ " ",
+ Cell[BoxData[
+  FormBox["h", TraditionalForm]], "InlineMath"],
+ " describes the raggedness, with higher exponents leading to smoother \
+surfaces. Fractional Brownian motion is a generalization of ordinary Brownian \
+motion that has been used successfully to model a variety of natural \
+phenomena, such as terrains, coastlines, and clouds. It has the scaling \
+property ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"|", 
+    RowBox[{
+     RowBox[{"V", "(", "t", ")"}], "-", 
+     RowBox[{"V", "(", 
+      RowBox[{"t", "+", "dt"}], ")"}]}], "|", 
+    RowBox[{"\[Proportional]", 
+     SuperscriptBox["dt", "h"]}]}], TraditionalForm]], "InlineMath"],
+ ". Ordinary Brownian motion has ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"h", "=", 
+    FractionBox["1", "2"]}], TraditionalForm]], "InlineMath"],
+ "."
+}], "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.36879606124429*^9, 3.36879607080998*^9}, {
+   3.377269833863372*^9, 3.377269883643505*^9}, {3.377350320175375*^9, 
+   3.377350321879237*^9}, {3.377351582798101*^9, 3.377351595130215*^9}, {
+   3.3773761534833307`*^9, 3.3773761567177057`*^9}, {3.3787321282536573`*^9, 
+   3.3787321287536573`*^9}, {3.3797916550328918`*^9, 3.379791665860185*^9}, 
+   3.380735482421875*^9},
+ CellID->1044312921]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`h$$ = 
+    0.5, $CellContext`meth$$ = $CellContext`fBmRA, $CellContext`n$$ = 
+    50, $CellContext`rand$$ = 3059724972881023401, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`meth$$], $CellContext`fBmRA, 
+       "method"}, {$CellContext`fBmRA -> 
+       "random additions", $CellContext`fBmFourier -> 
+       "Fourier synthesis"}}, {{
+       Hold[$CellContext`n$$], 50, "points"}, 10, 100, 10}, {{
+       Hold[$CellContext`h$$], 0.5, "Hurst exponent h"}, 0.1, 0.9}, {{
+       Hold[$CellContext`rand$$], 3059724972881023401, ""}, 
+      Dynamic[
+      Button["randomize", $CellContext`rand$$ = RandomInteger[2^64 - 1]]& ]}},
+     Typeset`size$$ = {360., {144., 148.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`meth$59947$$ = False, $CellContext`n$59948$$ = 
+    0, $CellContext`h$59949$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`h$$ = 
+        0.5, $CellContext`meth$$ = $CellContext`fBmRA, $CellContext`n$$ = 
+        50, $CellContext`rand$$ = 3059724972881023401}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`meth$$, $CellContext`meth$59947$$, False], 
+        Hold[$CellContext`n$$, $CellContext`n$59948$$, 0], 
+        Hold[$CellContext`h$$, $CellContext`h$59949$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      BlockRandom[SeedRandom[$CellContext`rand$$]; ListPlot3D[
+          $CellContext`meth$$[2, $CellContext`n$$, $CellContext`h$$], 
+          ColorFunction -> "GreenBrownTerrain", MeshFunctions -> {#3& }, 
+          PlotRange -> All, Axes -> False, Filling -> Bottom, FillingStyle -> 
+          Brown, Mesh -> ControlActive[5, Automatic]]], 
+      "Specifications" :> {{{$CellContext`meth$$, $CellContext`fBmRA, 
+          "method"}, {$CellContext`fBmRA -> 
+          "random additions", $CellContext`fBmFourier -> 
+          "Fourier synthesis"}}, {{$CellContext`n$$, 50, "points"}, 10, 100, 
+         10, Appearance -> 
+         "Labeled"}, {{$CellContext`h$$, 0.5, "Hurst exponent h"}, 0.1, 0.9, 
+         Appearance -> 
+         "Labeled"}, {{$CellContext`rand$$, 3059724972881023401, ""}, 
+         Dynamic[
+         Button["randomize", $CellContext`rand$$ = 
+           RandomInteger[2^64 - 1]]& ]}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{404., {226., 231.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({
+      Attributes[PlotRange] = {ReadProtected}, 
+       Attributes[ControlActive] = {
+        HoldAll, ReadProtected}, $CellContext`fBmRA[
+         Pattern[$CellContext`mat, 
+          Blank[List]], 
+         Pattern[$CellContext`n, 
+          Blank[Integer]], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Optional[
+          Pattern[$CellContext`r, 
+           Blank[]], 1/2]] := 
+       Module[{$CellContext`x = $CellContext`mat}, 
+         While[Length[$CellContext`x] < $CellContext`n, $CellContext`x = \
+$CellContext`fBmRAStep[$CellContext`x, $CellContext`h, 
+             
+             Max[$CellContext`r, 
+              Length[$CellContext`x]/$CellContext`n]]]; $CellContext`x], \
+$CellContext`fBmRA[
+         Pattern[$CellContext`e, 
+          Blank[Integer]], 
+         Pattern[$CellContext`args, 
+          BlankSequence[]]] := $CellContext`fBmRA[
+         Array[$CellContext`gauss/2& , 
+          Table[
+          2, {$CellContext`e}]], $CellContext`args], $CellContext`fBmRAStep[
+         Pattern[$CellContext`mat, 
+          Blank[List]], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Optional[
+          Pattern[$CellContext`r, 
+           Blank[]], 1/2]] := 
+       Module[{$CellContext`t, $CellContext`T, $CellContext`odims, \
+$CellContext`ndims}, $CellContext`odims = 
+          Dimensions[$CellContext`mat]; $CellContext`ndims = 
+          Ceiling[$CellContext`odims/$CellContext`r]; $CellContext`t = 
+          1./(Max[$CellContext`ndims] - 1); $CellContext`T = 
+          1./(Max[$CellContext`odims] - 1); 
+         With[{$CellContext`delta = (Sqrt[0.5] 
+              Sqrt[1 - ($CellContext`t/$CellContext`T)^(2 - 
+                 2 $CellContext`h)]) $CellContext`t^$CellContext`h}, 
+           Map[$CellContext`delta $CellContext`gauss + #& , 
+            $CellContext`interpolate[$CellContext`mat, $CellContext`ndims], \
+{-1}]]], $CellContext`gauss := Random[
+         NormalDistribution[0, 1]], $CellContext`interpolate[
+         Pattern[$CellContext`x, 
+          Blank[]], 
+         Pattern[$CellContext`ndims, 
+          Blank[List]]] := 
+       With[{$CellContext`e = TensorRank[$CellContext`x]}, 
+         With[{$CellContext`trans = RotateRight[
+             Range[$CellContext`e]]}, 
+          Fold[Map[
+            Function[$CellContext`slice, 
+             $CellContext`inter[$CellContext`slice, #2]], 
+            
+            Transpose[#, $CellContext`trans], {$CellContext`e - 
+             1}]& , $CellContext`x, $CellContext`ndims]]], $CellContext`inter[
+        
+         Pattern[$CellContext`x, 
+          Blank[]], 
+         Pattern[$CellContext`m, 
+          Blank[]]] := 
+       With[{$CellContext`interpol = 
+          Interpolation[$CellContext`x, InterpolationOrder -> 
+            1], $CellContext`n = Length[$CellContext`x]}, 
+         $CellContext`interpol[
+          Range[
+          1, $CellContext`n, ($CellContext`n - 1)/($CellContext`m - 
+           1)]]], $CellContext`fBmFourier[1, 
+         PatternTest[
+          Pattern[$CellContext`n, 
+           Blank[]], EvenQ], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Optional[
+          Pattern[$CellContext`maxn, 
+           Blank[]], Automatic]] := 
+       Module[{$CellContext`ff, $CellContext`n2 = $CellContext`n/
+           2, $CellContext`mbeta2 = -((2 $CellContext`h + 1)/
+            2.), $CellContext`i, $CellContext`nmax = $CellContext`maxn}, 
+         If[$CellContext`nmax === 
+           Automatic, $CellContext`nmax = $CellContext`n]; $CellContext`nmax = 
+          Round[$CellContext`nmax/2]; $CellContext`ff = Table[
+            $CellContext`freq1[$CellContext`i, $CellContext`mbeta2, \
+$CellContext`nmax], {$CellContext`i, 0, $CellContext`n2}]; 
+         Part[$CellContext`ff, -1] = Re[
+            Part[$CellContext`ff, -1]]; $CellContext`ff = 
+          Join[$CellContext`ff, 
+            Reverse[
+             Conjugate[
+              Take[$CellContext`ff, {2, -2}]]]]; $CellContext`n Chop[
+            InverseFourier[$CellContext`ff]]], $CellContext`fBmFourier[2, 
+         PatternTest[
+          Pattern[$CellContext`n, 
+           Blank[]], EvenQ], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Optional[
+          Pattern[$CellContext`maxn, 
+           Blank[]], Automatic]] := 
+       Module[{$CellContext`line0, $CellContext`half1, $CellContext`linem, \
+$CellContext`half2, $CellContext`full, $CellContext`n2 = $CellContext`n/
+           2, $CellContext`mbeta2 = -(($CellContext`h + 1)/
+            2.), $CellContext`i, $CellContext`j, $CellContext`nmax = \
+$CellContext`maxn}, 
+         If[$CellContext`nmax === 
+           Automatic, $CellContext`nmax = $CellContext`n]; $CellContext`nmax = 
+          Round[$CellContext`nmax/2]; $CellContext`line0 = Table[
+            $CellContext`freq2[
+            0, $CellContext`j, $CellContext`mbeta2, $CellContext`nmax], \
+{$CellContext`j, 0, $CellContext`n2}]; Part[$CellContext`line0, -1] = Re[
+            Part[$CellContext`line0, -1]]; $CellContext`line0 = 
+          Join[$CellContext`line0, 
+            Conjugate[
+             Reverse[
+              Take[$CellContext`line0, {2, -2}]]]]; $CellContext`half1 = 
+          Table[
+            $CellContext`freq2[$CellContext`i, 
+             
+             Min[$CellContext`j, $CellContext`n - $CellContext`j], \
+$CellContext`mbeta2, $CellContext`nmax], {$CellContext`i, 1, $CellContext`n2 - 
+             1}, {$CellContext`j, 0, $CellContext`n - 1}]; $CellContext`linem = 
+          Table[
+            $CellContext`freq2[$CellContext`n2, $CellContext`j, \
+$CellContext`mbeta2, $CellContext`nmax], {$CellContext`j, 
+             0, $CellContext`n2}]; Part[$CellContext`linem, 1] = Re[
+            Part[$CellContext`linem, 1]]; Part[$CellContext`linem, -1] = Re[
+            Part[$CellContext`linem, -1]]; $CellContext`linem = 
+          Join[$CellContext`linem, 
+            Conjugate[
+             Reverse[
+              Take[$CellContext`linem, {2, -2}]]]]; $CellContext`half2 = 
+          Map[RotateLeft, $CellContext`half1]; $CellContext`half2 = Reverse[
+            Map[Reverse, $CellContext`half2]]; $CellContext`half2 = 
+          Conjugate[$CellContext`half2]; $CellContext`full = 
+          Join[{$CellContext`line0}, $CellContext`half1, \
+{$CellContext`linem}, $CellContext`half2]; N[
+            Sqrt[$CellContext`n]] Chop[
+            InverseFourier[$CellContext`full]]], $CellContext`freq1[0, 
+         Pattern[$CellContext`exp, 
+          Blank[]], 
+         Pattern[$CellContext`nmax, 
+          Blank[]]] := 0, Condition[
+         $CellContext`freq1[
+          Pattern[$CellContext`i, 
+           Blank[]], 
+          Pattern[$CellContext`exp, 
+           Blank[]], 
+          Pattern[$CellContext`nmax, 
+           Blank[]]], $CellContext`i > $CellContext`nmax] := 
+       0, $CellContext`freq1[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`exp, 
+          Blank[]], 
+         Pattern[$CellContext`nmax, 
+          
+          Blank[]]] := ($CellContext`gauss $CellContext`i^$CellContext`exp) \
+$CellContext`randPhase, $CellContext`randPhase := 
+       Exp[I RandomReal[{0, 6.283185307179586}]], $CellContext`freq2 = 
+       CompiledFunction[{
+          Blank[Integer], 
+          Blank[Integer], 
+          Blank[Real], 
+          Blank[Integer]}, {{2, 0, 0}, {2, 0, 1}, {3, 0, 0}, {2, 0, 2}, {4, 0,
+          0}}, {5, 8, 6, 3, 
+         0}, {{1, 5}, {7, 0, 3}, {33, 0, 3, 0}, {3, 0, 5}, {7, 0, 3}, {33, 1, 
+          3, 1}, {10, 1, 3}, {4, 3}, {6, False, 2}, {10, 2, 3}, {3, 3, 7}, {7,
+           0, 3}, {15, 0, 3, 1}, {8, 0., 2}, {16, 1, 2, 2}, {13, 2, 0}, {4, 
+          38}, {36, 2, 0, 0}, {3, 0, 4}, {6, True, 1}, {10, 1, 4}, {4, 3}, {
+          36, 2, 1, 2}, {10, 2, 4}, {3, 4, 7}, {7, 0, 4}, {15, 0, 4, 1}, {
+          8, 0., 2}, {16, 1, 2, 2}, {13, 2, 1}, {4, 23}, {54, 
+           
+           Function[{$CellContext`i, $CellContext`j, $CellContext`exp, \
+$CellContext`nmax}, $CellContext`gauss], 2, 0, 0, 2, 0, 1, 3, 0, 0, 2, 0, 2, 
+           3, 0, 1}, {7, 2, 5}, {94, 264, 2, 0, 0, 2, 0, 5, 2, 0, 6}, {7, 2, 
+          5}, {94, 264, 2, 0, 1, 2, 0, 5, 2, 0, 7}, {17, 6, 7, 6}, {94, 264, 
+          2, 0, 6, 3, 0, 0, 3, 0, 2}, {9, 0., 1., 0}, {7, 0, 6}, {15, 0, 6, 
+          3}, {8, 6.283185307179586, 4}, {59, 3, 3, 4, 5}, {8, 0., 3}, {16, 5,
+           3, 1}, {22, 0, 1, 0}, {93, 34, 4, 0, 0, 4, 0, 1}, {8, 0., 5}, {16, 
+          1, 5, 0}, {8, 0., 3}, {16, 2, 3, 2}, {22, 0, 2, 1, 0}, {13, 0, 1}, {
+          13, 1, 0}, {2}}, 
+         Function[{$CellContext`i, $CellContext`j, $CellContext`exp, \
+$CellContext`nmax}, 
+          Which[
+           And[$CellContext`i == 0, $CellContext`j == 0], 0, 
+           
+           Or[$CellContext`i > $CellContext`nmax, $CellContext`j > \
+$CellContext`nmax], 0, 
+           True, ($CellContext`gauss ($CellContext`i^2 + \
+$CellContext`j^2)^$CellContext`exp) 
+           Exp[I RandomReal[{0, 6.283185307179586}]]]], Evaluate]}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->757054381]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`h$$ = 
+    0.5, $CellContext`meth$$ = $CellContext`fBmFourier, $CellContext`n$$ = 
+    10, $CellContext`rand$$ = 0, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`meth$$], $CellContext`fBmFourier, 
+       "method"}, {$CellContext`fBmRA -> 
+       "random additions", $CellContext`fBmFourier -> 
+       "Fourier synthesis"}}, {{
+       Hold[$CellContext`n$$], 10, "points"}, 10, 100, 10}, {{
+       Hold[$CellContext`h$$], 0.5, "Hurst exponent h"}, 0.1, 0.9}, {{
+       Hold[$CellContext`rand$$], 0, ""}, 
+      Dynamic[
+      Button["randomize", $CellContext`rand$$ = RandomInteger[2^64 - 1]]& ]}},
+     Typeset`size$$ = {360., {144., 148.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`meth$60013$$ = False, $CellContext`n$60014$$ = 
+    0, $CellContext`h$60015$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`h$$ = 
+        0.5, $CellContext`meth$$ = $CellContext`fBmFourier, $CellContext`n$$ = 
+        10, $CellContext`rand$$ = 0}, "ControllerVariables" :> {
+        Hold[$CellContext`meth$$, $CellContext`meth$60013$$, False], 
+        Hold[$CellContext`n$$, $CellContext`n$60014$$, 0], 
+        Hold[$CellContext`h$$, $CellContext`h$60015$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      BlockRandom[SeedRandom[$CellContext`rand$$]; ListPlot3D[
+          $CellContext`meth$$[2, $CellContext`n$$, $CellContext`h$$], 
+          ColorFunction -> "GreenBrownTerrain", MeshFunctions -> {#3& }, 
+          PlotRange -> All, Axes -> False, Filling -> Bottom, FillingStyle -> 
+          Brown, Mesh -> ControlActive[5, Automatic]]], 
+      "Specifications" :> {{{$CellContext`meth$$, $CellContext`fBmFourier, 
+          "method"}, {$CellContext`fBmRA -> 
+          "random additions", $CellContext`fBmFourier -> 
+          "Fourier synthesis"}}, {{$CellContext`n$$, 10, "points"}, 10, 100, 
+         10, Appearance -> 
+         "Labeled"}, {{$CellContext`h$$, 0.5, "Hurst exponent h"}, 0.1, 0.9, 
+         Appearance -> "Labeled"}, {{$CellContext`rand$$, 0, ""}, 
+         Dynamic[
+         Button["randomize", $CellContext`rand$$ = 
+           RandomInteger[2^64 - 1]]& ]}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{404., {226., 231.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({
+      Attributes[PlotRange] = {ReadProtected}, 
+       Attributes[ControlActive] = {
+        HoldAll, ReadProtected}, $CellContext`fBmFourier[1, 
+         PatternTest[
+          Pattern[$CellContext`n, 
+           Blank[]], EvenQ], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Optional[
+          Pattern[$CellContext`maxn, 
+           Blank[]], Automatic]] := 
+       Module[{$CellContext`ff, $CellContext`n2 = $CellContext`n/
+           2, $CellContext`mbeta2 = -((2 $CellContext`h + 1)/
+            2.), $CellContext`i, $CellContext`nmax = $CellContext`maxn}, 
+         If[$CellContext`nmax === 
+           Automatic, $CellContext`nmax = $CellContext`n]; $CellContext`nmax = 
+          Round[$CellContext`nmax/2]; $CellContext`ff = Table[
+            $CellContext`freq1[$CellContext`i, $CellContext`mbeta2, \
+$CellContext`nmax], {$CellContext`i, 0, $CellContext`n2}]; 
+         Part[$CellContext`ff, -1] = Re[
+            Part[$CellContext`ff, -1]]; $CellContext`ff = 
+          Join[$CellContext`ff, 
+            Reverse[
+             Conjugate[
+              Take[$CellContext`ff, {2, -2}]]]]; $CellContext`n Chop[
+            InverseFourier[$CellContext`ff]]], $CellContext`fBmFourier[2, 
+         PatternTest[
+          Pattern[$CellContext`n, 
+           Blank[]], EvenQ], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Optional[
+          Pattern[$CellContext`maxn, 
+           Blank[]], Automatic]] := 
+       Module[{$CellContext`line0, $CellContext`half1, $CellContext`linem, \
+$CellContext`half2, $CellContext`full, $CellContext`n2 = $CellContext`n/
+           2, $CellContext`mbeta2 = -(($CellContext`h + 1)/
+            2.), $CellContext`i, $CellContext`j, $CellContext`nmax = \
+$CellContext`maxn}, 
+         If[$CellContext`nmax === 
+           Automatic, $CellContext`nmax = $CellContext`n]; $CellContext`nmax = 
+          Round[$CellContext`nmax/2]; $CellContext`line0 = Table[
+            $CellContext`freq2[
+            0, $CellContext`j, $CellContext`mbeta2, $CellContext`nmax], \
+{$CellContext`j, 0, $CellContext`n2}]; Part[$CellContext`line0, -1] = Re[
+            Part[$CellContext`line0, -1]]; $CellContext`line0 = 
+          Join[$CellContext`line0, 
+            Conjugate[
+             Reverse[
+              Take[$CellContext`line0, {2, -2}]]]]; $CellContext`half1 = 
+          Table[
+            $CellContext`freq2[$CellContext`i, 
+             
+             Min[$CellContext`j, $CellContext`n - $CellContext`j], \
+$CellContext`mbeta2, $CellContext`nmax], {$CellContext`i, 1, $CellContext`n2 - 
+             1}, {$CellContext`j, 0, $CellContext`n - 1}]; $CellContext`linem = 
+          Table[
+            $CellContext`freq2[$CellContext`n2, $CellContext`j, \
+$CellContext`mbeta2, $CellContext`nmax], {$CellContext`j, 
+             0, $CellContext`n2}]; Part[$CellContext`linem, 1] = Re[
+            Part[$CellContext`linem, 1]]; Part[$CellContext`linem, -1] = Re[
+            Part[$CellContext`linem, -1]]; $CellContext`linem = 
+          Join[$CellContext`linem, 
+            Conjugate[
+             Reverse[
+              Take[$CellContext`linem, {2, -2}]]]]; $CellContext`half2 = 
+          Map[RotateLeft, $CellContext`half1]; $CellContext`half2 = Reverse[
+            Map[Reverse, $CellContext`half2]]; $CellContext`half2 = 
+          Conjugate[$CellContext`half2]; $CellContext`full = 
+          Join[{$CellContext`line0}, $CellContext`half1, \
+{$CellContext`linem}, $CellContext`half2]; N[
+            Sqrt[$CellContext`n]] Chop[
+            InverseFourier[$CellContext`full]]], $CellContext`freq1[0, 
+         Pattern[$CellContext`exp, 
+          Blank[]], 
+         Pattern[$CellContext`nmax, 
+          Blank[]]] := 0, Condition[
+         $CellContext`freq1[
+          Pattern[$CellContext`i, 
+           Blank[]], 
+          Pattern[$CellContext`exp, 
+           Blank[]], 
+          Pattern[$CellContext`nmax, 
+           Blank[]]], $CellContext`i > $CellContext`nmax] := 
+       0, $CellContext`freq1[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`exp, 
+          Blank[]], 
+         Pattern[$CellContext`nmax, 
+          
+          Blank[]]] := ($CellContext`gauss $CellContext`i^$CellContext`exp) \
+$CellContext`randPhase, $CellContext`gauss := Random[
+         NormalDistribution[0, 1]], $CellContext`randPhase := 
+       Exp[I RandomReal[{0, 6.283185307179586}]], $CellContext`freq2 = 
+       CompiledFunction[{
+          Blank[Integer], 
+          Blank[Integer], 
+          Blank[Real], 
+          Blank[Integer]}, {{2, 0, 0}, {2, 0, 1}, {3, 0, 0}, {2, 0, 2}, {4, 0,
+          0}}, {5, 8, 6, 3, 
+         0}, {{1, 5}, {7, 0, 3}, {33, 0, 3, 0}, {3, 0, 5}, {7, 0, 3}, {33, 1, 
+          3, 1}, {10, 1, 3}, {4, 3}, {6, False, 2}, {10, 2, 3}, {3, 3, 7}, {7,
+           0, 3}, {15, 0, 3, 1}, {8, 0., 2}, {16, 1, 2, 2}, {13, 2, 0}, {4, 
+          38}, {36, 2, 0, 0}, {3, 0, 4}, {6, True, 1}, {10, 1, 4}, {4, 3}, {
+          36, 2, 1, 2}, {10, 2, 4}, {3, 4, 7}, {7, 0, 4}, {15, 0, 4, 1}, {
+          8, 0., 2}, {16, 1, 2, 2}, {13, 2, 1}, {4, 23}, {54, 
+           
+           Function[{$CellContext`i, $CellContext`j, $CellContext`exp, \
+$CellContext`nmax}, $CellContext`gauss], 2, 0, 0, 2, 0, 1, 3, 0, 0, 2, 0, 2, 
+           3, 0, 1}, {7, 2, 5}, {94, 264, 2, 0, 0, 2, 0, 5, 2, 0, 6}, {7, 2, 
+          5}, {94, 264, 2, 0, 1, 2, 0, 5, 2, 0, 7}, {17, 6, 7, 6}, {94, 264, 
+          2, 0, 6, 3, 0, 0, 3, 0, 2}, {9, 0., 1., 0}, {7, 0, 6}, {15, 0, 6, 
+          3}, {8, 6.283185307179586, 4}, {59, 3, 3, 4, 5}, {8, 0., 3}, {16, 5,
+           3, 1}, {22, 0, 1, 0}, {93, 34, 4, 0, 0, 4, 0, 1}, {8, 0., 5}, {16, 
+          1, 5, 0}, {8, 0., 3}, {16, 2, 3, 2}, {22, 0, 2, 1, 0}, {13, 0, 1}, {
+          13, 1, 0}, {2}}, 
+         Function[{$CellContext`i, $CellContext`j, $CellContext`exp, \
+$CellContext`nmax}, 
+          Which[
+           And[$CellContext`i == 0, $CellContext`j == 0], 0, 
+           
+           Or[$CellContext`i > $CellContext`nmax, $CellContext`j > \
+$CellContext`nmax], 0, 
+           True, ($CellContext`gauss ($CellContext`i^2 + \
+$CellContext`j^2)^$CellContext`exp) 
+           Exp[I RandomReal[{0, 6.283185307179586}]]]], 
+         Evaluate], $CellContext`fBmRA[
+         Pattern[$CellContext`mat, 
+          Blank[List]], 
+         Pattern[$CellContext`n, 
+          Blank[Integer]], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Optional[
+          Pattern[$CellContext`r, 
+           Blank[]], 1/2]] := 
+       Module[{$CellContext`x = $CellContext`mat}, 
+         While[Length[$CellContext`x] < $CellContext`n, $CellContext`x = \
+$CellContext`fBmRAStep[$CellContext`x, $CellContext`h, 
+             
+             Max[$CellContext`r, 
+              Length[$CellContext`x]/$CellContext`n]]]; $CellContext`x], \
+$CellContext`fBmRA[
+         Pattern[$CellContext`e, 
+          Blank[Integer]], 
+         Pattern[$CellContext`args, 
+          BlankSequence[]]] := $CellContext`fBmRA[
+         Array[$CellContext`gauss/2& , 
+          Table[
+          2, {$CellContext`e}]], $CellContext`args], $CellContext`fBmRAStep[
+         Pattern[$CellContext`mat, 
+          Blank[List]], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Optional[
+          Pattern[$CellContext`r, 
+           Blank[]], 1/2]] := 
+       Module[{$CellContext`t, $CellContext`T, $CellContext`odims, \
+$CellContext`ndims}, $CellContext`odims = 
+          Dimensions[$CellContext`mat]; $CellContext`ndims = 
+          Ceiling[$CellContext`odims/$CellContext`r]; $CellContext`t = 
+          1./(Max[$CellContext`ndims] - 1); $CellContext`T = 
+          1./(Max[$CellContext`odims] - 1); 
+         With[{$CellContext`delta = (Sqrt[0.5] 
+              Sqrt[1 - ($CellContext`t/$CellContext`T)^(2 - 
+                 2 $CellContext`h)]) $CellContext`t^$CellContext`h}, 
+           Map[$CellContext`delta $CellContext`gauss + #& , 
+            $CellContext`interpolate[$CellContext`mat, $CellContext`ndims], \
+{-1}]]], $CellContext`interpolate[
+         Pattern[$CellContext`x, 
+          Blank[]], 
+         Pattern[$CellContext`ndims, 
+          Blank[List]]] := 
+       With[{$CellContext`e = TensorRank[$CellContext`x]}, 
+         With[{$CellContext`trans = RotateRight[
+             Range[$CellContext`e]]}, 
+          Fold[Map[
+            Function[$CellContext`slice, 
+             $CellContext`inter[$CellContext`slice, #2]], 
+            
+            Transpose[#, $CellContext`trans], {$CellContext`e - 
+             1}]& , $CellContext`x, $CellContext`ndims]]], $CellContext`inter[
+        
+         Pattern[$CellContext`x, 
+          Blank[]], 
+         Pattern[$CellContext`m, 
+          Blank[]]] := 
+       With[{$CellContext`interpol = 
+          Interpolation[$CellContext`x, InterpolationOrder -> 
+            1], $CellContext`n = Length[$CellContext`x]}, 
+         $CellContext`interpol[
+          Range[
+          1, $CellContext`n, ($CellContext`n - 1)/($CellContext`m - 1)]]]}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->676213691],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`h$$ = 
+    0.5, $CellContext`meth$$ = $CellContext`fBmFourier, $CellContext`n$$ = 
+    60, $CellContext`rand$$ = 0, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`meth$$], $CellContext`fBmFourier, 
+       "method"}, {$CellContext`fBmRA -> 
+       "random additions", $CellContext`fBmFourier -> 
+       "Fourier synthesis"}}, {{
+       Hold[$CellContext`n$$], 60, "points"}, 10, 100, 10}, {{
+       Hold[$CellContext`h$$], 0.5, "Hurst exponent h"}, 0.1, 0.9}, {{
+       Hold[$CellContext`rand$$], 0, ""}, 
+      Dynamic[
+      Button["randomize", $CellContext`rand$$ = RandomInteger[2^64 - 1]]& ]}},
+     Typeset`size$$ = {360., {144., 148.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`meth$60079$$ = False, $CellContext`n$60080$$ = 
+    0, $CellContext`h$60081$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`h$$ = 
+        0.5, $CellContext`meth$$ = $CellContext`fBmFourier, $CellContext`n$$ = 
+        60, $CellContext`rand$$ = 0}, "ControllerVariables" :> {
+        Hold[$CellContext`meth$$, $CellContext`meth$60079$$, False], 
+        Hold[$CellContext`n$$, $CellContext`n$60080$$, 0], 
+        Hold[$CellContext`h$$, $CellContext`h$60081$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      BlockRandom[SeedRandom[$CellContext`rand$$]; ListPlot3D[
+          $CellContext`meth$$[2, $CellContext`n$$, $CellContext`h$$], 
+          ColorFunction -> "GreenBrownTerrain", MeshFunctions -> {#3& }, 
+          PlotRange -> All, Axes -> False, Filling -> Bottom, FillingStyle -> 
+          Brown, Mesh -> ControlActive[5, Automatic]]], 
+      "Specifications" :> {{{$CellContext`meth$$, $CellContext`fBmFourier, 
+          "method"}, {$CellContext`fBmRA -> 
+          "random additions", $CellContext`fBmFourier -> 
+          "Fourier synthesis"}}, {{$CellContext`n$$, 60, "points"}, 10, 100, 
+         10, Appearance -> 
+         "Labeled"}, {{$CellContext`h$$, 0.5, "Hurst exponent h"}, 0.1, 0.9, 
+         Appearance -> "Labeled"}, {{$CellContext`rand$$, 0, ""}, 
+         Dynamic[
+         Button["randomize", $CellContext`rand$$ = 
+           RandomInteger[2^64 - 1]]& ]}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{404., {226., 231.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({
+      Attributes[PlotRange] = {ReadProtected}, 
+       Attributes[ControlActive] = {
+        HoldAll, ReadProtected}, $CellContext`fBmFourier[1, 
+         PatternTest[
+          Pattern[$CellContext`n, 
+           Blank[]], EvenQ], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Optional[
+          Pattern[$CellContext`maxn, 
+           Blank[]], Automatic]] := 
+       Module[{$CellContext`ff, $CellContext`n2 = $CellContext`n/
+           2, $CellContext`mbeta2 = -((2 $CellContext`h + 1)/
+            2.), $CellContext`i, $CellContext`nmax = $CellContext`maxn}, 
+         If[$CellContext`nmax === 
+           Automatic, $CellContext`nmax = $CellContext`n]; $CellContext`nmax = 
+          Round[$CellContext`nmax/2]; $CellContext`ff = Table[
+            $CellContext`freq1[$CellContext`i, $CellContext`mbeta2, \
+$CellContext`nmax], {$CellContext`i, 0, $CellContext`n2}]; 
+         Part[$CellContext`ff, -1] = Re[
+            Part[$CellContext`ff, -1]]; $CellContext`ff = 
+          Join[$CellContext`ff, 
+            Reverse[
+             Conjugate[
+              Take[$CellContext`ff, {2, -2}]]]]; $CellContext`n Chop[
+            InverseFourier[$CellContext`ff]]], $CellContext`fBmFourier[2, 
+         PatternTest[
+          Pattern[$CellContext`n, 
+           Blank[]], EvenQ], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Optional[
+          Pattern[$CellContext`maxn, 
+           Blank[]], Automatic]] := 
+       Module[{$CellContext`line0, $CellContext`half1, $CellContext`linem, \
+$CellContext`half2, $CellContext`full, $CellContext`n2 = $CellContext`n/
+           2, $CellContext`mbeta2 = -(($CellContext`h + 1)/
+            2.), $CellContext`i, $CellContext`j, $CellContext`nmax = \
+$CellContext`maxn}, 
+         If[$CellContext`nmax === 
+           Automatic, $CellContext`nmax = $CellContext`n]; $CellContext`nmax = 
+          Round[$CellContext`nmax/2]; $CellContext`line0 = Table[
+            $CellContext`freq2[
+            0, $CellContext`j, $CellContext`mbeta2, $CellContext`nmax], \
+{$CellContext`j, 0, $CellContext`n2}]; Part[$CellContext`line0, -1] = Re[
+            Part[$CellContext`line0, -1]]; $CellContext`line0 = 
+          Join[$CellContext`line0, 
+            Conjugate[
+             Reverse[
+              Take[$CellContext`line0, {2, -2}]]]]; $CellContext`half1 = 
+          Table[
+            $CellContext`freq2[$CellContext`i, 
+             
+             Min[$CellContext`j, $CellContext`n - $CellContext`j], \
+$CellContext`mbeta2, $CellContext`nmax], {$CellContext`i, 1, $CellContext`n2 - 
+             1}, {$CellContext`j, 0, $CellContext`n - 1}]; $CellContext`linem = 
+          Table[
+            $CellContext`freq2[$CellContext`n2, $CellContext`j, \
+$CellContext`mbeta2, $CellContext`nmax], {$CellContext`j, 
+             0, $CellContext`n2}]; Part[$CellContext`linem, 1] = Re[
+            Part[$CellContext`linem, 1]]; Part[$CellContext`linem, -1] = Re[
+            Part[$CellContext`linem, -1]]; $CellContext`linem = 
+          Join[$CellContext`linem, 
+            Conjugate[
+             Reverse[
+              Take[$CellContext`linem, {2, -2}]]]]; $CellContext`half2 = 
+          Map[RotateLeft, $CellContext`half1]; $CellContext`half2 = Reverse[
+            Map[Reverse, $CellContext`half2]]; $CellContext`half2 = 
+          Conjugate[$CellContext`half2]; $CellContext`full = 
+          Join[{$CellContext`line0}, $CellContext`half1, \
+{$CellContext`linem}, $CellContext`half2]; N[
+            Sqrt[$CellContext`n]] Chop[
+            InverseFourier[$CellContext`full]]], $CellContext`freq1[0, 
+         Pattern[$CellContext`exp, 
+          Blank[]], 
+         Pattern[$CellContext`nmax, 
+          Blank[]]] := 0, Condition[
+         $CellContext`freq1[
+          Pattern[$CellContext`i, 
+           Blank[]], 
+          Pattern[$CellContext`exp, 
+           Blank[]], 
+          Pattern[$CellContext`nmax, 
+           Blank[]]], $CellContext`i > $CellContext`nmax] := 
+       0, $CellContext`freq1[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`exp, 
+          Blank[]], 
+         Pattern[$CellContext`nmax, 
+          
+          Blank[]]] := ($CellContext`gauss $CellContext`i^$CellContext`exp) \
+$CellContext`randPhase, $CellContext`gauss := Random[
+         NormalDistribution[0, 1]], $CellContext`randPhase := 
+       Exp[I RandomReal[{0, 6.283185307179586}]], $CellContext`freq2 = 
+       CompiledFunction[{
+          Blank[Integer], 
+          Blank[Integer], 
+          Blank[Real], 
+          Blank[Integer]}, {{2, 0, 0}, {2, 0, 1}, {3, 0, 0}, {2, 0, 2}, {4, 0,
+          0}}, {5, 8, 6, 3, 
+         0}, {{1, 5}, {7, 0, 3}, {33, 0, 3, 0}, {3, 0, 5}, {7, 0, 3}, {33, 1, 
+          3, 1}, {10, 1, 3}, {4, 3}, {6, False, 2}, {10, 2, 3}, {3, 3, 7}, {7,
+           0, 3}, {15, 0, 3, 1}, {8, 0., 2}, {16, 1, 2, 2}, {13, 2, 0}, {4, 
+          38}, {36, 2, 0, 0}, {3, 0, 4}, {6, True, 1}, {10, 1, 4}, {4, 3}, {
+          36, 2, 1, 2}, {10, 2, 4}, {3, 4, 7}, {7, 0, 4}, {15, 0, 4, 1}, {
+          8, 0., 2}, {16, 1, 2, 2}, {13, 2, 1}, {4, 23}, {54, 
+           
+           Function[{$CellContext`i, $CellContext`j, $CellContext`exp, \
+$CellContext`nmax}, $CellContext`gauss], 2, 0, 0, 2, 0, 1, 3, 0, 0, 2, 0, 2, 
+           3, 0, 1}, {7, 2, 5}, {94, 264, 2, 0, 0, 2, 0, 5, 2, 0, 6}, {7, 2, 
+          5}, {94, 264, 2, 0, 1, 2, 0, 5, 2, 0, 7}, {17, 6, 7, 6}, {94, 264, 
+          2, 0, 6, 3, 0, 0, 3, 0, 2}, {9, 0., 1., 0}, {7, 0, 6}, {15, 0, 6, 
+          3}, {8, 6.283185307179586, 4}, {59, 3, 3, 4, 5}, {8, 0., 3}, {16, 5,
+           3, 1}, {22, 0, 1, 0}, {93, 34, 4, 0, 0, 4, 0, 1}, {8, 0., 5}, {16, 
+          1, 5, 0}, {8, 0., 3}, {16, 2, 3, 2}, {22, 0, 2, 1, 0}, {13, 0, 1}, {
+          13, 1, 0}, {2}}, 
+         Function[{$CellContext`i, $CellContext`j, $CellContext`exp, \
+$CellContext`nmax}, 
+          Which[
+           And[$CellContext`i == 0, $CellContext`j == 0], 0, 
+           
+           Or[$CellContext`i > $CellContext`nmax, $CellContext`j > \
+$CellContext`nmax], 0, 
+           True, ($CellContext`gauss ($CellContext`i^2 + \
+$CellContext`j^2)^$CellContext`exp) 
+           Exp[I RandomReal[{0, 6.283185307179586}]]]], 
+         Evaluate], $CellContext`fBmRA[
+         Pattern[$CellContext`mat, 
+          Blank[List]], 
+         Pattern[$CellContext`n, 
+          Blank[Integer]], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Optional[
+          Pattern[$CellContext`r, 
+           Blank[]], 1/2]] := 
+       Module[{$CellContext`x = $CellContext`mat}, 
+         While[Length[$CellContext`x] < $CellContext`n, $CellContext`x = \
+$CellContext`fBmRAStep[$CellContext`x, $CellContext`h, 
+             
+             Max[$CellContext`r, 
+              Length[$CellContext`x]/$CellContext`n]]]; $CellContext`x], \
+$CellContext`fBmRA[
+         Pattern[$CellContext`e, 
+          Blank[Integer]], 
+         Pattern[$CellContext`args, 
+          BlankSequence[]]] := $CellContext`fBmRA[
+         Array[$CellContext`gauss/2& , 
+          Table[
+          2, {$CellContext`e}]], $CellContext`args], $CellContext`fBmRAStep[
+         Pattern[$CellContext`mat, 
+          Blank[List]], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Optional[
+          Pattern[$CellContext`r, 
+           Blank[]], 1/2]] := 
+       Module[{$CellContext`t, $CellContext`T, $CellContext`odims, \
+$CellContext`ndims}, $CellContext`odims = 
+          Dimensions[$CellContext`mat]; $CellContext`ndims = 
+          Ceiling[$CellContext`odims/$CellContext`r]; $CellContext`t = 
+          1./(Max[$CellContext`ndims] - 1); $CellContext`T = 
+          1./(Max[$CellContext`odims] - 1); 
+         With[{$CellContext`delta = (Sqrt[0.5] 
+              Sqrt[1 - ($CellContext`t/$CellContext`T)^(2 - 
+                 2 $CellContext`h)]) $CellContext`t^$CellContext`h}, 
+           Map[$CellContext`delta $CellContext`gauss + #& , 
+            $CellContext`interpolate[$CellContext`mat, $CellContext`ndims], \
+{-1}]]], $CellContext`interpolate[
+         Pattern[$CellContext`x, 
+          Blank[]], 
+         Pattern[$CellContext`ndims, 
+          Blank[List]]] := 
+       With[{$CellContext`e = TensorRank[$CellContext`x]}, 
+         With[{$CellContext`trans = RotateRight[
+             Range[$CellContext`e]]}, 
+          Fold[Map[
+            Function[$CellContext`slice, 
+             $CellContext`inter[$CellContext`slice, #2]], 
+            
+            Transpose[#, $CellContext`trans], {$CellContext`e - 
+             1}]& , $CellContext`x, $CellContext`ndims]]], $CellContext`inter[
+        
+         Pattern[$CellContext`x, 
+          Blank[]], 
+         Pattern[$CellContext`m, 
+          Blank[]]] := 
+       With[{$CellContext`interpol = 
+          Interpolation[$CellContext`x, InterpolationOrder -> 
+            1], $CellContext`n = Length[$CellContext`x]}, 
+         $CellContext`interpol[
+          Range[
+          1, $CellContext`n, ($CellContext`n - 1)/($CellContext`m - 1)]]]}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->199085168],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`h$$ = 
+    0.83, $CellContext`meth$$ = $CellContext`fBmRA, $CellContext`n$$ = 
+    90, $CellContext`rand$$ = 0, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`meth$$], $CellContext`fBmRA, 
+       "method"}, {$CellContext`fBmRA -> 
+       "random additions", $CellContext`fBmFourier -> 
+       "Fourier synthesis"}}, {{
+       Hold[$CellContext`n$$], 90, "points"}, 10, 100, 10}, {{
+       Hold[$CellContext`h$$], 0.83, "Hurst exponent h"}, 0.1, 0.9}, {{
+       Hold[$CellContext`rand$$], 0, ""}, 
+      Dynamic[
+      Button["randomize", $CellContext`rand$$ = RandomInteger[2^64 - 1]]& ]}},
+     Typeset`size$$ = {360., {144., 148.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`meth$60145$$ = False, $CellContext`n$60146$$ = 
+    0, $CellContext`h$60147$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`h$$ = 
+        0.83, $CellContext`meth$$ = $CellContext`fBmRA, $CellContext`n$$ = 
+        90, $CellContext`rand$$ = 0}, "ControllerVariables" :> {
+        Hold[$CellContext`meth$$, $CellContext`meth$60145$$, False], 
+        Hold[$CellContext`n$$, $CellContext`n$60146$$, 0], 
+        Hold[$CellContext`h$$, $CellContext`h$60147$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      BlockRandom[SeedRandom[$CellContext`rand$$]; ListPlot3D[
+          $CellContext`meth$$[2, $CellContext`n$$, $CellContext`h$$], 
+          ColorFunction -> "GreenBrownTerrain", MeshFunctions -> {#3& }, 
+          PlotRange -> All, Axes -> False, Filling -> Bottom, FillingStyle -> 
+          Brown, Mesh -> ControlActive[5, Automatic]]], 
+      "Specifications" :> {{{$CellContext`meth$$, $CellContext`fBmRA, 
+          "method"}, {$CellContext`fBmRA -> 
+          "random additions", $CellContext`fBmFourier -> 
+          "Fourier synthesis"}}, {{$CellContext`n$$, 90, "points"}, 10, 100, 
+         10, Appearance -> 
+         "Labeled"}, {{$CellContext`h$$, 0.83, "Hurst exponent h"}, 0.1, 0.9, 
+         Appearance -> "Labeled"}, {{$CellContext`rand$$, 0, ""}, 
+         Dynamic[
+         Button["randomize", $CellContext`rand$$ = 
+           RandomInteger[2^64 - 1]]& ]}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{404., {226., 231.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({
+      Attributes[PlotRange] = {ReadProtected}, 
+       Attributes[ControlActive] = {
+        HoldAll, ReadProtected}, $CellContext`fBmRA[
+         Pattern[$CellContext`mat, 
+          Blank[List]], 
+         Pattern[$CellContext`n, 
+          Blank[Integer]], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Optional[
+          Pattern[$CellContext`r, 
+           Blank[]], 1/2]] := 
+       Module[{$CellContext`x = $CellContext`mat}, 
+         While[Length[$CellContext`x] < $CellContext`n, $CellContext`x = \
+$CellContext`fBmRAStep[$CellContext`x, $CellContext`h, 
+             
+             Max[$CellContext`r, 
+              Length[$CellContext`x]/$CellContext`n]]]; $CellContext`x], \
+$CellContext`fBmRA[
+         Pattern[$CellContext`e, 
+          Blank[Integer]], 
+         Pattern[$CellContext`args, 
+          BlankSequence[]]] := $CellContext`fBmRA[
+         Array[$CellContext`gauss/2& , 
+          Table[
+          2, {$CellContext`e}]], $CellContext`args], $CellContext`fBmRAStep[
+         Pattern[$CellContext`mat, 
+          Blank[List]], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Optional[
+          Pattern[$CellContext`r, 
+           Blank[]], 1/2]] := 
+       Module[{$CellContext`t, $CellContext`T, $CellContext`odims, \
+$CellContext`ndims}, $CellContext`odims = 
+          Dimensions[$CellContext`mat]; $CellContext`ndims = 
+          Ceiling[$CellContext`odims/$CellContext`r]; $CellContext`t = 
+          1./(Max[$CellContext`ndims] - 1); $CellContext`T = 
+          1./(Max[$CellContext`odims] - 1); 
+         With[{$CellContext`delta = (Sqrt[0.5] 
+              Sqrt[1 - ($CellContext`t/$CellContext`T)^(2 - 
+                 2 $CellContext`h)]) $CellContext`t^$CellContext`h}, 
+           Map[$CellContext`delta $CellContext`gauss + #& , 
+            $CellContext`interpolate[$CellContext`mat, $CellContext`ndims], \
+{-1}]]], $CellContext`gauss := Random[
+         NormalDistribution[0, 1]], $CellContext`interpolate[
+         Pattern[$CellContext`x, 
+          Blank[]], 
+         Pattern[$CellContext`ndims, 
+          Blank[List]]] := 
+       With[{$CellContext`e = TensorRank[$CellContext`x]}, 
+         With[{$CellContext`trans = RotateRight[
+             Range[$CellContext`e]]}, 
+          Fold[Map[
+            Function[$CellContext`slice, 
+             $CellContext`inter[$CellContext`slice, #2]], 
+            
+            Transpose[#, $CellContext`trans], {$CellContext`e - 
+             1}]& , $CellContext`x, $CellContext`ndims]]], $CellContext`inter[
+        
+         Pattern[$CellContext`x, 
+          Blank[]], 
+         Pattern[$CellContext`m, 
+          Blank[]]] := 
+       With[{$CellContext`interpol = 
+          Interpolation[$CellContext`x, InterpolationOrder -> 
+            1], $CellContext`n = Length[$CellContext`x]}, 
+         $CellContext`interpol[
+          Range[
+          1, $CellContext`n, ($CellContext`n - 1)/($CellContext`m - 
+           1)]]], $CellContext`fBmFourier[1, 
+         PatternTest[
+          Pattern[$CellContext`n, 
+           Blank[]], EvenQ], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Optional[
+          Pattern[$CellContext`maxn, 
+           Blank[]], Automatic]] := 
+       Module[{$CellContext`ff, $CellContext`n2 = $CellContext`n/
+           2, $CellContext`mbeta2 = -((2 $CellContext`h + 1)/
+            2.), $CellContext`i, $CellContext`nmax = $CellContext`maxn}, 
+         If[$CellContext`nmax === 
+           Automatic, $CellContext`nmax = $CellContext`n]; $CellContext`nmax = 
+          Round[$CellContext`nmax/2]; $CellContext`ff = Table[
+            $CellContext`freq1[$CellContext`i, $CellContext`mbeta2, \
+$CellContext`nmax], {$CellContext`i, 0, $CellContext`n2}]; 
+         Part[$CellContext`ff, -1] = Re[
+            Part[$CellContext`ff, -1]]; $CellContext`ff = 
+          Join[$CellContext`ff, 
+            Reverse[
+             Conjugate[
+              Take[$CellContext`ff, {2, -2}]]]]; $CellContext`n Chop[
+            InverseFourier[$CellContext`ff]]], $CellContext`fBmFourier[2, 
+         PatternTest[
+          Pattern[$CellContext`n, 
+           Blank[]], EvenQ], 
+         Pattern[$CellContext`h, 
+          Blank[]], 
+         Optional[
+          Pattern[$CellContext`maxn, 
+           Blank[]], Automatic]] := 
+       Module[{$CellContext`line0, $CellContext`half1, $CellContext`linem, \
+$CellContext`half2, $CellContext`full, $CellContext`n2 = $CellContext`n/
+           2, $CellContext`mbeta2 = -(($CellContext`h + 1)/
+            2.), $CellContext`i, $CellContext`j, $CellContext`nmax = \
+$CellContext`maxn}, 
+         If[$CellContext`nmax === 
+           Automatic, $CellContext`nmax = $CellContext`n]; $CellContext`nmax = 
+          Round[$CellContext`nmax/2]; $CellContext`line0 = Table[
+            $CellContext`freq2[
+            0, $CellContext`j, $CellContext`mbeta2, $CellContext`nmax], \
+{$CellContext`j, 0, $CellContext`n2}]; Part[$CellContext`line0, -1] = Re[
+            Part[$CellContext`line0, -1]]; $CellContext`line0 = 
+          Join[$CellContext`line0, 
+            Conjugate[
+             Reverse[
+              Take[$CellContext`line0, {2, -2}]]]]; $CellContext`half1 = 
+          Table[
+            $CellContext`freq2[$CellContext`i, 
+             
+             Min[$CellContext`j, $CellContext`n - $CellContext`j], \
+$CellContext`mbeta2, $CellContext`nmax], {$CellContext`i, 1, $CellContext`n2 - 
+             1}, {$CellContext`j, 0, $CellContext`n - 1}]; $CellContext`linem = 
+          Table[
+            $CellContext`freq2[$CellContext`n2, $CellContext`j, \
+$CellContext`mbeta2, $CellContext`nmax], {$CellContext`j, 
+             0, $CellContext`n2}]; Part[$CellContext`linem, 1] = Re[
+            Part[$CellContext`linem, 1]]; Part[$CellContext`linem, -1] = Re[
+            Part[$CellContext`linem, -1]]; $CellContext`linem = 
+          Join[$CellContext`linem, 
+            Conjugate[
+             Reverse[
+              Take[$CellContext`linem, {2, -2}]]]]; $CellContext`half2 = 
+          Map[RotateLeft, $CellContext`half1]; $CellContext`half2 = Reverse[
+            Map[Reverse, $CellContext`half2]]; $CellContext`half2 = 
+          Conjugate[$CellContext`half2]; $CellContext`full = 
+          Join[{$CellContext`line0}, $CellContext`half1, \
+{$CellContext`linem}, $CellContext`half2]; N[
+            Sqrt[$CellContext`n]] Chop[
+            InverseFourier[$CellContext`full]]], $CellContext`freq1[0, 
+         Pattern[$CellContext`exp, 
+          Blank[]], 
+         Pattern[$CellContext`nmax, 
+          Blank[]]] := 0, Condition[
+         $CellContext`freq1[
+          Pattern[$CellContext`i, 
+           Blank[]], 
+          Pattern[$CellContext`exp, 
+           Blank[]], 
+          Pattern[$CellContext`nmax, 
+           Blank[]]], $CellContext`i > $CellContext`nmax] := 
+       0, $CellContext`freq1[
+         Pattern[$CellContext`i, 
+          Blank[]], 
+         Pattern[$CellContext`exp, 
+          Blank[]], 
+         Pattern[$CellContext`nmax, 
+          
+          Blank[]]] := ($CellContext`gauss $CellContext`i^$CellContext`exp) \
+$CellContext`randPhase, $CellContext`randPhase := 
+       Exp[I RandomReal[{0, 6.283185307179586}]], $CellContext`freq2 = 
+       CompiledFunction[{
+          Blank[Integer], 
+          Blank[Integer], 
+          Blank[Real], 
+          Blank[Integer]}, {{2, 0, 0}, {2, 0, 1}, {3, 0, 0}, {2, 0, 2}, {4, 0,
+          0}}, {5, 8, 6, 3, 
+         0}, {{1, 5}, {7, 0, 3}, {33, 0, 3, 0}, {3, 0, 5}, {7, 0, 3}, {33, 1, 
+          3, 1}, {10, 1, 3}, {4, 3}, {6, False, 2}, {10, 2, 3}, {3, 3, 7}, {7,
+           0, 3}, {15, 0, 3, 1}, {8, 0., 2}, {16, 1, 2, 2}, {13, 2, 0}, {4, 
+          38}, {36, 2, 0, 0}, {3, 0, 4}, {6, True, 1}, {10, 1, 4}, {4, 3}, {
+          36, 2, 1, 2}, {10, 2, 4}, {3, 4, 7}, {7, 0, 4}, {15, 0, 4, 1}, {
+          8, 0., 2}, {16, 1, 2, 2}, {13, 2, 1}, {4, 23}, {54, 
+           
+           Function[{$CellContext`i, $CellContext`j, $CellContext`exp, \
+$CellContext`nmax}, $CellContext`gauss], 2, 0, 0, 2, 0, 1, 3, 0, 0, 2, 0, 2, 
+           3, 0, 1}, {7, 2, 5}, {94, 264, 2, 0, 0, 2, 0, 5, 2, 0, 6}, {7, 2, 
+          5}, {94, 264, 2, 0, 1, 2, 0, 5, 2, 0, 7}, {17, 6, 7, 6}, {94, 264, 
+          2, 0, 6, 3, 0, 0, 3, 0, 2}, {9, 0., 1., 0}, {7, 0, 6}, {15, 0, 6, 
+          3}, {8, 6.283185307179586, 4}, {59, 3, 3, 4, 5}, {8, 0., 3}, {16, 5,
+           3, 1}, {22, 0, 1, 0}, {93, 34, 4, 0, 0, 4, 0, 1}, {8, 0., 5}, {16, 
+          1, 5, 0}, {8, 0., 3}, {16, 2, 3, 2}, {22, 0, 2, 1, 0}, {13, 0, 1}, {
+          13, 1, 0}, {2}}, 
+         Function[{$CellContext`i, $CellContext`j, $CellContext`exp, \
+$CellContext`nmax}, 
+          Which[
+           And[$CellContext`i == 0, $CellContext`j == 0], 0, 
+           
+           Or[$CellContext`i > $CellContext`nmax, $CellContext`j > \
+$CellContext`nmax], 0, 
+           True, ($CellContext`gauss ($CellContext`i^2 + \
+$CellContext`j^2)^$CellContext`exp) 
+           Exp[I RandomReal[{0, 6.283185307179586}]]]], Evaluate]}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->388560129]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "DetailsSection"],
+
+Cell[TextData[{
+ StyleBox["Random addition",
+  FontSlant->"Italic"],
+ " refines the list of points by interpolation and adding random offsets."
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.377269572107841*^9, 3.377269592375051*^9}},
+ CellID->1152744834],
+
+Cell[TextData[{
+ StyleBox["Fourier synthesis",
+  FontSlant->"Italic"],
+ " generates a random spectrum such that the resulting data has the correct \
+scaling property."
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.377269572107841*^9, 3.377269592375051*^9}, {
+   3.377269632132851*^9, 3.377269667827747*^9}},
+ CellID->1619168855],
+
+Cell["\<\
+The surfaces are colored by height using the \"Topography\" gradient mapping \
+and level curves.\
+\>", "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.377350630002092*^9, 3.377350662906769*^9}},
+ CellID->1836062090],
+
+Cell[TextData[{
+ "The code for generating the data is from Roman E. Maeder, ",
+ StyleBox["The Mathematica Programmer II",
+  FontSlant->"Italic"],
+ ", New York: Academic Press, 1996."
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.36880574283977*^9, 3.36880580020991*^9}, {
+   3.36880823329114*^9, 3.36880823883336*^9}, {3.36896585672415*^9, 
+   3.36896588862274*^9}, {3.377269170575885*^9, 3.377269213185706*^9}, 
+   3.3807355601875*^9},
+ CellID->930147444]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SearchTermsSection"],
+
+Cell["Brownian motion", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.377270013276524*^9, 3.377270019841197*^9}},
+ CellID->1450314789],
+
+Cell["geometric modelling", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.377270013276524*^9, 3.377270047361772*^9}},
+ CellID->1303376888],
+
+Cell["fractional curve", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.377270013276524*^9, 3.377270056513428*^9}},
+ CellID->805584121],
+
+Cell["Fourier transform", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.377270013276524*^9, 3.377270065625117*^9}},
+ CellID->806738454],
+
+Cell["simulated landscape", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.377270013276524*^9, 3.377270065625117*^9}, {
+   3.377350677083384*^9, 3.377350679654733*^9}},
+ CellID->1804031483]
+}, Open  ]],
+
+Cell["", "RelatedLinksSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Roman E. Maeder",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Roman+E.+\
+Maeder"], None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Roman+E.+Maeder"]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.36880814845506*^9, 3.36880815520617*^9}, 
+   3.3773761162645807`*^9},
+ CellID->1420352333]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{700, 573},
+WindowMargins->{{25, Automatic}, {-126, 53}},
+FrontEndVersion->"6.0 for Microsoft Windows (32-bit) (June 19, 2007)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[80480, 1881, 310, 8, 70, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[80793, 1891, 676, 16, 70, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[81472, 1909, 339, 11, 70, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[81814, 1922, 636, 15, 70, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[82453, 1939, 843, 21, 70, "ControlSuggestions",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[83299, 1962, 303, 8, 70, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[83605, 1972, 1411, 31, 70, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[85019, 2005, 881, 21, 70, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 87719, 2094},
+ {"RotateAndZoomIn3D", 87828, 2097},
+ {"DragLocators", 87938, 2100},
+ {"CreateAndDeleteLocators", 88054, 2103},
+ {"SliderZoom", 88168, 2106},
+ {"GamepadControls", 88274, 2109},
+ {"AutomaticAnimation", 88387, 2112},
+ {"BookmarkAnimation", 88504, 2115}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[590, 23, 314, 5, 70, "DemoTitle",
+ CellID->700863240],
+Cell[CellGroupData[{
+Cell[929, 32, 33, 0, 70, "InitializationSection"],
+Cell[965, 34, 806, 23, 70, "Input",
+ CellID->784550105],
+Cell[1774, 59, 1213, 39, 70, "Input",
+ CellID->430911127],
+Cell[2990, 100, 1757, 51, 70, "Input",
+ CellID->1477580908],
+Cell[4750, 153, 1734, 52, 70, "Input",
+ CellID->684517028],
+Cell[6487, 207, 1803, 50, 70, "Input",
+ CellID->1764517223],
+Cell[8293, 259, 4460, 127, 70, "Input",
+ CellID->2138423562]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[12790, 391, 29, 0, 70, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[12844, 395, 3740, 82, 70, "Input",
+ CellID->836397690],
+Cell[16587, 479, 12134, 257, 70, "Output",
+ CellID->284724664]
+}, {2}]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[28767, 742, 36, 0, 70, "ManipulateCaptionSection"],
+Cell[28806, 744, 1454, 36, 70, "ManipulateCaption",
+ CellID->1044312921]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[30297, 785, 28, 0, 70, "ThumbnailSection"],
+Cell[30328, 787, 12205, 259, 70, "Output",
+ CellID->757054381]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[42570, 1051, 28, 0, 70, "SnapshotsSection"],
+Cell[42601, 1053, 12134, 257, 70, "Output",
+ CellID->676213691],
+Cell[54738, 1312, 12134, 257, 70, "Output",
+ CellID->199085168],
+Cell[66875, 1571, 12120, 257, 70, "Output",
+ CellID->388560129]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[79032, 1833, 26, 0, 70, "DetailsSection"],
+Cell[79061, 1835, 273, 7, 70, "DetailNotes",
+ CellID->1152744834],
+Cell[79337, 1844, 347, 9, 70, "DetailNotes",
+ CellID->1619168855],
+Cell[79687, 1855, 238, 6, 70, "DetailNotes",
+ CellID->1836062090],
+Cell[79928, 1863, 475, 11, 70, "DetailNotes",
+ CellID->930147444]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[80440, 1879, 37, 0, 70, "ControlSuggestionsSection"],
+Cell[80480, 1881, 310, 8, 70, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[80793, 1891, 676, 16, 70, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[81472, 1909, 339, 11, 70, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[81814, 1922, 636, 15, 70, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[82453, 1939, 843, 21, 70, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[83299, 1962, 303, 8, 70, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[83605, 1972, 1411, 31, 70, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[85019, 2005, 881, 21, 70, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[85937, 2031, 30, 0, 70, "SearchTermsSection"],
+Cell[85970, 2033, 149, 3, 70, "SearchTerms",
+ CellID->1450314789],
+Cell[86122, 2038, 153, 3, 70, "SearchTerms",
+ CellID->1303376888],
+Cell[86278, 2043, 149, 3, 70, "SearchTerms",
+ CellID->805584121],
+Cell[86430, 2048, 150, 3, 70, "SearchTerms",
+ CellID->806738454],
+Cell[86583, 2053, 203, 4, 70, "SearchTerms",
+ CellID->1804031483]
+}, Open  ]],
+Cell[86801, 2060, 31, 0, 70, "RelatedLinksSection"],
+Cell[CellGroupData[{
+Cell[86857, 2064, 25, 0, 70, "AuthorSection"],
+Cell[86885, 2066, 439, 13, 70, "Author",
+ CellID->1420352333]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

@@ -1,0 +1,1206 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     47739,       1197]
+NotebookOptionsPosition[     43653,       1068]
+NotebookOutlinePosition[     45260,       1119]
+CellTagsIndexPosition[     44932,       1107]
+WindowFrame->Normal
+ContainsDynamic->True *)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Difference Set", "DemoTitle",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.380888255580988*^9, 3.3808882601177826`*^9}, {
+   3.380899098853404*^9, 3.380899105122794*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["", "InitializationSection"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"diffsets", " ", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"7", ",", "3"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", "2", ",", "4"}], "}"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"13", ",", "4"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "1", ",", "3", ",", "9"}], "}"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"21", ",", "5"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"3", ",", "6", ",", "7", ",", "12", ",", "14"}], "}"}]}], 
+      "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"31", ",", "6"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", "5", ",", "11", ",", "24", ",", "25", ",", "27"}], 
+        "}"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"57", ",", "8"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+        "0", ",", "1", ",", "6", ",", "15", ",", "22", ",", "26", ",", "45", 
+         ",", "55"}], "}"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"73", ",", "9"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+        "0", ",", "1", ",", "12", ",", "20", ",", "26", ",", "30", ",", "33", 
+         ",", "35", ",", "57"}], "}"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"91", ",", "10"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+        "0", ",", "2", ",", "6", ",", "7", ",", "18", ",", "21", ",", "31", 
+         ",", "54", ",", "63", ",", "71"}], "}"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"133", ",", "12"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+        "1", ",", "10", ",", "11", ",", "13", ",", "27", ",", "31", ",", "68",
+          ",", "75", ",", "83", ",", "110", ",", "115", ",", "121"}], "}"}]}],
+       "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"183", ",", "14"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+        "1", ",", "13", ",", "20", ",", "21", ",", "23", ",", "44", ",", "61",
+          ",", "72", ",", "77", ",", "86", ",", "90", ",", "116", ",", "122", 
+         ",", "169"}], "}"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"273", ",", "17"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+        "0", ",", "1", ",", "22", ",", "33", ",", "83", ",", "122", ",", 
+         "135", ",", "141", ",", "145", ",", "159", ",", "175", ",", "200", 
+         ",", "226", ",", "229", ",", "231", ",", "238", ",", "246"}], 
+        "}"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"307", ",", "18"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+        "0", ",", "1", ",", "3", ",", "30", ",", "37", ",", "50", ",", "55", 
+         ",", "76", ",", "98", ",", "117", ",", "129", ",", "133", ",", "157",
+          ",", "189", ",", "199", ",", "222", ",", "293", ",", "299"}], 
+        "}"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"381", ",", "20"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+        "0", ",", "1", ",", "19", ",", "28", ",", "96", ",", "118", ",", 
+         "151", ",", "153", ",", "176", ",", "202", ",", "240", ",", "254", 
+         ",", "290", ",", "296", ",", "300", ",", "307", ",", "337", ",", 
+         "361", ",", "366", ",", "369"}], "}"}]}], "}"}]}], "}"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.380894411108793*^9, 3.3808944221048236`*^9}},
+ CellID->310820003]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"With", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"diffset", " ", "=", " ", 
+        RowBox[{"diffsets", "[", 
+         RowBox[{"[", 
+          RowBox[{"setindex", ",", "2"}], "]"}], "]"}]}], ",", " ", 
+       RowBox[{"circ", "=", " ", 
+        RowBox[{"diffsets", "[", 
+         RowBox[{"[", 
+          RowBox[{"setindex", ",", "1", ",", "1"}], "]"}], "]"}]}], ",", " ", 
+       
+       RowBox[{"len", " ", "=", " ", 
+        RowBox[{"diffsets", "[", 
+         RowBox[{"[", 
+          RowBox[{"setindex", ",", "1", ",", "2"}], "]"}], "]"}]}]}], "}"}], 
+     ",", 
+     RowBox[{"With", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"jj", " ", "=", 
+         RowBox[{"Drop", "[", 
+          RowBox[{
+           RowBox[{"Sort", "[", 
+            RowBox[{"Flatten", "[", 
+             RowBox[{
+              RowBox[{"Table", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"Mod", "[", 
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{"diffset", "[", 
+                    RowBox[{"[", "a", "]"}], "]"}], "-", 
+                    RowBox[{"diffset", "[", 
+                    RowBox[{"[", "b", "]"}], "]"}]}], ",", "circ"}], "]"}], 
+                  ",", 
+                  RowBox[{"diffset", "[", 
+                   RowBox[{"[", "a", "]"}], "]"}], ",", 
+                  RowBox[{"diffset", "[", 
+                   RowBox[{"[", "b", "]"}], "]"}]}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"a", ",", "1", ",", "len"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"b", ",", "1", ",", "len"}], "}"}]}], "]"}], ",", 
+              "1"}], "]"}], "]"}], ",", "len"}], "]"}]}], "}"}], ",", 
+       RowBox[{"Graphics", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"RGBColor", "[", 
+           RowBox[{".67", ",", ".75", ",", ".15"}], "]"}], ",", 
+          RowBox[{"Circle", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0"}], "}"}], ",", "1"}], "]"}], ",", "Black", 
+          ",", 
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"Circle", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"0", ",", "0"}], "}"}], ",", 
+              RowBox[{"1", " ", "-", "  ", 
+               RowBox[{"n", "/", 
+                RowBox[{"(", 
+                 RowBox[{"circ", "+", "5"}], ")"}]}]}], ",", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"2", " ", 
+                 RowBox[{"jj", "[", 
+                  RowBox[{"[", 
+                   RowBox[{"n", ",", "2"}], "]"}], "]"}], " ", 
+                 RowBox[{"Pi", "/", "circ"}]}], ",", " ", 
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"jj", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"n", ",", "2"}], "]"}], "]"}], "<", 
+                   RowBox[{"jj", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"n", ",", "3"}], "]"}], "]"}]}], ",", 
+                  RowBox[{"2", " ", 
+                   RowBox[{"jj", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"n", ",", "3"}], "]"}], "]"}], " ", 
+                   RowBox[{"Pi", "/", "circ"}]}], ",", 
+                  RowBox[{
+                   RowBox[{"2", " ", 
+                    RowBox[{"jj", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"n", ",", "3"}], "]"}], "]"}], " ", 
+                    RowBox[{"Pi", "/", "circ"}]}], "+", 
+                   RowBox[{"2", " ", "Pi"}]}]}], "]"}]}], "}"}]}], "]"}], ",",
+             
+            RowBox[{"{", 
+             RowBox[{"n", ",", "1", ",", 
+              RowBox[{"circ", "-", "1"}]}], "}"}]}], "]"}], ",", " ", 
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"Point", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"Cos", "[", 
+                RowBox[{"2", " ", "Pi", " ", 
+                 RowBox[{"n", "/", "circ"}]}], "]"}], ",", 
+               RowBox[{"Sin", "[", 
+                RowBox[{"2", " ", "Pi", " ", 
+                 RowBox[{"n", "/", "circ"}]}], "]"}]}], "}"}], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"n", ",", "1", ",", "circ"}], "}"}]}], "]"}], ",", 
+          RowBox[{"RGBColor", "[", 
+           RowBox[{"1", ",", ".47", ",", "0"}], "]"}], ",", 
+          RowBox[{"AbsolutePointSize", "[", "6", "]"}], ",", 
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"Point", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"Cos", "[", 
+                RowBox[{"2", " ", "Pi", " ", 
+                 RowBox[{
+                  RowBox[{"diffset", "[", 
+                   RowBox[{"[", "n", "]"}], "]"}], "/", "circ"}]}], "]"}], 
+               ",", 
+               RowBox[{"Sin", "[", 
+                RowBox[{"2", " ", "Pi", " ", 
+                 RowBox[{
+                  RowBox[{"diffset", "[", 
+                   RowBox[{"[", "n", "]"}], "]"}], "/", "circ"}]}], "]"}]}], 
+              "}"}], "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"n", ",", "1", ",", "len"}], "}"}]}], "]"}]}], "}"}], 
+        "]"}]}], "]"}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"setindex", ",", "4", ",", "\"\<pick a difference set\>\""}], 
+      "}"}], ",", "1", ",", "12", ",", "1", ",", 
+     RowBox[{"Appearance", "\[Rule]", " ", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   
+   RowBox[{"SaveDefinitions", "\[Rule]", " ", "True"}]}], "]"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.380889493733816*^9, 3.3808894942144446`*^9}, 
+   3.380891876766327*^9, {3.3808919196087856`*^9, 3.380892018122406*^9}, {
+   3.3808924571844673`*^9, 3.380892495890896*^9}, {3.3808926208430605`*^9, 
+   3.3808926217343597`*^9}, {3.380892946427721*^9, 3.3808929547798977`*^9}, 
+   3.3808929987740355`*^9, {3.3808944555836315`*^9, 3.38089450406431*^9}, {
+   3.3808961485915337`*^9, 3.3808961678163023`*^9}, {3.3808962060055027`*^9, 
+   3.380896356729702*^9}, {3.380896871514456*^9, 3.380896896344759*^9}, {
+   3.380896935163401*^9, 3.3808970601666436`*^9}, {3.3808970912935314`*^9, 
+   3.3808971309914055`*^9}, {3.3808972011637077`*^9, 3.380897203336876*^9}, {
+   3.3808972738296456`*^9, 3.3808972771344633`*^9}, {3.380897338904516*^9, 
+   3.3808973579222417`*^9}, {3.380897710676512*^9, 3.3808977865771656`*^9}, {
+   3.3808978388257685`*^9, 3.3808979472792864`*^9}, {3.380898197271931*^9, 
+   3.3808983890434217`*^9}, {3.3808984686703014`*^9, 3.380898474999592*^9}, {
+   3.382722995862275*^9, 3.382723013049775*^9}},
+ CellID->201630633],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`setindex$$ = 4, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`setindex$$], 4, "pick a difference set"}, 1, 12, 1}},
+     Typeset`size$$ = {360., {177., 182.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`setindex$61358$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`setindex$$ = 4}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`setindex$$, $CellContext`setindex$61358$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      With[{$CellContext`diffset = 
+         Part[$CellContext`diffsets, $CellContext`setindex$$, 
+           2], $CellContext`circ = 
+         Part[$CellContext`diffsets, $CellContext`setindex$$, 1, 
+           1], $CellContext`len = 
+         Part[$CellContext`diffsets, $CellContext`setindex$$, 1, 2]}, 
+        With[{$CellContext`jj = Drop[
+            Sort[
+             Flatten[
+              Table[{
+                Mod[
+                Part[$CellContext`diffset, $CellContext`a] - 
+                 Part[$CellContext`diffset, $CellContext`b], \
+$CellContext`circ], 
+                Part[$CellContext`diffset, $CellContext`a], 
+                Part[$CellContext`diffset, $CellContext`b]}, {$CellContext`a, 
+                1, $CellContext`len}, {$CellContext`b, 1, $CellContext`len}], 
+              1]], $CellContext`len]}, 
+         Graphics[{
+           RGBColor[0.67, 0.75, 0.15], 
+           Circle[{0, 0}, 1], Black, 
+           Table[
+            
+            Circle[{0, 0}, 1 - $CellContext`n/($CellContext`circ + 5), {
+             2 Part[$CellContext`jj, $CellContext`n, 2] (
+               Pi/$CellContext`circ), 
+              If[
+              Part[$CellContext`jj, $CellContext`n, 2] < 
+               Part[$CellContext`jj, $CellContext`n, 3], 2 
+               Part[$CellContext`jj, $CellContext`n, 3] (
+                Pi/$CellContext`circ), 
+               2 Part[$CellContext`jj, $CellContext`n, 3] (
+                 Pi/$CellContext`circ) + 2 Pi]}], {$CellContext`n, 
+             1, $CellContext`circ - 1}], 
+           Table[
+            Point[{
+              Cos[2 Pi ($CellContext`n/$CellContext`circ)], 
+              Sin[2 Pi ($CellContext`n/$CellContext`circ)]}], {$CellContext`n,
+              1, $CellContext`circ}], 
+           RGBColor[1, 0.47, 0], 
+           AbsolutePointSize[6], 
+           Table[
+            Point[{
+              Cos[
+              2 Pi (Part[$CellContext`diffset, \
+$CellContext`n]/$CellContext`circ)], 
+              Sin[
+              2 Pi (Part[$CellContext`diffset, \
+$CellContext`n]/$CellContext`circ)]}], {$CellContext`n, 
+             1, $CellContext`len}]}]]], 
+      "Specifications" :> {{{$CellContext`setindex$$, 4, 
+          "pick a difference set"}, 1, 12, 1, Appearance -> "Labeled"}}, 
+      "Options" :> {}, "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{404., {220., 225.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`diffsets = {{{7, 3}, {1, 2, 4}}, {{13, 
+          4}, {0, 1, 3, 9}}, {{21, 5}, {3, 6, 7, 12, 14}}, {{31, 6}, {1, 5, 
+          11, 24, 25, 27}}, {{57, 8}, {0, 1, 6, 15, 22, 26, 45, 55}}, {{73, 
+          9}, {0, 1, 12, 20, 26, 30, 33, 35, 57}}, {{91, 10}, {0, 2, 6, 7, 18,
+           21, 31, 54, 63, 71}}, {{133, 12}, {1, 10, 11, 13, 27, 31, 68, 75, 
+          83, 110, 115, 121}}, {{183, 14}, {1, 13, 20, 21, 23, 44, 61, 72, 77,
+           86, 90, 116, 122, 169}}, {{273, 17}, {0, 1, 22, 33, 83, 122, 135, 
+          141, 145, 159, 175, 200, 226, 229, 231, 238, 246}}, {{307, 18}, {0, 
+          1, 3, 30, 37, 50, 55, 76, 98, 117, 129, 133, 157, 189, 199, 222, 
+          293, 299}}, {{381, 20}, {0, 1, 19, 28, 96, 118, 151, 153, 176, 202, 
+          240, 254, 290, 296, 300, 307, 337, 361, 366, 369}}}}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->10847964]
+}, {2}]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell[TextData[{
+ "A Golomb ruler is a set of marks ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"{", 
+    RowBox[{"a", ",", "b", ",", "c", ",", "\[Ellipsis]"}], "}"}], 
+   TraditionalForm]], "InlineMath"],
+ " such that all the differences ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"x", "-", "y"}], TraditionalForm]], "InlineMath"],
+ " between pairs are different. The differences from {0, 1, 4, 6} are all the \
+numbers between 1 and 6; it is therefore called a perfect Golomb ruler and it \
+is the largest such set. "
+}], "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3808985491584454`*^9, 3.380898742101655*^9}, 
+   3.3808988091801157`*^9, {3.3808989456739793`*^9, 3.380899045092884*^9}, {
+   3.3808990850627494`*^9, 3.3808990908714495`*^9}, {3.3824478384375*^9, 
+   3.382448141484375*^9}, {3.382448221734375*^9, 3.3824483545*^9}, {
+   3.382449546765625*^9, 3.38244955684375*^9}, 3.38245394683331*^9},
+ CellID->72790866],
+
+Cell["\<\
+If a circular wheel is used, a perfect set of measuring marks is called a \
+difference set, a Ganymede circle, or an n-switch. All the distances between \
+selected red points are different. The distances are indicated by arcs inside \
+the circle. \
+\>", "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3808985491584454`*^9, 3.380898742101655*^9}, 
+   3.3808988091801157`*^9, {3.3808989456739793`*^9, 3.380899045092884*^9}, {
+   3.3808990850627494`*^9, 3.3808990908714495`*^9}, {3.3824478384375*^9, 
+   3.382448143921875*^9}, 3.382448181546875*^9, {3.3824486653125*^9, 
+   3.382448776328125*^9}},
+ CellID->272740025]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`setindex$$ = 6, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`setindex$$], 6, "pick a difference set"}, 1, 12, 1}},
+     Typeset`size$$ = {360., {177., 182.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`setindex$61407$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`setindex$$ = 6}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`setindex$$, $CellContext`setindex$61407$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      With[{$CellContext`diffset = 
+         Part[$CellContext`diffsets, $CellContext`setindex$$, 
+           2], $CellContext`circ = 
+         Part[$CellContext`diffsets, $CellContext`setindex$$, 1, 
+           1], $CellContext`len = 
+         Part[$CellContext`diffsets, $CellContext`setindex$$, 1, 2]}, 
+        With[{$CellContext`jj = Drop[
+            Sort[
+             Flatten[
+              Table[{
+                Mod[
+                Part[$CellContext`diffset, $CellContext`a] - 
+                 Part[$CellContext`diffset, $CellContext`b], \
+$CellContext`circ], 
+                Part[$CellContext`diffset, $CellContext`a], 
+                Part[$CellContext`diffset, $CellContext`b]}, {$CellContext`a, 
+                1, $CellContext`len}, {$CellContext`b, 1, $CellContext`len}], 
+              1]], $CellContext`len]}, 
+         Graphics[{
+           RGBColor[0.67, 0.75, 0.15], 
+           Circle[{0, 0}, 1], Black, 
+           Table[
+            
+            Circle[{0, 0}, 1 - $CellContext`n/($CellContext`circ + 5), {
+             2 Part[$CellContext`jj, $CellContext`n, 2] (
+               Pi/$CellContext`circ), 
+              If[
+              Part[$CellContext`jj, $CellContext`n, 2] < 
+               Part[$CellContext`jj, $CellContext`n, 3], 2 
+               Part[$CellContext`jj, $CellContext`n, 3] (
+                Pi/$CellContext`circ), 
+               2 Part[$CellContext`jj, $CellContext`n, 3] (
+                 Pi/$CellContext`circ) + 2 Pi]}], {$CellContext`n, 
+             1, $CellContext`circ - 1}], 
+           Table[
+            Point[{
+              Cos[2 Pi ($CellContext`n/$CellContext`circ)], 
+              Sin[2 Pi ($CellContext`n/$CellContext`circ)]}], {$CellContext`n,
+              1, $CellContext`circ}], 
+           RGBColor[1, 0.47, 0], 
+           AbsolutePointSize[6], 
+           Table[
+            Point[{
+              Cos[
+              2 Pi (Part[$CellContext`diffset, \
+$CellContext`n]/$CellContext`circ)], 
+              Sin[
+              2 Pi (Part[$CellContext`diffset, \
+$CellContext`n]/$CellContext`circ)]}], {$CellContext`n, 
+             1, $CellContext`len}]}]]], 
+      "Specifications" :> {{{$CellContext`setindex$$, 6, 
+          "pick a difference set"}, 1, 12, 1, Appearance -> "Labeled"}}, 
+      "Options" :> {}, "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{404., {220., 225.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`diffsets = {{{7, 3}, {1, 2, 4}}, {{13, 
+          4}, {0, 1, 3, 9}}, {{21, 5}, {3, 6, 7, 12, 14}}, {{31, 6}, {1, 5, 
+          11, 24, 25, 27}}, {{57, 8}, {0, 1, 6, 15, 22, 26, 45, 55}}, {{73, 
+          9}, {0, 1, 12, 20, 26, 30, 33, 35, 57}}, {{91, 10}, {0, 2, 6, 7, 18,
+           21, 31, 54, 63, 71}}, {{133, 12}, {1, 10, 11, 13, 27, 31, 68, 75, 
+          83, 110, 115, 121}}, {{183, 14}, {1, 13, 20, 21, 23, 44, 61, 72, 77,
+           86, 90, 116, 122, 169}}, {{273, 17}, {0, 1, 22, 33, 83, 122, 135, 
+          141, 145, 159, 175, 200, 226, 229, 231, 238, 246}}, {{307, 18}, {0, 
+          1, 3, 30, 37, 50, 55, 76, 98, 117, 129, 133, 157, 189, 199, 222, 
+          293, 299}}, {{381, 20}, {0, 1, 19, 28, 96, 118, 151, 153, 176, 202, 
+          240, 254, 290, 296, 300, 307, 337, 361, 366, 369}}}}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->40138623]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`setindex$$ = 5, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`setindex$$], 5, "pick a difference set"}, 1, 12, 1}},
+     Typeset`size$$ = {360., {177., 182.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`setindex$61456$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`setindex$$ = 5}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`setindex$$, $CellContext`setindex$61456$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      With[{$CellContext`diffset = 
+         Part[$CellContext`diffsets, $CellContext`setindex$$, 
+           2], $CellContext`circ = 
+         Part[$CellContext`diffsets, $CellContext`setindex$$, 1, 
+           1], $CellContext`len = 
+         Part[$CellContext`diffsets, $CellContext`setindex$$, 1, 2]}, 
+        With[{$CellContext`jj = Drop[
+            Sort[
+             Flatten[
+              Table[{
+                Mod[
+                Part[$CellContext`diffset, $CellContext`a] - 
+                 Part[$CellContext`diffset, $CellContext`b], \
+$CellContext`circ], 
+                Part[$CellContext`diffset, $CellContext`a], 
+                Part[$CellContext`diffset, $CellContext`b]}, {$CellContext`a, 
+                1, $CellContext`len}, {$CellContext`b, 1, $CellContext`len}], 
+              1]], $CellContext`len]}, 
+         Graphics[{
+           RGBColor[0.67, 0.75, 0.15], 
+           Circle[{0, 0}, 1], Black, 
+           Table[
+            
+            Circle[{0, 0}, 1 - $CellContext`n/($CellContext`circ + 5), {
+             2 Part[$CellContext`jj, $CellContext`n, 2] (
+               Pi/$CellContext`circ), 
+              If[
+              Part[$CellContext`jj, $CellContext`n, 2] < 
+               Part[$CellContext`jj, $CellContext`n, 3], 2 
+               Part[$CellContext`jj, $CellContext`n, 3] (
+                Pi/$CellContext`circ), 
+               2 Part[$CellContext`jj, $CellContext`n, 3] (
+                 Pi/$CellContext`circ) + 2 Pi]}], {$CellContext`n, 
+             1, $CellContext`circ - 1}], 
+           Table[
+            Point[{
+              Cos[2 Pi ($CellContext`n/$CellContext`circ)], 
+              Sin[2 Pi ($CellContext`n/$CellContext`circ)]}], {$CellContext`n,
+              1, $CellContext`circ}], 
+           RGBColor[1, 0.47, 0], 
+           AbsolutePointSize[6], 
+           Table[
+            Point[{
+              Cos[
+              2 Pi (Part[$CellContext`diffset, \
+$CellContext`n]/$CellContext`circ)], 
+              Sin[
+              2 Pi (Part[$CellContext`diffset, \
+$CellContext`n]/$CellContext`circ)]}], {$CellContext`n, 
+             1, $CellContext`len}]}]]], 
+      "Specifications" :> {{{$CellContext`setindex$$, 5, 
+          "pick a difference set"}, 1, 12, 1, Appearance -> "Labeled"}}, 
+      "Options" :> {}, "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{404., {220., 225.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`diffsets = {{{7, 3}, {1, 2, 4}}, {{13, 
+          4}, {0, 1, 3, 9}}, {{21, 5}, {3, 6, 7, 12, 14}}, {{31, 6}, {1, 5, 
+          11, 24, 25, 27}}, {{57, 8}, {0, 1, 6, 15, 22, 26, 45, 55}}, {{73, 
+          9}, {0, 1, 12, 20, 26, 30, 33, 35, 57}}, {{91, 10}, {0, 2, 6, 7, 18,
+           21, 31, 54, 63, 71}}, {{133, 12}, {1, 10, 11, 13, 27, 31, 68, 75, 
+          83, 110, 115, 121}}, {{183, 14}, {1, 13, 20, 21, 23, 44, 61, 72, 77,
+           86, 90, 116, 122, 169}}, {{273, 17}, {0, 1, 22, 33, 83, 122, 135, 
+          141, 145, 159, 175, 200, 226, 229, 231, 238, 246}}, {{307, 18}, {0, 
+          1, 3, 30, 37, 50, 55, 76, 98, 117, 129, 133, 157, 189, 199, 222, 
+          293, 299}}, {{381, 20}, {0, 1, 19, 28, 96, 118, 151, 153, 176, 202, 
+          240, 254, 290, 296, 300, 307, 337, 361, 366, 369}}}}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->165886873],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`setindex$$ = 4, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`setindex$$], 4, "pick a difference set"}, 1, 12, 1}},
+     Typeset`size$$ = {360., {177., 182.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`setindex$61505$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`setindex$$ = 4}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`setindex$$, $CellContext`setindex$61505$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      With[{$CellContext`diffset = 
+         Part[$CellContext`diffsets, $CellContext`setindex$$, 
+           2], $CellContext`circ = 
+         Part[$CellContext`diffsets, $CellContext`setindex$$, 1, 
+           1], $CellContext`len = 
+         Part[$CellContext`diffsets, $CellContext`setindex$$, 1, 2]}, 
+        With[{$CellContext`jj = Drop[
+            Sort[
+             Flatten[
+              Table[{
+                Mod[
+                Part[$CellContext`diffset, $CellContext`a] - 
+                 Part[$CellContext`diffset, $CellContext`b], \
+$CellContext`circ], 
+                Part[$CellContext`diffset, $CellContext`a], 
+                Part[$CellContext`diffset, $CellContext`b]}, {$CellContext`a, 
+                1, $CellContext`len}, {$CellContext`b, 1, $CellContext`len}], 
+              1]], $CellContext`len]}, 
+         Graphics[{
+           RGBColor[0.67, 0.75, 0.15], 
+           Circle[{0, 0}, 1], Black, 
+           Table[
+            
+            Circle[{0, 0}, 1 - $CellContext`n/($CellContext`circ + 5), {
+             2 Part[$CellContext`jj, $CellContext`n, 2] (
+               Pi/$CellContext`circ), 
+              If[
+              Part[$CellContext`jj, $CellContext`n, 2] < 
+               Part[$CellContext`jj, $CellContext`n, 3], 2 
+               Part[$CellContext`jj, $CellContext`n, 3] (
+                Pi/$CellContext`circ), 
+               2 Part[$CellContext`jj, $CellContext`n, 3] (
+                 Pi/$CellContext`circ) + 2 Pi]}], {$CellContext`n, 
+             1, $CellContext`circ - 1}], 
+           Table[
+            Point[{
+              Cos[2 Pi ($CellContext`n/$CellContext`circ)], 
+              Sin[2 Pi ($CellContext`n/$CellContext`circ)]}], {$CellContext`n,
+              1, $CellContext`circ}], 
+           RGBColor[1, 0.47, 0], 
+           AbsolutePointSize[6], 
+           Table[
+            Point[{
+              Cos[
+              2 Pi (Part[$CellContext`diffset, \
+$CellContext`n]/$CellContext`circ)], 
+              Sin[
+              2 Pi (Part[$CellContext`diffset, \
+$CellContext`n]/$CellContext`circ)]}], {$CellContext`n, 
+             1, $CellContext`len}]}]]], 
+      "Specifications" :> {{{$CellContext`setindex$$, 4, 
+          "pick a difference set"}, 1, 12, 1, Appearance -> "Labeled"}}, 
+      "Options" :> {}, "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{404., {220., 225.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`diffsets = {{{7, 3}, {1, 2, 4}}, {{13, 
+          4}, {0, 1, 3, 9}}, {{21, 5}, {3, 6, 7, 12, 14}}, {{31, 6}, {1, 5, 
+          11, 24, 25, 27}}, {{57, 8}, {0, 1, 6, 15, 22, 26, 45, 55}}, {{73, 
+          9}, {0, 1, 12, 20, 26, 30, 33, 35, 57}}, {{91, 10}, {0, 2, 6, 7, 18,
+           21, 31, 54, 63, 71}}, {{133, 12}, {1, 10, 11, 13, 27, 31, 68, 75, 
+          83, 110, 115, 121}}, {{183, 14}, {1, 13, 20, 21, 23, 44, 61, 72, 77,
+           86, 90, 116, 122, 169}}, {{273, 17}, {0, 1, 22, 33, 83, 122, 135, 
+          141, 145, 159, 175, 200, 226, 229, 231, 238, 246}}, {{307, 18}, {0, 
+          1, 3, 30, 37, 50, 55, 76, 98, 117, 129, 133, 157, 189, 199, 222, 
+          293, 299}}, {{381, 20}, {0, 1, 19, 28, 96, 118, 151, 153, 176, 202, 
+          240, 254, 290, 296, 300, 307, 337, 361, 366, 369}}}}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->34576983],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`setindex$$ = 3, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`setindex$$], 3, "pick a difference set"}, 1, 12, 1}},
+     Typeset`size$$ = {360., {177., 182.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`setindex$61554$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`setindex$$ = 3}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`setindex$$, $CellContext`setindex$61554$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      With[{$CellContext`diffset = 
+         Part[$CellContext`diffsets, $CellContext`setindex$$, 
+           2], $CellContext`circ = 
+         Part[$CellContext`diffsets, $CellContext`setindex$$, 1, 
+           1], $CellContext`len = 
+         Part[$CellContext`diffsets, $CellContext`setindex$$, 1, 2]}, 
+        With[{$CellContext`jj = Drop[
+            Sort[
+             Flatten[
+              Table[{
+                Mod[
+                Part[$CellContext`diffset, $CellContext`a] - 
+                 Part[$CellContext`diffset, $CellContext`b], \
+$CellContext`circ], 
+                Part[$CellContext`diffset, $CellContext`a], 
+                Part[$CellContext`diffset, $CellContext`b]}, {$CellContext`a, 
+                1, $CellContext`len}, {$CellContext`b, 1, $CellContext`len}], 
+              1]], $CellContext`len]}, 
+         Graphics[{
+           RGBColor[0.67, 0.75, 0.15], 
+           Circle[{0, 0}, 1], Black, 
+           Table[
+            
+            Circle[{0, 0}, 1 - $CellContext`n/($CellContext`circ + 5), {
+             2 Part[$CellContext`jj, $CellContext`n, 2] (
+               Pi/$CellContext`circ), 
+              If[
+              Part[$CellContext`jj, $CellContext`n, 2] < 
+               Part[$CellContext`jj, $CellContext`n, 3], 2 
+               Part[$CellContext`jj, $CellContext`n, 3] (
+                Pi/$CellContext`circ), 
+               2 Part[$CellContext`jj, $CellContext`n, 3] (
+                 Pi/$CellContext`circ) + 2 Pi]}], {$CellContext`n, 
+             1, $CellContext`circ - 1}], 
+           Table[
+            Point[{
+              Cos[2 Pi ($CellContext`n/$CellContext`circ)], 
+              Sin[2 Pi ($CellContext`n/$CellContext`circ)]}], {$CellContext`n,
+              1, $CellContext`circ}], 
+           RGBColor[1, 0.47, 0], 
+           AbsolutePointSize[6], 
+           Table[
+            Point[{
+              Cos[
+              2 Pi (Part[$CellContext`diffset, \
+$CellContext`n]/$CellContext`circ)], 
+              Sin[
+              2 Pi (Part[$CellContext`diffset, \
+$CellContext`n]/$CellContext`circ)]}], {$CellContext`n, 
+             1, $CellContext`len}]}]]], 
+      "Specifications" :> {{{$CellContext`setindex$$, 3, 
+          "pick a difference set"}, 1, 12, 1, Appearance -> "Labeled"}}, 
+      "Options" :> {}, "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{404., {220., 225.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`diffsets = {{{7, 3}, {1, 2, 4}}, {{13, 
+          4}, {0, 1, 3, 9}}, {{21, 5}, {3, 6, 7, 12, 14}}, {{31, 6}, {1, 5, 
+          11, 24, 25, 27}}, {{57, 8}, {0, 1, 6, 15, 22, 26, 45, 55}}, {{73, 
+          9}, {0, 1, 12, 20, 26, 30, 33, 35, 57}}, {{91, 10}, {0, 2, 6, 7, 18,
+           21, 31, 54, 63, 71}}, {{133, 12}, {1, 10, 11, 13, 27, 31, 68, 75, 
+          83, 110, 115, 121}}, {{183, 14}, {1, 13, 20, 21, 23, 44, 61, 72, 77,
+           86, 90, 116, 122, 169}}, {{273, 17}, {0, 1, 22, 33, 83, 122, 135, 
+          141, 145, 159, 175, 200, 226, 229, 231, 238, 246}}, {{307, 18}, {0, 
+          1, 3, 30, 37, 50, 55, 76, 98, 117, 129, 133, 157, 189, 199, 222, 
+          293, 299}}, {{381, 20}, {0, 1, 19, 28, 96, 118, 151, 153, 176, 202, 
+          240, 254, 290, 296, 300, 307, 337, 361, 366, 369}}}}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->117597780]
+}, Open  ]],
+
+Cell["", "DetailsSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SearchTermsSection"],
+
+Cell["difference set", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3808988610171843`*^9, 3.3808988653136196`*^9}},
+ CellID->354625205],
+
+Cell["Ganymede circle", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3808989016780844`*^9, 3.380898905513829*^9}},
+ CellID->136335332],
+
+Cell["n-switch", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3808988757091894`*^9, 3.3808988778523993`*^9}},
+ CellID->560120654],
+
+Cell["projective plane", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3808988681779094`*^9, 3.380898871552964*^9}},
+ CellID->122147142],
+
+Cell["switching network", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3808988803561497`*^9, 3.3808988844723144`*^9}},
+ CellID->293136826]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "RelatedLinksSection"],
+
+Cell[TextData[ButtonBox["Difference Set",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/DifferenceSet.html"], 
+   None}]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.382462224077251*^9, 3.382462224077251*^9}},
+ CellID->34825889]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Ed Pegg Jr",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Ed+Pegg+Jr"], 
+    None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Ed+Pegg+Jr"]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3808989122338943`*^9, 3.3808989214777393`*^9}},
+ CellID->562121017]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{700, 696},
+WindowMargins->{{220, Automatic}, {314, 90}},
+ShowSelection->True,
+FrontEndVersion->"6.0 for Microsoft Windows (32-bit) (June 19, 2007)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[36553, 856, 310, 8, 70, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[36866, 866, 677, 16, 70, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[37546, 884, 339, 11, 70, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[37888, 897, 636, 15, 70, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[38527, 914, 843, 21, 70, "ControlSuggestions",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[39373, 937, 303, 8, 70, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[39679, 947, 1411, 31, 70, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[41093, 980, 881, 21, 70, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 44041, 1080},
+ {"RotateAndZoomIn3D", 44149, 1083},
+ {"DragLocators", 44258, 1086},
+ {"CreateAndDeleteLocators", 44373, 1089},
+ {"SliderZoom", 44486, 1092},
+ {"GamepadControls", 44591, 1095},
+ {"AutomaticAnimation", 44703, 1098},
+ {"BookmarkAnimation", 44819, 1101}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[590, 23, 177, 3, 70, "DemoTitle"],
+Cell[CellGroupData[{
+Cell[792, 30, 33, 0, 70, "InitializationSection"],
+Cell[828, 32, 3770, 106, 70, "Input",
+ CellID->310820003]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[4635, 143, 29, 0, 70, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[4689, 147, 6818, 162, 70, "Input",
+ CellID->201630633],
+Cell[11510, 311, 4625, 95, 70, "Output",
+ CellID->10847964]
+}, {2}]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16181, 412, 36, 0, 70, "ManipulateCaptionSection"],
+Cell[16220, 414, 936, 21, 70, "ManipulateCaption",
+ CellID->72790866],
+Cell[17159, 437, 644, 12, 70, "ManipulateCaption",
+ CellID->272740025]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17840, 454, 28, 0, 70, "ThumbnailSection"],
+Cell[17871, 456, 4625, 95, 70, "Output",
+ CellID->40138623]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[22533, 556, 28, 0, 70, "SnapshotsSection"],
+Cell[22564, 558, 4626, 95, 70, "Output",
+ CellID->165886873],
+Cell[27193, 655, 4625, 95, 70, "Output",
+ CellID->34576983],
+Cell[31821, 752, 4626, 95, 70, "Output",
+ CellID->117597780]
+}, Open  ]],
+Cell[36462, 850, 26, 0, 70, "DetailsSection"],
+Cell[CellGroupData[{
+Cell[36513, 854, 37, 0, 70, "ControlSuggestionsSection"],
+Cell[36553, 856, 310, 8, 70, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[36866, 866, 677, 16, 70, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[37546, 884, 339, 11, 70, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[37888, 897, 636, 15, 70, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[38527, 914, 843, 21, 70, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[39373, 937, 303, 8, 70, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[39679, 947, 1411, 31, 70, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[41093, 980, 881, 21, 70, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[42011, 1006, 30, 0, 70, "SearchTermsSection"],
+Cell[42044, 1008, 151, 3, 70, "SearchTerms",
+ CellID->354625205],
+Cell[42198, 1013, 150, 3, 70, "SearchTerms",
+ CellID->136335332],
+Cell[42351, 1018, 145, 3, 70, "SearchTerms",
+ CellID->560120654],
+Cell[42499, 1023, 151, 3, 70, "SearchTerms",
+ CellID->122147142],
+Cell[42653, 1028, 154, 3, 70, "SearchTerms",
+ CellID->293136826]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[42844, 1036, 31, 0, 70, "RelatedLinksSection"],
+Cell[42878, 1038, 278, 7, 70, "RelatedLinks",
+ CellID->34825889]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[43193, 1050, 25, 0, 70, "AuthorSection"],
+Cell[43221, 1052, 404, 12, 70, "Author",
+ CellID->562121017]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

@@ -1,0 +1,1580 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     65524,       1571]
+NotebookOptionsPosition[     61299,       1440]
+NotebookOutlinePosition[     62898,       1490]
+CellTagsIndexPosition[     62570,       1478]
+WindowFrame->Normal
+ContainsDynamic->True *)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Chaos in the Shift Map", "DemoTitle",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.357854395202*^9, 3.35785440501463*^9}, {
+   3.35785916376304*^9, 3.3578591646693*^9}},
+ CellID->700863240],
+
+Cell["", "InitializationSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"With", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"w", "=", "50"}], ",", 
+       RowBox[{"n", "=", "70"}]}], "}"}], ",", 
+     RowBox[{"With", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"u", "=", 
+          RowBox[{"NestList", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"FractionalPart", "[", 
+              RowBox[{"m", "#"}], "]"}], "&"}], ",", 
+            RowBox[{"If", "[", 
+             RowBox[{"ma", ",", 
+              RowBox[{"N", "[", "x", "]"}], ",", 
+              RowBox[{"N", "[", 
+               RowBox[{"x", ",", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"Log", "[", 
+                   RowBox[{"10.", ",", "2"}], "]"}], 
+                  RowBox[{"Max", "[", 
+                   RowBox[{
+                    RowBox[{"w", "+", 
+                    RowBox[{"2", "n"}]}], ",", "40"}], "]"}]}], "+", "4"}]}], 
+               "]"}]}], "]"}], ",", "n"}], "]"}]}], ",", 
+         RowBox[{"v", "=", 
+          RowBox[{"NestList", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"FractionalPart", "[", 
+              RowBox[{"m", "#"}], "]"}], "&"}], ",", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"If", "[", 
+               RowBox[{"ma", ",", 
+                RowBox[{"N", "[", "#", "]"}], ",", 
+                RowBox[{"N", "[", 
+                 RowBox[{"#", ",", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"Log", "[", 
+                    RowBox[{"10.", ",", "2"}], "]"}], 
+                    RowBox[{"Max", "[", 
+                    RowBox[{
+                    RowBox[{"w", "+", 
+                    RowBox[{"2", "n"}]}], ",", "40"}], "]"}]}], "+", "4"}]}], 
+                 "]"}]}], "]"}], "&"}], "[", 
+             RowBox[{"FromDigits", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"MapAt", "[", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"#", "/.", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"1", "\[Rule]", "0"}], ",", 
+                    RowBox[{"0", "\[Rule]", "1"}]}], "}"}]}], "&"}], ",", 
+                   RowBox[{"First", "[", 
+                    RowBox[{"RealDigits", "[", 
+                    RowBox[{"x", ",", "2", ",", 
+                    RowBox[{"Round", "[", 
+                    RowBox[{
+                    RowBox[{"Max", "[", 
+                    RowBox[{
+                    RowBox[{"w", "+", 
+                    RowBox[{"2", "n"}]}], ",", "40"}], "]"}], "+", "4"}], 
+                    "]"}], ",", 
+                    RowBox[{"-", "1"}]}], "]"}], "]"}], ",", 
+                   RowBox[{"Switch", "[", 
+                    RowBox[{"fp", ",", "1", ",", "p", ",", "2", ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", "p", "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"p", "+", "5"}], "}"}]}], "}"}], ",", "All", ",", 
+                    
+                    RowBox[{"List", "/@", 
+                    RowBox[{"Range", "[", 
+                    RowBox[{"p", ",", 
+                    RowBox[{"Round", "[", 
+                    RowBox[{
+                    RowBox[{"Max", "[", 
+                    RowBox[{
+                    RowBox[{"w", "+", 
+                    RowBox[{"2", "n"}]}], ",", "40"}], "]"}], "+", "4"}], 
+                    "]"}]}], "]"}]}]}], "]"}]}], "]"}], ",", "0"}], "}"}], 
+               ",", "2"}], "]"}], "]"}], ",", "n"}], "]"}]}]}], "}"}], ",", 
+       RowBox[{"Show", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"With", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"vu", "=", 
+                RowBox[{"MapIndexed", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"-", "6"}], "+", 
+                    RowBox[{"5", "#"}]}], ",", 
+                    RowBox[{"n", "+", 
+                    RowBox[{"3", "/", "2"}], "-", 
+                    RowBox[{"First", "[", "#2", "]"}]}]}], "}"}], "&"}], ",", 
+                  "u"}], "]"}]}], ",", 
+               RowBox[{"vv", "=", 
+                RowBox[{"MapIndexed", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"-", "6"}], "+", 
+                    RowBox[{"5", "#"}]}], ",", 
+                    RowBox[{"n", "+", 
+                    RowBox[{"3", "/", "2"}], "-", 
+                    RowBox[{"First", "[", "#2", "]"}]}]}], "}"}], "&"}], ",", 
+                  "v"}], "]"}]}]}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"Graphics", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"PointSize", "[", "Large", "]"}], ",", "Gray", ",", 
+                  
+                  RowBox[{"Line", "[", "vu", "]"}], ",", 
+                  RowBox[{"Line", "[", "vv", "]"}], ",", 
+                  RowBox[{"Opacity", "[", ".5", "]"}], ",", "Red", ",", 
+                  RowBox[{"Point", "[", "vu", "]"}], ",", "Blue", ",", 
+                  RowBox[{"Point", "[", "vv", "]"}]}], "}"}], ",", 
+                RowBox[{"PlotRange", "\[Rule]", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"-", "6.5"}], ",", "All"}], "}"}], ",", "All"}], 
+                  "}"}]}]}], "]"}], "}"}]}], "]"}], ",", 
+           RowBox[{"ArrayPlot", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"2", 
+               RowBox[{"(", 
+                RowBox[{"First", "/@", 
+                 RowBox[{"RealDigits", "[", 
+                  RowBox[{"u", ",", "2", ",", "w", ",", 
+                   RowBox[{"-", "1"}]}], "]"}]}], ")"}]}], "+", 
+              RowBox[{"First", "/@", 
+               RowBox[{"RealDigits", "[", 
+                RowBox[{"v", ",", "2", ",", "w", ",", 
+                 RowBox[{"-", "1"}]}], "]"}]}]}], ",", 
+             RowBox[{"Mesh", "\[Rule]", "True"}], ",", 
+             RowBox[{"ColorRules", "\[Rule]", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"3", "\[Rule]", 
+                 RowBox[{"Darker", "[", 
+                  RowBox[{"Purple", ",", ".5"}], "]"}]}], ",", 
+                RowBox[{"1", "\[Rule]", 
+                 RowBox[{"Darker", "[", 
+                  RowBox[{"Blue", ",", ".2"}], "]"}]}], ",", 
+                RowBox[{"2", "\[Rule]", 
+                 RowBox[{"Darker", "[", 
+                  RowBox[{"Red", ",", "0.2"}], "]"}]}], ",", 
+                RowBox[{"0", "\[Rule]", 
+                 RowBox[{"GrayLevel", "[", ".9", "]"}]}]}], "}"}]}]}], 
+            "]"}]}], "}"}], ",", 
+         RowBox[{"ImageSize", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{"500", ",", "319"}], "}"}]}]}], "]"}]}], "]"}]}], "]"}], 
+   ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"p", ",", "15", ",", "\"\<leading bit of perturbation\>\""}], 
+      "}"}], ",", "1", ",", "70", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"fp", ",", "1", ",", "\"\<number of bits to flip\>\""}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2", ",", "All"}], "}"}]}], "}"}], ",", " ", 
+   "Delimiter", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"x", ",", 
+       RowBox[{"1", "/", "Pi"}], ",", "\"\<initial condition\>\""}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"1", "/", "2"}], ",", 
+       RowBox[{"1", "/", "3"}], ",", 
+       RowBox[{"1", "/", "5"}], ",", 
+       RowBox[{"3", "/", "7"}], ",", 
+       RowBox[{
+        RowBox[{"2", "^", 
+         RowBox[{"-", "25"}]}], "\[Rule]", 
+        RowBox[{"HoldForm", "[", 
+         RowBox[{"2", "^", 
+          RowBox[{"-", "25"}]}], "]"}]}], ",", 
+       RowBox[{"1", "/", 
+        RowBox[{"Sqrt", "[", "2", "]"}]}], ",", 
+       RowBox[{"1", "/", "Pi"}]}], "}"}], ",", 
+     RowBox[{"ControlType", "\[Rule]", "SetterBar"}]}], "}"}], ",", 
+   "Delimiter", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"m", ",", "2", ",", "\"\<multiplier\>\""}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "3", ",", 
+       RowBox[{"3", "/", "2"}], ",", 
+       RowBox[{"Sqrt", "[", "2", "]"}], ",", "E", ",", "Pi"}], "}"}], ",", 
+     RowBox[{"ControlType", "\[Rule]", "SetterBar"}]}], "}"}], ",", 
+   "Delimiter", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"ma", ",", "False", ",", "\"\<use machine arithmetic\>\""}], 
+      "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"True", ",", "False"}], "}"}]}], "}"}], ",", 
+   RowBox[{"AutorunSequencing", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "2"}], "}"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.35785442553052*^9, 3.35785443617128*^9}, {
+   3.35785447318738*^9, 3.35785463333005*^9}, {3.35785467703373*^9, 
+   3.35785482698878*^9}, {3.35785486436426*^9, 3.35785486584865*^9}, {
+   3.35785496922497*^9, 3.35785500335041*^9}, {3.3578551781964*^9, 
+   3.3578553699801*^9}, {3.35785545890312*^9, 3.35785546146565*^9}, {
+   3.35785551541947*^9, 3.357855517732*^9}, {3.35785572176586*^9, 
+   3.3578557405786*^9}, {3.35785577129774*^9, 3.35785578240726*^9}, {
+   3.35785583876735*^9, 3.35785584114239*^9}, {3.35785594945627*^9, 
+   3.35785609559877*^9}, {3.35785728347335*^9, 3.35785731236434*^9}, {
+   3.35785734305223*^9, 3.35785735167734*^9}, {3.35785743764719*^9, 
+   3.35785745445991*^9}, {3.35785750916374*^9, 3.35785752889836*^9}, {
+   3.35785776594827*^9, 3.35785787115274*^9}, 3.35785794791935*^9, 
+   3.35785799235742*^9, 3.35785820850081*^9, {3.35785831050212*^9, 
+   3.35785831558031*^9}, {3.35785835489331*^9, 3.35785838237804*^9}, 
+   3.35785842194104*^9, 3.35785848122305*^9, {3.35785858142746*^9, 
+   3.35785864770956*^9}, {3.35785869363202*^9, 3.35785870472591*^9}, {
+   3.35785901763617*^9, 3.35785902158934*^9}, {3.35785922035751*^9, 
+   3.35785933984342*^9}, {3.35785957106513*^9, 3.35785957951836*^9}, {
+   3.35785963580033*^9, 3.35785963867537*^9}, {3.36343446771296*^9, 
+   3.36343448338483*^9}, {3.381855751030743*^9, 3.381855751390118*^9}},
+ CellID->1681882],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`fp$$ = 1, $CellContext`m$$ = 
+    2, $CellContext`ma$$ = False, $CellContext`p$$ = 15, $CellContext`x$$ = 
+    Pi^(-1), Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`p$$], 15, "leading bit of perturbation"}, 1, 70, 
+      1}, {{
+       Hold[$CellContext`fp$$], 1, "number of bits to flip"}, {1, 2, All}}, {{
+      
+       Hold[$CellContext`x$$], Pi^(-1), "initial condition"}, {
+       Rational[1, 2], 
+       Rational[1, 3], 
+       Rational[1, 5], 
+       Rational[3, 7], Rational[1, 33554432] -> HoldForm[2^(-25)], 2^
+       Rational[-1, 2], Pi^(-1)}}, {{
+       Hold[$CellContext`m$$], 2, "multiplier"}, {2, 3, 
+       Rational[3, 2], 2^Rational[1, 2], E, Pi}}, {{
+       Hold[$CellContext`ma$$], False, "use machine arithmetic"}, {
+      True, False}}}, Typeset`size$$ = {500., {157., 162.}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`p$29162$$ = 0, $CellContext`fp$29163$$ = 
+    0, $CellContext`x$29164$$ = 0, $CellContext`m$29165$$ = 
+    0, $CellContext`ma$29166$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`fp$$ = 1, $CellContext`m$$ = 
+        2, $CellContext`ma$$ = False, $CellContext`p$$ = 15, $CellContext`x$$ = 
+        Pi^(-1)}, "ControllerVariables" :> {
+        Hold[$CellContext`p$$, $CellContext`p$29162$$, 0], 
+        Hold[$CellContext`fp$$, $CellContext`fp$29163$$, 0], 
+        Hold[$CellContext`x$$, $CellContext`x$29164$$, 0], 
+        Hold[$CellContext`m$$, $CellContext`m$29165$$, 0], 
+        Hold[$CellContext`ma$$, $CellContext`ma$29166$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      With[{$CellContext`w$ = 50, $CellContext`n$ = 70}, 
+        With[{$CellContext`u$ = 
+          NestList[FractionalPart[$CellContext`m$$ #]& , 
+            If[$CellContext`ma$$, 
+             N[$CellContext`x$$], 
+             
+             N[$CellContext`x$$, 
+              Log[10., 2] Max[$CellContext`w$ + 2 $CellContext`n$, 40] + 
+              4]], $CellContext`n$], $CellContext`v$ = 
+          NestList[FractionalPart[$CellContext`m$$ #]& , 
+            (If[$CellContext`ma$$, 
+             N[#], 
+             
+             N[#, Log[10., 2] Max[$CellContext`w$ + 2 $CellContext`n$, 40] + 
+              4]]& )[
+             FromDigits[{
+               MapAt[ReplaceAll[#, {1 -> 0, 0 -> 1}]& , 
+                First[
+                 RealDigits[$CellContext`x$$, 2, 
+                  Round[
+                  Max[$CellContext`w$ + 2 $CellContext`n$, 40] + 4], -1]], 
+                
+                Switch[$CellContext`fp$$, 1, $CellContext`p$$, 
+                 2, {{$CellContext`p$$}, {$CellContext`p$$ + 5}}, All, 
+                 Map[List, 
+                  Range[$CellContext`p$$, 
+                   Round[
+                   Max[$CellContext`w$ + 2 $CellContext`n$, 40] + 4]]]]], 0}, 
+              2]], $CellContext`n$]}, 
+         Show[{
+           
+           With[{$CellContext`vu = 
+             MapIndexed[{-6 + 5 #, $CellContext`n$ + 3/2 - 
+                First[#2]}& , $CellContext`u$], $CellContext`vv = 
+             MapIndexed[{-6 + 5 #, $CellContext`n$ + 3/2 - 
+                First[#2]}& , $CellContext`v$]}, {
+             Graphics[{
+               PointSize[Large], Gray, 
+               Line[$CellContext`vu], 
+               Line[$CellContext`vv], 
+               Opacity[0.5], Red, 
+               Point[$CellContext`vu], Blue, 
+               Point[$CellContext`vv]}, PlotRange -> {{-6.5, All}, All}]}], 
+           ArrayPlot[2 Map[First, 
+               RealDigits[$CellContext`u$, 2, $CellContext`w$, -1]] + 
+            Map[First, 
+              RealDigits[$CellContext`v$, 2, $CellContext`w$, -1]], Mesh -> 
+            True, 
+            ColorRules -> {
+             3 -> Darker[Purple, 0.5], 1 -> Darker[Blue, 0.2], 2 -> 
+              Darker[Red, 0.2], 0 -> GrayLevel[0.9]}]}, 
+          ImageSize -> {500, 319}]]], 
+      "Specifications" :> {{{$CellContext`p$$, 15, 
+          "leading bit of perturbation"}, 1, 70, 
+         1}, {{$CellContext`fp$$, 1, "number of bits to flip"}, {1, 2, All}}, 
+        Delimiter, {{$CellContext`x$$, Pi^(-1), "initial condition"}, {
+          Rational[1, 2], 
+          Rational[1, 3], 
+          Rational[1, 5], 
+          Rational[3, 7], Rational[1, 33554432] -> HoldForm[2^(-25)], 2^
+          Rational[-1, 2], Pi^(-1)}, ControlType -> SetterBar}, 
+        Delimiter, {{$CellContext`m$$, 2, "multiplier"}, {2, 3, 
+          Rational[3, 2], 2^Rational[1, 2], E, Pi}, ControlType -> SetterBar},
+         Delimiter, {{$CellContext`ma$$, False, "use machine arithmetic"}, {
+         True, False}}}, "Options" :> {AutorunSequencing -> {1, 2}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{548., {282., 287.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->424077940]
+}, {2}]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell["\<\
+The shift map is a standard example of the sensitive dependence on initial \
+conditions that is at the core of traditional chaos theory. This \
+Demonstration illustrates this basic phenomenon, and shows that there is \
+often more going on in the shift map.\
+\>", "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.35785990978821*^9, 3.3578600706809*^9}, {
+   3.378648581655115*^9, 3.378648593585011*^9}, {3.382931398841256*^9, 
+   3.3829313991617165`*^9}},
+ CellID->1044312921]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`fp$$ = All, $CellContext`m$$ = 
+    2, $CellContext`ma$$ = False, $CellContext`p$$ = 47, $CellContext`x$$ = 
+    Pi^(-1), Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`p$$], 47, "leading bit of perturbation"}, 1, 70, 
+      1}, {{
+       Hold[$CellContext`fp$$], All, "number of bits to flip"}, {
+      1, 2, All}}, {{
+       Hold[$CellContext`x$$], Pi^(-1), "initial condition"}, {
+       Rational[1, 2], 
+       Rational[1, 3], 
+       Rational[1, 5], 
+       Rational[3, 7], Rational[1, 33554432] -> HoldForm[2^(-25)], 2^
+       Rational[-1, 2], Pi^(-1)}}, {{
+       Hold[$CellContext`m$$], 2, "multiplier"}, {2, 3, 
+       Rational[3, 2], 2^Rational[1, 2], E, Pi}}, {{
+       Hold[$CellContext`ma$$], False, "use machine arithmetic"}, {
+      True, False}}}, Typeset`size$$ = {500., {157., 162.}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`p$29238$$ = 0, $CellContext`fp$29239$$ = 
+    0, $CellContext`x$29240$$ = 0, $CellContext`m$29241$$ = 
+    0, $CellContext`ma$29242$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`fp$$ = All, $CellContext`m$$ = 
+        2, $CellContext`ma$$ = False, $CellContext`p$$ = 47, $CellContext`x$$ = 
+        Pi^(-1)}, "ControllerVariables" :> {
+        Hold[$CellContext`p$$, $CellContext`p$29238$$, 0], 
+        Hold[$CellContext`fp$$, $CellContext`fp$29239$$, 0], 
+        Hold[$CellContext`x$$, $CellContext`x$29240$$, 0], 
+        Hold[$CellContext`m$$, $CellContext`m$29241$$, 0], 
+        Hold[$CellContext`ma$$, $CellContext`ma$29242$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      With[{$CellContext`w$ = 50, $CellContext`n$ = 70}, 
+        With[{$CellContext`u$ = 
+          NestList[FractionalPart[$CellContext`m$$ #]& , 
+            If[$CellContext`ma$$, 
+             N[$CellContext`x$$], 
+             
+             N[$CellContext`x$$, 
+              Log[10., 2] Max[$CellContext`w$ + 2 $CellContext`n$, 40] + 
+              4]], $CellContext`n$], $CellContext`v$ = 
+          NestList[FractionalPart[$CellContext`m$$ #]& , 
+            (If[$CellContext`ma$$, 
+             N[#], 
+             
+             N[#, Log[10., 2] Max[$CellContext`w$ + 2 $CellContext`n$, 40] + 
+              4]]& )[
+             FromDigits[{
+               MapAt[ReplaceAll[#, {1 -> 0, 0 -> 1}]& , 
+                First[
+                 RealDigits[$CellContext`x$$, 2, 
+                  Round[
+                  Max[$CellContext`w$ + 2 $CellContext`n$, 40] + 4], -1]], 
+                
+                Switch[$CellContext`fp$$, 1, $CellContext`p$$, 
+                 2, {{$CellContext`p$$}, {$CellContext`p$$ + 5}}, All, 
+                 Map[List, 
+                  Range[$CellContext`p$$, 
+                   Round[
+                   Max[$CellContext`w$ + 2 $CellContext`n$, 40] + 4]]]]], 0}, 
+              2]], $CellContext`n$]}, 
+         Show[{
+           
+           With[{$CellContext`vu = 
+             MapIndexed[{-6 + 5 #, $CellContext`n$ + 3/2 - 
+                First[#2]}& , $CellContext`u$], $CellContext`vv = 
+             MapIndexed[{-6 + 5 #, $CellContext`n$ + 3/2 - 
+                First[#2]}& , $CellContext`v$]}, {
+             Graphics[{
+               PointSize[Large], Gray, 
+               Line[$CellContext`vu], 
+               Line[$CellContext`vv], 
+               Opacity[0.5], Red, 
+               Point[$CellContext`vu], Blue, 
+               Point[$CellContext`vv]}, PlotRange -> {{-6.5, All}, All}]}], 
+           ArrayPlot[2 Map[First, 
+               RealDigits[$CellContext`u$, 2, $CellContext`w$, -1]] + 
+            Map[First, 
+              RealDigits[$CellContext`v$, 2, $CellContext`w$, -1]], Mesh -> 
+            True, 
+            ColorRules -> {
+             3 -> Darker[Purple, 0.5], 1 -> Darker[Blue, 0.2], 2 -> 
+              Darker[Red, 0.2], 0 -> GrayLevel[0.9]}]}, 
+          ImageSize -> {500, 319}]]], 
+      "Specifications" :> {{{$CellContext`p$$, 47, 
+          "leading bit of perturbation"}, 1, 70, 
+         1}, {{$CellContext`fp$$, All, "number of bits to flip"}, {
+         1, 2, All}}, 
+        Delimiter, {{$CellContext`x$$, Pi^(-1), "initial condition"}, {
+          Rational[1, 2], 
+          Rational[1, 3], 
+          Rational[1, 5], 
+          Rational[3, 7], Rational[1, 33554432] -> HoldForm[2^(-25)], 2^
+          Rational[-1, 2], Pi^(-1)}, ControlType -> SetterBar}, 
+        Delimiter, {{$CellContext`m$$, 2, "multiplier"}, {2, 3, 
+          Rational[3, 2], 2^Rational[1, 2], E, Pi}, ControlType -> SetterBar},
+         Delimiter, {{$CellContext`ma$$, False, "use machine arithmetic"}, {
+         True, False}}}, "Options" :> {AutorunSequencing -> {1, 2}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{548., {282., 287.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->247386164]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`fp$$ = All, $CellContext`m$$ = 
+    2, $CellContext`ma$$ = False, $CellContext`p$$ = 43, $CellContext`x$$ = 
+    Pi^(-1), Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`p$$], 43, "leading bit of perturbation"}, 1, 70, 
+      1}, {{
+       Hold[$CellContext`fp$$], All, "number of bits to flip"}, {
+      1, 2, All}}, {{
+       Hold[$CellContext`x$$], Pi^(-1), "initial condition"}, {
+       Rational[1, 2], 
+       Rational[1, 3], 
+       Rational[1, 5], 
+       Rational[3, 7], Rational[1, 33554432] -> HoldForm[2^(-25)], 2^
+       Rational[-1, 2], Pi^(-1)}}, {{
+       Hold[$CellContext`m$$], 2, "multiplier"}, {2, 3, 
+       Rational[3, 2], 2^Rational[1, 2], E, Pi}}, {{
+       Hold[$CellContext`ma$$], False, "use machine arithmetic"}, {
+      True, False}}}, Typeset`size$$ = {500., {157., 162.}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`p$29314$$ = 0, $CellContext`fp$29315$$ = 
+    0, $CellContext`x$29316$$ = 0, $CellContext`m$29317$$ = 
+    0, $CellContext`ma$29318$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`fp$$ = All, $CellContext`m$$ = 
+        2, $CellContext`ma$$ = False, $CellContext`p$$ = 43, $CellContext`x$$ = 
+        Pi^(-1)}, "ControllerVariables" :> {
+        Hold[$CellContext`p$$, $CellContext`p$29314$$, 0], 
+        Hold[$CellContext`fp$$, $CellContext`fp$29315$$, 0], 
+        Hold[$CellContext`x$$, $CellContext`x$29316$$, 0], 
+        Hold[$CellContext`m$$, $CellContext`m$29317$$, 0], 
+        Hold[$CellContext`ma$$, $CellContext`ma$29318$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      With[{$CellContext`w$ = 50, $CellContext`n$ = 70}, 
+        With[{$CellContext`u$ = 
+          NestList[FractionalPart[$CellContext`m$$ #]& , 
+            If[$CellContext`ma$$, 
+             N[$CellContext`x$$], 
+             
+             N[$CellContext`x$$, 
+              Log[10., 2] Max[$CellContext`w$ + 2 $CellContext`n$, 40] + 
+              4]], $CellContext`n$], $CellContext`v$ = 
+          NestList[FractionalPart[$CellContext`m$$ #]& , 
+            (If[$CellContext`ma$$, 
+             N[#], 
+             
+             N[#, Log[10., 2] Max[$CellContext`w$ + 2 $CellContext`n$, 40] + 
+              4]]& )[
+             FromDigits[{
+               MapAt[ReplaceAll[#, {1 -> 0, 0 -> 1}]& , 
+                First[
+                 RealDigits[$CellContext`x$$, 2, 
+                  Round[
+                  Max[$CellContext`w$ + 2 $CellContext`n$, 40] + 4], -1]], 
+                
+                Switch[$CellContext`fp$$, 1, $CellContext`p$$, 
+                 2, {{$CellContext`p$$}, {$CellContext`p$$ + 5}}, All, 
+                 Map[List, 
+                  Range[$CellContext`p$$, 
+                   Round[
+                   Max[$CellContext`w$ + 2 $CellContext`n$, 40] + 4]]]]], 0}, 
+              2]], $CellContext`n$]}, 
+         Show[{
+           
+           With[{$CellContext`vu = 
+             MapIndexed[{-6 + 5 #, $CellContext`n$ + 3/2 - 
+                First[#2]}& , $CellContext`u$], $CellContext`vv = 
+             MapIndexed[{-6 + 5 #, $CellContext`n$ + 3/2 - 
+                First[#2]}& , $CellContext`v$]}, {
+             Graphics[{
+               PointSize[Large], Gray, 
+               Line[$CellContext`vu], 
+               Line[$CellContext`vv], 
+               Opacity[0.5], Red, 
+               Point[$CellContext`vu], Blue, 
+               Point[$CellContext`vv]}, PlotRange -> {{-6.5, All}, All}]}], 
+           ArrayPlot[2 Map[First, 
+               RealDigits[$CellContext`u$, 2, $CellContext`w$, -1]] + 
+            Map[First, 
+              RealDigits[$CellContext`v$, 2, $CellContext`w$, -1]], Mesh -> 
+            True, 
+            ColorRules -> {
+             3 -> Darker[Purple, 0.5], 1 -> Darker[Blue, 0.2], 2 -> 
+              Darker[Red, 0.2], 0 -> GrayLevel[0.9]}]}, 
+          ImageSize -> {500, 319}]]], 
+      "Specifications" :> {{{$CellContext`p$$, 43, 
+          "leading bit of perturbation"}, 1, 70, 
+         1}, {{$CellContext`fp$$, All, "number of bits to flip"}, {
+         1, 2, All}}, 
+        Delimiter, {{$CellContext`x$$, Pi^(-1), "initial condition"}, {
+          Rational[1, 2], 
+          Rational[1, 3], 
+          Rational[1, 5], 
+          Rational[3, 7], Rational[1, 33554432] -> HoldForm[2^(-25)], 2^
+          Rational[-1, 2], Pi^(-1)}, ControlType -> SetterBar}, 
+        Delimiter, {{$CellContext`m$$, 2, "multiplier"}, {2, 3, 
+          Rational[3, 2], 2^Rational[1, 2], E, Pi}, ControlType -> SetterBar},
+         Delimiter, {{$CellContext`ma$$, False, "use machine arithmetic"}, {
+         True, False}}}, "Options" :> {AutorunSequencing -> {1, 2}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{548., {282., 287.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->123960227],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`fp$$ = All, $CellContext`m$$ = 
+    2, $CellContext`ma$$ = True, $CellContext`p$$ = 43, $CellContext`x$$ = 
+    Pi^(-1), Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`p$$], 43, "leading bit of perturbation"}, 1, 70, 
+      1}, {{
+       Hold[$CellContext`fp$$], All, "number of bits to flip"}, {
+      1, 2, All}}, {{
+       Hold[$CellContext`x$$], Pi^(-1), "initial condition"}, {
+       Rational[1, 2], 
+       Rational[1, 3], 
+       Rational[1, 5], 
+       Rational[3, 7], Rational[1, 33554432] -> HoldForm[2^(-25)], 2^
+       Rational[-1, 2], Pi^(-1)}}, {{
+       Hold[$CellContext`m$$], 2, "multiplier"}, {2, 3, 
+       Rational[3, 2], 2^Rational[1, 2], E, Pi}}, {{
+       Hold[$CellContext`ma$$], True, "use machine arithmetic"}, {
+      True, False}}}, Typeset`size$$ = {500., {157., 162.}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`p$29390$$ = 0, $CellContext`fp$29391$$ = 
+    0, $CellContext`x$29392$$ = 0, $CellContext`m$29393$$ = 
+    0, $CellContext`ma$29394$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`fp$$ = All, $CellContext`m$$ = 
+        2, $CellContext`ma$$ = True, $CellContext`p$$ = 43, $CellContext`x$$ = 
+        Pi^(-1)}, "ControllerVariables" :> {
+        Hold[$CellContext`p$$, $CellContext`p$29390$$, 0], 
+        Hold[$CellContext`fp$$, $CellContext`fp$29391$$, 0], 
+        Hold[$CellContext`x$$, $CellContext`x$29392$$, 0], 
+        Hold[$CellContext`m$$, $CellContext`m$29393$$, 0], 
+        Hold[$CellContext`ma$$, $CellContext`ma$29394$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      With[{$CellContext`w$ = 50, $CellContext`n$ = 70}, 
+        With[{$CellContext`u$ = 
+          NestList[FractionalPart[$CellContext`m$$ #]& , 
+            If[$CellContext`ma$$, 
+             N[$CellContext`x$$], 
+             
+             N[$CellContext`x$$, 
+              Log[10., 2] Max[$CellContext`w$ + 2 $CellContext`n$, 40] + 
+              4]], $CellContext`n$], $CellContext`v$ = 
+          NestList[FractionalPart[$CellContext`m$$ #]& , 
+            (If[$CellContext`ma$$, 
+             N[#], 
+             
+             N[#, Log[10., 2] Max[$CellContext`w$ + 2 $CellContext`n$, 40] + 
+              4]]& )[
+             FromDigits[{
+               MapAt[ReplaceAll[#, {1 -> 0, 0 -> 1}]& , 
+                First[
+                 RealDigits[$CellContext`x$$, 2, 
+                  Round[
+                  Max[$CellContext`w$ + 2 $CellContext`n$, 40] + 4], -1]], 
+                
+                Switch[$CellContext`fp$$, 1, $CellContext`p$$, 
+                 2, {{$CellContext`p$$}, {$CellContext`p$$ + 5}}, All, 
+                 Map[List, 
+                  Range[$CellContext`p$$, 
+                   Round[
+                   Max[$CellContext`w$ + 2 $CellContext`n$, 40] + 4]]]]], 0}, 
+              2]], $CellContext`n$]}, 
+         Show[{
+           
+           With[{$CellContext`vu = 
+             MapIndexed[{-6 + 5 #, $CellContext`n$ + 3/2 - 
+                First[#2]}& , $CellContext`u$], $CellContext`vv = 
+             MapIndexed[{-6 + 5 #, $CellContext`n$ + 3/2 - 
+                First[#2]}& , $CellContext`v$]}, {
+             Graphics[{
+               PointSize[Large], Gray, 
+               Line[$CellContext`vu], 
+               Line[$CellContext`vv], 
+               Opacity[0.5], Red, 
+               Point[$CellContext`vu], Blue, 
+               Point[$CellContext`vv]}, PlotRange -> {{-6.5, All}, All}]}], 
+           ArrayPlot[2 Map[First, 
+               RealDigits[$CellContext`u$, 2, $CellContext`w$, -1]] + 
+            Map[First, 
+              RealDigits[$CellContext`v$, 2, $CellContext`w$, -1]], Mesh -> 
+            True, 
+            ColorRules -> {
+             3 -> Darker[Purple, 0.5], 1 -> Darker[Blue, 0.2], 2 -> 
+              Darker[Red, 0.2], 0 -> GrayLevel[0.9]}]}, 
+          ImageSize -> {500, 319}]]], 
+      "Specifications" :> {{{$CellContext`p$$, 43, 
+          "leading bit of perturbation"}, 1, 70, 
+         1}, {{$CellContext`fp$$, All, "number of bits to flip"}, {
+         1, 2, All}}, 
+        Delimiter, {{$CellContext`x$$, Pi^(-1), "initial condition"}, {
+          Rational[1, 2], 
+          Rational[1, 3], 
+          Rational[1, 5], 
+          Rational[3, 7], Rational[1, 33554432] -> HoldForm[2^(-25)], 2^
+          Rational[-1, 2], Pi^(-1)}, ControlType -> SetterBar}, 
+        Delimiter, {{$CellContext`m$$, 2, "multiplier"}, {2, 3, 
+          Rational[3, 2], 2^Rational[1, 2], E, Pi}, ControlType -> SetterBar},
+         Delimiter, {{$CellContext`ma$$, True, "use machine arithmetic"}, {
+         True, False}}}, "Options" :> {AutorunSequencing -> {1, 2}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{548., {282., 287.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->201198101],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`fp$$ = All, $CellContext`m$$ = Rational[
+    3, 2], $CellContext`ma$$ = False, $CellContext`p$$ = 
+    41, $CellContext`x$$ = Rational[1, 33554432], Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`p$$], 41, "leading bit of perturbation"}, 1, 70, 
+      1}, {{
+       Hold[$CellContext`fp$$], All, "number of bits to flip"}, {
+      1, 2, All}}, {{
+       Hold[$CellContext`x$$], 
+       Rational[1, 33554432], "initial condition"}, {
+       Rational[1, 2], 
+       Rational[1, 3], 
+       Rational[1, 5], 
+       Rational[3, 7], Rational[1, 33554432] -> HoldForm[2^(-25)], 2^
+       Rational[-1, 2], Pi^(-1)}}, {{
+       Hold[$CellContext`m$$], 
+       Rational[3, 2], "multiplier"}, {2, 3, 
+       Rational[3, 2], 2^Rational[1, 2], E, Pi}}, {{
+       Hold[$CellContext`ma$$], False, "use machine arithmetic"}, {
+      True, False}}}, Typeset`size$$ = {500., {157., 162.}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`p$29466$$ = 0, $CellContext`fp$29467$$ = 
+    0, $CellContext`x$29468$$ = 0, $CellContext`m$29469$$ = 
+    0, $CellContext`ma$29470$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`fp$$ = All, $CellContext`m$$ = 
+        Rational[3, 2], $CellContext`ma$$ = False, $CellContext`p$$ = 
+        41, $CellContext`x$$ = Rational[1, 33554432]}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`p$$, $CellContext`p$29466$$, 0], 
+        Hold[$CellContext`fp$$, $CellContext`fp$29467$$, 0], 
+        Hold[$CellContext`x$$, $CellContext`x$29468$$, 0], 
+        Hold[$CellContext`m$$, $CellContext`m$29469$$, 0], 
+        Hold[$CellContext`ma$$, $CellContext`ma$29470$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      With[{$CellContext`w$ = 50, $CellContext`n$ = 70}, 
+        With[{$CellContext`u$ = 
+          NestList[FractionalPart[$CellContext`m$$ #]& , 
+            If[$CellContext`ma$$, 
+             N[$CellContext`x$$], 
+             
+             N[$CellContext`x$$, 
+              Log[10., 2] Max[$CellContext`w$ + 2 $CellContext`n$, 40] + 
+              4]], $CellContext`n$], $CellContext`v$ = 
+          NestList[FractionalPart[$CellContext`m$$ #]& , 
+            (If[$CellContext`ma$$, 
+             N[#], 
+             
+             N[#, Log[10., 2] Max[$CellContext`w$ + 2 $CellContext`n$, 40] + 
+              4]]& )[
+             FromDigits[{
+               MapAt[ReplaceAll[#, {1 -> 0, 0 -> 1}]& , 
+                First[
+                 RealDigits[$CellContext`x$$, 2, 
+                  Round[
+                  Max[$CellContext`w$ + 2 $CellContext`n$, 40] + 4], -1]], 
+                
+                Switch[$CellContext`fp$$, 1, $CellContext`p$$, 
+                 2, {{$CellContext`p$$}, {$CellContext`p$$ + 5}}, All, 
+                 Map[List, 
+                  Range[$CellContext`p$$, 
+                   Round[
+                   Max[$CellContext`w$ + 2 $CellContext`n$, 40] + 4]]]]], 0}, 
+              2]], $CellContext`n$]}, 
+         Show[{
+           
+           With[{$CellContext`vu = 
+             MapIndexed[{-6 + 5 #, $CellContext`n$ + 3/2 - 
+                First[#2]}& , $CellContext`u$], $CellContext`vv = 
+             MapIndexed[{-6 + 5 #, $CellContext`n$ + 3/2 - 
+                First[#2]}& , $CellContext`v$]}, {
+             Graphics[{
+               PointSize[Large], Gray, 
+               Line[$CellContext`vu], 
+               Line[$CellContext`vv], 
+               Opacity[0.5], Red, 
+               Point[$CellContext`vu], Blue, 
+               Point[$CellContext`vv]}, PlotRange -> {{-6.5, All}, All}]}], 
+           ArrayPlot[2 Map[First, 
+               RealDigits[$CellContext`u$, 2, $CellContext`w$, -1]] + 
+            Map[First, 
+              RealDigits[$CellContext`v$, 2, $CellContext`w$, -1]], Mesh -> 
+            True, ColorRules -> {
+             3 -> Darker[Purple, 0.5], 1 -> Darker[Blue, 0.2], 2 -> 
+              Darker[Red, 0.2], 0 -> GrayLevel[0.9]}]}, 
+          ImageSize -> {500, 319}]]], 
+      "Specifications" :> {{{$CellContext`p$$, 41, 
+          "leading bit of perturbation"}, 1, 70, 
+         1}, {{$CellContext`fp$$, All, "number of bits to flip"}, {
+         1, 2, All}}, Delimiter, {{$CellContext`x$$, 
+          Rational[1, 33554432], "initial condition"}, {
+          Rational[1, 2], 
+          Rational[1, 3], 
+          Rational[1, 5], 
+          Rational[3, 7], Rational[1, 33554432] -> HoldForm[2^(-25)], 2^
+          Rational[-1, 2], Pi^(-1)}, ControlType -> SetterBar}, 
+        Delimiter, {{$CellContext`m$$, 
+          Rational[3, 2], "multiplier"}, {2, 3, 
+          Rational[3, 2], 2^Rational[1, 2], E, Pi}, ControlType -> SetterBar},
+         Delimiter, {{$CellContext`ma$$, False, "use machine arithmetic"}, {
+         True, False}}}, "Options" :> {AutorunSequencing -> {1, 2}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{548., {282., 287.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->655822262],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`fp$$ = All, $CellContext`m$$ = 
+    3, $CellContext`ma$$ = False, $CellContext`p$$ = 47, $CellContext`x$$ = 
+    Rational[1, 33554432], Typeset`show$$ = True, Typeset`bookmarkList$$ = {},
+     Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`p$$], 47, "leading bit of perturbation"}, 1, 70, 
+      1}, {{
+       Hold[$CellContext`fp$$], All, "number of bits to flip"}, {
+      1, 2, All}}, {{
+       Hold[$CellContext`x$$], 
+       Rational[1, 33554432], "initial condition"}, {
+       Rational[1, 2], 
+       Rational[1, 3], 
+       Rational[1, 5], 
+       Rational[3, 7], Rational[1, 33554432] -> HoldForm[2^(-25)], 2^
+       Rational[-1, 2], Pi^(-1)}}, {{
+       Hold[$CellContext`m$$], 3, "multiplier"}, {2, 3, 
+       Rational[3, 2], 2^Rational[1, 2], E, Pi}}, {{
+       Hold[$CellContext`ma$$], False, "use machine arithmetic"}, {
+      True, False}}}, Typeset`size$$ = {500., {157., 162.}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`p$29542$$ = 0, $CellContext`fp$29543$$ = 
+    0, $CellContext`x$29544$$ = 0, $CellContext`m$29545$$ = 
+    0, $CellContext`ma$29546$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`fp$$ = All, $CellContext`m$$ = 
+        3, $CellContext`ma$$ = False, $CellContext`p$$ = 47, $CellContext`x$$ = 
+        Rational[1, 33554432]}, "ControllerVariables" :> {
+        Hold[$CellContext`p$$, $CellContext`p$29542$$, 0], 
+        Hold[$CellContext`fp$$, $CellContext`fp$29543$$, 0], 
+        Hold[$CellContext`x$$, $CellContext`x$29544$$, 0], 
+        Hold[$CellContext`m$$, $CellContext`m$29545$$, 0], 
+        Hold[$CellContext`ma$$, $CellContext`ma$29546$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      With[{$CellContext`w$ = 50, $CellContext`n$ = 70}, 
+        With[{$CellContext`u$ = 
+          NestList[FractionalPart[$CellContext`m$$ #]& , 
+            If[$CellContext`ma$$, 
+             N[$CellContext`x$$], 
+             
+             N[$CellContext`x$$, 
+              Log[10., 2] Max[$CellContext`w$ + 2 $CellContext`n$, 40] + 
+              4]], $CellContext`n$], $CellContext`v$ = 
+          NestList[FractionalPart[$CellContext`m$$ #]& , 
+            (If[$CellContext`ma$$, 
+             N[#], 
+             
+             N[#, Log[10., 2] Max[$CellContext`w$ + 2 $CellContext`n$, 40] + 
+              4]]& )[
+             FromDigits[{
+               MapAt[ReplaceAll[#, {1 -> 0, 0 -> 1}]& , 
+                First[
+                 RealDigits[$CellContext`x$$, 2, 
+                  Round[
+                  Max[$CellContext`w$ + 2 $CellContext`n$, 40] + 4], -1]], 
+                
+                Switch[$CellContext`fp$$, 1, $CellContext`p$$, 
+                 2, {{$CellContext`p$$}, {$CellContext`p$$ + 5}}, All, 
+                 Map[List, 
+                  Range[$CellContext`p$$, 
+                   Round[
+                   Max[$CellContext`w$ + 2 $CellContext`n$, 40] + 4]]]]], 0}, 
+              2]], $CellContext`n$]}, 
+         Show[{
+           
+           With[{$CellContext`vu = 
+             MapIndexed[{-6 + 5 #, $CellContext`n$ + 3/2 - 
+                First[#2]}& , $CellContext`u$], $CellContext`vv = 
+             MapIndexed[{-6 + 5 #, $CellContext`n$ + 3/2 - 
+                First[#2]}& , $CellContext`v$]}, {
+             Graphics[{
+               PointSize[Large], Gray, 
+               Line[$CellContext`vu], 
+               Line[$CellContext`vv], 
+               Opacity[0.5], Red, 
+               Point[$CellContext`vu], Blue, 
+               Point[$CellContext`vv]}, PlotRange -> {{-6.5, All}, All}]}], 
+           ArrayPlot[2 Map[First, 
+               RealDigits[$CellContext`u$, 2, $CellContext`w$, -1]] + 
+            Map[First, 
+              RealDigits[$CellContext`v$, 2, $CellContext`w$, -1]], Mesh -> 
+            True, ColorRules -> {
+             3 -> Darker[Purple, 0.5], 1 -> Darker[Blue, 0.2], 2 -> 
+              Darker[Red, 0.2], 0 -> GrayLevel[0.9]}]}, 
+          ImageSize -> {500, 319}]]], 
+      "Specifications" :> {{{$CellContext`p$$, 47, 
+          "leading bit of perturbation"}, 1, 70, 
+         1}, {{$CellContext`fp$$, All, "number of bits to flip"}, {
+         1, 2, All}}, Delimiter, {{$CellContext`x$$, 
+          Rational[1, 33554432], "initial condition"}, {
+          Rational[1, 2], 
+          Rational[1, 3], 
+          Rational[1, 5], 
+          Rational[3, 7], Rational[1, 33554432] -> HoldForm[2^(-25)], 2^
+          Rational[-1, 2], Pi^(-1)}, ControlType -> SetterBar}, 
+        Delimiter, {{$CellContext`m$$, 3, "multiplier"}, {2, 3, 
+          Rational[3, 2], 2^Rational[1, 2], E, Pi}, ControlType -> SetterBar},
+         Delimiter, {{$CellContext`ma$$, False, "use machine arithmetic"}, {
+         True, False}}}, "Options" :> {AutorunSequencing -> {1, 2}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{548., {282., 287.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->822581254],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`fp$$ = All, $CellContext`m$$ = 2^
+    Rational[1, 2], $CellContext`ma$$ = True, $CellContext`p$$ = 
+    45, $CellContext`x$$ = Pi^(-1), Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`p$$], 45, "leading bit of perturbation"}, 1, 70, 
+      1}, {{
+       Hold[$CellContext`fp$$], All, "number of bits to flip"}, {
+      1, 2, All}}, {{
+       Hold[$CellContext`x$$], Pi^(-1), "initial condition"}, {
+       Rational[1, 2], 
+       Rational[1, 3], 
+       Rational[1, 5], 
+       Rational[3, 7], Rational[1, 33554432] -> HoldForm[2^(-25)], 2^
+       Rational[-1, 2], Pi^(-1)}}, {{
+       Hold[$CellContext`m$$], 2^Rational[1, 2], "multiplier"}, {2, 3, 
+       Rational[3, 2], 2^Rational[1, 2], E, Pi}}, {{
+       Hold[$CellContext`ma$$], True, "use machine arithmetic"}, {
+      True, False}}}, Typeset`size$$ = {500., {157., 162.}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`p$29618$$ = 0, $CellContext`fp$29619$$ = 
+    0, $CellContext`x$29620$$ = 0, $CellContext`m$29621$$ = 
+    0, $CellContext`ma$29622$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`fp$$ = All, $CellContext`m$$ = 
+        2^Rational[1, 2], $CellContext`ma$$ = True, $CellContext`p$$ = 
+        45, $CellContext`x$$ = Pi^(-1)}, "ControllerVariables" :> {
+        Hold[$CellContext`p$$, $CellContext`p$29618$$, 0], 
+        Hold[$CellContext`fp$$, $CellContext`fp$29619$$, 0], 
+        Hold[$CellContext`x$$, $CellContext`x$29620$$, 0], 
+        Hold[$CellContext`m$$, $CellContext`m$29621$$, 0], 
+        Hold[$CellContext`ma$$, $CellContext`ma$29622$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      With[{$CellContext`w$ = 50, $CellContext`n$ = 70}, 
+        With[{$CellContext`u$ = 
+          NestList[FractionalPart[$CellContext`m$$ #]& , 
+            If[$CellContext`ma$$, 
+             N[$CellContext`x$$], 
+             
+             N[$CellContext`x$$, 
+              Log[10., 2] Max[$CellContext`w$ + 2 $CellContext`n$, 40] + 
+              4]], $CellContext`n$], $CellContext`v$ = 
+          NestList[FractionalPart[$CellContext`m$$ #]& , 
+            (If[$CellContext`ma$$, 
+             N[#], 
+             
+             N[#, Log[10., 2] Max[$CellContext`w$ + 2 $CellContext`n$, 40] + 
+              4]]& )[
+             FromDigits[{
+               MapAt[ReplaceAll[#, {1 -> 0, 0 -> 1}]& , 
+                First[
+                 RealDigits[$CellContext`x$$, 2, 
+                  Round[
+                  Max[$CellContext`w$ + 2 $CellContext`n$, 40] + 4], -1]], 
+                
+                Switch[$CellContext`fp$$, 1, $CellContext`p$$, 
+                 2, {{$CellContext`p$$}, {$CellContext`p$$ + 5}}, All, 
+                 Map[List, 
+                  Range[$CellContext`p$$, 
+                   Round[
+                   Max[$CellContext`w$ + 2 $CellContext`n$, 40] + 4]]]]], 0}, 
+              2]], $CellContext`n$]}, 
+         Show[{
+           
+           With[{$CellContext`vu = 
+             MapIndexed[{-6 + 5 #, $CellContext`n$ + 3/2 - 
+                First[#2]}& , $CellContext`u$], $CellContext`vv = 
+             MapIndexed[{-6 + 5 #, $CellContext`n$ + 3/2 - 
+                First[#2]}& , $CellContext`v$]}, {
+             Graphics[{
+               PointSize[Large], Gray, 
+               Line[$CellContext`vu], 
+               Line[$CellContext`vv], 
+               Opacity[0.5], Red, 
+               Point[$CellContext`vu], Blue, 
+               Point[$CellContext`vv]}, PlotRange -> {{-6.5, All}, All}]}], 
+           ArrayPlot[2 Map[First, 
+               RealDigits[$CellContext`u$, 2, $CellContext`w$, -1]] + 
+            Map[First, 
+              RealDigits[$CellContext`v$, 2, $CellContext`w$, -1]], Mesh -> 
+            True, ColorRules -> {
+             3 -> Darker[Purple, 0.5], 1 -> Darker[Blue, 0.2], 2 -> 
+              Darker[Red, 0.2], 0 -> GrayLevel[0.9]}]}, 
+          ImageSize -> {500, 319}]]], 
+      "Specifications" :> {{{$CellContext`p$$, 45, 
+          "leading bit of perturbation"}, 1, 70, 
+         1}, {{$CellContext`fp$$, All, "number of bits to flip"}, {
+         1, 2, All}}, 
+        Delimiter, {{$CellContext`x$$, Pi^(-1), "initial condition"}, {
+          Rational[1, 2], 
+          Rational[1, 3], 
+          Rational[1, 5], 
+          Rational[3, 7], Rational[1, 33554432] -> HoldForm[2^(-25)], 2^
+          Rational[-1, 2], Pi^(-1)}, ControlType -> SetterBar}, 
+        Delimiter, {{$CellContext`m$$, 2^Rational[1, 2], "multiplier"}, {
+         2, 3, 
+          Rational[3, 2], 2^Rational[1, 2], E, Pi}, ControlType -> SetterBar},
+         Delimiter, {{$CellContext`ma$$, True, "use machine arithmetic"}, {
+         True, False}}}, "Options" :> {AutorunSequencing -> {1, 2}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{548., {282., 287.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->67091412]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "DetailsSection"],
+
+Cell["\<\
+At each step, a number is multiplied by the specified multiplier, but only \
+the fractional part is kept. The main array shows the base-2 digit sequences \
+of successive numbers generated in this way.\
+\>", "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.35786008325918*^9, 3.35786014115055*^9}, 
+   3.3822066253367357`*^9},
+ CellID->17654688],
+
+Cell["\<\
+One starts with two numbers that differ by a \"perturbation\" that affects \
+only high-order digits. What the Demonstration shows is that often such a \
+perturbation will grow, as its digits are shifted into more significant \
+positions.\
+\>", "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.35786014257244*^9, 3.35786021983906*^9}, 
+   3.382206627003356*^9, {3.382206827381957*^9, 3.382206827617957*^9}},
+ CellID->147731420],
+
+Cell["\<\
+For multiplier 2, all the shift map does is to shift digits to the left. \
+There is apparent randomness in the values shown on the left even in this \
+case, so long as the digit sequence of the initial conditions is somehow \
+seemingly random, say because it comes from a number like 1/\[Pi]. \
+\>", "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.35786022083907*^9, 3.35786024524563*^9}, {
+   3.35786029907445*^9, 3.35786034587192*^9}, 3.382206628419368*^9},
+ CellID->57052175],
+
+Cell["\<\
+If machine arithmetic is used (as in most earlier numerical work), the \
+phenomenon becomes more confused, since after a limited time one \"runs out \
+of bits\", and starts generating 0s.\
+\>", "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3578603537939*^9, 3.35786040410704*^9}},
+ CellID->282375357],
+
+Cell["\<\
+With multipliers other than 2, another phenomenon appears: even with very \
+simple initial conditions, apparent randomness is generated, quite \
+independent of \"excavating the bits\" from the initial conditions. In most \
+practical situations, this is probably a more important source of randomness \
+than the specific one associated with sensitive dependence on initial \
+conditions.\
+\>", "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.35786040671645*^9, 3.35786052440546*^9}, {
+   3.38220664257987*^9, 3.3822066460839663`*^9}},
+ CellID->269940112]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell["", "SearchTermsSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "RelatedLinksSection"],
+
+Cell[TextData[ButtonBox["Chaos",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/Chaos.html"], None}]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.418745427002431*^9, 3.418745435552286*^9}},
+ CellID->222526258],
+
+Cell[TextData[ButtonBox["Iterated Maps and the Chaos Phenomenon",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://www.wolframscience.com/nksonline/section-4.7"], 
+   None}]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.36956597866612*^9, 3.3695659831191*^9}, {
+   3.378648565280479*^9, 3.378648568047364*^9}},
+ CellID->278345716],
+
+Cell[TextData[ButtonBox["Problems with computer experiments [in chaos \
+theory]",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://www.wolframscience.com/nksonline/page-919c-text"], 
+   None}]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.36956598665024*^9, 3.36956599132196*^9}, {
+   3.37864855931054*^9, 3.378648561839788*^9}},
+ CellID->53255110]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Stephen Wolfram",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Stephen+\
+Wolfram"], None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Stephen+Wolfram"]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.35781799819449*^9, 3.35781799975702*^9}, {
+   3.36956597021326*^9, 3.3695659744475*^9}},
+ CellID->279523093]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1020, 724},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"6.0 for Microsoft Windows (64-bit) (March 13, 2008)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[54234, 1235, 310, 8, 22, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[54547, 1245, 677, 16, 22, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[55227, 1263, 339, 11, 22, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[55569, 1276, 636, 15, 22, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[56208, 1293, 843, 21, 22, "ControlSuggestions",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[57054, 1316, 303, 8, 22, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[57360, 1326, 1411, 31, 22, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[58774, 1359, 881, 21, 22, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 61671, 1451},
+ {"RotateAndZoomIn3D", 61780, 1454},
+ {"DragLocators", 61890, 1457},
+ {"CreateAndDeleteLocators", 62006, 1460},
+ {"SliderZoom", 62120, 1463},
+ {"GamepadControls", 62226, 1466},
+ {"AutomaticAnimation", 62339, 1469},
+ {"BookmarkAnimation", 62456, 1472}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[590, 23, 196, 4, 74, "DemoTitle",
+ CellID->700863240],
+Cell[789, 29, 33, 0, 156, "InitializationSection"],
+Cell[CellGroupData[{
+Cell[847, 33, 29, 0, 188, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[901, 37, 10646, 260, 70, "Input",
+ CellID->1681882],
+Cell[11550, 299, 5604, 117, 581, "Output",
+ CellID->424077940]
+}, {2}]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17200, 422, 36, 0, 136, "ManipulateCaptionSection"],
+Cell[17239, 424, 503, 10, 37, "ManipulateCaption",
+ CellID->1044312921]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17779, 439, 28, 0, 168, "ThumbnailSection"],
+Cell[17810, 441, 5622, 118, 581, "Output",
+ CellID->247386164]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23469, 564, 28, 0, 138, "SnapshotsSection"],
+Cell[23500, 566, 5622, 118, 581, "Output",
+ CellID->123960227],
+Cell[29125, 686, 5618, 118, 581, "Output",
+ CellID->201198101],
+Cell[34746, 806, 5758, 122, 581, "Output",
+ CellID->655822262],
+Cell[40507, 930, 5675, 118, 581, "Output",
+ CellID->822581254],
+Cell[46185, 1050, 5679, 119, 581, "Output",
+ CellID->67091412]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[51901, 1174, 26, 0, 232, "DetailsSection"],
+Cell[51930, 1176, 366, 8, 37, "DetailNotes",
+ CellID->17654688],
+Cell[52299, 1186, 448, 9, 37, "DetailNotes",
+ CellID->147731420],
+Cell[52750, 1197, 501, 9, 37, "DetailNotes",
+ CellID->57052175],
+Cell[53254, 1208, 325, 7, 37, "DetailNotes",
+ CellID->282375357],
+Cell[53582, 1217, 575, 11, 52, "DetailNotes",
+ CellID->269940112]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[54194, 1233, 37, 0, 120, "ControlSuggestionsSection"],
+Cell[54234, 1235, 310, 8, 22, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[54547, 1245, 677, 16, 22, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[55227, 1263, 339, 11, 22, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[55569, 1276, 636, 15, 22, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[56208, 1293, 843, 21, 22, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[57054, 1316, 303, 8, 22, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[57360, 1326, 1411, 31, 22, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[58774, 1359, 881, 21, 22, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[59670, 1383, 30, 0, 152, "SearchTermsSection"],
+Cell[CellGroupData[{
+Cell[59725, 1387, 31, 0, 126, "RelatedLinksSection"],
+Cell[59759, 1389, 258, 6, 22, "RelatedLinks",
+ CellID->222526258],
+Cell[60020, 1397, 354, 8, 22, "RelatedLinks",
+ CellID->278345716],
+Cell[60377, 1407, 372, 9, 22, "RelatedLinks",
+ CellID->53255110]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[60786, 1421, 25, 0, 136, "AuthorSection"],
+Cell[60814, 1423, 457, 13, 22, "Author",
+ CellID->279523093]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

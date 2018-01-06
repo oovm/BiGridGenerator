@@ -1,0 +1,2114 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     96602,       2105]
+NotebookOptionsPosition[     92907,       1992]
+NotebookOutlinePosition[     94506,       2042]
+CellTagsIndexPosition[     94178,       2030]
+WindowFrame->Normal
+ContainsDynamic->True *)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Gravitational Lensing of a Point Source", "DemoTitle",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.36033359482352*^9, 3.36033360063193*^9}},
+ CellID->700863240],
+
+Cell["", "InitializationSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Quiet", "@", 
+    RowBox[{"Graphics", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"PointSize", "[", ".01", "]"}], ",", 
+        RowBox[{"lensmap", "[", 
+         RowBox[{"pos", ",", "M", ",", "meshtype"}], "]"}]}], "}"}], ",", 
+      RowBox[{"PlotRange", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"-", "1"}], ",", "1"}], "}"}], "zoom"}], ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"-", "1"}], ",", "1"}], "}"}], "zoom"}]}], "}"}]}], ",", 
+      RowBox[{"Epilog", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"GrayLevel", "[", 
+          RowBox[{".3", ",", ".6"}], "]"}], ",", 
+         RowBox[{"PointSize", "[", ".01", "]"}], ",", 
+         RowBox[{"Point", "[", "pos", "]"}]}], "}"}]}], ",", 
+      RowBox[{"ImageSize", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{"350", ",", "350"}], "}"}]}]}], "]"}]}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"pos", ",", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "0"}], "}"}], ",", "\"\<lens position\>\""}], "}"}],
+      ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "75"}], ",", 
+       RowBox[{"-", "75"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"75", ",", "75"}], "}"}], ",", "Locator", ",", 
+     RowBox[{"Appearance", "\[Rule]", 
+      GraphicsBox[
+       {RGBColor[0.6, 0.4, 0.2], DiskBox[{0., 0.}]},
+       ImageSize->{12., Automatic}]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"M", ",", "1", ",", "\"\<mass of lens\>\""}], "}"}], ",", ".1", 
+     ",", "200", ",", 
+     RowBox[{"ControlPlacement", "\[Rule]", "Top"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"meshtype", ",", "meshpoint1", ",", "\"\<source grid\>\""}], 
+      "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"meshpoint1", "\[Rule]", 
+        RowBox[{"Graphics", "[", 
+         RowBox[{
+          RowBox[{"pointmesh", "[", 
+           RowBox[{"9", ",", "meshpoint1"}], "]"}], ",", 
+          RowBox[{"ImageSize", "\[Rule]", "30"}]}], "]"}]}], ",", 
+       RowBox[{"meshpoint2", "\[Rule]", 
+        RowBox[{"Graphics", "[", 
+         RowBox[{
+          RowBox[{"pointmesh", "[", 
+           RowBox[{"9", ",", "meshpoint2"}], "]"}], ",", 
+          RowBox[{"ImageSize", "\[Rule]", "30"}]}], "]"}]}], ",", 
+       RowBox[{"meshpoint3", "\[Rule]", 
+        RowBox[{"Graphics", "[", 
+         RowBox[{
+          RowBox[{"pointmesh", "[", 
+           RowBox[{"9", ",", "meshpoint3"}], "]"}], ",", 
+          RowBox[{"ImageSize", "\[Rule]", "30"}]}], "]"}]}], ",", 
+       RowBox[{"meshpoint4", "\[Rule]", 
+        RowBox[{"Graphics", "[", 
+         RowBox[{
+          RowBox[{"pointmesh", "[", 
+           RowBox[{"9", ",", "meshpoint4"}], "]"}], ",", 
+          RowBox[{"ImageSize", "\[Rule]", "30"}]}], "]"}]}], ",", 
+       RowBox[{"meshpoint5", "\[Rule]", 
+        RowBox[{"Graphics", "[", 
+         RowBox[{
+          RowBox[{"pointmesh", "[", 
+           RowBox[{"9", ",", "meshpoint5"}], "]"}], ",", 
+          RowBox[{"ImageSize", "\[Rule]", "30"}]}], "]"}]}], ",", 
+       RowBox[{"meshpoint6", "\[Rule]", 
+        RowBox[{"Graphics", "[", 
+         RowBox[{
+          RowBox[{"pointmesh", "[", 
+           RowBox[{"9", ",", "meshpoint6"}], "]"}], ",", 
+          RowBox[{"ImageSize", "\[Rule]", "30"}]}], "]"}]}]}], "}"}], ",", 
+     RowBox[{"ControlPlacement", "\[Rule]", "Top"}], ",", 
+     RowBox[{"ControlType", "\[Rule]", "SetterBar"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"zoom", ",", "50"}], "}"}], ",", ".1", ",", "100"}], "}"}], ",",
+    
+   RowBox[{"TrackedSymbols", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"pos", ",", "M", ",", "meshtype", ",", "zoom"}], "}"}]}], ",", 
+   RowBox[{"Initialization", "\[RuleDelayed]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"G", "=", "1"}], ";", 
+      RowBox[{"c", "=", "1"}], ";", 
+      RowBox[{"\[Alpha]map", "=", 
+       RowBox[{"With", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"G", "=", "G"}], ",", 
+           RowBox[{"c", "=", "c"}]}], "}"}], ",", 
+         RowBox[{"Compile", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"x", ",", "_Real", ",", "1"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"xL", ",", "_Real", ",", "1"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"M", ",", "_Real"}], "}"}]}], "}"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{"x", "\[Equal]", "xL"}], ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"-", "100000."}], ",", 
+               RowBox[{"-", "100000."}]}], "}"}], ",", 
+             RowBox[{"4", "G", " ", 
+              RowBox[{"M", "/", 
+               RowBox[{"c", "^", "2"}]}], 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"x", "-", "xL"}], ")"}], "/", 
+               RowBox[{
+                RowBox[{"Norm", "[", 
+                 RowBox[{"x", "-", "xL"}], "]"}], "^", "2"}]}]}]}], "]"}]}], 
+          "]"}]}], "]"}]}], ";", 
+      RowBox[{"mapgrid", "=", 
+       RowBox[{"Compile", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"x", ",", "_Real", ",", "3"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"xL", ",", "_Real", ",", "1"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"M", ",", "_Real"}], "}"}]}], "}"}], ",", 
+         RowBox[{"Map", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"\[Alpha]map", "[", 
+             RowBox[{"#", ",", "xL", ",", "M"}], "]"}], "&"}], ",", "x", ",", 
+           
+           RowBox[{"{", "2", "}"}]}], "]"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"lensmap", "[", 
+        RowBox[{"xL_", ",", "M_", ",", "meshtype_"}], "]"}], ":=", 
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"grid", ",", "delta"}], "}"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"grid", "=", 
+           RowBox[{"Outer", "[", 
+            RowBox[{"List", ",", 
+             RowBox[{"Range", "[", 
+              RowBox[{
+               RowBox[{"-", "15."}], ",", "15."}], "]"}], ",", 
+             RowBox[{"Range", "[", 
+              RowBox[{
+               RowBox[{"-", "15."}], ",", "15."}], "]"}]}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"delta", "=", 
+           RowBox[{"grid", "-", 
+            RowBox[{"mapgrid", "[", 
+             RowBox[{"grid", ",", "xL", ",", "M"}], "]"}]}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{"Black", ",", 
+            RowBox[{"meshtype", "[", 
+             RowBox[{
+              RowBox[{"Flatten", "[", 
+               RowBox[{"delta", ",", "1"}], "]"}], ",", 
+              RowBox[{"Flatten", "[", 
+               RowBox[{"grid", ",", "1"}], "]"}]}], "]"}], ",", 
+            RowBox[{"hole", "[", 
+             RowBox[{"xL", ",", "xL"}], "]"}]}], "}"}]}]}], 
+        "\[IndentingNewLine]", "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"hole", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"x_", ",", "y_"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"i_", ",", "j_"}], "}"}]}], "]"}], ":=", 
+       RowBox[{"{", 
+        RowBox[{"Brown", ",", 
+         RowBox[{"Point", "[", 
+          RowBox[{"{", 
+           RowBox[{"x", ",", "y"}], "}"}], "]"}]}], "}"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"pointmesh", "[", 
+        RowBox[{"size_", ",", "meshtype_"}], "]"}], ":=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"meshtype", "[", 
+          RowBox[{"#", ",", "#"}], "]"}], "&"}], "[", 
+        RowBox[{"Flatten", "[", 
+         RowBox[{
+          RowBox[{"Outer", "[", 
+           RowBox[{"List", ",", 
+            RowBox[{"Range", "[", 
+             RowBox[{"0", ",", "size"}], "]"}], ",", 
+            RowBox[{"Range", "[", 
+             RowBox[{"0", ",", "size"}], "]"}]}], "]"}], ",", "1"}], "]"}], 
+        "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"meshpoint1", "[", 
+        RowBox[{"image_", ",", "preimage_"}], "]"}], ":=", 
+       RowBox[{"Point", "[", 
+        RowBox[{"Pick", "[", 
+         RowBox[{"image", ",", 
+          RowBox[{
+           RowBox[{"Function", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"i", ",", "j"}], "}"}], ",", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"Mod", "[", 
+                RowBox[{"i", ",", "3"}], "]"}], "\[Equal]", "0"}], "||", 
+              RowBox[{
+               RowBox[{"Mod", "[", 
+                RowBox[{"j", ",", "3"}], "]"}], "\[Equal]", "0"}]}]}], "]"}], 
+           "@@@", "preimage"}]}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      
+      RowBox[{
+       RowBox[{"meshpoint2", "[", 
+        RowBox[{"image_", ",", "preimage_"}], "]"}], ":=", 
+       RowBox[{"Point", "[", 
+        RowBox[{"Pick", "[", 
+         RowBox[{"image", ",", 
+          RowBox[{
+           RowBox[{"Function", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"i", ",", "j"}], "}"}], ",", 
+             RowBox[{
+              RowBox[{"Mod", "[", 
+               RowBox[{
+                RowBox[{"i", "+", "j"}], ",", "3"}], "]"}], "\[Equal]", 
+              "0"}]}], "]"}], "@@@", "preimage"}]}], "]"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"meshpoint3", "[", 
+        RowBox[{"image_", ",", "preimage_"}], "]"}], ":=", 
+       RowBox[{"Point", "[", 
+        RowBox[{"Pick", "[", 
+         RowBox[{"image", ",", 
+          RowBox[{
+           RowBox[{"Function", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"i", ",", "j"}], "}"}], ",", 
+             RowBox[{
+              RowBox[{"Mod", "[", 
+               RowBox[{"j", ",", "2"}], "]"}], "\[Equal]", "0"}]}], "]"}], "@@@",
+            "preimage"}]}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"meshpoint4", "[", 
+        RowBox[{"image_", ",", "preimage_"}], "]"}], ":=", 
+       RowBox[{"Point", "[", 
+        RowBox[{"Pick", "[", 
+         RowBox[{"image", ",", 
+          RowBox[{
+           RowBox[{"Function", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"i", ",", "j"}], "}"}], ",", 
+             RowBox[{
+              RowBox[{"Mod", "[", 
+               RowBox[{"i", ",", "2"}], "]"}], "\[Equal]", "0"}]}], "]"}], "@@@",
+            "preimage"}]}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"meshpoint5", "[", 
+        RowBox[{"image_", ",", "preimage_"}], "]"}], ":=", 
+       RowBox[{"Point", "[", 
+        RowBox[{"Pick", "[", 
+         RowBox[{"image", ",", 
+          RowBox[{
+           RowBox[{"Function", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"i", ",", "j"}], "}"}], ",", 
+             RowBox[{
+              RowBox[{"Mod", "[", 
+               RowBox[{
+                RowBox[{"i", "+", "j"}], ",", "2"}], "]"}], "\[Equal]", 
+              "0"}]}], "]"}], "@@@", "preimage"}]}], "]"}], "]"}]}], ";", 
+      RowBox[{
+       RowBox[{"meshpoint6", "[", 
+        RowBox[{"image_", ",", "preimage_"}], "]"}], ":=", 
+       RowBox[{"Point", "[", 
+        RowBox[{"Pick", "[", 
+         RowBox[{"image", ",", 
+          RowBox[{
+           RowBox[{"Function", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"i", ",", "j"}], "}"}], ",", 
+             RowBox[{
+              RowBox[{"5", "^", "2"}], "<=", 
+              RowBox[{
+               RowBox[{"i", "^", "2"}], "+", 
+               RowBox[{"j", "^", "2"}]}], "\[LessEqual]", 
+              RowBox[{"8", "^", "2"}]}]}], "]"}], "@@@", "preimage"}]}], 
+         "]"}], "]"}]}], ";"}], "}"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{
+  3.35757176568782*^9, 3.3603335919794*^9, {3.36231805082384*^9, 
+   3.36231805447151*^9}, {3.36354732277821*^9, 3.36354737932743*^9}, {
+   3.3706372938292017`*^9, 3.370637318355224*^9}, {3.377977135005228*^9, 
+   3.377977148214222*^9}, {3.38366851891228*^9, 3.38366851934978*^9}},
+ CellID->1496021318],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`M$$ = 
+    1, $CellContext`meshtype$$ = $CellContext`meshpoint1, $CellContext`pos$$ \
+= {0, 0}, $CellContext`zoom$$ = 50, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`pos$$], {0, 0}, "lens position"}, {-75, -75}, {75, 
+      75}}, {{
+       Hold[$CellContext`M$$], 1, "mass of lens"}, 0.1, 200}, {{
+       Hold[$CellContext`meshtype$$], $CellContext`meshpoint1, 
+       "source grid"}, {$CellContext`meshpoint1 -> Graphics[
+         Point[{{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0, 
+          7}, {0, 8}, {0, 9}, {1, 0}, {1, 3}, {1, 6}, {1, 9}, {2, 0}, {2, 
+          3}, {2, 6}, {2, 9}, {3, 0}, {3, 1}, {3, 2}, {3, 3}, {3, 4}, {3, 
+          5}, {3, 6}, {3, 7}, {3, 8}, {3, 9}, {4, 0}, {4, 3}, {4, 6}, {4, 
+          9}, {5, 0}, {5, 3}, {5, 6}, {5, 9}, {6, 0}, {6, 1}, {6, 2}, {6, 
+          3}, {6, 4}, {6, 5}, {6, 6}, {6, 7}, {6, 8}, {6, 9}, {7, 0}, {7, 
+          3}, {7, 6}, {7, 9}, {8, 0}, {8, 3}, {8, 6}, {8, 9}, {9, 0}, {9, 
+          1}, {9, 2}, {9, 3}, {9, 4}, {9, 5}, {9, 6}, {9, 7}, {9, 8}, {9, 
+          9}}], ImageSize -> 30], $CellContext`meshpoint2 -> Graphics[
+         Point[{{0, 0}, {0, 3}, {0, 6}, {0, 9}, {1, 2}, {1, 5}, {1, 8}, {2, 
+          1}, {2, 4}, {2, 7}, {3, 0}, {3, 3}, {3, 6}, {3, 9}, {4, 2}, {4, 
+          5}, {4, 8}, {5, 1}, {5, 4}, {5, 7}, {6, 0}, {6, 3}, {6, 6}, {6, 
+          9}, {7, 2}, {7, 5}, {7, 8}, {8, 1}, {8, 4}, {8, 7}, {9, 0}, {9, 
+          3}, {9, 6}, {9, 9}}], ImageSize -> 30], $CellContext`meshpoint3 -> 
+       Graphics[
+         Point[{{0, 0}, {0, 2}, {0, 4}, {0, 6}, {0, 8}, {1, 0}, {1, 2}, {1, 
+          4}, {1, 6}, {1, 8}, {2, 0}, {2, 2}, {2, 4}, {2, 6}, {2, 8}, {3, 
+          0}, {3, 2}, {3, 4}, {3, 6}, {3, 8}, {4, 0}, {4, 2}, {4, 4}, {4, 
+          6}, {4, 8}, {5, 0}, {5, 2}, {5, 4}, {5, 6}, {5, 8}, {6, 0}, {6, 
+          2}, {6, 4}, {6, 6}, {6, 8}, {7, 0}, {7, 2}, {7, 4}, {7, 6}, {7, 
+          8}, {8, 0}, {8, 2}, {8, 4}, {8, 6}, {8, 8}, {9, 0}, {9, 2}, {9, 
+          4}, {9, 6}, {9, 8}}], ImageSize -> 30], $CellContext`meshpoint4 -> 
+       Graphics[
+         Point[{{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0, 
+          7}, {0, 8}, {0, 9}, {2, 0}, {2, 1}, {2, 2}, {2, 3}, {2, 4}, {2, 
+          5}, {2, 6}, {2, 7}, {2, 8}, {2, 9}, {4, 0}, {4, 1}, {4, 2}, {4, 
+          3}, {4, 4}, {4, 5}, {4, 6}, {4, 7}, {4, 8}, {4, 9}, {6, 0}, {6, 
+          1}, {6, 2}, {6, 3}, {6, 4}, {6, 5}, {6, 6}, {6, 7}, {6, 8}, {6, 
+          9}, {8, 0}, {8, 1}, {8, 2}, {8, 3}, {8, 4}, {8, 5}, {8, 6}, {8, 
+          7}, {8, 8}, {8, 9}}], ImageSize -> 30], $CellContext`meshpoint5 -> 
+       Graphics[
+         Point[{{0, 0}, {0, 2}, {0, 4}, {0, 6}, {0, 8}, {1, 1}, {1, 3}, {1, 
+          5}, {1, 7}, {1, 9}, {2, 0}, {2, 2}, {2, 4}, {2, 6}, {2, 8}, {3, 
+          1}, {3, 3}, {3, 5}, {3, 7}, {3, 9}, {4, 0}, {4, 2}, {4, 4}, {4, 
+          6}, {4, 8}, {5, 1}, {5, 3}, {5, 5}, {5, 7}, {5, 9}, {6, 0}, {6, 
+          2}, {6, 4}, {6, 6}, {6, 8}, {7, 1}, {7, 3}, {7, 5}, {7, 7}, {7, 
+          9}, {8, 0}, {8, 2}, {8, 4}, {8, 6}, {8, 8}, {9, 1}, {9, 3}, {9, 
+          5}, {9, 7}, {9, 9}}], ImageSize -> 30], $CellContext`meshpoint6 -> 
+       Graphics[
+         Point[{{0, 5}, {0, 6}, {0, 7}, {0, 8}, {1, 5}, {1, 6}, {1, 7}, {2, 
+          5}, {2, 6}, {2, 7}, {3, 4}, {3, 5}, {3, 6}, {3, 7}, {4, 3}, {4, 
+          4}, {4, 5}, {4, 6}, {5, 0}, {5, 1}, {5, 2}, {5, 3}, {5, 4}, {5, 
+          5}, {5, 6}, {6, 0}, {6, 1}, {6, 2}, {6, 3}, {6, 4}, {6, 5}, {7, 
+          0}, {7, 1}, {7, 2}, {7, 3}, {8, 0}}], ImageSize -> 30]}}, {{
+       Hold[$CellContext`zoom$$], 50}, 0.1, 100}}, Typeset`size$$ = {
+    350., {173., 177.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`pos$59770$$ = {0, 
+    0}, $CellContext`M$59771$$ = 0, $CellContext`meshtype$59772$$ = 
+    False, $CellContext`zoom$59773$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`M$$ = 
+        1, $CellContext`meshtype$$ = $CellContext`meshpoint1, \
+$CellContext`pos$$ = {0, 0}, $CellContext`zoom$$ = 50}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`pos$$, $CellContext`pos$59770$$, {0, 0}], 
+        Hold[$CellContext`M$$, $CellContext`M$59771$$, 0], 
+        Hold[$CellContext`meshtype$$, $CellContext`meshtype$59772$$, False], 
+        Hold[$CellContext`zoom$$, $CellContext`zoom$59773$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Quiet[
+        Graphics[{
+          PointSize[0.01], 
+          $CellContext`lensmap[$CellContext`pos$$, $CellContext`M$$, \
+$CellContext`meshtype$$]}, 
+         PlotRange -> {{-1, 1} $CellContext`zoom$$, {-1, 
+            1} $CellContext`zoom$$}, Epilog -> {
+           GrayLevel[0.3, 0.6], 
+           PointSize[0.01], 
+           Point[$CellContext`pos$$]}, ImageSize -> {350, 350}]], 
+      "Specifications" :> {{{$CellContext`pos$$, {0, 0}, 
+          "lens position"}, {-75, -75}, {75, 75}, ControlType -> Locator, 
+         Appearance -> Graphics[{
+            RGBColor[0.6, 0.4, 0.2], 
+            Disk[{0., 0.}]}, 
+           ImageSize -> {12., Automatic}]}, {{$CellContext`M$$, 1, 
+          "mass of lens"}, 0.1, 200, ControlPlacement -> 
+         Top}, {{$CellContext`meshtype$$, $CellContext`meshpoint1, 
+          "source grid"}, {$CellContext`meshpoint1 -> Graphics[
+            
+            Point[{{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0,
+              7}, {0, 8}, {0, 9}, {1, 0}, {1, 3}, {1, 6}, {1, 9}, {2, 0}, {2, 
+             3}, {2, 6}, {2, 9}, {3, 0}, {3, 1}, {3, 2}, {3, 3}, {3, 4}, {3, 
+             5}, {3, 6}, {3, 7}, {3, 8}, {3, 9}, {4, 0}, {4, 3}, {4, 6}, {4, 
+             9}, {5, 0}, {5, 3}, {5, 6}, {5, 9}, {6, 0}, {6, 1}, {6, 2}, {6, 
+             3}, {6, 4}, {6, 5}, {6, 6}, {6, 7}, {6, 8}, {6, 9}, {7, 0}, {7, 
+             3}, {7, 6}, {7, 9}, {8, 0}, {8, 3}, {8, 6}, {8, 9}, {9, 0}, {9, 
+             1}, {9, 2}, {9, 3}, {9, 4}, {9, 5}, {9, 6}, {9, 7}, {9, 8}, {9, 
+             9}}], ImageSize -> 30], $CellContext`meshpoint2 -> Graphics[
+            
+            Point[{{0, 0}, {0, 3}, {0, 6}, {0, 9}, {1, 2}, {1, 5}, {1, 8}, {2,
+              1}, {2, 4}, {2, 7}, {3, 0}, {3, 3}, {3, 6}, {3, 9}, {4, 2}, {4, 
+             5}, {4, 8}, {5, 1}, {5, 4}, {5, 7}, {6, 0}, {6, 3}, {6, 6}, {6, 
+             9}, {7, 2}, {7, 5}, {7, 8}, {8, 1}, {8, 4}, {8, 7}, {9, 0}, {9, 
+             3}, {9, 6}, {9, 9}}], ImageSize -> 30], $CellContext`meshpoint3 -> 
+          Graphics[
+            
+            Point[{{0, 0}, {0, 2}, {0, 4}, {0, 6}, {0, 8}, {1, 0}, {1, 2}, {1,
+              4}, {1, 6}, {1, 8}, {2, 0}, {2, 2}, {2, 4}, {2, 6}, {2, 8}, {3, 
+             0}, {3, 2}, {3, 4}, {3, 6}, {3, 8}, {4, 0}, {4, 2}, {4, 4}, {4, 
+             6}, {4, 8}, {5, 0}, {5, 2}, {5, 4}, {5, 6}, {5, 8}, {6, 0}, {6, 
+             2}, {6, 4}, {6, 6}, {6, 8}, {7, 0}, {7, 2}, {7, 4}, {7, 6}, {7, 
+             8}, {8, 0}, {8, 2}, {8, 4}, {8, 6}, {8, 8}, {9, 0}, {9, 2}, {9, 
+             4}, {9, 6}, {9, 8}}], ImageSize -> 30], $CellContext`meshpoint4 -> 
+          Graphics[
+            
+            Point[{{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0,
+              7}, {0, 8}, {0, 9}, {2, 0}, {2, 1}, {2, 2}, {2, 3}, {2, 4}, {2, 
+             5}, {2, 6}, {2, 7}, {2, 8}, {2, 9}, {4, 0}, {4, 1}, {4, 2}, {4, 
+             3}, {4, 4}, {4, 5}, {4, 6}, {4, 7}, {4, 8}, {4, 9}, {6, 0}, {6, 
+             1}, {6, 2}, {6, 3}, {6, 4}, {6, 5}, {6, 6}, {6, 7}, {6, 8}, {6, 
+             9}, {8, 0}, {8, 1}, {8, 2}, {8, 3}, {8, 4}, {8, 5}, {8, 6}, {8, 
+             7}, {8, 8}, {8, 9}}], ImageSize -> 30], $CellContext`meshpoint5 -> 
+          Graphics[
+            
+            Point[{{0, 0}, {0, 2}, {0, 4}, {0, 6}, {0, 8}, {1, 1}, {1, 3}, {1,
+              5}, {1, 7}, {1, 9}, {2, 0}, {2, 2}, {2, 4}, {2, 6}, {2, 8}, {3, 
+             1}, {3, 3}, {3, 5}, {3, 7}, {3, 9}, {4, 0}, {4, 2}, {4, 4}, {4, 
+             6}, {4, 8}, {5, 1}, {5, 3}, {5, 5}, {5, 7}, {5, 9}, {6, 0}, {6, 
+             2}, {6, 4}, {6, 6}, {6, 8}, {7, 1}, {7, 3}, {7, 5}, {7, 7}, {7, 
+             9}, {8, 0}, {8, 2}, {8, 4}, {8, 6}, {8, 8}, {9, 1}, {9, 3}, {9, 
+             5}, {9, 7}, {9, 9}}], ImageSize -> 30], $CellContext`meshpoint6 -> 
+          Graphics[
+            Point[{{0, 5}, {0, 6}, {0, 7}, {0, 8}, {1, 5}, {1, 6}, {1, 7}, {2,
+              5}, {2, 6}, {2, 7}, {3, 4}, {3, 5}, {3, 6}, {3, 7}, {4, 3}, {4, 
+             4}, {4, 5}, {4, 6}, {5, 0}, {5, 1}, {5, 2}, {5, 3}, {5, 4}, {5, 
+             5}, {5, 6}, {6, 0}, {6, 1}, {6, 2}, {6, 3}, {6, 4}, {6, 5}, {7, 
+             0}, {7, 1}, {7, 2}, {7, 3}, {8, 0}}], ImageSize -> 30]}, 
+         ControlPlacement -> Top, ControlType -> 
+         SetterBar}, {{$CellContext`zoom$$, 50}, 0.1, 100}}, 
+      "Options" :> {
+       TrackedSymbols -> {$CellContext`pos$$, $CellContext`M$$, \
+$CellContext`meshtype$$, $CellContext`zoom$$}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{394., {252., 257.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`G = 1; $CellContext`c = 
+        1; $CellContext`\[Alpha]map = 
+        With[{$CellContext`G$ = $CellContext`G, $CellContext`c$ = \
+$CellContext`c}, 
+          Compile[{{$CellContext`x, 
+             Blank[Real], 1}, {$CellContext`xL, 
+             Blank[Real], 1}, {$CellContext`M$$, 
+             Blank[Real]}}, 
+           
+           If[$CellContext`x == $CellContext`xL, {-100000., -100000.}, 
+            4 $CellContext`G$ ($CellContext`M$$/$CellContext`c$^2) \
+(($CellContext`x - $CellContext`xL)/
+             Norm[$CellContext`x - $CellContext`xL]^2)]]]; \
+$CellContext`mapgrid = Compile[{{$CellContext`x, 
+            Blank[Real], 3}, {$CellContext`xL, 
+            Blank[Real], 1}, {$CellContext`M$$, 
+            Blank[Real]}}, 
+          
+          Map[$CellContext`\[Alpha]map[#, $CellContext`xL, $CellContext`M$$]& \
+, $CellContext`x, {2}]]; $CellContext`lensmap[
+          Pattern[$CellContext`xL, 
+           Blank[]], 
+          Pattern[$CellContext`M, 
+           Blank[]], 
+          Pattern[$CellContext`meshtype, 
+           Blank[]]] := 
+        Module[{$CellContext`grid, $CellContext`delta}, $CellContext`grid = 
+           Outer[List, 
+             Range[-15., 15.], 
+             Range[-15., 
+              15.]]; $CellContext`delta = $CellContext`grid - \
+$CellContext`mapgrid[$CellContext`grid, $CellContext`xL, $CellContext`M]; {
+           Black, 
+            $CellContext`meshtype[
+             Flatten[$CellContext`delta, 1], 
+             Flatten[$CellContext`grid, 1]], 
+            $CellContext`hole[$CellContext`xL, $CellContext`xL]}]; \
+$CellContext`hole[{
+           Pattern[$CellContext`x, 
+            Blank[]], 
+           Pattern[$CellContext`y, 
+            Blank[]]}, {
+           Pattern[$CellContext`i, 
+            Blank[]], 
+           Pattern[$CellContext`j, 
+            Blank[]]}] := {Brown, 
+          Point[{$CellContext`x, $CellContext`y}]}; $CellContext`pointmesh[
+          Pattern[$CellContext`size, 
+           Blank[]], 
+          Pattern[$CellContext`meshtype, 
+           Blank[]]] := ($CellContext`meshtype[#, #]& )[
+          Flatten[
+           Outer[List, 
+            Range[0, $CellContext`size], 
+            Range[0, $CellContext`size]], 1]]; $CellContext`meshpoint1[
+          Pattern[$CellContext`image, 
+           Blank[]], 
+          Pattern[$CellContext`preimage, 
+           Blank[]]] := Point[
+          Pick[$CellContext`image, 
+           Apply[
+            Function[{$CellContext`i, $CellContext`j}, 
+             Or[
+             Mod[$CellContext`i, 3] == 0, Mod[$CellContext`j, 3] == 
+              0]], $CellContext`preimage, {1}]]]; $CellContext`meshpoint2[
+          Pattern[$CellContext`image, 
+           Blank[]], 
+          Pattern[$CellContext`preimage, 
+           Blank[]]] := Point[
+          Pick[$CellContext`image, 
+           Apply[
+            
+            Function[{$CellContext`i, $CellContext`j}, 
+             Mod[$CellContext`i + $CellContext`j, 3] == 
+             0], $CellContext`preimage, {1}]]]; $CellContext`meshpoint3[
+          Pattern[$CellContext`image, 
+           Blank[]], 
+          Pattern[$CellContext`preimage, 
+           Blank[]]] := Point[
+          Pick[$CellContext`image, 
+           Apply[
+            
+            Function[{$CellContext`i, $CellContext`j}, Mod[$CellContext`j, 2] == 
+             0], $CellContext`preimage, {1}]]]; $CellContext`meshpoint4[
+          Pattern[$CellContext`image, 
+           Blank[]], 
+          Pattern[$CellContext`preimage, 
+           Blank[]]] := Point[
+          Pick[$CellContext`image, 
+           Apply[
+            
+            Function[{$CellContext`i, $CellContext`j}, Mod[$CellContext`i, 2] == 
+             0], $CellContext`preimage, {1}]]]; $CellContext`meshpoint5[
+          Pattern[$CellContext`image, 
+           Blank[]], 
+          Pattern[$CellContext`preimage, 
+           Blank[]]] := Point[
+          Pick[$CellContext`image, 
+           Apply[
+            
+            Function[{$CellContext`i, $CellContext`j}, 
+             Mod[$CellContext`i + $CellContext`j, 2] == 
+             0], $CellContext`preimage, {1}]]]; $CellContext`meshpoint6[
+          Pattern[$CellContext`image, 
+           Blank[]], 
+          Pattern[$CellContext`preimage, 
+           Blank[]]] := Point[
+          Pick[$CellContext`image, 
+           Apply[
+            
+            Function[{$CellContext`i, $CellContext`j}, 
+             5^2 <= $CellContext`i^2 + $CellContext`j^2 <= 
+             8^2], $CellContext`preimage, {1}]]]; Null}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->506581598]
+}, {2}]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell["\<\
+Move a point source lens of a given mass over different types of grids to see \
+the effects of gravitational lensing.\
+\>", "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, 3.36033362844219*^9, {3.36354774517982*^9, 
+   3.36354774633435*^9}},
+ CellID->1044312921]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`M$$ = 
+    65., $CellContext`meshtype$$ = $CellContext`meshpoint1, \
+$CellContext`pos$$ = {0, 0}, $CellContext`zoom$$ = 50, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`pos$$], {0, 0}, "lens position"}, {-75, -75}, {75, 
+      75}}, {{
+       Hold[$CellContext`M$$], 65., "mass of lens"}, 0.1, 200}, {{
+       Hold[$CellContext`meshtype$$], $CellContext`meshpoint1, 
+       "source grid"}, {$CellContext`meshpoint1 -> Graphics[
+         Point[{{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0, 
+          7}, {0, 8}, {0, 9}, {1, 0}, {1, 3}, {1, 6}, {1, 9}, {2, 0}, {2, 
+          3}, {2, 6}, {2, 9}, {3, 0}, {3, 1}, {3, 2}, {3, 3}, {3, 4}, {3, 
+          5}, {3, 6}, {3, 7}, {3, 8}, {3, 9}, {4, 0}, {4, 3}, {4, 6}, {4, 
+          9}, {5, 0}, {5, 3}, {5, 6}, {5, 9}, {6, 0}, {6, 1}, {6, 2}, {6, 
+          3}, {6, 4}, {6, 5}, {6, 6}, {6, 7}, {6, 8}, {6, 9}, {7, 0}, {7, 
+          3}, {7, 6}, {7, 9}, {8, 0}, {8, 3}, {8, 6}, {8, 9}, {9, 0}, {9, 
+          1}, {9, 2}, {9, 3}, {9, 4}, {9, 5}, {9, 6}, {9, 7}, {9, 8}, {9, 
+          9}}], ImageSize -> 30], $CellContext`meshpoint2 -> Graphics[
+         Point[{{0, 0}, {0, 3}, {0, 6}, {0, 9}, {1, 2}, {1, 5}, {1, 8}, {2, 
+          1}, {2, 4}, {2, 7}, {3, 0}, {3, 3}, {3, 6}, {3, 9}, {4, 2}, {4, 
+          5}, {4, 8}, {5, 1}, {5, 4}, {5, 7}, {6, 0}, {6, 3}, {6, 6}, {6, 
+          9}, {7, 2}, {7, 5}, {7, 8}, {8, 1}, {8, 4}, {8, 7}, {9, 0}, {9, 
+          3}, {9, 6}, {9, 9}}], ImageSize -> 30], $CellContext`meshpoint3 -> 
+       Graphics[
+         Point[{{0, 0}, {0, 2}, {0, 4}, {0, 6}, {0, 8}, {1, 0}, {1, 2}, {1, 
+          4}, {1, 6}, {1, 8}, {2, 0}, {2, 2}, {2, 4}, {2, 6}, {2, 8}, {3, 
+          0}, {3, 2}, {3, 4}, {3, 6}, {3, 8}, {4, 0}, {4, 2}, {4, 4}, {4, 
+          6}, {4, 8}, {5, 0}, {5, 2}, {5, 4}, {5, 6}, {5, 8}, {6, 0}, {6, 
+          2}, {6, 4}, {6, 6}, {6, 8}, {7, 0}, {7, 2}, {7, 4}, {7, 6}, {7, 
+          8}, {8, 0}, {8, 2}, {8, 4}, {8, 6}, {8, 8}, {9, 0}, {9, 2}, {9, 
+          4}, {9, 6}, {9, 8}}], ImageSize -> 30], $CellContext`meshpoint4 -> 
+       Graphics[
+         Point[{{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0, 
+          7}, {0, 8}, {0, 9}, {2, 0}, {2, 1}, {2, 2}, {2, 3}, {2, 4}, {2, 
+          5}, {2, 6}, {2, 7}, {2, 8}, {2, 9}, {4, 0}, {4, 1}, {4, 2}, {4, 
+          3}, {4, 4}, {4, 5}, {4, 6}, {4, 7}, {4, 8}, {4, 9}, {6, 0}, {6, 
+          1}, {6, 2}, {6, 3}, {6, 4}, {6, 5}, {6, 6}, {6, 7}, {6, 8}, {6, 
+          9}, {8, 0}, {8, 1}, {8, 2}, {8, 3}, {8, 4}, {8, 5}, {8, 6}, {8, 
+          7}, {8, 8}, {8, 9}}], ImageSize -> 30], $CellContext`meshpoint5 -> 
+       Graphics[
+         Point[{{0, 0}, {0, 2}, {0, 4}, {0, 6}, {0, 8}, {1, 1}, {1, 3}, {1, 
+          5}, {1, 7}, {1, 9}, {2, 0}, {2, 2}, {2, 4}, {2, 6}, {2, 8}, {3, 
+          1}, {3, 3}, {3, 5}, {3, 7}, {3, 9}, {4, 0}, {4, 2}, {4, 4}, {4, 
+          6}, {4, 8}, {5, 1}, {5, 3}, {5, 5}, {5, 7}, {5, 9}, {6, 0}, {6, 
+          2}, {6, 4}, {6, 6}, {6, 8}, {7, 1}, {7, 3}, {7, 5}, {7, 7}, {7, 
+          9}, {8, 0}, {8, 2}, {8, 4}, {8, 6}, {8, 8}, {9, 1}, {9, 3}, {9, 
+          5}, {9, 7}, {9, 9}}], ImageSize -> 30], $CellContext`meshpoint6 -> 
+       Graphics[
+         Point[{{0, 5}, {0, 6}, {0, 7}, {0, 8}, {1, 5}, {1, 6}, {1, 7}, {2, 
+          5}, {2, 6}, {2, 7}, {3, 4}, {3, 5}, {3, 6}, {3, 7}, {4, 3}, {4, 
+          4}, {4, 5}, {4, 6}, {5, 0}, {5, 1}, {5, 2}, {5, 3}, {5, 4}, {5, 
+          5}, {5, 6}, {6, 0}, {6, 1}, {6, 2}, {6, 3}, {6, 4}, {6, 5}, {7, 
+          0}, {7, 1}, {7, 2}, {7, 3}, {8, 0}}], ImageSize -> 30]}}, {{
+       Hold[$CellContext`zoom$$], 50}, 0.1, 100}}, Typeset`size$$ = {
+    350., {173., 177.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`pos$59839$$ = {0, 
+    0}, $CellContext`M$59840$$ = 0, $CellContext`meshtype$59841$$ = 
+    False, $CellContext`zoom$59842$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`M$$ = 
+        65., $CellContext`meshtype$$ = $CellContext`meshpoint1, \
+$CellContext`pos$$ = {0, 0}, $CellContext`zoom$$ = 50}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`pos$$, $CellContext`pos$59839$$, {0, 0}], 
+        Hold[$CellContext`M$$, $CellContext`M$59840$$, 0], 
+        Hold[$CellContext`meshtype$$, $CellContext`meshtype$59841$$, False], 
+        Hold[$CellContext`zoom$$, $CellContext`zoom$59842$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Quiet[
+        Graphics[{
+          PointSize[0.01], 
+          $CellContext`lensmap[$CellContext`pos$$, $CellContext`M$$, \
+$CellContext`meshtype$$]}, 
+         PlotRange -> {{-1, 1} $CellContext`zoom$$, {-1, 
+            1} $CellContext`zoom$$}, Epilog -> {
+           GrayLevel[0.3, 0.6], 
+           PointSize[0.01], 
+           Point[$CellContext`pos$$]}, ImageSize -> {350, 350}]], 
+      "Specifications" :> {{{$CellContext`pos$$, {0, 0}, 
+          "lens position"}, {-75, -75}, {75, 75}, ControlType -> Locator, 
+         Appearance -> Graphics[{
+            RGBColor[0.6, 0.4, 0.2], 
+            Disk[{0., 0.}]}, 
+           ImageSize -> {12., Automatic}]}, {{$CellContext`M$$, 65., 
+          "mass of lens"}, 0.1, 200, ControlPlacement -> 
+         Top}, {{$CellContext`meshtype$$, $CellContext`meshpoint1, 
+          "source grid"}, {$CellContext`meshpoint1 -> Graphics[
+            
+            Point[{{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0,
+              7}, {0, 8}, {0, 9}, {1, 0}, {1, 3}, {1, 6}, {1, 9}, {2, 0}, {2, 
+             3}, {2, 6}, {2, 9}, {3, 0}, {3, 1}, {3, 2}, {3, 3}, {3, 4}, {3, 
+             5}, {3, 6}, {3, 7}, {3, 8}, {3, 9}, {4, 0}, {4, 3}, {4, 6}, {4, 
+             9}, {5, 0}, {5, 3}, {5, 6}, {5, 9}, {6, 0}, {6, 1}, {6, 2}, {6, 
+             3}, {6, 4}, {6, 5}, {6, 6}, {6, 7}, {6, 8}, {6, 9}, {7, 0}, {7, 
+             3}, {7, 6}, {7, 9}, {8, 0}, {8, 3}, {8, 6}, {8, 9}, {9, 0}, {9, 
+             1}, {9, 2}, {9, 3}, {9, 4}, {9, 5}, {9, 6}, {9, 7}, {9, 8}, {9, 
+             9}}], ImageSize -> 30], $CellContext`meshpoint2 -> Graphics[
+            
+            Point[{{0, 0}, {0, 3}, {0, 6}, {0, 9}, {1, 2}, {1, 5}, {1, 8}, {2,
+              1}, {2, 4}, {2, 7}, {3, 0}, {3, 3}, {3, 6}, {3, 9}, {4, 2}, {4, 
+             5}, {4, 8}, {5, 1}, {5, 4}, {5, 7}, {6, 0}, {6, 3}, {6, 6}, {6, 
+             9}, {7, 2}, {7, 5}, {7, 8}, {8, 1}, {8, 4}, {8, 7}, {9, 0}, {9, 
+             3}, {9, 6}, {9, 9}}], ImageSize -> 30], $CellContext`meshpoint3 -> 
+          Graphics[
+            
+            Point[{{0, 0}, {0, 2}, {0, 4}, {0, 6}, {0, 8}, {1, 0}, {1, 2}, {1,
+              4}, {1, 6}, {1, 8}, {2, 0}, {2, 2}, {2, 4}, {2, 6}, {2, 8}, {3, 
+             0}, {3, 2}, {3, 4}, {3, 6}, {3, 8}, {4, 0}, {4, 2}, {4, 4}, {4, 
+             6}, {4, 8}, {5, 0}, {5, 2}, {5, 4}, {5, 6}, {5, 8}, {6, 0}, {6, 
+             2}, {6, 4}, {6, 6}, {6, 8}, {7, 0}, {7, 2}, {7, 4}, {7, 6}, {7, 
+             8}, {8, 0}, {8, 2}, {8, 4}, {8, 6}, {8, 8}, {9, 0}, {9, 2}, {9, 
+             4}, {9, 6}, {9, 8}}], ImageSize -> 30], $CellContext`meshpoint4 -> 
+          Graphics[
+            
+            Point[{{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0,
+              7}, {0, 8}, {0, 9}, {2, 0}, {2, 1}, {2, 2}, {2, 3}, {2, 4}, {2, 
+             5}, {2, 6}, {2, 7}, {2, 8}, {2, 9}, {4, 0}, {4, 1}, {4, 2}, {4, 
+             3}, {4, 4}, {4, 5}, {4, 6}, {4, 7}, {4, 8}, {4, 9}, {6, 0}, {6, 
+             1}, {6, 2}, {6, 3}, {6, 4}, {6, 5}, {6, 6}, {6, 7}, {6, 8}, {6, 
+             9}, {8, 0}, {8, 1}, {8, 2}, {8, 3}, {8, 4}, {8, 5}, {8, 6}, {8, 
+             7}, {8, 8}, {8, 9}}], ImageSize -> 30], $CellContext`meshpoint5 -> 
+          Graphics[
+            
+            Point[{{0, 0}, {0, 2}, {0, 4}, {0, 6}, {0, 8}, {1, 1}, {1, 3}, {1,
+              5}, {1, 7}, {1, 9}, {2, 0}, {2, 2}, {2, 4}, {2, 6}, {2, 8}, {3, 
+             1}, {3, 3}, {3, 5}, {3, 7}, {3, 9}, {4, 0}, {4, 2}, {4, 4}, {4, 
+             6}, {4, 8}, {5, 1}, {5, 3}, {5, 5}, {5, 7}, {5, 9}, {6, 0}, {6, 
+             2}, {6, 4}, {6, 6}, {6, 8}, {7, 1}, {7, 3}, {7, 5}, {7, 7}, {7, 
+             9}, {8, 0}, {8, 2}, {8, 4}, {8, 6}, {8, 8}, {9, 1}, {9, 3}, {9, 
+             5}, {9, 7}, {9, 9}}], ImageSize -> 30], $CellContext`meshpoint6 -> 
+          Graphics[
+            Point[{{0, 5}, {0, 6}, {0, 7}, {0, 8}, {1, 5}, {1, 6}, {1, 7}, {2,
+              5}, {2, 6}, {2, 7}, {3, 4}, {3, 5}, {3, 6}, {3, 7}, {4, 3}, {4, 
+             4}, {4, 5}, {4, 6}, {5, 0}, {5, 1}, {5, 2}, {5, 3}, {5, 4}, {5, 
+             5}, {5, 6}, {6, 0}, {6, 1}, {6, 2}, {6, 3}, {6, 4}, {6, 5}, {7, 
+             0}, {7, 1}, {7, 2}, {7, 3}, {8, 0}}], ImageSize -> 30]}, 
+         ControlPlacement -> Top, ControlType -> 
+         SetterBar}, {{$CellContext`zoom$$, 50}, 0.1, 100}}, 
+      "Options" :> {
+       TrackedSymbols -> {$CellContext`pos$$, $CellContext`M$$, \
+$CellContext`meshtype$$, $CellContext`zoom$$}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{394., {252., 257.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`G = 1; $CellContext`c = 
+        1; $CellContext`\[Alpha]map = 
+        With[{$CellContext`G$ = $CellContext`G, $CellContext`c$ = \
+$CellContext`c}, 
+          Compile[{{$CellContext`x, 
+             Blank[Real], 1}, {$CellContext`xL, 
+             Blank[Real], 1}, {$CellContext`M$$, 
+             Blank[Real]}}, 
+           
+           If[$CellContext`x == $CellContext`xL, {-100000., -100000.}, 
+            4 $CellContext`G$ ($CellContext`M$$/$CellContext`c$^2) \
+(($CellContext`x - $CellContext`xL)/
+             Norm[$CellContext`x - $CellContext`xL]^2)]]]; \
+$CellContext`mapgrid = Compile[{{$CellContext`x, 
+            Blank[Real], 3}, {$CellContext`xL, 
+            Blank[Real], 1}, {$CellContext`M$$, 
+            Blank[Real]}}, 
+          
+          Map[$CellContext`\[Alpha]map[#, $CellContext`xL, $CellContext`M$$]& \
+, $CellContext`x, {2}]]; $CellContext`lensmap[
+          Pattern[$CellContext`xL, 
+           Blank[]], 
+          Pattern[$CellContext`M, 
+           Blank[]], 
+          Pattern[$CellContext`meshtype, 
+           Blank[]]] := 
+        Module[{$CellContext`grid, $CellContext`delta}, $CellContext`grid = 
+           Outer[List, 
+             Range[-15., 15.], 
+             Range[-15., 
+              15.]]; $CellContext`delta = $CellContext`grid - \
+$CellContext`mapgrid[$CellContext`grid, $CellContext`xL, $CellContext`M]; {
+           Black, 
+            $CellContext`meshtype[
+             Flatten[$CellContext`delta, 1], 
+             Flatten[$CellContext`grid, 1]], 
+            $CellContext`hole[$CellContext`xL, $CellContext`xL]}]; \
+$CellContext`hole[{
+           Pattern[$CellContext`x, 
+            Blank[]], 
+           Pattern[$CellContext`y, 
+            Blank[]]}, {
+           Pattern[$CellContext`i, 
+            Blank[]], 
+           Pattern[$CellContext`j, 
+            Blank[]]}] := {Brown, 
+          Point[{$CellContext`x, $CellContext`y}]}; $CellContext`pointmesh[
+          Pattern[$CellContext`size, 
+           Blank[]], 
+          Pattern[$CellContext`meshtype, 
+           Blank[]]] := ($CellContext`meshtype[#, #]& )[
+          Flatten[
+           Outer[List, 
+            Range[0, $CellContext`size], 
+            Range[0, $CellContext`size]], 1]]; $CellContext`meshpoint1[
+          Pattern[$CellContext`image, 
+           Blank[]], 
+          Pattern[$CellContext`preimage, 
+           Blank[]]] := Point[
+          Pick[$CellContext`image, 
+           Apply[
+            Function[{$CellContext`i, $CellContext`j}, 
+             Or[
+             Mod[$CellContext`i, 3] == 0, Mod[$CellContext`j, 3] == 
+              0]], $CellContext`preimage, {1}]]]; $CellContext`meshpoint2[
+          Pattern[$CellContext`image, 
+           Blank[]], 
+          Pattern[$CellContext`preimage, 
+           Blank[]]] := Point[
+          Pick[$CellContext`image, 
+           Apply[
+            
+            Function[{$CellContext`i, $CellContext`j}, 
+             Mod[$CellContext`i + $CellContext`j, 3] == 
+             0], $CellContext`preimage, {1}]]]; $CellContext`meshpoint3[
+          Pattern[$CellContext`image, 
+           Blank[]], 
+          Pattern[$CellContext`preimage, 
+           Blank[]]] := Point[
+          Pick[$CellContext`image, 
+           Apply[
+            
+            Function[{$CellContext`i, $CellContext`j}, Mod[$CellContext`j, 2] == 
+             0], $CellContext`preimage, {1}]]]; $CellContext`meshpoint4[
+          Pattern[$CellContext`image, 
+           Blank[]], 
+          Pattern[$CellContext`preimage, 
+           Blank[]]] := Point[
+          Pick[$CellContext`image, 
+           Apply[
+            
+            Function[{$CellContext`i, $CellContext`j}, Mod[$CellContext`i, 2] == 
+             0], $CellContext`preimage, {1}]]]; $CellContext`meshpoint5[
+          Pattern[$CellContext`image, 
+           Blank[]], 
+          Pattern[$CellContext`preimage, 
+           Blank[]]] := Point[
+          Pick[$CellContext`image, 
+           Apply[
+            
+            Function[{$CellContext`i, $CellContext`j}, 
+             Mod[$CellContext`i + $CellContext`j, 2] == 
+             0], $CellContext`preimage, {1}]]]; $CellContext`meshpoint6[
+          Pattern[$CellContext`image, 
+           Blank[]], 
+          Pattern[$CellContext`preimage, 
+           Blank[]]] := Point[
+          Pick[$CellContext`image, 
+           Apply[
+            
+            Function[{$CellContext`i, $CellContext`j}, 
+             5^2 <= $CellContext`i^2 + $CellContext`j^2 <= 
+             8^2], $CellContext`preimage, {1}]]]; Null}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->270824293]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`M$$ = 
+    44, $CellContext`meshtype$$ = $CellContext`meshpoint1, $CellContext`pos$$ \
+= {0, 0}, $CellContext`zoom$$ = 6.7, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`pos$$], {0, 0}, "lens position"}, {-75, -75}, {75, 
+      75}}, {{
+       Hold[$CellContext`M$$], 44, "mass of lens"}, 0.1, 200}, {{
+       Hold[$CellContext`meshtype$$], $CellContext`meshpoint1, 
+       "source grid"}, {$CellContext`meshpoint1 -> Graphics[
+         Point[{{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0, 
+          7}, {0, 8}, {0, 9}, {1, 0}, {1, 3}, {1, 6}, {1, 9}, {2, 0}, {2, 
+          3}, {2, 6}, {2, 9}, {3, 0}, {3, 1}, {3, 2}, {3, 3}, {3, 4}, {3, 
+          5}, {3, 6}, {3, 7}, {3, 8}, {3, 9}, {4, 0}, {4, 3}, {4, 6}, {4, 
+          9}, {5, 0}, {5, 3}, {5, 6}, {5, 9}, {6, 0}, {6, 1}, {6, 2}, {6, 
+          3}, {6, 4}, {6, 5}, {6, 6}, {6, 7}, {6, 8}, {6, 9}, {7, 0}, {7, 
+          3}, {7, 6}, {7, 9}, {8, 0}, {8, 3}, {8, 6}, {8, 9}, {9, 0}, {9, 
+          1}, {9, 2}, {9, 3}, {9, 4}, {9, 5}, {9, 6}, {9, 7}, {9, 8}, {9, 
+          9}}], ImageSize -> 30], $CellContext`meshpoint2 -> Graphics[
+         Point[{{0, 0}, {0, 3}, {0, 6}, {0, 9}, {1, 2}, {1, 5}, {1, 8}, {2, 
+          1}, {2, 4}, {2, 7}, {3, 0}, {3, 3}, {3, 6}, {3, 9}, {4, 2}, {4, 
+          5}, {4, 8}, {5, 1}, {5, 4}, {5, 7}, {6, 0}, {6, 3}, {6, 6}, {6, 
+          9}, {7, 2}, {7, 5}, {7, 8}, {8, 1}, {8, 4}, {8, 7}, {9, 0}, {9, 
+          3}, {9, 6}, {9, 9}}], ImageSize -> 30], $CellContext`meshpoint3 -> 
+       Graphics[
+         Point[{{0, 0}, {0, 2}, {0, 4}, {0, 6}, {0, 8}, {1, 0}, {1, 2}, {1, 
+          4}, {1, 6}, {1, 8}, {2, 0}, {2, 2}, {2, 4}, {2, 6}, {2, 8}, {3, 
+          0}, {3, 2}, {3, 4}, {3, 6}, {3, 8}, {4, 0}, {4, 2}, {4, 4}, {4, 
+          6}, {4, 8}, {5, 0}, {5, 2}, {5, 4}, {5, 6}, {5, 8}, {6, 0}, {6, 
+          2}, {6, 4}, {6, 6}, {6, 8}, {7, 0}, {7, 2}, {7, 4}, {7, 6}, {7, 
+          8}, {8, 0}, {8, 2}, {8, 4}, {8, 6}, {8, 8}, {9, 0}, {9, 2}, {9, 
+          4}, {9, 6}, {9, 8}}], ImageSize -> 30], $CellContext`meshpoint4 -> 
+       Graphics[
+         Point[{{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0, 
+          7}, {0, 8}, {0, 9}, {2, 0}, {2, 1}, {2, 2}, {2, 3}, {2, 4}, {2, 
+          5}, {2, 6}, {2, 7}, {2, 8}, {2, 9}, {4, 0}, {4, 1}, {4, 2}, {4, 
+          3}, {4, 4}, {4, 5}, {4, 6}, {4, 7}, {4, 8}, {4, 9}, {6, 0}, {6, 
+          1}, {6, 2}, {6, 3}, {6, 4}, {6, 5}, {6, 6}, {6, 7}, {6, 8}, {6, 
+          9}, {8, 0}, {8, 1}, {8, 2}, {8, 3}, {8, 4}, {8, 5}, {8, 6}, {8, 
+          7}, {8, 8}, {8, 9}}], ImageSize -> 30], $CellContext`meshpoint5 -> 
+       Graphics[
+         Point[{{0, 0}, {0, 2}, {0, 4}, {0, 6}, {0, 8}, {1, 1}, {1, 3}, {1, 
+          5}, {1, 7}, {1, 9}, {2, 0}, {2, 2}, {2, 4}, {2, 6}, {2, 8}, {3, 
+          1}, {3, 3}, {3, 5}, {3, 7}, {3, 9}, {4, 0}, {4, 2}, {4, 4}, {4, 
+          6}, {4, 8}, {5, 1}, {5, 3}, {5, 5}, {5, 7}, {5, 9}, {6, 0}, {6, 
+          2}, {6, 4}, {6, 6}, {6, 8}, {7, 1}, {7, 3}, {7, 5}, {7, 7}, {7, 
+          9}, {8, 0}, {8, 2}, {8, 4}, {8, 6}, {8, 8}, {9, 1}, {9, 3}, {9, 
+          5}, {9, 7}, {9, 9}}], ImageSize -> 30], $CellContext`meshpoint6 -> 
+       Graphics[
+         Point[{{0, 5}, {0, 6}, {0, 7}, {0, 8}, {1, 5}, {1, 6}, {1, 7}, {2, 
+          5}, {2, 6}, {2, 7}, {3, 4}, {3, 5}, {3, 6}, {3, 7}, {4, 3}, {4, 
+          4}, {4, 5}, {4, 6}, {5, 0}, {5, 1}, {5, 2}, {5, 3}, {5, 4}, {5, 
+          5}, {5, 6}, {6, 0}, {6, 1}, {6, 2}, {6, 3}, {6, 4}, {6, 5}, {7, 
+          0}, {7, 1}, {7, 2}, {7, 3}, {8, 0}}], ImageSize -> 30]}}, {{
+       Hold[$CellContext`zoom$$], 6.7}, 0.1, 100}}, Typeset`size$$ = {
+    350., {173., 177.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`pos$59908$$ = {0, 
+    0}, $CellContext`M$59909$$ = 0, $CellContext`meshtype$59910$$ = 
+    False, $CellContext`zoom$59911$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`M$$ = 
+        44, $CellContext`meshtype$$ = $CellContext`meshpoint1, \
+$CellContext`pos$$ = {0, 0}, $CellContext`zoom$$ = 6.7}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`pos$$, $CellContext`pos$59908$$, {0, 0}], 
+        Hold[$CellContext`M$$, $CellContext`M$59909$$, 0], 
+        Hold[$CellContext`meshtype$$, $CellContext`meshtype$59910$$, False], 
+        Hold[$CellContext`zoom$$, $CellContext`zoom$59911$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Quiet[
+        Graphics[{
+          PointSize[0.01], 
+          $CellContext`lensmap[$CellContext`pos$$, $CellContext`M$$, \
+$CellContext`meshtype$$]}, 
+         PlotRange -> {{-1, 1} $CellContext`zoom$$, {-1, 
+            1} $CellContext`zoom$$}, Epilog -> {
+           GrayLevel[0.3, 0.6], 
+           PointSize[0.01], 
+           Point[$CellContext`pos$$]}, ImageSize -> {350, 350}]], 
+      "Specifications" :> {{{$CellContext`pos$$, {0, 0}, 
+          "lens position"}, {-75, -75}, {75, 75}, ControlType -> Locator, 
+         Appearance -> Graphics[{
+            RGBColor[0.6, 0.4, 0.2], 
+            Disk[{0., 0.}]}, 
+           ImageSize -> {12., Automatic}]}, {{$CellContext`M$$, 44, 
+          "mass of lens"}, 0.1, 200, ControlPlacement -> 
+         Top}, {{$CellContext`meshtype$$, $CellContext`meshpoint1, 
+          "source grid"}, {$CellContext`meshpoint1 -> Graphics[
+            
+            Point[{{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0,
+              7}, {0, 8}, {0, 9}, {1, 0}, {1, 3}, {1, 6}, {1, 9}, {2, 0}, {2, 
+             3}, {2, 6}, {2, 9}, {3, 0}, {3, 1}, {3, 2}, {3, 3}, {3, 4}, {3, 
+             5}, {3, 6}, {3, 7}, {3, 8}, {3, 9}, {4, 0}, {4, 3}, {4, 6}, {4, 
+             9}, {5, 0}, {5, 3}, {5, 6}, {5, 9}, {6, 0}, {6, 1}, {6, 2}, {6, 
+             3}, {6, 4}, {6, 5}, {6, 6}, {6, 7}, {6, 8}, {6, 9}, {7, 0}, {7, 
+             3}, {7, 6}, {7, 9}, {8, 0}, {8, 3}, {8, 6}, {8, 9}, {9, 0}, {9, 
+             1}, {9, 2}, {9, 3}, {9, 4}, {9, 5}, {9, 6}, {9, 7}, {9, 8}, {9, 
+             9}}], ImageSize -> 30], $CellContext`meshpoint2 -> Graphics[
+            
+            Point[{{0, 0}, {0, 3}, {0, 6}, {0, 9}, {1, 2}, {1, 5}, {1, 8}, {2,
+              1}, {2, 4}, {2, 7}, {3, 0}, {3, 3}, {3, 6}, {3, 9}, {4, 2}, {4, 
+             5}, {4, 8}, {5, 1}, {5, 4}, {5, 7}, {6, 0}, {6, 3}, {6, 6}, {6, 
+             9}, {7, 2}, {7, 5}, {7, 8}, {8, 1}, {8, 4}, {8, 7}, {9, 0}, {9, 
+             3}, {9, 6}, {9, 9}}], ImageSize -> 30], $CellContext`meshpoint3 -> 
+          Graphics[
+            
+            Point[{{0, 0}, {0, 2}, {0, 4}, {0, 6}, {0, 8}, {1, 0}, {1, 2}, {1,
+              4}, {1, 6}, {1, 8}, {2, 0}, {2, 2}, {2, 4}, {2, 6}, {2, 8}, {3, 
+             0}, {3, 2}, {3, 4}, {3, 6}, {3, 8}, {4, 0}, {4, 2}, {4, 4}, {4, 
+             6}, {4, 8}, {5, 0}, {5, 2}, {5, 4}, {5, 6}, {5, 8}, {6, 0}, {6, 
+             2}, {6, 4}, {6, 6}, {6, 8}, {7, 0}, {7, 2}, {7, 4}, {7, 6}, {7, 
+             8}, {8, 0}, {8, 2}, {8, 4}, {8, 6}, {8, 8}, {9, 0}, {9, 2}, {9, 
+             4}, {9, 6}, {9, 8}}], ImageSize -> 30], $CellContext`meshpoint4 -> 
+          Graphics[
+            
+            Point[{{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0,
+              7}, {0, 8}, {0, 9}, {2, 0}, {2, 1}, {2, 2}, {2, 3}, {2, 4}, {2, 
+             5}, {2, 6}, {2, 7}, {2, 8}, {2, 9}, {4, 0}, {4, 1}, {4, 2}, {4, 
+             3}, {4, 4}, {4, 5}, {4, 6}, {4, 7}, {4, 8}, {4, 9}, {6, 0}, {6, 
+             1}, {6, 2}, {6, 3}, {6, 4}, {6, 5}, {6, 6}, {6, 7}, {6, 8}, {6, 
+             9}, {8, 0}, {8, 1}, {8, 2}, {8, 3}, {8, 4}, {8, 5}, {8, 6}, {8, 
+             7}, {8, 8}, {8, 9}}], ImageSize -> 30], $CellContext`meshpoint5 -> 
+          Graphics[
+            
+            Point[{{0, 0}, {0, 2}, {0, 4}, {0, 6}, {0, 8}, {1, 1}, {1, 3}, {1,
+              5}, {1, 7}, {1, 9}, {2, 0}, {2, 2}, {2, 4}, {2, 6}, {2, 8}, {3, 
+             1}, {3, 3}, {3, 5}, {3, 7}, {3, 9}, {4, 0}, {4, 2}, {4, 4}, {4, 
+             6}, {4, 8}, {5, 1}, {5, 3}, {5, 5}, {5, 7}, {5, 9}, {6, 0}, {6, 
+             2}, {6, 4}, {6, 6}, {6, 8}, {7, 1}, {7, 3}, {7, 5}, {7, 7}, {7, 
+             9}, {8, 0}, {8, 2}, {8, 4}, {8, 6}, {8, 8}, {9, 1}, {9, 3}, {9, 
+             5}, {9, 7}, {9, 9}}], ImageSize -> 30], $CellContext`meshpoint6 -> 
+          Graphics[
+            Point[{{0, 5}, {0, 6}, {0, 7}, {0, 8}, {1, 5}, {1, 6}, {1, 7}, {2,
+              5}, {2, 6}, {2, 7}, {3, 4}, {3, 5}, {3, 6}, {3, 7}, {4, 3}, {4, 
+             4}, {4, 5}, {4, 6}, {5, 0}, {5, 1}, {5, 2}, {5, 3}, {5, 4}, {5, 
+             5}, {5, 6}, {6, 0}, {6, 1}, {6, 2}, {6, 3}, {6, 4}, {6, 5}, {7, 
+             0}, {7, 1}, {7, 2}, {7, 3}, {8, 0}}], ImageSize -> 30]}, 
+         ControlPlacement -> Top, ControlType -> 
+         SetterBar}, {{$CellContext`zoom$$, 6.7}, 0.1, 100}}, 
+      "Options" :> {
+       TrackedSymbols -> {$CellContext`pos$$, $CellContext`M$$, \
+$CellContext`meshtype$$, $CellContext`zoom$$}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{394., {252., 257.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`G = 1; $CellContext`c = 
+        1; $CellContext`\[Alpha]map = 
+        With[{$CellContext`G$ = $CellContext`G, $CellContext`c$ = \
+$CellContext`c}, 
+          Compile[{{$CellContext`x, 
+             Blank[Real], 1}, {$CellContext`xL, 
+             Blank[Real], 1}, {$CellContext`M$$, 
+             Blank[Real]}}, 
+           
+           If[$CellContext`x == $CellContext`xL, {-100000., -100000.}, 
+            4 $CellContext`G$ ($CellContext`M$$/$CellContext`c$^2) \
+(($CellContext`x - $CellContext`xL)/
+             Norm[$CellContext`x - $CellContext`xL]^2)]]]; \
+$CellContext`mapgrid = Compile[{{$CellContext`x, 
+            Blank[Real], 3}, {$CellContext`xL, 
+            Blank[Real], 1}, {$CellContext`M$$, 
+            Blank[Real]}}, 
+          
+          Map[$CellContext`\[Alpha]map[#, $CellContext`xL, $CellContext`M$$]& \
+, $CellContext`x, {2}]]; $CellContext`lensmap[
+          Pattern[$CellContext`xL, 
+           Blank[]], 
+          Pattern[$CellContext`M, 
+           Blank[]], 
+          Pattern[$CellContext`meshtype, 
+           Blank[]]] := 
+        Module[{$CellContext`grid, $CellContext`delta}, $CellContext`grid = 
+           Outer[List, 
+             Range[-15., 15.], 
+             Range[-15., 
+              15.]]; $CellContext`delta = $CellContext`grid - \
+$CellContext`mapgrid[$CellContext`grid, $CellContext`xL, $CellContext`M]; {
+           Black, 
+            $CellContext`meshtype[
+             Flatten[$CellContext`delta, 1], 
+             Flatten[$CellContext`grid, 1]], 
+            $CellContext`hole[$CellContext`xL, $CellContext`xL]}]; \
+$CellContext`hole[{
+           Pattern[$CellContext`x, 
+            Blank[]], 
+           Pattern[$CellContext`y, 
+            Blank[]]}, {
+           Pattern[$CellContext`i, 
+            Blank[]], 
+           Pattern[$CellContext`j, 
+            Blank[]]}] := {Brown, 
+          Point[{$CellContext`x, $CellContext`y}]}; $CellContext`pointmesh[
+          Pattern[$CellContext`size, 
+           Blank[]], 
+          Pattern[$CellContext`meshtype, 
+           Blank[]]] := ($CellContext`meshtype[#, #]& )[
+          Flatten[
+           Outer[List, 
+            Range[0, $CellContext`size], 
+            Range[0, $CellContext`size]], 1]]; $CellContext`meshpoint1[
+          Pattern[$CellContext`image, 
+           Blank[]], 
+          Pattern[$CellContext`preimage, 
+           Blank[]]] := Point[
+          Pick[$CellContext`image, 
+           Apply[
+            Function[{$CellContext`i, $CellContext`j}, 
+             Or[
+             Mod[$CellContext`i, 3] == 0, Mod[$CellContext`j, 3] == 
+              0]], $CellContext`preimage, {1}]]]; $CellContext`meshpoint2[
+          Pattern[$CellContext`image, 
+           Blank[]], 
+          Pattern[$CellContext`preimage, 
+           Blank[]]] := Point[
+          Pick[$CellContext`image, 
+           Apply[
+            
+            Function[{$CellContext`i, $CellContext`j}, 
+             Mod[$CellContext`i + $CellContext`j, 3] == 
+             0], $CellContext`preimage, {1}]]]; $CellContext`meshpoint3[
+          Pattern[$CellContext`image, 
+           Blank[]], 
+          Pattern[$CellContext`preimage, 
+           Blank[]]] := Point[
+          Pick[$CellContext`image, 
+           Apply[
+            
+            Function[{$CellContext`i, $CellContext`j}, Mod[$CellContext`j, 2] == 
+             0], $CellContext`preimage, {1}]]]; $CellContext`meshpoint4[
+          Pattern[$CellContext`image, 
+           Blank[]], 
+          Pattern[$CellContext`preimage, 
+           Blank[]]] := Point[
+          Pick[$CellContext`image, 
+           Apply[
+            
+            Function[{$CellContext`i, $CellContext`j}, Mod[$CellContext`i, 2] == 
+             0], $CellContext`preimage, {1}]]]; $CellContext`meshpoint5[
+          Pattern[$CellContext`image, 
+           Blank[]], 
+          Pattern[$CellContext`preimage, 
+           Blank[]]] := Point[
+          Pick[$CellContext`image, 
+           Apply[
+            
+            Function[{$CellContext`i, $CellContext`j}, 
+             Mod[$CellContext`i + $CellContext`j, 2] == 
+             0], $CellContext`preimage, {1}]]]; $CellContext`meshpoint6[
+          Pattern[$CellContext`image, 
+           Blank[]], 
+          Pattern[$CellContext`preimage, 
+           Blank[]]] := Point[
+          Pick[$CellContext`image, 
+           Apply[
+            
+            Function[{$CellContext`i, $CellContext`j}, 
+             5^2 <= $CellContext`i^2 + $CellContext`j^2 <= 
+             8^2], $CellContext`preimage, {1}]]]; Null}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->566631555],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`M$$ = 
+    11.2, $CellContext`meshtype$$ = $CellContext`meshpoint6, \
+$CellContext`pos$$ = {-4.799999999999997, -4.599999999999994}, \
+$CellContext`zoom$$ = 42.6, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`pos$$], {-4.799999999999997, -4.599999999999994}, 
+       "lens position"}, {-75, -75}, {75, 75}}, {{
+       Hold[$CellContext`M$$], 11.2, "mass of lens"}, 0.1, 200}, {{
+       Hold[$CellContext`meshtype$$], $CellContext`meshpoint6, 
+       "source grid"}, {$CellContext`meshpoint1 -> Graphics[
+         Point[{{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0, 
+          7}, {0, 8}, {0, 9}, {1, 0}, {1, 3}, {1, 6}, {1, 9}, {2, 0}, {2, 
+          3}, {2, 6}, {2, 9}, {3, 0}, {3, 1}, {3, 2}, {3, 3}, {3, 4}, {3, 
+          5}, {3, 6}, {3, 7}, {3, 8}, {3, 9}, {4, 0}, {4, 3}, {4, 6}, {4, 
+          9}, {5, 0}, {5, 3}, {5, 6}, {5, 9}, {6, 0}, {6, 1}, {6, 2}, {6, 
+          3}, {6, 4}, {6, 5}, {6, 6}, {6, 7}, {6, 8}, {6, 9}, {7, 0}, {7, 
+          3}, {7, 6}, {7, 9}, {8, 0}, {8, 3}, {8, 6}, {8, 9}, {9, 0}, {9, 
+          1}, {9, 2}, {9, 3}, {9, 4}, {9, 5}, {9, 6}, {9, 7}, {9, 8}, {9, 
+          9}}], ImageSize -> 30], $CellContext`meshpoint2 -> Graphics[
+         Point[{{0, 0}, {0, 3}, {0, 6}, {0, 9}, {1, 2}, {1, 5}, {1, 8}, {2, 
+          1}, {2, 4}, {2, 7}, {3, 0}, {3, 3}, {3, 6}, {3, 9}, {4, 2}, {4, 
+          5}, {4, 8}, {5, 1}, {5, 4}, {5, 7}, {6, 0}, {6, 3}, {6, 6}, {6, 
+          9}, {7, 2}, {7, 5}, {7, 8}, {8, 1}, {8, 4}, {8, 7}, {9, 0}, {9, 
+          3}, {9, 6}, {9, 9}}], ImageSize -> 30], $CellContext`meshpoint3 -> 
+       Graphics[
+         Point[{{0, 0}, {0, 2}, {0, 4}, {0, 6}, {0, 8}, {1, 0}, {1, 2}, {1, 
+          4}, {1, 6}, {1, 8}, {2, 0}, {2, 2}, {2, 4}, {2, 6}, {2, 8}, {3, 
+          0}, {3, 2}, {3, 4}, {3, 6}, {3, 8}, {4, 0}, {4, 2}, {4, 4}, {4, 
+          6}, {4, 8}, {5, 0}, {5, 2}, {5, 4}, {5, 6}, {5, 8}, {6, 0}, {6, 
+          2}, {6, 4}, {6, 6}, {6, 8}, {7, 0}, {7, 2}, {7, 4}, {7, 6}, {7, 
+          8}, {8, 0}, {8, 2}, {8, 4}, {8, 6}, {8, 8}, {9, 0}, {9, 2}, {9, 
+          4}, {9, 6}, {9, 8}}], ImageSize -> 30], $CellContext`meshpoint4 -> 
+       Graphics[
+         Point[{{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0, 
+          7}, {0, 8}, {0, 9}, {2, 0}, {2, 1}, {2, 2}, {2, 3}, {2, 4}, {2, 
+          5}, {2, 6}, {2, 7}, {2, 8}, {2, 9}, {4, 0}, {4, 1}, {4, 2}, {4, 
+          3}, {4, 4}, {4, 5}, {4, 6}, {4, 7}, {4, 8}, {4, 9}, {6, 0}, {6, 
+          1}, {6, 2}, {6, 3}, {6, 4}, {6, 5}, {6, 6}, {6, 7}, {6, 8}, {6, 
+          9}, {8, 0}, {8, 1}, {8, 2}, {8, 3}, {8, 4}, {8, 5}, {8, 6}, {8, 
+          7}, {8, 8}, {8, 9}}], ImageSize -> 30], $CellContext`meshpoint5 -> 
+       Graphics[
+         Point[{{0, 0}, {0, 2}, {0, 4}, {0, 6}, {0, 8}, {1, 1}, {1, 3}, {1, 
+          5}, {1, 7}, {1, 9}, {2, 0}, {2, 2}, {2, 4}, {2, 6}, {2, 8}, {3, 
+          1}, {3, 3}, {3, 5}, {3, 7}, {3, 9}, {4, 0}, {4, 2}, {4, 4}, {4, 
+          6}, {4, 8}, {5, 1}, {5, 3}, {5, 5}, {5, 7}, {5, 9}, {6, 0}, {6, 
+          2}, {6, 4}, {6, 6}, {6, 8}, {7, 1}, {7, 3}, {7, 5}, {7, 7}, {7, 
+          9}, {8, 0}, {8, 2}, {8, 4}, {8, 6}, {8, 8}, {9, 1}, {9, 3}, {9, 
+          5}, {9, 7}, {9, 9}}], ImageSize -> 30], $CellContext`meshpoint6 -> 
+       Graphics[
+         Point[{{0, 5}, {0, 6}, {0, 7}, {0, 8}, {1, 5}, {1, 6}, {1, 7}, {2, 
+          5}, {2, 6}, {2, 7}, {3, 4}, {3, 5}, {3, 6}, {3, 7}, {4, 3}, {4, 
+          4}, {4, 5}, {4, 6}, {5, 0}, {5, 1}, {5, 2}, {5, 3}, {5, 4}, {5, 
+          5}, {5, 6}, {6, 0}, {6, 1}, {6, 2}, {6, 3}, {6, 4}, {6, 5}, {7, 
+          0}, {7, 1}, {7, 2}, {7, 3}, {8, 0}}], ImageSize -> 30]}}, {{
+       Hold[$CellContext`zoom$$], 42.6}, 0.1, 100}}, Typeset`size$$ = {
+    350., {173., 177.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`pos$59977$$ = {0, 
+    0}, $CellContext`M$59978$$ = 0, $CellContext`meshtype$59979$$ = 
+    False, $CellContext`zoom$59980$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`M$$ = 
+        11.2, $CellContext`meshtype$$ = $CellContext`meshpoint6, \
+$CellContext`pos$$ = {-4.799999999999997, -4.599999999999994}, \
+$CellContext`zoom$$ = 42.6}, "ControllerVariables" :> {
+        Hold[$CellContext`pos$$, $CellContext`pos$59977$$, {0, 0}], 
+        Hold[$CellContext`M$$, $CellContext`M$59978$$, 0], 
+        Hold[$CellContext`meshtype$$, $CellContext`meshtype$59979$$, False], 
+        Hold[$CellContext`zoom$$, $CellContext`zoom$59980$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Quiet[
+        Graphics[{
+          PointSize[0.01], 
+          $CellContext`lensmap[$CellContext`pos$$, $CellContext`M$$, \
+$CellContext`meshtype$$]}, 
+         PlotRange -> {{-1, 1} $CellContext`zoom$$, {-1, 
+            1} $CellContext`zoom$$}, Epilog -> {
+           GrayLevel[0.3, 0.6], 
+           PointSize[0.01], 
+           Point[$CellContext`pos$$]}, ImageSize -> {350, 350}]], 
+      "Specifications" :> {{{$CellContext`pos$$, {-4.799999999999997, \
+-4.599999999999994}, "lens position"}, {-75, -75}, {75, 75}, ControlType -> 
+         Locator, Appearance -> Graphics[{
+            RGBColor[0.6, 0.4, 0.2], 
+            Disk[{0., 0.}]}, 
+           ImageSize -> {12., Automatic}]}, {{$CellContext`M$$, 11.2, 
+          "mass of lens"}, 0.1, 200, ControlPlacement -> 
+         Top}, {{$CellContext`meshtype$$, $CellContext`meshpoint6, 
+          "source grid"}, {$CellContext`meshpoint1 -> Graphics[
+            
+            Point[{{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0,
+              7}, {0, 8}, {0, 9}, {1, 0}, {1, 3}, {1, 6}, {1, 9}, {2, 0}, {2, 
+             3}, {2, 6}, {2, 9}, {3, 0}, {3, 1}, {3, 2}, {3, 3}, {3, 4}, {3, 
+             5}, {3, 6}, {3, 7}, {3, 8}, {3, 9}, {4, 0}, {4, 3}, {4, 6}, {4, 
+             9}, {5, 0}, {5, 3}, {5, 6}, {5, 9}, {6, 0}, {6, 1}, {6, 2}, {6, 
+             3}, {6, 4}, {6, 5}, {6, 6}, {6, 7}, {6, 8}, {6, 9}, {7, 0}, {7, 
+             3}, {7, 6}, {7, 9}, {8, 0}, {8, 3}, {8, 6}, {8, 9}, {9, 0}, {9, 
+             1}, {9, 2}, {9, 3}, {9, 4}, {9, 5}, {9, 6}, {9, 7}, {9, 8}, {9, 
+             9}}], ImageSize -> 30], $CellContext`meshpoint2 -> Graphics[
+            
+            Point[{{0, 0}, {0, 3}, {0, 6}, {0, 9}, {1, 2}, {1, 5}, {1, 8}, {2,
+              1}, {2, 4}, {2, 7}, {3, 0}, {3, 3}, {3, 6}, {3, 9}, {4, 2}, {4, 
+             5}, {4, 8}, {5, 1}, {5, 4}, {5, 7}, {6, 0}, {6, 3}, {6, 6}, {6, 
+             9}, {7, 2}, {7, 5}, {7, 8}, {8, 1}, {8, 4}, {8, 7}, {9, 0}, {9, 
+             3}, {9, 6}, {9, 9}}], ImageSize -> 30], $CellContext`meshpoint3 -> 
+          Graphics[
+            
+            Point[{{0, 0}, {0, 2}, {0, 4}, {0, 6}, {0, 8}, {1, 0}, {1, 2}, {1,
+              4}, {1, 6}, {1, 8}, {2, 0}, {2, 2}, {2, 4}, {2, 6}, {2, 8}, {3, 
+             0}, {3, 2}, {3, 4}, {3, 6}, {3, 8}, {4, 0}, {4, 2}, {4, 4}, {4, 
+             6}, {4, 8}, {5, 0}, {5, 2}, {5, 4}, {5, 6}, {5, 8}, {6, 0}, {6, 
+             2}, {6, 4}, {6, 6}, {6, 8}, {7, 0}, {7, 2}, {7, 4}, {7, 6}, {7, 
+             8}, {8, 0}, {8, 2}, {8, 4}, {8, 6}, {8, 8}, {9, 0}, {9, 2}, {9, 
+             4}, {9, 6}, {9, 8}}], ImageSize -> 30], $CellContext`meshpoint4 -> 
+          Graphics[
+            
+            Point[{{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0,
+              7}, {0, 8}, {0, 9}, {2, 0}, {2, 1}, {2, 2}, {2, 3}, {2, 4}, {2, 
+             5}, {2, 6}, {2, 7}, {2, 8}, {2, 9}, {4, 0}, {4, 1}, {4, 2}, {4, 
+             3}, {4, 4}, {4, 5}, {4, 6}, {4, 7}, {4, 8}, {4, 9}, {6, 0}, {6, 
+             1}, {6, 2}, {6, 3}, {6, 4}, {6, 5}, {6, 6}, {6, 7}, {6, 8}, {6, 
+             9}, {8, 0}, {8, 1}, {8, 2}, {8, 3}, {8, 4}, {8, 5}, {8, 6}, {8, 
+             7}, {8, 8}, {8, 9}}], ImageSize -> 30], $CellContext`meshpoint5 -> 
+          Graphics[
+            
+            Point[{{0, 0}, {0, 2}, {0, 4}, {0, 6}, {0, 8}, {1, 1}, {1, 3}, {1,
+              5}, {1, 7}, {1, 9}, {2, 0}, {2, 2}, {2, 4}, {2, 6}, {2, 8}, {3, 
+             1}, {3, 3}, {3, 5}, {3, 7}, {3, 9}, {4, 0}, {4, 2}, {4, 4}, {4, 
+             6}, {4, 8}, {5, 1}, {5, 3}, {5, 5}, {5, 7}, {5, 9}, {6, 0}, {6, 
+             2}, {6, 4}, {6, 6}, {6, 8}, {7, 1}, {7, 3}, {7, 5}, {7, 7}, {7, 
+             9}, {8, 0}, {8, 2}, {8, 4}, {8, 6}, {8, 8}, {9, 1}, {9, 3}, {9, 
+             5}, {9, 7}, {9, 9}}], ImageSize -> 30], $CellContext`meshpoint6 -> 
+          Graphics[
+            
+            Point[{{0, 5}, {0, 6}, {0, 7}, {0, 8}, {1, 5}, {1, 6}, {1, 7}, {2,
+              5}, {2, 6}, {2, 7}, {3, 4}, {3, 5}, {3, 6}, {3, 7}, {4, 3}, {4, 
+             4}, {4, 5}, {4, 6}, {5, 0}, {5, 1}, {5, 2}, {5, 3}, {5, 4}, {5, 
+             5}, {5, 6}, {6, 0}, {6, 1}, {6, 2}, {6, 3}, {6, 4}, {6, 5}, {7, 
+             0}, {7, 1}, {7, 2}, {7, 3}, {8, 0}}], ImageSize -> 30]}, 
+         ControlPlacement -> Top, ControlType -> 
+         SetterBar}, {{$CellContext`zoom$$, 42.6}, 0.1, 100}}, 
+      "Options" :> {
+       TrackedSymbols -> {$CellContext`pos$$, $CellContext`M$$, \
+$CellContext`meshtype$$, $CellContext`zoom$$}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{394., {252., 257.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`G = 1; $CellContext`c = 
+        1; $CellContext`\[Alpha]map = 
+        With[{$CellContext`G$ = $CellContext`G, $CellContext`c$ = \
+$CellContext`c}, 
+          Compile[{{$CellContext`x, 
+             Blank[Real], 1}, {$CellContext`xL, 
+             Blank[Real], 1}, {$CellContext`M$$, 
+             Blank[Real]}}, 
+           
+           If[$CellContext`x == $CellContext`xL, {-100000., -100000.}, 
+            4 $CellContext`G$ ($CellContext`M$$/$CellContext`c$^2) \
+(($CellContext`x - $CellContext`xL)/
+             Norm[$CellContext`x - $CellContext`xL]^2)]]]; \
+$CellContext`mapgrid = Compile[{{$CellContext`x, 
+            Blank[Real], 3}, {$CellContext`xL, 
+            Blank[Real], 1}, {$CellContext`M$$, 
+            Blank[Real]}}, 
+          
+          Map[$CellContext`\[Alpha]map[#, $CellContext`xL, $CellContext`M$$]& \
+, $CellContext`x, {2}]]; $CellContext`lensmap[
+          Pattern[$CellContext`xL, 
+           Blank[]], 
+          Pattern[$CellContext`M, 
+           Blank[]], 
+          Pattern[$CellContext`meshtype, 
+           Blank[]]] := 
+        Module[{$CellContext`grid, $CellContext`delta}, $CellContext`grid = 
+           Outer[List, 
+             Range[-15., 15.], 
+             
+             Range[-15., 
+              15.]]; $CellContext`delta = $CellContext`grid - \
+$CellContext`mapgrid[$CellContext`grid, $CellContext`xL, $CellContext`M]; {
+           Black, 
+            $CellContext`meshtype[
+             Flatten[$CellContext`delta, 1], 
+             Flatten[$CellContext`grid, 1]], 
+            $CellContext`hole[$CellContext`xL, $CellContext`xL]}]; \
+$CellContext`hole[{
+           Pattern[$CellContext`x, 
+            Blank[]], 
+           Pattern[$CellContext`y, 
+            Blank[]]}, {
+           Pattern[$CellContext`i, 
+            Blank[]], 
+           Pattern[$CellContext`j, 
+            Blank[]]}] := {Brown, 
+          Point[{$CellContext`x, $CellContext`y}]}; $CellContext`pointmesh[
+          Pattern[$CellContext`size, 
+           Blank[]], 
+          Pattern[$CellContext`meshtype, 
+           Blank[]]] := ($CellContext`meshtype[#, #]& )[
+          Flatten[
+           Outer[List, 
+            Range[0, $CellContext`size], 
+            Range[0, $CellContext`size]], 1]]; $CellContext`meshpoint1[
+          Pattern[$CellContext`image, 
+           Blank[]], 
+          Pattern[$CellContext`preimage, 
+           Blank[]]] := Point[
+          Pick[$CellContext`image, 
+           Apply[
+            Function[{$CellContext`i, $CellContext`j}, 
+             Or[
+             Mod[$CellContext`i, 3] == 0, Mod[$CellContext`j, 3] == 
+              0]], $CellContext`preimage, {1}]]]; $CellContext`meshpoint2[
+          Pattern[$CellContext`image, 
+           Blank[]], 
+          Pattern[$CellContext`preimage, 
+           Blank[]]] := Point[
+          Pick[$CellContext`image, 
+           Apply[
+            
+            Function[{$CellContext`i, $CellContext`j}, 
+             Mod[$CellContext`i + $CellContext`j, 3] == 
+             0], $CellContext`preimage, {1}]]]; $CellContext`meshpoint3[
+          Pattern[$CellContext`image, 
+           Blank[]], 
+          Pattern[$CellContext`preimage, 
+           Blank[]]] := Point[
+          Pick[$CellContext`image, 
+           Apply[
+            
+            Function[{$CellContext`i, $CellContext`j}, Mod[$CellContext`j, 2] == 
+             0], $CellContext`preimage, {1}]]]; $CellContext`meshpoint4[
+          Pattern[$CellContext`image, 
+           Blank[]], 
+          Pattern[$CellContext`preimage, 
+           Blank[]]] := Point[
+          Pick[$CellContext`image, 
+           Apply[
+            
+            Function[{$CellContext`i, $CellContext`j}, Mod[$CellContext`i, 2] == 
+             0], $CellContext`preimage, {1}]]]; $CellContext`meshpoint5[
+          Pattern[$CellContext`image, 
+           Blank[]], 
+          Pattern[$CellContext`preimage, 
+           Blank[]]] := Point[
+          Pick[$CellContext`image, 
+           Apply[
+            
+            Function[{$CellContext`i, $CellContext`j}, 
+             Mod[$CellContext`i + $CellContext`j, 2] == 
+             0], $CellContext`preimage, {1}]]]; $CellContext`meshpoint6[
+          Pattern[$CellContext`image, 
+           Blank[]], 
+          Pattern[$CellContext`preimage, 
+           Blank[]]] := Point[
+          Pick[$CellContext`image, 
+           Apply[
+            
+            Function[{$CellContext`i, $CellContext`j}, 
+             5^2 <= $CellContext`i^2 + $CellContext`j^2 <= 
+             8^2], $CellContext`preimage, {1}]]]; Null}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->903024412],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`M$$ = 
+    42.8, $CellContext`meshtype$$ = $CellContext`meshpoint1, \
+$CellContext`pos$$ = {0, 0}, $CellContext`zoom$$ = 50, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`pos$$], {0, 0}, "lens position"}, {-75, -75}, {75, 
+      75}}, {{
+       Hold[$CellContext`M$$], 42.8, "mass of lens"}, 0.1, 200}, {{
+       Hold[$CellContext`meshtype$$], $CellContext`meshpoint1, 
+       "source grid"}, {$CellContext`meshpoint1 -> Graphics[
+         Point[{{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0, 
+          7}, {0, 8}, {0, 9}, {1, 0}, {1, 3}, {1, 6}, {1, 9}, {2, 0}, {2, 
+          3}, {2, 6}, {2, 9}, {3, 0}, {3, 1}, {3, 2}, {3, 3}, {3, 4}, {3, 
+          5}, {3, 6}, {3, 7}, {3, 8}, {3, 9}, {4, 0}, {4, 3}, {4, 6}, {4, 
+          9}, {5, 0}, {5, 3}, {5, 6}, {5, 9}, {6, 0}, {6, 1}, {6, 2}, {6, 
+          3}, {6, 4}, {6, 5}, {6, 6}, {6, 7}, {6, 8}, {6, 9}, {7, 0}, {7, 
+          3}, {7, 6}, {7, 9}, {8, 0}, {8, 3}, {8, 6}, {8, 9}, {9, 0}, {9, 
+          1}, {9, 2}, {9, 3}, {9, 4}, {9, 5}, {9, 6}, {9, 7}, {9, 8}, {9, 
+          9}}], ImageSize -> 30], $CellContext`meshpoint2 -> Graphics[
+         Point[{{0, 0}, {0, 3}, {0, 6}, {0, 9}, {1, 2}, {1, 5}, {1, 8}, {2, 
+          1}, {2, 4}, {2, 7}, {3, 0}, {3, 3}, {3, 6}, {3, 9}, {4, 2}, {4, 
+          5}, {4, 8}, {5, 1}, {5, 4}, {5, 7}, {6, 0}, {6, 3}, {6, 6}, {6, 
+          9}, {7, 2}, {7, 5}, {7, 8}, {8, 1}, {8, 4}, {8, 7}, {9, 0}, {9, 
+          3}, {9, 6}, {9, 9}}], ImageSize -> 30], $CellContext`meshpoint3 -> 
+       Graphics[
+         Point[{{0, 0}, {0, 2}, {0, 4}, {0, 6}, {0, 8}, {1, 0}, {1, 2}, {1, 
+          4}, {1, 6}, {1, 8}, {2, 0}, {2, 2}, {2, 4}, {2, 6}, {2, 8}, {3, 
+          0}, {3, 2}, {3, 4}, {3, 6}, {3, 8}, {4, 0}, {4, 2}, {4, 4}, {4, 
+          6}, {4, 8}, {5, 0}, {5, 2}, {5, 4}, {5, 6}, {5, 8}, {6, 0}, {6, 
+          2}, {6, 4}, {6, 6}, {6, 8}, {7, 0}, {7, 2}, {7, 4}, {7, 6}, {7, 
+          8}, {8, 0}, {8, 2}, {8, 4}, {8, 6}, {8, 8}, {9, 0}, {9, 2}, {9, 
+          4}, {9, 6}, {9, 8}}], ImageSize -> 30], $CellContext`meshpoint4 -> 
+       Graphics[
+         Point[{{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0, 
+          7}, {0, 8}, {0, 9}, {2, 0}, {2, 1}, {2, 2}, {2, 3}, {2, 4}, {2, 
+          5}, {2, 6}, {2, 7}, {2, 8}, {2, 9}, {4, 0}, {4, 1}, {4, 2}, {4, 
+          3}, {4, 4}, {4, 5}, {4, 6}, {4, 7}, {4, 8}, {4, 9}, {6, 0}, {6, 
+          1}, {6, 2}, {6, 3}, {6, 4}, {6, 5}, {6, 6}, {6, 7}, {6, 8}, {6, 
+          9}, {8, 0}, {8, 1}, {8, 2}, {8, 3}, {8, 4}, {8, 5}, {8, 6}, {8, 
+          7}, {8, 8}, {8, 9}}], ImageSize -> 30], $CellContext`meshpoint5 -> 
+       Graphics[
+         Point[{{0, 0}, {0, 2}, {0, 4}, {0, 6}, {0, 8}, {1, 1}, {1, 3}, {1, 
+          5}, {1, 7}, {1, 9}, {2, 0}, {2, 2}, {2, 4}, {2, 6}, {2, 8}, {3, 
+          1}, {3, 3}, {3, 5}, {3, 7}, {3, 9}, {4, 0}, {4, 2}, {4, 4}, {4, 
+          6}, {4, 8}, {5, 1}, {5, 3}, {5, 5}, {5, 7}, {5, 9}, {6, 0}, {6, 
+          2}, {6, 4}, {6, 6}, {6, 8}, {7, 1}, {7, 3}, {7, 5}, {7, 7}, {7, 
+          9}, {8, 0}, {8, 2}, {8, 4}, {8, 6}, {8, 8}, {9, 1}, {9, 3}, {9, 
+          5}, {9, 7}, {9, 9}}], ImageSize -> 30], $CellContext`meshpoint6 -> 
+       Graphics[
+         Point[{{0, 5}, {0, 6}, {0, 7}, {0, 8}, {1, 5}, {1, 6}, {1, 7}, {2, 
+          5}, {2, 6}, {2, 7}, {3, 4}, {3, 5}, {3, 6}, {3, 7}, {4, 3}, {4, 
+          4}, {4, 5}, {4, 6}, {5, 0}, {5, 1}, {5, 2}, {5, 3}, {5, 4}, {5, 
+          5}, {5, 6}, {6, 0}, {6, 1}, {6, 2}, {6, 3}, {6, 4}, {6, 5}, {7, 
+          0}, {7, 1}, {7, 2}, {7, 3}, {8, 0}}], ImageSize -> 30]}}, {{
+       Hold[$CellContext`zoom$$], 50}, 0.1, 100}}, Typeset`size$$ = {
+    350., {173., 177.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`pos$60046$$ = {0, 
+    0}, $CellContext`M$60047$$ = 0, $CellContext`meshtype$60048$$ = 
+    False, $CellContext`zoom$60049$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`M$$ = 
+        42.8, $CellContext`meshtype$$ = $CellContext`meshpoint1, \
+$CellContext`pos$$ = {0, 0}, $CellContext`zoom$$ = 50}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`pos$$, $CellContext`pos$60046$$, {0, 0}], 
+        Hold[$CellContext`M$$, $CellContext`M$60047$$, 0], 
+        Hold[$CellContext`meshtype$$, $CellContext`meshtype$60048$$, False], 
+        Hold[$CellContext`zoom$$, $CellContext`zoom$60049$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Quiet[
+        Graphics[{
+          PointSize[0.01], 
+          $CellContext`lensmap[$CellContext`pos$$, $CellContext`M$$, \
+$CellContext`meshtype$$]}, 
+         PlotRange -> {{-1, 1} $CellContext`zoom$$, {-1, 
+            1} $CellContext`zoom$$}, Epilog -> {
+           GrayLevel[0.3, 0.6], 
+           PointSize[0.01], 
+           Point[$CellContext`pos$$]}, ImageSize -> {350, 350}]], 
+      "Specifications" :> {{{$CellContext`pos$$, {0, 0}, 
+          "lens position"}, {-75, -75}, {75, 75}, ControlType -> Locator, 
+         Appearance -> Graphics[{
+            RGBColor[0.6, 0.4, 0.2], 
+            Disk[{0., 0.}]}, 
+           ImageSize -> {12., Automatic}]}, {{$CellContext`M$$, 42.8, 
+          "mass of lens"}, 0.1, 200, ControlPlacement -> 
+         Top}, {{$CellContext`meshtype$$, $CellContext`meshpoint1, 
+          "source grid"}, {$CellContext`meshpoint1 -> Graphics[
+            
+            Point[{{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0,
+              7}, {0, 8}, {0, 9}, {1, 0}, {1, 3}, {1, 6}, {1, 9}, {2, 0}, {2, 
+             3}, {2, 6}, {2, 9}, {3, 0}, {3, 1}, {3, 2}, {3, 3}, {3, 4}, {3, 
+             5}, {3, 6}, {3, 7}, {3, 8}, {3, 9}, {4, 0}, {4, 3}, {4, 6}, {4, 
+             9}, {5, 0}, {5, 3}, {5, 6}, {5, 9}, {6, 0}, {6, 1}, {6, 2}, {6, 
+             3}, {6, 4}, {6, 5}, {6, 6}, {6, 7}, {6, 8}, {6, 9}, {7, 0}, {7, 
+             3}, {7, 6}, {7, 9}, {8, 0}, {8, 3}, {8, 6}, {8, 9}, {9, 0}, {9, 
+             1}, {9, 2}, {9, 3}, {9, 4}, {9, 5}, {9, 6}, {9, 7}, {9, 8}, {9, 
+             9}}], ImageSize -> 30], $CellContext`meshpoint2 -> Graphics[
+            
+            Point[{{0, 0}, {0, 3}, {0, 6}, {0, 9}, {1, 2}, {1, 5}, {1, 8}, {2,
+              1}, {2, 4}, {2, 7}, {3, 0}, {3, 3}, {3, 6}, {3, 9}, {4, 2}, {4, 
+             5}, {4, 8}, {5, 1}, {5, 4}, {5, 7}, {6, 0}, {6, 3}, {6, 6}, {6, 
+             9}, {7, 2}, {7, 5}, {7, 8}, {8, 1}, {8, 4}, {8, 7}, {9, 0}, {9, 
+             3}, {9, 6}, {9, 9}}], ImageSize -> 30], $CellContext`meshpoint3 -> 
+          Graphics[
+            
+            Point[{{0, 0}, {0, 2}, {0, 4}, {0, 6}, {0, 8}, {1, 0}, {1, 2}, {1,
+              4}, {1, 6}, {1, 8}, {2, 0}, {2, 2}, {2, 4}, {2, 6}, {2, 8}, {3, 
+             0}, {3, 2}, {3, 4}, {3, 6}, {3, 8}, {4, 0}, {4, 2}, {4, 4}, {4, 
+             6}, {4, 8}, {5, 0}, {5, 2}, {5, 4}, {5, 6}, {5, 8}, {6, 0}, {6, 
+             2}, {6, 4}, {6, 6}, {6, 8}, {7, 0}, {7, 2}, {7, 4}, {7, 6}, {7, 
+             8}, {8, 0}, {8, 2}, {8, 4}, {8, 6}, {8, 8}, {9, 0}, {9, 2}, {9, 
+             4}, {9, 6}, {9, 8}}], ImageSize -> 30], $CellContext`meshpoint4 -> 
+          Graphics[
+            
+            Point[{{0, 0}, {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0,
+              7}, {0, 8}, {0, 9}, {2, 0}, {2, 1}, {2, 2}, {2, 3}, {2, 4}, {2, 
+             5}, {2, 6}, {2, 7}, {2, 8}, {2, 9}, {4, 0}, {4, 1}, {4, 2}, {4, 
+             3}, {4, 4}, {4, 5}, {4, 6}, {4, 7}, {4, 8}, {4, 9}, {6, 0}, {6, 
+             1}, {6, 2}, {6, 3}, {6, 4}, {6, 5}, {6, 6}, {6, 7}, {6, 8}, {6, 
+             9}, {8, 0}, {8, 1}, {8, 2}, {8, 3}, {8, 4}, {8, 5}, {8, 6}, {8, 
+             7}, {8, 8}, {8, 9}}], ImageSize -> 30], $CellContext`meshpoint5 -> 
+          Graphics[
+            
+            Point[{{0, 0}, {0, 2}, {0, 4}, {0, 6}, {0, 8}, {1, 1}, {1, 3}, {1,
+              5}, {1, 7}, {1, 9}, {2, 0}, {2, 2}, {2, 4}, {2, 6}, {2, 8}, {3, 
+             1}, {3, 3}, {3, 5}, {3, 7}, {3, 9}, {4, 0}, {4, 2}, {4, 4}, {4, 
+             6}, {4, 8}, {5, 1}, {5, 3}, {5, 5}, {5, 7}, {5, 9}, {6, 0}, {6, 
+             2}, {6, 4}, {6, 6}, {6, 8}, {7, 1}, {7, 3}, {7, 5}, {7, 7}, {7, 
+             9}, {8, 0}, {8, 2}, {8, 4}, {8, 6}, {8, 8}, {9, 1}, {9, 3}, {9, 
+             5}, {9, 7}, {9, 9}}], ImageSize -> 30], $CellContext`meshpoint6 -> 
+          Graphics[
+            Point[{{0, 5}, {0, 6}, {0, 7}, {0, 8}, {1, 5}, {1, 6}, {1, 7}, {2,
+              5}, {2, 6}, {2, 7}, {3, 4}, {3, 5}, {3, 6}, {3, 7}, {4, 3}, {4, 
+             4}, {4, 5}, {4, 6}, {5, 0}, {5, 1}, {5, 2}, {5, 3}, {5, 4}, {5, 
+             5}, {5, 6}, {6, 0}, {6, 1}, {6, 2}, {6, 3}, {6, 4}, {6, 5}, {7, 
+             0}, {7, 1}, {7, 2}, {7, 3}, {8, 0}}], ImageSize -> 30]}, 
+         ControlPlacement -> Top, ControlType -> 
+         SetterBar}, {{$CellContext`zoom$$, 50}, 0.1, 100}}, 
+      "Options" :> {
+       TrackedSymbols -> {$CellContext`pos$$, $CellContext`M$$, \
+$CellContext`meshtype$$, $CellContext`zoom$$}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{394., {252., 257.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`G = 1; $CellContext`c = 
+        1; $CellContext`\[Alpha]map = 
+        With[{$CellContext`G$ = $CellContext`G, $CellContext`c$ = \
+$CellContext`c}, 
+          Compile[{{$CellContext`x, 
+             Blank[Real], 1}, {$CellContext`xL, 
+             Blank[Real], 1}, {$CellContext`M$$, 
+             Blank[Real]}}, 
+           
+           If[$CellContext`x == $CellContext`xL, {-100000., -100000.}, 
+            4 $CellContext`G$ ($CellContext`M$$/$CellContext`c$^2) \
+(($CellContext`x - $CellContext`xL)/
+             Norm[$CellContext`x - $CellContext`xL]^2)]]]; \
+$CellContext`mapgrid = Compile[{{$CellContext`x, 
+            Blank[Real], 3}, {$CellContext`xL, 
+            Blank[Real], 1}, {$CellContext`M$$, 
+            Blank[Real]}}, 
+          
+          Map[$CellContext`\[Alpha]map[#, $CellContext`xL, $CellContext`M$$]& \
+, $CellContext`x, {2}]]; $CellContext`lensmap[
+          Pattern[$CellContext`xL, 
+           Blank[]], 
+          Pattern[$CellContext`M, 
+           Blank[]], 
+          Pattern[$CellContext`meshtype, 
+           Blank[]]] := 
+        Module[{$CellContext`grid, $CellContext`delta}, $CellContext`grid = 
+           Outer[List, 
+             Range[-15., 15.], 
+             Range[-15., 
+              15.]]; $CellContext`delta = $CellContext`grid - \
+$CellContext`mapgrid[$CellContext`grid, $CellContext`xL, $CellContext`M]; {
+           Black, 
+            $CellContext`meshtype[
+             Flatten[$CellContext`delta, 1], 
+             Flatten[$CellContext`grid, 1]], 
+            $CellContext`hole[$CellContext`xL, $CellContext`xL]}]; \
+$CellContext`hole[{
+           Pattern[$CellContext`x, 
+            Blank[]], 
+           Pattern[$CellContext`y, 
+            Blank[]]}, {
+           Pattern[$CellContext`i, 
+            Blank[]], 
+           Pattern[$CellContext`j, 
+            Blank[]]}] := {Brown, 
+          Point[{$CellContext`x, $CellContext`y}]}; $CellContext`pointmesh[
+          Pattern[$CellContext`size, 
+           Blank[]], 
+          Pattern[$CellContext`meshtype, 
+           Blank[]]] := ($CellContext`meshtype[#, #]& )[
+          Flatten[
+           Outer[List, 
+            Range[0, $CellContext`size], 
+            Range[0, $CellContext`size]], 1]]; $CellContext`meshpoint1[
+          Pattern[$CellContext`image, 
+           Blank[]], 
+          Pattern[$CellContext`preimage, 
+           Blank[]]] := Point[
+          Pick[$CellContext`image, 
+           Apply[
+            Function[{$CellContext`i, $CellContext`j}, 
+             Or[
+             Mod[$CellContext`i, 3] == 0, Mod[$CellContext`j, 3] == 
+              0]], $CellContext`preimage, {1}]]]; $CellContext`meshpoint2[
+          Pattern[$CellContext`image, 
+           Blank[]], 
+          Pattern[$CellContext`preimage, 
+           Blank[]]] := Point[
+          Pick[$CellContext`image, 
+           Apply[
+            
+            Function[{$CellContext`i, $CellContext`j}, 
+             Mod[$CellContext`i + $CellContext`j, 3] == 
+             0], $CellContext`preimage, {1}]]]; $CellContext`meshpoint3[
+          Pattern[$CellContext`image, 
+           Blank[]], 
+          Pattern[$CellContext`preimage, 
+           Blank[]]] := Point[
+          Pick[$CellContext`image, 
+           Apply[
+            
+            Function[{$CellContext`i, $CellContext`j}, Mod[$CellContext`j, 2] == 
+             0], $CellContext`preimage, {1}]]]; $CellContext`meshpoint4[
+          Pattern[$CellContext`image, 
+           Blank[]], 
+          Pattern[$CellContext`preimage, 
+           Blank[]]] := Point[
+          Pick[$CellContext`image, 
+           Apply[
+            
+            Function[{$CellContext`i, $CellContext`j}, Mod[$CellContext`i, 2] == 
+             0], $CellContext`preimage, {1}]]]; $CellContext`meshpoint5[
+          Pattern[$CellContext`image, 
+           Blank[]], 
+          Pattern[$CellContext`preimage, 
+           Blank[]]] := Point[
+          Pick[$CellContext`image, 
+           Apply[
+            
+            Function[{$CellContext`i, $CellContext`j}, 
+             Mod[$CellContext`i + $CellContext`j, 2] == 
+             0], $CellContext`preimage, {1}]]]; $CellContext`meshpoint6[
+          Pattern[$CellContext`image, 
+           Blank[]], 
+          Pattern[$CellContext`preimage, 
+           Blank[]]] := Point[
+          Pick[$CellContext`image, 
+           Apply[
+            
+            Function[{$CellContext`i, $CellContext`j}, 
+             5^2 <= $CellContext`i^2 + $CellContext`j^2 <= 
+             8^2], $CellContext`preimage, {1}]]]; Null}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->58813236]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "DetailsSection"],
+
+Cell["\<\
+Einstein's general relativity tells us that matter and energy bend spacetime. \
+One of the best examples of this can be seen with \"gravitational lensing.\" \
+Lensing occurs when the path of light from a source (or in this case a grid \
+of point sources) travels near a massive or energetic object, called a \
+\"lens,\" and bends due to the mass/energy of the lens. In this Demonstration \
+the massive object is an infinitely small point of variable mass, marked with \
+a brown dot.\
+\>", "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.36354661575916*^9, 3.36354674810872*^9}, {
+   3.36354678479979*^9, 3.36354679343063*^9}, {3.3635470781085*^9, 
+   3.36354728038638*^9}, {3.36354743401865*^9, 3.36354748763909*^9}, {
+   3.36354753155143*^9, 3.36354759009117*^9}, {3.36354764164349*^9, 
+   3.36354764165352*^9}, {3.36596533315482*^9, 3.36596539890505*^9}, 
+   3.370637202347539*^9, {3.38293467048667*^9, 3.382934670837398*^9}},
+ CellID->939426703]
+}, Open  ]],
+
+Cell["", "ImplementationSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell["", "SearchTermsSection"],
+
+Cell["", "RelatedLinksSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Rob Morris",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Rob+Morris"], 
+    None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Rob+Morris"]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.36033364476583*^9, 3.36033364657845*^9}, {
+   3.36596540576777*^9, 3.36596540803536*^9}, 3.3706374653710957`*^9},
+ CellID->17443046]
+}, Open  ]],
+
+Cell["", "NotesSection"]
+}, Open  ]]
+},
+WindowSize->{700, 750},
+WindowMargins->{{16, Automatic}, {Automatic, 17}},
+FrontEndVersion->"6.0 for Microsoft Windows (32-bit) (June 19, 2007)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[86831, 1817, 311, 8, 70, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[87145, 1827, 677, 16, 70, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[87825, 1845, 338, 11, 70, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[88166, 1858, 636, 15, 70, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[88805, 1875, 842, 21, 70, "ControlSuggestions",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[89650, 1898, 303, 8, 70, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[89956, 1908, 1411, 31, 70, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[91370, 1941, 881, 21, 70, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 93279, 2003},
+ {"RotateAndZoomIn3D", 93388, 2006},
+ {"DragLocators", 93498, 2009},
+ {"CreateAndDeleteLocators", 93614, 2012},
+ {"SliderZoom", 93728, 2015},
+ {"GamepadControls", 93834, 2018},
+ {"AutomaticAnimation", 93947, 2021},
+ {"BookmarkAnimation", 94064, 2024}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[590, 23, 168, 3, 70, "DemoTitle",
+ CellID->700863240],
+Cell[761, 28, 33, 0, 70, "InitializationSection"],
+Cell[CellGroupData[{
+Cell[819, 32, 29, 0, 70, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[873, 36, 12531, 336, 70, "Input",
+ CellID->1496021318],
+Cell[13407, 374, 14312, 275, 70, "Output",
+ CellID->506581598]
+}, {2}]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[27765, 655, 36, 0, 70, "ManipulateCaptionSection"],
+Cell[27804, 657, 288, 7, 70, "ManipulateCaption",
+ CellID->1044312921]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[28129, 669, 28, 0, 70, "ThumbnailSection"],
+Cell[28160, 671, 14320, 275, 70, "Output",
+ CellID->270824293]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[42517, 951, 28, 0, 70, "SnapshotsSection"],
+Cell[42548, 953, 14320, 275, 70, "Output",
+ CellID->566631555],
+Cell[56871, 1230, 14484, 278, 70, "Output",
+ CellID->903024412],
+Cell[71358, 1510, 14323, 275, 70, "Output",
+ CellID->58813236]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[85718, 1790, 26, 0, 70, "DetailsSection"],
+Cell[85747, 1792, 971, 16, 70, "DetailNotes",
+ CellID->939426703]
+}, Open  ]],
+Cell[86733, 1811, 33, 0, 70, "ImplementationSection"],
+Cell[CellGroupData[{
+Cell[86791, 1815, 37, 0, 70, "ControlSuggestionsSection"],
+Cell[86831, 1817, 311, 8, 70, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[87145, 1827, 677, 16, 70, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[87825, 1845, 338, 11, 70, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[88166, 1858, 636, 15, 70, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[88805, 1875, 842, 21, 70, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[89650, 1898, 303, 8, 70, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[89956, 1908, 1411, 31, 70, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[91370, 1941, 881, 21, 70, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[92266, 1965, 30, 0, 70, "SearchTermsSection"],
+Cell[92299, 1967, 31, 0, 70, "RelatedLinksSection"],
+Cell[CellGroupData[{
+Cell[92355, 1971, 25, 0, 70, "AuthorSection"],
+Cell[92383, 1973, 469, 13, 70, "Author",
+ CellID->17443046]
+}, Open  ]],
+Cell[92867, 1989, 24, 0, 70, "NotesSection"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

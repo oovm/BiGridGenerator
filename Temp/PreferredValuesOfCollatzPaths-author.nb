@@ -1,0 +1,720 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     26546,        711]
+NotebookOptionsPosition[     22718,        592]
+NotebookOutlinePosition[     24304,        642]
+CellTagsIndexPosition[     23984,        630]
+WindowFrame->Normal
+ContainsDynamic->True *)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Preferred Values of Collatz Paths", "DemoTitle",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.41583154196875*^9, 3.41583155071875*^9}, {
+   3.415833441703125*^9, 3.415833462828125*^9}}],
+
+Cell["", "InitializationSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"ListPlot", "[", 
+    RowBox[{
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"k", ",", " ", "#1"}], "}"}], " ", "&"}], " ", ")"}], " ", 
+        "/@", " ", 
+        RowBox[{"NestWhileList", "[", "\n", "      ", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{"OddQ", "[", "#1", "]"}], ",", " ", 
+             RowBox[{
+              RowBox[{"3", "*", "#1"}], " ", "+", " ", "1"}], ",", " ", 
+             RowBox[{"#1", "/", "2"}]}], "]"}], " ", "&"}], " ", ",", " ", 
+          "k", ",", " ", 
+          RowBox[{
+           RowBox[{"#1", " ", "=!=", " ", "1"}], " ", "&"}]}], " ", "]"}]}], 
+       ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", " ", "n"}], "}"}]}], "]"}], ",", " ", "\n", "   ", 
+     RowBox[{"PlotRange", " ", "\[Rule]", " ", 
+      RowBox[{"{", 
+       RowBox[{"n", ",", " ", "n"}], "}"}]}], ",", " ", 
+     RowBox[{"AspectRatio", " ", "\[Rule]", " ", "1"}], ",", " ", 
+     RowBox[{"AxesOrigin", " ", "\[Rule]", " ", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", " ", "0"}], "}"}]}], ",", " ", "\n", "   ", 
+     RowBox[{"PlotStyle", " ", "\[Rule]", " ", 
+      RowBox[{"ColorData", "[", 
+       RowBox[{"35", ",", " ", "\"\<ColorList\>\""}], "]"}]}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"400", ",", "400"}], "}"}]}], ",", 
+     RowBox[{"ImagePadding", "\[Rule]", "20"}]}], "]"}], ",", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"n", ",", " ", "75", ",", " ", "\"\<size\>\""}], "}"}], ",", 
+     " ", "1", ",", " ", "100", ",", " ", "1", ",", " ", "\n", "   ", 
+     RowBox[{"Appearance", " ", "\[Rule]", " ", "\"\<Labeled\>\""}]}], 
+    "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.41641895540625*^9, 3.416418982375*^9}, {
+   3.416664072404877*^9, 3.416664076311102*^9}},
+ CellID->293031348],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 75, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`n$$], 75, "size"}, 1, 100, 1}}, Typeset`size$$ = {
+    400., {198., 202.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`n$358214$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`n$$ = 75}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`n$$, $CellContext`n$358214$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> ListPlot[
+        Table[
+         Map[{$CellContext`k, #}& , 
+          NestWhileList[If[
+            OddQ[#], 3 # + 1, #/2]& , $CellContext`k, # =!= 
+           1& ]], {$CellContext`k, $CellContext`n$$}], 
+        PlotRange -> {$CellContext`n$$, $CellContext`n$$}, AspectRatio -> 1, 
+        AxesOrigin -> {0, 0}, PlotStyle -> ColorData[35, "ColorList"], 
+        ImageSize -> {400, 400}, ImagePadding -> 20], 
+      "Specifications" :> {{{$CellContext`n$$, 75, "size"}, 1, 100, 1, 
+         Appearance -> "Labeled"}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{446., {241., 246.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.35696210375764*^9, 3.4166640898422656`*^9},
+ CellID->38535717]
+}, {2}]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell["", "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.415832612890625*^9, 3.415832949*^9}, 
+   3.415833465421875*^9, {3.415915506036079*^9, 3.415915546585417*^9}, {
+   3.415915660420722*^9, 3.415915693781824*^9}, 3.41591585574424*^9, {
+   3.416237642791828*^9, 3.416237691900887*^9}, {3.416237805799827*^9, 
+   3.4162378281581182`*^9}, 3.4162379230687037`*^9, 3.41641899253125*^9, {
+   3.4165695358203096`*^9, 3.4165695397158346`*^9}, 3.416655313545055*^9},
+ CellID->33899609],
+
+Cell["Consider the function", "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4166552984800262`*^9, 3.4166553030089703`*^9}},
+ CellID->108808512],
+
+Cell[TextData[{
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"n", " ", "\[RightTeeArrow]"}], TraditionalForm]], "InlineMath"],
+ " ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[Piecewise]", GridBox[{
+      {
+       FractionBox["n", "2"], 
+       RowBox[{"n", " ", "is", " ", "even"}]},
+      {
+       RowBox[{
+        RowBox[{"3", " ", "n"}], "+", "1"}], 
+       RowBox[{"n", " ", "is", " ", 
+        RowBox[{"odd", "."}]}]}
+     },
+     GridBoxAlignment->{
+      "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+       "RowsIndexed" -> {}},
+     GridBoxItemSize->{
+      "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+       "RowsIndexed" -> {}},
+     GridBoxSpacings->{"Columns" -> {
+         Offset[0.27999999999999997`], {
+          Offset[0.84]}, 
+         Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+         Offset[0.2], {
+          Offset[0.4]}, 
+         Offset[0.2]}, "RowsIndexed" -> {}}]}], TraditionalForm]], 
+  "InlineMath"]
+}], "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.416657745189724*^9, 3.416657745189724*^9}},
+ CellID->660722990],
+
+Cell[TextData[{
+ "The Collatz problem consists in repeatedly evaluating the function for \
+every positive integer ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{" ", "n"}], TraditionalForm]], "InlineMath"],
+ "; it always seems to end in 1, but this may not always be true. This shows \
+a plot of paths for the Collatz problem; each path is plotted along the ",
+ Cell[BoxData[
+  FormBox["y", TraditionalForm]], "InlineMath"],
+ " axis. Notice that the plot reveals a pattern of diagonal lines that pass \
+though the origin and horizontal lines that show that certain values are much \
+more likely than others. The reason for these diffuse patterns made by \
+preferred values is unclear. "
+}], "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.415832612890625*^9, 3.415832949*^9}, 
+   3.415833465421875*^9, {3.415915506036079*^9, 3.415915546585417*^9}, {
+   3.415915660420722*^9, 3.415915693781824*^9}, 3.41591585574424*^9, {
+   3.416237642791828*^9, 3.416237700337158*^9}, {3.416237741183004*^9, 
+   3.4162377685802603`*^9}, 3.4162378455946302`*^9, {3.4165695626371036`*^9, 
+   3.4165695803851156`*^9}, {3.4165696304085875`*^9, 
+   3.4165696847732964`*^9}, {3.416574487935917*^9, 3.416574506059512*^9}, {
+   3.416655318451411*^9, 3.4166553357966375`*^9}, 3.416657740684022*^9},
+ CellID->80025316]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 75, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`n$$], 75, "size"}, 1, 100, 1}}, Typeset`size$$ = {
+    400., {198., 202.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`n$357784$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`n$$ = 75}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`n$$, $CellContext`n$357784$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> ListPlot[
+        Table[
+         Map[{$CellContext`k, #}& , 
+          NestWhileList[If[
+            OddQ[#], 3 # + 1, #/2]& , $CellContext`k, # =!= 
+           1& ]], {$CellContext`k, $CellContext`n$$}], 
+        PlotRange -> {$CellContext`n$$, $CellContext`n$$}, AspectRatio -> 1, 
+        AxesOrigin -> {0, 0}, PlotStyle -> ColorData[35, "ColorList"], 
+        ImageSize -> {400, 400}, ImagePadding -> 20], 
+      "Specifications" :> {{{$CellContext`n$$, 75, "size"}, 1, 100, 1, 
+         Appearance -> "Labeled"}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{446., {241., 246.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->192938664]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 15, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`n$$], 15, "size"}, 1, 100, 1}}, Typeset`size$$ = 
+    Automatic, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`n$357832$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`n$$ = 15}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`n$$, $CellContext`n$357832$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> ListPlot[
+        Table[
+         Map[{$CellContext`k, #}& , 
+          NestWhileList[If[
+            OddQ[#], 3 # + 1, #/2]& , $CellContext`k, # =!= 
+           1& ]], {$CellContext`k, $CellContext`n$$}], 
+        PlotRange -> {$CellContext`n$$, $CellContext`n$$}, AspectRatio -> 1, 
+        AxesOrigin -> {0, 0}, PlotStyle -> ColorData[35, "ColorList"], 
+        ImageSize -> {400, 400}, ImagePadding -> 20], 
+      "Specifications" :> {{{$CellContext`n$$, 15, "size"}, 1, 100, 1, 
+         Appearance -> "Labeled"}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->113203591],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 50, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`n$$], 50, "size"}, 1, 100, 1}}, Typeset`size$$ = 
+    Automatic, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`n$357880$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`n$$ = 50}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`n$$, $CellContext`n$357880$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> ListPlot[
+        Table[
+         Map[{$CellContext`k, #}& , 
+          NestWhileList[If[
+            OddQ[#], 3 # + 1, #/2]& , $CellContext`k, # =!= 
+           1& ]], {$CellContext`k, $CellContext`n$$}], 
+        PlotRange -> {$CellContext`n$$, $CellContext`n$$}, AspectRatio -> 1, 
+        AxesOrigin -> {0, 0}, PlotStyle -> ColorData[35, "ColorList"], 
+        ImageSize -> {400, 400}, ImagePadding -> 20], 
+      "Specifications" :> {{{$CellContext`n$$, 50, "size"}, 1, 100, 1, 
+         Appearance -> "Labeled"}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->252433830],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 30, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`n$$], 30, "size"}, 1, 100, 1}}, Typeset`size$$ = 
+    Automatic, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`n$357928$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`n$$ = 30}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`n$$, $CellContext`n$357928$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> ListPlot[
+        Table[
+         Map[{$CellContext`k, #}& , 
+          NestWhileList[If[
+            OddQ[#], 3 # + 1, #/2]& , $CellContext`k, # =!= 
+           1& ]], {$CellContext`k, $CellContext`n$$}], 
+        PlotRange -> {$CellContext`n$$, $CellContext`n$$}, AspectRatio -> 1, 
+        AxesOrigin -> {0, 0}, PlotStyle -> ColorData[35, "ColorList"], 
+        ImageSize -> {400, 400}, ImagePadding -> 20], 
+      "Specifications" :> {{{$CellContext`n$$, 30, "size"}, 1, 100, 1, 
+         Appearance -> "Labeled"}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->189081283]
+}, Open  ]],
+
+Cell["", "DetailsSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  ActionDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.4162375806545057`*^9},
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  ActionDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.3895522232313623`*^9},
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.415915426688466*^9},
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SearchTermsSection"],
+
+Cell["Collatz problem", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.416243258469913*^9, 3.4162432618809557`*^9}},
+ CellID->712411374]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "RelatedLinksSection"],
+
+Cell[TextData[ButtonBox["Collatz Problem",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/CollatzProblem.html"], 
+   None}]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.416419077328125*^9, 3.416419087796875*^9}},
+ CellID->179890015]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Enrique Zeleny",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Enrique+Zeleny"]\
+, None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Enrique+Zeleny"]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.415915430891243*^9, 3.415915433223421*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{737, 788},
+WindowMargins->{{99, Automatic}, {Automatic, 3}},
+FrontEndVersion->"6.0 for Microsoft Windows (32-bit) (February 11, 2008)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[16051, 398, 375, 9, 22, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[16429, 409, 677, 16, 22, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[17109, 427, 339, 11, 22, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[17451, 440, 636, 15, 22, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[18090, 457, 843, 21, 22, "ControlSuggestions",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[18936, 480, 368, 9, 22, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[19307, 491, 1473, 32, 22, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[20783, 525, 881, 21, 22, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 23093, 603},
+ {"RotateAndZoomIn3D", 23201, 606},
+ {"DragLocators", 23310, 609},
+ {"CreateAndDeleteLocators", 23425, 612},
+ {"SliderZoom", 23538, 615},
+ {"GamepadControls", 23643, 618},
+ {"AutomaticAnimation", 23755, 621},
+ {"BookmarkAnimation", 23871, 624}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[590, 23, 192, 3, 74, "DemoTitle"],
+Cell[785, 28, 33, 0, 156, "InitializationSection"],
+Cell[CellGroupData[{
+Cell[843, 32, 29, 0, 188, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[897, 36, 2065, 52, 148, "Input",
+ CellID->293031348],
+Cell[2965, 90, 2013, 41, 499, "Output",
+ CellID->38535717]
+}, {2}]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5024, 137, 36, 0, 136, "ManipulateCaptionSection"],
+Cell[5063, 139, 498, 8, 22, "ManipulateCaption",
+ CellID->33899609],
+Cell[5564, 149, 164, 3, 22, "ManipulateCaption",
+ CellID->108808512],
+Cell[5731, 154, 1131, 34, 47, "ManipulateCaption",
+ CellID->660722990],
+Cell[6865, 190, 1304, 24, 99, "ManipulateCaption",
+ CellID->80025316]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8206, 219, 28, 0, 168, "ThumbnailSection"],
+Cell[8237, 221, 1949, 40, 499, "Output",
+ CellID->192938664]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10223, 266, 28, 0, 138, "SnapshotsSection"],
+Cell[10254, 268, 1895, 39, 32, "Output",
+ CellID->113203591],
+Cell[12152, 309, 1895, 39, 32, "Output",
+ CellID->252433830],
+Cell[14050, 350, 1895, 39, 32, "Output",
+ CellID->189081283]
+}, Open  ]],
+Cell[15960, 392, 26, 0, 232, "DetailsSection"],
+Cell[CellGroupData[{
+Cell[16011, 396, 37, 0, 108, "ControlSuggestionsSection"],
+Cell[16051, 398, 375, 9, 22, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[16429, 409, 677, 16, 22, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[17109, 427, 339, 11, 22, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[17451, 440, 636, 15, 22, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[18090, 457, 843, 21, 22, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[18936, 480, 368, 9, 22, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[19307, 491, 1473, 32, 22, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[20783, 525, 881, 21, 22, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21701, 551, 30, 0, 152, "SearchTermsSection"],
+Cell[21734, 553, 150, 3, 22, "SearchTerms",
+ CellID->712411374]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21921, 561, 31, 0, 138, "RelatedLinksSection"],
+Cell[21955, 563, 281, 7, 22, "RelatedLinks",
+ CellID->179890015]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[22273, 575, 25, 0, 136, "AuthorSection"],
+Cell[22301, 577, 389, 11, 22, "Author"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

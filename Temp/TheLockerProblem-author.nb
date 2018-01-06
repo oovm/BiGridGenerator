@@ -1,0 +1,1612 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     81385,       1603]
+NotebookOptionsPosition[     77336,       1478]
+NotebookOutlinePosition[     78934,       1528]
+CellTagsIndexPosition[     78606,       1516]
+WindowFrame->Normal
+ContainsDynamic->True *)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["The Locker Problem", "DemoTitle",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3890002498866377`*^9, 3.389000259716373*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["", "InitializationSection"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"openLockers", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{"1", ",", 
+     RowBox[{"{", "100", "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"student", "[", "k_", "]"}], ":=", 
+   RowBox[{"ReplacePart", "[", 
+    RowBox[{"openLockers", ",", 
+     RowBox[{"-", "1"}], ",", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"{", "i", "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "k", ",", "100", ",", "k"}], "}"}]}], "]"}]}], 
+    "]"}]}], ";"}]}], "Input",
+ CellID->613366157]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"graphical", ",", "m", ",", "textual"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"graphical", "=", 
+       RowBox[{"ArrayPlot", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"m", "=", 
+          RowBox[{"FoldList", "[", 
+           RowBox[{"Times", ",", 
+            RowBox[{"-", "openLockers"}], ",", 
+            RowBox[{"student", "/@", "studentList"}]}], "]"}]}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"ColorRules", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"-", "1"}], "\[Rule]", "Black"}], ",", 
+            RowBox[{"1", "\[Rule]", "White"}]}], "}"}]}], ",", 
+         RowBox[{"Mesh", "\[Rule]", "True"}], ",", 
+         RowBox[{"ImageSize", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{"400", ",", "400"}], "}"}]}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"textual", "=", 
+       RowBox[{"Graphics", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"Line", "[", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"0", ",", "0"}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"0", ",", "1"}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"1", ",", "1"}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"1", ",", "0"}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"0", ",", "0"}], "}"}]}], "}"}], "]"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"Inset", "@", 
+            RowBox[{"Column", "[", 
+             RowBox[{"{", "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"Style", "[", 
+                RowBox[{"\"\<students sent:\>\"", ",", "\"\<Label\>\""}], 
+                "]"}], ",", "\[IndentingNewLine]", 
+               RowBox[{"Grid", "[", 
+                RowBox[{"Partition", "[", 
+                 RowBox[{"studentList", ",", "20", ",", "20", ",", 
+                  RowBox[{"{", 
+                   RowBox[{"1", ",", "1"}], "}"}], ",", 
+                  RowBox[{"{", "}"}]}], "]"}], "]"}], ",", 
+               "\[IndentingNewLine]", "\"\< \>\"", ",", "\[IndentingNewLine]",
+                
+               RowBox[{"Style", "[", 
+                RowBox[{"\"\<open lockers:\>\"", ",", "\"\<Label\>\""}], 
+                "]"}], ",", "\[IndentingNewLine]", 
+               RowBox[{"Grid", "[", 
+                RowBox[{"Partition", "[", 
+                 RowBox[{
+                  RowBox[{"Flatten", "[", 
+                   RowBox[{"Position", "[", 
+                    RowBox[{
+                    RowBox[{"Last", "[", "m", "]"}], ",", "1"}], "]"}], "]"}],
+                   ",", "20", ",", "20", ",", 
+                  RowBox[{"{", 
+                   RowBox[{"1", ",", "1"}], "}"}], ",", 
+                  RowBox[{"{", "}"}]}], "]"}], "]"}]}], "\[IndentingNewLine]",
+               "}"}], "]"}]}]}], "\[IndentingNewLine]", "}"}], ",", 
+         RowBox[{"ImageSize", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{"400", ",", "400"}], "}"}]}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Deploy", "@", 
+       RowBox[{"If", "[", 
+        RowBox[{"display", ",", "graphical", ",", "textual"}], "]"}]}]}]}], 
+    "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", ",", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"display", ",", "True"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"True", "\[Rule]", "\"\<graphical\>\""}], ",", 
+       RowBox[{"False", "\[Rule]", "\"\<textual\>\""}]}], "}"}], ",", 
+     RowBox[{"ControlType", "\[Rule]", "SetterBar"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"studentList", ",", 
+       RowBox[{"Range", "[", "100", "]"}], ",", "\"\<students\>\""}], "}"}], 
+     ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Range", "[", "100", "]"}], "\[Rule]", "\"\<all\>\""}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"RandomSample", "[", 
+         RowBox[{
+          RowBox[{"Range", "[", "100", "]"}], ",", "100"}], "]"}], "\[Rule]", 
+        "\"\<all, random order\>\""}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"2", "*", 
+         RowBox[{"Range", "[", "50", "]"}]}], "\[Rule]", "\"\<evens\>\""}], 
+       ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"2", "*", 
+          RowBox[{"Range", "[", "50", "]"}]}], "-", "1"}], "\[Rule]", 
+        "\"\<odds\>\""}], ",", " ", "\[IndentingNewLine]", 
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"Range", "[", "10", "]"}], "2"], "\[Rule]", 
+        "\"\<squares\>\""}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Select", "[", 
+         RowBox[{
+          RowBox[{"Range", "[", "100", "]"}], ",", "SquareFreeQ"}], "]"}], 
+        "\[Rule]", "\"\<square frees\>\""}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Select", "[", 
+         RowBox[{
+          RowBox[{"Range", "[", "100", "]"}], ",", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"SquareFreeQ", "[", "#", "]"}], "&&", 
+            RowBox[{"EvenQ", "[", "#", "]"}]}], "&"}]}], "]"}], "\[Rule]", 
+        "\"\<even square frees\>\""}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Select", "[", 
+         RowBox[{
+          RowBox[{"Range", "[", "100", "]"}], ",", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"SquareFreeQ", "[", "#", "]"}], "&&", 
+            RowBox[{"OddQ", "[", "#", "]"}]}], "&"}]}], "]"}], "\[Rule]", 
+        "\"\<odd square frees\>\""}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"Range", "[", "4", "]"}], "3"], "\[Rule]", "\"\<cubes\>\""}],
+        ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Select", "[", 
+         RowBox[{
+          RowBox[{"Sort", "@", 
+           RowBox[{"Flatten", "@", 
+            RowBox[{"Outer", "[", 
+             RowBox[{"Times", ",", 
+              SuperscriptBox[
+               RowBox[{"Range", "[", "4", "]"}], "3"], ",", 
+              RowBox[{"Select", "[", 
+               RowBox[{
+                RowBox[{"Range", "[", "100", "]"}], ",", "SquareFreeQ"}], 
+               "]"}]}], "]"}]}]}], ",", 
+          RowBox[{
+           RowBox[{"#", "\[LessEqual]", "100"}], "&"}]}], "]"}], "\[Rule]", 
+        "\"\<cubes times square frees\>\""}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"Select", "[", 
+          RowBox[{
+           RowBox[{"Range", "[", "10", "]"}], ",", "SquareFreeQ"}], "]"}], 
+         "2"], "\[Rule]", "\"\<squares of square frees\>\""}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Select", "[", 
+         RowBox[{
+          RowBox[{"Range", "[", "100", "]"}], ",", "PrimeQ"}], "]"}], 
+        "\[Rule]", "\"\<primes\>\""}], ",", 
+       RowBox[{
+        RowBox[{"Select", "[", 
+         RowBox[{
+          RowBox[{"Range", "[", "100", "]"}], ",", 
+          RowBox[{
+           RowBox[{"Not", "[", 
+            RowBox[{"PrimeQ", "[", "#", "]"}], "]"}], "&"}]}], "]"}], 
+        "\[Rule]", "\"\<composites\>\""}]}], "}"}]}], "\[IndentingNewLine]", 
+    "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"SaveDefinitions", "\[Rule]", "True"}]}], "]"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, 3.389000335969141*^9, {3.389001234192873*^9, 
+   3.38900123643906*^9}, {3.389011005413168*^9, 3.3890110113037925`*^9}, {
+   3.3890110719912925`*^9, 3.389011072288168*^9}, {3.389461382447138*^9, 
+   3.389461384840579*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`display$$ = 
+    True, $CellContext`studentList$$ = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
+     13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 
+    31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 
+    49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 
+    67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 
+    85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100}, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`display$$], True}, {
+      True -> "graphical", False -> "textual"}}, {{
+       Hold[$CellContext`studentList$$], {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 
+       12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
+        30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 
+       47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64,
+        65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 
+       82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99,
+        100}, "students"}, {{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 
+        15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 
+        32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 
+        49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 
+        66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 
+        83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 
+        100} -> "all", {35, 25, 60, 93, 30, 59, 76, 61, 100, 77, 81, 88, 28, 
+        26, 82, 24, 22, 83, 75, 53, 97, 91, 13, 70, 39, 92, 46, 95, 37, 14, 
+        43, 7, 44, 51, 65, 50, 45, 56, 5, 99, 52, 27, 16, 3, 84, 85, 69, 41, 
+        71, 33, 12, 34, 94, 78, 89, 96, 63, 17, 47, 36, 98, 15, 29, 1, 80, 58,
+         68, 32, 19, 72, 62, 48, 74, 57, 10, 31, 67, 40, 42, 66, 49, 87, 79, 
+        2, 4, 9, 64, 21, 8, 11, 73, 55, 23, 20, 86, 6, 90, 18, 38, 54} -> 
+       "all, random order", {2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 
+        28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 
+        62, 64, 66, 68, 70, 72, 74, 76, 78, 80, 82, 84, 86, 88, 90, 92, 94, 
+        96, 98, 100} -> 
+       "evens", {1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 
+        33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 
+        67, 69, 71, 73, 75, 77, 79, 81, 83, 85, 87, 89, 91, 93, 95, 97, 99} -> 
+       "odds", {1, 4, 9, 16, 25, 36, 49, 64, 81, 100} -> 
+       "squares", {1, 2, 3, 5, 6, 7, 10, 11, 13, 14, 15, 17, 19, 21, 22, 23, 
+        26, 29, 30, 31, 33, 34, 35, 37, 38, 39, 41, 42, 43, 46, 47, 51, 53, 
+        55, 57, 58, 59, 61, 62, 65, 66, 67, 69, 70, 71, 73, 74, 77, 78, 79, 
+        82, 83, 85, 86, 87, 89, 91, 93, 94, 95, 97} -> 
+       "square frees", {2, 6, 10, 14, 22, 26, 30, 34, 38, 42, 46, 58, 62, 66, 
+        70, 74, 78, 82, 86, 94} -> 
+       "even square frees", {1, 3, 5, 7, 11, 13, 15, 17, 19, 21, 23, 29, 31, 
+        33, 35, 37, 39, 41, 43, 47, 51, 53, 55, 57, 59, 61, 65, 67, 69, 71, 
+        73, 77, 79, 83, 85, 87, 89, 91, 93, 95, 97} -> 
+       "odd square frees", {1, 8, 27, 64} -> 
+       "cubes", {1, 2, 3, 5, 6, 7, 8, 10, 11, 13, 14, 15, 16, 17, 19, 21, 22, 
+        23, 24, 26, 27, 29, 30, 31, 33, 34, 35, 37, 38, 39, 40, 41, 42, 43, 
+        46, 47, 48, 51, 53, 54, 55, 56, 57, 58, 59, 61, 62, 64, 65, 66, 67, 
+        69, 70, 71, 73, 74, 77, 78, 79, 80, 81, 82, 83, 85, 86, 87, 88, 89, 
+        91, 93, 94, 95, 97} -> 
+       "cubes times square frees", {1, 4, 9, 25, 36, 49, 100} -> 
+       "squares of square frees", {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37,
+         41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97} -> 
+       "primes", {1, 4, 6, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 22, 24, 25, 
+        26, 27, 28, 30, 32, 33, 34, 35, 36, 38, 39, 40, 42, 44, 45, 46, 48, 
+        49, 50, 51, 52, 54, 55, 56, 57, 58, 60, 62, 63, 64, 65, 66, 68, 69, 
+        70, 72, 74, 75, 76, 77, 78, 80, 81, 82, 84, 85, 86, 87, 88, 90, 91, 
+        92, 93, 94, 95, 96, 98, 99, 100} -> "composites"}}}, 
+    Typeset`size$$ = {400., {198., 202.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`display$13021$$ = 
+    False, $CellContext`studentList$13022$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`display$$ = 
+        True, $CellContext`studentList$$ = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+          12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 
+         29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 
+         46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 
+         63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 
+         80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 
+         97, 98, 99, 100}}, "ControllerVariables" :> {
+        Hold[$CellContext`display$$, $CellContext`display$13021$$, False], 
+        Hold[$CellContext`studentList$$, $CellContext`studentList$13022$$, 
+         False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`graphical$, $CellContext`m$, \
+$CellContext`textual$}, $CellContext`graphical$ = 
+         ArrayPlot[$CellContext`m$ = 
+           FoldList[Times, -$CellContext`openLockers, 
+             Map[$CellContext`student, $CellContext`studentList$$]], 
+           ColorRules -> {-1 -> Black, 1 -> White}, Mesh -> True, 
+           ImageSize -> {400, 400}]; $CellContext`textual$ = Graphics[{
+            Line[{{0, 0}, {0, 1}, {1, 1}, {1, 0}, {0, 0}}], 
+            Inset[
+             Column[{
+               Style["students sent:", "Label"], 
+               Grid[
+                Partition[$CellContext`studentList$$, 20, 20, {1, 1}, {}]], 
+               " ", 
+               Style["open lockers:", "Label"], 
+               Grid[
+                Partition[
+                 Flatten[
+                  Position[
+                   Last[$CellContext`m$], 1]], 20, 20, {1, 1}, {}]]}]]}, 
+           ImageSize -> {400, 400}]; Deploy[
+          
+          If[$CellContext`display$$, $CellContext`graphical$, \
+$CellContext`textual$]]], 
+      "Specifications" :> {{{$CellContext`display$$, True}, {
+         True -> "graphical", False -> "textual"}, ControlType -> 
+         SetterBar}, {{$CellContext`studentList$$, {1, 2, 3, 4, 5, 6, 7, 8, 9,
+           10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
+           27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43,
+           44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60,
+           61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77,
+           78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94,
+           95, 96, 97, 98, 99, 100}, 
+          "students"}, {{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 
+           16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
+            33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 
+           49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65,
+            66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 
+           82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98,
+            99, 100} -> 
+          "all", {35, 25, 60, 93, 30, 59, 76, 61, 100, 77, 81, 88, 28, 26, 82,
+            24, 22, 83, 75, 53, 97, 91, 13, 70, 39, 92, 46, 95, 37, 14, 43, 7,
+            44, 51, 65, 50, 45, 56, 5, 99, 52, 27, 16, 3, 84, 85, 69, 41, 71, 
+           33, 12, 34, 94, 78, 89, 96, 63, 17, 47, 36, 98, 15, 29, 1, 80, 58, 
+           68, 32, 19, 72, 62, 48, 74, 57, 10, 31, 67, 40, 42, 66, 49, 87, 79,
+            2, 4, 9, 64, 21, 8, 11, 73, 55, 23, 20, 86, 6, 90, 18, 38, 54} -> 
+          "all, random order", {2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 
+           26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58,
+            60, 62, 64, 66, 68, 70, 72, 74, 76, 78, 80, 82, 84, 86, 88, 90, 
+           92, 94, 96, 98, 100} -> 
+          "evens", {1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31,
+            33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 
+           65, 67, 69, 71, 73, 75, 77, 79, 81, 83, 85, 87, 89, 91, 93, 95, 97,
+            99} -> "odds", {1, 4, 9, 16, 25, 36, 49, 64, 81, 100} -> 
+          "squares", {1, 2, 3, 5, 6, 7, 10, 11, 13, 14, 15, 17, 19, 21, 22, 
+           23, 26, 29, 30, 31, 33, 34, 35, 37, 38, 39, 41, 42, 43, 46, 47, 51,
+            53, 55, 57, 58, 59, 61, 62, 65, 66, 67, 69, 70, 71, 73, 74, 77, 
+           78, 79, 82, 83, 85, 86, 87, 89, 91, 93, 94, 95, 97} -> 
+          "square frees", {2, 6, 10, 14, 22, 26, 30, 34, 38, 42, 46, 58, 62, 
+           66, 70, 74, 78, 82, 86, 94} -> 
+          "even square frees", {1, 3, 5, 7, 11, 13, 15, 17, 19, 21, 23, 29, 
+           31, 33, 35, 37, 39, 41, 43, 47, 51, 53, 55, 57, 59, 61, 65, 67, 69,
+            71, 73, 77, 79, 83, 85, 87, 89, 91, 93, 95, 97} -> 
+          "odd square frees", {1, 8, 27, 64} -> 
+          "cubes", {1, 2, 3, 5, 6, 7, 8, 10, 11, 13, 14, 15, 16, 17, 19, 21, 
+           22, 23, 24, 26, 27, 29, 30, 31, 33, 34, 35, 37, 38, 39, 40, 41, 42,
+            43, 46, 47, 48, 51, 53, 54, 55, 56, 57, 58, 59, 61, 62, 64, 65, 
+           66, 67, 69, 70, 71, 73, 74, 77, 78, 79, 80, 81, 82, 83, 85, 86, 87,
+            88, 89, 91, 93, 94, 95, 97} -> 
+          "cubes times square frees", {1, 4, 9, 25, 36, 49, 100} -> 
+          "squares of square frees", {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 
+           37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97} -> 
+          "primes", {1, 4, 6, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 22, 24, 
+           25, 26, 27, 28, 30, 32, 33, 34, 35, 36, 38, 39, 40, 42, 44, 45, 46,
+            48, 49, 50, 51, 52, 54, 55, 56, 57, 58, 60, 62, 63, 64, 65, 66, 
+           68, 69, 70, 72, 74, 75, 76, 77, 78, 80, 81, 82, 84, 85, 86, 87, 88,
+            90, 91, 92, 93, 94, 95, 96, 98, 99, 100} -> "composites"}}}, 
+      "Options" :> {}, "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{448., {255., 260.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`openLockers = {1, 1, 1, 1, 1, 1, 1, 1, 1, 
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+        1}, $CellContext`student[
+         Pattern[$CellContext`k, 
+          Blank[]]] := ReplacePart[$CellContext`openLockers, -1, 
+         Table[{$CellContext`i}, {$CellContext`i, $CellContext`k, 
+           100, $CellContext`k}]]}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->123010333]
+}, {2}]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell[TextData[{
+ "Imagine a hallway with 100 lockers, all closed. 100 students are sent down \
+the hall as follows: student 1 opens all the lockers; student 2 closes every \
+other locker, beginning with the second; student 3 changes the state of every \
+third locker, beginning with the third; and so on. After all the students \
+have marched, which lockers remain open? This Demonstration illustrates the \
+changing locker states as the students march. Black squares represent closed \
+lockers and white squares represent open lockers. The first row in the \
+graphic shows the initial hallway with locker 1 on the left and locker 100 on \
+the right. Each subsequent row shows the hallway after the next student has \
+marched, with the bottom row showing the final locker configuration. The user \
+can select certain subsets of the students to send marching, using the \
+convention that student ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]], "InlineMath"],
+ " will change the state of every ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["n", "th"], TraditionalForm]], "InlineMath"],
+ " locker, beginning with the ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["n", "th"], TraditionalForm]], "InlineMath"],
+ ". Can you see how the final locker state relates to the set of students \
+sent marching?"
+}], "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.389001030525639*^9, 3.3890012158434067`*^9}, {
+   3.3890013157687397`*^9, 3.389001561278954*^9}, {3.389002211056074*^9, 
+   3.389002283854084*^9}, {3.389002325689238*^9, 3.389002397325508*^9}, 
+   3.38900280622272*^9, {3.389011093444418*^9, 3.389011103600668*^9}, {
+   3.389011150194418*^9, 3.3890111678662925`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`display$$ = 
+    True, $CellContext`studentList$$ = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
+     13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 
+    31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 
+    49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 
+    67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 
+    85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100}, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`display$$], True}, {
+      True -> "graphical", False -> "textual"}}, {{
+       Hold[$CellContext`studentList$$], {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 
+       12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
+        30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 
+       47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64,
+        65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 
+       82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99,
+        100}, "students"}, {{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 
+        15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 
+        32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 
+        49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 
+        66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 
+        83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 
+        100} -> "all", {35, 25, 60, 93, 30, 59, 76, 61, 100, 77, 81, 88, 28, 
+        26, 82, 24, 22, 83, 75, 53, 97, 91, 13, 70, 39, 92, 46, 95, 37, 14, 
+        43, 7, 44, 51, 65, 50, 45, 56, 5, 99, 52, 27, 16, 3, 84, 85, 69, 41, 
+        71, 33, 12, 34, 94, 78, 89, 96, 63, 17, 47, 36, 98, 15, 29, 1, 80, 58,
+         68, 32, 19, 72, 62, 48, 74, 57, 10, 31, 67, 40, 42, 66, 49, 87, 79, 
+        2, 4, 9, 64, 21, 8, 11, 73, 55, 23, 20, 86, 6, 90, 18, 38, 54} -> 
+       "all, random order", {2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 
+        28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 
+        62, 64, 66, 68, 70, 72, 74, 76, 78, 80, 82, 84, 86, 88, 90, 92, 94, 
+        96, 98, 100} -> 
+       "evens", {1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 
+        33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 
+        67, 69, 71, 73, 75, 77, 79, 81, 83, 85, 87, 89, 91, 93, 95, 97, 99} -> 
+       "odds", {1, 4, 9, 16, 25, 36, 49, 64, 81, 100} -> 
+       "squares", {1, 2, 3, 5, 6, 7, 10, 11, 13, 14, 15, 17, 19, 21, 22, 23, 
+        26, 29, 30, 31, 33, 34, 35, 37, 38, 39, 41, 42, 43, 46, 47, 51, 53, 
+        55, 57, 58, 59, 61, 62, 65, 66, 67, 69, 70, 71, 73, 74, 77, 78, 79, 
+        82, 83, 85, 86, 87, 89, 91, 93, 94, 95, 97} -> 
+       "square frees", {2, 6, 10, 14, 22, 26, 30, 34, 38, 42, 46, 58, 62, 66, 
+        70, 74, 78, 82, 86, 94} -> 
+       "even square frees", {1, 3, 5, 7, 11, 13, 15, 17, 19, 21, 23, 29, 31, 
+        33, 35, 37, 39, 41, 43, 47, 51, 53, 55, 57, 59, 61, 65, 67, 69, 71, 
+        73, 77, 79, 83, 85, 87, 89, 91, 93, 95, 97} -> 
+       "odd square frees", {1, 8, 27, 64} -> 
+       "cubes", {1, 2, 3, 5, 6, 7, 8, 10, 11, 13, 14, 15, 16, 17, 19, 21, 22, 
+        23, 24, 26, 27, 29, 30, 31, 33, 34, 35, 37, 38, 39, 40, 41, 42, 43, 
+        46, 47, 48, 51, 53, 54, 55, 56, 57, 58, 59, 61, 62, 64, 65, 66, 67, 
+        69, 70, 71, 73, 74, 77, 78, 79, 80, 81, 82, 83, 85, 86, 87, 88, 89, 
+        91, 93, 94, 95, 97} -> 
+       "cubes times square frees", {1, 4, 9, 25, 36, 49, 100} -> 
+       "squares of square frees", {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37,
+         41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97} -> 
+       "primes", {1, 4, 6, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 22, 24, 25, 
+        26, 27, 28, 30, 32, 33, 34, 35, 36, 38, 39, 40, 42, 44, 45, 46, 48, 
+        49, 50, 51, 52, 54, 55, 56, 57, 58, 60, 62, 63, 64, 65, 66, 68, 69, 
+        70, 72, 74, 75, 76, 77, 78, 80, 81, 82, 84, 85, 86, 87, 88, 90, 91, 
+        92, 93, 94, 95, 96, 98, 99, 100} -> "composites"}}}, 
+    Typeset`size$$ = {400., {198., 202.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`display$13077$$ = 
+    False, $CellContext`studentList$13078$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`display$$ = 
+        True, $CellContext`studentList$$ = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+          12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 
+         29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 
+         46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 
+         63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 
+         80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 
+         97, 98, 99, 100}}, "ControllerVariables" :> {
+        Hold[$CellContext`display$$, $CellContext`display$13077$$, False], 
+        Hold[$CellContext`studentList$$, $CellContext`studentList$13078$$, 
+         False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`graphical$, $CellContext`m$, \
+$CellContext`textual$}, $CellContext`graphical$ = 
+         ArrayPlot[$CellContext`m$ = 
+           FoldList[Times, -$CellContext`openLockers, 
+             Map[$CellContext`student, $CellContext`studentList$$]], 
+           ColorRules -> {-1 -> Black, 1 -> White}, Mesh -> True, 
+           ImageSize -> {400, 400}]; $CellContext`textual$ = Graphics[{
+            Line[{{0, 0}, {0, 1}, {1, 1}, {1, 0}, {0, 0}}], 
+            Inset[
+             Column[{
+               Style["students sent:", "Label"], 
+               Grid[
+                Partition[$CellContext`studentList$$, 20, 20, {1, 1}, {}]], 
+               " ", 
+               Style["open lockers:", "Label"], 
+               Grid[
+                Partition[
+                 Flatten[
+                  Position[
+                   Last[$CellContext`m$], 1]], 20, 20, {1, 1}, {}]]}]]}, 
+           ImageSize -> {400, 400}]; Deploy[
+          
+          If[$CellContext`display$$, $CellContext`graphical$, \
+$CellContext`textual$]]], 
+      "Specifications" :> {{{$CellContext`display$$, True}, {
+         True -> "graphical", False -> "textual"}, ControlType -> 
+         SetterBar}, {{$CellContext`studentList$$, {1, 2, 3, 4, 5, 6, 7, 8, 9,
+           10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
+           27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43,
+           44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60,
+           61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77,
+           78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94,
+           95, 96, 97, 98, 99, 100}, 
+          "students"}, {{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 
+           16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
+            33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 
+           49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65,
+            66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 
+           82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98,
+            99, 100} -> 
+          "all", {35, 25, 60, 93, 30, 59, 76, 61, 100, 77, 81, 88, 28, 26, 82,
+            24, 22, 83, 75, 53, 97, 91, 13, 70, 39, 92, 46, 95, 37, 14, 43, 7,
+            44, 51, 65, 50, 45, 56, 5, 99, 52, 27, 16, 3, 84, 85, 69, 41, 71, 
+           33, 12, 34, 94, 78, 89, 96, 63, 17, 47, 36, 98, 15, 29, 1, 80, 58, 
+           68, 32, 19, 72, 62, 48, 74, 57, 10, 31, 67, 40, 42, 66, 49, 87, 79,
+            2, 4, 9, 64, 21, 8, 11, 73, 55, 23, 20, 86, 6, 90, 18, 38, 54} -> 
+          "all, random order", {2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 
+           26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58,
+            60, 62, 64, 66, 68, 70, 72, 74, 76, 78, 80, 82, 84, 86, 88, 90, 
+           92, 94, 96, 98, 100} -> 
+          "evens", {1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31,
+            33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 
+           65, 67, 69, 71, 73, 75, 77, 79, 81, 83, 85, 87, 89, 91, 93, 95, 97,
+            99} -> "odds", {1, 4, 9, 16, 25, 36, 49, 64, 81, 100} -> 
+          "squares", {1, 2, 3, 5, 6, 7, 10, 11, 13, 14, 15, 17, 19, 21, 22, 
+           23, 26, 29, 30, 31, 33, 34, 35, 37, 38, 39, 41, 42, 43, 46, 47, 51,
+            53, 55, 57, 58, 59, 61, 62, 65, 66, 67, 69, 70, 71, 73, 74, 77, 
+           78, 79, 82, 83, 85, 86, 87, 89, 91, 93, 94, 95, 97} -> 
+          "square frees", {2, 6, 10, 14, 22, 26, 30, 34, 38, 42, 46, 58, 62, 
+           66, 70, 74, 78, 82, 86, 94} -> 
+          "even square frees", {1, 3, 5, 7, 11, 13, 15, 17, 19, 21, 23, 29, 
+           31, 33, 35, 37, 39, 41, 43, 47, 51, 53, 55, 57, 59, 61, 65, 67, 69,
+            71, 73, 77, 79, 83, 85, 87, 89, 91, 93, 95, 97} -> 
+          "odd square frees", {1, 8, 27, 64} -> 
+          "cubes", {1, 2, 3, 5, 6, 7, 8, 10, 11, 13, 14, 15, 16, 17, 19, 21, 
+           22, 23, 24, 26, 27, 29, 30, 31, 33, 34, 35, 37, 38, 39, 40, 41, 42,
+            43, 46, 47, 48, 51, 53, 54, 55, 56, 57, 58, 59, 61, 62, 64, 65, 
+           66, 67, 69, 70, 71, 73, 74, 77, 78, 79, 80, 81, 82, 83, 85, 86, 87,
+            88, 89, 91, 93, 94, 95, 97} -> 
+          "cubes times square frees", {1, 4, 9, 25, 36, 49, 100} -> 
+          "squares of square frees", {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 
+           37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97} -> 
+          "primes", {1, 4, 6, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 22, 24, 
+           25, 26, 27, 28, 30, 32, 33, 34, 35, 36, 38, 39, 40, 42, 44, 45, 46,
+            48, 49, 50, 51, 52, 54, 55, 56, 57, 58, 60, 62, 63, 64, 65, 66, 
+           68, 69, 70, 72, 74, 75, 76, 77, 78, 80, 81, 82, 84, 85, 86, 87, 88,
+            90, 91, 92, 93, 94, 95, 96, 98, 99, 100} -> "composites"}}}, 
+      "Options" :> {}, "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{448., {255., 260.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`openLockers = {1, 1, 1, 1, 1, 1, 1, 1, 1, 
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+        1}, $CellContext`student[
+         Pattern[$CellContext`k, 
+          Blank[]]] := ReplacePart[$CellContext`openLockers, -1, 
+         Table[{$CellContext`i}, {$CellContext`i, $CellContext`k, 
+           100, $CellContext`k}]]}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->495041]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`display$$ = 
+    True, $CellContext`studentList$$ = {1, 2, 3, 5, 6, 7, 10, 11, 13, 14, 15, 
+    17, 19, 21, 22, 23, 26, 29, 30, 31, 33, 34, 35, 37, 38, 39, 41, 42, 43, 
+    46, 47, 51, 53, 55, 57, 58, 59, 61, 62, 65, 66, 67, 69, 70, 71, 73, 74, 
+    77, 78, 79, 82, 83, 85, 86, 87, 89, 91, 93, 94, 95, 97}, Typeset`show$$ = 
+    True, Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`display$$], True}, {
+      True -> "graphical", False -> "textual"}}, {{
+       Hold[$CellContext`studentList$$], {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 
+       12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
+        30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 
+       47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64,
+        65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 
+       82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99,
+        100}, "students"}, {{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 
+        15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 
+        32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 
+        49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 
+        66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 
+        83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 
+        100} -> "all", {35, 25, 60, 93, 30, 59, 76, 61, 100, 77, 81, 88, 28, 
+        26, 82, 24, 22, 83, 75, 53, 97, 91, 13, 70, 39, 92, 46, 95, 37, 14, 
+        43, 7, 44, 51, 65, 50, 45, 56, 5, 99, 52, 27, 16, 3, 84, 85, 69, 41, 
+        71, 33, 12, 34, 94, 78, 89, 96, 63, 17, 47, 36, 98, 15, 29, 1, 80, 58,
+         68, 32, 19, 72, 62, 48, 74, 57, 10, 31, 67, 40, 42, 66, 49, 87, 79, 
+        2, 4, 9, 64, 21, 8, 11, 73, 55, 23, 20, 86, 6, 90, 18, 38, 54} -> 
+       "all, random order", {2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 
+        28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 
+        62, 64, 66, 68, 70, 72, 74, 76, 78, 80, 82, 84, 86, 88, 90, 92, 94, 
+        96, 98, 100} -> 
+       "evens", {1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 
+        33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 
+        67, 69, 71, 73, 75, 77, 79, 81, 83, 85, 87, 89, 91, 93, 95, 97, 99} -> 
+       "odds", {1, 4, 9, 16, 25, 36, 49, 64, 81, 100} -> 
+       "squares", {1, 2, 3, 5, 6, 7, 10, 11, 13, 14, 15, 17, 19, 21, 22, 23, 
+        26, 29, 30, 31, 33, 34, 35, 37, 38, 39, 41, 42, 43, 46, 47, 51, 53, 
+        55, 57, 58, 59, 61, 62, 65, 66, 67, 69, 70, 71, 73, 74, 77, 78, 79, 
+        82, 83, 85, 86, 87, 89, 91, 93, 94, 95, 97} -> 
+       "square frees", {2, 6, 10, 14, 22, 26, 30, 34, 38, 42, 46, 58, 62, 66, 
+        70, 74, 78, 82, 86, 94} -> 
+       "even square frees", {1, 3, 5, 7, 11, 13, 15, 17, 19, 21, 23, 29, 31, 
+        33, 35, 37, 39, 41, 43, 47, 51, 53, 55, 57, 59, 61, 65, 67, 69, 71, 
+        73, 77, 79, 83, 85, 87, 89, 91, 93, 95, 97} -> 
+       "odd square frees", {1, 8, 27, 64} -> 
+       "cubes", {1, 2, 3, 5, 6, 7, 8, 10, 11, 13, 14, 15, 16, 17, 19, 21, 22, 
+        23, 24, 26, 27, 29, 30, 31, 33, 34, 35, 37, 38, 39, 40, 41, 42, 43, 
+        46, 47, 48, 51, 53, 54, 55, 56, 57, 58, 59, 61, 62, 64, 65, 66, 67, 
+        69, 70, 71, 73, 74, 77, 78, 79, 80, 81, 82, 83, 85, 86, 87, 88, 89, 
+        91, 93, 94, 95, 97} -> 
+       "cubes times square frees", {1, 4, 9, 25, 36, 49, 100} -> 
+       "squares of square frees", {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37,
+         41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97} -> 
+       "primes", {1, 4, 6, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 22, 24, 25, 
+        26, 27, 28, 30, 32, 33, 34, 35, 36, 38, 39, 40, 42, 44, 45, 46, 48, 
+        49, 50, 51, 52, 54, 55, 56, 57, 58, 60, 62, 63, 64, 65, 66, 68, 69, 
+        70, 72, 74, 75, 76, 77, 78, 80, 81, 82, 84, 85, 86, 87, 88, 90, 91, 
+        92, 93, 94, 95, 96, 98, 99, 100} -> "composites"}}}, 
+    Typeset`size$$ = {400., {198., 202.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`display$13133$$ = 
+    False, $CellContext`studentList$13134$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`display$$ = 
+        True, $CellContext`studentList$$ = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+          12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 
+         29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 
+         46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 
+         63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 
+         80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 
+         97, 98, 99, 100}}, "ControllerVariables" :> {
+        Hold[$CellContext`display$$, $CellContext`display$13133$$, False], 
+        Hold[$CellContext`studentList$$, $CellContext`studentList$13134$$, 
+         False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`graphical$, $CellContext`m$, \
+$CellContext`textual$}, $CellContext`graphical$ = 
+         ArrayPlot[$CellContext`m$ = 
+           FoldList[Times, -$CellContext`openLockers, 
+             Map[$CellContext`student, $CellContext`studentList$$]], 
+           ColorRules -> {-1 -> Black, 1 -> White}, Mesh -> True, 
+           ImageSize -> {400, 400}]; $CellContext`textual$ = Graphics[{
+            Line[{{0, 0}, {0, 1}, {1, 1}, {1, 0}, {0, 0}}], 
+            Inset[
+             Column[{
+               Style["students sent:", "Label"], 
+               Grid[
+                Partition[$CellContext`studentList$$, 20, 20, {1, 1}, {}]], 
+               " ", 
+               Style["open lockers:", "Label"], 
+               Grid[
+                Partition[
+                 Flatten[
+                  Position[
+                   Last[$CellContext`m$], 1]], 20, 20, {1, 1}, {}]]}]]}, 
+           ImageSize -> {400, 400}]; Deploy[
+          
+          If[$CellContext`display$$, $CellContext`graphical$, \
+$CellContext`textual$]]], 
+      "Specifications" :> {{{$CellContext`display$$, True}, {
+         True -> "graphical", False -> "textual"}, ControlType -> 
+         SetterBar}, {{$CellContext`studentList$$, {1, 2, 3, 4, 5, 6, 7, 8, 9,
+           10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
+           27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43,
+           44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60,
+           61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77,
+           78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94,
+           95, 96, 97, 98, 99, 100}, 
+          "students"}, {{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 
+           16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
+            33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 
+           49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65,
+            66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 
+           82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98,
+            99, 100} -> 
+          "all", {35, 25, 60, 93, 30, 59, 76, 61, 100, 77, 81, 88, 28, 26, 82,
+            24, 22, 83, 75, 53, 97, 91, 13, 70, 39, 92, 46, 95, 37, 14, 43, 7,
+            44, 51, 65, 50, 45, 56, 5, 99, 52, 27, 16, 3, 84, 85, 69, 41, 71, 
+           33, 12, 34, 94, 78, 89, 96, 63, 17, 47, 36, 98, 15, 29, 1, 80, 58, 
+           68, 32, 19, 72, 62, 48, 74, 57, 10, 31, 67, 40, 42, 66, 49, 87, 79,
+            2, 4, 9, 64, 21, 8, 11, 73, 55, 23, 20, 86, 6, 90, 18, 38, 54} -> 
+          "all, random order", {2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 
+           26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58,
+            60, 62, 64, 66, 68, 70, 72, 74, 76, 78, 80, 82, 84, 86, 88, 90, 
+           92, 94, 96, 98, 100} -> 
+          "evens", {1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31,
+            33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 
+           65, 67, 69, 71, 73, 75, 77, 79, 81, 83, 85, 87, 89, 91, 93, 95, 97,
+            99} -> "odds", {1, 4, 9, 16, 25, 36, 49, 64, 81, 100} -> 
+          "squares", {1, 2, 3, 5, 6, 7, 10, 11, 13, 14, 15, 17, 19, 21, 22, 
+           23, 26, 29, 30, 31, 33, 34, 35, 37, 38, 39, 41, 42, 43, 46, 47, 51,
+            53, 55, 57, 58, 59, 61, 62, 65, 66, 67, 69, 70, 71, 73, 74, 77, 
+           78, 79, 82, 83, 85, 86, 87, 89, 91, 93, 94, 95, 97} -> 
+          "square frees", {2, 6, 10, 14, 22, 26, 30, 34, 38, 42, 46, 58, 62, 
+           66, 70, 74, 78, 82, 86, 94} -> 
+          "even square frees", {1, 3, 5, 7, 11, 13, 15, 17, 19, 21, 23, 29, 
+           31, 33, 35, 37, 39, 41, 43, 47, 51, 53, 55, 57, 59, 61, 65, 67, 69,
+            71, 73, 77, 79, 83, 85, 87, 89, 91, 93, 95, 97} -> 
+          "odd square frees", {1, 8, 27, 64} -> 
+          "cubes", {1, 2, 3, 5, 6, 7, 8, 10, 11, 13, 14, 15, 16, 17, 19, 21, 
+           22, 23, 24, 26, 27, 29, 30, 31, 33, 34, 35, 37, 38, 39, 40, 41, 42,
+            43, 46, 47, 48, 51, 53, 54, 55, 56, 57, 58, 59, 61, 62, 64, 65, 
+           66, 67, 69, 70, 71, 73, 74, 77, 78, 79, 80, 81, 82, 83, 85, 86, 87,
+            88, 89, 91, 93, 94, 95, 97} -> 
+          "cubes times square frees", {1, 4, 9, 25, 36, 49, 100} -> 
+          "squares of square frees", {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 
+           37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97} -> 
+          "primes", {1, 4, 6, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 22, 24, 
+           25, 26, 27, 28, 30, 32, 33, 34, 35, 36, 38, 39, 40, 42, 44, 45, 46,
+            48, 49, 50, 51, 52, 54, 55, 56, 57, 58, 60, 62, 63, 64, 65, 66, 
+           68, 69, 70, 72, 74, 75, 76, 77, 78, 80, 81, 82, 84, 85, 86, 87, 88,
+            90, 91, 92, 93, 94, 95, 96, 98, 99, 100} -> "composites"}}}, 
+      "Options" :> {}, "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{448., {255., 260.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`openLockers = {1, 1, 1, 1, 1, 1, 1, 1, 1, 
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+        1}, $CellContext`student[
+         Pattern[$CellContext`k, 
+          Blank[]]] := ReplacePart[$CellContext`openLockers, -1, 
+         Table[{$CellContext`i}, {$CellContext`i, $CellContext`k, 
+           100, $CellContext`k}]]}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->227775261],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`display$$ = 
+    True, $CellContext`studentList$$ = {1, 2, 3, 5, 6, 7, 8, 10, 11, 13, 14, 
+    15, 16, 17, 19, 21, 22, 23, 24, 26, 27, 29, 30, 31, 33, 34, 35, 37, 38, 
+    39, 40, 41, 42, 43, 46, 47, 48, 51, 53, 54, 55, 56, 57, 58, 59, 61, 62, 
+    64, 65, 66, 67, 69, 70, 71, 73, 74, 77, 78, 79, 80, 81, 82, 83, 85, 86, 
+    87, 88, 89, 91, 93, 94, 95, 97}, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`display$$], True}, {
+      True -> "graphical", False -> "textual"}}, {{
+       Hold[$CellContext`studentList$$], {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 
+       12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
+        30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 
+       47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64,
+        65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 
+       82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99,
+        100}, "students"}, {{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 
+        15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 
+        32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 
+        49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 
+        66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 
+        83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 
+        100} -> "all", {35, 25, 60, 93, 30, 59, 76, 61, 100, 77, 81, 88, 28, 
+        26, 82, 24, 22, 83, 75, 53, 97, 91, 13, 70, 39, 92, 46, 95, 37, 14, 
+        43, 7, 44, 51, 65, 50, 45, 56, 5, 99, 52, 27, 16, 3, 84, 85, 69, 41, 
+        71, 33, 12, 34, 94, 78, 89, 96, 63, 17, 47, 36, 98, 15, 29, 1, 80, 58,
+         68, 32, 19, 72, 62, 48, 74, 57, 10, 31, 67, 40, 42, 66, 49, 87, 79, 
+        2, 4, 9, 64, 21, 8, 11, 73, 55, 23, 20, 86, 6, 90, 18, 38, 54} -> 
+       "all, random order", {2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 
+        28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 
+        62, 64, 66, 68, 70, 72, 74, 76, 78, 80, 82, 84, 86, 88, 90, 92, 94, 
+        96, 98, 100} -> 
+       "evens", {1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 
+        33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 
+        67, 69, 71, 73, 75, 77, 79, 81, 83, 85, 87, 89, 91, 93, 95, 97, 99} -> 
+       "odds", {1, 4, 9, 16, 25, 36, 49, 64, 81, 100} -> 
+       "squares", {1, 2, 3, 5, 6, 7, 10, 11, 13, 14, 15, 17, 19, 21, 22, 23, 
+        26, 29, 30, 31, 33, 34, 35, 37, 38, 39, 41, 42, 43, 46, 47, 51, 53, 
+        55, 57, 58, 59, 61, 62, 65, 66, 67, 69, 70, 71, 73, 74, 77, 78, 79, 
+        82, 83, 85, 86, 87, 89, 91, 93, 94, 95, 97} -> 
+       "square frees", {2, 6, 10, 14, 22, 26, 30, 34, 38, 42, 46, 58, 62, 66, 
+        70, 74, 78, 82, 86, 94} -> 
+       "even square frees", {1, 3, 5, 7, 11, 13, 15, 17, 19, 21, 23, 29, 31, 
+        33, 35, 37, 39, 41, 43, 47, 51, 53, 55, 57, 59, 61, 65, 67, 69, 71, 
+        73, 77, 79, 83, 85, 87, 89, 91, 93, 95, 97} -> 
+       "odd square frees", {1, 8, 27, 64} -> 
+       "cubes", {1, 2, 3, 5, 6, 7, 8, 10, 11, 13, 14, 15, 16, 17, 19, 21, 22, 
+        23, 24, 26, 27, 29, 30, 31, 33, 34, 35, 37, 38, 39, 40, 41, 42, 43, 
+        46, 47, 48, 51, 53, 54, 55, 56, 57, 58, 59, 61, 62, 64, 65, 66, 67, 
+        69, 70, 71, 73, 74, 77, 78, 79, 80, 81, 82, 83, 85, 86, 87, 88, 89, 
+        91, 93, 94, 95, 97} -> 
+       "cubes times square frees", {1, 4, 9, 25, 36, 49, 100} -> 
+       "squares of square frees", {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37,
+         41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97} -> 
+       "primes", {1, 4, 6, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 22, 24, 25, 
+        26, 27, 28, 30, 32, 33, 34, 35, 36, 38, 39, 40, 42, 44, 45, 46, 48, 
+        49, 50, 51, 52, 54, 55, 56, 57, 58, 60, 62, 63, 64, 65, 66, 68, 69, 
+        70, 72, 74, 75, 76, 77, 78, 80, 81, 82, 84, 85, 86, 87, 88, 90, 91, 
+        92, 93, 94, 95, 96, 98, 99, 100} -> "composites"}}}, 
+    Typeset`size$$ = {400., {198., 202.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`display$13189$$ = 
+    False, $CellContext`studentList$13190$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`display$$ = 
+        True, $CellContext`studentList$$ = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+          12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 
+         29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 
+         46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 
+         63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 
+         80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 
+         97, 98, 99, 100}}, "ControllerVariables" :> {
+        Hold[$CellContext`display$$, $CellContext`display$13189$$, False], 
+        Hold[$CellContext`studentList$$, $CellContext`studentList$13190$$, 
+         False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`graphical$, $CellContext`m$, \
+$CellContext`textual$}, $CellContext`graphical$ = 
+         ArrayPlot[$CellContext`m$ = 
+           FoldList[Times, -$CellContext`openLockers, 
+             Map[$CellContext`student, $CellContext`studentList$$]], 
+           ColorRules -> {-1 -> Black, 1 -> White}, Mesh -> True, 
+           ImageSize -> {400, 400}]; $CellContext`textual$ = Graphics[{
+            Line[{{0, 0}, {0, 1}, {1, 1}, {1, 0}, {0, 0}}], 
+            Inset[
+             Column[{
+               Style["students sent:", "Label"], 
+               Grid[
+                Partition[$CellContext`studentList$$, 20, 20, {1, 1}, {}]], 
+               " ", 
+               Style["open lockers:", "Label"], 
+               Grid[
+                Partition[
+                 Flatten[
+                  Position[
+                   Last[$CellContext`m$], 1]], 20, 20, {1, 1}, {}]]}]]}, 
+           ImageSize -> {400, 400}]; Deploy[
+          
+          If[$CellContext`display$$, $CellContext`graphical$, \
+$CellContext`textual$]]], 
+      "Specifications" :> {{{$CellContext`display$$, True}, {
+         True -> "graphical", False -> "textual"}, ControlType -> 
+         SetterBar}, {{$CellContext`studentList$$, {1, 2, 3, 4, 5, 6, 7, 8, 9,
+           10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
+           27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43,
+           44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60,
+           61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77,
+           78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94,
+           95, 96, 97, 98, 99, 100}, 
+          "students"}, {{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 
+           16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
+            33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 
+           49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65,
+            66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 
+           82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98,
+            99, 100} -> 
+          "all", {35, 25, 60, 93, 30, 59, 76, 61, 100, 77, 81, 88, 28, 26, 82,
+            24, 22, 83, 75, 53, 97, 91, 13, 70, 39, 92, 46, 95, 37, 14, 43, 7,
+            44, 51, 65, 50, 45, 56, 5, 99, 52, 27, 16, 3, 84, 85, 69, 41, 71, 
+           33, 12, 34, 94, 78, 89, 96, 63, 17, 47, 36, 98, 15, 29, 1, 80, 58, 
+           68, 32, 19, 72, 62, 48, 74, 57, 10, 31, 67, 40, 42, 66, 49, 87, 79,
+            2, 4, 9, 64, 21, 8, 11, 73, 55, 23, 20, 86, 6, 90, 18, 38, 54} -> 
+          "all, random order", {2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 
+           26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58,
+            60, 62, 64, 66, 68, 70, 72, 74, 76, 78, 80, 82, 84, 86, 88, 90, 
+           92, 94, 96, 98, 100} -> 
+          "evens", {1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31,
+            33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 
+           65, 67, 69, 71, 73, 75, 77, 79, 81, 83, 85, 87, 89, 91, 93, 95, 97,
+            99} -> "odds", {1, 4, 9, 16, 25, 36, 49, 64, 81, 100} -> 
+          "squares", {1, 2, 3, 5, 6, 7, 10, 11, 13, 14, 15, 17, 19, 21, 22, 
+           23, 26, 29, 30, 31, 33, 34, 35, 37, 38, 39, 41, 42, 43, 46, 47, 51,
+            53, 55, 57, 58, 59, 61, 62, 65, 66, 67, 69, 70, 71, 73, 74, 77, 
+           78, 79, 82, 83, 85, 86, 87, 89, 91, 93, 94, 95, 97} -> 
+          "square frees", {2, 6, 10, 14, 22, 26, 30, 34, 38, 42, 46, 58, 62, 
+           66, 70, 74, 78, 82, 86, 94} -> 
+          "even square frees", {1, 3, 5, 7, 11, 13, 15, 17, 19, 21, 23, 29, 
+           31, 33, 35, 37, 39, 41, 43, 47, 51, 53, 55, 57, 59, 61, 65, 67, 69,
+            71, 73, 77, 79, 83, 85, 87, 89, 91, 93, 95, 97} -> 
+          "odd square frees", {1, 8, 27, 64} -> 
+          "cubes", {1, 2, 3, 5, 6, 7, 8, 10, 11, 13, 14, 15, 16, 17, 19, 21, 
+           22, 23, 24, 26, 27, 29, 30, 31, 33, 34, 35, 37, 38, 39, 40, 41, 42,
+            43, 46, 47, 48, 51, 53, 54, 55, 56, 57, 58, 59, 61, 62, 64, 65, 
+           66, 67, 69, 70, 71, 73, 74, 77, 78, 79, 80, 81, 82, 83, 85, 86, 87,
+            88, 89, 91, 93, 94, 95, 97} -> 
+          "cubes times square frees", {1, 4, 9, 25, 36, 49, 100} -> 
+          "squares of square frees", {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 
+           37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97} -> 
+          "primes", {1, 4, 6, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 22, 24, 
+           25, 26, 27, 28, 30, 32, 33, 34, 35, 36, 38, 39, 40, 42, 44, 45, 46,
+            48, 49, 50, 51, 52, 54, 55, 56, 57, 58, 60, 62, 63, 64, 65, 66, 
+           68, 69, 70, 72, 74, 75, 76, 77, 78, 80, 81, 82, 84, 85, 86, 87, 88,
+            90, 91, 92, 93, 94, 95, 96, 98, 99, 100} -> "composites"}}}, 
+      "Options" :> {}, "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{448., {255., 260.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`openLockers = {1, 1, 1, 1, 1, 1, 1, 1, 1, 
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+        1}, $CellContext`student[
+         Pattern[$CellContext`k, 
+          Blank[]]] := ReplacePart[$CellContext`openLockers, -1, 
+         Table[{$CellContext`i}, {$CellContext`i, $CellContext`k, 
+           100, $CellContext`k}]]}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->74688166],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`display$$ = 
+    False, $CellContext`studentList$$ = {1, 2, 3, 5, 6, 7, 8, 10, 11, 13, 14, 
+    15, 16, 17, 19, 21, 22, 23, 24, 26, 27, 29, 30, 31, 33, 34, 35, 37, 38, 
+    39, 40, 41, 42, 43, 46, 47, 48, 51, 53, 54, 55, 56, 57, 58, 59, 61, 62, 
+    64, 65, 66, 67, 69, 70, 71, 73, 74, 77, 78, 79, 80, 81, 82, 83, 85, 86, 
+    87, 88, 89, 91, 93, 94, 95, 97}, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`display$$], False}, {
+      True -> "graphical", False -> "textual"}}, {{
+       Hold[$CellContext`studentList$$], {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 
+       12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
+        30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 
+       47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64,
+        65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 
+       82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99,
+        100}, "students"}, {{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 
+        15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 
+        32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 
+        49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 
+        66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 
+        83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 
+        100} -> "all", {35, 25, 60, 93, 30, 59, 76, 61, 100, 77, 81, 88, 28, 
+        26, 82, 24, 22, 83, 75, 53, 97, 91, 13, 70, 39, 92, 46, 95, 37, 14, 
+        43, 7, 44, 51, 65, 50, 45, 56, 5, 99, 52, 27, 16, 3, 84, 85, 69, 41, 
+        71, 33, 12, 34, 94, 78, 89, 96, 63, 17, 47, 36, 98, 15, 29, 1, 80, 58,
+         68, 32, 19, 72, 62, 48, 74, 57, 10, 31, 67, 40, 42, 66, 49, 87, 79, 
+        2, 4, 9, 64, 21, 8, 11, 73, 55, 23, 20, 86, 6, 90, 18, 38, 54} -> 
+       "all, random order", {2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 
+        28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60, 
+        62, 64, 66, 68, 70, 72, 74, 76, 78, 80, 82, 84, 86, 88, 90, 92, 94, 
+        96, 98, 100} -> 
+       "evens", {1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 
+        33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 
+        67, 69, 71, 73, 75, 77, 79, 81, 83, 85, 87, 89, 91, 93, 95, 97, 99} -> 
+       "odds", {1, 4, 9, 16, 25, 36, 49, 64, 81, 100} -> 
+       "squares", {1, 2, 3, 5, 6, 7, 10, 11, 13, 14, 15, 17, 19, 21, 22, 23, 
+        26, 29, 30, 31, 33, 34, 35, 37, 38, 39, 41, 42, 43, 46, 47, 51, 53, 
+        55, 57, 58, 59, 61, 62, 65, 66, 67, 69, 70, 71, 73, 74, 77, 78, 79, 
+        82, 83, 85, 86, 87, 89, 91, 93, 94, 95, 97} -> 
+       "square frees", {2, 6, 10, 14, 22, 26, 30, 34, 38, 42, 46, 58, 62, 66, 
+        70, 74, 78, 82, 86, 94} -> 
+       "even square frees", {1, 3, 5, 7, 11, 13, 15, 17, 19, 21, 23, 29, 31, 
+        33, 35, 37, 39, 41, 43, 47, 51, 53, 55, 57, 59, 61, 65, 67, 69, 71, 
+        73, 77, 79, 83, 85, 87, 89, 91, 93, 95, 97} -> 
+       "odd square frees", {1, 8, 27, 64} -> 
+       "cubes", {1, 2, 3, 5, 6, 7, 8, 10, 11, 13, 14, 15, 16, 17, 19, 21, 22, 
+        23, 24, 26, 27, 29, 30, 31, 33, 34, 35, 37, 38, 39, 40, 41, 42, 43, 
+        46, 47, 48, 51, 53, 54, 55, 56, 57, 58, 59, 61, 62, 64, 65, 66, 67, 
+        69, 70, 71, 73, 74, 77, 78, 79, 80, 81, 82, 83, 85, 86, 87, 88, 89, 
+        91, 93, 94, 95, 97} -> 
+       "cubes times square frees", {1, 4, 9, 25, 36, 49, 100} -> 
+       "squares of square frees", {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37,
+         41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97} -> 
+       "primes", {1, 4, 6, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 22, 24, 25, 
+        26, 27, 28, 30, 32, 33, 34, 35, 36, 38, 39, 40, 42, 44, 45, 46, 48, 
+        49, 50, 51, 52, 54, 55, 56, 57, 58, 60, 62, 63, 64, 65, 66, 68, 69, 
+        70, 72, 74, 75, 76, 77, 78, 80, 81, 82, 84, 85, 86, 87, 88, 90, 91, 
+        92, 93, 94, 95, 96, 98, 99, 100} -> "composites"}}}, 
+    Typeset`size$$ = {400., {198., 202.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`display$13245$$ = 
+    False, $CellContext`studentList$13246$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`display$$ = 
+        False, $CellContext`studentList$$ = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 
+         11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 
+         28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 
+         45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 
+         62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 
+         79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 
+         96, 97, 98, 99, 100}}, "ControllerVariables" :> {
+        Hold[$CellContext`display$$, $CellContext`display$13245$$, False], 
+        Hold[$CellContext`studentList$$, $CellContext`studentList$13246$$, 
+         False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`graphical$, $CellContext`m$, \
+$CellContext`textual$}, $CellContext`graphical$ = 
+         ArrayPlot[$CellContext`m$ = 
+           FoldList[Times, -$CellContext`openLockers, 
+             Map[$CellContext`student, $CellContext`studentList$$]], 
+           ColorRules -> {-1 -> Black, 1 -> White}, Mesh -> True, 
+           ImageSize -> {400, 400}]; $CellContext`textual$ = Graphics[{
+            Line[{{0, 0}, {0, 1}, {1, 1}, {1, 0}, {0, 0}}], 
+            Inset[
+             Column[{
+               Style["students sent:", "Label"], 
+               Grid[
+                Partition[$CellContext`studentList$$, 20, 20, {1, 1}, {}]], 
+               " ", 
+               Style["open lockers:", "Label"], 
+               Grid[
+                Partition[
+                 Flatten[
+                  Position[
+                   Last[$CellContext`m$], 1]], 20, 20, {1, 1}, {}]]}]]}, 
+           ImageSize -> {400, 400}]; Deploy[
+          
+          If[$CellContext`display$$, $CellContext`graphical$, \
+$CellContext`textual$]]], 
+      "Specifications" :> {{{$CellContext`display$$, False}, {
+         True -> "graphical", False -> "textual"}, ControlType -> 
+         SetterBar}, {{$CellContext`studentList$$, {1, 2, 3, 4, 5, 6, 7, 8, 9,
+           10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
+           27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43,
+           44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60,
+           61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77,
+           78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94,
+           95, 96, 97, 98, 99, 100}, 
+          "students"}, {{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 
+           16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
+            33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 
+           49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65,
+            66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 
+           82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98,
+            99, 100} -> 
+          "all", {35, 25, 60, 93, 30, 59, 76, 61, 100, 77, 81, 88, 28, 26, 82,
+            24, 22, 83, 75, 53, 97, 91, 13, 70, 39, 92, 46, 95, 37, 14, 43, 7,
+            44, 51, 65, 50, 45, 56, 5, 99, 52, 27, 16, 3, 84, 85, 69, 41, 71, 
+           33, 12, 34, 94, 78, 89, 96, 63, 17, 47, 36, 98, 15, 29, 1, 80, 58, 
+           68, 32, 19, 72, 62, 48, 74, 57, 10, 31, 67, 40, 42, 66, 49, 87, 79,
+            2, 4, 9, 64, 21, 8, 11, 73, 55, 23, 20, 86, 6, 90, 18, 38, 54} -> 
+          "all, random order", {2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 
+           26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58,
+            60, 62, 64, 66, 68, 70, 72, 74, 76, 78, 80, 82, 84, 86, 88, 90, 
+           92, 94, 96, 98, 100} -> 
+          "evens", {1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31,
+            33, 35, 37, 39, 41, 43, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 
+           65, 67, 69, 71, 73, 75, 77, 79, 81, 83, 85, 87, 89, 91, 93, 95, 97,
+            99} -> "odds", {1, 4, 9, 16, 25, 36, 49, 64, 81, 100} -> 
+          "squares", {1, 2, 3, 5, 6, 7, 10, 11, 13, 14, 15, 17, 19, 21, 22, 
+           23, 26, 29, 30, 31, 33, 34, 35, 37, 38, 39, 41, 42, 43, 46, 47, 51,
+            53, 55, 57, 58, 59, 61, 62, 65, 66, 67, 69, 70, 71, 73, 74, 77, 
+           78, 79, 82, 83, 85, 86, 87, 89, 91, 93, 94, 95, 97} -> 
+          "square frees", {2, 6, 10, 14, 22, 26, 30, 34, 38, 42, 46, 58, 62, 
+           66, 70, 74, 78, 82, 86, 94} -> 
+          "even square frees", {1, 3, 5, 7, 11, 13, 15, 17, 19, 21, 23, 29, 
+           31, 33, 35, 37, 39, 41, 43, 47, 51, 53, 55, 57, 59, 61, 65, 67, 69,
+            71, 73, 77, 79, 83, 85, 87, 89, 91, 93, 95, 97} -> 
+          "odd square frees", {1, 8, 27, 64} -> 
+          "cubes", {1, 2, 3, 5, 6, 7, 8, 10, 11, 13, 14, 15, 16, 17, 19, 21, 
+           22, 23, 24, 26, 27, 29, 30, 31, 33, 34, 35, 37, 38, 39, 40, 41, 42,
+            43, 46, 47, 48, 51, 53, 54, 55, 56, 57, 58, 59, 61, 62, 64, 65, 
+           66, 67, 69, 70, 71, 73, 74, 77, 78, 79, 80, 81, 82, 83, 85, 86, 87,
+            88, 89, 91, 93, 94, 95, 97} -> 
+          "cubes times square frees", {1, 4, 9, 25, 36, 49, 100} -> 
+          "squares of square frees", {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 
+           37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97} -> 
+          "primes", {1, 4, 6, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 22, 24, 
+           25, 26, 27, 28, 30, 32, 33, 34, 35, 36, 38, 39, 40, 42, 44, 45, 46,
+            48, 49, 50, 51, 52, 54, 55, 56, 57, 58, 60, 62, 63, 64, 65, 66, 
+           68, 69, 70, 72, 74, 75, 76, 77, 78, 80, 81, 82, 84, 85, 86, 87, 88,
+            90, 91, 92, 93, 94, 95, 96, 98, 99, 100} -> "composites"}}}, 
+      "Options" :> {}, "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{448., {255., 260.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`openLockers = {1, 1, 1, 1, 1, 1, 1, 1, 1, 
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+        1}, $CellContext`student[
+         Pattern[$CellContext`k, 
+          Blank[]]] := ReplacePart[$CellContext`openLockers, -1, 
+         Table[{$CellContext`i}, {$CellContext`i, $CellContext`k, 
+           100, $CellContext`k}]]}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->529130869]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "DetailsSection"],
+
+Cell["Further reading: ", "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.389000627090016*^9, 3.389000669881374*^9}, {
+   3.389000712820222*^9, 3.3890007332148438`*^9}},
+ CellID->1091810472],
+
+Cell[TextData[{
+ "B. Torrence, \"Extending the Locker Problem,\"",
+ StyleBox[" Mathematica in Education and Research",
+  FontSlant->"Italic"],
+ ", \n",
+ StyleBox["11",
+  FontWeight->"Bold"],
+ "(1), 2006 pp. 83\[Dash]95."
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3894615098303056`*^9, 3.3894615392926702`*^9}, 
+   3.3896393744743032`*^9, {3.431790279959341*^9, 3.4317902827893667`*^9}, {
+   3.4319535968321157`*^9, 3.4319535983582687`*^9}},
+ CellID->300888535],
+
+Cell[TextData[{
+ "B. Torrence and S. Wagon, \"The Locker Problem,\" ",
+ StyleBox["Crux Mathematicorum",
+  FontSlant->"Italic"],
+ ", ",
+ StyleBox["33",
+  FontWeight->"Bold"],
+ "(4), 2007, pp. 232\[Dash]236."
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.389461658704376*^9, 3.3894616590749087`*^9}, {
+   3.4317902222886143`*^9, 3.431790285359576*^9}, {3.4319536003004627`*^9, 
+   3.4319536120916414`*^9}},
+ CellID->11227662]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SearchTermsSection"],
+
+Cell["locker", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.389000572904088*^9, 3.38900057673628*^9}},
+ CellID->1412846066],
+
+Cell["locker problem", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.389000578182515*^9, 3.389000580254571*^9}},
+ CellID->977146383],
+
+Cell["recreational mathematics", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3890017137582827`*^9, 3.389001722515561*^9}},
+ CellID->2036127334],
+
+Cell["divisors", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.389001749825164*^9, 3.38900175122851*^9}},
+ CellID->1040187593]
+}, Open  ]],
+
+Cell["", "RelatedLinksSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Leah Sayre",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Leah+Sayre"], 
+    None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Leah+Sayre"],
+ " and ",
+ ButtonBox["Bruce Torrence",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Bruce+Torrence"]\
+, None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Bruce+Torrence"]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3890005527201643`*^9, 3.3890005589658327`*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{700, 750},
+WindowMargins->{{81, Automatic}, {19, Automatic}},
+FrontEndVersion->"6.0 for Microsoft Windows (64-bit) (May 21, 2008)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[70478, 1276, 310, 8, 22, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[70791, 1286, 677, 16, 22, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[71471, 1304, 339, 11, 22, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[71813, 1317, 636, 15, 22, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[72452, 1334, 843, 21, 22, "ControlSuggestions",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[73298, 1357, 303, 8, 22, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[73604, 1367, 1411, 31, 22, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[75018, 1400, 881, 21, 22, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 77707, 1489},
+ {"RotateAndZoomIn3D", 77816, 1492},
+ {"DragLocators", 77926, 1495},
+ {"CreateAndDeleteLocators", 78042, 1498},
+ {"SliderZoom", 78156, 1501},
+ {"GamepadControls", 78262, 1504},
+ {"AutomaticAnimation", 78375, 1507},
+ {"BookmarkAnimation", 78492, 1510}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[590, 23, 131, 2, 74, "DemoTitle"],
+Cell[CellGroupData[{
+Cell[746, 29, 33, 0, 156, "InitializationSection"],
+Cell[782, 31, 569, 18, 70, "Input",
+ CellID->613366157]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[1388, 54, 29, 0, 188, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[1442, 58, 7896, 195, 70, "Input"],
+Cell[9341, 255, 11666, 184, 527, "Output",
+ CellID->123010333]
+}, {2}]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21053, 445, 36, 0, 136, "ManipulateCaptionSection"],
+Cell[21092, 447, 1691, 31, 189, "ManipulateCaption"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[22820, 483, 28, 0, 168, "ThumbnailSection"],
+Cell[22851, 485, 11663, 184, 527, "Output",
+ CellID->495041]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[34551, 674, 28, 0, 138, "SnapshotsSection"],
+Cell[34582, 676, 11502, 182, 527, "Output",
+ CellID->227775261],
+Cell[46087, 860, 11553, 183, 527, "Output",
+ CellID->74688166],
+Cell[57643, 1045, 11558, 183, 527, "Output",
+ CellID->529130869]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[69238, 1233, 26, 0, 232, "DetailsSection"],
+Cell[69267, 1235, 203, 4, 22, "DetailNotes",
+ CellID->1091810472],
+Cell[69473, 1241, 483, 13, 37, "DetailNotes",
+ CellID->300888535],
+Cell[69959, 1256, 442, 13, 37, "DetailNotes",
+ CellID->11227662]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[70438, 1274, 37, 0, 120, "ControlSuggestionsSection"],
+Cell[70478, 1276, 310, 8, 22, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[70791, 1286, 677, 16, 22, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[71471, 1304, 339, 11, 22, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[71813, 1317, 636, 15, 22, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[72452, 1334, 843, 21, 22, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[73298, 1357, 303, 8, 22, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[73604, 1367, 1411, 31, 22, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[75018, 1400, 881, 21, 22, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[75936, 1426, 30, 0, 152, "SearchTermsSection"],
+Cell[75969, 1428, 139, 3, 22, "SearchTerms",
+ CellID->1412846066],
+Cell[76111, 1433, 147, 3, 22, "SearchTerms",
+ CellID->977146383],
+Cell[76261, 1438, 160, 3, 22, "SearchTerms",
+ CellID->2036127334],
+Cell[76424, 1443, 141, 3, 22, "SearchTerms",
+ CellID->1040187593]
+}, Open  ]],
+Cell[76580, 1449, 31, 0, 138, "RelatedLinksSection"],
+Cell[CellGroupData[{
+Cell[76636, 1453, 25, 0, 124, "AuthorSection"],
+Cell[76664, 1455, 644, 19, 22, "Author"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

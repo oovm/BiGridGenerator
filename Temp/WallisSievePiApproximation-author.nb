@@ -1,0 +1,1195 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     46410,       1186]
+NotebookOptionsPosition[     42360,       1059]
+NotebookOutlinePosition[     43974,       1110]
+CellTagsIndexPosition[     43646,       1098]
+WindowFrame->Normal
+ContainsDynamic->True *)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Wallis Sieve Pi Approximation", "DemoTitle",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.36937940976278*^9, 3.36937951417635*^9}, {
+   3.36937954895749*^9, 3.36937956146607*^9}, {3.36937965443897*^9, 
+   3.36937965962971*^9}, {3.36937973120863*^9, 3.36937973329472*^9}, 
+   3.36938066282415*^9, {3.370904745464719*^9, 3.370904781328507*^9}, {
+   3.370905921604653*^9, 3.37090592392087*^9}, {3.3709059622082777`*^9, 
+   3.370905967772484*^9}, {3.371069493281049*^9, 3.371069539960876*^9}, 
+   3.371077638081943*^9, {3.371592548794745*^9, 3.37159256296747*^9}, {
+   3.371983898460005*^9, 3.371983910167748*^9}, {3.372907854086259*^9, 
+   3.372907877693886*^9}, {3.373191918392912*^9, 3.373191957304688*^9}, {
+   3.373192021811511*^9, 3.373192027778674*^9}},
+ CellID->700863240],
+
+Cell[CellGroupData[{
+
+Cell["", "InitializationSection"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ps", "[", 
+   RowBox[{"q_", ",", "r_"}], "]"}], ":=", 
+  RowBox[{"With", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"qq", "=", 
+      RowBox[{"1", "/", "q"}]}], "}"}], ",", 
+    RowBox[{"Polygon", "[", 
+     RowBox[{"Flatten", "[", 
+      RowBox[{
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"List", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"a", ",", "b"}], "}"}], "+", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"-", "qq"}], ",", "qq"}], "}"}]}], ",", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"a", ",", "b"}], "}"}], "+", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"-", "qq"}], ",", 
+              RowBox[{"-", "qq"}]}], "}"}]}], ",", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"a", ",", "b"}], "}"}], "+", 
+            RowBox[{"{", 
+             RowBox[{"qq", ",", 
+              RowBox[{"-", "qq"}]}], "}"}]}], ",", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"a", ",", "b"}], "}"}], "+", 
+            RowBox[{"{", 
+             RowBox[{"qq", ",", "qq"}], "}"}]}]}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"a", ",", 
+           RowBox[{
+            RowBox[{"-", "1"}], "+", 
+            RowBox[{"1", "/", "r"}]}], ",", 
+           RowBox[{"1", "-", 
+            RowBox[{"1", "/", "r"}]}], ",", 
+           RowBox[{"2", "/", "r"}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"b", ",", 
+           RowBox[{
+            RowBox[{"-", "1"}], "+", 
+            RowBox[{"1", "/", "r"}]}], ",", 
+           RowBox[{"1", "-", 
+            RowBox[{"1", "/", "r"}]}], ",", 
+           RowBox[{"2", "/", " ", "r"}]}], "}"}]}], "]"}], ",", "1"}], "]"}], 
+     "]"}]}], "]"}]}]], "Input",
+ InitializationCell->True,
+ CellID->839747613]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"With", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"di", "=", 
+       RowBox[{"N", "[", 
+        RowBox[{
+         RowBox[{"-", "Pi"}], "+", 
+         RowBox[{"(", 
+          RowBox[{"4", "*", 
+           RowBox[{"If", "[", 
+            RowBox[{"r", ",", 
+             RowBox[{"8", "/", "9"}], ",", "1"}], "]"}], "*", 
+           RowBox[{"If", "[", 
+            RowBox[{"g", ",", 
+             RowBox[{"24", "/", "25"}], ",", "1"}], "]"}], "*", 
+           RowBox[{"If", "[", 
+            RowBox[{"b", ",", 
+             RowBox[{"48", "/", "49"}], ",", "1"}], "]"}]}], ")"}]}], "]"}]}],
+       "}"}], ",", 
+     RowBox[{"Graphics", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"RGBColor", "[", 
+          RowBox[{".12", ",", ".61", ",", ".78"}], "]"}], ",", 
+         RowBox[{"Rectangle", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"-", "1"}], ",", 
+             RowBox[{"-", "1"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"1", ",", "1"}], "}"}]}], "]"}], ",", 
+         RowBox[{"If", "[", 
+          RowBox[{"r", ",", 
+           RowBox[{"{", 
+            RowBox[{"White", ",", 
+             RowBox[{"ps", "[", 
+              RowBox[{"6", ",", "2"}], "]"}]}], "}"}], ",", 
+           RowBox[{"{", "}"}]}], "]"}], ",", 
+         RowBox[{"If", "[", 
+          RowBox[{"g", ",", 
+           RowBox[{"{", 
+            RowBox[{"White", ",", 
+             RowBox[{"ps", "[", 
+              RowBox[{"30", ",", "6"}], "]"}]}], "}"}], ",", 
+           RowBox[{"{", "}"}]}], "]"}], ",", 
+         RowBox[{"If", "[", 
+          RowBox[{"b", ",", 
+           RowBox[{"{", 
+            RowBox[{"White", ",", 
+             RowBox[{"ps", "[", 
+              RowBox[{"210", ",", "30"}], "]"}]}], "}"}], ",", 
+           RowBox[{"{", "}"}]}], "]"}], ",", 
+         RowBox[{"Opacity", "[", ".5", "]"}], ",", 
+         RowBox[{"If", "[", 
+          RowBox[{"p", ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"Lighter", "@", "Green"}], ",", 
+             RowBox[{"Disk", "[", "]"}]}], "}"}], ",", 
+           RowBox[{"{", "}"}]}], "]"}], ",", 
+         RowBox[{"If", "[", 
+          RowBox[{"e", ",", 
+           RowBox[{"{", 
+            RowBox[{"Gray", ",", 
+             RowBox[{"Tooltip", "[", 
+              RowBox[{
+               RowBox[{"Disk", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{"0", ",", "0"}], "}"}], ",", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"Pi", "+", "di"}], ")"}], "^", 
+                   RowBox[{"(", 
+                    RowBox[{"1", "/", "2"}], ")"}]}], "/", 
+                  RowBox[{
+                   RowBox[{"(", "Pi", ")"}], "^", 
+                   RowBox[{"(", 
+                    RowBox[{"1", "/", "2"}], ")"}]}]}]}], "]"}], ",", 
+               RowBox[{"Row", "[", 
+                RowBox[{"{", 
+                 RowBox[{
+                 "\"\<- \[Pi] + \[CapitalPi] = \>\"", " ", ",", "di"}], "}"}],
+                 "]"}]}], "]"}]}], "}"}], ",", 
+           RowBox[{"{", "}"}]}], "]"}], ",", "Black", ",", 
+         RowBox[{"Line", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"-", "7"}], "/", "6"}], ",", "0"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"7", "/", "6"}], ",", "0"}], "}"}]}], "}"}], "]"}], ",",
+          
+         RowBox[{"Line", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"0", ",", 
+              RowBox[{
+               RowBox[{"-", "7"}], "/", "6"}]}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"0", ",", 
+              RowBox[{"7", "/", "6"}]}], "}"}]}], "}"}], "]"}]}], "}"}], ",", 
+       
+       RowBox[{"PlotRange", "\[Rule]", 
+        RowBox[{"7", "/", "6"}]}], ",", 
+       RowBox[{"ImageSize", "\[Rule]", "400"}]}], "]"}]}], "]"}], ",", 
+   "\"\<terms to include\>\"", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"r", ",", "False", ",", 
+       RowBox[{"8", "/", "9"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"False", ",", "True"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"g", ",", "False", ",", 
+       RowBox[{"24", "/", "25"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"False", ",", "True"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"b", ",", "False", ",", 
+       RowBox[{"48", "/", "49"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"False", ",", "True"}], "}"}]}], "}"}], ",", "Delimiter", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"e", ",", "True", ",", "\"\<show approximation\>\""}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"False", ",", "True"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"p", ",", "True", ",", "\"\<show unit disk\>\""}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"False", ",", "True"}], "}"}]}], "}"}], ",", 
+   RowBox[{"ControlPlacement", "\[Rule]", "Left"}], ",", 
+   RowBox[{"SaveDefinitions", "\[Rule]", "True"}]}], "]"}]], "Input",
+ CellChangeTimes->{
+  3.35757176568782*^9, {3.36923182557301*^9, 3.36923183298958*^9}, 
+   3.36937940170145*^9, 3.36938067565753*^9, {3.3709048062174873`*^9, 
+   3.37090486206066*^9}, {3.370904911439968*^9, 3.3709049527896214`*^9}, {
+   3.370905050520063*^9, 3.370905064109676*^9}, {3.370905139117625*^9, 
+   3.3709051851882877`*^9}, {3.3709052571019697`*^9, 3.370905340097289*^9}, {
+   3.370905400266094*^9, 3.3709054191982927`*^9}, {3.370906693272941*^9, 
+   3.370906697473196*^9}, 3.3709068103867493`*^9, {3.3710695573150883`*^9, 
+   3.371069583248221*^9}, 3.371077599945698*^9, 3.371592579615781*^9, {
+   3.371592631662272*^9, 3.371592637166875*^9}, {3.371983942422117*^9, 
+   3.371983967630344*^9}, {3.372116851379757*^9, 3.3721168579192963`*^9}, {
+   3.372907841771763*^9, 3.372907843684291*^9}, 3.372967399259552*^9, 
+   3.373192061050086*^9, {3.3735867356790895`*^9, 3.3735868885968246`*^9}, {
+   3.3858440603460383`*^9, 3.385844062839624*^9}, {3.3859313721799774`*^9, 
+   3.3859314126381536`*^9}},
+ CellID->1496021318],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`b$$ = False, $CellContext`e$$ = 
+    True, $CellContext`g$$ = False, $CellContext`p$$ = 
+    True, $CellContext`r$$ = False, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold["terms to include"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`r$$], False, 
+       Rational[8, 9]}, {False, True}}, {{
+       Hold[$CellContext`g$$], False, 
+       Rational[24, 25]}, {False, True}}, {{
+       Hold[$CellContext`b$$], False, 
+       Rational[48, 49]}, {False, True}}, {{
+       Hold[$CellContext`e$$], True, "show approximation"}, {False, True}}, {{
+      
+       Hold[$CellContext`p$$], True, "show unit disk"}, {False, True}}}, 
+    Typeset`size$$ = {400., {198., 202.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`r$57246$$ = False, $CellContext`g$57247$$ = 
+    False, $CellContext`b$57248$$ = False, $CellContext`e$57249$$ = 
+    False, $CellContext`p$57250$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`b$$ = False, $CellContext`e$$ = 
+        True, $CellContext`g$$ = False, $CellContext`p$$ = 
+        True, $CellContext`r$$ = False}, "ControllerVariables" :> {
+        Hold[$CellContext`r$$, $CellContext`r$57246$$, False], 
+        Hold[$CellContext`g$$, $CellContext`g$57247$$, False], 
+        Hold[$CellContext`b$$, $CellContext`b$57248$$, False], 
+        Hold[$CellContext`e$$, $CellContext`e$57249$$, False], 
+        Hold[$CellContext`p$$, $CellContext`p$57250$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      With[{$CellContext`di$ = 
+         N[-Pi + ((4 If[$CellContext`r$$, 8/9, 1]) 
+             If[$CellContext`g$$, 24/25, 1]) If[$CellContext`b$$, 48/49, 1]]},
+         
+        Graphics[{
+          RGBColor[0.12, 0.61, 0.78], 
+          Rectangle[{-1, -1}, {1, 1}], 
+          If[$CellContext`r$$, {White, 
+            $CellContext`ps[6, 2]}, {}], 
+          If[$CellContext`g$$, {White, 
+            $CellContext`ps[30, 6]}, {}], 
+          If[$CellContext`b$$, {White, 
+            $CellContext`ps[210, 30]}, {}], 
+          Opacity[0.5], 
+          If[$CellContext`p$$, {
+            Lighter[Green], 
+            Disk[]}, {}], 
+          If[$CellContext`e$$, {Gray, 
+            Tooltip[
+             Disk[{0, 0}, (Pi + $CellContext`di$)^(1/2)/Pi^(1/2)], 
+             Row[{"- \[Pi] + \[CapitalPi] = ", $CellContext`di$}]]}, {}], 
+          Black, 
+          Line[{{(-7)/6, 0}, {7/6, 0}}], 
+          Line[{{0, (-7)/6}, {0, 7/6}}]}, PlotRange -> 7/6, ImageSize -> 
+         400]], "Specifications" :> {
+       "terms to include", {{$CellContext`r$$, False, 
+          Rational[8, 9]}, {False, True}}, {{$CellContext`g$$, False, 
+          Rational[24, 25]}, {False, True}}, {{$CellContext`b$$, False, 
+          Rational[48, 49]}, {False, True}}, 
+        Delimiter, {{$CellContext`e$$, True, "show approximation"}, {
+         False, True}}, {{$CellContext`p$$, True, "show unit disk"}, {
+         False, True}}}, "Options" :> {ControlPlacement -> Left}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{558., {225., 230.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`ps[
+         Pattern[$CellContext`q$, 
+          Blank[]], 
+         Pattern[$CellContext`r$, 
+          Blank[]]] := With[{$CellContext`qq$ = 1/$CellContext`q$}, 
+         Polygon[
+          Flatten[
+           
+           Table[{{$CellContext`a, 
+               FE`b$$1073} + {-$CellContext`qq$, $CellContext`qq$}, \
+{$CellContext`a, 
+               FE`b$$1073} + {-$CellContext`qq$, -$CellContext`qq$}, \
+{$CellContext`a, 
+               FE`b$$1073} + {$CellContext`qq$, -$CellContext`qq$}, \
+{$CellContext`a, 
+               FE`b$$1073} + {$CellContext`qq$, $CellContext`qq$}}, \
+{$CellContext`a, -1 + 1/$CellContext`r$, 1 - 1/$CellContext`r$, 
+             2/$CellContext`r$}, {
+            FE`b$$1073, -1 + 1/$CellContext`r$, 1 - 1/$CellContext`r$, 
+             2/$CellContext`r$}], 1]]], FE`b$$1073 = False, 
+       Attributes[PlotRange] = {ReadProtected}}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->458508498]
+}, {2}]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell[TextData[{
+ "The Wallis Sieve approximates the area of the unit disk by an infinite \
+product. This approximation\[LongDash]",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"\[Mu]", "(", 
+     SubscriptBox["W", "\[Infinity]"], ")"}], "=", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       FractionBox["8", "9"], "\[CenterDot]", 
+       FractionBox["24", "25"], "\[CenterDot]", 
+       FractionBox["48", "49"]}], "\[Ellipsis]"}], "=", 
+     FractionBox["\[Pi]", "4"]}]}], TraditionalForm]], "InlineMath"],
+ "\[LongDash]converges slowly. "
+}], "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3731922408974323`*^9, 3.373192468511775*^9}, {
+   3.385816671764347*^9, 3.385816672106427*^9}, {3.386102260867221*^9, 
+   3.386102334723421*^9}},
+ CellID->366394684]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`b$$ = False, $CellContext`e$$ = 
+    True, $CellContext`g$$ = True, $CellContext`p$$ = 
+    False, $CellContext`r$$ = True, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold["terms to include"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`r$$], True, 
+       Rational[8, 9]}, {False, True}}, {{
+       Hold[$CellContext`g$$], True, 
+       Rational[24, 25]}, {False, True}}, {{
+       Hold[$CellContext`b$$], False, 
+       Rational[48, 49]}, {False, True}}, {{
+       Hold[$CellContext`e$$], True, "show approximation"}, {False, True}}, {{
+      
+       Hold[$CellContext`p$$], False, "show unit disk"}, {False, True}}}, 
+    Typeset`size$$ = {400., {198., 202.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`r$57323$$ = False, $CellContext`g$57324$$ = 
+    False, $CellContext`b$57325$$ = False, $CellContext`e$57326$$ = 
+    False, $CellContext`p$57327$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`b$$ = False, $CellContext`e$$ = 
+        True, $CellContext`g$$ = True, $CellContext`p$$ = 
+        False, $CellContext`r$$ = True}, "ControllerVariables" :> {
+        Hold[$CellContext`r$$, $CellContext`r$57323$$, False], 
+        Hold[$CellContext`g$$, $CellContext`g$57324$$, False], 
+        Hold[$CellContext`b$$, $CellContext`b$57325$$, False], 
+        Hold[$CellContext`e$$, $CellContext`e$57326$$, False], 
+        Hold[$CellContext`p$$, $CellContext`p$57327$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      With[{$CellContext`di$ = 
+         N[-Pi + ((4 If[$CellContext`r$$, 8/9, 1]) 
+             If[$CellContext`g$$, 24/25, 1]) If[$CellContext`b$$, 48/49, 1]]},
+         
+        Graphics[{
+          RGBColor[0.12, 0.61, 0.78], 
+          Rectangle[{-1, -1}, {1, 1}], 
+          If[$CellContext`r$$, {White, 
+            $CellContext`ps[6, 2]}, {}], 
+          If[$CellContext`g$$, {White, 
+            $CellContext`ps[30, 6]}, {}], 
+          If[$CellContext`b$$, {White, 
+            $CellContext`ps[210, 30]}, {}], 
+          Opacity[0.5], 
+          If[$CellContext`p$$, {
+            Lighter[Green], 
+            Disk[]}, {}], 
+          If[$CellContext`e$$, {Gray, 
+            Tooltip[
+             Disk[{0, 0}, (Pi + $CellContext`di$)^(1/2)/Pi^(1/2)], 
+             Row[{"- \[Pi] + \[CapitalPi] = ", $CellContext`di$}]]}, {}], 
+          Black, 
+          Line[{{(-7)/6, 0}, {7/6, 0}}], 
+          Line[{{0, (-7)/6}, {0, 7/6}}]}, PlotRange -> 7/6, ImageSize -> 
+         400]], "Specifications" :> {
+       "terms to include", {{$CellContext`r$$, True, 
+          Rational[8, 9]}, {False, True}}, {{$CellContext`g$$, True, 
+          Rational[24, 25]}, {False, True}}, {{$CellContext`b$$, False, 
+          Rational[48, 49]}, {False, True}}, 
+        Delimiter, {{$CellContext`e$$, True, "show approximation"}, {
+         False, True}}, {{$CellContext`p$$, False, "show unit disk"}, {
+         False, True}}}, "Options" :> {ControlPlacement -> Left}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{558., {225., 230.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`ps[
+         Pattern[$CellContext`q$, 
+          Blank[]], 
+         Pattern[$CellContext`r$, 
+          Blank[]]] := With[{$CellContext`qq$ = 1/$CellContext`q$}, 
+         Polygon[
+          Flatten[
+           
+           Table[{{$CellContext`a, 
+               FE`b$$1073} + {-$CellContext`qq$, $CellContext`qq$}, \
+{$CellContext`a, 
+               FE`b$$1073} + {-$CellContext`qq$, -$CellContext`qq$}, \
+{$CellContext`a, 
+               FE`b$$1073} + {$CellContext`qq$, -$CellContext`qq$}, \
+{$CellContext`a, 
+               FE`b$$1073} + {$CellContext`qq$, $CellContext`qq$}}, \
+{$CellContext`a, -1 + 1/$CellContext`r$, 1 - 1/$CellContext`r$, 
+             2/$CellContext`r$}, {
+            FE`b$$1073, -1 + 1/$CellContext`r$, 1 - 1/$CellContext`r$, 
+             2/$CellContext`r$}], 1]]], FE`b$$1073 = False, 
+       Attributes[PlotRange] = {ReadProtected}}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->242212232]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`b$$ = True, $CellContext`e$$ = 
+    False, $CellContext`g$$ = True, $CellContext`p$$ = 
+    True, $CellContext`r$$ = True, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold["terms to include"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`r$$], True, 
+       Rational[8, 9]}, {False, True}}, {{
+       Hold[$CellContext`g$$], True, 
+       Rational[24, 25]}, {False, True}}, {{
+       Hold[$CellContext`b$$], True, 
+       Rational[48, 49]}, {False, True}}, {{
+       Hold[$CellContext`e$$], False, "show approximation"}, {
+      False, True}}, {{
+       Hold[$CellContext`p$$], True, "show unit disk"}, {False, True}}}, 
+    Typeset`size$$ = {400., {198., 202.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`r$57400$$ = False, $CellContext`g$57401$$ = 
+    False, $CellContext`b$57402$$ = False, $CellContext`e$57403$$ = 
+    False, $CellContext`p$57404$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`b$$ = True, $CellContext`e$$ = 
+        False, $CellContext`g$$ = True, $CellContext`p$$ = 
+        True, $CellContext`r$$ = True}, "ControllerVariables" :> {
+        Hold[$CellContext`r$$, $CellContext`r$57400$$, False], 
+        Hold[$CellContext`g$$, $CellContext`g$57401$$, False], 
+        Hold[$CellContext`b$$, $CellContext`b$57402$$, False], 
+        Hold[$CellContext`e$$, $CellContext`e$57403$$, False], 
+        Hold[$CellContext`p$$, $CellContext`p$57404$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      With[{$CellContext`di$ = 
+         N[-Pi + ((4 If[$CellContext`r$$, 8/9, 1]) 
+             If[$CellContext`g$$, 24/25, 1]) If[$CellContext`b$$, 48/49, 1]]},
+         
+        Graphics[{
+          RGBColor[0.12, 0.61, 0.78], 
+          Rectangle[{-1, -1}, {1, 1}], 
+          If[$CellContext`r$$, {White, 
+            $CellContext`ps[6, 2]}, {}], 
+          If[$CellContext`g$$, {White, 
+            $CellContext`ps[30, 6]}, {}], 
+          If[$CellContext`b$$, {White, 
+            $CellContext`ps[210, 30]}, {}], 
+          Opacity[0.5], 
+          If[$CellContext`p$$, {
+            Lighter[Green], 
+            Disk[]}, {}], 
+          If[$CellContext`e$$, {Gray, 
+            Tooltip[
+             Disk[{0, 0}, (Pi + $CellContext`di$)^(1/2)/Pi^(1/2)], 
+             Row[{"- \[Pi] + \[CapitalPi] = ", $CellContext`di$}]]}, {}], 
+          Black, 
+          Line[{{(-7)/6, 0}, {7/6, 0}}], 
+          Line[{{0, (-7)/6}, {0, 7/6}}]}, PlotRange -> 7/6, ImageSize -> 
+         400]], "Specifications" :> {
+       "terms to include", {{$CellContext`r$$, True, 
+          Rational[8, 9]}, {False, True}}, {{$CellContext`g$$, True, 
+          Rational[24, 25]}, {False, True}}, {{$CellContext`b$$, True, 
+          Rational[48, 49]}, {False, True}}, 
+        Delimiter, {{$CellContext`e$$, False, "show approximation"}, {
+         False, True}}, {{$CellContext`p$$, True, "show unit disk"}, {
+         False, True}}}, "Options" :> {ControlPlacement -> Left}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{558., {225., 230.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`ps[
+         Pattern[$CellContext`q$, 
+          Blank[]], 
+         Pattern[$CellContext`r$, 
+          Blank[]]] := With[{$CellContext`qq$ = 1/$CellContext`q$}, 
+         Polygon[
+          Flatten[
+           
+           Table[{{$CellContext`a, 
+               FE`b$$1073} + {-$CellContext`qq$, $CellContext`qq$}, \
+{$CellContext`a, 
+               FE`b$$1073} + {-$CellContext`qq$, -$CellContext`qq$}, \
+{$CellContext`a, 
+               FE`b$$1073} + {$CellContext`qq$, -$CellContext`qq$}, \
+{$CellContext`a, 
+               FE`b$$1073} + {$CellContext`qq$, $CellContext`qq$}}, \
+{$CellContext`a, -1 + 1/$CellContext`r$, 1 - 1/$CellContext`r$, 
+             2/$CellContext`r$}, {
+            FE`b$$1073, -1 + 1/$CellContext`r$, 1 - 1/$CellContext`r$, 
+             2/$CellContext`r$}], 1]]], FE`b$$1073 = False, 
+       Attributes[PlotRange] = {ReadProtected}}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->422263935],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`b$$ = False, $CellContext`e$$ = 
+    True, $CellContext`g$$ = True, $CellContext`p$$ = 
+    False, $CellContext`r$$ = True, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold["terms to include"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`r$$], True, 
+       Rational[8, 9]}, {False, True}}, {{
+       Hold[$CellContext`g$$], True, 
+       Rational[24, 25]}, {False, True}}, {{
+       Hold[$CellContext`b$$], False, 
+       Rational[48, 49]}, {False, True}}, {{
+       Hold[$CellContext`e$$], True, "show approximation"}, {False, True}}, {{
+      
+       Hold[$CellContext`p$$], False, "show unit disk"}, {False, True}}}, 
+    Typeset`size$$ = {400., {198., 202.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`r$57477$$ = False, $CellContext`g$57478$$ = 
+    False, $CellContext`b$57479$$ = False, $CellContext`e$57480$$ = 
+    False, $CellContext`p$57481$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`b$$ = False, $CellContext`e$$ = 
+        True, $CellContext`g$$ = True, $CellContext`p$$ = 
+        False, $CellContext`r$$ = True}, "ControllerVariables" :> {
+        Hold[$CellContext`r$$, $CellContext`r$57477$$, False], 
+        Hold[$CellContext`g$$, $CellContext`g$57478$$, False], 
+        Hold[$CellContext`b$$, $CellContext`b$57479$$, False], 
+        Hold[$CellContext`e$$, $CellContext`e$57480$$, False], 
+        Hold[$CellContext`p$$, $CellContext`p$57481$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      With[{$CellContext`di$ = 
+         N[-Pi + ((4 If[$CellContext`r$$, 8/9, 1]) 
+             If[$CellContext`g$$, 24/25, 1]) If[$CellContext`b$$, 48/49, 1]]},
+         
+        Graphics[{
+          RGBColor[0.12, 0.61, 0.78], 
+          Rectangle[{-1, -1}, {1, 1}], 
+          If[$CellContext`r$$, {White, 
+            $CellContext`ps[6, 2]}, {}], 
+          If[$CellContext`g$$, {White, 
+            $CellContext`ps[30, 6]}, {}], 
+          If[$CellContext`b$$, {White, 
+            $CellContext`ps[210, 30]}, {}], 
+          Opacity[0.5], 
+          If[$CellContext`p$$, {
+            Lighter[Green], 
+            Disk[]}, {}], 
+          If[$CellContext`e$$, {Gray, 
+            Tooltip[
+             Disk[{0, 0}, (Pi + $CellContext`di$)^(1/2)/Pi^(1/2)], 
+             Row[{"- \[Pi] + \[CapitalPi] = ", $CellContext`di$}]]}, {}], 
+          Black, 
+          Line[{{(-7)/6, 0}, {7/6, 0}}], 
+          Line[{{0, (-7)/6}, {0, 7/6}}]}, PlotRange -> 7/6, ImageSize -> 
+         400]], "Specifications" :> {
+       "terms to include", {{$CellContext`r$$, True, 
+          Rational[8, 9]}, {False, True}}, {{$CellContext`g$$, True, 
+          Rational[24, 25]}, {False, True}}, {{$CellContext`b$$, False, 
+          Rational[48, 49]}, {False, True}}, 
+        Delimiter, {{$CellContext`e$$, True, "show approximation"}, {
+         False, True}}, {{$CellContext`p$$, False, "show unit disk"}, {
+         False, True}}}, "Options" :> {ControlPlacement -> Left}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{558., {225., 230.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`ps[
+         Pattern[$CellContext`q$, 
+          Blank[]], 
+         Pattern[$CellContext`r$, 
+          Blank[]]] := With[{$CellContext`qq$ = 1/$CellContext`q$}, 
+         Polygon[
+          Flatten[
+           
+           Table[{{$CellContext`a, 
+               FE`b$$1073} + {-$CellContext`qq$, $CellContext`qq$}, \
+{$CellContext`a, 
+               FE`b$$1073} + {-$CellContext`qq$, -$CellContext`qq$}, \
+{$CellContext`a, 
+               FE`b$$1073} + {$CellContext`qq$, -$CellContext`qq$}, \
+{$CellContext`a, 
+               FE`b$$1073} + {$CellContext`qq$, $CellContext`qq$}}, \
+{$CellContext`a, -1 + 1/$CellContext`r$, 1 - 1/$CellContext`r$, 
+             2/$CellContext`r$}, {
+            FE`b$$1073, -1 + 1/$CellContext`r$, 1 - 1/$CellContext`r$, 
+             2/$CellContext`r$}], 1]]], FE`b$$1073 = False, 
+       Attributes[PlotRange] = {ReadProtected}}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->158050296],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`b$$ = True, $CellContext`e$$ = 
+    False, $CellContext`g$$ = True, $CellContext`p$$ = 
+    False, $CellContext`r$$ = True, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold["terms to include"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`r$$], True, 
+       Rational[8, 9]}, {False, True}}, {{
+       Hold[$CellContext`g$$], True, 
+       Rational[24, 25]}, {False, True}}, {{
+       Hold[$CellContext`b$$], True, 
+       Rational[48, 49]}, {False, True}}, {{
+       Hold[$CellContext`e$$], False, "show approximation"}, {
+      False, True}}, {{
+       Hold[$CellContext`p$$], False, "show unit disk"}, {False, True}}}, 
+    Typeset`size$$ = {400., {198., 202.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`r$57554$$ = False, $CellContext`g$57555$$ = 
+    False, $CellContext`b$57556$$ = False, $CellContext`e$57557$$ = 
+    False, $CellContext`p$57558$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`b$$ = True, $CellContext`e$$ = 
+        False, $CellContext`g$$ = True, $CellContext`p$$ = 
+        False, $CellContext`r$$ = True}, "ControllerVariables" :> {
+        Hold[$CellContext`r$$, $CellContext`r$57554$$, False], 
+        Hold[$CellContext`g$$, $CellContext`g$57555$$, False], 
+        Hold[$CellContext`b$$, $CellContext`b$57556$$, False], 
+        Hold[$CellContext`e$$, $CellContext`e$57557$$, False], 
+        Hold[$CellContext`p$$, $CellContext`p$57558$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      With[{$CellContext`di$ = 
+         N[-Pi + ((4 If[$CellContext`r$$, 8/9, 1]) 
+             If[$CellContext`g$$, 24/25, 1]) If[$CellContext`b$$, 48/49, 1]]},
+         
+        Graphics[{
+          RGBColor[0.12, 0.61, 0.78], 
+          Rectangle[{-1, -1}, {1, 1}], 
+          If[$CellContext`r$$, {White, 
+            $CellContext`ps[6, 2]}, {}], 
+          If[$CellContext`g$$, {White, 
+            $CellContext`ps[30, 6]}, {}], 
+          If[$CellContext`b$$, {White, 
+            $CellContext`ps[210, 30]}, {}], 
+          Opacity[0.5], 
+          If[$CellContext`p$$, {
+            Lighter[Green], 
+            Disk[]}, {}], 
+          If[$CellContext`e$$, {Gray, 
+            Tooltip[
+             Disk[{0, 0}, (Pi + $CellContext`di$)^(1/2)/Pi^(1/2)], 
+             Row[{"- \[Pi] + \[CapitalPi] = ", $CellContext`di$}]]}, {}], 
+          Black, 
+          Line[{{(-7)/6, 0}, {7/6, 0}}], 
+          Line[{{0, (-7)/6}, {0, 7/6}}]}, PlotRange -> 7/6, ImageSize -> 
+         400]], "Specifications" :> {
+       "terms to include", {{$CellContext`r$$, True, 
+          Rational[8, 9]}, {False, True}}, {{$CellContext`g$$, True, 
+          Rational[24, 25]}, {False, True}}, {{$CellContext`b$$, True, 
+          Rational[48, 49]}, {False, True}}, 
+        Delimiter, {{$CellContext`e$$, False, "show approximation"}, {
+         False, True}}, {{$CellContext`p$$, False, "show unit disk"}, {
+         False, True}}}, "Options" :> {ControlPlacement -> Left}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{558., {225., 230.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`ps[
+         Pattern[$CellContext`q$, 
+          Blank[]], 
+         Pattern[$CellContext`r$, 
+          Blank[]]] := With[{$CellContext`qq$ = 1/$CellContext`q$}, 
+         Polygon[
+          Flatten[
+           
+           Table[{{$CellContext`a, 
+               FE`b$$1073} + {-$CellContext`qq$, $CellContext`qq$}, \
+{$CellContext`a, 
+               FE`b$$1073} + {-$CellContext`qq$, -$CellContext`qq$}, \
+{$CellContext`a, 
+               FE`b$$1073} + {$CellContext`qq$, -$CellContext`qq$}, \
+{$CellContext`a, 
+               FE`b$$1073} + {$CellContext`qq$, $CellContext`qq$}}, \
+{$CellContext`a, -1 + 1/$CellContext`r$, 1 - 1/$CellContext`r$, 
+             2/$CellContext`r$}, {
+            FE`b$$1073, -1 + 1/$CellContext`r$, 1 - 1/$CellContext`r$, 
+             2/$CellContext`r$}], 1]]], FE`b$$1073 = False, 
+       Attributes[PlotRange] = {ReadProtected}}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->52238162]
+}, Open  ]],
+
+Cell["", "DetailsSection"],
+
+Cell["", "ImplementationSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SearchTermsSection"],
+
+Cell["approximation", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.373192215323687*^9, 3.373192220216247*^9}},
+ CellID->1935899385],
+
+Cell["Pi", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.373192204715674*^9, 3.373192204927684*^9}},
+ CellID->1041210963],
+
+Cell["product", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.373192225915825*^9, 3.373192228336362*^9}},
+ CellID->136227998]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "RelatedLinksSection"],
+
+Cell[TextData[ButtonBox["Wallis Sieve",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/WallisSieve.html"], 
+   None}]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3710705171712017`*^9, 3.371070531792005*^9}, {
+   3.371070568833723*^9, 3.371070568885819*^9}, {3.3719840600146093`*^9, 
+   3.371984088605608*^9}, {3.372908593181985*^9, 3.372908617067604*^9}, {
+   3.372967386389408*^9, 3.372967387802045*^9}, {3.373192174291197*^9, 
+   3.373192202071816*^9}},
+ CellID->917457820]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Michael Schreiber",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Michael+\
+Schreiber"], None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Michael+Schreiber"]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.36915918170661*^9, 3.36915919852718*^9}},
+ CellID->202572579]
+}, Open  ]],
+
+Cell["", "NotesSection"]
+}, Open  ]]
+},
+AutoGeneratedPackage->None,
+WindowSize->{792, 573},
+WindowMargins->{{-132, 132}, {Automatic, 0}},
+FrontEndVersion->"6.0 for Microsoft Windows (32-bit) (June 19, 2007)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[35308, 851, 310, 8, 70, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[35621, 861, 677, 16, 70, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[36301, 879, 339, 11, 70, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[36643, 892, 636, 15, 70, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[37282, 909, 843, 21, 70, "ControlSuggestions",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[38128, 932, 303, 8, 70, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[38434, 942, 1411, 31, 70, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[39848, 975, 881, 21, 70, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 42755, 1071},
+ {"RotateAndZoomIn3D", 42863, 1074},
+ {"DragLocators", 42972, 1077},
+ {"CreateAndDeleteLocators", 43087, 1080},
+ {"SliderZoom", 43200, 1083},
+ {"GamepadControls", 43305, 1086},
+ {"AutomaticAnimation", 43417, 1089},
+ {"BookmarkAnimation", 43533, 1092}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[590, 23, 783, 12, 70, "DemoTitle",
+ CellID->700863240],
+Cell[CellGroupData[{
+Cell[1398, 39, 33, 0, 70, "InitializationSection"],
+Cell[1434, 41, 1896, 58, 70, "Input",
+ InitializationCell->True,
+ CellID->839747613]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[3367, 104, 29, 0, 70, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[3421, 108, 6403, 168, 70, "Input",
+ CellID->1496021318],
+Cell[9827, 278, 4870, 103, 70, "Output",
+ CellID->458508498]
+}, {2}]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14743, 387, 36, 0, 70, "ManipulateCaptionSection"],
+Cell[14782, 389, 783, 21, 70, "ManipulateCaption",
+ CellID->366394684]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15602, 415, 28, 0, 70, "ThumbnailSection"],
+Cell[15633, 417, 4866, 103, 70, "Output",
+ CellID->242212232]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[20536, 525, 28, 0, 70, "SnapshotsSection"],
+Cell[20567, 527, 4862, 103, 70, "Output",
+ CellID->422263935],
+Cell[25432, 632, 4866, 103, 70, "Output",
+ CellID->158050296],
+Cell[30301, 737, 4865, 103, 70, "Output",
+ CellID->52238162]
+}, Open  ]],
+Cell[35181, 843, 26, 0, 70, "DetailsSection"],
+Cell[35210, 845, 33, 0, 70, "ImplementationSection"],
+Cell[CellGroupData[{
+Cell[35268, 849, 37, 0, 70, "ControlSuggestionsSection"],
+Cell[35308, 851, 310, 8, 70, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[35621, 861, 677, 16, 70, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[36301, 879, 339, 11, 70, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[36643, 892, 636, 15, 70, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[37282, 909, 843, 21, 70, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[38128, 932, 303, 8, 70, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[38434, 942, 1411, 31, 70, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[39848, 975, 881, 21, 70, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[40766, 1001, 30, 0, 70, "SearchTermsSection"],
+Cell[40799, 1003, 147, 3, 70, "SearchTerms",
+ CellID->1935899385],
+Cell[40949, 1008, 136, 3, 70, "SearchTerms",
+ CellID->1041210963],
+Cell[41088, 1013, 140, 3, 70, "SearchTerms",
+ CellID->136227998]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[41265, 1021, 31, 0, 70, "RelatedLinksSection"],
+Cell[41299, 1023, 525, 11, 70, "RelatedLinks",
+ CellID->917457820]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[41861, 1039, 25, 0, 70, "AuthorSection"],
+Cell[41889, 1041, 416, 12, 70, "Author",
+ CellID->202572579]
+}, Open  ]],
+Cell[42320, 1056, 24, 0, 70, "NotesSection"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

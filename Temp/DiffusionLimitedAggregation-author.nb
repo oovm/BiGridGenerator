@@ -1,0 +1,2956 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[    149398,       2947]
+NotebookOptionsPosition[    145167,       2815]
+NotebookOutlinePosition[    146811,       2867]
+CellTagsIndexPosition[    146475,       2855]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Diffusion-Limited Aggregation", "DemoTitle",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.412468532824605*^9, 3.412468541062565*^9}, {
+   3.412472147128665*^9, 3.412472165497706*^9}, {3.4136429892104826`*^9, 
+   3.413642989413598*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["", "InitializationSection"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"DLA", "=", 
+   RowBox[{"Compile", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"steps", ",", "_Integer"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"width", ",", "_Integer"}], "}"}]}], "}"}], ",", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"list", "=", 
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"1", ",", "1"}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"1", ",", "1"}], "}"}]}], "}"}], ",", 
+            RowBox[{"{", "steps", "}"}]}], "]"}]}], ",", "r", ",", "v", ",", 
+         "v1"}], "}"}], ",", 
+       RowBox[{
+        RowBox[{"Do", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"n", "[", "i", "]"}], "=", "0"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", 
+            RowBox[{"width", "+", "1"}]}], "}"}]}], "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Do", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"r", "=", 
+            RowBox[{"RandomInteger", "[", 
+             RowBox[{"{", 
+              RowBox[{"2", ",", 
+               RowBox[{"width", "-", "1"}]}], "}"}], "]"}]}], ";", 
+           RowBox[{"Which", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{"n", "[", "r", "]"}], "<", 
+               RowBox[{"n", "[", 
+                RowBox[{"r", "-", "1"}], "]"}]}], "&&", 
+              RowBox[{
+               RowBox[{"n", "[", 
+                RowBox[{"r", "+", "1"}], "]"}], "<", 
+               RowBox[{"n", "[", 
+                RowBox[{"r", "-", "1"}], "]"}]}]}], ",", 
+             RowBox[{"v", "=", 
+              RowBox[{"r", "-", "1"}]}], ",", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"n", "[", "r", "]"}], "<", 
+               RowBox[{"n", "[", 
+                RowBox[{"r", "+", "1"}], "]"}]}], "&&", 
+              RowBox[{
+               RowBox[{"n", "[", 
+                RowBox[{"r", "-", "1"}], "]"}], "\[LessEqual]", 
+               RowBox[{"n", "[", 
+                RowBox[{"r", "+", "1"}], "]"}]}]}], ",", 
+             RowBox[{"v", "=", 
+              RowBox[{"r", "+", "1"}]}], ",", "True", ",", 
+             RowBox[{"v", "=", "r"}]}], "]"}], ";", 
+           RowBox[{"v1", "=", 
+            RowBox[{"n", "[", "v", "]"}]}], ";", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{"1", "<", "r", "<", "width"}], ",", 
+             RowBox[{
+              RowBox[{"n", "[", "r", "]"}], "=", 
+              RowBox[{
+               RowBox[{"n", "[", "v", "]"}], "+", "1"}]}]}], "]"}], ";", 
+           RowBox[{
+            RowBox[{"list", "[", 
+             RowBox[{"[", "j", "]"}], "]"}], "=", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"v", ",", "v1"}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"r", ",", 
+                RowBox[{"n", "[", "r", "]"}]}], "}"}]}], "}"}]}]}], ",", 
+          RowBox[{"{", 
+           RowBox[{"j", ",", "steps"}], "}"}]}], "]"}], ";", "list"}]}], 
+      "]"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.412544686445291*^9, 3.4125447919481487`*^9}, {
+   3.412545268578122*^9, 3.4125453073184223`*^9}, {3.412545779035441*^9, 
+   3.4125458193930473`*^9}, {3.412545915703912*^9, 3.412545926974242*^9}, {
+   3.412545987130529*^9, 3.412546001557159*^9}, {3.412546330703136*^9, 
+   3.412546344994385*^9}, {3.412546407116115*^9, 3.412546514375292*^9}, {
+   3.412546550133082*^9, 3.412546573724169*^9}, {3.4125466511212387`*^9, 
+   3.412546651205791*^9}, {3.412546807174519*^9, 3.412546807515181*^9}, {
+   3.412546972526688*^9, 3.41254700516321*^9}, {3.412547036742774*^9, 
+   3.412547053300262*^9}, {3.4125470917675257`*^9, 3.412547092303577*^9}, {
+   3.412547555513702*^9, 3.412547557592835*^9}, 3.412547587736691*^9, {
+   3.412547700086463*^9, 3.412547724325849*^9}, {3.412547890313059*^9, 
+   3.412547890610239*^9}, {3.412547939411468*^9, 3.412547958019217*^9}, {
+   3.412547992687248*^9, 3.412547992900235*^9}, {3.4125481334731903`*^9, 
+   3.41254813653314*^9}, {3.412548733010942*^9, 3.412548741888929*^9}, {
+   3.412548773610559*^9, 3.412548780470257*^9}, {3.412549768740519*^9, 
+   3.412549790668323*^9}, 3.4125500738699713`*^9, {3.412550333188043*^9, 
+   3.412550353223201*^9}, {3.412550501693757*^9, 3.412550556500226*^9}, {
+   3.412550600578302*^9, 3.41255060066829*^9}, {3.412550907272472*^9, 
+   3.412550915396347*^9}, {3.4125515058461227`*^9, 3.412551527465664*^9}, {
+   3.4125518917535763`*^9, 3.41255197437431*^9}, {3.412552050063716*^9, 
+   3.412552050894746*^9}, {3.412552241800927*^9, 3.412552242943894*^9}, 
+   3.412553864649886*^9, {3.412554169769389*^9, 3.412554174518968*^9}, {
+   3.412554425231056*^9, 3.412554425381475*^9}, {3.4125544715495462`*^9, 
+   3.412554514492146*^9}, {3.412554569080865*^9, 3.4125545693500423`*^9}, {
+   3.412554705937014*^9, 3.4125547160228167`*^9}, 3.412555531830289*^9, {
+   3.4125556037701283`*^9, 3.412555621582334*^9}, {3.412620825739916*^9, 
+   3.412620844869924*^9}, 3.412965670438368*^9, {3.413300599080269*^9, 
+   3.4133006155899677`*^9}, {3.413300656319887*^9, 3.413300660158849*^9}},
+ CellID->1927002126],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"DLA2", "=", 
+   RowBox[{"Compile", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"r", ",", "_Integer"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"m", ",", "_Integer"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"n", ",", "_Integer"}], "}"}]}], "}"}], ",", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"pos", ",", "\[Theta]", ",", 
+         RowBox[{"i", "=", "0"}], ",", 
+         RowBox[{"occupiedSites", "=", 
+          RowBox[{"{", 
+           RowBox[{"{", 
+            RowBox[{"0", ",", "0"}], "}"}], "}"}]}], ",", 
+         RowBox[{"dirs", "=", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"1", ",", "0"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"0", ",", "1"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"-", "1"}], ",", "0"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"0", ",", 
+              RowBox[{"-", "1"}]}], "}"}]}], "}"}]}]}], "}"}], ",", 
+       RowBox[{
+        RowBox[{"While", "[", 
+         RowBox[{
+          RowBox[{"i", "<", "n"}], ",", 
+          RowBox[{
+           RowBox[{"i", "++"}], ";", 
+           RowBox[{"\[Theta]", "=", 
+            RowBox[{"RandomReal", "[", 
+             RowBox[{"{", 
+              RowBox[{"0", ",", 
+               RowBox[{"2", "\[Pi]"}]}], "}"}], "]"}]}], ";", 
+           RowBox[{"pos", "=", 
+            RowBox[{"Floor", "[", 
+             RowBox[{"r", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"Cos", "[", "\[Theta]", "]"}], ",", 
+                RowBox[{"Sin", "[", "\[Theta]", "]"}]}], "}"}]}], "]"}]}], 
+           ";", 
+           RowBox[{"With", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"pl", "=", 
+               RowBox[{"r", "+", "m"}]}], "}"}], ",", 
+             RowBox[{"While", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{"Abs", "@", 
+                  RowBox[{"pos", "[", 
+                   RowBox[{"[", "1", "]"}], "]"}]}], "<", "pl"}], "\[And]", 
+                RowBox[{
+                 RowBox[{"Abs", "@", 
+                  RowBox[{"pos", "[", 
+                   RowBox[{"[", "2", "]"}], "]"}]}], "<", "pl"}], "\[And]", 
+                RowBox[{"!", 
+                 RowBox[{"MemberQ", "[", 
+                  RowBox[{"occupiedSites", ",", "pos"}], "]"}]}], "\[And]", 
+                RowBox[{"Catch", "[", 
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"Do", "[", 
+                    RowBox[{
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"MemberQ", "[", 
+                    RowBox[{"occupiedSites", ",", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"pos", "+", "#"}], "&"}], "/@", "dirs"}], ")"}], 
+                    "[", 
+                    RowBox[{"[", "k", "]"}], "]"}]}], "]"}], ",", 
+                    RowBox[{"Throw", "[", "False", "]"}]}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"k", ",", "4"}], "}"}]}], "]"}], ";", "True"}], 
+                  ")"}], "]"}]}], ",", 
+               RowBox[{"pos", "+=", 
+                RowBox[{"RandomChoice", "[", "dirs", "]"}]}]}], "]"}]}], 
+            "]"}], ";", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{"Catch", "[", 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"Do", "[", 
+                 RowBox[{
+                  RowBox[{"If", "[", 
+                   RowBox[{
+                    RowBox[{"MemberQ", "[", 
+                    RowBox[{"occupiedSites", ",", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"pos", "+", "#"}], "&"}], "/@", "dirs"}], ")"}], 
+                    "[", 
+                    RowBox[{"[", "k", "]"}], "]"}]}], "]"}], ",", 
+                    RowBox[{"Throw", "[", "True", "]"}]}], "]"}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{"k", ",", "4"}], "}"}]}], "]"}], ";", "False"}], 
+               ")"}], "]"}], ",", 
+             RowBox[{"AppendTo", "[", 
+              RowBox[{"occupiedSites", ",", "pos"}], "]"}]}], "]"}]}]}], 
+         "]"}], ";", "occupiedSites"}]}], "]"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4127122567684507`*^9, 3.41271236003651*^9}, {
+   3.412712645867626*^9, 3.412712654384856*^9}, {3.412712928274735*^9, 
+   3.4127129965622997`*^9}, {3.4127131081088657`*^9, 3.412713154015473*^9}, {
+   3.4127131895983553`*^9, 3.412713201575396*^9}, {3.412713292744822*^9, 
+   3.412713337450924*^9}, {3.412713375254345*^9, 3.412713400483972*^9}, {
+   3.4127134436899443`*^9, 3.412713462756489*^9}, {3.412714134337111*^9, 
+   3.4127141397323837`*^9}, {3.412714253084992*^9, 3.41271425373772*^9}, {
+   3.412714397480321*^9, 3.4127143982212563`*^9}, {3.412714571989482*^9, 
+   3.412714597626588*^9}, {3.412715776908051*^9, 3.412715776988761*^9}, 
+   3.412716501733025*^9, {3.4127165600466633`*^9, 3.412716560809948*^9}, {
+   3.4127166072212057`*^9, 3.41271660805894*^9}, 3.412717410500752*^9, {
+   3.412717632335267*^9, 3.4127176937388763`*^9}, {3.412717726262116*^9, 
+   3.412717747898554*^9}, 3.412718270551859*^9, {3.412722626576605*^9, 
+   3.412722648094232*^9}, {3.412722808228359*^9, 3.412722810509987*^9}, {
+   3.41272296984855*^9, 3.412722971267901*^9}, {3.412723820495537*^9, 
+   3.412723832725328*^9}, {3.412723866357099*^9, 3.4127238696159067`*^9}, {
+   3.41272444328563*^9, 3.412724446001659*^9}, {3.4127245360355473`*^9, 
+   3.412724567810511*^9}, {3.412724602029298*^9, 3.41272461736896*^9}, {
+   3.4127246546652308`*^9, 3.4127246646578503`*^9}, {3.412724711505496*^9, 
+   3.412724815207015*^9}, {3.412725037082841*^9, 3.4127250410053*^9}, {
+   3.412725081727908*^9, 3.412725121538227*^9}, {3.412725226619419*^9, 
+   3.41272522694409*^9}, {3.412725400741638*^9, 3.4127254155370607`*^9}, 
+   3.412725701447028*^9, {3.4127266585209713`*^9, 3.412726670678022*^9}, {
+   3.412726822304901*^9, 3.412726857240481*^9}, {3.412727218387782*^9, 
+   3.412727252921631*^9}, {3.412727445759392*^9, 3.412727460718742*^9}, {
+   3.412727600204403*^9, 3.412727604339181*^9}, {3.412728033783525*^9, 
+   3.412728040515574*^9}, 3.4127287453168716`*^9, {3.4127291537540617`*^9, 
+   3.412729154389303*^9}, {3.412805418519425*^9, 3.412805521405819*^9}, {
+   3.412805551862628*^9, 3.412805627301852*^9}, {3.4128057044369926`*^9, 
+   3.4128057360036707`*^9}, {3.4128059171911182`*^9, 3.412805917890485*^9}, {
+   3.412806231136877*^9, 3.4128062359117403`*^9}, {3.4128071999487247`*^9, 
+   3.412807244207061*^9}, {3.41280727467767*^9, 3.4128072943855257`*^9}, {
+   3.412807379894578*^9, 3.412807382691736*^9}, {3.412807433332177*^9, 
+   3.412807435859095*^9}, {3.412807477172394*^9, 3.4128074851424313`*^9}, {
+   3.412807819543971*^9, 3.412807821940414*^9}, {3.412807862995009*^9, 
+   3.412807864375886*^9}, {3.412809467004046*^9, 3.4128095306883917`*^9}, {
+   3.4128095731536617`*^9, 3.412809584407796*^9}, {3.4128109590953283`*^9, 
+   3.412810972209338*^9}, {3.412811126206747*^9, 3.412811128563236*^9}, {
+   3.4128134033146887`*^9, 3.412813417818042*^9}, 3.412814581754633*^9, 
+   3.412814616833129*^9, 3.412876261421883*^9, 3.412876315824432*^9, {
+   3.412876572055427*^9, 3.412876576665512*^9}, {3.4128771792970057`*^9, 
+   3.412877183485963*^9}, {3.412877323837131*^9, 3.4128773863508253`*^9}, {
+   3.412877874026876*^9, 3.4128779198388243`*^9}, {3.412877995826334*^9, 
+   3.41287802021663*^9}, {3.412878057663357*^9, 3.4128780732470703`*^9}, {
+   3.412878150338932*^9, 3.412878153511331*^9}, {3.4128787273122387`*^9, 
+   3.41287872760585*^9}, {3.412878821883292*^9, 3.4128788275615597`*^9}, {
+   3.412878866102045*^9, 3.412878898208497*^9}, {3.4128789527187357`*^9, 
+   3.412878974234933*^9}, {3.412880848538567*^9, 3.412880861130885*^9}, {
+   3.412880940011668*^9, 3.412880963748239*^9}, {3.412881008981616*^9, 
+   3.41288101268115*^9}, 3.412887407305829*^9, {3.412887505607686*^9, 
+   3.412887509818101*^9}, 3.412887636072473*^9, {3.4128880708493357`*^9, 
+   3.4128880914524937`*^9}, {3.412888229213004*^9, 3.412888263462265*^9}, {
+   3.412888310713056*^9, 3.412888311026794*^9}, {3.412888456527553*^9, 
+   3.41288845703485*^9}, {3.4128887428976727`*^9, 3.412888742987247*^9}, 
+   3.412889561906713*^9, {3.4128917045837917`*^9, 3.41289172909997*^9}, {
+   3.412891770002741*^9, 3.4128917704367657`*^9}, {3.412901885971148*^9, 
+   3.412901996297484*^9}, {3.412902044219659*^9, 3.412902048171501*^9}, {
+   3.412902188059321*^9, 3.412902188174815*^9}, {3.412902515866829*^9, 
+   3.412902525933585*^9}, {3.4129025637176247`*^9, 3.412902658842976*^9}, {
+   3.412902696977252*^9, 3.412902698854516*^9}, {3.412905898333263*^9, 
+   3.412905913737364*^9}, 3.4129654569681377`*^9, {3.413300663023538*^9, 
+   3.413300666162229*^9}, {3.413300873219927*^9, 3.413300911844761*^9}},
+ CellID->289405278]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Pane", "[", 
+    RowBox[{
+     RowBox[{"With", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"evol", "=", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"dim", "\[Equal]", "\"\<1D\>\""}], ",", 
+           RowBox[{"DLA", "[", 
+            RowBox[{"steps", ",", "width"}], "]"}], ",", 
+           RowBox[{"DLA2", "[", 
+            RowBox[{"r", ",", "m", ",", "steps"}], "]"}]}], "]"}]}], "}"}], 
+       ",", 
+       RowBox[{
+        RowBox[{"SeedRandom", "[", "seed", "]"}], ";", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"dim", "\[Equal]", "\"\<1D\>\""}], ",", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"view", "\[Equal]", "\"\<lines\>\""}], ",", 
+            RowBox[{"Graphics", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"Thickness", "[", "0.01", "]"}], ",", 
+                RowBox[{"MapIndexed", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"ColorData", "[", "\"\<Rainbow\>\"", "]"}], "[", 
+                    RowBox[{
+                    RowBox[{"First", "@", "#2"}], "/", 
+                    RowBox[{"Length", "[", "evol", "]"}]}], "]"}], ",", 
+                    RowBox[{"Line", "[", "#", "]"}]}], "}"}], "&"}], ",", 
+                  "evol"}], "]"}]}], "}"}], ",", 
+              RowBox[{"Background", "\[Rule]", 
+               RowBox[{
+                RowBox[{"ColorData", "[", "\"\<Rainbow\>\"", "]"}], "[", "0", 
+                "]"}]}], ",", 
+              RowBox[{"PlotRange", "\[Rule]", 
+               RowBox[{"{", 
+                RowBox[{"Automatic", ",", 
+                 RowBox[{"{", 
+                  RowBox[{"0", ",", 
+                   RowBox[{"Max", "[", 
+                    RowBox[{"evol", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}]}], "}"}]}],
+                 "}"}]}]}], "]"}], ",", 
+            RowBox[{"With", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"evol2", "=", 
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{"Last", "/@", "evol"}], "/.", "\[InvisibleSpace]", 
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{"i_", ",", "j_"}], "}"}], "\[Rule]", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Max", "[", 
+                    RowBox[{"evol", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}], "-", "j", 
+                    "+", "2"}], ",", "i"}], "}"}], "-", 
+                    RowBox[{"Min", "/@", 
+                    RowBox[{"Transpose", "[", "evol", "]"}]}]}]}]}], ")"}]}], 
+               "}"}], ",", 
+              RowBox[{"ArrayPlot", "[", 
+               RowBox[{
+                RowBox[{"SparseArray", "[", 
+                 RowBox[{"Thread", "[", 
+                  RowBox[{"evol2", "\[Rule]", 
+                   RowBox[{"N", "[", 
+                    FractionBox[
+                    RowBox[{"Range", "[", 
+                    RowBox[{"Length", "[", "evol", "]"}], "]"}], 
+                    RowBox[{"Length", "[", "evol", "]"}]], "]"}]}], "]"}], 
+                 "]"}], ",", 
+                RowBox[{"ColorFunction", "\[Rule]", "\"\<Rainbow\>\""}]}], 
+               "]"}]}], "]"}]}], "]"}], ",", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"view", "\[Equal]", "\"\<lines\>\""}], ",", 
+            RowBox[{"Graphics", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"Thickness", "[", "0.01", "]"}], ",", 
+                RowBox[{"MapIndexed", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"ColorData", "[", "\"\<Rainbow\>\"", "]"}], "[", 
+                    RowBox[{"N", "[", 
+                    FractionBox[
+                    RowBox[{"First", "[", "#2", "]"}], 
+                    RowBox[{"Length", "[", "evol", "]"}]], "]"}], "]"}], ",", 
+                    RowBox[{"Line", "[", "#", "]"}]}], "}"}], "&"}], ",", 
+                  RowBox[{"Flatten", "[", 
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"With", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"s", "=", "#"}], "}"}], ",", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"s", ",", "#"}], "}"}], "&"}], "/@", 
+                    RowBox[{"Union", "@", 
+                    RowBox[{"Nearest", "[", 
+                    RowBox[{"evol", ",", "#", ",", 
+                    RowBox[{"DistanceFunction", "\[Rule]", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Norm", "[", 
+                    RowBox[{"#", "-", "#2"}], "]"}], "\[Equal]", "1"}], ",", 
+                    "1", ",", "2"}], "]"}], "&"}], ")"}]}]}], "]"}]}]}]}], 
+                    "]"}], ")"}], "&"}], "/@", "evol"}], ",", "1"}], "]"}]}], 
+                 "]"}]}], "}"}], ",", 
+              RowBox[{"Background", "\[Rule]", 
+               RowBox[{
+                RowBox[{"ColorData", "[", "\"\<Rainbow\>\"", "]"}], "[", "0", 
+                "]"}]}]}], "]"}], ",", 
+            RowBox[{"With", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"evol2", "=", 
+                RowBox[{"(", 
+                 RowBox[{"evol", "/.", "\[InvisibleSpace]", 
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{"i_", ",", "j_"}], "}"}], "\[Rule]", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"i", ",", "j"}], "}"}], "-", 
+                    RowBox[{"Min", "/@", 
+                    RowBox[{"Transpose", "[", "evol", "]"}]}], "+", "1"}]}]}],
+                  ")"}]}], "}"}], ",", 
+              RowBox[{"ArrayPlot", "[", 
+               RowBox[{
+                RowBox[{"Reverse", "@", 
+                 RowBox[{"Transpose", "@", 
+                  RowBox[{"SparseArray", "[", 
+                   RowBox[{"Thread", "[", 
+                    RowBox[{"evol2", "\[Rule]", 
+                    RowBox[{"N", "[", 
+                    FractionBox[
+                    RowBox[{"Range", "[", 
+                    RowBox[{"Length", "[", "evol", "]"}], "]"}], 
+                    RowBox[{"Length", "[", "evol", "]"}]], "]"}]}], "]"}], 
+                   "]"}]}]}], ",", 
+                RowBox[{"ColorFunction", "\[Rule]", "\"\<Rainbow\>\""}]}], 
+               "]"}]}], "]"}]}], "]"}]}], "]"}]}]}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"350", ",", "350"}], "}"}], ",", 
+     RowBox[{"Alignment", "\[Rule]", 
+      RowBox[{"{", "Center", "}"}]}]}], "]"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"dim", ",", "\"\<1D\>\"", ",", "\"\<dimension\>\""}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"\"\<1D\>\"", ",", "\"\<2D\>\""}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"view", ",", 
+     RowBox[{"{", 
+      RowBox[{"\"\<lines\>\"", ",", "\"\<squares\>\""}], "}"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"steps", ",", "220"}], "}"}], ",", "10", ",", "300", ",", "1", 
+     ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Small"}], ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", "Delimiter", ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{"width", ",", "40", ",", "100", ",", "1", ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Small"}], ",", 
+     RowBox[{"Enabled", "\[Rule]", 
+      RowBox[{"Dynamic", "[", 
+       RowBox[{"dim", "==", "\"\<1D\>\""}], "]"}]}], ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", "Delimiter", ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"r", ",", "12", ",", "\"\<radius r\>\""}], "}"}], ",", "5", ",",
+      "15", ",", "1", ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Small"}], ",", 
+     RowBox[{"Enabled", "\[Rule]", 
+      RowBox[{"Dynamic", "[", 
+       RowBox[{"dim", "==", "\"\<2D\>\""}], "]"}]}], ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"m", ",", "16", ",", "\"\<distance m\>\""}], "}"}], ",", "1", 
+     ",", "30", ",", "1", ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Small"}], ",", 
+     RowBox[{"Enabled", "\[Rule]", 
+      RowBox[{"Dynamic", "[", 
+       RowBox[{"dim", "==", "\"\<2D\>\""}], "]"}]}], ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "Delimiter", ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"seed", ",", "234556"}], "}"}], ",", 
+     SuperscriptBox["10", "5"], ",", 
+     RowBox[{
+      SuperscriptBox["10", "6"], "-", "1"}], ",", "1", ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Small"}], ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", "\n", 
+   RowBox[{"ControlPlacement", "\[Rule]", "Left"}], ",", 
+   RowBox[{"SaveDefinitions", "\[Rule]", "True"}], ",", 
+   RowBox[{"AutorunSequencing", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "2", ",", "3", ",", "4", ",", "7"}], "}"}]}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, 3.412469508351597*^9, {3.4124697379330873`*^9, 
+   3.412469872072897*^9}, {3.4124699784950857`*^9, 3.4124699790581493`*^9}, 
+   3.412470068824782*^9, 3.41247011663789*^9, {3.412472095548182*^9, 
+   3.4124721159262943`*^9}, {3.412472397901092*^9, 3.41247240476829*^9}, {
+   3.412472737490921*^9, 3.41247275424778*^9}, 3.4124727893478193`*^9, {
+   3.412539798857218*^9, 3.4125398581899023`*^9}, {3.4125399018729*^9, 
+   3.412539902127*^9}, {3.412539982352724*^9, 3.412540002000819*^9}, 
+   3.4125400514697027`*^9, {3.412540193126737*^9, 3.412540228689371*^9}, {
+   3.412540284325177*^9, 3.412540306815531*^9}, {3.4125407242258797`*^9, 
+   3.412540727265657*^9}, {3.4125407935496187`*^9, 3.412540793905506*^9}, 
+   3.41254467933715*^9, {3.412553892389523*^9, 3.412553903147203*^9}, {
+   3.412553968453672*^9, 3.4125539863933353`*^9}, {3.412554296763784*^9, 
+   3.412554327017932*^9}, {3.412554540536312*^9, 3.412554542159966*^9}, {
+   3.41255457612918*^9, 3.412554592849696*^9}, {3.412555609934231*^9, 
+   3.412555631834144*^9}, {3.412555808647958*^9, 3.4125558623475323`*^9}, 
+   3.4125589481143913`*^9, {3.412620734058209*^9, 3.412620740390675*^9}, {
+   3.412620859231913*^9, 3.412620869503354*^9}, {3.412898310384541*^9, 
+   3.412898415466627*^9}, {3.4128984915264053`*^9, 3.412898501302289*^9}, {
+   3.412898596477824*^9, 3.412898666564164*^9}, {3.412898762431859*^9, 
+   3.412898805722314*^9}, {3.412900581660346*^9, 3.4129006810076838`*^9}, {
+   3.412900755475287*^9, 3.412900772693223*^9}, 3.4129656773762617`*^9, {
+   3.412969978935848*^9, 3.412969998126801*^9}, {3.4129700520624037`*^9, 
+   3.412970071781562*^9}, {3.412970140298814*^9, 3.4129701525462646`*^9}, {
+   3.412970193047131*^9, 3.412970221700526*^9}, {3.412970259488594*^9, 
+   3.412970270526819*^9}, 3.412970305642272*^9, {3.41297060869346*^9, 
+   3.412970618329815*^9}, {3.41297071892093*^9, 3.412970762271841*^9}, {
+   3.4129708024822063`*^9, 3.412970808608461*^9}, {3.412970891775569*^9, 
+   3.412970893667115*^9}, {3.412974739494368*^9, 3.412974841297456*^9}, 
+   3.412978330746791*^9, 3.413234767860876*^9, {3.413234813239565*^9, 
+   3.413234848816823*^9}, {3.413235323853405*^9, 3.4132353267800007`*^9}, {
+   3.4132353771065617`*^9, 3.413235380201795*^9}, {3.413235414393072*^9, 
+   3.413235472438085*^9}, {3.413235527774732*^9, 3.4132355991085176`*^9}, {
+   3.4132356315299*^9, 3.413235631816237*^9}, {3.413235976534667*^9, 
+   3.413235977655776*^9}, {3.4132360695372*^9, 3.4132360753780403`*^9}, {
+   3.413236182354144*^9, 3.4132361915273037`*^9}, {3.413303987238679*^9, 
+   3.413303998269929*^9}, {3.413304041738679*^9, 3.413304052082429*^9}, {
+   3.413576586132704*^9, 3.413576624976454*^9}, {3.413576656945204*^9, 
+   3.413576674585829*^9}, {3.4136430094127026`*^9, 3.413643024005799*^9}},
+ CellID->263071836],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`dim$$ = "2D", $CellContext`m$$ = 
+    16, $CellContext`r$$ = 15, $CellContext`seed$$ = 
+    234556, $CellContext`steps$$ = 133, $CellContext`view$$ = 
+    "lines", $CellContext`width$$ = 40, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`dim$$], "1D", "dimension"}, {"1D", "2D"}}, {
+      Hold[$CellContext`view$$], {"lines", "squares"}}, {{
+       Hold[$CellContext`steps$$], 220}, 10, 300, 1}, {
+      Hold[$CellContext`width$$], 40, 100, 1}, {{
+       Hold[$CellContext`r$$], 12, "radius r"}, 5, 15, 1}, {{
+       Hold[$CellContext`m$$], 16, "distance m"}, 1, 30, 1}, {{
+       Hold[$CellContext`seed$$], 234556}, 100000, 999999, 1}}, 
+    Typeset`size$$ = {525., {259., 266.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`dim$791113$$ = False, $CellContext`view$791114$$ = 
+    False, $CellContext`steps$791115$$ = 0, $CellContext`width$791116$$ = 
+    0, $CellContext`r$791117$$ = 0, $CellContext`m$791118$$ = 
+    0, $CellContext`seed$791119$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`dim$$ = "1D", $CellContext`m$$ = 
+        16, $CellContext`r$$ = 12, $CellContext`seed$$ = 
+        234556, $CellContext`steps$$ = 220, $CellContext`view$$ = 
+        "lines", $CellContext`width$$ = 40}, "ControllerVariables" :> {
+        Hold[$CellContext`dim$$, $CellContext`dim$791113$$, False], 
+        Hold[$CellContext`view$$, $CellContext`view$791114$$, False], 
+        Hold[$CellContext`steps$$, $CellContext`steps$791115$$, 0], 
+        Hold[$CellContext`width$$, $CellContext`width$791116$$, 0], 
+        Hold[$CellContext`r$$, $CellContext`r$791117$$, 0], 
+        Hold[$CellContext`m$$, $CellContext`m$791118$$, 0], 
+        Hold[$CellContext`seed$$, $CellContext`seed$791119$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Pane[
+        With[{$CellContext`evol$ = If[$CellContext`dim$$ == "1D", 
+            $CellContext`DLA[$CellContext`steps$$, $CellContext`width$$], 
+            $CellContext`DLA2[$CellContext`r$$, $CellContext`m$$, \
+$CellContext`steps$$]]}, SeedRandom[$CellContext`seed$$]; 
+         If[$CellContext`dim$$ == "1D", 
+           If[$CellContext`view$$ == "lines", 
+            Graphics[{
+              Thickness[0.01], 
+              MapIndexed[{
+                ColorData["Rainbow"][First[#2]/Length[$CellContext`evol$]], 
+                Line[#]}& , $CellContext`evol$]}, Background -> 
+             ColorData["Rainbow"][0], PlotRange -> {Automatic, {0, 
+                Max[
+                 Part[$CellContext`evol$, All, 2]]}}], 
+            With[{$CellContext`evol2$ = ReplaceAll[
+                Map[Last, $CellContext`evol$], {
+                  Pattern[$CellContext`i$, 
+                   Blank[]], 
+                  Pattern[$CellContext`j$, 
+                   Blank[]]} -> {Max[
+                    Part[$CellContext`evol$, All, 2]] - $CellContext`j$ + 
+                   2, $CellContext`i$} - Map[Min, 
+                  Transpose[$CellContext`evol$]]]}, 
+             ArrayPlot[
+              SparseArray[
+               Thread[$CellContext`evol2$ -> N[Range[
+                    Length[$CellContext`evol$]]/Length[$CellContext`evol$]]]],
+               ColorFunction -> "Rainbow"]]], 
+           If[$CellContext`view$$ == "lines", 
+            Graphics[{
+              Thickness[0.01], 
+              MapIndexed[{
+                ColorData["Rainbow"][
+                 N[First[#2]/Length[$CellContext`evol$]]], 
+                Line[#]}& , 
+               Flatten[
+                Map[With[{$CellContext`s$ = #}, 
+                  Map[{$CellContext`s$, #}& , 
+                   Union[
+                    
+                    Nearest[$CellContext`evol$, #, 
+                    DistanceFunction -> (If[
+                    Norm[# - #2] == 1, 1, 2]& )]]]]& , $CellContext`evol$], 
+                1]]}, Background -> ColorData["Rainbow"][0]], 
+            With[{$CellContext`evol2$ = ReplaceAll[$CellContext`evol$, {
+                  Pattern[$CellContext`i$, 
+                   Blank[]], 
+                  Pattern[$CellContext`j$, 
+                   Blank[]]} -> {$CellContext`i$, $CellContext`j$} - Map[Min, 
+                  Transpose[$CellContext`evol$]] + 1]}, 
+             ArrayPlot[
+              Reverse[
+               Transpose[
+                SparseArray[
+                 Thread[$CellContext`evol2$ -> N[Range[
+                    Length[$CellContext`evol$]]/
+                    Length[$CellContext`evol$]]]]]], ColorFunction -> 
+              "Rainbow"]]]]], {350, 350}, Alignment -> {Center}], 
+      "Specifications" :> {{{$CellContext`dim$$, "1D", "dimension"}, {
+         "1D", "2D"}}, {$CellContext`view$$, {
+         "lines", "squares"}}, {{$CellContext`steps$$, 220}, 10, 300, 1, 
+         ImageSize -> Small, Appearance -> "Labeled"}, 
+        Delimiter, {$CellContext`width$$, 40, 100, 1, ImageSize -> Small, 
+         Enabled -> Dynamic[$CellContext`dim$$ == "1D"], Appearance -> 
+         "Labeled"}, 
+        Delimiter, {{$CellContext`r$$, 12, "radius r"}, 5, 15, 1, ImageSize -> 
+         Small, Enabled -> Dynamic[$CellContext`dim$$ == "2D"], Appearance -> 
+         "Labeled"}, {{$CellContext`m$$, 16, "distance m"}, 1, 30, 1, 
+         ImageSize -> Small, Enabled -> Dynamic[$CellContext`dim$$ == "2D"], 
+         Appearance -> "Labeled"}, 
+        Delimiter, {{$CellContext`seed$$, 234556}, 100000, 999999, 1, 
+         ImageSize -> Small, Appearance -> "Labeled"}}, 
+      "Options" :> {
+       ControlPlacement -> Left, AutorunSequencing -> {1, 2, 3, 4, 7}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{905., {299., 306.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`DLA = CompiledFunction[{
+          Blank[Integer], 
+          Blank[Integer]}, {{2, 0, 0}, {2, 0, 1}, {2, 3, 1}}, {5, 9, 0, 0, 
+         4}, {{1, 5}, {11, 0, 2}, {7, -1, 4}, {7, 1, 5}, {64, 2, 5, 4, 2, 
+          1}, {7, 0, 6}, {11, 6, 3}, {4, 3}, {
+          45, {{1, 1}, {1, 1}}, 2, 2, 2, 2}, {66, 4, 2, 1}, {5, 3, 2, -2}, {7,
+           1, 4}, {17, 1, 4, 2}, {7, 0, 4}, {4, 2}, {54, 
+           
+           Function[{$CellContext`steps, $CellContext`width}, \
+$CellContext`n[$CellContext`i] = 0], {$CellContext`i, 2, 0, 4, Block}, 2, 0, 
+           0, 2, 0, 1, 6, 0, 17}, {5, 4, 2, -1}, {11, 0, 5}, {7, 0, 3}, {4, 
+          60}, {7, 2, 2}, {7, -1, 4}, {17, 1, 4, 6}, {58, 2, 2, 6, 4}, {54, 
+           Function[{$CellContext`steps$, $CellContext`width$}, 
+            $CellContext`n[$CellContext`r$$]], {$CellContext`j, 2, 0, 3, 
+            Block}, {$CellContext`r$$, 2, 0, 4, Module}, 2, 0, 0, 2, 0, 1, 2, 
+           0, 2}, {7, -1, 6}, {17, 4, 6, 7}, {
+          55, $CellContext`n, 2, 0, 7, 2, 0, 6}, {36, 2, 6, 0}, {3, 0, 10}, {
+          7, 1, 2}, {17, 4, 2, 6}, {55, $CellContext`n, 2, 0, 6, 2, 0, 2}, {
+          7, -1, 6}, {17, 4, 6, 7}, {55, $CellContext`n, 2, 0, 7, 2, 0, 6}, {
+          36, 2, 6, 1}, {10, 1, 3}, {4, 3}, {6, False, 2}, {10, 2, 3}, {3, 3, 
+          4}, {7, -1, 2}, {17, 4, 2, 6}, {4, 24}, {54, 
+           Function[{$CellContext`steps$, $CellContext`width$}, 
+            $CellContext`n[$CellContext`r$$]], {$CellContext`j, 2, 0, 3, 
+            Block}, {$CellContext`r$$, 2, 0, 4, Module}, 2, 0, 0, 2, 0, 1, 2, 
+           0, 2}, {7, 1, 7}, {17, 4, 7, 8}, {
+          55, $CellContext`n, 2, 0, 8, 2, 0, 7}, {36, 2, 7, 0}, {3, 0, 10}, {
+          7, -1, 2}, {17, 4, 2, 7}, {55, $CellContext`n, 2, 0, 7, 2, 0, 2}, {
+          7, 1, 7}, {17, 4, 7, 8}, {55, $CellContext`n, 2, 0, 8, 2, 0, 7}, {
+          38, 2, 7, 1}, {10, 1, 4}, {4, 3}, {6, False, 2}, {10, 2, 4}, {3, 4, 
+          5}, {7, 1, 2}, {17, 4, 2, 7}, {11, 7, 6}, {4, 2}, {11, 4, 6}, {54, 
+           Function[{$CellContext`steps, $CellContext`width}, 
+            $CellContext`n[$CellContext`v]], {$CellContext`v, 2, 0, 6, 
+            Module}, {$CellContext`j, 2, 0, 3, Block}, 2, 0, 0, 2, 0, 1, 2, 0,
+            7}, {7, 1, 2}, {36, 2, 4, 1, 3}, {3, 3, 3}, {54, 
+           
+           Function[{$CellContext`steps$, $CellContext`width$}, \
+$CellContext`n[$CellContext`r$$] = $CellContext`n[$CellContext`v] + 
+             1], {$CellContext`v, 2, 0, 6, Module}, {$CellContext`j, 2, 0, 3, 
+            Block}, {$CellContext`r$$, 2, 0, 4, Module}, 2, 0, 0, 2, 0, 1, 6, 
+           0, 17}, {4, 1}, {67, 6, 7, 2, 0}, {54, 
+           Function[{$CellContext`steps$, $CellContext`width$}, 
+            $CellContext`n[$CellContext`r$$]], {$CellContext`j, 2, 0, 3, 
+            Block}, {$CellContext`r$$, 2, 0, 4, Module}, 2, 0, 0, 2, 0, 1, 2, 
+           0, 2}, {67, 4, 2, 2, 2}, {68, 0, 2, 3}, {71, 1, 0, 3, 2, 3}, {5, 3,
+           5, -59}, {2}}, 
+         Function[{$CellContext`steps, $CellContext`width}, 
+          
+          Module[{$CellContext`list = 
+            Table[{{1, 1}, {1, 
+              1}}, {$CellContext`steps}], $CellContext`r, $CellContext`v, \
+$CellContext`v1}, 
+           Do[$CellContext`n[$CellContext`i] = 
+             0, {$CellContext`i, $CellContext`width + 1}]; 
+           Do[$CellContext`r = RandomInteger[{2, $CellContext`width - 1}]; 
+             Which[
+               
+               And[$CellContext`n[$CellContext`r] < \
+$CellContext`n[$CellContext`r - 1], $CellContext`n[$CellContext`r + 
+                  1] < $CellContext`n[$CellContext`r - 
+                  1]], $CellContext`v = $CellContext`r - 1, 
+               
+               And[$CellContext`n[$CellContext`r] < \
+$CellContext`n[$CellContext`r + 1], $CellContext`n[$CellContext`r - 
+                  1] <= $CellContext`n[$CellContext`r + 
+                  1]], $CellContext`v = $CellContext`r + 1, 
+               True, $CellContext`v = $CellContext`r]; $CellContext`v1 = \
+$CellContext`n[$CellContext`v]; 
+             If[1 < $CellContext`r < $CellContext`width, \
+$CellContext`n[$CellContext`r] = $CellContext`n[$CellContext`v] + 1]; 
+             
+             Part[$CellContext`list, $CellContext`j] = {{$CellContext`v, \
+$CellContext`v1}, {$CellContext`r, 
+                 $CellContext`n[$CellContext`r]}}, {$CellContext`j, \
+$CellContext`steps}]; $CellContext`list]], Evaluate], $CellContext`n[1] = 
+       0, $CellContext`n[2] = 20, $CellContext`n[3] = 25, $CellContext`n[4] = 
+       24, $CellContext`n[5] = 25, $CellContext`n[6] = 23, $CellContext`n[7] = 
+       24, $CellContext`n[8] = 22, $CellContext`n[9] = 21, $CellContext`n[10] = 
+       16, $CellContext`n[11] = 23, $CellContext`n[12] = 
+       21, $CellContext`n[13] = 23, $CellContext`n[14] = 
+       21, $CellContext`n[15] = 20, $CellContext`n[16] = 
+       18, $CellContext`n[17] = 21, $CellContext`n[18] = 
+       16, $CellContext`n[19] = 20, $CellContext`n[20] = 
+       21, $CellContext`n[21] = 22, $CellContext`n[22] = 
+       20, $CellContext`n[23] = 19, $CellContext`n[24] = 
+       20, $CellContext`n[25] = 9, $CellContext`n[26] = 8, $CellContext`n[27] = 
+       10, $CellContext`n[28] = 11, $CellContext`n[29] = 
+       10, $CellContext`n[30] = 6, $CellContext`n[31] = 
+       15, $CellContext`n[32] = 12, $CellContext`n[33] = 
+       13, $CellContext`n[34] = 8, $CellContext`n[35] = 
+       16, $CellContext`n[36] = 22, $CellContext`n[37] = 
+       21, $CellContext`n[38] = 22, $CellContext`n[39] = 
+       18, $CellContext`n[40] = 0, $CellContext`n[41] = 0, $CellContext`n[42] = 
+       16, $CellContext`n[43] = 9, $CellContext`n[44] = 
+       20, $CellContext`n[45] = 19, $CellContext`n[46] = 
+       17, $CellContext`n[47] = 24, $CellContext`n[48] = 
+       25, $CellContext`n[49] = 27, $CellContext`n[50] = 
+       19, $CellContext`n[51] = 21, $CellContext`n[52] = 
+       16, $CellContext`n[53] = 25, $CellContext`n[54] = 
+       24, $CellContext`n[55] = 21, $CellContext`n[56] = 
+       24, $CellContext`n[57] = 25, $CellContext`n[58] = 
+       24, $CellContext`n[59] = 14, $CellContext`n[60] = 
+       13, $CellContext`n[61] = 14, $CellContext`n[62] = 
+       15, $CellContext`n[63] = 12, $CellContext`n[64] = 
+       0, $CellContext`n[65] = 13, $CellContext`n[66] = 
+       14, $CellContext`n[67] = 0, $CellContext`n[68] = 0, $CellContext`n[69] = 
+       12, $CellContext`n[70] = 15, $CellContext`n[71] = 
+       12, $CellContext`n[72] = 15, $CellContext`n[73] = 
+       0, $CellContext`n[74] = 0, $CellContext`n[75] = 9, $CellContext`n[76] = 
+       10, $CellContext`n[77] = 7, $CellContext`n[78] = 8, $CellContext`n[79] = 
+       12, $CellContext`n[80] = 11, $CellContext`n[81] = 
+       12, $CellContext`n[82] = 9, $CellContext`n[83] = 
+       13, $CellContext`n[84] = 12, $CellContext`n[85] = 
+       11, $CellContext`n[86] = 12, $CellContext`n[87] = 
+       13, $CellContext`n[88] = 0, $CellContext`n[89] = 0, $CellContext`n[90] = 
+       7, $CellContext`n[91] = 9, $CellContext`n[92] = 8, $CellContext`n[93] = 
+       9, $CellContext`n[94] = 8, $CellContext`n[95] = 9, $CellContext`n[96] = 
+       1, $CellContext`n[97] = 7, $CellContext`n[98] = 6, $CellContext`n[99] = 
+       0, $CellContext`n[100] = 0, $CellContext`n[101] = 0, $CellContext`DLA2 = 
+       CompiledFunction[{
+          Blank[Integer], 
+          Blank[Integer], 
+          Blank[Integer]}, {{2, 0, 0}, {2, 0, 1}, {2, 0, 2}, {2, 2, 0}}, {7, 
+         16, 3, 0, 
+         7}, {{1, 5}, {7, 0, 3}, {45, {{0, 0}}, 2, 1, 2, 0}, {
+          45, {{1, 0}, {0, 1}, {-1, 0}, {0, -1}}, 2, 4, 2, 1}, {36, 3, 2, 
+          0}, {3, 0, 106}, {11, 3, 4}, {7, 1, 5}, {17, 4, 5, 6}, {11, 6, 3}, {
+          7, 0, 6}, {15, 0, 6, 0}, {7, 2, 5}, {8, 3.141592653589793, 1}, {15, 
+          1, 5, 2}, {21, 2, 1, 2}, {59, 3, 0, 2, 1}, {93, 2, 3, 0, 1, 3, 0, 
+          0}, {93, 1, 3, 0, 1, 3, 0, 2}, {67, 0, 2, 3, 2}, {94, 273, 2, 0, 0, 
+          3, 1, 2, 3, 1, 3}, {93, 48, 3, 1, 3, 2, 1, 2}, {17, 0, 1, 6}, {7, 1,
+           5}, {70, 2, 0, 5, 0, 7}, {93, 36, 2, 0, 7, 2, 0, 5}, {36, 5, 6, 
+          1}, {3, 1, 44}, {7, 2, 5}, {70, 2, 0, 5, 0, 7}, {93, 36, 2, 0, 7, 2,
+           0, 5}, {36, 5, 6, 2}, {3, 2, 35}, {82, 0, 2, 3}, {43, 3, 4}, {3, 4,
+           28}, {7, 4, 8}, {7, 0, 9}, {4, 17}, {44, 1, 12}, {7, -1, 14}, {64, 
+          12, 14, 2, 3}, {7, 0, 15}, {11, 15, 13}, {4, 4}, {70, 1, 0, 13, 1, 
+          5}, {51, 2, 5, 6}, {66, 14, 6, 3}, {5, 13, 12, -3}, {70, 3, 0, 9, 1,
+           4}, {82, 0, 4, 3}, {3, 3, 4}, {6, False, 5}, {4, 5}, {4, 1}, {5, 9,
+           8, -16}, {6, True, 3}, {4, 2}, {4, 3}, {10, 3, 5}, {4, 1}, {10, 5, 
+          6}, {4, 3}, {6, False, 3}, {10, 3, 6}, {10, 6, 5}, {4, 3}, {
+          6, False, 4}, {10, 4, 5}, {10, 5, 6}, {4, 3}, {6, False, 2}, {10, 2,
+           6}, {3, 6, 5}, {61, -1, 1, 4}, {51, 2, 4, 3}, {46, 3, 2}, {
+          4, -54}, {7, 4, 7}, {7, 0, 8}, {4, 17}, {44, 1, 10}, {7, -1, 14}, {
+          64, 10, 14, 2, 3}, {7, 0, 12}, {11, 12, 11}, {4, 4}, {70, 1, 0, 11, 
+          1, 6}, {51, 2, 6, 5}, {66, 14, 5, 3}, {5, 11, 10, -3}, {70, 3, 0, 8,
+           1, 4}, {82, 0, 4, 6}, {3, 6, 4}, {6, True, 1}, {4, 5}, {4, 1}, {5, 
+          8, 7, -16}, {6, False, 6}, {4, 2}, {4, 3}, {10, 6, 1}, {4, 1}, {3, 
+          1, 7}, {7, -1, 6}, {67, 6, 2, 4}, {68, 4, 3}, {74, 0, 2, 3, 5}, {46,
+           5, 0}, {4, 1}, {4, -106}, {2}}, 
+         Function[{$CellContext`r, $CellContext`m, $CellContext`n}, 
+          
+          Module[{$CellContext`pos, $CellContext`\[Theta], $CellContext`i = 
+            0, $CellContext`occupiedSites = {{0, 0}}, $CellContext`dirs = {{1,
+              0}, {0, 1}, {-1, 0}, {0, -1}}}, 
+           While[$CellContext`i < $CellContext`n, 
+             Increment[$CellContext`i]; $CellContext`\[Theta] = 
+              RandomReal[{0, 2 Pi}]; $CellContext`pos = Floor[$CellContext`r {
+                  Cos[$CellContext`\[Theta]], 
+                  Sin[$CellContext`\[Theta]]}]; 
+             With[{$CellContext`pl = $CellContext`r + $CellContext`m}, 
+               While[
+                And[Abs[
+                   Part[$CellContext`pos, 1]] < $CellContext`pl, Abs[
+                   Part[$CellContext`pos, 2]] < $CellContext`pl, 
+                 Not[
+                  MemberQ[$CellContext`occupiedSites, $CellContext`pos]], 
+                 Catch[Do[
+                    If[
+                    MemberQ[$CellContext`occupiedSites, 
+                    Part[
+                    
+                    Map[$CellContext`pos + #& , $CellContext`dirs], \
+$CellContext`k]], 
+                    Throw[False]], {$CellContext`k, 4}]; True]], 
+                AddTo[$CellContext`pos, 
+                 RandomChoice[$CellContext`dirs]]]]; If[
+               Catch[Do[
+                  If[
+                   MemberQ[$CellContext`occupiedSites, 
+                    Part[
+                    
+                    Map[$CellContext`pos + #& , $CellContext`dirs], \
+$CellContext`k]], 
+                   Throw[True]], {$CellContext`k, 4}]; False], 
+               
+               AppendTo[$CellContext`occupiedSites, $CellContext`pos]]]; \
+$CellContext`occupiedSites]], Evaluate], 
+       Attributes[PlotRange] = {ReadProtected}}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.35696210375764*^9, 3.41587890878125*^9},
+ CellID->53521669]
+}, {2}]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell[TextData[{
+ "A simple model of kinetic growth process is diffusion-limited aggregation \
+(DLA), which consists of particles in Brownian motion that \"stick\" together \
+in a square lattice. In the 1D case, particles are added in random positions \
+with the same value of height, which increases at each step. For the 2D case, \
+other subtleties are involved; a particle is released from a randomly \
+selected initial location within a circle of radius ",
+ Cell[BoxData[
+  FormBox["r", TraditionalForm]], "InlineMath"],
+ " to move randomly. If the particle moves to a location contiguous to an \
+occupied site, it is added to the cluster. The particle continues to move \
+until it is captured or moves a distance ",
+ Cell[BoxData[
+  FormBox["m", TraditionalForm]], "InlineMath"],
+ " away from the original position in the circle. When the distance ",
+ Cell[BoxData[
+  FormBox["m", TraditionalForm]], "InlineMath"],
+ " is varied, the cluster can be develops into a fractal pattern, as \
+described in the paper by Witten and Sander."
+}], "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4129719912218018`*^9, 3.412972026761739*^9}, {
+   3.412972075313796*^9, 3.412972105298586*^9}, {3.412972308682908*^9, 
+   3.412972377622232*^9}, {3.412972419771372*^9, 3.412972504502412*^9}, {
+   3.412972698612118*^9, 3.4129727423488827`*^9}, {3.412972842860653*^9, 
+   3.4129728664079227`*^9}, {3.412972933015214*^9, 3.412972941767497*^9}, {
+   3.412973017707428*^9, 3.41297312335985*^9}, {3.412973167433489*^9, 
+   3.412973168169558*^9}, {3.412973201791156*^9, 3.412973342021769*^9}, {
+   3.412973480184392*^9, 3.4129734856936407`*^9}, {3.412973520864664*^9, 
+   3.4129735322624073`*^9}, {3.412973847682438*^9, 3.412973857874681*^9}, {
+   3.412978693943819*^9, 3.412978698540114*^9}, {3.413236758789369*^9, 
+   3.413236784996204*^9}, {3.41323773358991*^9, 3.413237740038364*^9}, {
+   3.413237783210643*^9, 3.4132378439153633`*^9}, {3.4132992176875057`*^9, 
+   3.413299274361517*^9}, {3.413299306998846*^9, 3.413299307150509*^9}, {
+   3.413318205907325*^9, 3.413318259225625*^9}, {3.4133182932136974`*^9, 
+   3.413318318685219*^9}, {3.413643070534964*^9, 3.4136431091269855`*^9}, {
+   3.415748654671875*^9, 3.415748729734375*^9}, {3.4157487935*^9, 
+   3.4157487999375*^9}, {3.4159822600191517`*^9, 3.41598226683139*^9}, {
+   3.415982317095085*^9, 3.41598232034496*^9}, {3.415982366124452*^9, 
+   3.415982368514985*^9}, {3.415982775610121*^9, 3.415982873622609*^9}, {
+   3.508769599802924*^9, 3.5087697217898197`*^9}, {3.50877002687821*^9, 
+   3.508770063991476*^9}, {3.508770101581634*^9, 3.508770110497048*^9}, {
+   3.5087706350638037`*^9, 3.5087707035312643`*^9}, {3.508770740646916*^9, 
+   3.508770751748966*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`dim$$ = "1D", $CellContext`m$$ = 
+    16, $CellContext`r$$ = 12, $CellContext`seed$$ = 
+    234556, $CellContext`steps$$ = 220, $CellContext`view$$ = 
+    "lines", $CellContext`width$$ = 40, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`dim$$], "1D", "dimension"}, {"1D", "2D"}}, {
+      Hold[$CellContext`view$$], {"lines", "squares"}}, {{
+       Hold[$CellContext`steps$$], 220}, 10, 300, 1}, {
+      Hold[$CellContext`width$$], 40, 100, 1}, {{
+       Hold[$CellContext`r$$], 12, "radius r"}, 5, 15, 1}, {{
+       Hold[$CellContext`m$$], 16, "distance m"}, 1, 30, 1}, {{
+       Hold[$CellContext`seed$$], 234556}, 100000, 999999, 1}}, 
+    Typeset`size$$ = {525., {259., 266.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`dim$39562$$ = False, $CellContext`view$39563$$ = 
+    False, $CellContext`steps$39564$$ = 0, $CellContext`width$39565$$ = 
+    0, $CellContext`r$39566$$ = 0, $CellContext`m$39567$$ = 
+    0, $CellContext`seed$39568$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`dim$$ = "1D", $CellContext`m$$ = 
+        16, $CellContext`r$$ = 12, $CellContext`seed$$ = 
+        234556, $CellContext`steps$$ = 220, $CellContext`view$$ = 
+        "lines", $CellContext`width$$ = 40}, "ControllerVariables" :> {
+        Hold[$CellContext`dim$$, $CellContext`dim$39562$$, False], 
+        Hold[$CellContext`view$$, $CellContext`view$39563$$, False], 
+        Hold[$CellContext`steps$$, $CellContext`steps$39564$$, 0], 
+        Hold[$CellContext`width$$, $CellContext`width$39565$$, 0], 
+        Hold[$CellContext`r$$, $CellContext`r$39566$$, 0], 
+        Hold[$CellContext`m$$, $CellContext`m$39567$$, 0], 
+        Hold[$CellContext`seed$$, $CellContext`seed$39568$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Pane[
+        With[{$CellContext`evol$ = If[$CellContext`dim$$ == "1D", 
+            $CellContext`DLA[$CellContext`steps$$, $CellContext`width$$], 
+            $CellContext`DLA2[$CellContext`r$$, $CellContext`m$$, \
+$CellContext`steps$$]]}, SeedRandom[$CellContext`seed$$]; 
+         If[$CellContext`dim$$ == "1D", 
+           If[$CellContext`view$$ == "lines", 
+            Graphics[{
+              Thickness[0.01], 
+              MapIndexed[{
+                ColorData["Rainbow"][First[#2]/Length[$CellContext`evol$]], 
+                Line[#]}& , $CellContext`evol$]}, Background -> 
+             ColorData["Rainbow"][0], PlotRange -> {Automatic, {0, 
+                Max[
+                 Part[$CellContext`evol$, All, 2]]}}], 
+            With[{$CellContext`evol2$ = ReplaceAll[
+                Map[Last, $CellContext`evol$], {
+                  Pattern[$CellContext`i$, 
+                   Blank[]], 
+                  Pattern[$CellContext`j$, 
+                   Blank[]]} -> {Max[
+                    Part[$CellContext`evol$, All, 2]] - $CellContext`j$ + 
+                   2, $CellContext`i$} - Map[Min, 
+                  Transpose[$CellContext`evol$]]]}, 
+             ArrayPlot[
+              SparseArray[
+               Thread[$CellContext`evol2$ -> N[Range[
+                    Length[$CellContext`evol$]]/Length[$CellContext`evol$]]]],
+               ColorFunction -> "Rainbow"]]], 
+           If[$CellContext`view$$ == "lines", 
+            Graphics[{
+              Thickness[0.01], 
+              MapIndexed[{
+                ColorData["Rainbow"][
+                 N[First[#2]/Length[$CellContext`evol$]]], 
+                Line[#]}& , 
+               Flatten[
+                Map[With[{$CellContext`s$ = #}, 
+                  Map[{$CellContext`s$, #}& , 
+                   Union[
+                    
+                    Nearest[$CellContext`evol$, #, 
+                    DistanceFunction -> (If[
+                    Norm[# - #2] == 1, 1, 2]& )]]]]& , $CellContext`evol$], 
+                1]]}, Background -> ColorData["Rainbow"][0]], 
+            With[{$CellContext`evol2$ = ReplaceAll[$CellContext`evol$, {
+                  Pattern[$CellContext`i$, 
+                   Blank[]], 
+                  Pattern[$CellContext`j$, 
+                   Blank[]]} -> {$CellContext`i$, $CellContext`j$} - Map[Min, 
+                  Transpose[$CellContext`evol$]] + 1]}, 
+             ArrayPlot[
+              Reverse[
+               Transpose[
+                SparseArray[
+                 Thread[$CellContext`evol2$ -> N[Range[
+                    Length[$CellContext`evol$]]/
+                    Length[$CellContext`evol$]]]]]], ColorFunction -> 
+              "Rainbow"]]]]], {350, 350}, Alignment -> {Center}], 
+      "Specifications" :> {{{$CellContext`dim$$, "1D", "dimension"}, {
+         "1D", "2D"}}, {$CellContext`view$$, {
+         "lines", "squares"}}, {{$CellContext`steps$$, 220}, 10, 300, 1, 
+         ImageSize -> Small, Appearance -> "Labeled"}, 
+        Delimiter, {$CellContext`width$$, 40, 100, 1, ImageSize -> Small, 
+         Enabled -> Dynamic[$CellContext`dim$$ == "1D"], Appearance -> 
+         "Labeled"}, 
+        Delimiter, {{$CellContext`r$$, 12, "radius r"}, 5, 15, 1, ImageSize -> 
+         Small, Enabled -> Dynamic[$CellContext`dim$$ == "2D"], Appearance -> 
+         "Labeled"}, {{$CellContext`m$$, 16, "distance m"}, 1, 30, 1, 
+         ImageSize -> Small, Enabled -> Dynamic[$CellContext`dim$$ == "2D"], 
+         Appearance -> "Labeled"}, 
+        Delimiter, {{$CellContext`seed$$, 234556}, 100000, 999999, 1, 
+         ImageSize -> Small, Appearance -> "Labeled"}}, 
+      "Options" :> {
+       ControlPlacement -> Left, AutorunSequencing -> {1, 2, 3, 4, 7}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{905., {299., 306.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`DLA = CompiledFunction[{
+          Blank[Integer], 
+          Blank[Integer]}, {{2, 0, 0}, {2, 0, 1}, {2, 3, 1}}, {5, 9, 0, 0, 
+         4}, {{1, 5}, {11, 0, 2}, {7, -1, 4}, {7, 1, 5}, {64, 2, 5, 4, 2, 
+          1}, {7, 0, 6}, {11, 6, 3}, {4, 3}, {
+          45, {{1, 1}, {1, 1}}, 2, 2, 2, 2}, {66, 4, 2, 1}, {5, 3, 2, -2}, {7,
+           1, 4}, {17, 1, 4, 2}, {7, 0, 4}, {4, 2}, {54, 
+           
+           Function[{$CellContext`steps, $CellContext`width}, \
+$CellContext`n[$CellContext`i] = 0], {$CellContext`i, 2, 0, 4, Block}, 2, 0, 
+           0, 2, 0, 1, 6, 0, 17}, {5, 4, 2, -1}, {11, 0, 5}, {7, 0, 3}, {4, 
+          60}, {7, 2, 2}, {7, -1, 4}, {17, 1, 4, 6}, {58, 2, 2, 6, 4}, {54, 
+           Function[{$CellContext`steps$, $CellContext`width$}, 
+            $CellContext`n[FE`r$$894]], {$CellContext`j, 2, 0, 3, Block}, {
+           FE`r$$894, 2, 0, 4, Module}, 2, 0, 0, 2, 0, 1, 2, 0, 2}, {7, -1, 
+          6}, {17, 4, 6, 7}, {55, $CellContext`n, 2, 0, 7, 2, 0, 6}, {36, 2, 
+          6, 0}, {3, 0, 10}, {7, 1, 2}, {17, 4, 2, 6}, {
+          55, $CellContext`n, 2, 0, 6, 2, 0, 2}, {7, -1, 6}, {17, 4, 6, 7}, {
+          55, $CellContext`n, 2, 0, 7, 2, 0, 6}, {36, 2, 6, 1}, {10, 1, 3}, {
+          4, 3}, {6, False, 2}, {10, 2, 3}, {3, 3, 4}, {7, -1, 2}, {17, 4, 2, 
+          6}, {4, 24}, {54, 
+           Function[{$CellContext`steps$, $CellContext`width$}, 
+            $CellContext`n[FE`r$$894]], {$CellContext`j, 2, 0, 3, Block}, {
+           FE`r$$894, 2, 0, 4, Module}, 2, 0, 0, 2, 0, 1, 2, 0, 2}, {7, 1, 
+          7}, {17, 4, 7, 8}, {55, $CellContext`n, 2, 0, 8, 2, 0, 7}, {36, 2, 
+          7, 0}, {3, 0, 10}, {7, -1, 2}, {17, 4, 2, 7}, {
+          55, $CellContext`n, 2, 0, 7, 2, 0, 2}, {7, 1, 7}, {17, 4, 7, 8}, {
+          55, $CellContext`n, 2, 0, 8, 2, 0, 7}, {38, 2, 7, 1}, {10, 1, 4}, {
+          4, 3}, {6, False, 2}, {10, 2, 4}, {3, 4, 5}, {7, 1, 2}, {17, 4, 2, 
+          7}, {11, 7, 6}, {4, 2}, {11, 4, 6}, {54, 
+           Function[{$CellContext`steps, $CellContext`width}, 
+            $CellContext`n[$CellContext`v]], {$CellContext`v, 2, 0, 6, 
+            Module}, {$CellContext`j, 2, 0, 3, Block}, 2, 0, 0, 2, 0, 1, 2, 0,
+            7}, {7, 1, 2}, {36, 2, 4, 1, 3}, {3, 3, 3}, {54, 
+           
+           Function[{$CellContext`steps$, $CellContext`width$}, \
+$CellContext`n[FE`r$$894] = $CellContext`n[$CellContext`v] + 
+             1], {$CellContext`v, 2, 0, 6, Module}, {$CellContext`j, 2, 0, 3, 
+            Block}, {FE`r$$894, 2, 0, 4, Module}, 2, 0, 0, 2, 0, 1, 6, 0, 
+           17}, {4, 1}, {67, 6, 7, 2, 0}, {54, 
+           Function[{$CellContext`steps$, $CellContext`width$}, 
+            $CellContext`n[FE`r$$894]], {$CellContext`j, 2, 0, 3, Block}, {
+           FE`r$$894, 2, 0, 4, Module}, 2, 0, 0, 2, 0, 1, 2, 0, 2}, {67, 4, 2,
+           2, 2}, {68, 0, 2, 3}, {71, 1, 0, 3, 2, 3}, {5, 3, 5, -59}, {2}}, 
+         Function[{$CellContext`steps, $CellContext`width}, 
+          
+          Module[{$CellContext`list = 
+            Table[{{1, 1}, {1, 
+              1}}, {$CellContext`steps}], $CellContext`r, $CellContext`v, \
+$CellContext`v1}, 
+           Do[$CellContext`n[$CellContext`i] = 
+             0, {$CellContext`i, $CellContext`width + 1}]; 
+           Do[$CellContext`r = RandomInteger[{2, $CellContext`width - 1}]; 
+             Which[
+               
+               And[$CellContext`n[$CellContext`r] < \
+$CellContext`n[$CellContext`r - 1], $CellContext`n[$CellContext`r + 
+                  1] < $CellContext`n[$CellContext`r - 
+                  1]], $CellContext`v = $CellContext`r - 1, 
+               
+               And[$CellContext`n[$CellContext`r] < \
+$CellContext`n[$CellContext`r + 1], $CellContext`n[$CellContext`r - 
+                  1] <= $CellContext`n[$CellContext`r + 
+                  1]], $CellContext`v = $CellContext`r + 1, 
+               True, $CellContext`v = $CellContext`r]; $CellContext`v1 = \
+$CellContext`n[$CellContext`v]; 
+             If[1 < $CellContext`r < $CellContext`width, \
+$CellContext`n[$CellContext`r] = $CellContext`n[$CellContext`v] + 1]; 
+             Part[$CellContext`list, $CellContext`j] = {{$CellContext`v, \
+$CellContext`v1}, {$CellContext`r, 
+                 $CellContext`n[$CellContext`r]}}, {$CellContext`j, \
+$CellContext`steps}]; $CellContext`list]], Evaluate], $CellContext`n[1] = 
+       0, $CellContext`n[2] = 20, $CellContext`n[3] = 25, $CellContext`n[4] = 
+       24, $CellContext`n[5] = 25, $CellContext`n[6] = 23, $CellContext`n[7] = 
+       24, $CellContext`n[8] = 22, $CellContext`n[9] = 21, $CellContext`n[10] = 
+       16, $CellContext`n[11] = 23, $CellContext`n[12] = 
+       21, $CellContext`n[13] = 23, $CellContext`n[14] = 
+       21, $CellContext`n[15] = 20, $CellContext`n[16] = 
+       18, $CellContext`n[17] = 21, $CellContext`n[18] = 
+       16, $CellContext`n[19] = 20, $CellContext`n[20] = 
+       21, $CellContext`n[21] = 22, $CellContext`n[22] = 
+       20, $CellContext`n[23] = 19, $CellContext`n[24] = 
+       20, $CellContext`n[25] = 9, $CellContext`n[26] = 8, $CellContext`n[27] = 
+       10, $CellContext`n[28] = 11, $CellContext`n[29] = 
+       10, $CellContext`n[30] = 6, $CellContext`n[31] = 
+       15, $CellContext`n[32] = 12, $CellContext`n[33] = 
+       13, $CellContext`n[34] = 8, $CellContext`n[35] = 
+       16, $CellContext`n[36] = 22, $CellContext`n[37] = 
+       21, $CellContext`n[38] = 22, $CellContext`n[39] = 
+       18, $CellContext`n[40] = 0, $CellContext`n[41] = 0, $CellContext`n[42] = 
+       16, $CellContext`n[43] = 9, $CellContext`n[44] = 
+       20, $CellContext`n[45] = 19, $CellContext`n[46] = 
+       17, $CellContext`n[47] = 24, $CellContext`n[48] = 
+       25, $CellContext`n[49] = 27, $CellContext`n[50] = 
+       19, $CellContext`n[51] = 21, $CellContext`n[52] = 
+       16, $CellContext`n[53] = 25, $CellContext`n[54] = 
+       24, $CellContext`n[55] = 21, $CellContext`n[56] = 
+       24, $CellContext`n[57] = 25, $CellContext`n[58] = 
+       24, $CellContext`n[59] = 14, $CellContext`n[60] = 
+       13, $CellContext`n[61] = 14, $CellContext`n[62] = 
+       15, $CellContext`n[63] = 12, $CellContext`n[64] = 
+       0, $CellContext`n[65] = 13, $CellContext`n[66] = 
+       14, $CellContext`n[67] = 0, $CellContext`n[68] = 0, $CellContext`n[69] = 
+       12, $CellContext`n[70] = 15, $CellContext`n[71] = 
+       12, $CellContext`n[72] = 15, $CellContext`n[73] = 
+       0, $CellContext`n[74] = 0, $CellContext`n[75] = 9, $CellContext`n[76] = 
+       10, $CellContext`n[77] = 7, $CellContext`n[78] = 8, $CellContext`n[79] = 
+       12, $CellContext`n[80] = 11, $CellContext`n[81] = 
+       12, $CellContext`n[82] = 9, $CellContext`n[83] = 
+       13, $CellContext`n[84] = 12, $CellContext`n[85] = 
+       11, $CellContext`n[86] = 12, $CellContext`n[87] = 
+       13, $CellContext`n[88] = 0, $CellContext`n[89] = 0, $CellContext`n[90] = 
+       7, $CellContext`n[91] = 9, $CellContext`n[92] = 8, $CellContext`n[93] = 
+       9, $CellContext`n[94] = 8, $CellContext`n[95] = 9, $CellContext`n[96] = 
+       1, $CellContext`n[97] = 7, $CellContext`n[98] = 6, $CellContext`n[99] = 
+       0, $CellContext`n[100] = 0, $CellContext`n[101] = 0, FE`r$$894 = 
+       12, $CellContext`DLA2 = CompiledFunction[{
+          Blank[Integer], 
+          Blank[Integer], 
+          Blank[Integer]}, {{2, 0, 0}, {2, 0, 1}, {2, 0, 2}, {2, 2, 0}}, {7, 
+         16, 3, 0, 
+         7}, {{1, 5}, {7, 0, 3}, {45, {{0, 0}}, 2, 1, 2, 0}, {
+          45, {{1, 0}, {0, 1}, {-1, 0}, {0, -1}}, 2, 4, 2, 1}, {36, 3, 2, 
+          0}, {3, 0, 106}, {11, 3, 4}, {7, 1, 5}, {17, 4, 5, 6}, {11, 6, 3}, {
+          7, 0, 6}, {15, 0, 6, 0}, {7, 2, 5}, {8, 3.141592653589793, 1}, {15, 
+          1, 5, 2}, {21, 2, 1, 2}, {59, 3, 0, 2, 1}, {93, 2, 3, 0, 1, 3, 0, 
+          0}, {93, 1, 3, 0, 1, 3, 0, 2}, {67, 0, 2, 3, 2}, {94, 273, 2, 0, 0, 
+          3, 1, 2, 3, 1, 3}, {93, 48, 3, 1, 3, 2, 1, 2}, {17, 0, 1, 6}, {7, 1,
+           5}, {70, 2, 0, 5, 0, 7}, {93, 36, 2, 0, 7, 2, 0, 5}, {36, 5, 6, 
+          1}, {3, 1, 44}, {7, 2, 5}, {70, 2, 0, 5, 0, 7}, {93, 36, 2, 0, 7, 2,
+           0, 5}, {36, 5, 6, 2}, {3, 2, 35}, {82, 0, 2, 3}, {43, 3, 4}, {3, 4,
+           28}, {7, 4, 8}, {7, 0, 9}, {4, 17}, {44, 1, 12}, {7, -1, 14}, {64, 
+          12, 14, 2, 3}, {7, 0, 15}, {11, 15, 13}, {4, 4}, {70, 1, 0, 13, 1, 
+          5}, {51, 2, 5, 6}, {66, 14, 6, 3}, {5, 13, 12, -3}, {70, 3, 0, 9, 1,
+           4}, {82, 0, 4, 3}, {3, 3, 4}, {6, False, 5}, {4, 5}, {4, 1}, {5, 9,
+           8, -16}, {6, True, 3}, {4, 2}, {4, 3}, {10, 3, 5}, {4, 1}, {10, 5, 
+          6}, {4, 3}, {6, False, 3}, {10, 3, 6}, {10, 6, 5}, {4, 3}, {
+          6, False, 4}, {10, 4, 5}, {10, 5, 6}, {4, 3}, {6, False, 2}, {10, 2,
+           6}, {3, 6, 5}, {61, -1, 1, 4}, {51, 2, 4, 3}, {46, 3, 2}, {
+          4, -54}, {7, 4, 7}, {7, 0, 8}, {4, 17}, {44, 1, 10}, {7, -1, 14}, {
+          64, 10, 14, 2, 3}, {7, 0, 12}, {11, 12, 11}, {4, 4}, {70, 1, 0, 11, 
+          1, 6}, {51, 2, 6, 5}, {66, 14, 5, 3}, {5, 11, 10, -3}, {70, 3, 0, 8,
+           1, 4}, {82, 0, 4, 6}, {3, 6, 4}, {6, True, 1}, {4, 5}, {4, 1}, {5, 
+          8, 7, -16}, {6, False, 6}, {4, 2}, {4, 3}, {10, 6, 1}, {4, 1}, {3, 
+          1, 7}, {7, -1, 6}, {67, 6, 2, 4}, {68, 4, 3}, {74, 0, 2, 3, 5}, {46,
+           5, 0}, {4, 1}, {4, -106}, {2}}, 
+         Function[{$CellContext`r, $CellContext`m, $CellContext`n}, 
+          
+          Module[{$CellContext`pos, $CellContext`\[Theta], $CellContext`i = 
+            0, $CellContext`occupiedSites = {{0, 0}}, $CellContext`dirs = {{1,
+              0}, {0, 1}, {-1, 0}, {0, -1}}}, 
+           While[$CellContext`i < $CellContext`n, 
+             Increment[$CellContext`i]; $CellContext`\[Theta] = 
+              RandomReal[{0, 2 Pi}]; $CellContext`pos = Floor[$CellContext`r {
+                  Cos[$CellContext`\[Theta]], 
+                  Sin[$CellContext`\[Theta]]}]; 
+             With[{$CellContext`pl = $CellContext`r + $CellContext`m}, 
+               While[
+                And[Abs[
+                   Part[$CellContext`pos, 1]] < $CellContext`pl, Abs[
+                   Part[$CellContext`pos, 2]] < $CellContext`pl, 
+                 Not[
+                  MemberQ[$CellContext`occupiedSites, $CellContext`pos]], 
+                 Catch[Do[
+                    If[
+                    MemberQ[$CellContext`occupiedSites, 
+                    Part[
+                    
+                    Map[$CellContext`pos + #& , $CellContext`dirs], \
+$CellContext`k]], 
+                    Throw[False]], {$CellContext`k, 4}]; True]], 
+                AddTo[$CellContext`pos, 
+                 RandomChoice[$CellContext`dirs]]]]; If[
+               Catch[Do[
+                  If[
+                   MemberQ[$CellContext`occupiedSites, 
+                    Part[
+                    
+                    Map[$CellContext`pos + #& , $CellContext`dirs], \
+$CellContext`k]], 
+                   Throw[True]], {$CellContext`k, 4}]; False], 
+               
+               AppendTo[$CellContext`occupiedSites, $CellContext`pos]]]; \
+$CellContext`occupiedSites]], Evaluate], 
+       Attributes[PlotRange] = {ReadProtected}}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->18072697]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`dim$$ = "1D", $CellContext`m$$ = 
+    16, $CellContext`r$$ = 12, $CellContext`seed$$ = 
+    234556, $CellContext`steps$$ = 300, $CellContext`view$$ = 
+    "squares", $CellContext`width$$ = 59, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`dim$$], "1D", "dimension"}, {"1D", "2D"}}, {{
+       Hold[$CellContext`view$$], "squares"}, {"lines", "squares"}}, {{
+       Hold[$CellContext`steps$$], 300}, 10, 300, 1}, {{
+       Hold[$CellContext`width$$], 59}, 40, 100, 1}, {{
+       Hold[$CellContext`r$$], 12, "radius r"}, 5, 15, 1}, {{
+       Hold[$CellContext`m$$], 16, "distance m"}, 1, 30, 1}, {{
+       Hold[$CellContext`seed$$], 234556}, 100000, 999999, 1}}, 
+    Typeset`size$$ = {525., {259., 266.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`dim$39653$$ = False, $CellContext`view$39654$$ = 
+    False, $CellContext`steps$39655$$ = 0, $CellContext`width$39656$$ = 
+    0, $CellContext`r$39657$$ = 0, $CellContext`m$39658$$ = 
+    0, $CellContext`seed$39659$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`dim$$ = "1D", $CellContext`m$$ = 
+        16, $CellContext`r$$ = 12, $CellContext`seed$$ = 
+        234556, $CellContext`steps$$ = 300, $CellContext`view$$ = 
+        "squares", $CellContext`width$$ = 59}, "ControllerVariables" :> {
+        Hold[$CellContext`dim$$, $CellContext`dim$39653$$, False], 
+        Hold[$CellContext`view$$, $CellContext`view$39654$$, False], 
+        Hold[$CellContext`steps$$, $CellContext`steps$39655$$, 0], 
+        Hold[$CellContext`width$$, $CellContext`width$39656$$, 0], 
+        Hold[$CellContext`r$$, $CellContext`r$39657$$, 0], 
+        Hold[$CellContext`m$$, $CellContext`m$39658$$, 0], 
+        Hold[$CellContext`seed$$, $CellContext`seed$39659$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Pane[
+        With[{$CellContext`evol$ = If[$CellContext`dim$$ == "1D", 
+            $CellContext`DLA[$CellContext`steps$$, $CellContext`width$$], 
+            $CellContext`DLA2[$CellContext`r$$, $CellContext`m$$, \
+$CellContext`steps$$]]}, SeedRandom[$CellContext`seed$$]; 
+         If[$CellContext`dim$$ == "1D", 
+           If[$CellContext`view$$ == "lines", 
+            Graphics[{
+              Thickness[0.01], 
+              MapIndexed[{
+                ColorData["Rainbow"][First[#2]/Length[$CellContext`evol$]], 
+                Line[#]}& , $CellContext`evol$]}, Background -> 
+             ColorData["Rainbow"][0], PlotRange -> {Automatic, {0, 
+                Max[
+                 Part[$CellContext`evol$, All, 2]]}}], 
+            With[{$CellContext`evol2$ = ReplaceAll[
+                Map[Last, $CellContext`evol$], {
+                  Pattern[$CellContext`i$, 
+                   Blank[]], 
+                  Pattern[$CellContext`j$, 
+                   Blank[]]} -> {Max[
+                    Part[$CellContext`evol$, All, 2]] - $CellContext`j$ + 
+                   2, $CellContext`i$} - Map[Min, 
+                  Transpose[$CellContext`evol$]]]}, 
+             ArrayPlot[
+              SparseArray[
+               Thread[$CellContext`evol2$ -> N[Range[
+                    Length[$CellContext`evol$]]/Length[$CellContext`evol$]]]],
+               ColorFunction -> "Rainbow"]]], 
+           If[$CellContext`view$$ == "lines", 
+            Graphics[{
+              Thickness[0.01], 
+              MapIndexed[{
+                ColorData["Rainbow"][
+                 N[First[#2]/Length[$CellContext`evol$]]], 
+                Line[#]}& , 
+               Flatten[
+                Map[With[{$CellContext`s$ = #}, 
+                  Map[{$CellContext`s$, #}& , 
+                   Union[
+                    
+                    Nearest[$CellContext`evol$, #, 
+                    DistanceFunction -> (If[
+                    Norm[# - #2] == 1, 1, 2]& )]]]]& , $CellContext`evol$], 
+                1]]}, Background -> ColorData["Rainbow"][0]], 
+            With[{$CellContext`evol2$ = ReplaceAll[$CellContext`evol$, {
+                  Pattern[$CellContext`i$, 
+                   Blank[]], 
+                  Pattern[$CellContext`j$, 
+                   Blank[]]} -> {$CellContext`i$, $CellContext`j$} - Map[Min, 
+                  Transpose[$CellContext`evol$]] + 1]}, 
+             ArrayPlot[
+              Reverse[
+               Transpose[
+                SparseArray[
+                 Thread[$CellContext`evol2$ -> N[Range[
+                    Length[$CellContext`evol$]]/
+                    Length[$CellContext`evol$]]]]]], ColorFunction -> 
+              "Rainbow"]]]]], {350, 350}, Alignment -> {Center}], 
+      "Specifications" :> {{{$CellContext`dim$$, "1D", "dimension"}, {
+         "1D", "2D"}}, {{$CellContext`view$$, "squares"}, {
+         "lines", "squares"}}, {{$CellContext`steps$$, 300}, 10, 300, 1, 
+         ImageSize -> Small, Appearance -> "Labeled"}, 
+        Delimiter, {{$CellContext`width$$, 59}, 40, 100, 1, ImageSize -> 
+         Small, Enabled -> Dynamic[$CellContext`dim$$ == "1D"], Appearance -> 
+         "Labeled"}, 
+        Delimiter, {{$CellContext`r$$, 12, "radius r"}, 5, 15, 1, ImageSize -> 
+         Small, Enabled -> Dynamic[$CellContext`dim$$ == "2D"], Appearance -> 
+         "Labeled"}, {{$CellContext`m$$, 16, "distance m"}, 1, 30, 1, 
+         ImageSize -> Small, Enabled -> Dynamic[$CellContext`dim$$ == "2D"], 
+         Appearance -> "Labeled"}, 
+        Delimiter, {{$CellContext`seed$$, 234556}, 100000, 999999, 1, 
+         ImageSize -> Small, Appearance -> "Labeled"}}, 
+      "Options" :> {
+       ControlPlacement -> Left, AutorunSequencing -> {1, 2, 3, 4, 7}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{905., {299., 306.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`DLA = CompiledFunction[{
+          Blank[Integer], 
+          Blank[Integer]}, {{2, 0, 0}, {2, 0, 1}, {2, 3, 1}}, {5, 9, 0, 0, 
+         4}, {{1, 5}, {11, 0, 2}, {7, -1, 4}, {7, 1, 5}, {64, 2, 5, 4, 2, 
+          1}, {7, 0, 6}, {11, 6, 3}, {4, 3}, {
+          45, {{1, 1}, {1, 1}}, 2, 2, 2, 2}, {66, 4, 2, 1}, {5, 3, 2, -2}, {7,
+           1, 4}, {17, 1, 4, 2}, {7, 0, 4}, {4, 2}, {54, 
+           
+           Function[{$CellContext`steps, $CellContext`width}, \
+$CellContext`n[$CellContext`i] = 0], {$CellContext`i, 2, 0, 4, Block}, 2, 0, 
+           0, 2, 0, 1, 6, 0, 17}, {5, 4, 2, -1}, {11, 0, 5}, {7, 0, 3}, {4, 
+          60}, {7, 2, 2}, {7, -1, 4}, {17, 1, 4, 6}, {58, 2, 2, 6, 4}, {54, 
+           Function[{$CellContext`steps$, $CellContext`width$}, 
+            $CellContext`n[FE`r$$894]], {$CellContext`j, 2, 0, 3, Block}, {
+           FE`r$$894, 2, 0, 4, Module}, 2, 0, 0, 2, 0, 1, 2, 0, 2}, {7, -1, 
+          6}, {17, 4, 6, 7}, {55, $CellContext`n, 2, 0, 7, 2, 0, 6}, {36, 2, 
+          6, 0}, {3, 0, 10}, {7, 1, 2}, {17, 4, 2, 6}, {
+          55, $CellContext`n, 2, 0, 6, 2, 0, 2}, {7, -1, 6}, {17, 4, 6, 7}, {
+          55, $CellContext`n, 2, 0, 7, 2, 0, 6}, {36, 2, 6, 1}, {10, 1, 3}, {
+          4, 3}, {6, False, 2}, {10, 2, 3}, {3, 3, 4}, {7, -1, 2}, {17, 4, 2, 
+          6}, {4, 24}, {54, 
+           Function[{$CellContext`steps$, $CellContext`width$}, 
+            $CellContext`n[FE`r$$894]], {$CellContext`j, 2, 0, 3, Block}, {
+           FE`r$$894, 2, 0, 4, Module}, 2, 0, 0, 2, 0, 1, 2, 0, 2}, {7, 1, 
+          7}, {17, 4, 7, 8}, {55, $CellContext`n, 2, 0, 8, 2, 0, 7}, {36, 2, 
+          7, 0}, {3, 0, 10}, {7, -1, 2}, {17, 4, 2, 7}, {
+          55, $CellContext`n, 2, 0, 7, 2, 0, 2}, {7, 1, 7}, {17, 4, 7, 8}, {
+          55, $CellContext`n, 2, 0, 8, 2, 0, 7}, {38, 2, 7, 1}, {10, 1, 4}, {
+          4, 3}, {6, False, 2}, {10, 2, 4}, {3, 4, 5}, {7, 1, 2}, {17, 4, 2, 
+          7}, {11, 7, 6}, {4, 2}, {11, 4, 6}, {54, 
+           Function[{$CellContext`steps, $CellContext`width}, 
+            $CellContext`n[$CellContext`v]], {$CellContext`v, 2, 0, 6, 
+            Module}, {$CellContext`j, 2, 0, 3, Block}, 2, 0, 0, 2, 0, 1, 2, 0,
+            7}, {7, 1, 2}, {36, 2, 4, 1, 3}, {3, 3, 3}, {54, 
+           
+           Function[{$CellContext`steps$, $CellContext`width$}, \
+$CellContext`n[FE`r$$894] = $CellContext`n[$CellContext`v] + 
+             1], {$CellContext`v, 2, 0, 6, Module}, {$CellContext`j, 2, 0, 3, 
+            Block}, {FE`r$$894, 2, 0, 4, Module}, 2, 0, 0, 2, 0, 1, 6, 0, 
+           17}, {4, 1}, {67, 6, 7, 2, 0}, {54, 
+           Function[{$CellContext`steps$, $CellContext`width$}, 
+            $CellContext`n[FE`r$$894]], {$CellContext`j, 2, 0, 3, Block}, {
+           FE`r$$894, 2, 0, 4, Module}, 2, 0, 0, 2, 0, 1, 2, 0, 2}, {67, 4, 2,
+           2, 2}, {68, 0, 2, 3}, {71, 1, 0, 3, 2, 3}, {5, 3, 5, -59}, {2}}, 
+         Function[{$CellContext`steps, $CellContext`width}, 
+          
+          Module[{$CellContext`list = 
+            Table[{{1, 1}, {1, 
+              1}}, {$CellContext`steps}], $CellContext`r, $CellContext`v, \
+$CellContext`v1}, 
+           Do[$CellContext`n[$CellContext`i] = 
+             0, {$CellContext`i, $CellContext`width + 1}]; 
+           Do[$CellContext`r = RandomInteger[{2, $CellContext`width - 1}]; 
+             Which[
+               
+               And[$CellContext`n[$CellContext`r] < \
+$CellContext`n[$CellContext`r - 1], $CellContext`n[$CellContext`r + 
+                  1] < $CellContext`n[$CellContext`r - 
+                  1]], $CellContext`v = $CellContext`r - 1, 
+               
+               And[$CellContext`n[$CellContext`r] < \
+$CellContext`n[$CellContext`r + 1], $CellContext`n[$CellContext`r - 
+                  1] <= $CellContext`n[$CellContext`r + 
+                  1]], $CellContext`v = $CellContext`r + 1, 
+               True, $CellContext`v = $CellContext`r]; $CellContext`v1 = \
+$CellContext`n[$CellContext`v]; 
+             If[1 < $CellContext`r < $CellContext`width, \
+$CellContext`n[$CellContext`r] = $CellContext`n[$CellContext`v] + 1]; 
+             
+             Part[$CellContext`list, $CellContext`j] = {{$CellContext`v, \
+$CellContext`v1}, {$CellContext`r, 
+                 $CellContext`n[$CellContext`r]}}, {$CellContext`j, \
+$CellContext`steps}]; $CellContext`list]], Evaluate], $CellContext`n[1] = 
+       0, $CellContext`n[2] = 20, $CellContext`n[3] = 25, $CellContext`n[4] = 
+       24, $CellContext`n[5] = 25, $CellContext`n[6] = 23, $CellContext`n[7] = 
+       24, $CellContext`n[8] = 22, $CellContext`n[9] = 21, $CellContext`n[10] = 
+       16, $CellContext`n[11] = 23, $CellContext`n[12] = 
+       21, $CellContext`n[13] = 23, $CellContext`n[14] = 
+       21, $CellContext`n[15] = 20, $CellContext`n[16] = 
+       18, $CellContext`n[17] = 21, $CellContext`n[18] = 
+       16, $CellContext`n[19] = 20, $CellContext`n[20] = 
+       21, $CellContext`n[21] = 22, $CellContext`n[22] = 
+       20, $CellContext`n[23] = 19, $CellContext`n[24] = 
+       20, $CellContext`n[25] = 9, $CellContext`n[26] = 8, $CellContext`n[27] = 
+       10, $CellContext`n[28] = 11, $CellContext`n[29] = 
+       10, $CellContext`n[30] = 6, $CellContext`n[31] = 
+       15, $CellContext`n[32] = 12, $CellContext`n[33] = 
+       13, $CellContext`n[34] = 8, $CellContext`n[35] = 
+       16, $CellContext`n[36] = 22, $CellContext`n[37] = 
+       21, $CellContext`n[38] = 22, $CellContext`n[39] = 
+       18, $CellContext`n[40] = 0, $CellContext`n[41] = 0, $CellContext`n[42] = 
+       16, $CellContext`n[43] = 9, $CellContext`n[44] = 
+       20, $CellContext`n[45] = 19, $CellContext`n[46] = 
+       17, $CellContext`n[47] = 24, $CellContext`n[48] = 
+       25, $CellContext`n[49] = 27, $CellContext`n[50] = 
+       19, $CellContext`n[51] = 21, $CellContext`n[52] = 
+       16, $CellContext`n[53] = 25, $CellContext`n[54] = 
+       24, $CellContext`n[55] = 21, $CellContext`n[56] = 
+       24, $CellContext`n[57] = 25, $CellContext`n[58] = 
+       24, $CellContext`n[59] = 14, $CellContext`n[60] = 
+       13, $CellContext`n[61] = 14, $CellContext`n[62] = 
+       15, $CellContext`n[63] = 12, $CellContext`n[64] = 
+       0, $CellContext`n[65] = 13, $CellContext`n[66] = 
+       14, $CellContext`n[67] = 0, $CellContext`n[68] = 0, $CellContext`n[69] = 
+       12, $CellContext`n[70] = 15, $CellContext`n[71] = 
+       12, $CellContext`n[72] = 15, $CellContext`n[73] = 
+       0, $CellContext`n[74] = 0, $CellContext`n[75] = 9, $CellContext`n[76] = 
+       10, $CellContext`n[77] = 7, $CellContext`n[78] = 8, $CellContext`n[79] = 
+       12, $CellContext`n[80] = 11, $CellContext`n[81] = 
+       12, $CellContext`n[82] = 9, $CellContext`n[83] = 
+       13, $CellContext`n[84] = 12, $CellContext`n[85] = 
+       11, $CellContext`n[86] = 12, $CellContext`n[87] = 
+       13, $CellContext`n[88] = 0, $CellContext`n[89] = 0, $CellContext`n[90] = 
+       7, $CellContext`n[91] = 9, $CellContext`n[92] = 8, $CellContext`n[93] = 
+       9, $CellContext`n[94] = 8, $CellContext`n[95] = 9, $CellContext`n[96] = 
+       1, $CellContext`n[97] = 7, $CellContext`n[98] = 6, $CellContext`n[99] = 
+       0, $CellContext`n[100] = 0, $CellContext`n[101] = 0, FE`r$$894 = 
+       12, $CellContext`DLA2 = CompiledFunction[{
+          Blank[Integer], 
+          Blank[Integer], 
+          Blank[Integer]}, {{2, 0, 0}, {2, 0, 1}, {2, 0, 2}, {2, 2, 0}}, {7, 
+         16, 3, 0, 
+         7}, {{1, 5}, {7, 0, 3}, {45, {{0, 0}}, 2, 1, 2, 0}, {
+          45, {{1, 0}, {0, 1}, {-1, 0}, {0, -1}}, 2, 4, 2, 1}, {36, 3, 2, 
+          0}, {3, 0, 106}, {11, 3, 4}, {7, 1, 5}, {17, 4, 5, 6}, {11, 6, 3}, {
+          7, 0, 6}, {15, 0, 6, 0}, {7, 2, 5}, {8, 3.141592653589793, 1}, {15, 
+          1, 5, 2}, {21, 2, 1, 2}, {59, 3, 0, 2, 1}, {93, 2, 3, 0, 1, 3, 0, 
+          0}, {93, 1, 3, 0, 1, 3, 0, 2}, {67, 0, 2, 3, 2}, {94, 273, 2, 0, 0, 
+          3, 1, 2, 3, 1, 3}, {93, 48, 3, 1, 3, 2, 1, 2}, {17, 0, 1, 6}, {7, 1,
+           5}, {70, 2, 0, 5, 0, 7}, {93, 36, 2, 0, 7, 2, 0, 5}, {36, 5, 6, 
+          1}, {3, 1, 44}, {7, 2, 5}, {70, 2, 0, 5, 0, 7}, {93, 36, 2, 0, 7, 2,
+           0, 5}, {36, 5, 6, 2}, {3, 2, 35}, {82, 0, 2, 3}, {43, 3, 4}, {3, 4,
+           28}, {7, 4, 8}, {7, 0, 9}, {4, 17}, {44, 1, 12}, {7, -1, 14}, {64, 
+          12, 14, 2, 3}, {7, 0, 15}, {11, 15, 13}, {4, 4}, {70, 1, 0, 13, 1, 
+          5}, {51, 2, 5, 6}, {66, 14, 6, 3}, {5, 13, 12, -3}, {70, 3, 0, 9, 1,
+           4}, {82, 0, 4, 3}, {3, 3, 4}, {6, False, 5}, {4, 5}, {4, 1}, {5, 9,
+           8, -16}, {6, True, 3}, {4, 2}, {4, 3}, {10, 3, 5}, {4, 1}, {10, 5, 
+          6}, {4, 3}, {6, False, 3}, {10, 3, 6}, {10, 6, 5}, {4, 3}, {
+          6, False, 4}, {10, 4, 5}, {10, 5, 6}, {4, 3}, {6, False, 2}, {10, 2,
+           6}, {3, 6, 5}, {61, -1, 1, 4}, {51, 2, 4, 3}, {46, 3, 2}, {
+          4, -54}, {7, 4, 7}, {7, 0, 8}, {4, 17}, {44, 1, 10}, {7, -1, 14}, {
+          64, 10, 14, 2, 3}, {7, 0, 12}, {11, 12, 11}, {4, 4}, {70, 1, 0, 11, 
+          1, 6}, {51, 2, 6, 5}, {66, 14, 5, 3}, {5, 11, 10, -3}, {70, 3, 0, 8,
+           1, 4}, {82, 0, 4, 6}, {3, 6, 4}, {6, True, 1}, {4, 5}, {4, 1}, {5, 
+          8, 7, -16}, {6, False, 6}, {4, 2}, {4, 3}, {10, 6, 1}, {4, 1}, {3, 
+          1, 7}, {7, -1, 6}, {67, 6, 2, 4}, {68, 4, 3}, {74, 0, 2, 3, 5}, {46,
+           5, 0}, {4, 1}, {4, -106}, {2}}, 
+         Function[{$CellContext`r, $CellContext`m, $CellContext`n}, 
+          
+          Module[{$CellContext`pos, $CellContext`\[Theta], $CellContext`i = 
+            0, $CellContext`occupiedSites = {{0, 0}}, $CellContext`dirs = {{1,
+              0}, {0, 1}, {-1, 0}, {0, -1}}}, 
+           While[$CellContext`i < $CellContext`n, 
+             Increment[$CellContext`i]; $CellContext`\[Theta] = 
+              RandomReal[{0, 2 Pi}]; $CellContext`pos = Floor[$CellContext`r {
+                  Cos[$CellContext`\[Theta]], 
+                  Sin[$CellContext`\[Theta]]}]; 
+             With[{$CellContext`pl = $CellContext`r + $CellContext`m}, 
+               While[
+                And[Abs[
+                   Part[$CellContext`pos, 1]] < $CellContext`pl, Abs[
+                   Part[$CellContext`pos, 2]] < $CellContext`pl, 
+                 Not[
+                  MemberQ[$CellContext`occupiedSites, $CellContext`pos]], 
+                 Catch[Do[
+                    If[
+                    MemberQ[$CellContext`occupiedSites, 
+                    Part[
+                    
+                    Map[$CellContext`pos + #& , $CellContext`dirs], \
+$CellContext`k]], 
+                    Throw[False]], {$CellContext`k, 4}]; True]], 
+                AddTo[$CellContext`pos, 
+                 RandomChoice[$CellContext`dirs]]]]; If[
+               Catch[Do[
+                  If[
+                   MemberQ[$CellContext`occupiedSites, 
+                    Part[
+                    
+                    Map[$CellContext`pos + #& , $CellContext`dirs], \
+$CellContext`k]], 
+                   Throw[True]], {$CellContext`k, 4}]; False], 
+               
+               AppendTo[$CellContext`occupiedSites, $CellContext`pos]]]; \
+$CellContext`occupiedSites]], Evaluate], 
+       Attributes[PlotRange] = {ReadProtected}}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->418111042],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`dim$$ = "2D", $CellContext`m$$ = 
+    25, $CellContext`r$$ = 8, $CellContext`seed$$ = 
+    234556, $CellContext`steps$$ = 220, $CellContext`view$$ = 
+    "squares", $CellContext`width$$ = 40, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`dim$$], "2D", "dimension"}, {"1D", "2D"}}, {{
+       Hold[$CellContext`view$$], "squares"}, {"lines", "squares"}}, {{
+       Hold[$CellContext`steps$$], 220}, 10, 300, 1}, {
+      Hold[$CellContext`width$$], 40, 100, 1}, {{
+       Hold[$CellContext`r$$], 8, "radius r"}, 5, 15, 1}, {{
+       Hold[$CellContext`m$$], 25, "distance m"}, 1, 30, 1}, {{
+       Hold[$CellContext`seed$$], 234556}, 100000, 999999, 1}}, 
+    Typeset`size$$ = {525., {259., 266.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`dim$39744$$ = False, $CellContext`view$39745$$ = 
+    False, $CellContext`steps$39746$$ = 0, $CellContext`width$39747$$ = 
+    0, $CellContext`r$39748$$ = 0, $CellContext`m$39749$$ = 
+    0, $CellContext`seed$39750$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`dim$$ = "2D", $CellContext`m$$ = 
+        25, $CellContext`r$$ = 8, $CellContext`seed$$ = 
+        234556, $CellContext`steps$$ = 220, $CellContext`view$$ = 
+        "squares", $CellContext`width$$ = 40}, "ControllerVariables" :> {
+        Hold[$CellContext`dim$$, $CellContext`dim$39744$$, False], 
+        Hold[$CellContext`view$$, $CellContext`view$39745$$, False], 
+        Hold[$CellContext`steps$$, $CellContext`steps$39746$$, 0], 
+        Hold[$CellContext`width$$, $CellContext`width$39747$$, 0], 
+        Hold[$CellContext`r$$, $CellContext`r$39748$$, 0], 
+        Hold[$CellContext`m$$, $CellContext`m$39749$$, 0], 
+        Hold[$CellContext`seed$$, $CellContext`seed$39750$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Pane[
+        With[{$CellContext`evol$ = If[$CellContext`dim$$ == "1D", 
+            $CellContext`DLA[$CellContext`steps$$, $CellContext`width$$], 
+            $CellContext`DLA2[$CellContext`r$$, $CellContext`m$$, \
+$CellContext`steps$$]]}, SeedRandom[$CellContext`seed$$]; 
+         If[$CellContext`dim$$ == "1D", 
+           If[$CellContext`view$$ == "lines", 
+            Graphics[{
+              Thickness[0.01], 
+              MapIndexed[{
+                ColorData["Rainbow"][First[#2]/Length[$CellContext`evol$]], 
+                Line[#]}& , $CellContext`evol$]}, Background -> 
+             ColorData["Rainbow"][0], PlotRange -> {Automatic, {0, 
+                Max[
+                 Part[$CellContext`evol$, All, 2]]}}], 
+            With[{$CellContext`evol2$ = ReplaceAll[
+                Map[Last, $CellContext`evol$], {
+                  Pattern[$CellContext`i$, 
+                   Blank[]], 
+                  Pattern[$CellContext`j$, 
+                   Blank[]]} -> {Max[
+                    Part[$CellContext`evol$, All, 2]] - $CellContext`j$ + 
+                   2, $CellContext`i$} - Map[Min, 
+                  Transpose[$CellContext`evol$]]]}, 
+             ArrayPlot[
+              SparseArray[
+               Thread[$CellContext`evol2$ -> N[Range[
+                    Length[$CellContext`evol$]]/Length[$CellContext`evol$]]]],
+               ColorFunction -> "Rainbow"]]], 
+           If[$CellContext`view$$ == "lines", 
+            Graphics[{
+              Thickness[0.01], 
+              MapIndexed[{
+                ColorData["Rainbow"][
+                 N[First[#2]/Length[$CellContext`evol$]]], 
+                Line[#]}& , 
+               Flatten[
+                Map[With[{$CellContext`s$ = #}, 
+                  Map[{$CellContext`s$, #}& , 
+                   Union[
+                    
+                    Nearest[$CellContext`evol$, #, 
+                    DistanceFunction -> (If[
+                    Norm[# - #2] == 1, 1, 2]& )]]]]& , $CellContext`evol$], 
+                1]]}, Background -> ColorData["Rainbow"][0]], 
+            With[{$CellContext`evol2$ = ReplaceAll[$CellContext`evol$, {
+                  Pattern[$CellContext`i$, 
+                   Blank[]], 
+                  Pattern[$CellContext`j$, 
+                   Blank[]]} -> {$CellContext`i$, $CellContext`j$} - Map[Min, 
+                  Transpose[$CellContext`evol$]] + 1]}, 
+             ArrayPlot[
+              Reverse[
+               Transpose[
+                SparseArray[
+                 Thread[$CellContext`evol2$ -> N[Range[
+                    Length[$CellContext`evol$]]/
+                    Length[$CellContext`evol$]]]]]], ColorFunction -> 
+              "Rainbow"]]]]], {350, 350}, Alignment -> {Center}], 
+      "Specifications" :> {{{$CellContext`dim$$, "2D", "dimension"}, {
+         "1D", "2D"}}, {{$CellContext`view$$, "squares"}, {
+         "lines", "squares"}}, {{$CellContext`steps$$, 220}, 10, 300, 1, 
+         ImageSize -> Small, Appearance -> "Labeled"}, 
+        Delimiter, {$CellContext`width$$, 40, 100, 1, ImageSize -> Small, 
+         Enabled -> Dynamic[$CellContext`dim$$ == "1D"], Appearance -> 
+         "Labeled"}, 
+        Delimiter, {{$CellContext`r$$, 8, "radius r"}, 5, 15, 1, ImageSize -> 
+         Small, Enabled -> Dynamic[$CellContext`dim$$ == "2D"], Appearance -> 
+         "Labeled"}, {{$CellContext`m$$, 25, "distance m"}, 1, 30, 1, 
+         ImageSize -> Small, Enabled -> Dynamic[$CellContext`dim$$ == "2D"], 
+         Appearance -> "Labeled"}, 
+        Delimiter, {{$CellContext`seed$$, 234556}, 100000, 999999, 1, 
+         ImageSize -> Small, Appearance -> "Labeled"}}, 
+      "Options" :> {
+       ControlPlacement -> Left, AutorunSequencing -> {1, 2, 3, 4, 7}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{905., {299., 306.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`DLA = CompiledFunction[{
+          Blank[Integer], 
+          Blank[Integer]}, {{2, 0, 0}, {2, 0, 1}, {2, 3, 1}}, {5, 9, 0, 0, 
+         4}, {{1, 5}, {11, 0, 2}, {7, -1, 4}, {7, 1, 5}, {64, 2, 5, 4, 2, 
+          1}, {7, 0, 6}, {11, 6, 3}, {4, 3}, {
+          45, {{1, 1}, {1, 1}}, 2, 2, 2, 2}, {66, 4, 2, 1}, {5, 3, 2, -2}, {7,
+           1, 4}, {17, 1, 4, 2}, {7, 0, 4}, {4, 2}, {54, 
+           
+           Function[{$CellContext`steps, $CellContext`width}, \
+$CellContext`n[$CellContext`i] = 0], {$CellContext`i, 2, 0, 4, Block}, 2, 0, 
+           0, 2, 0, 1, 6, 0, 17}, {5, 4, 2, -1}, {11, 0, 5}, {7, 0, 3}, {4, 
+          60}, {7, 2, 2}, {7, -1, 4}, {17, 1, 4, 6}, {58, 2, 2, 6, 4}, {54, 
+           Function[{$CellContext`steps$, $CellContext`width$}, 
+            $CellContext`n[FE`r$$894]], {$CellContext`j, 2, 0, 3, Block}, {
+           FE`r$$894, 2, 0, 4, Module}, 2, 0, 0, 2, 0, 1, 2, 0, 2}, {7, -1, 
+          6}, {17, 4, 6, 7}, {55, $CellContext`n, 2, 0, 7, 2, 0, 6}, {36, 2, 
+          6, 0}, {3, 0, 10}, {7, 1, 2}, {17, 4, 2, 6}, {
+          55, $CellContext`n, 2, 0, 6, 2, 0, 2}, {7, -1, 6}, {17, 4, 6, 7}, {
+          55, $CellContext`n, 2, 0, 7, 2, 0, 6}, {36, 2, 6, 1}, {10, 1, 3}, {
+          4, 3}, {6, False, 2}, {10, 2, 3}, {3, 3, 4}, {7, -1, 2}, {17, 4, 2, 
+          6}, {4, 24}, {54, 
+           Function[{$CellContext`steps$, $CellContext`width$}, 
+            $CellContext`n[FE`r$$894]], {$CellContext`j, 2, 0, 3, Block}, {
+           FE`r$$894, 2, 0, 4, Module}, 2, 0, 0, 2, 0, 1, 2, 0, 2}, {7, 1, 
+          7}, {17, 4, 7, 8}, {55, $CellContext`n, 2, 0, 8, 2, 0, 7}, {36, 2, 
+          7, 0}, {3, 0, 10}, {7, -1, 2}, {17, 4, 2, 7}, {
+          55, $CellContext`n, 2, 0, 7, 2, 0, 2}, {7, 1, 7}, {17, 4, 7, 8}, {
+          55, $CellContext`n, 2, 0, 8, 2, 0, 7}, {38, 2, 7, 1}, {10, 1, 4}, {
+          4, 3}, {6, False, 2}, {10, 2, 4}, {3, 4, 5}, {7, 1, 2}, {17, 4, 2, 
+          7}, {11, 7, 6}, {4, 2}, {11, 4, 6}, {54, 
+           Function[{$CellContext`steps, $CellContext`width}, 
+            $CellContext`n[$CellContext`v]], {$CellContext`v, 2, 0, 6, 
+            Module}, {$CellContext`j, 2, 0, 3, Block}, 2, 0, 0, 2, 0, 1, 2, 0,
+            7}, {7, 1, 2}, {36, 2, 4, 1, 3}, {3, 3, 3}, {54, 
+           
+           Function[{$CellContext`steps$, $CellContext`width$}, \
+$CellContext`n[FE`r$$894] = $CellContext`n[$CellContext`v] + 
+             1], {$CellContext`v, 2, 0, 6, Module}, {$CellContext`j, 2, 0, 3, 
+            Block}, {FE`r$$894, 2, 0, 4, Module}, 2, 0, 0, 2, 0, 1, 6, 0, 
+           17}, {4, 1}, {67, 6, 7, 2, 0}, {54, 
+           Function[{$CellContext`steps$, $CellContext`width$}, 
+            $CellContext`n[FE`r$$894]], {$CellContext`j, 2, 0, 3, Block}, {
+           FE`r$$894, 2, 0, 4, Module}, 2, 0, 0, 2, 0, 1, 2, 0, 2}, {67, 4, 2,
+           2, 2}, {68, 0, 2, 3}, {71, 1, 0, 3, 2, 3}, {5, 3, 5, -59}, {2}}, 
+         Function[{$CellContext`steps, $CellContext`width}, 
+          
+          Module[{$CellContext`list = 
+            Table[{{1, 1}, {1, 
+              1}}, {$CellContext`steps}], $CellContext`r, $CellContext`v, \
+$CellContext`v1}, 
+           Do[$CellContext`n[$CellContext`i] = 
+             0, {$CellContext`i, $CellContext`width + 1}]; 
+           Do[$CellContext`r = RandomInteger[{2, $CellContext`width - 1}]; 
+             Which[
+               
+               And[$CellContext`n[$CellContext`r] < \
+$CellContext`n[$CellContext`r - 1], $CellContext`n[$CellContext`r + 
+                  1] < $CellContext`n[$CellContext`r - 
+                  1]], $CellContext`v = $CellContext`r - 1, 
+               
+               And[$CellContext`n[$CellContext`r] < \
+$CellContext`n[$CellContext`r + 1], $CellContext`n[$CellContext`r - 
+                  1] <= $CellContext`n[$CellContext`r + 
+                  1]], $CellContext`v = $CellContext`r + 1, 
+               True, $CellContext`v = $CellContext`r]; $CellContext`v1 = \
+$CellContext`n[$CellContext`v]; 
+             If[1 < $CellContext`r < $CellContext`width, \
+$CellContext`n[$CellContext`r] = $CellContext`n[$CellContext`v] + 1]; 
+             Part[$CellContext`list, $CellContext`j] = {{$CellContext`v, \
+$CellContext`v1}, {$CellContext`r, 
+                 $CellContext`n[$CellContext`r]}}, {$CellContext`j, \
+$CellContext`steps}]; $CellContext`list]], Evaluate], $CellContext`n[1] = 
+       0, $CellContext`n[2] = 20, $CellContext`n[3] = 25, $CellContext`n[4] = 
+       24, $CellContext`n[5] = 25, $CellContext`n[6] = 23, $CellContext`n[7] = 
+       24, $CellContext`n[8] = 22, $CellContext`n[9] = 21, $CellContext`n[10] = 
+       16, $CellContext`n[11] = 23, $CellContext`n[12] = 
+       21, $CellContext`n[13] = 23, $CellContext`n[14] = 
+       21, $CellContext`n[15] = 20, $CellContext`n[16] = 
+       18, $CellContext`n[17] = 21, $CellContext`n[18] = 
+       16, $CellContext`n[19] = 20, $CellContext`n[20] = 
+       21, $CellContext`n[21] = 22, $CellContext`n[22] = 
+       20, $CellContext`n[23] = 19, $CellContext`n[24] = 
+       20, $CellContext`n[25] = 9, $CellContext`n[26] = 8, $CellContext`n[27] = 
+       10, $CellContext`n[28] = 11, $CellContext`n[29] = 
+       10, $CellContext`n[30] = 6, $CellContext`n[31] = 
+       15, $CellContext`n[32] = 12, $CellContext`n[33] = 
+       13, $CellContext`n[34] = 8, $CellContext`n[35] = 
+       16, $CellContext`n[36] = 22, $CellContext`n[37] = 
+       21, $CellContext`n[38] = 22, $CellContext`n[39] = 
+       18, $CellContext`n[40] = 0, $CellContext`n[41] = 0, $CellContext`n[42] = 
+       16, $CellContext`n[43] = 9, $CellContext`n[44] = 
+       20, $CellContext`n[45] = 19, $CellContext`n[46] = 
+       17, $CellContext`n[47] = 24, $CellContext`n[48] = 
+       25, $CellContext`n[49] = 27, $CellContext`n[50] = 
+       19, $CellContext`n[51] = 21, $CellContext`n[52] = 
+       16, $CellContext`n[53] = 25, $CellContext`n[54] = 
+       24, $CellContext`n[55] = 21, $CellContext`n[56] = 
+       24, $CellContext`n[57] = 25, $CellContext`n[58] = 
+       24, $CellContext`n[59] = 14, $CellContext`n[60] = 
+       13, $CellContext`n[61] = 14, $CellContext`n[62] = 
+       15, $CellContext`n[63] = 12, $CellContext`n[64] = 
+       0, $CellContext`n[65] = 13, $CellContext`n[66] = 
+       14, $CellContext`n[67] = 0, $CellContext`n[68] = 0, $CellContext`n[69] = 
+       12, $CellContext`n[70] = 15, $CellContext`n[71] = 
+       12, $CellContext`n[72] = 15, $CellContext`n[73] = 
+       0, $CellContext`n[74] = 0, $CellContext`n[75] = 9, $CellContext`n[76] = 
+       10, $CellContext`n[77] = 7, $CellContext`n[78] = 8, $CellContext`n[79] = 
+       12, $CellContext`n[80] = 11, $CellContext`n[81] = 
+       12, $CellContext`n[82] = 9, $CellContext`n[83] = 
+       13, $CellContext`n[84] = 12, $CellContext`n[85] = 
+       11, $CellContext`n[86] = 12, $CellContext`n[87] = 
+       13, $CellContext`n[88] = 0, $CellContext`n[89] = 0, $CellContext`n[90] = 
+       7, $CellContext`n[91] = 9, $CellContext`n[92] = 8, $CellContext`n[93] = 
+       9, $CellContext`n[94] = 8, $CellContext`n[95] = 9, $CellContext`n[96] = 
+       1, $CellContext`n[97] = 7, $CellContext`n[98] = 6, $CellContext`n[99] = 
+       0, $CellContext`n[100] = 0, $CellContext`n[101] = 0, FE`r$$894 = 
+       12, $CellContext`DLA2 = CompiledFunction[{
+          Blank[Integer], 
+          Blank[Integer], 
+          Blank[Integer]}, {{2, 0, 0}, {2, 0, 1}, {2, 0, 2}, {2, 2, 0}}, {7, 
+         16, 3, 0, 
+         7}, {{1, 5}, {7, 0, 3}, {45, {{0, 0}}, 2, 1, 2, 0}, {
+          45, {{1, 0}, {0, 1}, {-1, 0}, {0, -1}}, 2, 4, 2, 1}, {36, 3, 2, 
+          0}, {3, 0, 106}, {11, 3, 4}, {7, 1, 5}, {17, 4, 5, 6}, {11, 6, 3}, {
+          7, 0, 6}, {15, 0, 6, 0}, {7, 2, 5}, {8, 3.141592653589793, 1}, {15, 
+          1, 5, 2}, {21, 2, 1, 2}, {59, 3, 0, 2, 1}, {93, 2, 3, 0, 1, 3, 0, 
+          0}, {93, 1, 3, 0, 1, 3, 0, 2}, {67, 0, 2, 3, 2}, {94, 273, 2, 0, 0, 
+          3, 1, 2, 3, 1, 3}, {93, 48, 3, 1, 3, 2, 1, 2}, {17, 0, 1, 6}, {7, 1,
+           5}, {70, 2, 0, 5, 0, 7}, {93, 36, 2, 0, 7, 2, 0, 5}, {36, 5, 6, 
+          1}, {3, 1, 44}, {7, 2, 5}, {70, 2, 0, 5, 0, 7}, {93, 36, 2, 0, 7, 2,
+           0, 5}, {36, 5, 6, 2}, {3, 2, 35}, {82, 0, 2, 3}, {43, 3, 4}, {3, 4,
+           28}, {7, 4, 8}, {7, 0, 9}, {4, 17}, {44, 1, 12}, {7, -1, 14}, {64, 
+          12, 14, 2, 3}, {7, 0, 15}, {11, 15, 13}, {4, 4}, {70, 1, 0, 13, 1, 
+          5}, {51, 2, 5, 6}, {66, 14, 6, 3}, {5, 13, 12, -3}, {70, 3, 0, 9, 1,
+           4}, {82, 0, 4, 3}, {3, 3, 4}, {6, False, 5}, {4, 5}, {4, 1}, {5, 9,
+           8, -16}, {6, True, 3}, {4, 2}, {4, 3}, {10, 3, 5}, {4, 1}, {10, 5, 
+          6}, {4, 3}, {6, False, 3}, {10, 3, 6}, {10, 6, 5}, {4, 3}, {
+          6, False, 4}, {10, 4, 5}, {10, 5, 6}, {4, 3}, {6, False, 2}, {10, 2,
+           6}, {3, 6, 5}, {61, -1, 1, 4}, {51, 2, 4, 3}, {46, 3, 2}, {
+          4, -54}, {7, 4, 7}, {7, 0, 8}, {4, 17}, {44, 1, 10}, {7, -1, 14}, {
+          64, 10, 14, 2, 3}, {7, 0, 12}, {11, 12, 11}, {4, 4}, {70, 1, 0, 11, 
+          1, 6}, {51, 2, 6, 5}, {66, 14, 5, 3}, {5, 11, 10, -3}, {70, 3, 0, 8,
+           1, 4}, {82, 0, 4, 6}, {3, 6, 4}, {6, True, 1}, {4, 5}, {4, 1}, {5, 
+          8, 7, -16}, {6, False, 6}, {4, 2}, {4, 3}, {10, 6, 1}, {4, 1}, {3, 
+          1, 7}, {7, -1, 6}, {67, 6, 2, 4}, {68, 4, 3}, {74, 0, 2, 3, 5}, {46,
+           5, 0}, {4, 1}, {4, -106}, {2}}, 
+         Function[{$CellContext`r, $CellContext`m, $CellContext`n}, 
+          
+          Module[{$CellContext`pos, $CellContext`\[Theta], $CellContext`i = 
+            0, $CellContext`occupiedSites = {{0, 0}}, $CellContext`dirs = {{1,
+              0}, {0, 1}, {-1, 0}, {0, -1}}}, 
+           While[$CellContext`i < $CellContext`n, 
+             Increment[$CellContext`i]; $CellContext`\[Theta] = 
+              RandomReal[{0, 2 Pi}]; $CellContext`pos = Floor[$CellContext`r {
+                  Cos[$CellContext`\[Theta]], 
+                  Sin[$CellContext`\[Theta]]}]; 
+             With[{$CellContext`pl = $CellContext`r + $CellContext`m}, 
+               While[
+                And[Abs[
+                   Part[$CellContext`pos, 1]] < $CellContext`pl, Abs[
+                   Part[$CellContext`pos, 2]] < $CellContext`pl, 
+                 Not[
+                  MemberQ[$CellContext`occupiedSites, $CellContext`pos]], 
+                 Catch[Do[
+                    If[
+                    MemberQ[$CellContext`occupiedSites, 
+                    Part[
+                    
+                    Map[$CellContext`pos + #& , $CellContext`dirs], \
+$CellContext`k]], 
+                    Throw[False]], {$CellContext`k, 4}]; True]], 
+                AddTo[$CellContext`pos, 
+                 RandomChoice[$CellContext`dirs]]]]; If[
+               Catch[Do[
+                  If[
+                   MemberQ[$CellContext`occupiedSites, 
+                    Part[
+                    
+                    Map[$CellContext`pos + #& , $CellContext`dirs], \
+$CellContext`k]], 
+                   Throw[True]], {$CellContext`k, 4}]; False], 
+               
+               AppendTo[$CellContext`occupiedSites, $CellContext`pos]]]; \
+$CellContext`occupiedSites]], Evaluate], 
+       Attributes[PlotRange] = {ReadProtected}}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->258602477],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`dim$$ = "2D", $CellContext`m$$ = 
+    16, $CellContext`r$$ = 12, $CellContext`seed$$ = 
+    603571, $CellContext`steps$$ = 220, $CellContext`view$$ = 
+    "lines", $CellContext`width$$ = 40, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`dim$$], "2D", "dimension"}, {"1D", "2D"}}, {
+      Hold[$CellContext`view$$], {"lines", "squares"}}, {{
+       Hold[$CellContext`steps$$], 220}, 10, 300, 1}, {
+      Hold[$CellContext`width$$], 40, 100, 1}, {{
+       Hold[$CellContext`r$$], 12, "radius r"}, 5, 15, 1}, {{
+       Hold[$CellContext`m$$], 16, "distance m"}, 1, 30, 1}, {{
+       Hold[$CellContext`seed$$], 603571}, 100000, 999999, 1}}, 
+    Typeset`size$$ = {525., {259., 266.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`dim$39835$$ = False, $CellContext`view$39836$$ = 
+    False, $CellContext`steps$39837$$ = 0, $CellContext`width$39838$$ = 
+    0, $CellContext`r$39839$$ = 0, $CellContext`m$39840$$ = 
+    0, $CellContext`seed$39841$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`dim$$ = "2D", $CellContext`m$$ = 
+        16, $CellContext`r$$ = 12, $CellContext`seed$$ = 
+        603571, $CellContext`steps$$ = 220, $CellContext`view$$ = 
+        "lines", $CellContext`width$$ = 40}, "ControllerVariables" :> {
+        Hold[$CellContext`dim$$, $CellContext`dim$39835$$, False], 
+        Hold[$CellContext`view$$, $CellContext`view$39836$$, False], 
+        Hold[$CellContext`steps$$, $CellContext`steps$39837$$, 0], 
+        Hold[$CellContext`width$$, $CellContext`width$39838$$, 0], 
+        Hold[$CellContext`r$$, $CellContext`r$39839$$, 0], 
+        Hold[$CellContext`m$$, $CellContext`m$39840$$, 0], 
+        Hold[$CellContext`seed$$, $CellContext`seed$39841$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Pane[
+        With[{$CellContext`evol$ = If[$CellContext`dim$$ == "1D", 
+            $CellContext`DLA[$CellContext`steps$$, $CellContext`width$$], 
+            $CellContext`DLA2[$CellContext`r$$, $CellContext`m$$, \
+$CellContext`steps$$]]}, SeedRandom[$CellContext`seed$$]; 
+         If[$CellContext`dim$$ == "1D", 
+           If[$CellContext`view$$ == "lines", 
+            Graphics[{
+              Thickness[0.01], 
+              MapIndexed[{
+                ColorData["Rainbow"][First[#2]/Length[$CellContext`evol$]], 
+                Line[#]}& , $CellContext`evol$]}, Background -> 
+             ColorData["Rainbow"][0], PlotRange -> {Automatic, {0, 
+                Max[
+                 Part[$CellContext`evol$, All, 2]]}}], 
+            With[{$CellContext`evol2$ = ReplaceAll[
+                Map[Last, $CellContext`evol$], {
+                  Pattern[$CellContext`i$, 
+                   Blank[]], 
+                  Pattern[$CellContext`j$, 
+                   Blank[]]} -> {Max[
+                    Part[$CellContext`evol$, All, 2]] - $CellContext`j$ + 
+                   2, $CellContext`i$} - Map[Min, 
+                  Transpose[$CellContext`evol$]]]}, 
+             ArrayPlot[
+              SparseArray[
+               Thread[$CellContext`evol2$ -> N[Range[
+                    Length[$CellContext`evol$]]/Length[$CellContext`evol$]]]],
+               ColorFunction -> "Rainbow"]]], 
+           If[$CellContext`view$$ == "lines", 
+            Graphics[{
+              Thickness[0.01], 
+              MapIndexed[{
+                ColorData["Rainbow"][
+                 N[First[#2]/Length[$CellContext`evol$]]], 
+                Line[#]}& , 
+               Flatten[
+                Map[With[{$CellContext`s$ = #}, 
+                  Map[{$CellContext`s$, #}& , 
+                   Union[
+                    
+                    Nearest[$CellContext`evol$, #, 
+                    DistanceFunction -> (If[
+                    Norm[# - #2] == 1, 1, 2]& )]]]]& , $CellContext`evol$], 
+                1]]}, Background -> ColorData["Rainbow"][0]], 
+            With[{$CellContext`evol2$ = ReplaceAll[$CellContext`evol$, {
+                  Pattern[$CellContext`i$, 
+                   Blank[]], 
+                  Pattern[$CellContext`j$, 
+                   Blank[]]} -> {$CellContext`i$, $CellContext`j$} - Map[Min, 
+                  Transpose[$CellContext`evol$]] + 1]}, 
+             ArrayPlot[
+              Reverse[
+               Transpose[
+                SparseArray[
+                 Thread[$CellContext`evol2$ -> N[Range[
+                    Length[$CellContext`evol$]]/
+                    Length[$CellContext`evol$]]]]]], ColorFunction -> 
+              "Rainbow"]]]]], {350, 350}, Alignment -> {Center}], 
+      "Specifications" :> {{{$CellContext`dim$$, "2D", "dimension"}, {
+         "1D", "2D"}}, {$CellContext`view$$, {
+         "lines", "squares"}}, {{$CellContext`steps$$, 220}, 10, 300, 1, 
+         ImageSize -> Small, Appearance -> "Labeled"}, 
+        Delimiter, {$CellContext`width$$, 40, 100, 1, ImageSize -> Small, 
+         Enabled -> Dynamic[$CellContext`dim$$ == "1D"], Appearance -> 
+         "Labeled"}, 
+        Delimiter, {{$CellContext`r$$, 12, "radius r"}, 5, 15, 1, ImageSize -> 
+         Small, Enabled -> Dynamic[$CellContext`dim$$ == "2D"], Appearance -> 
+         "Labeled"}, {{$CellContext`m$$, 16, "distance m"}, 1, 30, 1, 
+         ImageSize -> Small, Enabled -> Dynamic[$CellContext`dim$$ == "2D"], 
+         Appearance -> "Labeled"}, 
+        Delimiter, {{$CellContext`seed$$, 603571}, 100000, 999999, 1, 
+         ImageSize -> Small, Appearance -> "Labeled"}}, 
+      "Options" :> {
+       ControlPlacement -> Left, AutorunSequencing -> {1, 2, 3, 4, 7}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{905., {299., 306.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`DLA = CompiledFunction[{
+          Blank[Integer], 
+          Blank[Integer]}, {{2, 0, 0}, {2, 0, 1}, {2, 3, 1}}, {5, 9, 0, 0, 
+         4}, {{1, 5}, {11, 0, 2}, {7, -1, 4}, {7, 1, 5}, {64, 2, 5, 4, 2, 
+          1}, {7, 0, 6}, {11, 6, 3}, {4, 3}, {
+          45, {{1, 1}, {1, 1}}, 2, 2, 2, 2}, {66, 4, 2, 1}, {5, 3, 2, -2}, {7,
+           1, 4}, {17, 1, 4, 2}, {7, 0, 4}, {4, 2}, {54, 
+           
+           Function[{$CellContext`steps, $CellContext`width}, \
+$CellContext`n[$CellContext`i] = 0], {$CellContext`i, 2, 0, 4, Block}, 2, 0, 
+           0, 2, 0, 1, 6, 0, 17}, {5, 4, 2, -1}, {11, 0, 5}, {7, 0, 3}, {4, 
+          60}, {7, 2, 2}, {7, -1, 4}, {17, 1, 4, 6}, {58, 2, 2, 6, 4}, {54, 
+           Function[{$CellContext`steps$, $CellContext`width$}, 
+            $CellContext`n[FE`r$$894]], {$CellContext`j, 2, 0, 3, Block}, {
+           FE`r$$894, 2, 0, 4, Module}, 2, 0, 0, 2, 0, 1, 2, 0, 2}, {7, -1, 
+          6}, {17, 4, 6, 7}, {55, $CellContext`n, 2, 0, 7, 2, 0, 6}, {36, 2, 
+          6, 0}, {3, 0, 10}, {7, 1, 2}, {17, 4, 2, 6}, {
+          55, $CellContext`n, 2, 0, 6, 2, 0, 2}, {7, -1, 6}, {17, 4, 6, 7}, {
+          55, $CellContext`n, 2, 0, 7, 2, 0, 6}, {36, 2, 6, 1}, {10, 1, 3}, {
+          4, 3}, {6, False, 2}, {10, 2, 3}, {3, 3, 4}, {7, -1, 2}, {17, 4, 2, 
+          6}, {4, 24}, {54, 
+           Function[{$CellContext`steps$, $CellContext`width$}, 
+            $CellContext`n[FE`r$$894]], {$CellContext`j, 2, 0, 3, Block}, {
+           FE`r$$894, 2, 0, 4, Module}, 2, 0, 0, 2, 0, 1, 2, 0, 2}, {7, 1, 
+          7}, {17, 4, 7, 8}, {55, $CellContext`n, 2, 0, 8, 2, 0, 7}, {36, 2, 
+          7, 0}, {3, 0, 10}, {7, -1, 2}, {17, 4, 2, 7}, {
+          55, $CellContext`n, 2, 0, 7, 2, 0, 2}, {7, 1, 7}, {17, 4, 7, 8}, {
+          55, $CellContext`n, 2, 0, 8, 2, 0, 7}, {38, 2, 7, 1}, {10, 1, 4}, {
+          4, 3}, {6, False, 2}, {10, 2, 4}, {3, 4, 5}, {7, 1, 2}, {17, 4, 2, 
+          7}, {11, 7, 6}, {4, 2}, {11, 4, 6}, {54, 
+           Function[{$CellContext`steps, $CellContext`width}, 
+            $CellContext`n[$CellContext`v]], {$CellContext`v, 2, 0, 6, 
+            Module}, {$CellContext`j, 2, 0, 3, Block}, 2, 0, 0, 2, 0, 1, 2, 0,
+            7}, {7, 1, 2}, {36, 2, 4, 1, 3}, {3, 3, 3}, {54, 
+           
+           Function[{$CellContext`steps$, $CellContext`width$}, \
+$CellContext`n[FE`r$$894] = $CellContext`n[$CellContext`v] + 
+             1], {$CellContext`v, 2, 0, 6, Module}, {$CellContext`j, 2, 0, 3, 
+            Block}, {FE`r$$894, 2, 0, 4, Module}, 2, 0, 0, 2, 0, 1, 6, 0, 
+           17}, {4, 1}, {67, 6, 7, 2, 0}, {54, 
+           Function[{$CellContext`steps$, $CellContext`width$}, 
+            $CellContext`n[FE`r$$894]], {$CellContext`j, 2, 0, 3, Block}, {
+           FE`r$$894, 2, 0, 4, Module}, 2, 0, 0, 2, 0, 1, 2, 0, 2}, {67, 4, 2,
+           2, 2}, {68, 0, 2, 3}, {71, 1, 0, 3, 2, 3}, {5, 3, 5, -59}, {2}}, 
+         Function[{$CellContext`steps, $CellContext`width}, 
+          
+          Module[{$CellContext`list = 
+            Table[{{1, 1}, {1, 
+              1}}, {$CellContext`steps}], $CellContext`r, $CellContext`v, \
+$CellContext`v1}, 
+           Do[$CellContext`n[$CellContext`i] = 
+             0, {$CellContext`i, $CellContext`width + 1}]; 
+           Do[$CellContext`r = RandomInteger[{2, $CellContext`width - 1}]; 
+             Which[
+               
+               And[$CellContext`n[$CellContext`r] < \
+$CellContext`n[$CellContext`r - 1], $CellContext`n[$CellContext`r + 
+                  1] < $CellContext`n[$CellContext`r - 
+                  1]], $CellContext`v = $CellContext`r - 1, 
+               
+               And[$CellContext`n[$CellContext`r] < \
+$CellContext`n[$CellContext`r + 1], $CellContext`n[$CellContext`r - 
+                  1] <= $CellContext`n[$CellContext`r + 
+                  1]], $CellContext`v = $CellContext`r + 1, 
+               True, $CellContext`v = $CellContext`r]; $CellContext`v1 = \
+$CellContext`n[$CellContext`v]; 
+             If[1 < $CellContext`r < $CellContext`width, \
+$CellContext`n[$CellContext`r] = $CellContext`n[$CellContext`v] + 1]; 
+             Part[$CellContext`list, $CellContext`j] = {{$CellContext`v, \
+$CellContext`v1}, {$CellContext`r, 
+                 $CellContext`n[$CellContext`r]}}, {$CellContext`j, \
+$CellContext`steps}]; $CellContext`list]], Evaluate], $CellContext`n[1] = 
+       0, $CellContext`n[2] = 20, $CellContext`n[3] = 25, $CellContext`n[4] = 
+       24, $CellContext`n[5] = 25, $CellContext`n[6] = 23, $CellContext`n[7] = 
+       24, $CellContext`n[8] = 22, $CellContext`n[9] = 21, $CellContext`n[10] = 
+       16, $CellContext`n[11] = 23, $CellContext`n[12] = 
+       21, $CellContext`n[13] = 23, $CellContext`n[14] = 
+       21, $CellContext`n[15] = 20, $CellContext`n[16] = 
+       18, $CellContext`n[17] = 21, $CellContext`n[18] = 
+       16, $CellContext`n[19] = 20, $CellContext`n[20] = 
+       21, $CellContext`n[21] = 22, $CellContext`n[22] = 
+       20, $CellContext`n[23] = 19, $CellContext`n[24] = 
+       20, $CellContext`n[25] = 9, $CellContext`n[26] = 8, $CellContext`n[27] = 
+       10, $CellContext`n[28] = 11, $CellContext`n[29] = 
+       10, $CellContext`n[30] = 6, $CellContext`n[31] = 
+       15, $CellContext`n[32] = 12, $CellContext`n[33] = 
+       13, $CellContext`n[34] = 8, $CellContext`n[35] = 
+       16, $CellContext`n[36] = 22, $CellContext`n[37] = 
+       21, $CellContext`n[38] = 22, $CellContext`n[39] = 
+       18, $CellContext`n[40] = 0, $CellContext`n[41] = 0, $CellContext`n[42] = 
+       16, $CellContext`n[43] = 9, $CellContext`n[44] = 
+       20, $CellContext`n[45] = 19, $CellContext`n[46] = 
+       17, $CellContext`n[47] = 24, $CellContext`n[48] = 
+       25, $CellContext`n[49] = 27, $CellContext`n[50] = 
+       19, $CellContext`n[51] = 21, $CellContext`n[52] = 
+       16, $CellContext`n[53] = 25, $CellContext`n[54] = 
+       24, $CellContext`n[55] = 21, $CellContext`n[56] = 
+       24, $CellContext`n[57] = 25, $CellContext`n[58] = 
+       24, $CellContext`n[59] = 14, $CellContext`n[60] = 
+       13, $CellContext`n[61] = 14, $CellContext`n[62] = 
+       15, $CellContext`n[63] = 12, $CellContext`n[64] = 
+       0, $CellContext`n[65] = 13, $CellContext`n[66] = 
+       14, $CellContext`n[67] = 0, $CellContext`n[68] = 0, $CellContext`n[69] = 
+       12, $CellContext`n[70] = 15, $CellContext`n[71] = 
+       12, $CellContext`n[72] = 15, $CellContext`n[73] = 
+       0, $CellContext`n[74] = 0, $CellContext`n[75] = 9, $CellContext`n[76] = 
+       10, $CellContext`n[77] = 7, $CellContext`n[78] = 8, $CellContext`n[79] = 
+       12, $CellContext`n[80] = 11, $CellContext`n[81] = 
+       12, $CellContext`n[82] = 9, $CellContext`n[83] = 
+       13, $CellContext`n[84] = 12, $CellContext`n[85] = 
+       11, $CellContext`n[86] = 12, $CellContext`n[87] = 
+       13, $CellContext`n[88] = 0, $CellContext`n[89] = 0, $CellContext`n[90] = 
+       7, $CellContext`n[91] = 9, $CellContext`n[92] = 8, $CellContext`n[93] = 
+       9, $CellContext`n[94] = 8, $CellContext`n[95] = 9, $CellContext`n[96] = 
+       1, $CellContext`n[97] = 7, $CellContext`n[98] = 6, $CellContext`n[99] = 
+       0, $CellContext`n[100] = 0, $CellContext`n[101] = 0, FE`r$$894 = 
+       12, $CellContext`DLA2 = CompiledFunction[{
+          Blank[Integer], 
+          Blank[Integer], 
+          Blank[Integer]}, {{2, 0, 0}, {2, 0, 1}, {2, 0, 2}, {2, 2, 0}}, {7, 
+         16, 3, 0, 
+         7}, {{1, 5}, {7, 0, 3}, {45, {{0, 0}}, 2, 1, 2, 0}, {
+          45, {{1, 0}, {0, 1}, {-1, 0}, {0, -1}}, 2, 4, 2, 1}, {36, 3, 2, 
+          0}, {3, 0, 106}, {11, 3, 4}, {7, 1, 5}, {17, 4, 5, 6}, {11, 6, 3}, {
+          7, 0, 6}, {15, 0, 6, 0}, {7, 2, 5}, {8, 3.141592653589793, 1}, {15, 
+          1, 5, 2}, {21, 2, 1, 2}, {59, 3, 0, 2, 1}, {93, 2, 3, 0, 1, 3, 0, 
+          0}, {93, 1, 3, 0, 1, 3, 0, 2}, {67, 0, 2, 3, 2}, {94, 273, 2, 0, 0, 
+          3, 1, 2, 3, 1, 3}, {93, 48, 3, 1, 3, 2, 1, 2}, {17, 0, 1, 6}, {7, 1,
+           5}, {70, 2, 0, 5, 0, 7}, {93, 36, 2, 0, 7, 2, 0, 5}, {36, 5, 6, 
+          1}, {3, 1, 44}, {7, 2, 5}, {70, 2, 0, 5, 0, 7}, {93, 36, 2, 0, 7, 2,
+           0, 5}, {36, 5, 6, 2}, {3, 2, 35}, {82, 0, 2, 3}, {43, 3, 4}, {3, 4,
+           28}, {7, 4, 8}, {7, 0, 9}, {4, 17}, {44, 1, 12}, {7, -1, 14}, {64, 
+          12, 14, 2, 3}, {7, 0, 15}, {11, 15, 13}, {4, 4}, {70, 1, 0, 13, 1, 
+          5}, {51, 2, 5, 6}, {66, 14, 6, 3}, {5, 13, 12, -3}, {70, 3, 0, 9, 1,
+           4}, {82, 0, 4, 3}, {3, 3, 4}, {6, False, 5}, {4, 5}, {4, 1}, {5, 9,
+           8, -16}, {6, True, 3}, {4, 2}, {4, 3}, {10, 3, 5}, {4, 1}, {10, 5, 
+          6}, {4, 3}, {6, False, 3}, {10, 3, 6}, {10, 6, 5}, {4, 3}, {
+          6, False, 4}, {10, 4, 5}, {10, 5, 6}, {4, 3}, {6, False, 2}, {10, 2,
+           6}, {3, 6, 5}, {61, -1, 1, 4}, {51, 2, 4, 3}, {46, 3, 2}, {
+          4, -54}, {7, 4, 7}, {7, 0, 8}, {4, 17}, {44, 1, 10}, {7, -1, 14}, {
+          64, 10, 14, 2, 3}, {7, 0, 12}, {11, 12, 11}, {4, 4}, {70, 1, 0, 11, 
+          1, 6}, {51, 2, 6, 5}, {66, 14, 5, 3}, {5, 11, 10, -3}, {70, 3, 0, 8,
+           1, 4}, {82, 0, 4, 6}, {3, 6, 4}, {6, True, 1}, {4, 5}, {4, 1}, {5, 
+          8, 7, -16}, {6, False, 6}, {4, 2}, {4, 3}, {10, 6, 1}, {4, 1}, {3, 
+          1, 7}, {7, -1, 6}, {67, 6, 2, 4}, {68, 4, 3}, {74, 0, 2, 3, 5}, {46,
+           5, 0}, {4, 1}, {4, -106}, {2}}, 
+         Function[{$CellContext`r, $CellContext`m, $CellContext`n}, 
+          
+          Module[{$CellContext`pos, $CellContext`\[Theta], $CellContext`i = 
+            0, $CellContext`occupiedSites = {{0, 0}}, $CellContext`dirs = {{1,
+              0}, {0, 1}, {-1, 0}, {0, -1}}}, 
+           While[$CellContext`i < $CellContext`n, 
+             Increment[$CellContext`i]; $CellContext`\[Theta] = 
+              RandomReal[{0, 2 Pi}]; $CellContext`pos = Floor[$CellContext`r {
+                  Cos[$CellContext`\[Theta]], 
+                  Sin[$CellContext`\[Theta]]}]; 
+             With[{$CellContext`pl = $CellContext`r + $CellContext`m}, 
+               While[
+                And[Abs[
+                   Part[$CellContext`pos, 1]] < $CellContext`pl, Abs[
+                   Part[$CellContext`pos, 2]] < $CellContext`pl, 
+                 Not[
+                  MemberQ[$CellContext`occupiedSites, $CellContext`pos]], 
+                 Catch[Do[
+                    If[
+                    MemberQ[$CellContext`occupiedSites, 
+                    Part[
+                    
+                    Map[$CellContext`pos + #& , $CellContext`dirs], \
+$CellContext`k]], 
+                    Throw[False]], {$CellContext`k, 4}]; True]], 
+                AddTo[$CellContext`pos, 
+                 RandomChoice[$CellContext`dirs]]]]; If[
+               Catch[Do[
+                  If[
+                   MemberQ[$CellContext`occupiedSites, 
+                    Part[
+                    
+                    Map[$CellContext`pos + #& , $CellContext`dirs], \
+$CellContext`k]], 
+                   Throw[True]], {$CellContext`k, 4}]; False], 
+               
+               AppendTo[$CellContext`occupiedSites, $CellContext`pos]]]; \
+$CellContext`occupiedSites]], Evaluate], 
+       Attributes[PlotRange] = {ReadProtected}}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->168083291],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`dim$$ = "2D", $CellContext`m$$ = 
+    16, $CellContext`r$$ = 12, $CellContext`seed$$ = 
+    234556, $CellContext`steps$$ = 220, $CellContext`view$$ = 
+    "squares", $CellContext`width$$ = 40, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`dim$$], "2D", "dimension"}, {"1D", "2D"}}, {{
+       Hold[$CellContext`view$$], "squares"}, {"lines", "squares"}}, {{
+       Hold[$CellContext`steps$$], 220}, 10, 300, 1}, {
+      Hold[$CellContext`width$$], 40, 100, 1}, {{
+       Hold[$CellContext`r$$], 12, "radius r"}, 5, 15, 1}, {{
+       Hold[$CellContext`m$$], 16, "distance m"}, 1, 30, 1}, {{
+       Hold[$CellContext`seed$$], 234556}, 100000, 999999, 1}}, 
+    Typeset`size$$ = {525., {259., 266.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`dim$39926$$ = False, $CellContext`view$39927$$ = 
+    False, $CellContext`steps$39928$$ = 0, $CellContext`width$39929$$ = 
+    0, $CellContext`r$39930$$ = 0, $CellContext`m$39931$$ = 
+    0, $CellContext`seed$39932$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`dim$$ = "2D", $CellContext`m$$ = 
+        16, $CellContext`r$$ = 12, $CellContext`seed$$ = 
+        234556, $CellContext`steps$$ = 220, $CellContext`view$$ = 
+        "squares", $CellContext`width$$ = 40}, "ControllerVariables" :> {
+        Hold[$CellContext`dim$$, $CellContext`dim$39926$$, False], 
+        Hold[$CellContext`view$$, $CellContext`view$39927$$, False], 
+        Hold[$CellContext`steps$$, $CellContext`steps$39928$$, 0], 
+        Hold[$CellContext`width$$, $CellContext`width$39929$$, 0], 
+        Hold[$CellContext`r$$, $CellContext`r$39930$$, 0], 
+        Hold[$CellContext`m$$, $CellContext`m$39931$$, 0], 
+        Hold[$CellContext`seed$$, $CellContext`seed$39932$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Pane[
+        With[{$CellContext`evol$ = If[$CellContext`dim$$ == "1D", 
+            $CellContext`DLA[$CellContext`steps$$, $CellContext`width$$], 
+            $CellContext`DLA2[$CellContext`r$$, $CellContext`m$$, \
+$CellContext`steps$$]]}, SeedRandom[$CellContext`seed$$]; 
+         If[$CellContext`dim$$ == "1D", 
+           If[$CellContext`view$$ == "lines", 
+            Graphics[{
+              Thickness[0.01], 
+              MapIndexed[{
+                ColorData["Rainbow"][First[#2]/Length[$CellContext`evol$]], 
+                Line[#]}& , $CellContext`evol$]}, Background -> 
+             ColorData["Rainbow"][0], PlotRange -> {Automatic, {0, 
+                Max[
+                 Part[$CellContext`evol$, All, 2]]}}], 
+            With[{$CellContext`evol2$ = ReplaceAll[
+                Map[Last, $CellContext`evol$], {
+                  Pattern[$CellContext`i$, 
+                   Blank[]], 
+                  Pattern[$CellContext`j$, 
+                   Blank[]]} -> {Max[
+                    Part[$CellContext`evol$, All, 2]] - $CellContext`j$ + 
+                   2, $CellContext`i$} - Map[Min, 
+                  Transpose[$CellContext`evol$]]]}, 
+             ArrayPlot[
+              SparseArray[
+               Thread[$CellContext`evol2$ -> N[Range[
+                    Length[$CellContext`evol$]]/Length[$CellContext`evol$]]]],
+               ColorFunction -> "Rainbow"]]], 
+           If[$CellContext`view$$ == "lines", 
+            Graphics[{
+              Thickness[0.01], 
+              MapIndexed[{
+                ColorData["Rainbow"][
+                 N[First[#2]/Length[$CellContext`evol$]]], 
+                Line[#]}& , 
+               Flatten[
+                Map[With[{$CellContext`s$ = #}, 
+                  Map[{$CellContext`s$, #}& , 
+                   Union[
+                    
+                    Nearest[$CellContext`evol$, #, 
+                    DistanceFunction -> (If[
+                    Norm[# - #2] == 1, 1, 2]& )]]]]& , $CellContext`evol$], 
+                1]]}, Background -> ColorData["Rainbow"][0]], 
+            With[{$CellContext`evol2$ = ReplaceAll[$CellContext`evol$, {
+                  Pattern[$CellContext`i$, 
+                   Blank[]], 
+                  Pattern[$CellContext`j$, 
+                   Blank[]]} -> {$CellContext`i$, $CellContext`j$} - Map[Min, 
+                  Transpose[$CellContext`evol$]] + 1]}, 
+             ArrayPlot[
+              Reverse[
+               Transpose[
+                SparseArray[
+                 Thread[$CellContext`evol2$ -> N[Range[
+                    Length[$CellContext`evol$]]/
+                    Length[$CellContext`evol$]]]]]], ColorFunction -> 
+              "Rainbow"]]]]], {350, 350}, Alignment -> {Center}], 
+      "Specifications" :> {{{$CellContext`dim$$, "2D", "dimension"}, {
+         "1D", "2D"}}, {{$CellContext`view$$, "squares"}, {
+         "lines", "squares"}}, {{$CellContext`steps$$, 220}, 10, 300, 1, 
+         ImageSize -> Small, Appearance -> "Labeled"}, 
+        Delimiter, {$CellContext`width$$, 40, 100, 1, ImageSize -> Small, 
+         Enabled -> Dynamic[$CellContext`dim$$ == "1D"], Appearance -> 
+         "Labeled"}, 
+        Delimiter, {{$CellContext`r$$, 12, "radius r"}, 5, 15, 1, ImageSize -> 
+         Small, Enabled -> Dynamic[$CellContext`dim$$ == "2D"], Appearance -> 
+         "Labeled"}, {{$CellContext`m$$, 16, "distance m"}, 1, 30, 1, 
+         ImageSize -> Small, Enabled -> Dynamic[$CellContext`dim$$ == "2D"], 
+         Appearance -> "Labeled"}, 
+        Delimiter, {{$CellContext`seed$$, 234556}, 100000, 999999, 1, 
+         ImageSize -> Small, Appearance -> "Labeled"}}, 
+      "Options" :> {
+       ControlPlacement -> Left, AutorunSequencing -> {1, 2, 3, 4, 7}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{905., {299., 306.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`DLA = CompiledFunction[{
+          Blank[Integer], 
+          Blank[Integer]}, {{2, 0, 0}, {2, 0, 1}, {2, 3, 1}}, {5, 9, 0, 0, 
+         4}, {{1, 5}, {11, 0, 2}, {7, -1, 4}, {7, 1, 5}, {64, 2, 5, 4, 2, 
+          1}, {7, 0, 6}, {11, 6, 3}, {4, 3}, {
+          45, {{1, 1}, {1, 1}}, 2, 2, 2, 2}, {66, 4, 2, 1}, {5, 3, 2, -2}, {7,
+           1, 4}, {17, 1, 4, 2}, {7, 0, 4}, {4, 2}, {54, 
+           
+           Function[{$CellContext`steps, $CellContext`width}, \
+$CellContext`n[$CellContext`i] = 0], {$CellContext`i, 2, 0, 4, Block}, 2, 0, 
+           0, 2, 0, 1, 6, 0, 17}, {5, 4, 2, -1}, {11, 0, 5}, {7, 0, 3}, {4, 
+          60}, {7, 2, 2}, {7, -1, 4}, {17, 1, 4, 6}, {58, 2, 2, 6, 4}, {54, 
+           Function[{$CellContext`steps$, $CellContext`width$}, 
+            $CellContext`n[FE`r$$894]], {$CellContext`j, 2, 0, 3, Block}, {
+           FE`r$$894, 2, 0, 4, Module}, 2, 0, 0, 2, 0, 1, 2, 0, 2}, {7, -1, 
+          6}, {17, 4, 6, 7}, {55, $CellContext`n, 2, 0, 7, 2, 0, 6}, {36, 2, 
+          6, 0}, {3, 0, 10}, {7, 1, 2}, {17, 4, 2, 6}, {
+          55, $CellContext`n, 2, 0, 6, 2, 0, 2}, {7, -1, 6}, {17, 4, 6, 7}, {
+          55, $CellContext`n, 2, 0, 7, 2, 0, 6}, {36, 2, 6, 1}, {10, 1, 3}, {
+          4, 3}, {6, False, 2}, {10, 2, 3}, {3, 3, 4}, {7, -1, 2}, {17, 4, 2, 
+          6}, {4, 24}, {54, 
+           Function[{$CellContext`steps$, $CellContext`width$}, 
+            $CellContext`n[FE`r$$894]], {$CellContext`j, 2, 0, 3, Block}, {
+           FE`r$$894, 2, 0, 4, Module}, 2, 0, 0, 2, 0, 1, 2, 0, 2}, {7, 1, 
+          7}, {17, 4, 7, 8}, {55, $CellContext`n, 2, 0, 8, 2, 0, 7}, {36, 2, 
+          7, 0}, {3, 0, 10}, {7, -1, 2}, {17, 4, 2, 7}, {
+          55, $CellContext`n, 2, 0, 7, 2, 0, 2}, {7, 1, 7}, {17, 4, 7, 8}, {
+          55, $CellContext`n, 2, 0, 8, 2, 0, 7}, {38, 2, 7, 1}, {10, 1, 4}, {
+          4, 3}, {6, False, 2}, {10, 2, 4}, {3, 4, 5}, {7, 1, 2}, {17, 4, 2, 
+          7}, {11, 7, 6}, {4, 2}, {11, 4, 6}, {54, 
+           Function[{$CellContext`steps, $CellContext`width}, 
+            $CellContext`n[$CellContext`v]], {$CellContext`v, 2, 0, 6, 
+            Module}, {$CellContext`j, 2, 0, 3, Block}, 2, 0, 0, 2, 0, 1, 2, 0,
+            7}, {7, 1, 2}, {36, 2, 4, 1, 3}, {3, 3, 3}, {54, 
+           
+           Function[{$CellContext`steps$, $CellContext`width$}, \
+$CellContext`n[FE`r$$894] = $CellContext`n[$CellContext`v] + 
+             1], {$CellContext`v, 2, 0, 6, Module}, {$CellContext`j, 2, 0, 3, 
+            Block}, {FE`r$$894, 2, 0, 4, Module}, 2, 0, 0, 2, 0, 1, 6, 0, 
+           17}, {4, 1}, {67, 6, 7, 2, 0}, {54, 
+           Function[{$CellContext`steps$, $CellContext`width$}, 
+            $CellContext`n[FE`r$$894]], {$CellContext`j, 2, 0, 3, Block}, {
+           FE`r$$894, 2, 0, 4, Module}, 2, 0, 0, 2, 0, 1, 2, 0, 2}, {67, 4, 2,
+           2, 2}, {68, 0, 2, 3}, {71, 1, 0, 3, 2, 3}, {5, 3, 5, -59}, {2}}, 
+         Function[{$CellContext`steps, $CellContext`width}, 
+          
+          Module[{$CellContext`list = 
+            Table[{{1, 1}, {1, 
+              1}}, {$CellContext`steps}], $CellContext`r, $CellContext`v, \
+$CellContext`v1}, 
+           Do[$CellContext`n[$CellContext`i] = 
+             0, {$CellContext`i, $CellContext`width + 1}]; 
+           Do[$CellContext`r = RandomInteger[{2, $CellContext`width - 1}]; 
+             Which[
+               
+               And[$CellContext`n[$CellContext`r] < \
+$CellContext`n[$CellContext`r - 1], $CellContext`n[$CellContext`r + 
+                  1] < $CellContext`n[$CellContext`r - 
+                  1]], $CellContext`v = $CellContext`r - 1, 
+               
+               And[$CellContext`n[$CellContext`r] < \
+$CellContext`n[$CellContext`r + 1], $CellContext`n[$CellContext`r - 
+                  1] <= $CellContext`n[$CellContext`r + 
+                  1]], $CellContext`v = $CellContext`r + 1, 
+               True, $CellContext`v = $CellContext`r]; $CellContext`v1 = \
+$CellContext`n[$CellContext`v]; 
+             If[1 < $CellContext`r < $CellContext`width, \
+$CellContext`n[$CellContext`r] = $CellContext`n[$CellContext`v] + 1]; 
+             
+             Part[$CellContext`list, $CellContext`j] = {{$CellContext`v, \
+$CellContext`v1}, {$CellContext`r, 
+                 $CellContext`n[$CellContext`r]}}, {$CellContext`j, \
+$CellContext`steps}]; $CellContext`list]], Evaluate], $CellContext`n[1] = 
+       0, $CellContext`n[2] = 20, $CellContext`n[3] = 25, $CellContext`n[4] = 
+       24, $CellContext`n[5] = 25, $CellContext`n[6] = 23, $CellContext`n[7] = 
+       24, $CellContext`n[8] = 22, $CellContext`n[9] = 21, $CellContext`n[10] = 
+       16, $CellContext`n[11] = 23, $CellContext`n[12] = 
+       21, $CellContext`n[13] = 23, $CellContext`n[14] = 
+       21, $CellContext`n[15] = 20, $CellContext`n[16] = 
+       18, $CellContext`n[17] = 21, $CellContext`n[18] = 
+       16, $CellContext`n[19] = 20, $CellContext`n[20] = 
+       21, $CellContext`n[21] = 22, $CellContext`n[22] = 
+       20, $CellContext`n[23] = 19, $CellContext`n[24] = 
+       20, $CellContext`n[25] = 9, $CellContext`n[26] = 8, $CellContext`n[27] = 
+       10, $CellContext`n[28] = 11, $CellContext`n[29] = 
+       10, $CellContext`n[30] = 6, $CellContext`n[31] = 
+       15, $CellContext`n[32] = 12, $CellContext`n[33] = 
+       13, $CellContext`n[34] = 8, $CellContext`n[35] = 
+       16, $CellContext`n[36] = 22, $CellContext`n[37] = 
+       21, $CellContext`n[38] = 22, $CellContext`n[39] = 
+       18, $CellContext`n[40] = 0, $CellContext`n[41] = 0, $CellContext`n[42] = 
+       16, $CellContext`n[43] = 9, $CellContext`n[44] = 
+       20, $CellContext`n[45] = 19, $CellContext`n[46] = 
+       17, $CellContext`n[47] = 24, $CellContext`n[48] = 
+       25, $CellContext`n[49] = 27, $CellContext`n[50] = 
+       19, $CellContext`n[51] = 21, $CellContext`n[52] = 
+       16, $CellContext`n[53] = 25, $CellContext`n[54] = 
+       24, $CellContext`n[55] = 21, $CellContext`n[56] = 
+       24, $CellContext`n[57] = 25, $CellContext`n[58] = 
+       24, $CellContext`n[59] = 14, $CellContext`n[60] = 
+       13, $CellContext`n[61] = 14, $CellContext`n[62] = 
+       15, $CellContext`n[63] = 12, $CellContext`n[64] = 
+       0, $CellContext`n[65] = 13, $CellContext`n[66] = 
+       14, $CellContext`n[67] = 0, $CellContext`n[68] = 0, $CellContext`n[69] = 
+       12, $CellContext`n[70] = 15, $CellContext`n[71] = 
+       12, $CellContext`n[72] = 15, $CellContext`n[73] = 
+       0, $CellContext`n[74] = 0, $CellContext`n[75] = 9, $CellContext`n[76] = 
+       10, $CellContext`n[77] = 7, $CellContext`n[78] = 8, $CellContext`n[79] = 
+       12, $CellContext`n[80] = 11, $CellContext`n[81] = 
+       12, $CellContext`n[82] = 9, $CellContext`n[83] = 
+       13, $CellContext`n[84] = 12, $CellContext`n[85] = 
+       11, $CellContext`n[86] = 12, $CellContext`n[87] = 
+       13, $CellContext`n[88] = 0, $CellContext`n[89] = 0, $CellContext`n[90] = 
+       7, $CellContext`n[91] = 9, $CellContext`n[92] = 8, $CellContext`n[93] = 
+       9, $CellContext`n[94] = 8, $CellContext`n[95] = 9, $CellContext`n[96] = 
+       1, $CellContext`n[97] = 7, $CellContext`n[98] = 6, $CellContext`n[99] = 
+       0, $CellContext`n[100] = 0, $CellContext`n[101] = 0, FE`r$$894 = 
+       12, $CellContext`DLA2 = CompiledFunction[{
+          Blank[Integer], 
+          Blank[Integer], 
+          Blank[Integer]}, {{2, 0, 0}, {2, 0, 1}, {2, 0, 2}, {2, 2, 0}}, {7, 
+         16, 3, 0, 
+         7}, {{1, 5}, {7, 0, 3}, {45, {{0, 0}}, 2, 1, 2, 0}, {
+          45, {{1, 0}, {0, 1}, {-1, 0}, {0, -1}}, 2, 4, 2, 1}, {36, 3, 2, 
+          0}, {3, 0, 106}, {11, 3, 4}, {7, 1, 5}, {17, 4, 5, 6}, {11, 6, 3}, {
+          7, 0, 6}, {15, 0, 6, 0}, {7, 2, 5}, {8, 3.141592653589793, 1}, {15, 
+          1, 5, 2}, {21, 2, 1, 2}, {59, 3, 0, 2, 1}, {93, 2, 3, 0, 1, 3, 0, 
+          0}, {93, 1, 3, 0, 1, 3, 0, 2}, {67, 0, 2, 3, 2}, {94, 273, 2, 0, 0, 
+          3, 1, 2, 3, 1, 3}, {93, 48, 3, 1, 3, 2, 1, 2}, {17, 0, 1, 6}, {7, 1,
+           5}, {70, 2, 0, 5, 0, 7}, {93, 36, 2, 0, 7, 2, 0, 5}, {36, 5, 6, 
+          1}, {3, 1, 44}, {7, 2, 5}, {70, 2, 0, 5, 0, 7}, {93, 36, 2, 0, 7, 2,
+           0, 5}, {36, 5, 6, 2}, {3, 2, 35}, {82, 0, 2, 3}, {43, 3, 4}, {3, 4,
+           28}, {7, 4, 8}, {7, 0, 9}, {4, 17}, {44, 1, 12}, {7, -1, 14}, {64, 
+          12, 14, 2, 3}, {7, 0, 15}, {11, 15, 13}, {4, 4}, {70, 1, 0, 13, 1, 
+          5}, {51, 2, 5, 6}, {66, 14, 6, 3}, {5, 13, 12, -3}, {70, 3, 0, 9, 1,
+           4}, {82, 0, 4, 3}, {3, 3, 4}, {6, False, 5}, {4, 5}, {4, 1}, {5, 9,
+           8, -16}, {6, True, 3}, {4, 2}, {4, 3}, {10, 3, 5}, {4, 1}, {10, 5, 
+          6}, {4, 3}, {6, False, 3}, {10, 3, 6}, {10, 6, 5}, {4, 3}, {
+          6, False, 4}, {10, 4, 5}, {10, 5, 6}, {4, 3}, {6, False, 2}, {10, 2,
+           6}, {3, 6, 5}, {61, -1, 1, 4}, {51, 2, 4, 3}, {46, 3, 2}, {
+          4, -54}, {7, 4, 7}, {7, 0, 8}, {4, 17}, {44, 1, 10}, {7, -1, 14}, {
+          64, 10, 14, 2, 3}, {7, 0, 12}, {11, 12, 11}, {4, 4}, {70, 1, 0, 11, 
+          1, 6}, {51, 2, 6, 5}, {66, 14, 5, 3}, {5, 11, 10, -3}, {70, 3, 0, 8,
+           1, 4}, {82, 0, 4, 6}, {3, 6, 4}, {6, True, 1}, {4, 5}, {4, 1}, {5, 
+          8, 7, -16}, {6, False, 6}, {4, 2}, {4, 3}, {10, 6, 1}, {4, 1}, {3, 
+          1, 7}, {7, -1, 6}, {67, 6, 2, 4}, {68, 4, 3}, {74, 0, 2, 3, 5}, {46,
+           5, 0}, {4, 1}, {4, -106}, {2}}, 
+         Function[{$CellContext`r, $CellContext`m, $CellContext`n}, 
+          
+          Module[{$CellContext`pos, $CellContext`\[Theta], $CellContext`i = 
+            0, $CellContext`occupiedSites = {{0, 0}}, $CellContext`dirs = {{1,
+              0}, {0, 1}, {-1, 0}, {0, -1}}}, 
+           While[$CellContext`i < $CellContext`n, 
+             Increment[$CellContext`i]; $CellContext`\[Theta] = 
+              RandomReal[{0, 2 Pi}]; $CellContext`pos = Floor[$CellContext`r {
+                  Cos[$CellContext`\[Theta]], 
+                  Sin[$CellContext`\[Theta]]}]; 
+             With[{$CellContext`pl = $CellContext`r + $CellContext`m}, 
+               While[
+                And[Abs[
+                   Part[$CellContext`pos, 1]] < $CellContext`pl, Abs[
+                   Part[$CellContext`pos, 2]] < $CellContext`pl, 
+                 Not[
+                  MemberQ[$CellContext`occupiedSites, $CellContext`pos]], 
+                 Catch[Do[
+                    If[
+                    MemberQ[$CellContext`occupiedSites, 
+                    Part[
+                    
+                    Map[$CellContext`pos + #& , $CellContext`dirs], \
+$CellContext`k]], 
+                    Throw[False]], {$CellContext`k, 4}]; True]], 
+                AddTo[$CellContext`pos, 
+                 RandomChoice[$CellContext`dirs]]]]; If[
+               Catch[Do[
+                  If[
+                   MemberQ[$CellContext`occupiedSites, 
+                    Part[
+                    
+                    Map[$CellContext`pos + #& , $CellContext`dirs], \
+$CellContext`k]], 
+                   Throw[True]], {$CellContext`k, 4}]; False], 
+               
+               AppendTo[$CellContext`occupiedSites, $CellContext`pos]]]; \
+$CellContext`occupiedSites]], Evaluate], 
+       Attributes[PlotRange] = {ReadProtected}}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->137920396]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "DetailsSection"],
+
+Cell[TextData[{
+ "T. A. Witten Jr, L. M. Sander, ",
+ StyleBox["Phys. Rev. Lett.",
+  FontSlant->"Italic"],
+ " 47, 1400 (1981)"
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.415657148546875*^9, 3.41565715378125*^9}, 
+   3.415748992609375*^9},
+ CellID->447566545],
+
+Cell[TextData[{
+ "Huang, Yi-Bin; Somasundaran, ",
+ StyleBox["P., Phys. Rev. A",
+  FontSlant->"Italic"],
+ " 36, 4518 (1987)"
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.41574891465625*^9, 3.41574902996875*^9}, {
+   3.415749065921875*^9, 3.4157490675*^9}, 3.415749607078125*^9},
+ CellID->886531766]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.413304121332429*^9},
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.41323647445529*^9, 3.413236476319577*^9}},
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.3895522232313623`*^9},
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.41247217387075*^9},
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SearchTermsSection"],
+
+Cell["diffusion limited aggregation", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.412472187696125*^9, 3.4124721940003147`*^9}},
+ CellID->1639898981],
+
+Cell["DLA", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4124721834626493`*^9, 3.412472183863905*^9}},
+ CellID->977048069]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "RelatedLinksSection"],
+
+Cell[TextData[ButtonBox["Diffusion-Limited Aggregation",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://library.wolfram.com/infocenter/Articles/2866/"], 
+   None}]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.413304148113679*^9, 3.413304148113679*^9}},
+ CellID->28214300],
+
+Cell[TextData[ButtonBox["The Growth of Crystals",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://www.wolframscience.com/nksonline/section-8.2"], 
+   None}]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.413304181769929*^9, 3.413304181769929*^9}},
+ CellID->138051867]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Enrique Zeleny",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Enrique+Zeleny"]\
+, None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Enrique+Zeleny"]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.412472199569957*^9, 3.412472202880362*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{853, 864},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+ShowSelection->True,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (February 23, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "AutomaticAnimation"->{
+  Cell[141288, 2700, 1473, 32, 42, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[142764, 2734, 882, 21, 42, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]},
+ "CreateAndDeleteLocators"->{
+  Cell[139340, 2647, 637, 15, 42, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "DragLocators"->{
+  Cell[138997, 2634, 340, 11, 42, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "GamepadControls"->{
+  Cell[140916, 2689, 369, 9, 42, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "ResizeImages"->{
+  Cell[137939, 2605, 374, 9, 42, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[138316, 2616, 678, 16, 42, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "SliderZoom"->{
+  Cell[139980, 2664, 933, 23, 42, "ControlSuggestions",
+   CellTags->"SliderZoom"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"AutomaticAnimation", 145574, 2828},
+ {"BookmarkAnimation", 145692, 2831},
+ {"CreateAndDeleteLocators", 145814, 2834},
+ {"DragLocators", 145931, 2837},
+ {"GamepadControls", 146040, 2840},
+ {"ResizeImages", 146148, 2843},
+ {"RotateAndZoomIn3D", 146258, 2846},
+ {"SliderZoom", 146367, 2849}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 242, 4, 111, "DemoTitle"],
+Cell[CellGroupData[{
+Cell[846, 30, 33, 0, 399, "InitializationSection"],
+Cell[882, 32, 5377, 121, 70, "Input",
+ CellID->1927002126],
+Cell[6262, 155, 9203, 184, 70, "Input",
+ CellID->289405278]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[15502, 344, 29, 0, 267, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[15556, 348, 12791, 279, 70, "Input",
+ CellID->263071836],
+Cell[28350, 629, 17749, 314, 622, "Output",
+ CellID->53521669]
+}, {2}]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[46145, 949, 36, 0, 249, "ManipulateCaptionSection"],
+Cell[46184, 951, 2724, 43, 261, "ManipulateCaption"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[48945, 999, 28, 0, 252, "ThumbnailSection"],
+Cell[48976, 1001, 17602, 311, 622, "Output",
+ CellID->18072697]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[66615, 1317, 28, 0, 207, "SnapshotsSection"],
+Cell[66646, 1319, 17661, 312, 622, "Output",
+ CellID->418111042],
+Cell[84310, 1633, 17630, 311, 622, "Output",
+ CellID->258602477],
+Cell[101943, 1946, 17603, 311, 622, "Output",
+ CellID->168083291],
+Cell[119549, 2259, 17648, 312, 622, "Output",
+ CellID->137920396]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[137234, 2576, 26, 0, 498, "DetailsSection"],
+Cell[137263, 2578, 279, 9, 33, "DetailNotes",
+ CellID->447566545],
+Cell[137545, 2589, 317, 9, 33, "DetailNotes",
+ CellID->886531766]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[137899, 2603, 37, 0, 180, "ControlSuggestionsSection"],
+Cell[137939, 2605, 374, 9, 42, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[138316, 2616, 678, 16, 42, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[138997, 2634, 340, 11, 42, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[139340, 2647, 637, 15, 42, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[139980, 2664, 933, 23, 42, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[140916, 2689, 369, 9, 42, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[141288, 2700, 1473, 32, 42, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[142764, 2734, 882, 21, 42, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[143683, 2760, 30, 0, 228, "SearchTermsSection"],
+Cell[143716, 2762, 165, 3, 33, "SearchTerms",
+ CellID->1639898981],
+Cell[143884, 2767, 138, 3, 33, "SearchTerms",
+ CellID->977048069]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[144059, 2775, 31, 0, 207, "RelatedLinksSection"],
+Cell[144093, 2777, 298, 7, 33, "RelatedLinks",
+ CellID->28214300],
+Cell[144394, 2786, 291, 7, 70, "RelatedLinks",
+ CellID->138051867]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[144722, 2798, 25, 0, 70, "AuthorSection"],
+Cell[144750, 2800, 389, 11, 70, "Author"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

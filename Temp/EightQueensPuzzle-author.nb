@@ -1,0 +1,1802 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     80166,       1793]
+NotebookOptionsPosition[     76096,       1665]
+NotebookOutlinePosition[     77694,       1715]
+CellTagsIndexPosition[     77366,       1703]
+WindowFrame->Normal
+ContainsDynamic->True *)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Eight Queens Puzzle", "DemoTitle",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3748764242392015`*^9, 3.3748764502546597`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["", "InitializationSection"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"PermutationToBoard", "[", "p_List", "]"}], "/;", 
+   RowBox[{"p", "=!=", 
+    RowBox[{"{", "}"}]}]}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"n", "=", 
+      RowBox[{"Length", "[", "p", "]"}]}], "}"}], ",", 
+    RowBox[{"Normal", "[", " ", 
+     RowBox[{"SparseArray", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"Thread", "[", 
+          RowBox[{
+           RowBox[{"Thread", "[", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Range", "[", "n", "]"}], ",", "#"}], "}"}], "]"}], 
+           "\[Rule]", "1"}], "]"}], "&"}], "[", "p", "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"n", ",", "n"}], "}"}]}], "]"}], " ", "]"}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.374884058955964*^9, 3.3748841093931413`*^9}, {
+   3.374895891786484*^9, 3.374895906583264*^9}, {3.3748959620516586`*^9, 
+   3.3748960913633313`*^9}, {3.3748961258943605`*^9, 
+   3.3748961453786106`*^9}, {3.374896225878095*^9, 3.3748963600803614`*^9}, {
+   3.3748965049700594`*^9, 3.374896574047742*^9}, {3.374942192490157*^9, 
+   3.3749422058806963`*^9}},
+ CellID->70535431],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"PermutationToBoard", "[", "p___", "]"}], ":=", 
+  RowBox[{"{", "}"}]}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.37494220764631*^9, 3.3749422167868767`*^9}, {
+   3.3749425051444063`*^9, 3.3749425055037785`*^9}},
+ CellID->380919021],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"ValidPermutation", "[", "p_", "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"m", ",", "m2"}], "}"}], ",", 
+     RowBox[{"Catch", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"Not", "[", 
+          RowBox[{"FreeQ", "[", 
+           RowBox[{
+            RowBox[{"Abs", "[", 
+             RowBox[{"Differences", "[", "p", "]"}], "]"}], ",", "1"}], "]"}],
+           "]"}], ",", 
+         RowBox[{"Throw", "[", "False", "]"}]}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"m", "=", 
+        RowBox[{"Range", "[", 
+         RowBox[{
+          RowBox[{"-", 
+           RowBox[{"Length", "[", "p", "]"}]}], ",", 
+          RowBox[{"Length", "[", "p", "]"}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"m2", "=", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"Take", "[", 
+           RowBox[{"m", ",", 
+            RowBox[{"{", 
+             RowBox[{"k", ",", 
+              RowBox[{"k", "+", 
+               RowBox[{"Length", "[", "p", "]"}], "-", "1"}]}], "}"}]}], 
+           "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"k", ",", 
+            RowBox[{
+             RowBox[{"Length", "[", "p", "]"}], "+", "1"}], ",", "2", ",", 
+            RowBox[{"-", "1"}]}], "}"}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Fold", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"#1", "&&", 
+            RowBox[{"With", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"p0", "=", 
+                RowBox[{"Extract", "[", 
+                 RowBox[{"p", ",", 
+                  RowBox[{"First", "@", 
+                   RowBox[{"Position", "[", 
+                    RowBox[{"#2", ",", "0", ",", 
+                    RowBox[{"{", "1", "}"}], ",", "1"}], "]"}]}]}], "]"}]}], 
+               "}"}], ",", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"Count", "[", 
+                 RowBox[{
+                  RowBox[{"Thread", "[", 
+                   RowBox[{"{", 
+                    RowBox[{"p", ",", 
+                    RowBox[{"p0", "+", "#2"}]}], "}"}], "]"}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{"a_", ",", "a_"}], "}"}], ",", 
+                  RowBox[{"{", "1", "}"}]}], "]"}], "\[Equal]", "1"}], "&&", 
+               RowBox[{
+                RowBox[{"Count", "[", "\[IndentingNewLine]", 
+                 RowBox[{
+                  RowBox[{"Thread", "[", 
+                   RowBox[{"{", 
+                    RowBox[{"p", ",", 
+                    RowBox[{"p0", "-", "#2"}]}], "}"}], "]"}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{"a_", ",", "a_"}], "}"}], ",", 
+                  RowBox[{"{", "1", "}"}]}], "]"}], "\[Equal]", "1"}]}]}], 
+             "]"}]}], ")"}], "&"}], ",", "True", ",", "m2"}], "]"}]}], 
+      "\[IndentingNewLine]", "]"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3748917311724863`*^9, 3.374891753641093*^9}, {
+   3.374891975280299*^9, 3.3748919926239386`*^9}, 3.37489207595153*^9, {
+   3.374892119310628*^9, 3.374892144451092*^9}, {3.3748922040444603`*^9, 
+   3.3748923628246937`*^9}, {3.374892406230666*^9, 3.3748925330579796`*^9}, {
+   3.3748926136043386`*^9, 3.3748926457447586`*^9}, {3.374892708603731*^9, 
+   3.3748927321660805`*^9}, {3.374892770040838*^9, 3.37489296194586*^9}, {
+   3.3748929950393977`*^9, 3.3748930152111435`*^9}, {3.3748931847100587`*^9, 
+   3.374893297209339*^9}, {3.374893415224209*^9, 3.374893490098729*^9}, {
+   3.3748935586607904`*^9, 3.3748935766294255`*^9}, {3.374893614019811*^9, 
+   3.374893631691573*^9}, {3.374893669113209*^9, 3.374893701566126*^9}, {
+   3.37489373608153*^9, 3.374893753565793*^9}, {3.3748939646113176`*^9, 
+   3.37489397211127*^9}, {3.3748940315483894`*^9, 3.3748940993448305`*^9}, {
+   3.3748941475320215`*^9, 3.3748941668131485`*^9}, {3.3748942375470705`*^9, 
+   3.3748942951092024`*^9}, {3.374894329780855*^9, 3.374894365296253*^9}, {
+   3.3748944587019053`*^9, 3.3748945229983687`*^9}, {3.374894554623166*^9, 
+   3.374894679247369*^9}, {3.3748947430282106`*^9, 3.3748947627312098`*^9}, {
+   3.374894802637204*^9, 3.3748948294339075`*^9}, {3.37489488607417*^9, 
+   3.3748948864804173`*^9}},
+ CellID->277280519],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"queenImg", "=", 
+   GraphicsBox[RasterBox[CompressedData["
+1:eJztXHtsTVsaX9Sj9VbjUVXUazBmzKhH1OMS9ZjxllRwPRtamgYx3MEUpXdc
+7h8edxBi+IMpQkS4TYjHhCFiRIxONJ6hEaMlHq0ywtBv9m91rd21V/feZ7c9
+Pac3c37Jl/bs/a31/dbv7PWt125jk5ZMSQpjjI0VVoeFEEIIIYQQQgghhPAT
+Q4RhMYbFGfZbw742LNmwbwzLMOx7w/YolmXYUcWytPvfi3LfiHq+FvXGiTgR
+gWhUFTHCsKWG/dmwHw27bVixYRQEKxbxfxR8fjCsQ/U1vUKYxKrYvqZNm1Lz
+5s1Ni4yMtHzG/SrGeG1YbLUr4Y5Ohn1kglPjxo2pd+/eNHHiRFqyZAlt2rSJ
+9u/fT6dOnaKrV6/SgwcPqKCggN6+fUtVAcqjHtSHelE/4iAe4iI+eIAPK9Pr
+cDCFMvAn8Khfvz7nWxMxd+5cqdV/gqzVLvBo2bIlFRYWBluWcvj8+TONGDFC
+apUXXKlYguBBXbp0oeXLl9Pu3bvp7NmzlJOTQ8+ePaNPnz5VuyZfvnzhffL2
+7dt08eJF3h9XrVpF8fHxah9cGVSlGKsludSqVcsxtzZr1ow6depEvXr1or59
++1JCQgKNHz+eEhMTuc2ZM4eSk5NtLSkpyfSbNGkSLztgwACej1Annmmn2LVr
+11Y/Nwi8POWQwoRWJ06coDNnztCePXsoMzOTFi9eTDNmzKCRI0dSXFwc9ejR
+g2JjY/nYFh4eXuHxrG7durxs+/btqVu3brzOYcOG0dSpUyktLY0yMjJox44d
+dPLkSbpz5w6tXr1alv0YBF3s0Niwl0z0wydPnlS4D71//55ev35ta5UdMx8/
+fkxt2rSRWp0OrkQWLGbiu2/SpAmtX7+ejh07Rjdv3qSXL19Wqq0VBeIgHuKu
+W7eOGjRooD6TCUFVpzwOMoe+U69ePYqOjuZ9ZvTo0Tz3zJ8/n5YuXUrp6el8
+XiRt27ZtvA/jp3odfvBHOZRHPagP9aJ+p9iG/SUoargjnAl+s2bNoqysLNqw
+YQOlpKTwueHAgQN5LsZzxyqQo5wM9aA+1Iv6EQfxEBfxFd/wQIpQAeQYRhMm
+TPDZZzAfe/r0Kd29e5du3Lhh2pUrV+jcuXP8p3odfvD3Mo9DfFaqU06Q9XDD
+DcP42BRMID4r1epGkPVwwhQmnnvk1mAC8VlZH5wSVFXKo5lhRUysDZGLz58/
+z+fRL168CIg+iIN4iIv44MFKtSoS/GoK9jOXPFynTh1q27Ytde7cmY9dQ4YM
+4fNTOR+fNm2a47wdhvvSF+VQHvWgPtSL+t3iC341AauY4DRmzBj+/SI379q1
+i8+jU1NTafLkyTRo0CDq06cPH7swR8S6h7m3z3G9hPKoB/WhXtSPOIiHuIgP
+HuCjlF0VaGE0rJBc2rVrx9evlQH2A5zm7TDcrwzAB7xYmV4rgqTT7wwrAYeo
+qCi+/qqJAC/wE1qVCN6BRi7iY783Nzc32JK4AvzAU+iVG2CdYkRcvs9y7do1
+3ldqIsAL/MCTlfXFmABqlcZs8i72kpBrp0+fTsuWLaOtW7fSkSNH6PLly3T/
+/n16/vw5ffz40S8aoB7Uh3pRP+IgHuIiPniAjx1Pw2YFUKtUBw6eDHsAyCHY
+z8LYD8O6Dvt4uuG69IE/yml7CJWx1ABoJIEzN76+P336NN8DGDduHG8L9uKq
+2A6/GOairVu3pn79+tGCBQvo0KFD6v0fqlUdKy4gJvaDdXz48IHv+UleXbt2
+5fsr6BuzZ8/mmg4dOlTPH9SiRQuef3EWiLOqhg0b8r0EXfuYmBjq2bMn30fG
+vgzmqTjnUn06duzIeegAX+FzIYBa5SMm9sl1rFy50sJ70aJFtvnmwIEDFr/i
+4mJbP1xX/fbu3WvrhziqH3joAF9xPz9AOkVKPps3b7ZwuXXrFt8T96IV1imq
+36VLl2z9cF31Q97yohV4gI8K8FV8IgOg1RAZLzs72+SBuXX//v0lj09uWmEv
+Sj972bJli60GuK76wa5fv+5LKx4ffNQ5P/gqPkMCoNVCGe/Ro0cmD+Qkhcd3
+hhU6abVixQrpVyLLzJw501YrXFfq/S9+4hzMRatCEZ9/Bi8J8FXqWhgArfgY
+iNxbUlLCOeTl5VGjRo0khwesdN/WVivMi5R5z98My8bv3bt3t9UK14Uv/I7j
+d8wZ3rx546ZVuODBeYEfAL7gzQI3FpYbA8eOHas+J8OFn61WR48eVb/bGYZt
+wO8499TzOz4r56HwGynLbt++3U0rJnjw5xb8JAI8FlrGwMOHD6ttV/eJbLUa
+NWqU9H3FSr//ibK8nt+1vA4/nHPz5wXzBh9aMabsq4EnEMCx0DIGvnr1ilq1
+aiVjP2fWsaWcVjjfVJ6T7cIvWtap53ctr0cL/98zG20dtIoUvDhP8A3gWGgZ
+A+fNm6fGnab5ltNqzZo1qv8vFd8CZpPflbxeoPj+zLAPuI51nw+tmODF74Fv
+AMdCcwzct2+fOu5n2/hatMLYrey7XdN8bfO7ltdV8HNbrLHkfr6LVmb94Ave
+rEyr6hwL+RgYFhbG97pFPLyf2cHG16KV9n3O13zL5XebvK5ikKwL5xAetOog
+eHLe4M+qfyy8wMraK22Jg69FK7wPxMq0baT5lsvvNnldx79wD/vueP/Kh1ZM
+8NS5V+dYmK/F+odhYQ6+plb5+fnqWcteG99y+d0hr6sw94Ww1+FBqzDBV623
+usZCcwwUhnXEr1z8Ta02btyoluvn4G/J7w55XUUTJvoVnlkPWjHB11x/seob
+C80xUNh3Pvy5VgsXLuT9RJRxe7/Akt9d8roK/H0Af2bxniDzrRVjyvqH+X8s
+jDfsj4ZdUur/zHy/f8K1wvt3Srk0F38zv6PPuuR1FX2Ytd1etAoX/KU/2oX2
+xfso54Yow87bcIEleihfqJXBO9PNXfzN/I73J5VydnldhZ6DfGkFJDL7dqG9
+UR7K6zB1wjOujLOyTl/QtfqrD38zv2PvUylnl9dVzGMV18psG9qlnfF7aZsK
+c/6C9dO7d++4KWspEj5u0LX6ykPcAq2MU15Xgb9XesO8a+WPtqlIZ+J5Qj0S
++F35DtJ91KFqdY+Vrnt9IZtZtXLL6yq2aeXc4I+2+bs+lfsfPMbdoJVzy+sq
+fqOVa+fi62+tqvqcJjAr974e45r5nXnL6wD2tP6tlcP+aSazf5b93QcBS273
+mP/qMbF3qRn2BZI9xDTzO/OW19sb9lb6a38nAUvxY9vc4DRncBtXM6Qf9m5x
+3qfwwHf9a5d4DQ37Vov1rbjuhK1MjGU4o8e68N69e+qc7gmzf7Yq0zYvkHNR
+X/M1/MsVPh4NHjyYioqKeB7A+/nKHvc+h7LQI9eGO4nrTnr9Ez54Z1vFwYMH
+1fLd/NA2fwNrLc7v+PHjFu44Gxb37jiUzZRlhw8fzs+n8ZOVtTfToVxVtQoW
+kDs4v507d1q4K+9Q63t8Enm4j3c9VOCzKJfnUK6yfbAmgPcjnGnh2Xr48CGt
+XbtW/Y7X2ZSJkPflvp0EPitl7f5G3pLbIyIivOb2mgD8qyi7nAPDuO60Hsxj
+lXuugIrOGWoScBagr1X+btjPXcqY+QrvZOOsBT+V8k75SgLPHNbD2G/BHqDb
+XLSmAfOsrwybadgvPPhXdhz8f4WcX+Wxsn7na34Vwk/jf52EEEIIIYQQQggh
+2OJ/pRNN6A==
+     "], {{0, 0}, {75, 75}}, {0, 255},
+     ColorFunction->RGBColor],
+    ImageSize->{75, 75},
+    PlotRange->{{0, 75}, {0, 75}}]}], ";"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.39916521346875*^9, 3.399165216859375*^9}, 
+   3.39916570278125*^9},
+ CellID->79589100]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Dynamic", "[", 
+     RowBox[{"n", ",", 
+      RowBox[{"{", 
+       RowBox[{"Automatic", ",", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"flag", "=", "True"}], ";", 
+           RowBox[{"pos", "=", "1"}]}], ")"}], "&"}]}], "}"}]}], "]"}], ";", 
+    RowBox[{"Graphics", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"ArrayPlot", "[", 
+           RowBox[{"#", ",", 
+            RowBox[{"Mesh", "\[Rule]", "True"}], ",", 
+            RowBox[{"ColorRules", "\[Rule]", 
+             RowBox[{"{", 
+              RowBox[{"1", "\[Rule]", "Orange"}], "}"}]}], ",", 
+            RowBox[{"ImageSize", "\[Rule]", 
+             RowBox[{"{", 
+              RowBox[{"400", ",", "400"}], "}"}]}]}], "]"}], "[", 
+          RowBox[{"[", "1", "]"}], "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Inset", "[", 
+            RowBox[{
+             RowBox[{"Show", "[", 
+              RowBox[{"queenImg", ",", 
+               RowBox[{"ImageSize", "\[Rule]", 
+                RowBox[{"280.", "/", "n"}]}]}], "]"}], ",", 
+             RowBox[{"Reverse", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"n", "+", 
+                  RowBox[{"1", "/", "2"}]}], ",", 
+                 RowBox[{
+                  RowBox[{"-", "1"}], "/", "2"}]}], "}"}], "+", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"-", "1"}], ",", "1"}], "}"}], "#"}]}], "]"}]}], 
+            "]"}], "&"}], "/@", 
+          RowBox[{
+           RowBox[{"ArrayRules", "[", 
+            RowBox[{"SparseArray", "[", 
+             RowBox[{"#", ",", 
+              RowBox[{"{", 
+               RowBox[{"n", ",", "n"}], "}"}]}], "]"}], "]"}], "[", 
+           RowBox[{"[", 
+            RowBox[{
+             RowBox[{"1", ";;", 
+              RowBox[{"-", "2"}]}], ",", "1"}], "]"}], "]"}]}]}], 
+        "\[IndentingNewLine]", "}"}], "&"}], "[", 
+      RowBox[{"Apply", "[", 
+       RowBox[{"PermutationToBoard", ",", 
+        RowBox[{"Block", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"pp", "=", 
+            RowBox[{"Permutations", "[", 
+             RowBox[{"Range", "[", "n", "]"}], "]"}]}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{"pos", ">", 
+              RowBox[{"Length", "[", "pp", "]"}]}], ",", 
+             RowBox[{
+              RowBox[{"flag", "=", "True"}], ";", 
+              RowBox[{"pos", "=", "1"}]}]}], "]"}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"Extract", "[", 
+            RowBox[{"pp", ",", 
+             RowBox[{"With", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"f", "=", 
+                 RowBox[{"Position", "[", 
+                  RowBox[{
+                   RowBox[{"Drop", "[", 
+                    RowBox[{"pp", ",", 
+                    RowBox[{"pos", "-", "1"}]}], "]"}], ",", 
+                   RowBox[{"x_List", "/;", 
+                    RowBox[{"ValidPermutation", "[", "x", "]"}]}], ",", 
+                   RowBox[{"{", "1", "}"}], ",", "1"}], "]"}]}], "}"}], ",", 
+               "\[IndentingNewLine]", 
+               RowBox[{"If", "[", 
+                RowBox[{
+                 RowBox[{"flag", "===", "True"}], ",", "\[IndentingNewLine]", 
+                 
+                 RowBox[{"If", "[", 
+                  RowBox[{
+                   RowBox[{"(", 
+                    RowBox[{"f", "=!=", 
+                    RowBox[{"{", "}"}]}], ")"}], ",", "\[IndentingNewLine]", 
+                   RowBox[{"{", 
+                    RowBox[{"{", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"f", "===", 
+                    RowBox[{"{", 
+                    RowBox[{"{", "1", "}"}], "}"}]}], ",", 
+                    RowBox[{"pos", "++"}], ",", 
+                    RowBox[{
+                    RowBox[{"flag", "=", "False"}], ";", 
+                    RowBox[{"pos", "=", 
+                    RowBox[{"pos", "+", 
+                    RowBox[{"f", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"1", ",", "1"}], "]"}], "]"}], "-", "1"}]}]}]}], 
+                    "]"}], "}"}], "}"}], "\[IndentingNewLine]", ",", 
+                   "\[IndentingNewLine]", 
+                   RowBox[{
+                    RowBox[{"flag", "=", "True"}], ";", 
+                    RowBox[{"pos", "=", "1"}], ";", 
+                    RowBox[{"{", "}"}]}]}], "]"}], "\[IndentingNewLine]", ",",
+                  "\[IndentingNewLine]", 
+                 RowBox[{"{", 
+                  RowBox[{"{", 
+                   RowBox[{"pos", "=", 
+                    RowBox[{"pos", "-", "1", "+", 
+                    RowBox[{"f", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"1", ",", "1"}], "]"}], "]"}]}]}], "}"}], "}"}]}],
+                 "\[IndentingNewLine]", "]"}]}], " ", "]"}]}], " ", "]"}]}]}],
+          " ", "]"}]}], "]"}], "]"}], " ", "]"}]}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"n", ",", "8", ",", "\"\<boardsize\>\""}], "}"}], ",", "4", ",",
+      "8", ",", "1", ",", 
+     RowBox[{"ControlType", "\[Rule]", "RadioButton"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"u", ",", "1", ",", "\"\<next configuration\>\""}], "}"}], ",", 
+     
+     RowBox[{
+      RowBox[{"Button", "[", 
+       RowBox[{
+        RowBox[{"Style", "[", 
+         RowBox[{"\"\<\[RightPointer]\>\"", ",", "20"}], "]"}], ",", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"pos", "++"}], ";", 
+          RowBox[{"flag", "=", "True"}]}], ")"}], ",", 
+        RowBox[{"Appearance", "\[Rule]", "Tiny"}], ",", 
+        RowBox[{"ImageSize", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"20", ",", "20"}], "}"}]}]}], "]"}], "&"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"SaveDefinitions", "\[Rule]", "True"}], ",", 
+   RowBox[{"TrackedSymbols", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"n", ",", "pos", ",", "flag"}], "}"}]}], ",", 
+   RowBox[{"AutorunSequencing", "\[Rule]", 
+    RowBox[{"{", "1", "}"}]}], ",", 
+   RowBox[{"Initialization", "\[RuleDelayed]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"flag", "=", "True"}], ";", 
+      RowBox[{"pos", "=", "1"}]}], "}"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.37868015871875*^9, 3.37868019259375*^9}, {
+   3.37998772003125*^9, 3.3799877245625*^9}, {3.388618496578125*^9, 
+   3.38861849671875*^9}, {3.388619089640625*^9, 3.388619091796875*^9}, {
+   3.39914738096875*^9, 3.399147390859375*^9}, {3.399152157078125*^9, 
+   3.399152166203125*^9}, {3.39915241353125*^9, 3.399152414*^9}, {
+   3.399152468421875*^9, 3.399152503078125*^9}, {3.399152607046875*^9, 
+   3.399152643421875*^9}, {3.399152681765625*^9, 3.399152702546875*^9}, {
+   3.399152758859375*^9, 3.39915276784375*^9}, {3.399152835234375*^9, 
+   3.399152845359375*^9}, {3.3991528813125*^9, 3.3991529046875*^9}, {
+   3.399155327734375*^9, 3.39915533278125*^9}, {3.3991553779375*^9, 
+   3.39915537834375*^9}, {3.399155907046875*^9, 3.39915599084375*^9}, {
+   3.399156066453125*^9, 3.39915607365625*^9}, {3.3991562143125*^9, 
+   3.399156241796875*^9}, {3.399156333015625*^9, 3.39915639690625*^9}, {
+   3.39915645134375*^9, 3.399156456953125*^9}, {3.39915739334375*^9, 
+   3.399157434765625*^9}, {3.399165098734375*^9, 3.39916528625*^9}, {
+   3.39916565425*^9, 3.399165659375*^9}, {3.39916571665625*^9, 
+   3.3991657236875*^9}, {3.399165760609375*^9, 3.399165765828125*^9}, {
+   3.39920547561709*^9, 3.3992054771639752`*^9}},
+ CellID->46006647],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 8, $CellContext`u$$ = 1, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`n$$], 8, "boardsize"}, 4, 8, 1}, {{
+       Hold[$CellContext`u$$], 1, "next configuration"}, Button[
+       Style["\[RightPointer]", 20], 
+       Increment[$CellContext`pos]; $CellContext`flag = True, Appearance -> 
+       Tiny, ImageSize -> {20, 20}]& }}, Typeset`size$$ = {
+    360., {178., 182.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`n$46704$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`n$$ = 8, $CellContext`u$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`n$$, $CellContext`n$46704$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (
+       Dynamic[$CellContext`n$$, {
+         Automatic, ($CellContext`flag = True; $CellContext`pos = 1)& }]; 
+       Graphics[
+         ({
+          Part[
+           
+           ArrayPlot[#, Mesh -> True, ColorRules -> {1 -> Orange}, 
+            ImageSize -> {400, 400}], 1], 
+          Map[Inset[
+            Show[$CellContext`queenImg, ImageSize -> 280./$CellContext`n$$], 
+            Reverse[{$CellContext`n$$ + 1/2, (-1)/2} + {-1, 1} #]]& , 
+           Part[
+            ArrayRules[
+             SparseArray[#, {$CellContext`n$$, $CellContext`n$$}]], 
+            Span[1, -2], 1]]}& )[
+          Apply[$CellContext`PermutationToBoard, 
+           Block[{$CellContext`pp = Permutations[
+               Range[$CellContext`n$$]]}, 
+            If[$CellContext`pos > 
+              Length[$CellContext`pp], $CellContext`flag = 
+               True; $CellContext`pos = 1]; Extract[$CellContext`pp, 
+              With[{$CellContext`f = Position[
+                  Drop[$CellContext`pp, $CellContext`pos - 1], 
+                  Condition[
+                   Pattern[$CellContext`x, 
+                    Blank[List]], 
+                   $CellContext`ValidPermutation[$CellContext`x]], {1}, 1]}, 
+               If[$CellContext`flag === True, 
+                If[$CellContext`f =!= {}, {{
+                   If[$CellContext`f === {{1}}, 
+                    
+                    Increment[$CellContext`pos], $CellContext`flag = 
+                    False; $CellContext`pos = $CellContext`pos + 
+                    Part[$CellContext`f, 1, 1] - 1]}}, $CellContext`flag = 
+                  True; $CellContext`pos = 
+                  1; {}], {{$CellContext`pos = $CellContext`pos - 1 + 
+                   Part[$CellContext`f, 1, 1]}}]]]]]]]), 
+      "Specifications" :> {{{$CellContext`n$$, 8, "boardsize"}, 4, 8, 1, 
+         ControlType -> 
+         RadioButton}, {{$CellContext`u$$, 1, "next configuration"}, Button[
+          Style["\[RightPointer]", 20], 
+          Increment[$CellContext`pos]; $CellContext`flag = True, Appearance -> 
+          Tiny, ImageSize -> {20, 20}]& }}, 
+      "Options" :> {
+       TrackedSymbols -> {$CellContext`n$$, 11, False}, 
+        AutorunSequencing -> {1}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{404., {234., 239.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({{$CellContext`flag = False, $CellContext`pos = 
+         11, $CellContext`queenImg = Graphics[
+           Raster[CompressedData["
+1:eJztXHtsTVsaX9Sj9VbjUVXUazBmzKhH1OMS9ZjxllRwPRtamgYx3MEUpXdc
+7h8edxBi+IMpQkS4TYjHhCFiRIxONJ6hEaMlHq0ywtBv9m91rd21V/feZ7c9
+Pac3c37Jl/bs/a31/dbv7PWt125jk5ZMSQpjjI0VVoeFEEIIIYQQQgghhPAT
+Q4RhMYbFGfZbw742LNmwbwzLMOx7w/YolmXYUcWytPvfi3LfiHq+FvXGiTgR
+gWhUFTHCsKWG/dmwHw27bVixYRQEKxbxfxR8fjCsQ/U1vUKYxKrYvqZNm1Lz
+5s1Ni4yMtHzG/SrGeG1YbLUr4Y5Ohn1kglPjxo2pd+/eNHHiRFqyZAlt2rSJ
+9u/fT6dOnaKrV6/SgwcPqKCggN6+fUtVAcqjHtSHelE/4iAe4iI+eIAPK9Pr
+cDCFMvAn8Khfvz7nWxMxd+5cqdV/gqzVLvBo2bIlFRYWBluWcvj8+TONGDFC
+apUXXKlYguBBXbp0oeXLl9Pu3bvp7NmzlJOTQ8+ePaNPnz5VuyZfvnzhffL2
+7dt08eJF3h9XrVpF8fHxah9cGVSlGKsludSqVcsxtzZr1ow6depEvXr1or59
++1JCQgKNHz+eEhMTuc2ZM4eSk5NtLSkpyfSbNGkSLztgwACej1Annmmn2LVr
+11Y/Nwi8POWQwoRWJ06coDNnztCePXsoMzOTFi9eTDNmzKCRI0dSXFwc9ejR
+g2JjY/nYFh4eXuHxrG7durxs+/btqVu3brzOYcOG0dSpUyktLY0yMjJox44d
+dPLkSbpz5w6tXr1alv0YBF3s0Niwl0z0wydPnlS4D71//55ev35ta5UdMx8/
+fkxt2rSRWp0OrkQWLGbiu2/SpAmtX7+ejh07Rjdv3qSXL19Wqq0VBeIgHuKu
+W7eOGjRooD6TCUFVpzwOMoe+U69ePYqOjuZ9ZvTo0Tz3zJ8/n5YuXUrp6el8
+XiRt27ZtvA/jp3odfvBHOZRHPagP9aJ+p9iG/SUoargjnAl+s2bNoqysLNqw
+YQOlpKTwueHAgQN5LsZzxyqQo5wM9aA+1Iv6EQfxEBfxFd/wQIpQAeQYRhMm
+TPDZZzAfe/r0Kd29e5du3Lhh2pUrV+jcuXP8p3odfvD3Mo9DfFaqU06Q9XDD
+DcP42BRMID4r1epGkPVwwhQmnnvk1mAC8VlZH5wSVFXKo5lhRUysDZGLz58/
+z+fRL168CIg+iIN4iIv44MFKtSoS/GoK9jOXPFynTh1q27Ytde7cmY9dQ4YM
+4fNTOR+fNm2a47wdhvvSF+VQHvWgPtSL+t3iC341AauY4DRmzBj+/SI379q1
+i8+jU1NTafLkyTRo0CDq06cPH7swR8S6h7m3z3G9hPKoB/WhXtSPOIiHuIgP
+HuCjlF0VaGE0rJBc2rVrx9evlQH2A5zm7TDcrwzAB7xYmV4rgqTT7wwrAYeo
+qCi+/qqJAC/wE1qVCN6BRi7iY783Nzc32JK4AvzAU+iVG2CdYkRcvs9y7do1
+3ldqIsAL/MCTlfXFmABqlcZs8i72kpBrp0+fTsuWLaOtW7fSkSNH6PLly3T/
+/n16/vw5ffz40S8aoB7Uh3pRP+IgHuIiPniAjx1Pw2YFUKtUBw6eDHsAyCHY
+z8LYD8O6Dvt4uuG69IE/yml7CJWx1ABoJIEzN76+P336NN8DGDduHG8L9uKq
+2A6/GOairVu3pn79+tGCBQvo0KFD6v0fqlUdKy4gJvaDdXz48IHv+UleXbt2
+5fsr6BuzZ8/mmg4dOlTPH9SiRQuef3EWiLOqhg0b8r0EXfuYmBjq2bMn30fG
+vgzmqTjnUn06duzIeegAX+FzIYBa5SMm9sl1rFy50sJ70aJFtvnmwIEDFr/i
+4mJbP1xX/fbu3WvrhziqH3joAF9xPz9AOkVKPps3b7ZwuXXrFt8T96IV1imq
+36VLl2z9cF31Q97yohV4gI8K8FV8IgOg1RAZLzs72+SBuXX//v0lj09uWmEv
+Sj972bJli60GuK76wa5fv+5LKx4ffNQ5P/gqPkMCoNVCGe/Ro0cmD+Qkhcd3
+hhU6abVixQrpVyLLzJw501YrXFfq/S9+4hzMRatCEZ9/Bi8J8FXqWhgArfgY
+iNxbUlLCOeTl5VGjRo0khwesdN/WVivMi5R5z98My8bv3bt3t9UK14Uv/I7j
+d8wZ3rx546ZVuODBeYEfAL7gzQI3FpYbA8eOHas+J8OFn61WR48eVb/bGYZt
+wO8499TzOz4r56HwGynLbt++3U0rJnjw5xb8JAI8FlrGwMOHD6ttV/eJbLUa
+NWqU9H3FSr//ibK8nt+1vA4/nHPz5wXzBh9aMabsq4EnEMCx0DIGvnr1ilq1
+aiVjP2fWsaWcVjjfVJ6T7cIvWtap53ctr0cL/98zG20dtIoUvDhP8A3gWGgZ
+A+fNm6fGnab5ltNqzZo1qv8vFd8CZpPflbxeoPj+zLAPuI51nw+tmODF74Fv
+AMdCcwzct2+fOu5n2/hatMLYrey7XdN8bfO7ltdV8HNbrLHkfr6LVmb94Ave
+rEyr6hwL+RgYFhbG97pFPLyf2cHG16KV9n3O13zL5XebvK5ikKwL5xAetOog
+eHLe4M+qfyy8wMraK22Jg69FK7wPxMq0baT5lsvvNnldx79wD/vueP/Kh1ZM
+8NS5V+dYmK/F+odhYQ6+plb5+fnqWcteG99y+d0hr6sw94Ww1+FBqzDBV623
+usZCcwwUhnXEr1z8Ta02btyoluvn4G/J7w55XUUTJvoVnlkPWjHB11x/seob
+C80xUNh3Pvy5VgsXLuT9RJRxe7/Akt9d8roK/H0Af2bxniDzrRVjyvqH+X8s
+jDfsj4ZdUur/zHy/f8K1wvt3Srk0F38zv6PPuuR1FX2Ytd1etAoX/KU/2oX2
+xfso54Yow87bcIEleihfqJXBO9PNXfzN/I73J5VydnldhZ6DfGkFJDL7dqG9
+UR7K6zB1wjOujLOyTl/QtfqrD38zv2PvUylnl9dVzGMV18psG9qlnfF7aZsK
+c/6C9dO7d++4KWspEj5u0LX6ykPcAq2MU15Xgb9XesO8a+WPtqlIZ+J5Qj0S
++F35DtJ91KFqdY+Vrnt9IZtZtXLL6yq2aeXc4I+2+bs+lfsfPMbdoJVzy+sq
+fqOVa+fi62+tqvqcJjAr974e45r5nXnL6wD2tP6tlcP+aSazf5b93QcBS273
+mP/qMbF3qRn2BZI9xDTzO/OW19sb9lb6a38nAUvxY9vc4DRncBtXM6Qf9m5x
+3qfwwHf9a5d4DQ37Vov1rbjuhK1MjGU4o8e68N69e+qc7gmzf7Yq0zYvkHNR
+X/M1/MsVPh4NHjyYioqKeB7A+/nKHvc+h7LQI9eGO4nrTnr9Ez54Z1vFwYMH
+1fLd/NA2fwNrLc7v+PHjFu44Gxb37jiUzZRlhw8fzs+n8ZOVtTfToVxVtQoW
+kDs4v507d1q4K+9Q63t8Enm4j3c9VOCzKJfnUK6yfbAmgPcjnGnh2Xr48CGt
+XbtW/Y7X2ZSJkPflvp0EPitl7f5G3pLbIyIivOb2mgD8qyi7nAPDuO60Hsxj
+lXuugIrOGWoScBagr1X+btjPXcqY+QrvZOOsBT+V8k75SgLPHNbD2G/BHqDb
+XLSmAfOsrwybadgvPPhXdhz8f4WcX+Wxsn7na34Vwk/jf52EEEIIIYQQQggh
+2OJ/pRNN6A==
+            "], {{0, 0}, {75, 75}}, {0, 255}, ColorFunction -> 
+            RGBColor], ImageSize -> {75, 75}, 
+           PlotRange -> {{0, 75}, {0, 75}}], Condition[
+           $CellContext`PermutationToBoard[
+            Pattern[$CellContext`p, 
+             Blank[List]]], $CellContext`p =!= {}] := 
+         Module[{$CellContext`n = Length[$CellContext`p]}, 
+           Normal[
+            SparseArray[
+             (Thread[Thread[{
+                 Range[$CellContext`n], #}] -> 
+              1]& )[$CellContext`p], {$CellContext`n, $CellContext`n}]]], \
+$CellContext`PermutationToBoard[
+           Pattern[$CellContext`p, 
+            Blank[]]] := {}, $CellContext`PermutationToBoard[
+           Pattern[$CellContext`p, 
+            BlankNullSequence[]]] := {}, $CellContext`ValidPermutation[
+           Pattern[$CellContext`p, 
+            Blank[]]] := Module[{$CellContext`m, $CellContext`m2}, 
+           Catch[If[
+              Not[
+               FreeQ[
+                Abs[
+                 Differences[$CellContext`p]], 1]], 
+              Throw[False]]; $CellContext`m = Range[-Length[$CellContext`p], 
+               Length[$CellContext`p]]; $CellContext`m2 = Table[
+               
+               Take[$CellContext`m, {$CellContext`k, $CellContext`k + 
+                 Length[$CellContext`p] - 1}], {$CellContext`k, 
+                Length[$CellContext`p] + 1, 2, -1}]; Fold[And[#, 
+               With[{$CellContext`p0 = Extract[$CellContext`p, 
+                   First[
+                    Position[#2, 0, {1}, 1]]]}, 
+                And[Count[
+                   Thread[{$CellContext`p, $CellContext`p0 + #2}], {
+                    Pattern[$CellContext`a, 
+                    Blank[]], 
+                    Pattern[$CellContext`a, 
+                    Blank[]]}, {1}] == 1, Count[
+                   Thread[{$CellContext`p, $CellContext`p0 - #2}], {
+                    Pattern[$CellContext`a, 
+                    Blank[]], 
+                    Pattern[$CellContext`a, 
+                    Blank[]]}, {1}] == 1]]]& , 
+              True, $CellContext`m2]]]}; {$CellContext`flag = 
+          True; $CellContext`pos = 1}}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.35696210375764*^9, 3.3992054801639943`*^9},
+ CellID->77169843]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell["\<\
+A queen attacks another one if they are in the same row, column, or diagonal. \
+Place eight queens on a chessboard such that no queen is under attack. Vary \
+the size of the chess board and click the button to see different \
+arrangements of the queens.\
+\>", "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3749201373188114`*^9, 3.374920194318446*^9}, {
+   3.37998774303125*^9, 3.379987794984375*^9}, {3.3803120641119194`*^9, 
+   3.38031210853351*^9}, {3.380312143486411*^9, 3.3803121521113563`*^9}},
+ CellID->930555059]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 8, $CellContext`u$$ = 1, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`n$$], 8, "boardsize"}, 4, 8, 1}, {{
+       Hold[$CellContext`u$$], 1, "next configuration"}, Button[
+       Style["\[RightPointer]", 20], 
+       Increment[$CellContext`pos]; $CellContext`flag = True, Appearance -> 
+       Tiny, ImageSize -> {20, 20}]& }}, Typeset`size$$ = {
+    360., {178., 182.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`n$185559$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`n$$ = 8, $CellContext`u$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`n$$, $CellContext`n$185559$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (
+       Dynamic[$CellContext`n$$, {
+         Automatic, ($CellContext`flag = True; $CellContext`pos = 1)& }]; 
+       Graphics[
+         ({
+          Part[
+           
+           ArrayPlot[#, Mesh -> True, ColorRules -> {1 -> Orange}, 
+            ImageSize -> {400, 400}], 1], 
+          Map[Inset[
+            Show[$CellContext`queenImg, ImageSize -> 280./$CellContext`n$$], 
+            Reverse[{$CellContext`n$$ + 1/2, (-1)/2} + {-1, 1} #]]& , 
+           Part[
+            ArrayRules[
+             SparseArray[#]], 
+            Span[1, -2], 1]]}& )[
+          Apply[$CellContext`PermutationToBoard, 
+           Block[{$CellContext`pp = Permutations[
+               Range[$CellContext`n$$]]}, 
+            If[$CellContext`pos > 
+              Length[$CellContext`pp], $CellContext`flag = 
+               True; $CellContext`pos = 1]; Extract[$CellContext`pp, 
+              With[{$CellContext`f = Position[
+                  Drop[$CellContext`pp, $CellContext`pos - 1], 
+                  Condition[
+                   Pattern[$CellContext`x, 
+                    Blank[List]], 
+                   $CellContext`ValidPermutation[$CellContext`x]], {1}, 1]}, 
+               If[$CellContext`flag === True, 
+                If[$CellContext`f =!= {}, {{
+                   If[$CellContext`f === {{1}}, 
+                    
+                    Increment[$CellContext`pos], $CellContext`flag = 
+                    False; $CellContext`pos = $CellContext`pos + 
+                    Part[$CellContext`f, 1, 1] - 1]}}, $CellContext`flag = 
+                  True; $CellContext`pos = 
+                  1; {}], {{$CellContext`pos = $CellContext`pos - 1 + 
+                   Part[$CellContext`f, 1, 1]}}]]]]]]]), 
+      "Specifications" :> {{{$CellContext`n$$, 8, "boardsize"}, 4, 8, 1, 
+         ControlType -> 
+         RadioButton}, {{$CellContext`u$$, 1, "next configuration"}, Button[
+          Style["\[RightPointer]", 20], 
+          Increment[$CellContext`pos]; $CellContext`flag = True, Appearance -> 
+          Tiny, ImageSize -> {20, 20}]& }}, 
+      "Options" :> {
+       TrackedSymbols -> {$CellContext`n$$, 11, False}, 
+        AutorunSequencing -> {1}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{404., {234., 239.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({{$CellContext`flag = False, $CellContext`pos = 
+         11, $CellContext`queenImg = Graphics[
+           Raster[CompressedData["
+1:eJztXHtsTVsaX9Sj9VbjUVXUazBmzKhH1OMS9ZjxllRwPRtamgYx3MEUpXdc
+7h8edxBi+IMpQkS4TYjHhCFiRIxONJ6hEaMlHq0ywtBv9m91rd21V/feZ7c9
+Pac3c37Jl/bs/a31/dbv7PWt125jk5ZMSQpjjI0VVoeFEEIIIYQQQgghhPAT
+Q4RhMYbFGfZbw742LNmwbwzLMOx7w/YolmXYUcWytPvfi3LfiHq+FvXGiTgR
+gWhUFTHCsKWG/dmwHw27bVixYRQEKxbxfxR8fjCsQ/U1vUKYxKrYvqZNm1Lz
+5s1Ni4yMtHzG/SrGeG1YbLUr4Y5Ohn1kglPjxo2pd+/eNHHiRFqyZAlt2rSJ
+9u/fT6dOnaKrV6/SgwcPqKCggN6+fUtVAcqjHtSHelE/4iAe4iI+eIAPK9Pr
+cDCFMvAn8Khfvz7nWxMxd+5cqdV/gqzVLvBo2bIlFRYWBluWcvj8+TONGDFC
+apUXXKlYguBBXbp0oeXLl9Pu3bvp7NmzlJOTQ8+ePaNPnz5VuyZfvnzhffL2
+7dt08eJF3h9XrVpF8fHxah9cGVSlGKsludSqVcsxtzZr1ow6depEvXr1or59
++1JCQgKNHz+eEhMTuc2ZM4eSk5NtLSkpyfSbNGkSLztgwACej1Annmmn2LVr
+11Y/Nwi8POWQwoRWJ06coDNnztCePXsoMzOTFi9eTDNmzKCRI0dSXFwc9ejR
+g2JjY/nYFh4eXuHxrG7durxs+/btqVu3brzOYcOG0dSpUyktLY0yMjJox44d
+dPLkSbpz5w6tXr1alv0YBF3s0Niwl0z0wydPnlS4D71//55ev35ta5UdMx8/
+fkxt2rSRWp0OrkQWLGbiu2/SpAmtX7+ejh07Rjdv3qSXL19Wqq0VBeIgHuKu
+W7eOGjRooD6TCUFVpzwOMoe+U69ePYqOjuZ9ZvTo0Tz3zJ8/n5YuXUrp6el8
+XiRt27ZtvA/jp3odfvBHOZRHPagP9aJ+p9iG/SUoargjnAl+s2bNoqysLNqw
+YQOlpKTwueHAgQN5LsZzxyqQo5wM9aA+1Iv6EQfxEBfxFd/wQIpQAeQYRhMm
+TPDZZzAfe/r0Kd29e5du3Lhh2pUrV+jcuXP8p3odfvD3Mo9DfFaqU06Q9XDD
+DcP42BRMID4r1epGkPVwwhQmnnvk1mAC8VlZH5wSVFXKo5lhRUysDZGLz58/
+z+fRL168CIg+iIN4iIv44MFKtSoS/GoK9jOXPFynTh1q27Ytde7cmY9dQ4YM
+4fNTOR+fNm2a47wdhvvSF+VQHvWgPtSL+t3iC341AauY4DRmzBj+/SI379q1
+i8+jU1NTafLkyTRo0CDq06cPH7swR8S6h7m3z3G9hPKoB/WhXtSPOIiHuIgP
+HuCjlF0VaGE0rJBc2rVrx9evlQH2A5zm7TDcrwzAB7xYmV4rgqTT7wwrAYeo
+qCi+/qqJAC/wE1qVCN6BRi7iY783Nzc32JK4AvzAU+iVG2CdYkRcvs9y7do1
+3ldqIsAL/MCTlfXFmABqlcZs8i72kpBrp0+fTsuWLaOtW7fSkSNH6PLly3T/
+/n16/vw5ffz40S8aoB7Uh3pRP+IgHuIiPniAjx1Pw2YFUKtUBw6eDHsAyCHY
+z8LYD8O6Dvt4uuG69IE/yml7CJWx1ABoJIEzN76+P336NN8DGDduHG8L9uKq
+2A6/GOairVu3pn79+tGCBQvo0KFD6v0fqlUdKy4gJvaDdXz48IHv+UleXbt2
+5fsr6BuzZ8/mmg4dOlTPH9SiRQuef3EWiLOqhg0b8r0EXfuYmBjq2bMn30fG
+vgzmqTjnUn06duzIeegAX+FzIYBa5SMm9sl1rFy50sJ70aJFtvnmwIEDFr/i
+4mJbP1xX/fbu3WvrhziqH3joAF9xPz9AOkVKPps3b7ZwuXXrFt8T96IV1imq
+36VLl2z9cF31Q97yohV4gI8K8FV8IgOg1RAZLzs72+SBuXX//v0lj09uWmEv
+Sj972bJli60GuK76wa5fv+5LKx4ffNQ5P/gqPkMCoNVCGe/Ro0cmD+Qkhcd3
+hhU6abVixQrpVyLLzJw501YrXFfq/S9+4hzMRatCEZ9/Bi8J8FXqWhgArfgY
+iNxbUlLCOeTl5VGjRo0khwesdN/WVivMi5R5z98My8bv3bt3t9UK14Uv/I7j
+d8wZ3rx546ZVuODBeYEfAL7gzQI3FpYbA8eOHas+J8OFn61WR48eVb/bGYZt
+wO8499TzOz4r56HwGynLbt++3U0rJnjw5xb8JAI8FlrGwMOHD6ttV/eJbLUa
+NWqU9H3FSr//ibK8nt+1vA4/nHPz5wXzBh9aMabsq4EnEMCx0DIGvnr1ilq1
+aiVjP2fWsaWcVjjfVJ6T7cIvWtap53ctr0cL/98zG20dtIoUvDhP8A3gWGgZ
+A+fNm6fGnab5ltNqzZo1qv8vFd8CZpPflbxeoPj+zLAPuI51nw+tmODF74Fv
+AMdCcwzct2+fOu5n2/hatMLYrey7XdN8bfO7ltdV8HNbrLHkfr6LVmb94Ave
+rEyr6hwL+RgYFhbG97pFPLyf2cHG16KV9n3O13zL5XebvK5ikKwL5xAetOog
+eHLe4M+qfyy8wMraK22Jg69FK7wPxMq0baT5lsvvNnldx79wD/vueP/Kh1ZM
+8NS5V+dYmK/F+odhYQ6+plb5+fnqWcteG99y+d0hr6sw94Ww1+FBqzDBV623
+usZCcwwUhnXEr1z8Ta02btyoluvn4G/J7w55XUUTJvoVnlkPWjHB11x/seob
+C80xUNh3Pvy5VgsXLuT9RJRxe7/Akt9d8roK/H0Af2bxniDzrRVjyvqH+X8s
+jDfsj4ZdUur/zHy/f8K1wvt3Srk0F38zv6PPuuR1FX2Ytd1etAoX/KU/2oX2
+xfso54Yow87bcIEleihfqJXBO9PNXfzN/I73J5VydnldhZ6DfGkFJDL7dqG9
+UR7K6zB1wjOujLOyTl/QtfqrD38zv2PvUylnl9dVzGMV18psG9qlnfF7aZsK
+c/6C9dO7d++4KWspEj5u0LX6ykPcAq2MU15Xgb9XesO8a+WPtqlIZ+J5Qj0S
++F35DtJ91KFqdY+Vrnt9IZtZtXLL6yq2aeXc4I+2+bs+lfsfPMbdoJVzy+sq
+fqOVa+fi62+tqvqcJjAr974e45r5nXnL6wD2tP6tlcP+aSazf5b93QcBS273
+mP/qMbF3qRn2BZI9xDTzO/OW19sb9lb6a38nAUvxY9vc4DRncBtXM6Qf9m5x
+3qfwwHf9a5d4DQ37Vov1rbjuhK1MjGU4o8e68N69e+qc7gmzf7Yq0zYvkHNR
+X/M1/MsVPh4NHjyYioqKeB7A+/nKHvc+h7LQI9eGO4nrTnr9Ez54Z1vFwYMH
+1fLd/NA2fwNrLc7v+PHjFu44Gxb37jiUzZRlhw8fzs+n8ZOVtTfToVxVtQoW
+kDs4v507d1q4K+9Q63t8Enm4j3c9VOCzKJfnUK6yfbAmgPcjnGnh2Xr48CGt
+XbtW/Y7X2ZSJkPflvp0EPitl7f5G3pLbIyIivOb2mgD8qyi7nAPDuO60Hsxj
+lXuugIrOGWoScBagr1X+btjPXcqY+QrvZOOsBT+V8k75SgLPHNbD2G/BHqDb
+XLSmAfOsrwybadgvPPhXdhz8f4WcX+Wxsn7na34Vwk/jf52EEEIIIYQQQggh
+2OJ/pRNN6A==
+            "], {{0, 0}, {75, 75}}, {0, 255}, ColorFunction -> 
+            RGBColor], ImageSize -> 35, PlotRange -> {{0, 75}, {0, 75}}], 
+         Condition[
+           $CellContext`PermutationToBoard[
+            Pattern[$CellContext`p, 
+             Blank[List]]], $CellContext`p =!= {}] := 
+         Module[{$CellContext`n = Length[$CellContext`p]}, 
+           Normal[
+            SparseArray[
+             (Thread[Thread[{
+                 Range[$CellContext`n], #}] -> 
+              1]& )[$CellContext`p], {$CellContext`n, $CellContext`n}]]], \
+$CellContext`PermutationToBoard[
+           Pattern[$CellContext`p, 
+            Blank[]]] := {}, $CellContext`PermutationToBoard[
+           Pattern[$CellContext`p, 
+            BlankNullSequence[]]] := {}, $CellContext`ValidPermutation[
+           Pattern[$CellContext`p, 
+            Blank[]]] := Module[{$CellContext`m, $CellContext`m2}, 
+           Catch[If[
+              Not[
+               FreeQ[
+                Abs[
+                 Differences[$CellContext`p]], 1]], 
+              Throw[False]]; $CellContext`m = Range[-Length[$CellContext`p], 
+               Length[$CellContext`p]]; $CellContext`m2 = Table[
+               
+               Take[$CellContext`m, {$CellContext`k, $CellContext`k + 
+                 Length[$CellContext`p] - 1}], {$CellContext`k, 
+                Length[$CellContext`p] + 1, 2, -1}]; Fold[And[#, 
+               With[{$CellContext`p0 = Extract[$CellContext`p, 
+                   First[
+                    Position[#2, 0, {1}, 1]]]}, 
+                And[Count[
+                   Thread[{$CellContext`p, $CellContext`p0 + #2}], {
+                    Pattern[$CellContext`a, 
+                    Blank[]], 
+                    Pattern[$CellContext`a, 
+                    Blank[]]}, {1}] == 1, Count[
+                   Thread[{$CellContext`p, $CellContext`p0 - #2}], {
+                    Pattern[$CellContext`a, 
+                    Blank[]], 
+                    Pattern[$CellContext`a, 
+                    Blank[]]}, {1}] == 1]]]& , 
+              True, $CellContext`m2]]]}; {$CellContext`flag = 
+          True; $CellContext`pos = 1}}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->789785363]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 4, $CellContext`u$$ = 1, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`n$$], 4, "boardsize"}, 4, 8, 1}, {{
+       Hold[$CellContext`u$$], 1, "next configuration"}, Button[
+       Style["\[RightPointer]", 20], 
+       Increment[$CellContext`pos]; $CellContext`flag = True, Appearance -> 
+       Tiny, ImageSize -> {20, 20}]& }}, Typeset`size$$ = {
+    360., {178., 182.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`n$185611$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`n$$ = 4, $CellContext`u$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`n$$, $CellContext`n$185611$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (
+       Dynamic[$CellContext`n$$, {
+         Automatic, ($CellContext`flag = True; $CellContext`pos = 1)& }]; 
+       Graphics[
+         ({
+          Part[
+           
+           ArrayPlot[#, Mesh -> True, ColorRules -> {1 -> Orange}, 
+            ImageSize -> {400, 400}], 1], 
+          Map[Inset[
+            Show[$CellContext`queenImg, ImageSize -> 280./$CellContext`n$$], 
+            Reverse[{$CellContext`n$$ + 1/2, (-1)/2} + {-1, 1} #]]& , 
+           Part[
+            ArrayRules[
+             SparseArray[#]], 
+            Span[1, -2], 1]]}& )[
+          Apply[$CellContext`PermutationToBoard, 
+           Block[{$CellContext`pp = Permutations[
+               Range[$CellContext`n$$]]}, 
+            If[$CellContext`pos > 
+              Length[$CellContext`pp], $CellContext`flag = 
+               True; $CellContext`pos = 1]; Extract[$CellContext`pp, 
+              With[{$CellContext`f = Position[
+                  Drop[$CellContext`pp, $CellContext`pos - 1], 
+                  Condition[
+                   Pattern[$CellContext`x, 
+                    Blank[List]], 
+                   $CellContext`ValidPermutation[$CellContext`x]], {1}, 1]}, 
+               If[$CellContext`flag === True, 
+                If[$CellContext`f =!= {}, {{
+                   If[$CellContext`f === {{1}}, 
+                    
+                    Increment[$CellContext`pos], $CellContext`flag = 
+                    False; $CellContext`pos = $CellContext`pos + 
+                    Part[$CellContext`f, 1, 1] - 1]}}, $CellContext`flag = 
+                  True; $CellContext`pos = 
+                  1; {}], {{$CellContext`pos = $CellContext`pos - 1 + 
+                   Part[$CellContext`f, 1, 1]}}]]]]]]]), 
+      "Specifications" :> {{{$CellContext`n$$, 4, "boardsize"}, 4, 8, 1, 
+         ControlType -> 
+         RadioButton}, {{$CellContext`u$$, 1, "next configuration"}, Button[
+          Style["\[RightPointer]", 20], 
+          Increment[$CellContext`pos]; $CellContext`flag = True, Appearance -> 
+          Tiny, ImageSize -> {20, 20}]& }}, 
+      "Options" :> {
+       TrackedSymbols -> {$CellContext`n$$, 11, False}, 
+        AutorunSequencing -> {1}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{404., {234., 239.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({{$CellContext`flag = False, $CellContext`pos = 
+         11, $CellContext`queenImg = Graphics[
+           Raster[CompressedData["
+1:eJztXHtsTVsaX9Sj9VbjUVXUazBmzKhH1OMS9ZjxllRwPRtamgYx3MEUpXdc
+7h8edxBi+IMpQkS4TYjHhCFiRIxONJ6hEaMlHq0ywtBv9m91rd21V/feZ7c9
+Pac3c37Jl/bs/a31/dbv7PWt125jk5ZMSQpjjI0VVoeFEEIIIYQQQgghhPAT
+Q4RhMYbFGfZbw742LNmwbwzLMOx7w/YolmXYUcWytPvfi3LfiHq+FvXGiTgR
+gWhUFTHCsKWG/dmwHw27bVixYRQEKxbxfxR8fjCsQ/U1vUKYxKrYvqZNm1Lz
+5s1Ni4yMtHzG/SrGeG1YbLUr4Y5Ohn1kglPjxo2pd+/eNHHiRFqyZAlt2rSJ
+9u/fT6dOnaKrV6/SgwcPqKCggN6+fUtVAcqjHtSHelE/4iAe4iI+eIAPK9Pr
+cDCFMvAn8Khfvz7nWxMxd+5cqdV/gqzVLvBo2bIlFRYWBluWcvj8+TONGDFC
+apUXXKlYguBBXbp0oeXLl9Pu3bvp7NmzlJOTQ8+ePaNPnz5VuyZfvnzhffL2
+7dt08eJF3h9XrVpF8fHxah9cGVSlGKsludSqVcsxtzZr1ow6depEvXr1or59
++1JCQgKNHz+eEhMTuc2ZM4eSk5NtLSkpyfSbNGkSLztgwACej1Annmmn2LVr
+11Y/Nwi8POWQwoRWJ06coDNnztCePXsoMzOTFi9eTDNmzKCRI0dSXFwc9ejR
+g2JjY/nYFh4eXuHxrG7durxs+/btqVu3brzOYcOG0dSpUyktLY0yMjJox44d
+dPLkSbpz5w6tXr1alv0YBF3s0Niwl0z0wydPnlS4D71//55ev35ta5UdMx8/
+fkxt2rSRWp0OrkQWLGbiu2/SpAmtX7+ejh07Rjdv3qSXL19Wqq0VBeIgHuKu
+W7eOGjRooD6TCUFVpzwOMoe+U69ePYqOjuZ9ZvTo0Tz3zJ8/n5YuXUrp6el8
+XiRt27ZtvA/jp3odfvBHOZRHPagP9aJ+p9iG/SUoargjnAl+s2bNoqysLNqw
+YQOlpKTwueHAgQN5LsZzxyqQo5wM9aA+1Iv6EQfxEBfxFd/wQIpQAeQYRhMm
+TPDZZzAfe/r0Kd29e5du3Lhh2pUrV+jcuXP8p3odfvD3Mo9DfFaqU06Q9XDD
+DcP42BRMID4r1epGkPVwwhQmnnvk1mAC8VlZH5wSVFXKo5lhRUysDZGLz58/
+z+fRL168CIg+iIN4iIv44MFKtSoS/GoK9jOXPFynTh1q27Ytde7cmY9dQ4YM
+4fNTOR+fNm2a47wdhvvSF+VQHvWgPtSL+t3iC341AauY4DRmzBj+/SI379q1
+i8+jU1NTafLkyTRo0CDq06cPH7swR8S6h7m3z3G9hPKoB/WhXtSPOIiHuIgP
+HuCjlF0VaGE0rJBc2rVrx9evlQH2A5zm7TDcrwzAB7xYmV4rgqTT7wwrAYeo
+qCi+/qqJAC/wE1qVCN6BRi7iY783Nzc32JK4AvzAU+iVG2CdYkRcvs9y7do1
+3ldqIsAL/MCTlfXFmABqlcZs8i72kpBrp0+fTsuWLaOtW7fSkSNH6PLly3T/
+/n16/vw5ffz40S8aoB7Uh3pRP+IgHuIiPniAjx1Pw2YFUKtUBw6eDHsAyCHY
+z8LYD8O6Dvt4uuG69IE/yml7CJWx1ABoJIEzN76+P336NN8DGDduHG8L9uKq
+2A6/GOairVu3pn79+tGCBQvo0KFD6v0fqlUdKy4gJvaDdXz48IHv+UleXbt2
+5fsr6BuzZ8/mmg4dOlTPH9SiRQuef3EWiLOqhg0b8r0EXfuYmBjq2bMn30fG
+vgzmqTjnUn06duzIeegAX+FzIYBa5SMm9sl1rFy50sJ70aJFtvnmwIEDFr/i
+4mJbP1xX/fbu3WvrhziqH3joAF9xPz9AOkVKPps3b7ZwuXXrFt8T96IV1imq
+36VLl2z9cF31Q97yohV4gI8K8FV8IgOg1RAZLzs72+SBuXX//v0lj09uWmEv
+Sj972bJli60GuK76wa5fv+5LKx4ffNQ5P/gqPkMCoNVCGe/Ro0cmD+Qkhcd3
+hhU6abVixQrpVyLLzJw501YrXFfq/S9+4hzMRatCEZ9/Bi8J8FXqWhgArfgY
+iNxbUlLCOeTl5VGjRo0khwesdN/WVivMi5R5z98My8bv3bt3t9UK14Uv/I7j
+d8wZ3rx546ZVuODBeYEfAL7gzQI3FpYbA8eOHas+J8OFn61WR48eVb/bGYZt
+wO8499TzOz4r56HwGynLbt++3U0rJnjw5xb8JAI8FlrGwMOHD6ttV/eJbLUa
+NWqU9H3FSr//ibK8nt+1vA4/nHPz5wXzBh9aMabsq4EnEMCx0DIGvnr1ilq1
+aiVjP2fWsaWcVjjfVJ6T7cIvWtap53ctr0cL/98zG20dtIoUvDhP8A3gWGgZ
+A+fNm6fGnab5ltNqzZo1qv8vFd8CZpPflbxeoPj+zLAPuI51nw+tmODF74Fv
+AMdCcwzct2+fOu5n2/hatMLYrey7XdN8bfO7ltdV8HNbrLHkfr6LVmb94Ave
+rEyr6hwL+RgYFhbG97pFPLyf2cHG16KV9n3O13zL5XebvK5ikKwL5xAetOog
+eHLe4M+qfyy8wMraK22Jg69FK7wPxMq0baT5lsvvNnldx79wD/vueP/Kh1ZM
+8NS5V+dYmK/F+odhYQ6+plb5+fnqWcteG99y+d0hr6sw94Ww1+FBqzDBV623
+usZCcwwUhnXEr1z8Ta02btyoluvn4G/J7w55XUUTJvoVnlkPWjHB11x/seob
+C80xUNh3Pvy5VgsXLuT9RJRxe7/Akt9d8roK/H0Af2bxniDzrRVjyvqH+X8s
+jDfsj4ZdUur/zHy/f8K1wvt3Srk0F38zv6PPuuR1FX2Ytd1etAoX/KU/2oX2
+xfso54Yow87bcIEleihfqJXBO9PNXfzN/I73J5VydnldhZ6DfGkFJDL7dqG9
+UR7K6zB1wjOujLOyTl/QtfqrD38zv2PvUylnl9dVzGMV18psG9qlnfF7aZsK
+c/6C9dO7d++4KWspEj5u0LX6ykPcAq2MU15Xgb9XesO8a+WPtqlIZ+J5Qj0S
++F35DtJ91KFqdY+Vrnt9IZtZtXLL6yq2aeXc4I+2+bs+lfsfPMbdoJVzy+sq
+fqOVa+fi62+tqvqcJjAr974e45r5nXnL6wD2tP6tlcP+aSazf5b93QcBS273
+mP/qMbF3qRn2BZI9xDTzO/OW19sb9lb6a38nAUvxY9vc4DRncBtXM6Qf9m5x
+3qfwwHf9a5d4DQ37Vov1rbjuhK1MjGU4o8e68N69e+qc7gmzf7Yq0zYvkHNR
+X/M1/MsVPh4NHjyYioqKeB7A+/nKHvc+h7LQI9eGO4nrTnr9Ez54Z1vFwYMH
+1fLd/NA2fwNrLc7v+PHjFu44Gxb37jiUzZRlhw8fzs+n8ZOVtTfToVxVtQoW
+kDs4v507d1q4K+9Q63t8Enm4j3c9VOCzKJfnUK6yfbAmgPcjnGnh2Xr48CGt
+XbtW/Y7X2ZSJkPflvp0EPitl7f5G3pLbIyIivOb2mgD8qyi7nAPDuO60Hsxj
+lXuugIrOGWoScBagr1X+btjPXcqY+QrvZOOsBT+V8k75SgLPHNbD2G/BHqDb
+XLSmAfOsrwybadgvPPhXdhz8f4WcX+Wxsn7na34Vwk/jf52EEEIIIYQQQggh
+2OJ/pRNN6A==
+            "], {{0, 0}, {75, 75}}, {0, 255}, ColorFunction -> 
+            RGBColor], ImageSize -> 35, PlotRange -> {{0, 75}, {0, 75}}], 
+         Condition[
+           $CellContext`PermutationToBoard[
+            Pattern[$CellContext`p, 
+             Blank[List]]], $CellContext`p =!= {}] := 
+         Module[{$CellContext`n = Length[$CellContext`p]}, 
+           Normal[
+            SparseArray[
+             (Thread[Thread[{
+                 Range[$CellContext`n], #}] -> 
+              1]& )[$CellContext`p], {$CellContext`n, $CellContext`n}]]], \
+$CellContext`PermutationToBoard[
+           Pattern[$CellContext`p, 
+            Blank[]]] := {}, $CellContext`PermutationToBoard[
+           Pattern[$CellContext`p, 
+            BlankNullSequence[]]] := {}, $CellContext`ValidPermutation[
+           Pattern[$CellContext`p, 
+            Blank[]]] := Module[{$CellContext`m, $CellContext`m2}, 
+           Catch[If[
+              Not[
+               FreeQ[
+                Abs[
+                 Differences[$CellContext`p]], 1]], 
+              Throw[False]]; $CellContext`m = Range[-Length[$CellContext`p], 
+               Length[$CellContext`p]]; $CellContext`m2 = Table[
+               
+               Take[$CellContext`m, {$CellContext`k, $CellContext`k + 
+                 Length[$CellContext`p] - 1}], {$CellContext`k, 
+                Length[$CellContext`p] + 1, 2, -1}]; Fold[And[#, 
+               With[{$CellContext`p0 = Extract[$CellContext`p, 
+                   First[
+                    Position[#2, 0, {1}, 1]]]}, 
+                And[Count[
+                   Thread[{$CellContext`p, $CellContext`p0 + #2}], {
+                    Pattern[$CellContext`a, 
+                    Blank[]], 
+                    Pattern[$CellContext`a, 
+                    Blank[]]}, {1}] == 1, Count[
+                   Thread[{$CellContext`p, $CellContext`p0 - #2}], {
+                    Pattern[$CellContext`a, 
+                    Blank[]], 
+                    Pattern[$CellContext`a, 
+                    Blank[]]}, {1}] == 1]]]& , 
+              True, $CellContext`m2]]]}; {$CellContext`flag = 
+          True; $CellContext`pos = 1}}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->263126260],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 5, $CellContext`u$$ = 1, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`n$$], 5, "boardsize"}, 4, 8, 1}, {{
+       Hold[$CellContext`u$$], 1, "next configuration"}, Button[
+       Style["\[RightPointer]", 20], 
+       Increment[$CellContext`pos]; $CellContext`flag = True, Appearance -> 
+       Tiny, ImageSize -> {20, 20}]& }}, Typeset`size$$ = {
+    360., {178., 182.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`n$185663$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`n$$ = 5, $CellContext`u$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`n$$, $CellContext`n$185663$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (
+       Dynamic[$CellContext`n$$, {
+         Automatic, ($CellContext`flag = True; $CellContext`pos = 1)& }]; 
+       Graphics[
+         ({
+          Part[
+           
+           ArrayPlot[#, Mesh -> True, ColorRules -> {1 -> Orange}, 
+            ImageSize -> {400, 400}], 1], 
+          Map[Inset[
+            Show[$CellContext`queenImg, ImageSize -> 280./$CellContext`n$$], 
+            Reverse[{$CellContext`n$$ + 1/2, (-1)/2} + {-1, 1} #]]& , 
+           Part[
+            ArrayRules[
+             SparseArray[#]], 
+            Span[1, -2], 1]]}& )[
+          Apply[$CellContext`PermutationToBoard, 
+           Block[{$CellContext`pp = Permutations[
+               Range[$CellContext`n$$]]}, 
+            If[$CellContext`pos > 
+              Length[$CellContext`pp], $CellContext`flag = 
+               True; $CellContext`pos = 1]; Extract[$CellContext`pp, 
+              With[{$CellContext`f = Position[
+                  Drop[$CellContext`pp, $CellContext`pos - 1], 
+                  Condition[
+                   Pattern[$CellContext`x, 
+                    Blank[List]], 
+                   $CellContext`ValidPermutation[$CellContext`x]], {1}, 1]}, 
+               If[$CellContext`flag === True, 
+                If[$CellContext`f =!= {}, {{
+                   If[$CellContext`f === {{1}}, 
+                    
+                    Increment[$CellContext`pos], $CellContext`flag = 
+                    False; $CellContext`pos = $CellContext`pos + 
+                    Part[$CellContext`f, 1, 1] - 1]}}, $CellContext`flag = 
+                  True; $CellContext`pos = 
+                  1; {}], {{$CellContext`pos = $CellContext`pos - 1 + 
+                   Part[$CellContext`f, 1, 1]}}]]]]]]]), 
+      "Specifications" :> {{{$CellContext`n$$, 5, "boardsize"}, 4, 8, 1, 
+         ControlType -> 
+         RadioButton}, {{$CellContext`u$$, 1, "next configuration"}, Button[
+          Style["\[RightPointer]", 20], 
+          Increment[$CellContext`pos]; $CellContext`flag = True, Appearance -> 
+          Tiny, ImageSize -> {20, 20}]& }}, 
+      "Options" :> {
+       TrackedSymbols -> {$CellContext`n$$, 11, False}, 
+        AutorunSequencing -> {1}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{404., {234., 239.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({{$CellContext`flag = False, $CellContext`pos = 
+         11, $CellContext`queenImg = Graphics[
+           Raster[CompressedData["
+1:eJztXHtsTVsaX9Sj9VbjUVXUazBmzKhH1OMS9ZjxllRwPRtamgYx3MEUpXdc
+7h8edxBi+IMpQkS4TYjHhCFiRIxONJ6hEaMlHq0ywtBv9m91rd21V/feZ7c9
+Pac3c37Jl/bs/a31/dbv7PWt125jk5ZMSQpjjI0VVoeFEEIIIYQQQgghhPAT
+Q4RhMYbFGfZbw742LNmwbwzLMOx7w/YolmXYUcWytPvfi3LfiHq+FvXGiTgR
+gWhUFTHCsKWG/dmwHw27bVixYRQEKxbxfxR8fjCsQ/U1vUKYxKrYvqZNm1Lz
+5s1Ni4yMtHzG/SrGeG1YbLUr4Y5Ohn1kglPjxo2pd+/eNHHiRFqyZAlt2rSJ
+9u/fT6dOnaKrV6/SgwcPqKCggN6+fUtVAcqjHtSHelE/4iAe4iI+eIAPK9Pr
+cDCFMvAn8Khfvz7nWxMxd+5cqdV/gqzVLvBo2bIlFRYWBluWcvj8+TONGDFC
+apUXXKlYguBBXbp0oeXLl9Pu3bvp7NmzlJOTQ8+ePaNPnz5VuyZfvnzhffL2
+7dt08eJF3h9XrVpF8fHxah9cGVSlGKsludSqVcsxtzZr1ow6depEvXr1or59
++1JCQgKNHz+eEhMTuc2ZM4eSk5NtLSkpyfSbNGkSLztgwACej1Annmmn2LVr
+11Y/Nwi8POWQwoRWJ06coDNnztCePXsoMzOTFi9eTDNmzKCRI0dSXFwc9ejR
+g2JjY/nYFh4eXuHxrG7durxs+/btqVu3brzOYcOG0dSpUyktLY0yMjJox44d
+dPLkSbpz5w6tXr1alv0YBF3s0Niwl0z0wydPnlS4D71//55ev35ta5UdMx8/
+fkxt2rSRWp0OrkQWLGbiu2/SpAmtX7+ejh07Rjdv3qSXL19Wqq0VBeIgHuKu
+W7eOGjRooD6TCUFVpzwOMoe+U69ePYqOjuZ9ZvTo0Tz3zJ8/n5YuXUrp6el8
+XiRt27ZtvA/jp3odfvBHOZRHPagP9aJ+p9iG/SUoargjnAl+s2bNoqysLNqw
+YQOlpKTwueHAgQN5LsZzxyqQo5wM9aA+1Iv6EQfxEBfxFd/wQIpQAeQYRhMm
+TPDZZzAfe/r0Kd29e5du3Lhh2pUrV+jcuXP8p3odfvD3Mo9DfFaqU06Q9XDD
+DcP42BRMID4r1epGkPVwwhQmnnvk1mAC8VlZH5wSVFXKo5lhRUysDZGLz58/
+z+fRL168CIg+iIN4iIv44MFKtSoS/GoK9jOXPFynTh1q27Ytde7cmY9dQ4YM
+4fNTOR+fNm2a47wdhvvSF+VQHvWgPtSL+t3iC341AauY4DRmzBj+/SI379q1
+i8+jU1NTafLkyTRo0CDq06cPH7swR8S6h7m3z3G9hPKoB/WhXtSPOIiHuIgP
+HuCjlF0VaGE0rJBc2rVrx9evlQH2A5zm7TDcrwzAB7xYmV4rgqTT7wwrAYeo
+qCi+/qqJAC/wE1qVCN6BRi7iY783Nzc32JK4AvzAU+iVG2CdYkRcvs9y7do1
+3ldqIsAL/MCTlfXFmABqlcZs8i72kpBrp0+fTsuWLaOtW7fSkSNH6PLly3T/
+/n16/vw5ffz40S8aoB7Uh3pRP+IgHuIiPniAjx1Pw2YFUKtUBw6eDHsAyCHY
+z8LYD8O6Dvt4uuG69IE/yml7CJWx1ABoJIEzN76+P336NN8DGDduHG8L9uKq
+2A6/GOairVu3pn79+tGCBQvo0KFD6v0fqlUdKy4gJvaDdXz48IHv+UleXbt2
+5fsr6BuzZ8/mmg4dOlTPH9SiRQuef3EWiLOqhg0b8r0EXfuYmBjq2bMn30fG
+vgzmqTjnUn06duzIeegAX+FzIYBa5SMm9sl1rFy50sJ70aJFtvnmwIEDFr/i
+4mJbP1xX/fbu3WvrhziqH3joAF9xPz9AOkVKPps3b7ZwuXXrFt8T96IV1imq
+36VLl2z9cF31Q97yohV4gI8K8FV8IgOg1RAZLzs72+SBuXX//v0lj09uWmEv
+Sj972bJli60GuK76wa5fv+5LKx4ffNQ5P/gqPkMCoNVCGe/Ro0cmD+Qkhcd3
+hhU6abVixQrpVyLLzJw501YrXFfq/S9+4hzMRatCEZ9/Bi8J8FXqWhgArfgY
+iNxbUlLCOeTl5VGjRo0khwesdN/WVivMi5R5z98My8bv3bt3t9UK14Uv/I7j
+d8wZ3rx546ZVuODBeYEfAL7gzQI3FpYbA8eOHas+J8OFn61WR48eVb/bGYZt
+wO8499TzOz4r56HwGynLbt++3U0rJnjw5xb8JAI8FlrGwMOHD6ttV/eJbLUa
+NWqU9H3FSr//ibK8nt+1vA4/nHPz5wXzBh9aMabsq4EnEMCx0DIGvnr1ilq1
+aiVjP2fWsaWcVjjfVJ6T7cIvWtap53ctr0cL/98zG20dtIoUvDhP8A3gWGgZ
+A+fNm6fGnab5ltNqzZo1qv8vFd8CZpPflbxeoPj+zLAPuI51nw+tmODF74Fv
+AMdCcwzct2+fOu5n2/hatMLYrey7XdN8bfO7ltdV8HNbrLHkfr6LVmb94Ave
+rEyr6hwL+RgYFhbG97pFPLyf2cHG16KV9n3O13zL5XebvK5ikKwL5xAetOog
+eHLe4M+qfyy8wMraK22Jg69FK7wPxMq0baT5lsvvNnldx79wD/vueP/Kh1ZM
+8NS5V+dYmK/F+odhYQ6+plb5+fnqWcteG99y+d0hr6sw94Ww1+FBqzDBV623
+usZCcwwUhnXEr1z8Ta02btyoluvn4G/J7w55XUUTJvoVnlkPWjHB11x/seob
+C80xUNh3Pvy5VgsXLuT9RJRxe7/Akt9d8roK/H0Af2bxniDzrRVjyvqH+X8s
+jDfsj4ZdUur/zHy/f8K1wvt3Srk0F38zv6PPuuR1FX2Ytd1etAoX/KU/2oX2
+xfso54Yow87bcIEleihfqJXBO9PNXfzN/I73J5VydnldhZ6DfGkFJDL7dqG9
+UR7K6zB1wjOujLOyTl/QtfqrD38zv2PvUylnl9dVzGMV18psG9qlnfF7aZsK
+c/6C9dO7d++4KWspEj5u0LX6ykPcAq2MU15Xgb9XesO8a+WPtqlIZ+J5Qj0S
++F35DtJ91KFqdY+Vrnt9IZtZtXLL6yq2aeXc4I+2+bs+lfsfPMbdoJVzy+sq
+fqOVa+fi62+tqvqcJjAr974e45r5nXnL6wD2tP6tlcP+aSazf5b93QcBS273
+mP/qMbF3qRn2BZI9xDTzO/OW19sb9lb6a38nAUvxY9vc4DRncBtXM6Qf9m5x
+3qfwwHf9a5d4DQ37Vov1rbjuhK1MjGU4o8e68N69e+qc7gmzf7Yq0zYvkHNR
+X/M1/MsVPh4NHjyYioqKeB7A+/nKHvc+h7LQI9eGO4nrTnr9Ez54Z1vFwYMH
+1fLd/NA2fwNrLc7v+PHjFu44Gxb37jiUzZRlhw8fzs+n8ZOVtTfToVxVtQoW
+kDs4v507d1q4K+9Q63t8Enm4j3c9VOCzKJfnUK6yfbAmgPcjnGnh2Xr48CGt
+XbtW/Y7X2ZSJkPflvp0EPitl7f5G3pLbIyIivOb2mgD8qyi7nAPDuO60Hsxj
+lXuugIrOGWoScBagr1X+btjPXcqY+QrvZOOsBT+V8k75SgLPHNbD2G/BHqDb
+XLSmAfOsrwybadgvPPhXdhz8f4WcX+Wxsn7na34Vwk/jf52EEEIIIYQQQggh
+2OJ/pRNN6A==
+            "], {{0, 0}, {75, 75}}, {0, 255}, ColorFunction -> 
+            RGBColor], ImageSize -> 35, PlotRange -> {{0, 75}, {0, 75}}], 
+         Condition[
+           $CellContext`PermutationToBoard[
+            Pattern[$CellContext`p, 
+             Blank[List]]], $CellContext`p =!= {}] := 
+         Module[{$CellContext`n = Length[$CellContext`p]}, 
+           Normal[
+            SparseArray[
+             (Thread[Thread[{
+                 Range[$CellContext`n], #}] -> 
+              1]& )[$CellContext`p], {$CellContext`n, $CellContext`n}]]], \
+$CellContext`PermutationToBoard[
+           Pattern[$CellContext`p, 
+            Blank[]]] := {}, $CellContext`PermutationToBoard[
+           Pattern[$CellContext`p, 
+            BlankNullSequence[]]] := {}, $CellContext`ValidPermutation[
+           Pattern[$CellContext`p, 
+            Blank[]]] := Module[{$CellContext`m, $CellContext`m2}, 
+           Catch[If[
+              Not[
+               FreeQ[
+                Abs[
+                 Differences[$CellContext`p]], 1]], 
+              Throw[False]]; $CellContext`m = Range[-Length[$CellContext`p], 
+               Length[$CellContext`p]]; $CellContext`m2 = Table[
+               
+               Take[$CellContext`m, {$CellContext`k, $CellContext`k + 
+                 Length[$CellContext`p] - 1}], {$CellContext`k, 
+                Length[$CellContext`p] + 1, 2, -1}]; Fold[And[#, 
+               With[{$CellContext`p0 = Extract[$CellContext`p, 
+                   First[
+                    Position[#2, 0, {1}, 1]]]}, 
+                And[Count[
+                   Thread[{$CellContext`p, $CellContext`p0 + #2}], {
+                    Pattern[$CellContext`a, 
+                    Blank[]], 
+                    Pattern[$CellContext`a, 
+                    Blank[]]}, {1}] == 1, Count[
+                   Thread[{$CellContext`p, $CellContext`p0 - #2}], {
+                    Pattern[$CellContext`a, 
+                    Blank[]], 
+                    Pattern[$CellContext`a, 
+                    Blank[]]}, {1}] == 1]]]& , 
+              True, $CellContext`m2]]]}; {$CellContext`flag = 
+          True; $CellContext`pos = 1}}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->151114708],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 7, $CellContext`u$$ = 1, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`n$$], 7, "boardsize"}, 4, 8, 1}, {{
+       Hold[$CellContext`u$$], 1, "next configuration"}, Button[
+       Style["\[RightPointer]", 20], 
+       Increment[$CellContext`pos]; $CellContext`flag = True, Appearance -> 
+       Tiny, ImageSize -> {20, 20}]& }}, Typeset`size$$ = {
+    360., {178., 182.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`n$185715$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`n$$ = 7, $CellContext`u$$ = 1}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`n$$, $CellContext`n$185715$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (
+       Dynamic[$CellContext`n$$, {
+         Automatic, ($CellContext`flag = True; $CellContext`pos = 1)& }]; 
+       Graphics[
+         ({
+          Part[
+           
+           ArrayPlot[#, Mesh -> True, ColorRules -> {1 -> Orange}, 
+            ImageSize -> {400, 400}], 1], 
+          Map[Inset[
+            Show[$CellContext`queenImg, ImageSize -> 280./$CellContext`n$$], 
+            Reverse[{$CellContext`n$$ + 1/2, (-1)/2} + {-1, 1} #]]& , 
+           Part[
+            ArrayRules[
+             SparseArray[#]], 
+            Span[1, -2], 1]]}& )[
+          Apply[$CellContext`PermutationToBoard, 
+           Block[{$CellContext`pp = Permutations[
+               Range[$CellContext`n$$]]}, 
+            If[$CellContext`pos > 
+              Length[$CellContext`pp], $CellContext`flag = 
+               True; $CellContext`pos = 1]; Extract[$CellContext`pp, 
+              With[{$CellContext`f = Position[
+                  Drop[$CellContext`pp, $CellContext`pos - 1], 
+                  Condition[
+                   Pattern[$CellContext`x, 
+                    Blank[List]], 
+                   $CellContext`ValidPermutation[$CellContext`x]], {1}, 1]}, 
+               If[$CellContext`flag === True, 
+                If[$CellContext`f =!= {}, {{
+                   If[$CellContext`f === {{1}}, 
+                    
+                    Increment[$CellContext`pos], $CellContext`flag = 
+                    False; $CellContext`pos = $CellContext`pos + 
+                    Part[$CellContext`f, 1, 1] - 1]}}, $CellContext`flag = 
+                  True; $CellContext`pos = 
+                  1; {}], {{$CellContext`pos = $CellContext`pos - 1 + 
+                   Part[$CellContext`f, 1, 1]}}]]]]]]]), 
+      "Specifications" :> {{{$CellContext`n$$, 7, "boardsize"}, 4, 8, 1, 
+         ControlType -> 
+         RadioButton}, {{$CellContext`u$$, 1, "next configuration"}, Button[
+          Style["\[RightPointer]", 20], 
+          Increment[$CellContext`pos]; $CellContext`flag = True, Appearance -> 
+          Tiny, ImageSize -> {20, 20}]& }}, 
+      "Options" :> {
+       TrackedSymbols -> {$CellContext`n$$, 11, False}, 
+        AutorunSequencing -> {1}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{404., {234., 239.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({{$CellContext`flag = False, $CellContext`pos = 
+         11, $CellContext`queenImg = Graphics[
+           Raster[CompressedData["
+1:eJztXHtsTVsaX9Sj9VbjUVXUazBmzKhH1OMS9ZjxllRwPRtamgYx3MEUpXdc
+7h8edxBi+IMpQkS4TYjHhCFiRIxONJ6hEaMlHq0ywtBv9m91rd21V/feZ7c9
+Pac3c37Jl/bs/a31/dbv7PWt125jk5ZMSQpjjI0VVoeFEEIIIYQQQgghhPAT
+Q4RhMYbFGfZbw742LNmwbwzLMOx7w/YolmXYUcWytPvfi3LfiHq+FvXGiTgR
+gWhUFTHCsKWG/dmwHw27bVixYRQEKxbxfxR8fjCsQ/U1vUKYxKrYvqZNm1Lz
+5s1Ni4yMtHzG/SrGeG1YbLUr4Y5Ohn1kglPjxo2pd+/eNHHiRFqyZAlt2rSJ
+9u/fT6dOnaKrV6/SgwcPqKCggN6+fUtVAcqjHtSHelE/4iAe4iI+eIAPK9Pr
+cDCFMvAn8Khfvz7nWxMxd+5cqdV/gqzVLvBo2bIlFRYWBluWcvj8+TONGDFC
+apUXXKlYguBBXbp0oeXLl9Pu3bvp7NmzlJOTQ8+ePaNPnz5VuyZfvnzhffL2
+7dt08eJF3h9XrVpF8fHxah9cGVSlGKsludSqVcsxtzZr1ow6depEvXr1or59
++1JCQgKNHz+eEhMTuc2ZM4eSk5NtLSkpyfSbNGkSLztgwACej1Annmmn2LVr
+11Y/Nwi8POWQwoRWJ06coDNnztCePXsoMzOTFi9eTDNmzKCRI0dSXFwc9ejR
+g2JjY/nYFh4eXuHxrG7durxs+/btqVu3brzOYcOG0dSpUyktLY0yMjJox44d
+dPLkSbpz5w6tXr1alv0YBF3s0Niwl0z0wydPnlS4D71//55ev35ta5UdMx8/
+fkxt2rSRWp0OrkQWLGbiu2/SpAmtX7+ejh07Rjdv3qSXL19Wqq0VBeIgHuKu
+W7eOGjRooD6TCUFVpzwOMoe+U69ePYqOjuZ9ZvTo0Tz3zJ8/n5YuXUrp6el8
+XiRt27ZtvA/jp3odfvBHOZRHPagP9aJ+p9iG/SUoargjnAl+s2bNoqysLNqw
+YQOlpKTwueHAgQN5LsZzxyqQo5wM9aA+1Iv6EQfxEBfxFd/wQIpQAeQYRhMm
+TPDZZzAfe/r0Kd29e5du3Lhh2pUrV+jcuXP8p3odfvD3Mo9DfFaqU06Q9XDD
+DcP42BRMID4r1epGkPVwwhQmnnvk1mAC8VlZH5wSVFXKo5lhRUysDZGLz58/
+z+fRL168CIg+iIN4iIv44MFKtSoS/GoK9jOXPFynTh1q27Ytde7cmY9dQ4YM
+4fNTOR+fNm2a47wdhvvSF+VQHvWgPtSL+t3iC341AauY4DRmzBj+/SI379q1
+i8+jU1NTafLkyTRo0CDq06cPH7swR8S6h7m3z3G9hPKoB/WhXtSPOIiHuIgP
+HuCjlF0VaGE0rJBc2rVrx9evlQH2A5zm7TDcrwzAB7xYmV4rgqTT7wwrAYeo
+qCi+/qqJAC/wE1qVCN6BRi7iY783Nzc32JK4AvzAU+iVG2CdYkRcvs9y7do1
+3ldqIsAL/MCTlfXFmABqlcZs8i72kpBrp0+fTsuWLaOtW7fSkSNH6PLly3T/
+/n16/vw5ffz40S8aoB7Uh3pRP+IgHuIiPniAjx1Pw2YFUKtUBw6eDHsAyCHY
+z8LYD8O6Dvt4uuG69IE/yml7CJWx1ABoJIEzN76+P336NN8DGDduHG8L9uKq
+2A6/GOairVu3pn79+tGCBQvo0KFD6v0fqlUdKy4gJvaDdXz48IHv+UleXbt2
+5fsr6BuzZ8/mmg4dOlTPH9SiRQuef3EWiLOqhg0b8r0EXfuYmBjq2bMn30fG
+vgzmqTjnUn06duzIeegAX+FzIYBa5SMm9sl1rFy50sJ70aJFtvnmwIEDFr/i
+4mJbP1xX/fbu3WvrhziqH3joAF9xPz9AOkVKPps3b7ZwuXXrFt8T96IV1imq
+36VLl2z9cF31Q97yohV4gI8K8FV8IgOg1RAZLzs72+SBuXX//v0lj09uWmEv
+Sj972bJli60GuK76wa5fv+5LKx4ffNQ5P/gqPkMCoNVCGe/Ro0cmD+Qkhcd3
+hhU6abVixQrpVyLLzJw501YrXFfq/S9+4hzMRatCEZ9/Bi8J8FXqWhgArfgY
+iNxbUlLCOeTl5VGjRo0khwesdN/WVivMi5R5z98My8bv3bt3t9UK14Uv/I7j
+d8wZ3rx546ZVuODBeYEfAL7gzQI3FpYbA8eOHas+J8OFn61WR48eVb/bGYZt
+wO8499TzOz4r56HwGynLbt++3U0rJnjw5xb8JAI8FlrGwMOHD6ttV/eJbLUa
+NWqU9H3FSr//ibK8nt+1vA4/nHPz5wXzBh9aMabsq4EnEMCx0DIGvnr1ilq1
+aiVjP2fWsaWcVjjfVJ6T7cIvWtap53ctr0cL/98zG20dtIoUvDhP8A3gWGgZ
+A+fNm6fGnab5ltNqzZo1qv8vFd8CZpPflbxeoPj+zLAPuI51nw+tmODF74Fv
+AMdCcwzct2+fOu5n2/hatMLYrey7XdN8bfO7ltdV8HNbrLHkfr6LVmb94Ave
+rEyr6hwL+RgYFhbG97pFPLyf2cHG16KV9n3O13zL5XebvK5ikKwL5xAetOog
+eHLe4M+qfyy8wMraK22Jg69FK7wPxMq0baT5lsvvNnldx79wD/vueP/Kh1ZM
+8NS5V+dYmK/F+odhYQ6+plb5+fnqWcteG99y+d0hr6sw94Ww1+FBqzDBV623
+usZCcwwUhnXEr1z8Ta02btyoluvn4G/J7w55XUUTJvoVnlkPWjHB11x/seob
+C80xUNh3Pvy5VgsXLuT9RJRxe7/Akt9d8roK/H0Af2bxniDzrRVjyvqH+X8s
+jDfsj4ZdUur/zHy/f8K1wvt3Srk0F38zv6PPuuR1FX2Ytd1etAoX/KU/2oX2
+xfso54Yow87bcIEleihfqJXBO9PNXfzN/I73J5VydnldhZ6DfGkFJDL7dqG9
+UR7K6zB1wjOujLOyTl/QtfqrD38zv2PvUylnl9dVzGMV18psG9qlnfF7aZsK
+c/6C9dO7d++4KWspEj5u0LX6ykPcAq2MU15Xgb9XesO8a+WPtqlIZ+J5Qj0S
++F35DtJ91KFqdY+Vrnt9IZtZtXLL6yq2aeXc4I+2+bs+lfsfPMbdoJVzy+sq
+fqOVa+fi62+tqvqcJjAr974e45r5nXnL6wD2tP6tlcP+aSazf5b93QcBS273
+mP/qMbF3qRn2BZI9xDTzO/OW19sb9lb6a38nAUvxY9vc4DRncBtXM6Qf9m5x
+3qfwwHf9a5d4DQ37Vov1rbjuhK1MjGU4o8e68N69e+qc7gmzf7Yq0zYvkHNR
+X/M1/MsVPh4NHjyYioqKeB7A+/nKHvc+h7LQI9eGO4nrTnr9Ez54Z1vFwYMH
+1fLd/NA2fwNrLc7v+PHjFu44Gxb37jiUzZRlhw8fzs+n8ZOVtTfToVxVtQoW
+kDs4v507d1q4K+9Q63t8Enm4j3c9VOCzKJfnUK6yfbAmgPcjnGnh2Xr48CGt
+XbtW/Y7X2ZSJkPflvp0EPitl7f5G3pLbIyIivOb2mgD8qyi7nAPDuO60Hsxj
+lXuugIrOGWoScBagr1X+btjPXcqY+QrvZOOsBT+V8k75SgLPHNbD2G/BHqDb
+XLSmAfOsrwybadgvPPhXdhz8f4WcX+Wxsn7na34Vwk/jf52EEEIIIYQQQggh
+2OJ/pRNN6A==
+            "], {{0, 0}, {75, 75}}, {0, 255}, ColorFunction -> 
+            RGBColor], ImageSize -> 35, PlotRange -> {{0, 75}, {0, 75}}], 
+         Condition[
+           $CellContext`PermutationToBoard[
+            Pattern[$CellContext`p, 
+             Blank[List]]], $CellContext`p =!= {}] := 
+         Module[{$CellContext`n = Length[$CellContext`p]}, 
+           Normal[
+            SparseArray[
+             (Thread[Thread[{
+                 Range[$CellContext`n], #}] -> 
+              1]& )[$CellContext`p], {$CellContext`n, $CellContext`n}]]], \
+$CellContext`PermutationToBoard[
+           Pattern[$CellContext`p, 
+            Blank[]]] := {}, $CellContext`PermutationToBoard[
+           Pattern[$CellContext`p, 
+            BlankNullSequence[]]] := {}, $CellContext`ValidPermutation[
+           Pattern[$CellContext`p, 
+            Blank[]]] := Module[{$CellContext`m, $CellContext`m2}, 
+           Catch[If[
+              Not[
+               FreeQ[
+                Abs[
+                 Differences[$CellContext`p]], 1]], 
+              Throw[False]]; $CellContext`m = Range[-Length[$CellContext`p], 
+               Length[$CellContext`p]]; $CellContext`m2 = Table[
+               
+               Take[$CellContext`m, {$CellContext`k, $CellContext`k + 
+                 Length[$CellContext`p] - 1}], {$CellContext`k, 
+                Length[$CellContext`p] + 1, 2, -1}]; Fold[And[#, 
+               With[{$CellContext`p0 = Extract[$CellContext`p, 
+                   First[
+                    Position[#2, 0, {1}, 1]]]}, 
+                And[Count[
+                   Thread[{$CellContext`p, $CellContext`p0 + #2}], {
+                    Pattern[$CellContext`a, 
+                    Blank[]], 
+                    Pattern[$CellContext`a, 
+                    Blank[]]}, {1}] == 1, Count[
+                   Thread[{$CellContext`p, $CellContext`p0 - #2}], {
+                    Pattern[$CellContext`a, 
+                    Blank[]], 
+                    Pattern[$CellContext`a, 
+                    Blank[]]}, {1}] == 1]]]& , 
+              True, $CellContext`m2]]]}; {$CellContext`flag = 
+          True; $CellContext`pos = 1}}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->188420763]
+}, Open  ]],
+
+Cell["", "DetailsSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SearchTermsSection"],
+
+Cell["chess", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.379987809234375*^9, 3.3799878099375*^9}},
+ CellID->272660432],
+
+Cell["queen", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.379987811625*^9, 3.37998781225*^9}},
+ CellID->15034548],
+
+Cell["strategy", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.379987816*^9, 3.379987817390625*^9}},
+ CellID->90477242]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "RelatedLinksSection"],
+
+Cell[TextData[ButtonBox["Queens Problem",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/QueensProblem.html"], 
+   None}]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.374714497171875*^9, 3.374714524046875*^9}, {
+   3.37868021421875*^9, 3.378680215328125*^9}},
+ CellID->123354798]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Oleksandr Pavlyk",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Oleksandr+\
+Pavlyk"], None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Oleksandr+Pavlyk"]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.374943946557056*^9, 3.374943954853878*^9}},
+ CellID->91141836]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{906, 817},
+WindowMargins->{{26, Automatic}, {Automatic, 0}},
+FrontEndVersion->"6.0 for Microsoft Windows (32-bit) (June 19, 2007)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[69293, 1462, 310, 8, 70, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[69606, 1472, 677, 16, 70, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[70286, 1490, 339, 11, 70, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[70628, 1503, 636, 15, 70, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[71267, 1520, 843, 21, 70, "ControlSuggestions",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[72113, 1543, 303, 8, 70, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[72419, 1553, 1411, 31, 70, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[73833, 1586, 881, 21, 70, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 76467, 1676},
+ {"RotateAndZoomIn3D", 76576, 1679},
+ {"DragLocators", 76686, 1682},
+ {"CreateAndDeleteLocators", 76802, 1685},
+ {"SliderZoom", 76916, 1688},
+ {"GamepadControls", 77022, 1691},
+ {"AutomaticAnimation", 77135, 1694},
+ {"BookmarkAnimation", 77252, 1697}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[590, 23, 134, 2, 70, "DemoTitle"],
+Cell[CellGroupData[{
+Cell[749, 29, 33, 0, 70, "InitializationSection"],
+Cell[785, 31, 1210, 33, 70, "Input",
+ CellID->70535431],
+Cell[1998, 66, 281, 7, 70, "Input",
+ CellID->380919021],
+Cell[2282, 75, 4400, 101, 70, "Input",
+ CellID->277280519],
+Cell[6685, 178, 4112, 73, 70, "Input",
+ CellID->79589100]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[10834, 256, 29, 0, 70, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[10888, 260, 7848, 189, 70, "Input",
+ CellID->46006647],
+Cell[18739, 451, 10020, 194, 70, "Output",
+ CellID->77169843]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[28808, 651, 36, 0, 70, "ManipulateCaptionSection"],
+Cell[28847, 653, 550, 10, 70, "ManipulateCaption",
+ CellID->930555059]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[29434, 668, 28, 0, 70, "ThumbnailSection"],
+Cell[29465, 670, 9912, 193, 70, "Output",
+ CellID->789785363]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[39414, 868, 28, 0, 70, "SnapshotsSection"],
+Cell[39445, 870, 9912, 193, 70, "Output",
+ CellID->263126260],
+Cell[49360, 1065, 9912, 193, 70, "Output",
+ CellID->151114708],
+Cell[59275, 1260, 9912, 193, 70, "Output",
+ CellID->188420763]
+}, Open  ]],
+Cell[69202, 1456, 26, 0, 70, "DetailsSection"],
+Cell[CellGroupData[{
+Cell[69253, 1460, 37, 0, 70, "ControlSuggestionsSection"],
+Cell[69293, 1462, 310, 8, 70, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[69606, 1472, 677, 16, 70, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[70286, 1490, 339, 11, 70, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[70628, 1503, 636, 15, 70, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[71267, 1520, 843, 21, 70, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[72113, 1543, 303, 8, 70, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[72419, 1553, 1411, 31, 70, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[73833, 1586, 881, 21, 70, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[74751, 1612, 30, 0, 70, "SearchTermsSection"],
+Cell[74784, 1614, 136, 3, 70, "SearchTerms",
+ CellID->272660432],
+Cell[74923, 1619, 130, 3, 70, "SearchTerms",
+ CellID->15034548],
+Cell[75056, 1624, 134, 3, 70, "SearchTerms",
+ CellID->90477242]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[75227, 1632, 31, 0, 70, "RelatedLinksSection"],
+Cell[75261, 1634, 328, 8, 70, "RelatedLinks",
+ CellID->123354798]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[75626, 1647, 25, 0, 70, "AuthorSection"],
+Cell[75654, 1649, 414, 12, 70, "Author",
+ CellID->91141836]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

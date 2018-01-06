@@ -1,0 +1,1790 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     75749,       1781]
+NotebookOptionsPosition[     71774,       1658]
+NotebookOutlinePosition[     73399,       1709]
+CellTagsIndexPosition[     73071,       1697]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Nonsense Sentence Generator", "DemoTitle",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.425229298298658*^9, 3.4252293111280146`*^9}, 
+   3.4252315818459826`*^9, 3.428078367486642*^9}],
+
+Cell[CellGroupData[{
+
+Cell["", "InitializationSection"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"NIL", "=", "\"\<\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"sentence", ":=", 
+   RowBox[{"Hold", "[", 
+    RowBox[{"Or", "[", 
+     RowBox[{"declarative", ",", "interrogative", ",", "imperative"}], "]"}], 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"declarative", ":=", 
+   RowBox[{"{", 
+    RowBox[{"subject", ",", "predicatepast"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"interrogative", ":=", 
+   RowBox[{"{", 
+    RowBox[{"qverb", ",", "subject", ",", "predicatepresent"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"imperative", ":=", 
+   RowBox[{"{", 
+    RowBox[{"actverb", ",", "subject"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"subject", ":=", 
+   RowBox[{"Hold", "[", 
+    RowBox[{"nounclause", "||", 
+     RowBox[{"{", 
+      RowBox[{"nounclause", ",", "prepositionclause"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"nounclause", ":=", 
+   RowBox[{"Hold", "[", 
+    RowBox[{"{", 
+     RowBox[{"adjectiveclause", ",", "noun"}], "}"}], "]"}]}], ";", 
+  RowBox[{"noun", ":=", 
+   RowBox[{"Or", "[", 
+    RowBox[{
+    "\"\<skyscraper\>\"", ",", "\"\<ball\>\"", ",", "\"\<dog\>\"", ",", 
+     "\"\<cow\>\"", ",", "\"\<shark\>\"", ",", "\"\<hatter\>\"", ",", 
+     "\"\<programmer\>\"", ",", "\"\<city\>\"", ",", "\"\<village\>\"", ",", 
+     "\"\<buffalo\>\"", ",", "\"\<moon\>\"", ",", "\"\<librarian\>\"", ",", 
+     "\"\<sheep\>\"", ",", "\"\<doctor\>\"", ",", "\"\<rabbit\>\"", ",", 
+     "\"\<shrubbery\>\""}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"adjectiveclause", ":=", 
+   RowBox[{"{", 
+    RowBox[{"article", ",", "adjectivelist"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"adjectivelist", ":=", 
+   RowBox[{"Hold", "[", 
+    RowBox[{"myOr", "[", 
+     RowBox[{".6", ",", 
+      RowBox[{"Hold", "[", 
+       RowBox[{
+        RowBox[{"tmpadjlist", "=", "adjective"}], ";", " ", "NIL"}], "]"}], 
+      ",", 
+      RowBox[{"Hold", "[", 
+       RowBox[{"With", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"tmp", "=", 
+           RowBox[{"randomPart", "[", "tmpadjlist", "]"}]}], "}"}], ",", 
+         RowBox[{
+          RowBox[{"tmpadjlist", "=", 
+           RowBox[{"Complement", "[", 
+            RowBox[{"tmpadjlist", ",", 
+             RowBox[{"Unevaluated", "[", 
+              RowBox[{"Or", "[", "tmp", "]"}], "]"}]}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{"tmp", ",", "adjectivelist"}], "}"}]}]}], "]"}], "]"}]}], 
+     "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"article", ":=", 
+   RowBox[{"Or", "[", 
+    RowBox[{
+    "\"\<a\>\"", ",", "\"\<the\>\"", ",", "\"\<this\>\"", ",", 
+     "\"\<that\>\""}], "]"}]}], ";", 
+  RowBox[{"adjective", ":=", 
+   RowBox[{"Or", "[", 
+    RowBox[{
+    "\"\<big\>\"", ",", "\"\<wet\>\"", ",", "\"\<soft\>\"", ",", 
+     "\"\<green\>\"", ",", "\"\<red\>\"", ",", "\"\<sharp\>\"", ",", 
+     "\"\<tense\>\"", ",", "\"\<delectable\>\"", ",", "\"\<mild-mannered\>\"",
+      ",", "\"\<low\>\"", ",", "\"\<silly\>\"", ",", "\"\<earthy\>\"", ",", 
+     "\"\<mellow\>\"", ",", "\"\<cute\>\"", ",", "\"\<blushing\>\"", ",", 
+     "\"\<brainy\>\"", ",", "\"\<robust\>\"", ",", "\"\<expensive\>\"", ",", 
+     "\"\<debonair\>\"", ",", "\"\<finicky\>\"", ",", "\"\<humdrum\>\"", ",", 
+     "\"\<perspicacious\>\""}], "]"}]}], ";", 
+  RowBox[{"tmpadjlist", "=", "adjective"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"prepositionclause", ":=", 
+   RowBox[{"{", 
+    RowBox[{"preposition", ",", "nounclause"}], "}"}]}], ";", 
+  RowBox[{"preposition", ":=", 
+   RowBox[{"Or", "[", 
+    RowBox[{
+    "\"\<in\>\"", ",", "\"\<above\>\"", ",", "\"\<under\>\"", ",", 
+     "\"\<from\>\"", ",", "\"\<near\>\"", ",", "\"\<at\>\"", ",", 
+     "\"\<with\>\""}], "]"}]}], ";", 
+  RowBox[{"predicatepresent", ":=", 
+   RowBox[{"{", 
+    RowBox[{"verbpresent", ",", "subject"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"predicatepast", ":=", 
+   RowBox[{"{", 
+    RowBox[{"verbclause", ",", "subject"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"verbclause", ":=", 
+   RowBox[{"Hold", "[", 
+    RowBox[{"{", 
+     RowBox[{"adverblist", ",", "verbpast"}], "}"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"adverblist", ":=", 
+   RowBox[{"Hold", "[", 
+    RowBox[{"myOr", "[", 
+     RowBox[{".8", ",", 
+      RowBox[{"Hold", "[", 
+       RowBox[{
+        RowBox[{"tmpadvlist", "=", "adverb"}], ";", " ", "NIL"}], "]"}], ",", 
+      RowBox[{"Hold", "[", 
+       RowBox[{"With", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"tmp", "=", 
+           RowBox[{"randomPart", "[", "tmpadvlist", "]"}]}], "}"}], ",", 
+         RowBox[{
+          RowBox[{"tmpadvlist", "=", 
+           RowBox[{"Complement", "[", 
+            RowBox[{"tmpadvlist", ",", 
+             RowBox[{"Unevaluated", "[", 
+              RowBox[{"Or", "[", "tmp", "]"}], "]"}]}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{"tmp", ",", "adverblist"}], "}"}]}]}], "]"}], "]"}]}], 
+     "]"}], "]"}]}], ";", 
+  RowBox[{"adverb", ":=", 
+   RowBox[{"Or", "[", 
+    RowBox[{
+    "\"\<swiftly\>\"", ",", "\"\<unflinchingly\>\"", ",", "\"\<smugly\>\"", 
+     ",", "\"\<selflessly\>\"", ",", "\"\<oddly\>\"", ",", "\"\<mightily\>\"",
+      ",", "\"\<anxiously\>\"", ",", "\"\<lazily\>\"", ",", 
+     "\"\<deliberately\>\"", ",", "\"\<shrilly\>\"", ",", 
+     "\"\<vivaciously\>\"", ",", "\"\<reluctantly\>\""}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"tmpadvlist", "=", "adverb"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"verbpast", ":=", 
+   RowBox[{"Or", "[", 
+    RowBox[{
+    "\"\<ate\>\"", ",", "\"\<threw\>\"", ",", "\"\<gnashed\>\"", ",", 
+     "\"\<thought\>\"", ",", "\"\<grated\>\"", ",", "\"\<milked\>\"", ",", 
+     "\"\<climbed\>\"", ",", "\"\<jumped\>\"", ",", "\"\<ran\>\""}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"verbpresent", ":=", 
+   RowBox[{"Or", "[", 
+    RowBox[{
+    "\"\<eat\>\"", ",", "\"\<throw\>\"", ",", "\"\<gnash\>\"", ",", 
+     "\"\<boil\>\"", ",", "\"\<grate\>\"", ",", "\"\<milk\>\"", ",", 
+     "\"\<belong\>\"", ",", "\"\<salivate\>\"", ",", "\"\<jump\>\"", ",", 
+     "\"\<itch\>\"", ",", "\"\<learn\>\"", ",", "\"\<grease\>\"", ",", 
+     "\"\<glue\>\"", ",", "\"\<bring\>\""}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"qverb", ":=", 
+   RowBox[{"Or", "[", 
+    RowBox[{
+    "\"\<did\>\"", ",", "\"\<will\>\"", ",", "\"\<could\>\"", ",", 
+     "\"\<should\>\""}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"actverb", ":=", 
+   RowBox[{"Or", "[", 
+    RowBox[{
+    "\"\<break\>\"", ",", "\"\<fix\>\"", ",", "\"\<launch\>\"", ",", 
+     "\"\<squeeze\>\"", ",", "\"\<fetch\>\"", ",", "\"\<pull\>\"", ",", 
+     "\"\<get\>\"", ",", "\"\<thread\>\"", ",", "\"\<string\>\""}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"randomPart", "[", "type_", "]"}], ":=", "\[IndentingNewLine]", 
+   RowBox[{"Switch", "[", 
+    RowBox[{
+     RowBox[{"Head", "[", "type", "]"}], ",", "Hold", ",", 
+     RowBox[{"randomPart", "[", 
+      RowBox[{"type", "[", 
+       RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", "String", ",", "type", ",",
+      "List", ",", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Length", "[", "type", "]"}], "\[Equal]", "0"}], ",", 
+       "\"\<\>\"", ",", 
+       RowBox[{"Flatten", "[", 
+        RowBox[{"Map", "[", 
+         RowBox[{"randomPart", ",", "type"}], "]"}], "]"}]}], "]"}], ",", 
+     "myOr", ",", 
+     RowBox[{"With", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"rnd", "=", 
+         RowBox[{"Random", "[", "]"}]}], "}"}], ",", 
+       RowBox[{"randomPart", "[", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"rnd", "<", 
+           RowBox[{"type", "[", 
+            RowBox[{"[", "1", "]"}], "]"}]}], ",", 
+          RowBox[{"type", "[", 
+           RowBox[{"[", "2", "]"}], "]"}], ",", 
+          RowBox[{"type", "[", 
+           RowBox[{"[", "3", "]"}], "]"}]}], "]"}], "]"}]}], "]"}], ",", "Or",
+      ",", 
+     RowBox[{"randomPart", "[", 
+      RowBox[{"type", "[", 
+       RowBox[{"[", 
+        RowBox[{"Random", "[", 
+         RowBox[{"Integer", ",", 
+          RowBox[{"{", 
+           RowBox[{"1", ",", 
+            RowBox[{"Length", "[", "type", "]"}]}], "}"}]}], "]"}], "]"}], 
+       "]"}], "]"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"randomSentence", "[", "]"}], ":=", 
+   RowBox[{"Apply", "[", 
+    RowBox[{"sentenceType", ",", 
+     RowBox[{
+      RowBox[{"randomPart", "[", "sentence", "]"}], "/.", 
+      RowBox[{"\"\<\>\"", "\[Rule]", 
+       RowBox[{"Sequence", "[", "]"}]}]}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"isQ", "[", 
+    RowBox[{"type_", ",", "a_"}], "]"}], ":=", 
+   RowBox[{"MemberQ", "[", 
+    RowBox[{"type", ",", "a"}], "]"}]}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Format", "[", "sentence_sentenceType", "]"}], ":=", 
+  RowBox[{"Module", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"word", "=", 
+       RowBox[{"sentence", "[", 
+        RowBox[{"[", "1", "]"}], "]"}]}], ",", "words", ",", "punc", ",", 
+      "res"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"words", "=", 
+      RowBox[{"Map", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"StringJoin", "[", 
+          RowBox[{"#", ",", "\"\< \>\""}], "]"}], "&"}], ",", "sentence"}], 
+       "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"punc", "=", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"isQ", "[", 
+         RowBox[{"qverb", ",", "word"}], "]"}], ",", "\"\<?\>\"", ",", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"isQ", "[", 
+           RowBox[{"actverb", ",", "word"}], "]"}], ",", "\"\<!\>\"", ",", 
+          "\"\<.\>\""}], "]"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"words", "[", 
+       RowBox[{"[", 
+        RowBox[{"Length", "[", "words", "]"}], "]"}], "]"}], "=", 
+      RowBox[{"StringReplacePart", "[", 
+       RowBox[{
+        RowBox[{"Last", "[", "words", "]"}], ",", "punc", ",", 
+        RowBox[{"-", "1"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"words", "[", 
+       RowBox[{"[", "1", "]"}], "]"}], "=", 
+      RowBox[{"StringReplacePart", "[", 
+       RowBox[{
+        RowBox[{"words", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], ",", 
+        RowBox[{"ToUpperCase", "[", 
+         RowBox[{"StringTake", "[", 
+          RowBox[{
+           RowBox[{"words", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], ",", "1"}], "]"}], "]"}], ",", 
+        "1"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Speak", "[", 
+      RowBox[{"res", "=", 
+       RowBox[{"Apply", "[", 
+        RowBox[{"StringJoin", ",", "words"}], "]"}]}], "]"}], ";", 
+     "\[IndentingNewLine]", "res"}]}], "]"}]}]}], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.436724091873904*^9, 3.4367240924192543`*^9}, {
+   3.43672414218983*^9, 3.436724147845518*^9}, 3.436724310081711*^9, {
+   3.436724384725008*^9, 3.436724456089509*^9}, {3.4367247291732683`*^9, 
+   3.43672474755934*^9}, {3.43672481850359*^9, 3.436724886829782*^9}, {
+   3.4367249184684057`*^9, 3.436725005688266*^9}, {3.436725042288641*^9, 
+   3.436725085555037*^9}, {3.436725131303255*^9, 3.436725142036982*^9}, {
+   3.436725178380877*^9, 3.436725180941133*^9}, {3.436725217313717*^9, 
+   3.43672523200532*^9}, {3.436725604492365*^9, 3.43672567700473*^9}, 
+   3.4367257578984413`*^9, {3.436725954673402*^9, 3.436726031142517*^9}, {
+   3.436726341997027*^9, 3.436726342378796*^9}, 3.43717285634375*^9},
+ CellID->2125108241]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Pane", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Text", "@", 
+      RowBox[{"Style", "[", "\[IndentingNewLine]", 
+       RowBox[{"ee", "\[IndentingNewLine]", ",", "17", ",", "Bold"}], "]"}]}],
+      ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"400", ",", "200"}], "}"}], ",", 
+     RowBox[{"Alignment", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"Center", ",", "Center"}], "}"}]}]}], "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"ee", ",", "\"\<Fetch a programmer!\>\"", ",", "\"\<\>\""}], 
+      "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"Button", "[", 
+       RowBox[{"\"\<random sentence\>\"", ",", "\[IndentingNewLine]", 
+        RowBox[{"ee", "=", 
+         RowBox[{"randomSentence", "[", "]"}]}]}], "]"}], "&"}]}], "}"}], ",",
+    "\[IndentingNewLine]", 
+   RowBox[{"SaveDefinitions", "\[Rule]", "True"}]}], "\[IndentingNewLine]", 
+  "]"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.425228153548147*^9, 3.425228173471935*^9}, {
+   3.425228248135352*^9, 3.4252283719909906`*^9}, {3.425228421902032*^9, 
+   3.425228425386741*^9}, {3.425228463937317*^9, 3.425228493221378*^9}, {
+   3.4252292066648617`*^9, 3.4252292858443375`*^9}, {3.425229385213251*^9, 
+   3.425229440187278*^9}, {3.425229604203022*^9, 3.4252296334558296`*^9}, {
+   3.425230683791027*^9, 3.4252308050370407`*^9}, {3.425233014225323*^9, 
+   3.4252330421871195`*^9}, {3.42635479196875*^9, 3.426354852984375*^9}, {
+   3.4271347181782427`*^9, 3.4271347307876987`*^9}, {3.4271348052881756`*^9, 
+   3.4271348145694847`*^9}, 3.42713488486681*^9, {3.42807855298619*^9, 
+   3.428078724635353*^9}, {3.436723180765532*^9, 3.436723584414165*^9}, {
+   3.436723679356823*^9, 3.4367236941227303`*^9}, 3.436724032806355*^9, {
+   3.4367240761148787`*^9, 3.436724086403922*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`ee$$ = "Fetch a programmer!", 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`ee$$], "Fetch a programmer!", ""}, 
+      Dynamic[
+      Button["random sentence", $CellContext`ee$$ = \
+$CellContext`randomSentence[]]& ]}}, Typeset`size$$ = {400., {97.5, 102.5}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`ee$$ = "Fetch a programmer!"}, 
+      "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Pane[
+        Text[
+         Style[$CellContext`ee$$, 17, Bold]], {400, 200}, 
+        Alignment -> {Center, Center}], 
+      "Specifications" :> {{{$CellContext`ee$$, "Fetch a programmer!", ""}, 
+         Dynamic[
+         Button["random sentence", $CellContext`ee$$ = \
+$CellContext`randomSentence[]]& ]}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{447., {143., 148.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`randomSentence[] := 
+       Apply[$CellContext`sentenceType, 
+         ReplaceAll[
+          $CellContext`randomPart[$CellContext`sentence], "" -> Sequence[]]], 
+       UpSetDelayed[
+        MakeBoxes[
+         Pattern[$CellContext`sentence, 
+          Blank[$CellContext`sentenceType]], 
+         Pattern[FormatType, 
+          Blank[]]], 
+        Format[
+         Module[{$CellContext`word = 
+           Part[$CellContext`sentence, 
+             1], $CellContext`words, $CellContext`punc, $CellContext`res}, \
+$CellContext`words = 
+           Map[StringJoin[#, 
+              " "]& , $CellContext`sentence]; $CellContext`punc = If[
+             $CellContext`isQ[$CellContext`qverb, $CellContext`word], "?", 
+             If[
+              $CellContext`isQ[$CellContext`actverb, $CellContext`word], "!", 
+              "."]]; Part[$CellContext`words, 
+             Length[$CellContext`words]] = StringReplacePart[
+             Last[$CellContext`words], $CellContext`punc, -1]; 
+          Part[$CellContext`words, 1] = StringReplacePart[
+             Part[$CellContext`words, 1], 
+             ToUpperCase[
+              StringTake[
+               Part[$CellContext`words, 1], 1]], 1]; 
+          Speak[$CellContext`res = 
+            Apply[StringJoin, $CellContext`words]]; $CellContext`res], 
+         FormatType]], Format[
+         Pattern[$CellContext`sentence, 
+          Blank[$CellContext`sentenceType]]] := 
+       Module[{$CellContext`word = 
+          Part[$CellContext`sentence, 
+            1], $CellContext`words, $CellContext`punc, $CellContext`res}, \
+$CellContext`words = 
+          Map[StringJoin[#, " "]& , $CellContext`sentence]; $CellContext`punc = 
+          If[
+            $CellContext`isQ[$CellContext`qverb, $CellContext`word], "?", 
+            If[
+             $CellContext`isQ[$CellContext`actverb, $CellContext`word], "!", 
+             "."]]; Part[$CellContext`words, 
+            Length[$CellContext`words]] = StringReplacePart[
+            Last[$CellContext`words], $CellContext`punc, -1]; 
+         Part[$CellContext`words, 1] = StringReplacePart[
+            Part[$CellContext`words, 1], 
+            ToUpperCase[
+             StringTake[
+              Part[$CellContext`words, 1], 1]], 1]; 
+         Speak[$CellContext`res = 
+           Apply[StringJoin, $CellContext`words]]; $CellContext`res], 
+       Attributes[MakeBoxes] = {HoldAllComplete}, $CellContext`sentence := 
+       Hold[
+         Or[$CellContext`declarative, $CellContext`interrogative, \
+$CellContext`imperative]], $CellContext`declarative := {$CellContext`subject, \
+$CellContext`predicatepast}, $CellContext`subject := Hold[
+         Or[$CellContext`nounclause, {$CellContext`nounclause, \
+$CellContext`prepositionclause}]], $CellContext`nounclause := 
+       Hold[{$CellContext`adjectiveclause, $CellContext`noun}], \
+$CellContext`adjectiveclause := {$CellContext`article, \
+$CellContext`adjectivelist}, $CellContext`article := 
+       Or["a", "the", "this", "that"], $CellContext`adjectivelist := Hold[
+         $CellContext`myOr[0.6, 
+          
+          Hold[$CellContext`tmpadjlist = $CellContext`adjective; \
+$CellContext`NIL], 
+          Hold[
+           
+           With[{$CellContext`tmp = \
+$CellContext`randomPart[$CellContext`tmpadjlist]}, $CellContext`tmpadjlist = 
+             Complement[$CellContext`tmpadjlist, 
+               Unevaluated[
+                
+                Or[$CellContext`tmp]]]; {$CellContext`tmp, \
+$CellContext`adjectivelist}]]]], $CellContext`tmpadjlist = 
+       Or["big", "wet", "soft", "green", "red", "sharp", "tense", 
+         "delectable", "mild-mannered", "low", "silly", "earthy", "mellow", 
+         "cute", "blushing", "brainy", "robust", "expensive", "debonair", 
+         "finicky", "humdrum", "perspicacious"], $CellContext`adjective := 
+       Or["big", "wet", "soft", "green", "red", "sharp", "tense", 
+         "delectable", "mild-mannered", "low", "silly", "earthy", "mellow", 
+         "cute", "blushing", "brainy", "robust", "expensive", "debonair", 
+         "finicky", "humdrum", "perspicacious"], $CellContext`NIL = 
+       "", $CellContext`randomPart[
+         Pattern[$CellContext`type, 
+          Blank[]]] := Switch[
+         Head[$CellContext`type], Hold, 
+         $CellContext`randomPart[
+          Part[$CellContext`type, 1]], String, $CellContext`type, List, 
+         If[Length[$CellContext`type] == 0, "", 
+          Flatten[
+           
+           Map[$CellContext`randomPart, $CellContext`type]]], \
+$CellContext`myOr, 
+         With[{$CellContext`rnd = Random[]}, 
+          $CellContext`randomPart[
+           If[$CellContext`rnd < Part[$CellContext`type, 1], 
+            Part[$CellContext`type, 2], 
+            Part[$CellContext`type, 3]]]], Or, 
+         $CellContext`randomPart[
+          Part[$CellContext`type, 
+           Random[Integer, {1, 
+             Length[$CellContext`type]}]]]], $CellContext`noun := 
+       Or["skyscraper", "ball", "dog", "cow", "shark", "hatter", "programmer",
+          "city", "village", "buffalo", "moon", "librarian", "sheep", 
+         "doctor", "rabbit", 
+         "shrubbery"], $CellContext`prepositionclause := \
+{$CellContext`preposition, $CellContext`nounclause}, $CellContext`preposition := 
+       Or["in", "above", "under", "from", "near", "at", 
+         "with"], $CellContext`predicatepast := {$CellContext`verbclause, \
+$CellContext`subject}, $CellContext`verbclause := 
+       Hold[{$CellContext`adverblist, $CellContext`verbpast}], \
+$CellContext`adverblist := Hold[
+         $CellContext`myOr[0.8, 
+          
+          Hold[$CellContext`tmpadvlist = $CellContext`adverb; \
+$CellContext`NIL], 
+          Hold[
+           
+           With[{$CellContext`tmp = \
+$CellContext`randomPart[$CellContext`tmpadvlist]}, $CellContext`tmpadvlist = 
+             Complement[$CellContext`tmpadvlist, 
+               Unevaluated[
+                
+                Or[$CellContext`tmp]]]; {$CellContext`tmp, \
+$CellContext`adverblist}]]]], $CellContext`tmpadvlist = 
+       Or["swiftly", "unflinchingly", "smugly", "selflessly", "oddly", 
+         "mightily", "anxiously", "lazily", "deliberately", "shrilly", 
+         "vivaciously", "reluctantly"], $CellContext`adverb := 
+       Or["swiftly", "unflinchingly", "smugly", "selflessly", "oddly", 
+         "mightily", "anxiously", "lazily", "deliberately", "shrilly", 
+         "vivaciously", "reluctantly"], $CellContext`verbpast := 
+       Or["ate", "threw", "gnashed", "thought", "grated", "milked", "climbed",
+          "jumped", 
+         "ran"], $CellContext`interrogative := {$CellContext`qverb, \
+$CellContext`subject, $CellContext`predicatepresent}, $CellContext`qverb := 
+       Or[
+        "did", "will", "could", 
+         "should"], $CellContext`predicatepresent := \
+{$CellContext`verbpresent, $CellContext`subject}, $CellContext`verbpresent := 
+       Or["eat", "throw", "gnash", "boil", "grate", "milk", "belong", 
+         "salivate", "jump", "itch", "learn", "grease", "glue", 
+         "bring"], $CellContext`imperative := {$CellContext`actverb, \
+$CellContext`subject}, $CellContext`actverb := 
+       Or["break", "fix", "launch", "squeeze", "fetch", "pull", "get", 
+         "thread", "string"], $CellContext`isQ[
+         Pattern[$CellContext`type, 
+          Blank[]], 
+         Pattern[$CellContext`a, 
+          Blank[]]] := MemberQ[$CellContext`type, $CellContext`a]}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->73599651]
+}, {2}]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell["\<\
+This Demonstration creates, displays, and speaks grammatically correct \
+sentences. They may not always be sensible.\
+\>", "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4252313015690784`*^9, 3.425231353792841*^9}, {
+   3.4253067323283625`*^9, 3.425306785996803*^9}, {3.4263298812532315`*^9, 
+   3.426329905675419*^9}, {3.42749376442714*^9, 3.42749376695839*^9}, {
+   3.4367895341694193`*^9, 3.436789540127987*^9}, {3.4367896007952223`*^9, 
+   3.4367896414837294`*^9}, 3.437163501670801*^9}],
+
+Cell["\<\
+The sentence generator has underlying grammar that allows for three main \
+classifications of sentences to appear: interrogative, declarative, or \
+imperative. It also uses various sets of nouns, verbs, and adverbs to create \
+sentences. Different grammars or word sets lead to different sets of possible \
+sentences. \
+\>", "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4263299129411373`*^9, 3.4263300717400446`*^9}, {
+   3.426330156538005*^9, 3.426330201351079*^9}, {3.42635490378125*^9, 
+   3.426354936203125*^9}, {3.42749379339589*^9, 3.427493795505265*^9}},
+ CellID->193177030]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`ee$$ = $CellContext`sentenceType[
+    "this", "programmer", "gnashed", "that", "skyscraper"], Typeset`show$$ = 
+    True, Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`ee$$], 
+       $CellContext`sentenceType[
+       "this", "programmer", "gnashed", "that", "skyscraper"], ""}, 
+      Dynamic[
+      Button["random sentence", $CellContext`ee$$ = \
+$CellContext`randomSentence[]]& ]}}, Typeset`size$$ = {400., {97.5, 102.5}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`ee$$ = $CellContext`sentenceType[
+         "this", "programmer", "gnashed", "that", "skyscraper"]}, 
+      "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Pane[
+        Text[
+         Style[$CellContext`ee$$, 17, Bold]], {400, 200}, 
+        Alignment -> {Center, Center}], 
+      "Specifications" :> {{{$CellContext`ee$$, 
+          $CellContext`sentenceType[
+          "this", "programmer", "gnashed", "that", "skyscraper"], ""}, 
+         Dynamic[
+         Button["random sentence", $CellContext`ee$$ = \
+$CellContext`randomSentence[]]& ]}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{447., {143., 148.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({
+       UpSetDelayed[
+        MakeBoxes[
+         Pattern[$CellContext`sentence, 
+          Blank[$CellContext`sentenceType]], 
+         Pattern[FormatType, 
+          Blank[]]], 
+        Format[
+         Module[{$CellContext`word = 
+           Part[$CellContext`sentence, 
+             1], $CellContext`words, $CellContext`punc, $CellContext`res}, \
+$CellContext`words = 
+           Map[StringJoin[#, 
+              " "]& , $CellContext`sentence]; $CellContext`punc = If[
+             $CellContext`isQ[$CellContext`qverb, $CellContext`word], "?", 
+             If[
+              $CellContext`isQ[$CellContext`actverb, $CellContext`word], "!", 
+              "."]]; Part[$CellContext`words, 
+             Length[$CellContext`words]] = StringReplacePart[
+             Last[$CellContext`words], $CellContext`punc, -1]; 
+          Part[$CellContext`words, 1] = StringReplacePart[
+             Part[$CellContext`words, 1], 
+             ToUpperCase[
+              StringTake[
+               Part[$CellContext`words, 1], 1]], 1]; 
+          Speak[$CellContext`res = 
+            Apply[StringJoin, $CellContext`words]]; $CellContext`res], 
+         FormatType]], Format[
+         Pattern[$CellContext`sentence, 
+          Blank[$CellContext`sentenceType]]] := 
+       Module[{$CellContext`word = 
+          Part[$CellContext`sentence, 
+            1], $CellContext`words, $CellContext`punc, $CellContext`res}, \
+$CellContext`words = 
+          Map[StringJoin[#, " "]& , $CellContext`sentence]; $CellContext`punc = 
+          If[
+            $CellContext`isQ[$CellContext`qverb, $CellContext`word], "?", 
+            If[
+             $CellContext`isQ[$CellContext`actverb, $CellContext`word], "!", 
+             "."]]; Part[$CellContext`words, 
+            Length[$CellContext`words]] = StringReplacePart[
+            Last[$CellContext`words], $CellContext`punc, -1]; 
+         Part[$CellContext`words, 1] = StringReplacePart[
+            Part[$CellContext`words, 1], 
+            ToUpperCase[
+             StringTake[
+              Part[$CellContext`words, 1], 1]], 1]; 
+         Speak[$CellContext`res = 
+           Apply[StringJoin, $CellContext`words]]; $CellContext`res], 
+       Attributes[MakeBoxes] = {HoldAllComplete}, $CellContext`sentence := 
+       Hold[
+         Or[$CellContext`declarative, $CellContext`interrogative, \
+$CellContext`imperative]], $CellContext`declarative := {$CellContext`subject, \
+$CellContext`predicatepast}, $CellContext`subject := Hold[
+         Or[$CellContext`nounclause, {$CellContext`nounclause, \
+$CellContext`prepositionclause}]], $CellContext`nounclause := 
+       Hold[{$CellContext`adjectiveclause, $CellContext`noun}], \
+$CellContext`adjectiveclause := {$CellContext`article, \
+$CellContext`adjectivelist}, $CellContext`article := 
+       Or["a", "the", "this", "that"], $CellContext`adjectivelist := Hold[
+         $CellContext`myOr[0.6, 
+          
+          Hold[$CellContext`tmpadjlist = $CellContext`adjective; \
+$CellContext`NIL], 
+          Hold[
+           
+           With[{$CellContext`tmp = \
+$CellContext`randomPart[$CellContext`tmpadjlist]}, $CellContext`tmpadjlist = 
+             Complement[$CellContext`tmpadjlist, 
+               Unevaluated[
+                
+                Or[$CellContext`tmp]]]; {$CellContext`tmp, \
+$CellContext`adjectivelist}]]]], $CellContext`tmpadjlist = 
+       Or["big", "wet", "soft", "green", "red", "sharp", "tense", 
+         "delectable", "mild-mannered", "low", "silly", "earthy", "mellow", 
+         "cute", "blushing", "brainy", "robust", "expensive", "debonair", 
+         "finicky", "humdrum", "perspicacious"], $CellContext`adjective := 
+       Or["big", "wet", "soft", "green", "red", "sharp", "tense", 
+         "delectable", "mild-mannered", "low", "silly", "earthy", "mellow", 
+         "cute", "blushing", "brainy", "robust", "expensive", "debonair", 
+         "finicky", "humdrum", "perspicacious"], $CellContext`NIL = 
+       "", $CellContext`randomPart[
+         Pattern[$CellContext`type, 
+          Blank[]]] := Switch[
+         Head[$CellContext`type], Hold, 
+         $CellContext`randomPart[
+          Part[$CellContext`type, 1]], String, $CellContext`type, List, 
+         If[Length[$CellContext`type] == 0, "", 
+          Flatten[
+           
+           Map[$CellContext`randomPart, $CellContext`type]]], \
+$CellContext`myOr, 
+         With[{$CellContext`rnd = Random[]}, 
+          $CellContext`randomPart[
+           If[$CellContext`rnd < Part[$CellContext`type, 1], 
+            Part[$CellContext`type, 2], 
+            Part[$CellContext`type, 3]]]], Or, 
+         $CellContext`randomPart[
+          Part[$CellContext`type, 
+           Random[Integer, {1, 
+             Length[$CellContext`type]}]]]], $CellContext`noun := 
+       Or["skyscraper", "ball", "dog", "cow", "shark", "hatter", "programmer",
+          "city", "village", "buffalo", "moon", "librarian", "sheep", 
+         "doctor", "rabbit", 
+         "shrubbery"], $CellContext`prepositionclause := \
+{$CellContext`preposition, $CellContext`nounclause}, $CellContext`preposition := 
+       Or["in", "above", "under", "from", "near", "at", 
+         "with"], $CellContext`predicatepast := {$CellContext`verbclause, \
+$CellContext`subject}, $CellContext`verbclause := 
+       Hold[{$CellContext`adverblist, $CellContext`verbpast}], \
+$CellContext`adverblist := Hold[
+         $CellContext`myOr[0.8, 
+          
+          Hold[$CellContext`tmpadvlist = $CellContext`adverb; \
+$CellContext`NIL], 
+          Hold[
+           
+           With[{$CellContext`tmp = \
+$CellContext`randomPart[$CellContext`tmpadvlist]}, $CellContext`tmpadvlist = 
+             Complement[$CellContext`tmpadvlist, 
+               Unevaluated[
+                
+                Or[$CellContext`tmp]]]; {$CellContext`tmp, \
+$CellContext`adverblist}]]]], $CellContext`tmpadvlist = 
+       Or["swiftly", "unflinchingly", "smugly", "selflessly", "oddly", 
+         "mightily", "anxiously", "lazily", "deliberately", "shrilly", 
+         "vivaciously", "reluctantly"], $CellContext`adverb := 
+       Or["swiftly", "unflinchingly", "smugly", "selflessly", "oddly", 
+         "mightily", "anxiously", "lazily", "deliberately", "shrilly", 
+         "vivaciously", "reluctantly"], $CellContext`verbpast := 
+       Or["ate", "threw", "gnashed", "thought", "grated", "milked", "climbed",
+          "jumped", 
+         "ran"], $CellContext`interrogative := {$CellContext`qverb, \
+$CellContext`subject, $CellContext`predicatepresent}, $CellContext`qverb := 
+       Or["did", "will", "could", 
+         "should"], $CellContext`predicatepresent := \
+{$CellContext`verbpresent, $CellContext`subject}, $CellContext`verbpresent := 
+       Or["eat", "throw", "gnash", "boil", "grate", "milk", "belong", 
+         "salivate", "jump", "itch", "learn", "grease", "glue", 
+         "bring"], $CellContext`imperative := {$CellContext`actverb, \
+$CellContext`subject}, $CellContext`actverb := 
+       Or["break", "fix", "launch", "squeeze", "fetch", "pull", "get", 
+         "thread", "string"], $CellContext`isQ[
+         Pattern[$CellContext`type, 
+          Blank[]], 
+         Pattern[$CellContext`a, 
+          Blank[]]] := 
+       MemberQ[$CellContext`type, $CellContext`a], \
+$CellContext`randomSentence[] := Apply[$CellContext`sentenceType, 
+         ReplaceAll[
+          $CellContext`randomPart[$CellContext`sentence], "" -> Sequence[]]]}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->617525808]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`ee$$ = $CellContext`sentenceType[
+    "the", "humdrum", "moon", "near", "the", "robust", "doctor", "jumped", 
+     "a", "shark", "from", "a", "mild-mannered", "buffalo"], Typeset`show$$ = 
+    True, Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`ee$$], 
+       $CellContext`sentenceType[
+       "the", "humdrum", "moon", "near", "the", "robust", "doctor", "jumped", 
+        "a", "shark", "from", "a", "mild-mannered", "buffalo"], ""}, 
+      Dynamic[
+      Button["random sentence", $CellContext`ee$$ = \
+$CellContext`randomSentence[]]& ]}}, Typeset`size$$ = Automatic, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`ee$$ = $CellContext`sentenceType[
+         "the", "humdrum", "moon", "near", "the", "robust", "doctor", 
+          "jumped", "a", "shark", "from", "a", "mild-mannered", "buffalo"]}, 
+      "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Pane[
+        Text[
+         Style[$CellContext`ee$$, 17, Bold]], {400, 200}, 
+        Alignment -> {Center, Center}], 
+      "Specifications" :> {{{$CellContext`ee$$, 
+          $CellContext`sentenceType[
+          "the", "humdrum", "moon", "near", "the", "robust", "doctor", 
+           "jumped", "a", "shark", "from", "a", "mild-mannered", "buffalo"], 
+          ""}, 
+         Dynamic[
+         Button["random sentence", $CellContext`ee$$ = \
+$CellContext`randomSentence[]]& ]}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({
+       UpSetDelayed[
+        MakeBoxes[
+         Pattern[$CellContext`sentence, 
+          Blank[$CellContext`sentenceType]], 
+         Pattern[FormatType, 
+          Blank[]]], 
+        Format[
+         Module[{$CellContext`word = 
+           Part[$CellContext`sentence, 
+             1], $CellContext`words, $CellContext`punc, $CellContext`res}, \
+$CellContext`words = 
+           Map[StringJoin[#, 
+              " "]& , $CellContext`sentence]; $CellContext`punc = If[
+             $CellContext`isQ[$CellContext`qverb, $CellContext`word], "?", 
+             If[
+              $CellContext`isQ[$CellContext`actverb, $CellContext`word], "!", 
+              "."]]; Part[$CellContext`words, 
+             Length[$CellContext`words]] = StringReplacePart[
+             Last[$CellContext`words], $CellContext`punc, -1]; 
+          Part[$CellContext`words, 1] = StringReplacePart[
+             Part[$CellContext`words, 1], 
+             ToUpperCase[
+              StringTake[
+               Part[$CellContext`words, 1], 1]], 1]; 
+          Speak[$CellContext`res = 
+            Apply[StringJoin, $CellContext`words]]; $CellContext`res], 
+         FormatType]], Format[
+         Pattern[$CellContext`sentence, 
+          Blank[$CellContext`sentenceType]]] := 
+       Module[{$CellContext`word = 
+          Part[$CellContext`sentence, 
+            1], $CellContext`words, $CellContext`punc, $CellContext`res}, \
+$CellContext`words = 
+          Map[StringJoin[#, " "]& , $CellContext`sentence]; $CellContext`punc = 
+          If[
+            $CellContext`isQ[$CellContext`qverb, $CellContext`word], "?", 
+            If[
+             $CellContext`isQ[$CellContext`actverb, $CellContext`word], "!", 
+             "."]]; Part[$CellContext`words, 
+            Length[$CellContext`words]] = StringReplacePart[
+            Last[$CellContext`words], $CellContext`punc, -1]; 
+         Part[$CellContext`words, 1] = StringReplacePart[
+            Part[$CellContext`words, 1], 
+            ToUpperCase[
+             StringTake[
+              Part[$CellContext`words, 1], 1]], 1]; 
+         Speak[$CellContext`res = 
+           Apply[StringJoin, $CellContext`words]]; $CellContext`res], 
+       Attributes[MakeBoxes] = {HoldAllComplete}, $CellContext`sentence := 
+       Hold[
+         Or[$CellContext`declarative, $CellContext`interrogative, \
+$CellContext`imperative]], $CellContext`declarative := {$CellContext`subject, \
+$CellContext`predicatepast}, $CellContext`subject := Hold[
+         Or[$CellContext`nounclause, {$CellContext`nounclause, \
+$CellContext`prepositionclause}]], $CellContext`nounclause := 
+       Hold[{$CellContext`adjectiveclause, $CellContext`noun}], \
+$CellContext`adjectiveclause := {$CellContext`article, \
+$CellContext`adjectivelist}, $CellContext`article := 
+       Or["a", "the", "this", "that"], $CellContext`adjectivelist := Hold[
+         $CellContext`myOr[0.6, 
+          
+          Hold[$CellContext`tmpadjlist = $CellContext`adjective; \
+$CellContext`NIL], 
+          Hold[
+           
+           With[{$CellContext`tmp = \
+$CellContext`randomPart[$CellContext`tmpadjlist]}, $CellContext`tmpadjlist = 
+             Complement[$CellContext`tmpadjlist, 
+               Unevaluated[
+                
+                Or[$CellContext`tmp]]]; {$CellContext`tmp, \
+$CellContext`adjectivelist}]]]], $CellContext`tmpadjlist = 
+       Or["big", "wet", "soft", "green", "red", "sharp", "tense", 
+         "delectable", "mild-mannered", "low", "silly", "earthy", "mellow", 
+         "cute", "blushing", "brainy", "robust", "expensive", "debonair", 
+         "finicky", "humdrum", "perspicacious"], $CellContext`adjective := 
+       Or["big", "wet", "soft", "green", "red", "sharp", "tense", 
+         "delectable", "mild-mannered", "low", "silly", "earthy", "mellow", 
+         "cute", "blushing", "brainy", "robust", "expensive", "debonair", 
+         "finicky", "humdrum", "perspicacious"], $CellContext`NIL = 
+       "", $CellContext`randomPart[
+         Pattern[$CellContext`type, 
+          Blank[]]] := Switch[
+         Head[$CellContext`type], Hold, 
+         $CellContext`randomPart[
+          Part[$CellContext`type, 1]], String, $CellContext`type, List, 
+         If[Length[$CellContext`type] == 0, "", 
+          Flatten[
+           
+           Map[$CellContext`randomPart, $CellContext`type]]], \
+$CellContext`myOr, 
+         With[{$CellContext`rnd = Random[]}, 
+          $CellContext`randomPart[
+           If[$CellContext`rnd < Part[$CellContext`type, 1], 
+            Part[$CellContext`type, 2], 
+            Part[$CellContext`type, 3]]]], Or, 
+         $CellContext`randomPart[
+          Part[$CellContext`type, 
+           Random[Integer, {1, 
+             Length[$CellContext`type]}]]]], $CellContext`noun := 
+       Or["skyscraper", "ball", "dog", "cow", "shark", "hatter", "programmer",
+          "city", "village", "buffalo", "moon", "librarian", "sheep", 
+         "doctor", "rabbit", 
+         "shrubbery"], $CellContext`prepositionclause := \
+{$CellContext`preposition, $CellContext`nounclause}, $CellContext`preposition := 
+       Or["in", "above", "under", "from", "near", "at", 
+         "with"], $CellContext`predicatepast := {$CellContext`verbclause, \
+$CellContext`subject}, $CellContext`verbclause := 
+       Hold[{$CellContext`adverblist, $CellContext`verbpast}], \
+$CellContext`adverblist := Hold[
+         $CellContext`myOr[0.8, 
+          
+          Hold[$CellContext`tmpadvlist = $CellContext`adverb; \
+$CellContext`NIL], 
+          Hold[
+           
+           With[{$CellContext`tmp = \
+$CellContext`randomPart[$CellContext`tmpadvlist]}, $CellContext`tmpadvlist = 
+             Complement[$CellContext`tmpadvlist, 
+               Unevaluated[
+                
+                Or[$CellContext`tmp]]]; {$CellContext`tmp, \
+$CellContext`adverblist}]]]], $CellContext`tmpadvlist = 
+       Or["swiftly", "unflinchingly", "smugly", "selflessly", "oddly", 
+         "mightily", "anxiously", "lazily", "deliberately", "shrilly", 
+         "vivaciously", "reluctantly"], $CellContext`adverb := 
+       Or[
+        "swiftly", "unflinchingly", "smugly", "selflessly", "oddly", 
+         "mightily", "anxiously", "lazily", "deliberately", "shrilly", 
+         "vivaciously", "reluctantly"], $CellContext`verbpast := 
+       Or["ate", "threw", "gnashed", "thought", "grated", "milked", "climbed",
+          "jumped", 
+         "ran"], $CellContext`interrogative := {$CellContext`qverb, \
+$CellContext`subject, $CellContext`predicatepresent}, $CellContext`qverb := 
+       Or["did", "will", "could", 
+         "should"], $CellContext`predicatepresent := \
+{$CellContext`verbpresent, $CellContext`subject}, $CellContext`verbpresent := 
+       Or["eat", "throw", "gnash", "boil", "grate", "milk", "belong", 
+         "salivate", "jump", "itch", "learn", "grease", "glue", 
+         "bring"], $CellContext`imperative := {$CellContext`actverb, \
+$CellContext`subject}, $CellContext`actverb := 
+       Or["break", "fix", "launch", "squeeze", "fetch", "pull", "get", 
+         "thread", "string"], $CellContext`isQ[
+         Pattern[$CellContext`type, 
+          Blank[]], 
+         Pattern[$CellContext`a, 
+          Blank[]]] := 
+       MemberQ[$CellContext`type, $CellContext`a], \
+$CellContext`randomSentence[] := Apply[$CellContext`sentenceType, 
+         ReplaceAll[
+          $CellContext`randomPart[$CellContext`sentence], "" -> Sequence[]]]}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->110152884],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`ee$$ = $CellContext`sentenceType[
+    "the", "soft", "ball", "oddly", "ran", "that", "tense", "hatter", "under",
+      "this", "sharp", "robust", "cute", "soft", "delectable", "mellow", 
+     "low", "wet", "shrubbery"], Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`ee$$], 
+       $CellContext`sentenceType[
+       "the", "soft", "ball", "oddly", "ran", "that", "tense", "hatter", 
+        "under", "this", "sharp", "robust", "cute", "soft", "delectable", 
+        "mellow", "low", "wet", "shrubbery"], ""}, 
+      Dynamic[
+      Button["random sentence", $CellContext`ee$$ = \
+$CellContext`randomSentence[]]& ]}}, Typeset`size$$ = Automatic, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`ee$$ = $CellContext`sentenceType[
+         "the", "soft", "ball", "oddly", "ran", "that", "tense", "hatter", 
+          "under", "this", "sharp", "robust", "cute", "soft", "delectable", 
+          "mellow", "low", "wet", "shrubbery"]}, "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Pane[
+        Text[
+         Style[$CellContext`ee$$, 17, Bold]], {400, 200}, 
+        Alignment -> {Center, Center}], 
+      "Specifications" :> {{{$CellContext`ee$$, 
+          $CellContext`sentenceType[
+          "the", "soft", "ball", "oddly", "ran", "that", "tense", "hatter", 
+           "under", "this", "sharp", "robust", "cute", "soft", "delectable", 
+           "mellow", "low", "wet", "shrubbery"], ""}, 
+         Dynamic[
+         Button[
+          "random sentence", $CellContext`ee$$ = \
+$CellContext`randomSentence[]]& ]}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({
+       UpSetDelayed[
+        MakeBoxes[
+         Pattern[$CellContext`sentence, 
+          Blank[$CellContext`sentenceType]], 
+         Pattern[FormatType, 
+          Blank[]]], 
+        Format[
+         Module[{$CellContext`word = 
+           Part[$CellContext`sentence, 
+             1], $CellContext`words, $CellContext`punc, $CellContext`res}, \
+$CellContext`words = 
+           Map[StringJoin[#, 
+              " "]& , $CellContext`sentence]; $CellContext`punc = If[
+             $CellContext`isQ[$CellContext`qverb, $CellContext`word], "?", 
+             If[
+              $CellContext`isQ[$CellContext`actverb, $CellContext`word], "!", 
+              "."]]; Part[$CellContext`words, 
+             Length[$CellContext`words]] = StringReplacePart[
+             Last[$CellContext`words], $CellContext`punc, -1]; 
+          Part[$CellContext`words, 1] = StringReplacePart[
+             Part[$CellContext`words, 1], 
+             ToUpperCase[
+              StringTake[
+               Part[$CellContext`words, 1], 1]], 1]; 
+          Speak[$CellContext`res = 
+            Apply[StringJoin, $CellContext`words]]; $CellContext`res], 
+         FormatType]], Format[
+         Pattern[$CellContext`sentence, 
+          Blank[$CellContext`sentenceType]]] := 
+       Module[{$CellContext`word = 
+          Part[$CellContext`sentence, 
+            1], $CellContext`words, $CellContext`punc, $CellContext`res}, \
+$CellContext`words = 
+          Map[StringJoin[#, " "]& , $CellContext`sentence]; $CellContext`punc = 
+          If[
+            $CellContext`isQ[$CellContext`qverb, $CellContext`word], "?", 
+            If[
+             $CellContext`isQ[$CellContext`actverb, $CellContext`word], "!", 
+             "."]]; Part[$CellContext`words, 
+            Length[$CellContext`words]] = StringReplacePart[
+            Last[$CellContext`words], $CellContext`punc, -1]; 
+         Part[$CellContext`words, 1] = StringReplacePart[
+            Part[$CellContext`words, 1], 
+            ToUpperCase[
+             StringTake[
+              Part[$CellContext`words, 1], 1]], 1]; 
+         Speak[$CellContext`res = 
+           Apply[StringJoin, $CellContext`words]]; $CellContext`res], 
+       Attributes[MakeBoxes] = {HoldAllComplete}, $CellContext`sentence := 
+       Hold[
+         Or[$CellContext`declarative, $CellContext`interrogative, \
+$CellContext`imperative]], $CellContext`declarative := {$CellContext`subject, \
+$CellContext`predicatepast}, $CellContext`subject := Hold[
+         Or[$CellContext`nounclause, {$CellContext`nounclause, \
+$CellContext`prepositionclause}]], $CellContext`nounclause := 
+       Hold[{$CellContext`adjectiveclause, $CellContext`noun}], \
+$CellContext`adjectiveclause := {$CellContext`article, \
+$CellContext`adjectivelist}, $CellContext`article := 
+       Or["a", "the", "this", "that"], $CellContext`adjectivelist := Hold[
+         $CellContext`myOr[0.6, 
+          
+          Hold[$CellContext`tmpadjlist = $CellContext`adjective; \
+$CellContext`NIL], 
+          Hold[
+           
+           With[{$CellContext`tmp = \
+$CellContext`randomPart[$CellContext`tmpadjlist]}, $CellContext`tmpadjlist = 
+             Complement[$CellContext`tmpadjlist, 
+               Unevaluated[
+                
+                Or[$CellContext`tmp]]]; {$CellContext`tmp, \
+$CellContext`adjectivelist}]]]], $CellContext`tmpadjlist = 
+       Or["big", "wet", "soft", "green", "red", "sharp", "tense", 
+         "delectable", "mild-mannered", "low", "silly", "earthy", "mellow", 
+         "cute", "blushing", "brainy", "robust", "expensive", "debonair", 
+         "finicky", "humdrum", "perspicacious"], $CellContext`adjective := 
+       Or["big", "wet", "soft", "green", "red", "sharp", "tense", 
+         "delectable", "mild-mannered", "low", "silly", "earthy", "mellow", 
+         "cute", "blushing", "brainy", "robust", "expensive", "debonair", 
+         "finicky", "humdrum", "perspicacious"], $CellContext`NIL = 
+       "", $CellContext`randomPart[
+         Pattern[$CellContext`type, 
+          Blank[]]] := Switch[
+         Head[$CellContext`type], Hold, 
+         $CellContext`randomPart[
+          Part[$CellContext`type, 1]], String, $CellContext`type, List, 
+         If[Length[$CellContext`type] == 0, "", 
+          Flatten[
+           
+           Map[$CellContext`randomPart, $CellContext`type]]], \
+$CellContext`myOr, 
+         With[{$CellContext`rnd = Random[]}, 
+          $CellContext`randomPart[
+           If[$CellContext`rnd < Part[$CellContext`type, 1], 
+            Part[$CellContext`type, 2], 
+            Part[$CellContext`type, 3]]]], Or, 
+         $CellContext`randomPart[
+          Part[$CellContext`type, 
+           Random[Integer, {1, 
+             Length[$CellContext`type]}]]]], $CellContext`noun := 
+       Or["skyscraper", "ball", "dog", "cow", "shark", "hatter", "programmer",
+          "city", "village", "buffalo", "moon", "librarian", "sheep", 
+         "doctor", "rabbit", 
+         "shrubbery"], $CellContext`prepositionclause := \
+{$CellContext`preposition, $CellContext`nounclause}, $CellContext`preposition := 
+       Or["in", "above", "under", "from", "near", "at", 
+         "with"], $CellContext`predicatepast := {$CellContext`verbclause, \
+$CellContext`subject}, $CellContext`verbclause := 
+       Hold[{$CellContext`adverblist, $CellContext`verbpast}], \
+$CellContext`adverblist := Hold[
+         $CellContext`myOr[0.8, 
+          
+          Hold[$CellContext`tmpadvlist = $CellContext`adverb; \
+$CellContext`NIL], 
+          Hold[
+           
+           With[{$CellContext`tmp = \
+$CellContext`randomPart[$CellContext`tmpadvlist]}, $CellContext`tmpadvlist = 
+             Complement[$CellContext`tmpadvlist, 
+               Unevaluated[
+                
+                Or[$CellContext`tmp]]]; {$CellContext`tmp, \
+$CellContext`adverblist}]]]], $CellContext`tmpadvlist = 
+       Or["swiftly", "unflinchingly", "smugly", "selflessly", "oddly", 
+         "mightily", "anxiously", "lazily", "deliberately", "shrilly", 
+         "vivaciously", "reluctantly"], $CellContext`adverb := 
+       Or["swiftly", "unflinchingly", "smugly", "selflessly", "oddly", 
+         "mightily", "anxiously", "lazily", "deliberately", "shrilly", 
+         "vivaciously", "reluctantly"], $CellContext`verbpast := 
+       Or["ate", "threw", "gnashed", "thought", "grated", "milked", "climbed",
+          "jumped", 
+         "ran"], $CellContext`interrogative := {$CellContext`qverb, \
+$CellContext`subject, $CellContext`predicatepresent}, $CellContext`qverb := 
+       Or["did", "will", "could", 
+         "should"], $CellContext`predicatepresent := \
+{$CellContext`verbpresent, $CellContext`subject}, $CellContext`verbpresent := 
+       Or["eat", "throw", "gnash", "boil", "grate", "milk", "belong", 
+         "salivate", "jump", "itch", "learn", "grease", "glue", 
+         "bring"], $CellContext`imperative := {$CellContext`actverb, \
+$CellContext`subject}, $CellContext`actverb := 
+       Or["break", "fix", "launch", "squeeze", "fetch", "pull", "get", 
+         "thread", "string"], $CellContext`isQ[
+         Pattern[$CellContext`type, 
+          Blank[]], 
+         Pattern[$CellContext`a, 
+          Blank[]]] := 
+       MemberQ[$CellContext`type, $CellContext`a], \
+$CellContext`randomSentence[] := Apply[$CellContext`sentenceType, 
+         ReplaceAll[
+          $CellContext`randomPart[$CellContext`sentence], "" -> Sequence[]]]}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->221392444],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`ee$$ = $CellContext`sentenceType[
+    "a", "ball", "above", "the", "brainy", "cow", "milked", "that", "doctor"],
+     Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`ee$$], 
+       $CellContext`sentenceType[
+       "a", "ball", "above", "the", "brainy", "cow", "milked", "that", 
+        "doctor"], ""}, 
+      Dynamic[
+      Button["random sentence", $CellContext`ee$$ = \
+$CellContext`randomSentence[]]& ]}}, Typeset`size$$ = Automatic, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`ee$$ = $CellContext`sentenceType[
+         "a", "ball", "above", "the", "brainy", "cow", "milked", "that", 
+          "doctor"]}, "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Pane[
+        Text[
+         Style[$CellContext`ee$$, 17, Bold]], {400, 200}, 
+        Alignment -> {Center, Center}], 
+      "Specifications" :> {{{$CellContext`ee$$, 
+          $CellContext`sentenceType[
+          "a", "ball", "above", "the", "brainy", "cow", "milked", "that", 
+           "doctor"], ""}, 
+         Dynamic[
+         Button["random sentence", $CellContext`ee$$ = \
+$CellContext`randomSentence[]]& ]}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({
+       UpSetDelayed[
+        MakeBoxes[
+         Pattern[$CellContext`sentence, 
+          Blank[$CellContext`sentenceType]], 
+         Pattern[FormatType, 
+          Blank[]]], 
+        Format[
+         Module[{$CellContext`word = 
+           Part[$CellContext`sentence, 
+             1], $CellContext`words, $CellContext`punc, $CellContext`res}, \
+$CellContext`words = 
+           Map[StringJoin[#, 
+              " "]& , $CellContext`sentence]; $CellContext`punc = If[
+             $CellContext`isQ[$CellContext`qverb, $CellContext`word], "?", 
+             If[
+              $CellContext`isQ[$CellContext`actverb, $CellContext`word], "!", 
+              "."]]; Part[$CellContext`words, 
+             Length[$CellContext`words]] = StringReplacePart[
+             Last[$CellContext`words], $CellContext`punc, -1]; 
+          Part[$CellContext`words, 1] = StringReplacePart[
+             Part[$CellContext`words, 1], 
+             ToUpperCase[
+              StringTake[
+               Part[$CellContext`words, 1], 1]], 1]; 
+          Speak[$CellContext`res = 
+            Apply[StringJoin, $CellContext`words]]; $CellContext`res], 
+         FormatType]], Format[
+         Pattern[$CellContext`sentence, 
+          Blank[$CellContext`sentenceType]]] := 
+       Module[{$CellContext`word = 
+          Part[$CellContext`sentence, 
+            1], $CellContext`words, $CellContext`punc, $CellContext`res}, \
+$CellContext`words = 
+          Map[StringJoin[#, " "]& , $CellContext`sentence]; $CellContext`punc = 
+          If[
+            $CellContext`isQ[$CellContext`qverb, $CellContext`word], "?", 
+            If[
+             $CellContext`isQ[$CellContext`actverb, $CellContext`word], "!", 
+             "."]]; Part[$CellContext`words, 
+            Length[$CellContext`words]] = StringReplacePart[
+            Last[$CellContext`words], $CellContext`punc, -1]; 
+         Part[$CellContext`words, 1] = StringReplacePart[
+            Part[$CellContext`words, 1], 
+            ToUpperCase[
+             StringTake[
+              Part[$CellContext`words, 1], 1]], 1]; 
+         Speak[$CellContext`res = 
+           Apply[StringJoin, $CellContext`words]]; $CellContext`res], 
+       Attributes[MakeBoxes] = {HoldAllComplete}, $CellContext`sentence := 
+       Hold[
+         Or[$CellContext`declarative, $CellContext`interrogative, \
+$CellContext`imperative]], $CellContext`declarative := {$CellContext`subject, \
+$CellContext`predicatepast}, $CellContext`subject := Hold[
+         Or[$CellContext`nounclause, {$CellContext`nounclause, \
+$CellContext`prepositionclause}]], $CellContext`nounclause := 
+       Hold[{$CellContext`adjectiveclause, $CellContext`noun}], \
+$CellContext`adjectiveclause := {$CellContext`article, \
+$CellContext`adjectivelist}, $CellContext`article := 
+       Or["a", "the", "this", "that"], $CellContext`adjectivelist := Hold[
+         $CellContext`myOr[0.6, 
+          
+          Hold[$CellContext`tmpadjlist = $CellContext`adjective; \
+$CellContext`NIL], 
+          Hold[
+           
+           With[{$CellContext`tmp = \
+$CellContext`randomPart[$CellContext`tmpadjlist]}, $CellContext`tmpadjlist = 
+             Complement[$CellContext`tmpadjlist, 
+               Unevaluated[
+                
+                Or[$CellContext`tmp]]]; {$CellContext`tmp, \
+$CellContext`adjectivelist}]]]], $CellContext`tmpadjlist = 
+       Or["big", "wet", "soft", "green", "red", "sharp", "tense", 
+         "delectable", "mild-mannered", "low", "silly", "earthy", "mellow", 
+         "cute", "blushing", "brainy", "robust", "expensive", "debonair", 
+         "finicky", "humdrum", "perspicacious"], $CellContext`adjective := 
+       Or["big", "wet", "soft", "green", "red", "sharp", "tense", 
+         "delectable", "mild-mannered", "low", "silly", "earthy", "mellow", 
+         "cute", "blushing", "brainy", "robust", "expensive", "debonair", 
+         "finicky", "humdrum", "perspicacious"], $CellContext`NIL = 
+       "", $CellContext`randomPart[
+         Pattern[$CellContext`type, 
+          Blank[]]] := Switch[
+         Head[$CellContext`type], Hold, 
+         $CellContext`randomPart[
+          Part[$CellContext`type, 1]], String, $CellContext`type, List, 
+         If[Length[$CellContext`type] == 0, "", 
+          Flatten[
+           
+           Map[$CellContext`randomPart, $CellContext`type]]], \
+$CellContext`myOr, 
+         With[{$CellContext`rnd = Random[]}, 
+          $CellContext`randomPart[
+           If[$CellContext`rnd < Part[$CellContext`type, 1], 
+            Part[$CellContext`type, 2], 
+            Part[$CellContext`type, 3]]]], Or, 
+         $CellContext`randomPart[
+          Part[$CellContext`type, 
+           Random[Integer, {1, 
+             Length[$CellContext`type]}]]]], $CellContext`noun := 
+       Or["skyscraper", "ball", "dog", "cow", "shark", "hatter", "programmer",
+          "city", "village", "buffalo", "moon", "librarian", "sheep", 
+         "doctor", "rabbit", 
+         "shrubbery"], $CellContext`prepositionclause := \
+{$CellContext`preposition, $CellContext`nounclause}, $CellContext`preposition := 
+       Or["in", "above", "under", "from", "near", "at", 
+         "with"], $CellContext`predicatepast := {$CellContext`verbclause, \
+$CellContext`subject}, $CellContext`verbclause := 
+       Hold[{$CellContext`adverblist, $CellContext`verbpast}], \
+$CellContext`adverblist := Hold[
+         $CellContext`myOr[0.8, 
+          
+          Hold[$CellContext`tmpadvlist = $CellContext`adverb; \
+$CellContext`NIL], 
+          Hold[
+           
+           With[{$CellContext`tmp = \
+$CellContext`randomPart[$CellContext`tmpadvlist]}, $CellContext`tmpadvlist = 
+             Complement[$CellContext`tmpadvlist, 
+               Unevaluated[
+                
+                Or[$CellContext`tmp]]]; {$CellContext`tmp, \
+$CellContext`adverblist}]]]], $CellContext`tmpadvlist = 
+       Or["swiftly", "unflinchingly", "smugly", "selflessly", "oddly", 
+         "mightily", "anxiously", "lazily", "deliberately", "shrilly", 
+         "vivaciously", "reluctantly"], $CellContext`adverb := 
+       Or["swiftly", "unflinchingly", "smugly", "selflessly", "oddly", 
+         "mightily", "anxiously", "lazily", "deliberately", "shrilly", 
+         "vivaciously", "reluctantly"], $CellContext`verbpast := 
+       Or["ate", "threw", "gnashed", "thought", "grated", "milked", "climbed",
+          "jumped", 
+         "ran"], $CellContext`interrogative := {$CellContext`qverb, \
+$CellContext`subject, $CellContext`predicatepresent}, $CellContext`qverb := 
+       Or["did", "will", "could", 
+         "should"], $CellContext`predicatepresent := \
+{$CellContext`verbpresent, $CellContext`subject}, $CellContext`verbpresent := 
+       Or["eat", "throw", "gnash", "boil", "grate", "milk", "belong", 
+         "salivate", "jump", "itch", "learn", "grease", "glue", 
+         "bring"], $CellContext`imperative := {$CellContext`actverb, \
+$CellContext`subject}, $CellContext`actverb := 
+       Or["break", "fix", "launch", "squeeze", "fetch", "pull", "get", 
+         "thread", "string"], $CellContext`isQ[
+         Pattern[$CellContext`type, 
+          Blank[]], 
+         Pattern[$CellContext`a, 
+          Blank[]]] := 
+       MemberQ[$CellContext`type, $CellContext`a], \
+$CellContext`randomSentence[] := Apply[$CellContext`sentenceType, 
+         ReplaceAll[
+          $CellContext`randomPart[$CellContext`sentence], "" -> Sequence[]]]}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->939741222]
+}, Open  ]],
+
+Cell["", "DetailsSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4252330718450847`*^9, 3.4252330759654965`*^9}},
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.3895522232313623`*^9},
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SearchTermsSection"],
+
+Cell["sentences", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.425231474351289*^9, 3.4252314759608183`*^9}},
+ CellID->145697699],
+
+Cell["grammer", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.425231477351577*^9, 3.425231478148528*^9}},
+ CellID->123986704]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "RelatedLinksSection"],
+
+Cell[TextData[ButtonBox["Data Structures and Efficient Algorithms in \
+Mathematica ",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://library.wolfram.com/infocenter/Conferences/321/"], 
+   None}]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4252315231215954`*^9, 3.4252315539526796`*^9}},
+ CellID->231998004]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Sarah Lichtblau",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Sarah+\
+Lichtblau"], None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Sarah+Lichtblau"]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4252314898371506`*^9, 3.425231492618667*^9}}],
+
+Cell[TextData[{
+ "After work by: ",
+ ButtonBox["Daniel Lichtblau",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Daniel+\
+Lichtblau"], None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Daniel+Lichtblau"]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4252315050886145`*^9, 3.425231512948744*^9}, {
+   3.428078356816575*^9, 3.428078358775771*^9}},
+ CellID->703894914]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{700, 681},
+WindowMargins->{{38, Automatic}, {Automatic, 20}},
+ShowSelection->True,
+FrontEndVersion->"7.0 for Microsoft Windows (32-bit) (November 10, 2008)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[64467, 1443, 406, 10, 22, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[64876, 1455, 678, 16, 22, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[65557, 1473, 340, 11, 22, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[65900, 1486, 637, 15, 22, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[66540, 1503, 844, 21, 22, "ControlSuggestions",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[67387, 1526, 369, 9, 22, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[67759, 1537, 1412, 31, 22, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[69174, 1570, 882, 21, 22, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 72171, 1670},
+ {"RotateAndZoomIn3D", 72281, 1673},
+ {"DragLocators", 72391, 1676},
+ {"CreateAndDeleteLocators", 72507, 1679},
+ {"SliderZoom", 72621, 1682},
+ {"GamepadControls", 72727, 1685},
+ {"AutomaticAnimation", 72840, 1688},
+ {"BookmarkAnimation", 72957, 1691}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 190, 3, 74, "DemoTitle"],
+Cell[CellGroupData[{
+Cell[782, 29, 33, 0, 266, "InitializationSection"],
+Cell[818, 31, 12009, 312, 1188, "Input",
+ InitializationCell->True,
+ CellID->2125108241]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[12864, 348, 29, 0, 188, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[12918, 352, 1950, 40, 228, "Input"],
+Cell[14871, 394, 9236, 191, 303, "Output",
+ CellID->73599651]
+}, {2}]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[24153, 591, 36, 0, 166, "ManipulateCaptionSection"],
+Cell[24192, 593, 521, 9, 37, "ManipulateCaption"],
+Cell[24716, 604, 613, 11, 67, "ManipulateCaption",
+ CellID->193177030]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[25366, 620, 28, 0, 168, "ThumbnailSection"],
+Cell[25397, 622, 9519, 197, 303, "Output",
+ CellID->617525808]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[34953, 824, 28, 0, 138, "SnapshotsSection"],
+Cell[34984, 826, 9806, 202, 37, "Output",
+ CellID->110152884],
+Cell[44793, 1030, 10000, 204, 37, "Output",
+ CellID->221392444],
+Cell[54796, 1236, 9565, 198, 37, "Output",
+ CellID->939741222]
+}, Open  ]],
+Cell[64376, 1437, 26, 0, 332, "DetailsSection"],
+Cell[CellGroupData[{
+Cell[64427, 1441, 37, 0, 108, "ControlSuggestionsSection"],
+Cell[64467, 1443, 406, 10, 22, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[64876, 1455, 678, 16, 22, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[65557, 1473, 340, 11, 22, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[65900, 1486, 637, 15, 22, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[66540, 1503, 844, 21, 22, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[67387, 1526, 369, 9, 22, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[67759, 1537, 1412, 31, 22, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[69174, 1570, 882, 21, 22, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[70093, 1596, 30, 0, 152, "SearchTermsSection"],
+Cell[70126, 1598, 144, 3, 22, "SearchTerms",
+ CellID->145697699],
+Cell[70273, 1603, 140, 3, 22, "SearchTerms",
+ CellID->123986704]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[70450, 1611, 31, 0, 138, "RelatedLinksSection"],
+Cell[70484, 1613, 334, 8, 22, "RelatedLinks",
+ CellID->231998004]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[70855, 1626, 25, 0, 136, "AuthorSection"],
+Cell[70883, 1628, 394, 11, 22, "Author"],
+Cell[71280, 1641, 466, 13, 22, "Author",
+ CellID->703894914]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

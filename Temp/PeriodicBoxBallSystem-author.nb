@@ -1,0 +1,2496 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[    106790,       2487]
+NotebookOptionsPosition[    103078,       2375]
+NotebookOutlinePosition[    104689,       2425]
+CellTagsIndexPosition[    104353,       2413]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Periodic Box-Ball System", "DemoTitle",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.462062071585127*^9, 3.462062084330327*^9}}],
+
+Cell["", "InitializationSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "ans", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"ans", "=", 
+       RowBox[{"pbbs", "[", 
+        RowBox[{"path2", ",", "l", ",", "t"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Magnify", "[", 
+       RowBox[{
+        RowBox[{"TableForm", "[", 
+         RowBox[{
+          RowBox[{"Join", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"showrc", "[", 
+              RowBox[{"ans", "[", 
+               RowBox[{"[", "1", "]"}], "]"}], "]"}], "}"}], ",", 
+            RowBox[{"Map", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"showpath", "[", "#", "]"}], "&"}], ",", 
+              RowBox[{"ans", "[", 
+               RowBox[{"[", "2", "]"}], "]"}]}], " ", "]"}]}], "]"}], ",", 
+          RowBox[{"TableSpacing", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{"0", ",", "0"}], "}"}]}]}], "]"}], ",", "1.5"}], 
+       "]"}]}]}], "]"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"l", ",", "6", ",", "\"\<type of time evolution\>\""}], "}"}], 
+     ",", "1", ",", "6", ",", "1", ",", 
+     RowBox[{"ControlType", "\[Rule]", "SetterBar"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"t", ",", "10", ",", "\"\<total evolution steps\>\""}], "}"}], 
+     ",", "1", ",", "15", ",", "1", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"path2", ",", 
+       RowBox[{"{", 
+        RowBox[{
+        "2", ",", "2", ",", "2", ",", "1", ",", "1", ",", "1", ",", "2", ",", 
+         "2", ",", "1", ",", "1", ",", "1", ",", "2", ",", "1", ",", "1", ",",
+          "1"}], "}"}]}], "}"}], ",", 
+     RowBox[{"ControlType", "\[Rule]", "None"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Row", "[", 
+    RowBox[{"{", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"Button", "[", 
+       RowBox[{"\"\<sample path\>\"", ",", 
+        RowBox[{"path2", "=", 
+         RowBox[{"{", 
+          RowBox[{
+          "2", ",", "2", ",", "2", ",", "1", ",", "1", ",", "1", ",", "2", 
+           ",", "2", ",", "1", ",", "1", ",", "1", ",", "2", ",", "1", ",", 
+           "1", ",", "1"}], "}"}]}]}], "]"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"Button", "[", 
+       RowBox[{"\"\<generate new random path\>\"", ",", 
+        RowBox[{"path2", "=", 
+         RowBox[{"Combinatorica`Permute", "[", 
+          RowBox[{
+           RowBox[{"Join", "[", 
+            RowBox[{
+             RowBox[{"Table", "[", 
+              RowBox[{"1", ",", 
+               RowBox[{"{", "9", "}"}]}], "]"}], ",", 
+             RowBox[{"Table", "[", 
+              RowBox[{"2", ",", 
+               RowBox[{"{", "6", "}"}]}], "]"}]}], "]"}], ",", 
+           RowBox[{"Combinatorica`RandomPermutation", "[", "15", "]"}]}], 
+          "]"}]}]}], "]"}]}], "\[IndentingNewLine]", "}"}], "]"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"AutorunSequencing", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "2"}], "}"}]}], ",", "\[IndentingNewLine]", 
+   RowBox[{"SynchronousInitialization", "\[Rule]", "False"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"TrackedSymbols", "\[RuleDelayed]", 
+    RowBox[{"{", 
+     RowBox[{"l", ",", "t", ",", "path", ",", "path2"}], "}"}]}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Initialization", "\[RuleDelayed]", 
+    RowBox[{"(", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"Quiet", "@", 
+       RowBox[{"Get", "[", "\"\<Combinatorica`\>\"", "]"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{"q", "\[Rule]", 
+        RowBox[{
+         RowBox[{
+         "0", " ", "limit", " ", "of", " ", "the", " ", "quantum", " ", "R"}],
+          "-", "matrices"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"r", "[", 
+        RowBox[{"car_", ",", "box_"}], "]"}], ":=", 
+       RowBox[{"Which", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"box", "\[Equal]", "1"}], "&&", 
+          RowBox[{
+           RowBox[{"car", "[", 
+            RowBox[{"[", "2", "]"}], "]"}], "\[Equal]", "0"}]}], ",", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "car"}], "}"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"box", "\[Equal]", "1"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"2", ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"car", "[", 
+               RowBox[{"[", "1", "]"}], "]"}], "+", "1"}], ",", 
+             RowBox[{
+              RowBox[{"car", "[", 
+               RowBox[{"[", "2", "]"}], "]"}], "-", "1"}]}], "}"}]}], "}"}], 
+         ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"box", "\[Equal]", "2"}], "&&", 
+          RowBox[{
+           RowBox[{"car", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "\[Equal]", "0"}]}], ",", 
+         RowBox[{"{", 
+          RowBox[{"2", ",", "car"}], "}"}], ",", "\[IndentingNewLine]", 
+         "True", ",", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"car", "[", 
+               RowBox[{"[", "1", "]"}], "]"}], "-", "1"}], ",", 
+             RowBox[{
+              RowBox[{"car", "[", 
+               RowBox[{"[", "2", "]"}], "]"}], "+", "1"}]}], "}"}]}], "}"}]}],
+         "]"}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+        RowBox[{"time", " ", "evolution", " ", "of", " ", "the", " ", "BBS"}],
+         " ", "=", " ", 
+        RowBox[{"q", "\[Rule]", 
+         RowBox[{
+         "0", " ", "limit", " ", "of", " ", "the", " ", "quantum", " ", 
+          "transfer", " ", "matrices"}]}]}], " ", "*)"}], 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"t1", "[", 
+        RowBox[{"vac_", ",", "path_"}], "]"}], ":=", 
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"ans", "=", 
+            RowBox[{"{", "}"}]}], ",", 
+           RowBox[{"car", "=", "vac"}], ",", "vt"}], "}"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"For", "[", 
+           RowBox[{
+            RowBox[{"i", "=", "1"}], ",", 
+            RowBox[{"i", "\[LessEqual]", 
+             RowBox[{"Length", "[", "path", "]"}]}], ",", 
+            RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"vt", "=", 
+              RowBox[{"r", "[", 
+               RowBox[{"car", ",", 
+                RowBox[{"path", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"ans", "=", 
+              RowBox[{"Append", "[", 
+               RowBox[{"ans", ",", 
+                RowBox[{"vt", "[", 
+                 RowBox[{"[", "1", "]"}], "]"}]}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"car", "=", 
+              RowBox[{"vt", "[", 
+               RowBox[{"[", "2", "]"}], "]"}]}]}]}], "]"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{"ans", ",", "car"}], "}"}]}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+        RowBox[{
+        "time", " ", "evolution", " ", "of", " ", "the", " ", "periodic", " ",
+          "box"}], "-", 
+        RowBox[{"ball", " ", "system"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"pt", "[", 
+        RowBox[{"path_", ",", "l_"}], "]"}], ":=", 
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", "aux", "}"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"aux", "=", 
+           RowBox[{
+            RowBox[{"t1", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"l", ",", "0"}], "}"}], ",", "path"}], "]"}], "[", 
+            RowBox[{"[", "2", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"t1", "[", 
+            RowBox[{"aux", ",", "path"}], "]"}], "[", 
+           RowBox[{"[", "1", "]"}], "]"}]}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"pbbs", "[", 
+        RowBox[{"path_", ",", "l_", ",", "t_"}], "]"}], ":=", 
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"ans", "=", 
+           RowBox[{"{", "path", "}"}]}], "}"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"While", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Length", "[", "ans", "]"}], "<", "t"}], ",", 
+            RowBox[{"ans", "=", 
+             RowBox[{"Append", "[", 
+              RowBox[{"ans", ",", 
+               RowBox[{"pt", "[", 
+                RowBox[{
+                 RowBox[{"ans", "[", 
+                  RowBox[{"[", 
+                   RowBox[{"-", "1"}], "]"}], "]"}], ",", "l"}], "]"}]}], 
+              "]"}]}]}], "]"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"ktt", "[", 
+             RowBox[{"ans", "[", 
+              RowBox[{"[", 
+               RowBox[{"-", "1"}], "]"}], "]"}], "]"}], ",", "ans"}], 
+           "}"}]}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{"drawing", " ", "paths"}], " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"showpath", "[", "path_", "]"}], ":=", 
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"l", "=", 
+            RowBox[{"Length", "[", "path", "]"}]}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"balls", "=", 
+            RowBox[{"Map", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"Disk", "[", 
+                RowBox[{
+                 RowBox[{"Flatten", "[", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"#", "-", 
+                    RowBox[{"1", "/", "2"}]}], ",", 
+                    RowBox[{"1", "/", "2"}]}], "}"}], "]"}], ",", "0.4"}], 
+                "]"}], "&"}], ",", 
+              RowBox[{"Position", "[", 
+               RowBox[{"path", ",", "2"}], "]"}]}], "]"}]}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"bound", "=", 
+            RowBox[{"Map", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"Circle", "[", 
+                RowBox[{
+                 RowBox[{"Flatten", "[", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"#", "-", 
+                    RowBox[{"1", "/", "2"}]}], ",", 
+                    RowBox[{"1", "/", "2"}]}], "}"}], "]"}], ",", "0.4"}], 
+                "]"}], "&"}], ",", 
+              RowBox[{"Position", "[", 
+               RowBox[{"path", ",", "2"}], "]"}]}], "]"}]}]}], "}"}], ",", 
+         RowBox[{"Graphics", "[", 
+          RowBox[{"{", 
+           RowBox[{"Black", ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Line", "[", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{"0", ",", "0"}], "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"l", ",", "0"}], "}"}]}], "}"}], "]"}], ",", 
+              RowBox[{"Line", "[", "\[IndentingNewLine]", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{"0", ",", "1"}], "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"l", ",", "1"}], "}"}]}], "}"}], "]"}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"Map", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"Line", "[", "#", "]"}], "&"}], ",", 
+                RowBox[{"Table", "[", 
+                 RowBox[{
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"i", ",", "0"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"i", ",", "1"}], "}"}]}], "}"}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{"i", ",", "0", ",", "l"}], "}"}]}], "]"}]}], 
+               "]"}]}], "}"}], ",", "\[IndentingNewLine]", "Yellow", ",", 
+            "balls", ",", 
+            RowBox[{"RGBColor", "[", 
+             RowBox[{"1", ",", "0", ",", "1"}], "]"}], ",", "bound"}], "}"}], 
+          "]"}]}], "]"}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{"drawing", " ", "the", " ", "rigged", " ", "configurations"}], 
+       " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"showrc", "[", "rc_", "]"}], ":=", 
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+          "y", ",", "l", ",", "ty", ",", "tl", ",", "r", ",", "rpos", ",", 
+           "hoff"}], "}"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"y", "=", 
+           RowBox[{"Map", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"#", "[", 
+               RowBox[{"[", "1", "]"}], "]"}], "&"}], ",", "rc"}], "]"}]}], 
+          ";", "\[IndentingNewLine]", 
+          RowBox[{"r", "=", 
+           RowBox[{"Map", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"#", "[", 
+               RowBox[{"[", "2", "]"}], "]"}], "&"}], ",", "rc"}], "]"}]}], 
+          ";", "\[IndentingNewLine]", 
+          RowBox[{"l", "=", 
+           RowBox[{"Length", "[", "y", "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"ty", "=", 
+           RowBox[{"Combinatorica`TransposePartition", "[", "y", "]"}]}], ";",
+           "\[IndentingNewLine]", 
+          RowBox[{"tl", "=", 
+           RowBox[{"Length", "[", "ty", "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"rpos", "=", 
+           RowBox[{"Table", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"y", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}], "+", "0.7"}], ",", 
+               RowBox[{
+                RowBox[{"Length", "[", "rc", "]"}], "-", "i", "+", "0.4"}]}], 
+              "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"i", ",", "1", ",", 
+               RowBox[{"Length", "[", "rc", "]"}]}], "}"}]}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"hoff", "=", "4"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"Graphics", "[", 
+           RowBox[{"{", 
+            RowBox[{"Black", ",", "\[IndentingNewLine]", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"Text", "[", 
+                RowBox[{"\"\<\>\"", ",", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"-", "hoff"}], ",", "0"}], "}"}]}], "]"}], ",", 
+               RowBox[{"Text", "[", 
+                RowBox[{"\"\<\>\"", ",", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"7", "+", "hoff"}], ",", "0"}], "}"}]}], "]"}], 
+               ",", "\[IndentingNewLine]", 
+               RowBox[{"Line", "[", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"{", 
+                   RowBox[{"0", ",", "l"}], "}"}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"y", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], ",", "l"}], "}"}]}], 
+                 "}"}], "]"}], ",", "\[IndentingNewLine]", 
+               RowBox[{"Line", "[", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"{", 
+                   RowBox[{"0", ",", "0"}], "}"}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{"0", ",", 
+                    RowBox[{"ty", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}]}], "}"}]}], "}"}], "]"}], 
+               ",", "\[IndentingNewLine]", 
+               RowBox[{"Map", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"Line", "[", "#", "]"}], "&"}], ",", 
+                 RowBox[{"Table", "[", 
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", 
+                    RowBox[{"(", 
+                    RowBox[{"l", "-", "i"}], ")"}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"y", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], ",", 
+                    RowBox[{"(", 
+                    RowBox[{"l", "-", "i"}], ")"}]}], "}"}]}], "}"}], ",", 
+                   RowBox[{"{", 
+                    RowBox[{"i", ",", "1", ",", "l"}], "}"}]}], "]"}]}], "  ",
+                 "]"}], ",", "\[IndentingNewLine]", 
+               RowBox[{"Map", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"Line", "[", "#", "]"}], "&"}], ",", 
+                 RowBox[{"Table", "[", 
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"i", ",", 
+                    RowBox[{
+                    RowBox[{"ty", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}], "-", 
+                    RowBox[{"ty", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}]}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"i", ",", 
+                    RowBox[{"ty", "[", 
+                    RowBox[{"[", "1", "]"}], "]"}]}], "}"}]}], "}"}], ",", 
+                   RowBox[{"{", 
+                    RowBox[{"i", ",", "1", ",", "tl"}], "}"}]}], "]"}]}], 
+                "  ", "]"}], ",", "\[IndentingNewLine]", 
+               RowBox[{"Table", "[", 
+                RowBox[{
+                 RowBox[{"Text", "[", 
+                  RowBox[{
+                   RowBox[{"r", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}], ",", 
+                   RowBox[{"rpos", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}]}], " ", "]"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"i", ",", "1", ",", 
+                   RowBox[{"Length", "[", "rc", "]"}]}], "}"}]}], "]"}]}], 
+              "}"}]}], "\[IndentingNewLine]", "}"}], "]"}]}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{"Kerov", "-", "Kirillov", "-", 
+        RowBox[{
+         RowBox[{"Reshetikhin", "'"}], "s", " ", "rigged", " ", 
+         "configuration", " ", "bijection"}]}], " ", "*)"}], 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"q", "[", 
+        RowBox[{"l_", ",", "conf_"}], "]"}], ":=", 
+       RowBox[{"Sum", "[", 
+        RowBox[{
+         RowBox[{"Min", "[", 
+          RowBox[{"l", ",", 
+           RowBox[{"conf", "[", 
+            RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", "1", ",", 
+           RowBox[{"Length", "[", "conf", "]"}]}], "}"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"delta", "[", 
+        RowBox[{"pos_", ",", "rc_"}], "]"}], ":=", 
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+          "conf", ",", "rig", ",", "corig", ",", "singpos", ",", "newconf", 
+           ",", "replacerig", ",", "newrig"}], "}"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"conf", "=", 
+           RowBox[{"Map", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"#", "[", 
+               RowBox[{"[", "1", "]"}], "]"}], "&"}], ",", "rc"}], "]"}]}], 
+          ";", "\[IndentingNewLine]", 
+          RowBox[{"rig", "=", 
+           RowBox[{"Map", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"#", "[", 
+               RowBox[{"[", "2", "]"}], "]"}], "&"}], ",", "rc"}], "]"}]}], 
+          ";", "\[IndentingNewLine]", 
+          RowBox[{"corig", "=", 
+           RowBox[{"Table", "[", 
+            RowBox[{
+             RowBox[{"pos", "-", "1", "-", 
+              RowBox[{"2", 
+               RowBox[{"q", "[", 
+                RowBox[{
+                 RowBox[{"conf", "[", 
+                  RowBox[{"[", "i", "]"}], "]"}], ",", "conf"}], "]"}]}], "-", 
+              RowBox[{"rig", "[", 
+               RowBox[{"[", "i", "]"}], "]"}]}], ",", 
+             RowBox[{"{", 
+              RowBox[{"i", ",", "1", ",", 
+               RowBox[{"Length", "[", "rc", "]"}]}], "}"}]}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Min", "[", "corig", "]"}], ">", "0"}], ",", 
+            RowBox[{"Return", "[", 
+             RowBox[{"Reverse", "[", 
+              RowBox[{"Sort", "[", 
+               RowBox[{"Append", "[", 
+                RowBox[{"rc", ",", 
+                 RowBox[{"{", 
+                  RowBox[{"1", ",", 
+                   RowBox[{"pos", "-", 
+                    RowBox[{"2", 
+                    RowBox[{"q", "[", 
+                    RowBox[{"1", ",", "conf"}], "]"}]}], "-", "2"}]}], 
+                  "}"}]}], "]"}], "]"}], "]"}], "]"}]}], "]"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"singpos", "=", 
+           RowBox[{"Min", "[", 
+            RowBox[{"Position", "[", 
+             RowBox[{"corig", ",", "0"}], "]"}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"newconf", "=", 
+           RowBox[{"MapAt", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"#", "+", "1"}], "&"}], ",", "conf", ",", "singpos"}], 
+            "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"replacerig", "=", 
+           RowBox[{"(", 
+            RowBox[{"pos", "-", 
+             RowBox[{"2", 
+              RowBox[{"q", "[", 
+               RowBox[{
+                RowBox[{"newconf", "[", 
+                 RowBox[{"[", "singpos", "]"}], "]"}], ",", "newconf"}], 
+               "]"}]}]}], ")"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"newrig", "=", 
+           RowBox[{"MapAt", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"Replace", "[", 
+               RowBox[{"#", ",", 
+                RowBox[{"#", "\[Rule]", "replacerig"}]}], "]"}], "&"}], ",", 
+             "rig", ",", "singpos"}], "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"Reverse", "[", 
+           RowBox[{"Sort", "[", 
+            RowBox[{"Table", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"newconf", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}], ",", 
+                RowBox[{"newrig", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}]}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"i", ",", "1", ",", 
+                RowBox[{"Length", "[", "rc", "]"}]}], "}"}]}], "]"}], "]"}], 
+           "]"}]}]}], "\[IndentingNewLine]", "]"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"kkr", "[", "path_", "]"}], ":=", 
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"ans", "=", 
+            RowBox[{"{", "}"}]}], ",", 
+           RowBox[{"pos", "=", 
+            RowBox[{"Flatten", "[", 
+             RowBox[{"Position", "[", 
+              RowBox[{"path", ",", "2"}], "]"}], "]"}]}]}], "}"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"pos", "\[Equal]", 
+             RowBox[{"{", "}"}]}], ",", 
+            RowBox[{"Return", "[", 
+             RowBox[{"{", "}"}], "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"For", "[", 
+           RowBox[{
+            RowBox[{"i", "=", "1"}], ",", 
+            RowBox[{"i", "\[LessEqual]", 
+             RowBox[{"Length", "[", "pos", "]"}]}], ",", 
+            RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+            RowBox[{"ans", "=", 
+             RowBox[{"delta", "[", 
+              RowBox[{
+               RowBox[{"pos", "[", 
+                RowBox[{"[", "i", "]"}], "]"}], ",", "ans"}], "]"}]}]}], 
+           "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+          "ans"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{"Kuniba", "-", "Takagi", "-", 
+        RowBox[{
+         RowBox[{"Takenouchi", "'"}], "s", " ", "quotient", " ", "space"}]}], 
+       " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"yamanouchiQ", "[", "path_", "]"}], ":=", 
+       RowBox[{"Apply", "[", 
+        RowBox[{"And", ",", 
+         RowBox[{"Map", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"Count", "[", 
+              RowBox[{"#", ",", "1"}], "]"}], "\[GreaterEqual]", 
+             RowBox[{"Count", "[", 
+              RowBox[{"#", ",", "2"}], "]"}]}], "&"}], ",", 
+           RowBox[{"Table", "[", 
+            RowBox[{
+             RowBox[{"Take", "[", 
+              RowBox[{"path", ",", "i"}], "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"i", ",", "1", ",", 
+               RowBox[{"Length", "[", "path", "]"}]}], "}"}]}], "]"}]}], 
+          "]"}]}], "]"}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"tohighest", "[", "path_", "]"}], ":=", 
+       RowBox[{"Module", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"ans", "=", "path"}], ",", 
+           RowBox[{"d", "=", "0"}]}], "}"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"While", "[", 
+           RowBox[{
+            RowBox[{"!", 
+             RowBox[{"yamanouchiQ", "[", "ans", "]"}]}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"ans", "=", 
+              RowBox[{"RotateRight", "[", "ans", "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"d", "=", 
+              RowBox[{"d", "+", "1"}]}]}]}], "]"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{"d", ",", "ans"}], "}"}]}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ktt", "[", "path_", "]"}], ":=", 
+       RowBox[{"Map", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"#", "-", 
+            RowBox[{"{", 
+             RowBox[{"0", ",", 
+              RowBox[{
+               RowBox[{"tohighest", "[", "path", "]"}], "[", 
+               RowBox[{"[", "1", "]"}], "]"}]}], "}"}]}], ")"}], "&"}], ",", 
+         RowBox[{"kkr", "[", 
+          RowBox[{
+           RowBox[{"tohighest", "[", "path", "]"}], "[", 
+           RowBox[{"[", "2", "]"}], "]"}], "]"}]}], "]"}]}], ";"}], 
+     "\[IndentingNewLine]", ")"}]}], ",", "\[IndentingNewLine]", 
+   RowBox[{"ContentSize", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"400", ",", "400"}], "}"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, 3.462062464168527*^9, {3.4621438061071253`*^9, 
+   3.4621438375567255`*^9}, {3.4621438908151255`*^9, 
+   3.4621439448067255`*^9}, {3.462143974821125*^9, 3.4621439762407255`*^9}, {
+   3.4621446192089252`*^9, 3.462144619271325*^9}, {3.4622919971228895`*^9, 
+   3.4622921092851048`*^9}, {3.4622921397871547`*^9, 3.462292170261202*^9}, {
+   3.4622922107112465`*^9, 3.4622922441145864`*^9}, {3.462292393412159*^9, 
+   3.4622924285185633`*^9}, {3.462292467090106*^9, 3.46229246845516*^9}, {
+   3.462472109442151*^9, 3.4624721278950396`*^9}, {3.462543751607329*^9, 
+   3.462543795562724*^9}, {3.4625438294691143`*^9, 3.4625439735475206`*^9}, {
+   3.462544007189884*^9, 3.4625440406749463`*^9}, {3.462544341472022*^9, 
+   3.462544341659041*^9}, {3.462544448517726*^9, 3.462544449508825*^9}, {
+   3.4625445044333167`*^9, 3.4625445919400663`*^9}, {3.4633253833363614`*^9, 
+   3.4633254104143133`*^9}, 3.465562177496934*^9, {3.4655623993159337`*^9, 
+   3.465562399430934*^9}, {3.4655625539839334`*^9, 3.4655625541079335`*^9}, {
+   3.465772300762537*^9, 3.4657723297005367`*^9}, {3.5058764689676266`*^9, 
+   3.5058764697977095`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`l$$ = 6, $CellContext`path2$$ = {2, 2, 2, 1,
+     1, 1, 2, 2, 1, 1, 1, 2, 1, 1, 1}, $CellContext`t$$ = 10, Typeset`show$$ =
+     True, Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`l$$], 6, "type of time evolution"}, 1, 6, 1}, {{
+       Hold[$CellContext`t$$], 10, "total evolution steps"}, 1, 15, 1}, {{
+       Hold[$CellContext`path2$$], {2, 2, 2, 1, 1, 1, 2, 2, 1, 1, 1, 2, 1, 1, 
+       1}}}, {
+      Hold[
+       Row[{
+         Button[
+         "sample path", $CellContext`path2$$ = {2, 2, 2, 1, 1, 1, 2, 2, 1, 1, 
+           1, 2, 1, 1, 1}], 
+         Button[
+         "generate new random path", $CellContext`path2$$ = 
+          Combinatorica`Permute[
+            Join[
+             Table[1, {9}], 
+             Table[2, {6}]], 
+            Combinatorica`RandomPermutation[15]]]}]], 
+      Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = Automatic, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`l$939702$$ = 0, $CellContext`t$939703$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`l$$ = 
+        6, $CellContext`path2$$ = {2, 2, 2, 1, 1, 1, 2, 2, 1, 1, 1, 2, 1, 1, 
+         1}, $CellContext`t$$ = 10}, "ControllerVariables" :> {
+        Hold[$CellContext`l$$, $CellContext`l$939702$$, 0], 
+        Hold[$CellContext`t$$, $CellContext`t$939703$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`ans$}, $CellContext`ans$ = \
+$CellContext`pbbs[$CellContext`path2$$, $CellContext`l$$, $CellContext`t$$]; 
+        Magnify[
+          TableForm[
+           Join[{
+             $CellContext`showrc[
+              Part[$CellContext`ans$, 1]]}, 
+            Map[$CellContext`showpath[#]& , 
+             Part[$CellContext`ans$, 2]]], TableSpacing -> {0, 0}], 1.5]], 
+      "Specifications" :> {{{$CellContext`l$$, 6, "type of time evolution"}, 
+         1, 6, 1, ControlType -> 
+         SetterBar}, {{$CellContext`t$$, 10, "total evolution steps"}, 1, 15, 
+         1, Appearance -> 
+         "Labeled"}, {{$CellContext`path2$$, {2, 2, 2, 1, 1, 1, 2, 2, 1, 1, 1,
+           2, 1, 1, 1}}, ControlType -> None}, 
+        Row[{
+          Button[
+          "sample path", $CellContext`path2$$ = {2, 2, 2, 1, 1, 1, 2, 2, 1, 1,
+             1, 2, 1, 1, 1}], 
+          Button[
+          "generate new random path", $CellContext`path2$$ = 
+           Combinatorica`Permute[
+             Join[
+              Table[1, {9}], 
+              Table[2, {6}]], 
+             Combinatorica`RandomPermutation[15]]]}]}, 
+      "Options" :> {
+       AutorunSequencing -> {1, 2}, SynchronousInitialization -> False, 
+        TrackedSymbols :> {$CellContext`l$$, $CellContext`t$$, \
+$CellContext`path, $CellContext`path2$$}, ContentSize -> {400, 400}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{420., {258., 263.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>((Quiet[
+        Get["Combinatorica`"]]; $CellContext`r[
+         Pattern[$CellContext`car, 
+          Blank[]], 
+         Pattern[$CellContext`box, 
+          Blank[]]] := Which[
+         And[$CellContext`box == 1, Part[$CellContext`car, 2] == 0], {
+         1, $CellContext`car}, $CellContext`box == 1, {
+         2, {Part[$CellContext`car, 1] + 1, Part[$CellContext`car, 2] - 1}}, 
+         And[$CellContext`box == 2, Part[$CellContext`car, 1] == 0], {
+         2, $CellContext`car}, True, {
+         1, {Part[$CellContext`car, 1] - 1, Part[$CellContext`car, 2] + 
+           1}}]; $CellContext`t1[
+         Pattern[$CellContext`vac, 
+          Blank[]], 
+         Pattern[$CellContext`path, 
+          Blank[]]] := 
+       Module[{$CellContext`ans = {}, $CellContext`car = $CellContext`vac, \
+$CellContext`vt}, 
+         For[$CellContext`i = 1, $CellContext`i <= Length[$CellContext`path], 
+           
+           Increment[$CellContext`i], $CellContext`vt = \
+$CellContext`r[$CellContext`car, 
+              Part[$CellContext`path, $CellContext`i]]; $CellContext`ans = 
+            Append[$CellContext`ans, 
+              Part[$CellContext`vt, 1]]; $CellContext`car = 
+            Part[$CellContext`vt, 
+              2]]; {$CellContext`ans, $CellContext`car}]; $CellContext`pt[
+         Pattern[$CellContext`path, 
+          Blank[]], 
+         Pattern[$CellContext`l, 
+          Blank[]]] := Module[{$CellContext`aux}, $CellContext`aux = Part[
+            $CellContext`t1[{$CellContext`l, 0}, $CellContext`path], 2]; Part[
+           $CellContext`t1[$CellContext`aux, $CellContext`path], 
+           1]]; $CellContext`pbbs[
+         Pattern[$CellContext`path, 
+          Blank[]], 
+         Pattern[$CellContext`l, 
+          Blank[]], 
+         Pattern[$CellContext`t, 
+          Blank[]]] := 
+       Module[{$CellContext`ans = {$CellContext`path}}, 
+         While[Length[$CellContext`ans] < $CellContext`t, $CellContext`ans = 
+           Append[$CellContext`ans, 
+             $CellContext`pt[
+              Part[$CellContext`ans, -1], $CellContext`l]]]; {
+           $CellContext`ktt[
+            
+            Part[$CellContext`ans, -1]], $CellContext`ans}]; \
+$CellContext`showpath[
+         Pattern[$CellContext`path, 
+          Blank[]]] := 
+       Module[{$CellContext`l = Length[$CellContext`path], $CellContext`balls = 
+          Map[Disk[
+             Flatten[{# - 1/2, 1/2}], 0.4]& , 
+            Position[$CellContext`path, 2]], $CellContext`bound = Map[Circle[
+             Flatten[{# - 1/2, 1/2}], 0.4]& , 
+            Position[$CellContext`path, 2]]}, 
+         Graphics[{Black, {
+            Line[{{0, 0}, {$CellContext`l, 0}}], 
+            Line[{{0, 1}, {$CellContext`l, 1}}], 
+            Map[Line[#]& , 
+             
+             Table[{{$CellContext`i, 0}, {$CellContext`i, 
+                1}}, {$CellContext`i, 0, $CellContext`l}]]}, 
+           Yellow, $CellContext`balls, 
+           RGBColor[1, 0, 1], $CellContext`bound}]]; $CellContext`showrc[
+         Pattern[$CellContext`rc, 
+          Blank[]]] := 
+       Module[{$CellContext`y, $CellContext`l, $CellContext`ty, \
+$CellContext`tl, $CellContext`r, $CellContext`rpos, $CellContext`hoff}, \
+$CellContext`y = Map[Part[#, 1]& , $CellContext`rc]; $CellContext`r = 
+          Map[Part[#, 2]& , $CellContext`rc]; $CellContext`l = 
+          Length[$CellContext`y]; $CellContext`ty = 
+          Combinatorica`TransposePartition[$CellContext`y]; $CellContext`tl = 
+          Length[$CellContext`ty]; $CellContext`rpos = 
+          Table[{Part[$CellContext`y, $CellContext`i] + 0.7, 
+             Length[$CellContext`rc] - $CellContext`i + 0.4}, {$CellContext`i,
+              1, 
+             Length[$CellContext`rc]}]; $CellContext`hoff = 4; 
+         Graphics[{Black, {
+             Text["", {-$CellContext`hoff, 0}], 
+             Text["", {7 + $CellContext`hoff, 0}], 
+             Line[{{0, $CellContext`l}, {
+                Part[$CellContext`y, 1], $CellContext`l}}], 
+             Line[{{0, 0}, {0, 
+                Part[$CellContext`ty, 1]}}], 
+             Map[Line[#]& , 
+              Table[{{0, $CellContext`l - $CellContext`i}, {
+                 
+                 Part[$CellContext`y, $CellContext`i], $CellContext`l - \
+$CellContext`i}}, {$CellContext`i, 1, $CellContext`l}]], 
+             Map[Line[#]& , 
+              
+              Table[{{$CellContext`i, Part[$CellContext`ty, 1] - 
+                 Part[$CellContext`ty, $CellContext`i]}, {$CellContext`i, 
+                 Part[$CellContext`ty, 1]}}, {$CellContext`i, 
+                1, $CellContext`tl}]], 
+             Table[
+              Text[
+               Part[$CellContext`r, $CellContext`i], 
+               Part[$CellContext`rpos, $CellContext`i]], {$CellContext`i, 1, 
+               Length[$CellContext`rc]}]}}]]; $CellContext`q[
+         Pattern[$CellContext`l, 
+          Blank[]], 
+         Pattern[$CellContext`conf, 
+          Blank[]]] := Sum[
+         Min[$CellContext`l, 
+          Part[$CellContext`conf, $CellContext`i]], {$CellContext`i, 1, 
+          Length[$CellContext`conf]}]; $CellContext`delta[
+         Pattern[$CellContext`pos, 
+          Blank[]], 
+         Pattern[$CellContext`rc, 
+          Blank[]]] := 
+       Module[{$CellContext`conf, $CellContext`rig, $CellContext`corig, \
+$CellContext`singpos, $CellContext`newconf, $CellContext`replacerig, \
+$CellContext`newrig}, $CellContext`conf = 
+          Map[Part[#, 1]& , $CellContext`rc]; $CellContext`rig = 
+          Map[Part[#, 2]& , $CellContext`rc]; $CellContext`corig = 
+          Table[$CellContext`pos - 1 - 2 $CellContext`q[
+              Part[$CellContext`conf, $CellContext`i], $CellContext`conf] - 
+            Part[$CellContext`rig, $CellContext`i], {$CellContext`i, 1, 
+             Length[$CellContext`rc]}]; If[Min[$CellContext`corig] > 0, 
+           Return[
+            Reverse[
+             Sort[
+              
+              Append[$CellContext`rc, {
+               1, $CellContext`pos - 2 $CellContext`q[1, $CellContext`conf] - 
+                2}]]]]]; $CellContext`singpos = Min[
+            Position[$CellContext`corig, 0]]; $CellContext`newconf = 
+          MapAt[# + 
+            1& , $CellContext`conf, $CellContext`singpos]; \
+$CellContext`replacerig = $CellContext`pos - 2 $CellContext`q[
+             
+             Part[$CellContext`newconf, $CellContext`singpos], \
+$CellContext`newconf]; $CellContext`newrig = 
+          MapAt[Replace[#, # -> $CellContext`replacerig]& , $CellContext`rig, \
+$CellContext`singpos]; Reverse[
+           Sort[
+            Table[{
+              Part[$CellContext`newconf, $CellContext`i], 
+              Part[$CellContext`newrig, $CellContext`i]}, {$CellContext`i, 1, 
+              Length[$CellContext`rc]}]]]]; $CellContext`kkr[
+         Pattern[$CellContext`path, 
+          Blank[]]] := 
+       Module[{$CellContext`ans = {}, $CellContext`pos = Flatten[
+            Position[$CellContext`path, 2]]}, If[$CellContext`pos == {}, 
+           Return[{}]]; 
+         For[$CellContext`i = 1, $CellContext`i <= Length[$CellContext`pos], 
+           Increment[$CellContext`i], $CellContext`ans = $CellContext`delta[
+             
+             Part[$CellContext`pos, $CellContext`i], $CellContext`ans]]; \
+$CellContext`ans]; $CellContext`yamanouchiQ[
+         Pattern[$CellContext`path, 
+          Blank[]]] := Apply[And, 
+         Map[Count[#, 1] >= Count[#, 2]& , 
+          Table[
+           Take[$CellContext`path, $CellContext`i], {$CellContext`i, 1, 
+            Length[$CellContext`path]}]]]; $CellContext`tohighest[
+         Pattern[$CellContext`path, 
+          Blank[]]] := 
+       Module[{$CellContext`ans = $CellContext`path, $CellContext`d = 0}, 
+         While[
+           Not[
+            $CellContext`yamanouchiQ[$CellContext`ans]], $CellContext`ans = 
+            RotateRight[$CellContext`ans]; $CellContext`d = $CellContext`d + 
+             1]; {$CellContext`d, $CellContext`ans}]; $CellContext`ktt[
+         Pattern[$CellContext`path, 
+          Blank[]]] := Map[# - {0, 
+          Part[
+           $CellContext`tohighest[$CellContext`path], 1]}& , 
+         $CellContext`kkr[
+          Part[
+           $CellContext`tohighest[$CellContext`path], 2]]]; Null); 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->False,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->432010115]
+}, {2}]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell[TextData[{
+ "The periodic box-ball systems (PBBS for short) are typical examples of \
+soliton cellular automata. Each group of balls constitutes a soliton; the \
+groups exhibit nonlinear scattering with each other. PBBS are not only a \
+limit of classical soliton systems but also a limit of quantum integrable \
+models. In particular, the limit of various types of transfer matrices of \
+quantum integrable models provides different types of time evolutions ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox[
+    StyleBox["T", "TI"], 
+    StyleBox["l", "TI"]], TraditionalForm]], "InlineMath"],
+ ", where ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    StyleBox["l", "TI"], "\[Element]", 
+    SubscriptBox[
+     StyleBox["Z",
+      FontSlant->"Plain"], 
+     RowBox[{"\[GreaterEqual]", "1"}]]}], TraditionalForm]], "InlineMath"],
+ ". ",
+ Cell[BoxData[
+  FormBox[Cell["", "InlineMath"], TraditionalForm]], "InlineMath"],
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["T", "1"], TraditionalForm]], "InlineMath"],
+ " coincides with cyclic shift and the others form a commuting family of \
+nontrivial time evolution operators that give integrability of the model. In \
+this Demonstration, time evolutions proceed downwards. At the top is the \
+rigged configuration, which is the action-angle variable (i.e., the constant \
+of motion and the linearization parameter) corresponding to the bottom line."
+}], "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.463177870017722*^9, 3.463177882388522*^9}, {
+   3.463177943368922*^9, 3.4631779881409225`*^9}, {3.463178159485322*^9, 
+   3.463178274301322*^9}, {3.4631785108697224`*^9, 3.4631788087673225`*^9}, {
+   3.463178847923322*^9, 3.463178869388922*^9}, {3.463178959541322*^9, 
+   3.463178971100922*^9}, {3.4631794192285223`*^9, 3.463179422379722*^9}, {
+   3.463179457978922*^9, 3.4631794612237225`*^9}, {3.4631798682433224`*^9, 
+   3.463179915308522*^9}, 3.463182411283122*^9, {3.463182548209322*^9, 
+   3.463182549675722*^9}, {3.4631868635495224`*^9, 3.463186874594322*^9}, {
+   3.463186908898722*^9, 3.463186933577922*^9}, 3.463200130224118*^9, {
+   3.463200222507718*^9, 3.463200286951318*^9}, {3.4632003618333178`*^9, 
+   3.463200365702118*^9}, {3.463320312355468*^9, 3.463320319453741*^9}, {
+   3.4633248356016912`*^9, 3.4633248356798162`*^9}, {3.4633248881329412`*^9, 
+   3.4633250229141912`*^9}, {3.4633250534610662`*^9, 3.4633251627735662`*^9}, 
+   3.465562204069934*^9, {3.4657431037104807`*^9, 3.465743104179234*^9}, {
+   3.465743142491979*^9, 3.4657431439763637`*^9}},
+ CellID->214508731]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`l$$ = 6, $CellContext`path2$$ = {2, 2, 2, 1,
+     1, 1, 2, 2, 1, 1, 1, 2, 1, 1, 1}, $CellContext`t$$ = 10, Typeset`show$$ =
+     True, Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`l$$], 6, "type of time evolution"}, 1, 6, 1}, {{
+       Hold[$CellContext`t$$], 10, "total evolution steps"}, 1, 15, 1}, {{
+       Hold[$CellContext`path2$$], {2, 2, 2, 1, 1, 1, 2, 2, 1, 1, 1, 2, 1, 1, 
+       1}}}, {
+      Hold[
+       Row[{
+         Button[
+         "sample path", $CellContext`path2$$ = {2, 2, 2, 1, 1, 1, 2, 2, 1, 1, 
+           1, 2, 1, 1, 1}], 
+         Button[
+         "generate new random path", $CellContext`path2$$ = 
+          Combinatorica`Permute[
+            Join[
+             Table[1, {9}], 
+             Table[2, {6}]], 
+            Combinatorica`RandomPermutation[15]]]}]], 
+      Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = Automatic, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`l$939760$$ = 0, $CellContext`t$939761$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`l$$ = 
+        6, $CellContext`path2$$ = {2, 2, 2, 1, 1, 1, 2, 2, 1, 1, 1, 2, 1, 1, 
+         1}, $CellContext`t$$ = 10}, "ControllerVariables" :> {
+        Hold[$CellContext`l$$, $CellContext`l$939760$$, 0], 
+        Hold[$CellContext`t$$, $CellContext`t$939761$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`ans$}, $CellContext`ans$ = \
+$CellContext`pbbs[$CellContext`path2$$, $CellContext`l$$, $CellContext`t$$]; 
+        Magnify[
+          TableForm[
+           Join[{
+             $CellContext`showrc[
+              Part[$CellContext`ans$, 1]]}, 
+            Map[$CellContext`showpath[#]& , 
+             Part[$CellContext`ans$, 2]]], TableSpacing -> {0, 0}], 1.5]], 
+      "Specifications" :> {{{$CellContext`l$$, 6, "type of time evolution"}, 
+         1, 6, 1, ControlType -> 
+         SetterBar}, {{$CellContext`t$$, 10, "total evolution steps"}, 1, 15, 
+         1, Appearance -> 
+         "Labeled"}, {{$CellContext`path2$$, {2, 2, 2, 1, 1, 1, 2, 2, 1, 1, 1,
+           2, 1, 1, 1}}, ControlType -> None}, 
+        Row[{
+          Button[
+          "sample path", $CellContext`path2$$ = {2, 2, 2, 1, 1, 1, 2, 2, 1, 1,
+             1, 2, 1, 1, 1}], 
+          Button[
+          "generate new random path", $CellContext`path2$$ = 
+           Combinatorica`Permute[
+             Join[
+              Table[1, {9}], 
+              Table[2, {6}]], 
+             Combinatorica`RandomPermutation[15]]]}]}, 
+      "Options" :> {
+       AutorunSequencing -> {1, 2}, SynchronousInitialization -> False, 
+        TrackedSymbols :> {$CellContext`l$$, $CellContext`t$$, \
+$CellContext`path, $CellContext`path2$$}, ContentSize -> {400, 400}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{420., {258., 263.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>((Quiet[
+        Get["Combinatorica`"]]; $CellContext`r[
+         Pattern[$CellContext`car, 
+          Blank[]], 
+         Pattern[$CellContext`box, 
+          Blank[]]] := Which[
+         And[$CellContext`box == 1, Part[$CellContext`car, 2] == 0], {
+         1, $CellContext`car}, $CellContext`box == 1, {
+         2, {Part[$CellContext`car, 1] + 1, Part[$CellContext`car, 2] - 1}}, 
+         And[$CellContext`box == 2, Part[$CellContext`car, 1] == 0], {
+         2, $CellContext`car}, True, {
+         1, {Part[$CellContext`car, 1] - 1, Part[$CellContext`car, 2] + 
+           1}}]; $CellContext`t1[
+         Pattern[$CellContext`vac, 
+          Blank[]], 
+         Pattern[$CellContext`path, 
+          Blank[]]] := 
+       Module[{$CellContext`ans = {}, $CellContext`car = $CellContext`vac, \
+$CellContext`vt}, 
+         For[$CellContext`i = 1, $CellContext`i <= Length[$CellContext`path], 
+           
+           Increment[$CellContext`i], $CellContext`vt = \
+$CellContext`r[$CellContext`car, 
+              Part[$CellContext`path, $CellContext`i]]; $CellContext`ans = 
+            Append[$CellContext`ans, 
+              Part[$CellContext`vt, 1]]; $CellContext`car = 
+            Part[$CellContext`vt, 
+              2]]; {$CellContext`ans, $CellContext`car}]; $CellContext`pt[
+         Pattern[$CellContext`path, 
+          Blank[]], 
+         Pattern[$CellContext`l, 
+          Blank[]]] := Module[{$CellContext`aux}, $CellContext`aux = Part[
+            $CellContext`t1[{$CellContext`l, 0}, $CellContext`path], 2]; Part[
+           $CellContext`t1[$CellContext`aux, $CellContext`path], 
+           1]]; $CellContext`pbbs[
+         Pattern[$CellContext`path, 
+          Blank[]], 
+         Pattern[$CellContext`l, 
+          Blank[]], 
+         Pattern[$CellContext`t, 
+          Blank[]]] := 
+       Module[{$CellContext`ans = {$CellContext`path}}, 
+         While[Length[$CellContext`ans] < $CellContext`t, $CellContext`ans = 
+           Append[$CellContext`ans, 
+             $CellContext`pt[
+              Part[$CellContext`ans, -1], $CellContext`l]]]; {
+           $CellContext`ktt[
+            
+            Part[$CellContext`ans, -1]], $CellContext`ans}]; \
+$CellContext`showpath[
+         Pattern[$CellContext`path, 
+          Blank[]]] := 
+       Module[{$CellContext`l = Length[$CellContext`path], $CellContext`balls = 
+          Map[Disk[
+             Flatten[{# - 1/2, 1/2}], 0.4]& , 
+            Position[$CellContext`path, 2]], $CellContext`bound = Map[Circle[
+             Flatten[{# - 1/2, 1/2}], 0.4]& , 
+            Position[$CellContext`path, 2]]}, 
+         Graphics[{Black, {
+            Line[{{0, 0}, {$CellContext`l, 0}}], 
+            Line[{{0, 1}, {$CellContext`l, 1}}], 
+            Map[Line[#]& , 
+             
+             Table[{{$CellContext`i, 0}, {$CellContext`i, 
+                1}}, {$CellContext`i, 0, $CellContext`l}]]}, 
+           Yellow, $CellContext`balls, 
+           RGBColor[1, 0, 1], $CellContext`bound}]]; $CellContext`showrc[
+         Pattern[$CellContext`rc, 
+          Blank[]]] := 
+       Module[{$CellContext`y, $CellContext`l, $CellContext`ty, \
+$CellContext`tl, $CellContext`r, $CellContext`rpos, $CellContext`hoff}, \
+$CellContext`y = Map[Part[#, 1]& , $CellContext`rc]; $CellContext`r = 
+          Map[Part[#, 2]& , $CellContext`rc]; $CellContext`l = 
+          Length[$CellContext`y]; $CellContext`ty = 
+          Combinatorica`TransposePartition[$CellContext`y]; $CellContext`tl = 
+          Length[$CellContext`ty]; $CellContext`rpos = 
+          Table[{Part[$CellContext`y, $CellContext`i] + 0.7, 
+             Length[$CellContext`rc] - $CellContext`i + 0.4}, {$CellContext`i,
+              1, 
+             Length[$CellContext`rc]}]; $CellContext`hoff = 4; 
+         Graphics[{Black, {
+             Text["", {-$CellContext`hoff, 0}], 
+             Text["", {7 + $CellContext`hoff, 0}], 
+             Line[{{0, $CellContext`l}, {
+                Part[$CellContext`y, 1], $CellContext`l}}], 
+             Line[{{0, 0}, {0, 
+                Part[$CellContext`ty, 1]}}], 
+             Map[Line[#]& , 
+              Table[{{0, $CellContext`l - $CellContext`i}, {
+                 
+                 Part[$CellContext`y, $CellContext`i], $CellContext`l - \
+$CellContext`i}}, {$CellContext`i, 1, $CellContext`l}]], 
+             Map[Line[#]& , 
+              
+              Table[{{$CellContext`i, Part[$CellContext`ty, 1] - 
+                 Part[$CellContext`ty, $CellContext`i]}, {$CellContext`i, 
+                 Part[$CellContext`ty, 1]}}, {$CellContext`i, 
+                1, $CellContext`tl}]], 
+             Table[
+              Text[
+               Part[$CellContext`r, $CellContext`i], 
+               Part[$CellContext`rpos, $CellContext`i]], {$CellContext`i, 1, 
+               Length[$CellContext`rc]}]}}]]; $CellContext`q[
+         Pattern[$CellContext`l, 
+          Blank[]], 
+         Pattern[$CellContext`conf, 
+          Blank[]]] := Sum[
+         Min[$CellContext`l, 
+          Part[$CellContext`conf, $CellContext`i]], {$CellContext`i, 1, 
+          Length[$CellContext`conf]}]; $CellContext`delta[
+         Pattern[$CellContext`pos, 
+          Blank[]], 
+         Pattern[$CellContext`rc, 
+          Blank[]]] := 
+       Module[{$CellContext`conf, $CellContext`rig, $CellContext`corig, \
+$CellContext`singpos, $CellContext`newconf, $CellContext`replacerig, \
+$CellContext`newrig}, $CellContext`conf = 
+          Map[Part[#, 1]& , $CellContext`rc]; $CellContext`rig = 
+          Map[Part[#, 2]& , $CellContext`rc]; $CellContext`corig = 
+          Table[$CellContext`pos - 1 - 2 $CellContext`q[
+              Part[$CellContext`conf, $CellContext`i], $CellContext`conf] - 
+            Part[$CellContext`rig, $CellContext`i], {$CellContext`i, 1, 
+             Length[$CellContext`rc]}]; If[Min[$CellContext`corig] > 0, 
+           Return[
+            Reverse[
+             Sort[
+              
+              Append[$CellContext`rc, {
+               1, $CellContext`pos - 2 $CellContext`q[1, $CellContext`conf] - 
+                2}]]]]]; $CellContext`singpos = Min[
+            Position[$CellContext`corig, 0]]; $CellContext`newconf = 
+          MapAt[# + 
+            1& , $CellContext`conf, $CellContext`singpos]; \
+$CellContext`replacerig = $CellContext`pos - 2 $CellContext`q[
+             
+             Part[$CellContext`newconf, $CellContext`singpos], \
+$CellContext`newconf]; $CellContext`newrig = 
+          MapAt[Replace[#, # -> $CellContext`replacerig]& , $CellContext`rig, \
+$CellContext`singpos]; Reverse[
+           Sort[
+            Table[{
+              Part[$CellContext`newconf, $CellContext`i], 
+              Part[$CellContext`newrig, $CellContext`i]}, {$CellContext`i, 1, 
+              Length[$CellContext`rc]}]]]]; $CellContext`kkr[
+         Pattern[$CellContext`path, 
+          Blank[]]] := 
+       Module[{$CellContext`ans = {}, $CellContext`pos = Flatten[
+            Position[$CellContext`path, 2]]}, If[$CellContext`pos == {}, 
+           Return[{}]]; 
+         For[$CellContext`i = 1, $CellContext`i <= Length[$CellContext`pos], 
+           Increment[$CellContext`i], $CellContext`ans = $CellContext`delta[
+             
+             Part[$CellContext`pos, $CellContext`i], $CellContext`ans]]; \
+$CellContext`ans]; $CellContext`yamanouchiQ[
+         Pattern[$CellContext`path, 
+          Blank[]]] := Apply[And, 
+         Map[Count[#, 1] >= Count[#, 2]& , 
+          Table[
+           Take[$CellContext`path, $CellContext`i], {$CellContext`i, 1, 
+            Length[$CellContext`path]}]]]; $CellContext`tohighest[
+         Pattern[$CellContext`path, 
+          Blank[]]] := 
+       Module[{$CellContext`ans = $CellContext`path, $CellContext`d = 0}, 
+         While[
+           Not[
+            $CellContext`yamanouchiQ[$CellContext`ans]], $CellContext`ans = 
+            RotateRight[$CellContext`ans]; $CellContext`d = $CellContext`d + 
+             1]; {$CellContext`d, $CellContext`ans}]; $CellContext`ktt[
+         Pattern[$CellContext`path, 
+          Blank[]]] := Map[# - {0, 
+          Part[
+           $CellContext`tohighest[$CellContext`path], 1]}& , 
+         $CellContext`kkr[
+          Part[
+           $CellContext`tohighest[$CellContext`path], 2]]]; Null); 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->False,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->94623524]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`l$$ = 1, $CellContext`path2$$ = {1, 1, 1, 1,
+     1, 1, 2, 2, 2, 2, 1, 1, 2, 2, 1}, $CellContext`t$$ = 10, Typeset`show$$ =
+     True, Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`l$$], 1, "type of time evolution"}, 1, 6, 1}, {{
+       Hold[$CellContext`t$$], 10, "total evolution steps"}, 1, 15, 1}, {{
+       Hold[$CellContext`path2$$], {1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 1, 1, 2, 2, 
+       1}}}, {
+      Hold[
+       Row[{
+         Button[
+         "sample path", $CellContext`path2$$ = {2, 2, 2, 1, 1, 1, 2, 2, 1, 1, 
+           1, 2, 1, 1, 1}], 
+         Button[
+         "generate new random path", $CellContext`path2$$ = 
+          Combinatorica`Permute[
+            Join[
+             Table[1, {9}], 
+             Table[2, {6}]], 
+            Combinatorica`RandomPermutation[15]]]}]], 
+      Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = Automatic, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`l$939818$$ = 0, $CellContext`t$939819$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`l$$ = 
+        1, $CellContext`path2$$ = {1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 1, 1, 2, 2, 
+         1}, $CellContext`t$$ = 10}, "ControllerVariables" :> {
+        Hold[$CellContext`l$$, $CellContext`l$939818$$, 0], 
+        Hold[$CellContext`t$$, $CellContext`t$939819$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`ans$}, $CellContext`ans$ = \
+$CellContext`pbbs[$CellContext`path2$$, $CellContext`l$$, $CellContext`t$$]; 
+        Magnify[
+          TableForm[
+           Join[{
+             $CellContext`showrc[
+              Part[$CellContext`ans$, 1]]}, 
+            Map[$CellContext`showpath[#]& , 
+             Part[$CellContext`ans$, 2]]], TableSpacing -> {0, 0}], 1.5]], 
+      "Specifications" :> {{{$CellContext`l$$, 1, "type of time evolution"}, 
+         1, 6, 1, ControlType -> 
+         SetterBar}, {{$CellContext`t$$, 10, "total evolution steps"}, 1, 15, 
+         1, Appearance -> 
+         "Labeled"}, {{$CellContext`path2$$, {1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 1,
+           1, 2, 2, 1}}, ControlType -> None}, 
+        Row[{
+          Button[
+          "sample path", $CellContext`path2$$ = {2, 2, 2, 1, 1, 1, 2, 2, 1, 1,
+             1, 2, 1, 1, 1}], 
+          Button[
+          "generate new random path", $CellContext`path2$$ = 
+           Combinatorica`Permute[
+             Join[
+              Table[1, {9}], 
+              Table[2, {6}]], 
+             Combinatorica`RandomPermutation[15]]]}]}, 
+      "Options" :> {
+       AutorunSequencing -> {1, 2}, SynchronousInitialization -> False, 
+        TrackedSymbols :> {$CellContext`l$$, $CellContext`t$$, \
+$CellContext`path, $CellContext`path2$$}, ContentSize -> {400, 400}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{420., {258., 263.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>((Quiet[
+        Get["Combinatorica`"]]; $CellContext`r[
+         Pattern[$CellContext`car, 
+          Blank[]], 
+         Pattern[$CellContext`box, 
+          Blank[]]] := Which[
+         And[$CellContext`box == 1, Part[$CellContext`car, 2] == 0], {
+         1, $CellContext`car}, $CellContext`box == 1, {
+         2, {Part[$CellContext`car, 1] + 1, Part[$CellContext`car, 2] - 1}}, 
+         And[$CellContext`box == 2, Part[$CellContext`car, 1] == 0], {
+         2, $CellContext`car}, True, {
+         1, {Part[$CellContext`car, 1] - 1, Part[$CellContext`car, 2] + 
+           1}}]; $CellContext`t1[
+         Pattern[$CellContext`vac, 
+          Blank[]], 
+         Pattern[$CellContext`path, 
+          Blank[]]] := 
+       Module[{$CellContext`ans = {}, $CellContext`car = $CellContext`vac, \
+$CellContext`vt}, 
+         For[$CellContext`i = 1, $CellContext`i <= Length[$CellContext`path], 
+           
+           Increment[$CellContext`i], $CellContext`vt = \
+$CellContext`r[$CellContext`car, 
+              Part[$CellContext`path, $CellContext`i]]; $CellContext`ans = 
+            Append[$CellContext`ans, 
+              Part[$CellContext`vt, 1]]; $CellContext`car = 
+            Part[$CellContext`vt, 
+              2]]; {$CellContext`ans, $CellContext`car}]; $CellContext`pt[
+         Pattern[$CellContext`path, 
+          Blank[]], 
+         Pattern[$CellContext`l, 
+          Blank[]]] := Module[{$CellContext`aux}, $CellContext`aux = Part[
+            $CellContext`t1[{$CellContext`l, 0}, $CellContext`path], 2]; Part[
+           $CellContext`t1[$CellContext`aux, $CellContext`path], 
+           1]]; $CellContext`pbbs[
+         Pattern[$CellContext`path, 
+          Blank[]], 
+         Pattern[$CellContext`l, 
+          Blank[]], 
+         Pattern[$CellContext`t, 
+          Blank[]]] := 
+       Module[{$CellContext`ans = {$CellContext`path}}, 
+         While[Length[$CellContext`ans] < $CellContext`t, $CellContext`ans = 
+           Append[$CellContext`ans, 
+             $CellContext`pt[
+              Part[$CellContext`ans, -1], $CellContext`l]]]; {
+           $CellContext`ktt[
+            
+            Part[$CellContext`ans, -1]], $CellContext`ans}]; \
+$CellContext`showpath[
+         Pattern[$CellContext`path, 
+          Blank[]]] := 
+       Module[{$CellContext`l = Length[$CellContext`path], $CellContext`balls = 
+          Map[Disk[
+             Flatten[{# - 1/2, 1/2}], 0.4]& , 
+            Position[$CellContext`path, 2]], $CellContext`bound = Map[Circle[
+             Flatten[{# - 1/2, 1/2}], 0.4]& , 
+            Position[$CellContext`path, 2]]}, 
+         Graphics[{Black, {
+            Line[{{0, 0}, {$CellContext`l, 0}}], 
+            Line[{{0, 1}, {$CellContext`l, 1}}], 
+            Map[Line[#]& , 
+             
+             Table[{{$CellContext`i, 0}, {$CellContext`i, 
+                1}}, {$CellContext`i, 0, $CellContext`l}]]}, 
+           Yellow, $CellContext`balls, 
+           RGBColor[1, 0, 1], $CellContext`bound}]]; $CellContext`showrc[
+         Pattern[$CellContext`rc, 
+          Blank[]]] := 
+       Module[{$CellContext`y, $CellContext`l, $CellContext`ty, \
+$CellContext`tl, $CellContext`r, $CellContext`rpos, $CellContext`hoff}, \
+$CellContext`y = Map[Part[#, 1]& , $CellContext`rc]; $CellContext`r = 
+          Map[Part[#, 2]& , $CellContext`rc]; $CellContext`l = 
+          Length[$CellContext`y]; $CellContext`ty = 
+          Combinatorica`TransposePartition[$CellContext`y]; $CellContext`tl = 
+          Length[$CellContext`ty]; $CellContext`rpos = 
+          Table[{Part[$CellContext`y, $CellContext`i] + 0.7, 
+             Length[$CellContext`rc] - $CellContext`i + 0.4}, {$CellContext`i,
+              1, 
+             Length[$CellContext`rc]}]; $CellContext`hoff = 4; 
+         Graphics[{Black, {
+             Text["", {-$CellContext`hoff, 0}], 
+             Text["", {7 + $CellContext`hoff, 0}], 
+             Line[{{0, $CellContext`l}, {
+                Part[$CellContext`y, 1], $CellContext`l}}], 
+             Line[{{0, 0}, {0, 
+                Part[$CellContext`ty, 1]}}], 
+             Map[Line[#]& , 
+              Table[{{0, $CellContext`l - $CellContext`i}, {
+                 
+                 Part[$CellContext`y, $CellContext`i], $CellContext`l - \
+$CellContext`i}}, {$CellContext`i, 1, $CellContext`l}]], 
+             Map[Line[#]& , 
+              
+              Table[{{$CellContext`i, Part[$CellContext`ty, 1] - 
+                 Part[$CellContext`ty, $CellContext`i]}, {$CellContext`i, 
+                 Part[$CellContext`ty, 1]}}, {$CellContext`i, 
+                1, $CellContext`tl}]], 
+             Table[
+              Text[
+               Part[$CellContext`r, $CellContext`i], 
+               Part[$CellContext`rpos, $CellContext`i]], {$CellContext`i, 1, 
+               Length[$CellContext`rc]}]}}]]; $CellContext`q[
+         Pattern[$CellContext`l, 
+          Blank[]], 
+         Pattern[$CellContext`conf, 
+          Blank[]]] := Sum[
+         Min[$CellContext`l, 
+          Part[$CellContext`conf, $CellContext`i]], {$CellContext`i, 1, 
+          Length[$CellContext`conf]}]; $CellContext`delta[
+         Pattern[$CellContext`pos, 
+          Blank[]], 
+         Pattern[$CellContext`rc, 
+          Blank[]]] := 
+       Module[{$CellContext`conf, $CellContext`rig, $CellContext`corig, \
+$CellContext`singpos, $CellContext`newconf, $CellContext`replacerig, \
+$CellContext`newrig}, $CellContext`conf = 
+          Map[Part[#, 1]& , $CellContext`rc]; $CellContext`rig = 
+          Map[Part[#, 2]& , $CellContext`rc]; $CellContext`corig = 
+          Table[$CellContext`pos - 1 - 2 $CellContext`q[
+              Part[$CellContext`conf, $CellContext`i], $CellContext`conf] - 
+            Part[$CellContext`rig, $CellContext`i], {$CellContext`i, 1, 
+             Length[$CellContext`rc]}]; If[Min[$CellContext`corig] > 0, 
+           Return[
+            Reverse[
+             Sort[
+              
+              Append[$CellContext`rc, {
+               1, $CellContext`pos - 2 $CellContext`q[1, $CellContext`conf] - 
+                2}]]]]]; $CellContext`singpos = Min[
+            Position[$CellContext`corig, 0]]; $CellContext`newconf = 
+          MapAt[# + 
+            1& , $CellContext`conf, $CellContext`singpos]; \
+$CellContext`replacerig = $CellContext`pos - 2 $CellContext`q[
+             
+             Part[$CellContext`newconf, $CellContext`singpos], \
+$CellContext`newconf]; $CellContext`newrig = 
+          MapAt[Replace[#, # -> $CellContext`replacerig]& , $CellContext`rig, \
+$CellContext`singpos]; Reverse[
+           Sort[
+            Table[{
+              Part[$CellContext`newconf, $CellContext`i], 
+              Part[$CellContext`newrig, $CellContext`i]}, {$CellContext`i, 1, 
+              Length[$CellContext`rc]}]]]]; $CellContext`kkr[
+         Pattern[$CellContext`path, 
+          Blank[]]] := 
+       Module[{$CellContext`ans = {}, $CellContext`pos = Flatten[
+            Position[$CellContext`path, 2]]}, If[$CellContext`pos == {}, 
+           Return[{}]]; 
+         For[$CellContext`i = 1, $CellContext`i <= Length[$CellContext`pos], 
+           Increment[$CellContext`i], $CellContext`ans = $CellContext`delta[
+             
+             Part[$CellContext`pos, $CellContext`i], $CellContext`ans]]; \
+$CellContext`ans]; $CellContext`yamanouchiQ[
+         Pattern[$CellContext`path, 
+          Blank[]]] := Apply[And, 
+         Map[Count[#, 1] >= Count[#, 2]& , 
+          Table[
+           Take[$CellContext`path, $CellContext`i], {$CellContext`i, 1, 
+            Length[$CellContext`path]}]]]; $CellContext`tohighest[
+         Pattern[$CellContext`path, 
+          Blank[]]] := 
+       Module[{$CellContext`ans = $CellContext`path, $CellContext`d = 0}, 
+         While[
+           Not[
+            $CellContext`yamanouchiQ[$CellContext`ans]], $CellContext`ans = 
+            RotateRight[$CellContext`ans]; $CellContext`d = $CellContext`d + 
+             1]; {$CellContext`d, $CellContext`ans}]; $CellContext`ktt[
+         Pattern[$CellContext`path, 
+          Blank[]]] := Map[# - {0, 
+          Part[
+           $CellContext`tohighest[$CellContext`path], 1]}& , 
+         $CellContext`kkr[
+          Part[
+           $CellContext`tohighest[$CellContext`path], 2]]]; Null); 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->False,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->332283182],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`l$$ = 6, $CellContext`path2$$ = {1, 1, 1, 1,
+     1, 1, 1, 1, 2, 2, 1, 2, 2, 2, 2}, $CellContext`t$$ = 11, Typeset`show$$ =
+     True, Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`l$$], 6, "type of time evolution"}, 1, 6, 1}, {{
+       Hold[$CellContext`t$$], 11, "total evolution steps"}, 1, 15, 1}, {{
+       Hold[$CellContext`path2$$], {1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 2, 2, 2, 
+       2}}}, {
+      Hold[
+       Row[{
+         Button[
+         "sample path", $CellContext`path2$$ = {2, 2, 2, 1, 1, 1, 2, 2, 1, 1, 
+           1, 2, 1, 1, 1}], 
+         Button[
+         "generate new random path", $CellContext`path2$$ = 
+          Combinatorica`Permute[
+            Join[
+             Table[1, {9}], 
+             Table[2, {6}]], 
+            Combinatorica`RandomPermutation[15]]]}]], 
+      Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = Automatic, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`l$939876$$ = 0, $CellContext`t$939877$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`l$$ = 
+        6, $CellContext`path2$$ = {1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 2, 2, 2, 
+         2}, $CellContext`t$$ = 11}, "ControllerVariables" :> {
+        Hold[$CellContext`l$$, $CellContext`l$939876$$, 0], 
+        Hold[$CellContext`t$$, $CellContext`t$939877$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`ans$}, $CellContext`ans$ = \
+$CellContext`pbbs[$CellContext`path2$$, $CellContext`l$$, $CellContext`t$$]; 
+        Magnify[
+          TableForm[
+           Join[{
+             $CellContext`showrc[
+              Part[$CellContext`ans$, 1]]}, 
+            Map[$CellContext`showpath[#]& , 
+             Part[$CellContext`ans$, 2]]], TableSpacing -> {0, 0}], 1.5]], 
+      "Specifications" :> {{{$CellContext`l$$, 6, "type of time evolution"}, 
+         1, 6, 1, ControlType -> 
+         SetterBar}, {{$CellContext`t$$, 11, "total evolution steps"}, 1, 15, 
+         1, Appearance -> 
+         "Labeled"}, {{$CellContext`path2$$, {1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1,
+           2, 2, 2, 2}}, ControlType -> None}, 
+        Row[{
+          Button[
+          "sample path", $CellContext`path2$$ = {2, 2, 2, 1, 1, 1, 2, 2, 1, 1,
+             1, 2, 1, 1, 1}], 
+          Button[
+          "generate new random path", $CellContext`path2$$ = 
+           Combinatorica`Permute[
+             Join[
+              Table[1, {9}], 
+              Table[2, {6}]], 
+             Combinatorica`RandomPermutation[15]]]}]}, 
+      "Options" :> {
+       AutorunSequencing -> {1, 2}, SynchronousInitialization -> False, 
+        TrackedSymbols :> {$CellContext`l$$, $CellContext`t$$, \
+$CellContext`path, $CellContext`path2$$}, ContentSize -> {400, 400}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{420., {258., 263.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>((Quiet[
+        Get["Combinatorica`"]]; $CellContext`r[
+         Pattern[$CellContext`car, 
+          Blank[]], 
+         Pattern[$CellContext`box, 
+          Blank[]]] := Which[
+         And[$CellContext`box == 1, Part[$CellContext`car, 2] == 0], {
+         1, $CellContext`car}, $CellContext`box == 1, {
+         2, {Part[$CellContext`car, 1] + 1, Part[$CellContext`car, 2] - 1}}, 
+         And[$CellContext`box == 2, Part[$CellContext`car, 1] == 0], {
+         2, $CellContext`car}, True, {
+         1, {Part[$CellContext`car, 1] - 1, Part[$CellContext`car, 2] + 
+           1}}]; $CellContext`t1[
+         Pattern[$CellContext`vac, 
+          Blank[]], 
+         Pattern[$CellContext`path, 
+          Blank[]]] := 
+       Module[{$CellContext`ans = {}, $CellContext`car = $CellContext`vac, \
+$CellContext`vt}, 
+         For[$CellContext`i = 1, $CellContext`i <= Length[$CellContext`path], 
+           
+           Increment[$CellContext`i], $CellContext`vt = \
+$CellContext`r[$CellContext`car, 
+              Part[$CellContext`path, $CellContext`i]]; $CellContext`ans = 
+            Append[$CellContext`ans, 
+              Part[$CellContext`vt, 1]]; $CellContext`car = 
+            Part[$CellContext`vt, 
+              2]]; {$CellContext`ans, $CellContext`car}]; $CellContext`pt[
+         Pattern[$CellContext`path, 
+          Blank[]], 
+         Pattern[$CellContext`l, 
+          Blank[]]] := Module[{$CellContext`aux}, $CellContext`aux = Part[
+            $CellContext`t1[{$CellContext`l, 0}, $CellContext`path], 2]; Part[
+           $CellContext`t1[$CellContext`aux, $CellContext`path], 
+           1]]; $CellContext`pbbs[
+         Pattern[$CellContext`path, 
+          Blank[]], 
+         Pattern[$CellContext`l, 
+          Blank[]], 
+         Pattern[$CellContext`t, 
+          Blank[]]] := 
+       Module[{$CellContext`ans = {$CellContext`path}}, 
+         While[Length[$CellContext`ans] < $CellContext`t, $CellContext`ans = 
+           Append[$CellContext`ans, 
+             $CellContext`pt[
+              Part[$CellContext`ans, -1], $CellContext`l]]]; {
+           $CellContext`ktt[
+            
+            Part[$CellContext`ans, -1]], $CellContext`ans}]; \
+$CellContext`showpath[
+         Pattern[$CellContext`path, 
+          Blank[]]] := 
+       Module[{$CellContext`l = Length[$CellContext`path], $CellContext`balls = 
+          Map[Disk[
+             Flatten[{# - 1/2, 1/2}], 0.4]& , 
+            Position[$CellContext`path, 2]], $CellContext`bound = Map[Circle[
+             Flatten[{# - 1/2, 1/2}], 0.4]& , 
+            Position[$CellContext`path, 2]]}, 
+         Graphics[{Black, {
+            Line[{{0, 0}, {$CellContext`l, 0}}], 
+            Line[{{0, 1}, {$CellContext`l, 1}}], 
+            Map[Line[#]& , 
+             
+             Table[{{$CellContext`i, 0}, {$CellContext`i, 
+                1}}, {$CellContext`i, 0, $CellContext`l}]]}, 
+           Yellow, $CellContext`balls, 
+           RGBColor[1, 0, 1], $CellContext`bound}]]; $CellContext`showrc[
+         Pattern[$CellContext`rc, 
+          Blank[]]] := 
+       Module[{$CellContext`y, $CellContext`l, $CellContext`ty, \
+$CellContext`tl, $CellContext`r, $CellContext`rpos, $CellContext`hoff}, \
+$CellContext`y = Map[Part[#, 1]& , $CellContext`rc]; $CellContext`r = 
+          Map[Part[#, 2]& , $CellContext`rc]; $CellContext`l = 
+          Length[$CellContext`y]; $CellContext`ty = 
+          Combinatorica`TransposePartition[$CellContext`y]; $CellContext`tl = 
+          Length[$CellContext`ty]; $CellContext`rpos = 
+          Table[{Part[$CellContext`y, $CellContext`i] + 0.7, 
+             Length[$CellContext`rc] - $CellContext`i + 0.4}, {$CellContext`i,
+              1, 
+             Length[$CellContext`rc]}]; $CellContext`hoff = 4; 
+         Graphics[{Black, {
+             Text["", {-$CellContext`hoff, 0}], 
+             Text["", {7 + $CellContext`hoff, 0}], 
+             Line[{{0, $CellContext`l}, {
+                Part[$CellContext`y, 1], $CellContext`l}}], 
+             Line[{{0, 0}, {0, 
+                Part[$CellContext`ty, 1]}}], 
+             Map[Line[#]& , 
+              Table[{{0, $CellContext`l - $CellContext`i}, {
+                 
+                 Part[$CellContext`y, $CellContext`i], $CellContext`l - \
+$CellContext`i}}, {$CellContext`i, 1, $CellContext`l}]], 
+             Map[Line[#]& , 
+              
+              Table[{{$CellContext`i, Part[$CellContext`ty, 1] - 
+                 Part[$CellContext`ty, $CellContext`i]}, {$CellContext`i, 
+                 Part[$CellContext`ty, 1]}}, {$CellContext`i, 
+                1, $CellContext`tl}]], 
+             Table[
+              Text[
+               Part[$CellContext`r, $CellContext`i], 
+               Part[$CellContext`rpos, $CellContext`i]], {$CellContext`i, 1, 
+               Length[$CellContext`rc]}]}}]]; $CellContext`q[
+         Pattern[$CellContext`l, 
+          Blank[]], 
+         Pattern[$CellContext`conf, 
+          Blank[]]] := Sum[
+         Min[$CellContext`l, 
+          Part[$CellContext`conf, $CellContext`i]], {$CellContext`i, 1, 
+          Length[$CellContext`conf]}]; $CellContext`delta[
+         Pattern[$CellContext`pos, 
+          Blank[]], 
+         Pattern[$CellContext`rc, 
+          Blank[]]] := 
+       Module[{$CellContext`conf, $CellContext`rig, $CellContext`corig, \
+$CellContext`singpos, $CellContext`newconf, $CellContext`replacerig, \
+$CellContext`newrig}, $CellContext`conf = 
+          Map[Part[#, 1]& , $CellContext`rc]; $CellContext`rig = 
+          Map[Part[#, 2]& , $CellContext`rc]; $CellContext`corig = 
+          Table[$CellContext`pos - 1 - 2 $CellContext`q[
+              Part[$CellContext`conf, $CellContext`i], $CellContext`conf] - 
+            Part[$CellContext`rig, $CellContext`i], {$CellContext`i, 1, 
+             Length[$CellContext`rc]}]; If[Min[$CellContext`corig] > 0, 
+           Return[
+            Reverse[
+             Sort[
+              
+              Append[$CellContext`rc, {
+               1, $CellContext`pos - 2 $CellContext`q[1, $CellContext`conf] - 
+                2}]]]]]; $CellContext`singpos = Min[
+            Position[$CellContext`corig, 0]]; $CellContext`newconf = 
+          MapAt[# + 
+            1& , $CellContext`conf, $CellContext`singpos]; \
+$CellContext`replacerig = $CellContext`pos - 2 $CellContext`q[
+             
+             Part[$CellContext`newconf, $CellContext`singpos], \
+$CellContext`newconf]; $CellContext`newrig = 
+          MapAt[Replace[#, # -> $CellContext`replacerig]& , $CellContext`rig, \
+$CellContext`singpos]; Reverse[
+           Sort[
+            Table[{
+              Part[$CellContext`newconf, $CellContext`i], 
+              Part[$CellContext`newrig, $CellContext`i]}, {$CellContext`i, 1, 
+              Length[$CellContext`rc]}]]]]; $CellContext`kkr[
+         Pattern[$CellContext`path, 
+          Blank[]]] := 
+       Module[{$CellContext`ans = {}, $CellContext`pos = Flatten[
+            Position[$CellContext`path, 2]]}, If[$CellContext`pos == {}, 
+           Return[{}]]; 
+         For[$CellContext`i = 1, $CellContext`i <= Length[$CellContext`pos], 
+           Increment[$CellContext`i], $CellContext`ans = $CellContext`delta[
+             
+             Part[$CellContext`pos, $CellContext`i], $CellContext`ans]]; \
+$CellContext`ans]; $CellContext`yamanouchiQ[
+         Pattern[$CellContext`path, 
+          Blank[]]] := Apply[And, 
+         Map[Count[#, 1] >= Count[#, 2]& , 
+          Table[
+           Take[$CellContext`path, $CellContext`i], {$CellContext`i, 1, 
+            Length[$CellContext`path]}]]]; $CellContext`tohighest[
+         Pattern[$CellContext`path, 
+          Blank[]]] := 
+       Module[{$CellContext`ans = $CellContext`path, $CellContext`d = 0}, 
+         While[
+           Not[
+            $CellContext`yamanouchiQ[$CellContext`ans]], $CellContext`ans = 
+            RotateRight[$CellContext`ans]; $CellContext`d = $CellContext`d + 
+             1]; {$CellContext`d, $CellContext`ans}]; $CellContext`ktt[
+         Pattern[$CellContext`path, 
+          Blank[]]] := Map[# - {0, 
+          Part[
+           $CellContext`tohighest[$CellContext`path], 1]}& , 
+         $CellContext`kkr[
+          Part[
+           $CellContext`tohighest[$CellContext`path], 2]]]; Null); 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->False,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->21184083],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`l$$ = 6, $CellContext`path2$$ = {2, 2, 2, 2,
+     2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2}, $CellContext`t$$ = 10, Typeset`show$$ =
+     True, Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`l$$], 6, "type of time evolution"}, 1, 6, 1}, {{
+       Hold[$CellContext`t$$], 10, "total evolution steps"}, 1, 15, 1}, {{
+       Hold[$CellContext`path2$$], {2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+       2}}}, {
+      Hold[
+       Row[{
+         Button[
+         "sample path", $CellContext`path2$$ = {2, 2, 2, 1, 1, 1, 2, 2, 1, 1, 
+           1, 2, 1, 1, 1}], 
+         Button[
+         "generate new random path", $CellContext`path2$$ = 
+          Combinatorica`Permute[
+            Join[
+             Table[1, {9}], 
+             Table[2, {6}]], 
+            Combinatorica`RandomPermutation[15]]]}]], 
+      Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = Automatic, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`l$939934$$ = 0, $CellContext`t$939935$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`l$$ = 
+        6, $CellContext`path2$$ = {2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
+         2}, $CellContext`t$$ = 10}, "ControllerVariables" :> {
+        Hold[$CellContext`l$$, $CellContext`l$939934$$, 0], 
+        Hold[$CellContext`t$$, $CellContext`t$939935$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`ans$}, $CellContext`ans$ = \
+$CellContext`pbbs[$CellContext`path2$$, $CellContext`l$$, $CellContext`t$$]; 
+        Magnify[
+          TableForm[
+           Join[{
+             $CellContext`showrc[
+              Part[$CellContext`ans$, 1]]}, 
+            Map[$CellContext`showpath[#]& , 
+             Part[$CellContext`ans$, 2]]], TableSpacing -> {0, 0}], 1.5]], 
+      "Specifications" :> {{{$CellContext`l$$, 6, "type of time evolution"}, 
+         1, 6, 1, ControlType -> 
+         SetterBar}, {{$CellContext`t$$, 10, "total evolution steps"}, 1, 15, 
+         1, Appearance -> 
+         "Labeled"}, {{$CellContext`path2$$, {2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1,
+           1, 1, 1, 2}}, ControlType -> None}, 
+        Row[{
+          Button[
+          "sample path", $CellContext`path2$$ = {2, 2, 2, 1, 1, 1, 2, 2, 1, 1,
+             1, 2, 1, 1, 1}], 
+          Button[
+          "generate new random path", $CellContext`path2$$ = 
+           Combinatorica`Permute[
+             Join[
+              Table[1, {9}], 
+              Table[2, {6}]], 
+             Combinatorica`RandomPermutation[15]]]}]}, 
+      "Options" :> {
+       AutorunSequencing -> {1, 2}, SynchronousInitialization -> False, 
+        TrackedSymbols :> {$CellContext`l$$, $CellContext`t$$, \
+$CellContext`path, $CellContext`path2$$}, ContentSize -> {400, 400}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{420., {258., 263.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>((Quiet[
+        Get["Combinatorica`"]]; $CellContext`r[
+         Pattern[$CellContext`car, 
+          Blank[]], 
+         Pattern[$CellContext`box, 
+          Blank[]]] := Which[
+         And[$CellContext`box == 1, Part[$CellContext`car, 2] == 0], {
+         1, $CellContext`car}, $CellContext`box == 1, {
+         2, {Part[$CellContext`car, 1] + 1, Part[$CellContext`car, 2] - 1}}, 
+         And[$CellContext`box == 2, Part[$CellContext`car, 1] == 0], {
+         2, $CellContext`car}, True, {
+         1, {Part[$CellContext`car, 1] - 1, Part[$CellContext`car, 2] + 
+           1}}]; $CellContext`t1[
+         Pattern[$CellContext`vac, 
+          Blank[]], 
+         Pattern[$CellContext`path, 
+          Blank[]]] := 
+       Module[{$CellContext`ans = {}, $CellContext`car = $CellContext`vac, \
+$CellContext`vt}, 
+         For[$CellContext`i = 1, $CellContext`i <= Length[$CellContext`path], 
+           
+           Increment[$CellContext`i], $CellContext`vt = \
+$CellContext`r[$CellContext`car, 
+              Part[$CellContext`path, $CellContext`i]]; $CellContext`ans = 
+            Append[$CellContext`ans, 
+              Part[$CellContext`vt, 1]]; $CellContext`car = 
+            Part[$CellContext`vt, 
+              2]]; {$CellContext`ans, $CellContext`car}]; $CellContext`pt[
+         Pattern[$CellContext`path, 
+          Blank[]], 
+         Pattern[$CellContext`l, 
+          Blank[]]] := Module[{$CellContext`aux}, $CellContext`aux = Part[
+            $CellContext`t1[{$CellContext`l, 0}, $CellContext`path], 2]; Part[
+           $CellContext`t1[$CellContext`aux, $CellContext`path], 
+           1]]; $CellContext`pbbs[
+         Pattern[$CellContext`path, 
+          Blank[]], 
+         Pattern[$CellContext`l, 
+          Blank[]], 
+         Pattern[$CellContext`t, 
+          Blank[]]] := 
+       Module[{$CellContext`ans = {$CellContext`path}}, 
+         While[Length[$CellContext`ans] < $CellContext`t, $CellContext`ans = 
+           Append[$CellContext`ans, 
+             $CellContext`pt[
+              Part[$CellContext`ans, -1], $CellContext`l]]]; {
+           $CellContext`ktt[
+            
+            Part[$CellContext`ans, -1]], $CellContext`ans}]; \
+$CellContext`showpath[
+         Pattern[$CellContext`path, 
+          Blank[]]] := 
+       Module[{$CellContext`l = Length[$CellContext`path], $CellContext`balls = 
+          Map[Disk[
+             Flatten[{# - 1/2, 1/2}], 0.4]& , 
+            Position[$CellContext`path, 2]], $CellContext`bound = Map[Circle[
+             Flatten[{# - 1/2, 1/2}], 0.4]& , 
+            Position[$CellContext`path, 2]]}, 
+         Graphics[{Black, {
+            Line[{{0, 0}, {$CellContext`l, 0}}], 
+            Line[{{0, 1}, {$CellContext`l, 1}}], 
+            Map[Line[#]& , 
+             
+             Table[{{$CellContext`i, 0}, {$CellContext`i, 
+                1}}, {$CellContext`i, 0, $CellContext`l}]]}, 
+           Yellow, $CellContext`balls, 
+           RGBColor[1, 0, 1], $CellContext`bound}]]; $CellContext`showrc[
+         Pattern[$CellContext`rc, 
+          Blank[]]] := 
+       Module[{$CellContext`y, $CellContext`l, $CellContext`ty, \
+$CellContext`tl, $CellContext`r, $CellContext`rpos, $CellContext`hoff}, \
+$CellContext`y = Map[Part[#, 1]& , $CellContext`rc]; $CellContext`r = 
+          Map[Part[#, 2]& , $CellContext`rc]; $CellContext`l = 
+          Length[$CellContext`y]; $CellContext`ty = 
+          Combinatorica`TransposePartition[$CellContext`y]; $CellContext`tl = 
+          Length[$CellContext`ty]; $CellContext`rpos = 
+          Table[{Part[$CellContext`y, $CellContext`i] + 0.7, 
+             Length[$CellContext`rc] - $CellContext`i + 0.4}, {$CellContext`i,
+              1, 
+             Length[$CellContext`rc]}]; $CellContext`hoff = 4; 
+         Graphics[{Black, {
+             Text["", {-$CellContext`hoff, 0}], 
+             Text["", {7 + $CellContext`hoff, 0}], 
+             Line[{{0, $CellContext`l}, {
+                Part[$CellContext`y, 1], $CellContext`l}}], 
+             Line[{{0, 0}, {0, 
+                Part[$CellContext`ty, 1]}}], 
+             Map[Line[#]& , 
+              Table[{{0, $CellContext`l - $CellContext`i}, {
+                 
+                 Part[$CellContext`y, $CellContext`i], $CellContext`l - \
+$CellContext`i}}, {$CellContext`i, 1, $CellContext`l}]], 
+             Map[Line[#]& , 
+              
+              Table[{{$CellContext`i, Part[$CellContext`ty, 1] - 
+                 Part[$CellContext`ty, $CellContext`i]}, {$CellContext`i, 
+                 Part[$CellContext`ty, 1]}}, {$CellContext`i, 
+                1, $CellContext`tl}]], 
+             Table[
+              Text[
+               Part[$CellContext`r, $CellContext`i], 
+               Part[$CellContext`rpos, $CellContext`i]], {$CellContext`i, 1, 
+               Length[$CellContext`rc]}]}}]]; $CellContext`q[
+         Pattern[$CellContext`l, 
+          Blank[]], 
+         Pattern[$CellContext`conf, 
+          Blank[]]] := Sum[
+         Min[$CellContext`l, 
+          Part[$CellContext`conf, $CellContext`i]], {$CellContext`i, 1, 
+          Length[$CellContext`conf]}]; $CellContext`delta[
+         Pattern[$CellContext`pos, 
+          Blank[]], 
+         Pattern[$CellContext`rc, 
+          Blank[]]] := 
+       Module[{$CellContext`conf, $CellContext`rig, $CellContext`corig, \
+$CellContext`singpos, $CellContext`newconf, $CellContext`replacerig, \
+$CellContext`newrig}, $CellContext`conf = 
+          Map[Part[#, 1]& , $CellContext`rc]; $CellContext`rig = 
+          Map[Part[#, 2]& , $CellContext`rc]; $CellContext`corig = 
+          Table[$CellContext`pos - 1 - 2 $CellContext`q[
+              Part[$CellContext`conf, $CellContext`i], $CellContext`conf] - 
+            Part[$CellContext`rig, $CellContext`i], {$CellContext`i, 1, 
+             Length[$CellContext`rc]}]; If[Min[$CellContext`corig] > 0, 
+           Return[
+            Reverse[
+             Sort[
+              
+              Append[$CellContext`rc, {
+               1, $CellContext`pos - 2 $CellContext`q[1, $CellContext`conf] - 
+                2}]]]]]; $CellContext`singpos = Min[
+            Position[$CellContext`corig, 0]]; $CellContext`newconf = 
+          MapAt[# + 
+            1& , $CellContext`conf, $CellContext`singpos]; \
+$CellContext`replacerig = $CellContext`pos - 2 $CellContext`q[
+             
+             Part[$CellContext`newconf, $CellContext`singpos], \
+$CellContext`newconf]; $CellContext`newrig = 
+          MapAt[Replace[#, # -> $CellContext`replacerig]& , $CellContext`rig, \
+$CellContext`singpos]; Reverse[
+           Sort[
+            Table[{
+              Part[$CellContext`newconf, $CellContext`i], 
+              Part[$CellContext`newrig, $CellContext`i]}, {$CellContext`i, 1, 
+              Length[$CellContext`rc]}]]]]; $CellContext`kkr[
+         Pattern[$CellContext`path, 
+          Blank[]]] := 
+       Module[{$CellContext`ans = {}, $CellContext`pos = Flatten[
+            Position[$CellContext`path, 2]]}, If[$CellContext`pos == {}, 
+           Return[{}]]; 
+         For[$CellContext`i = 1, $CellContext`i <= Length[$CellContext`pos], 
+           Increment[$CellContext`i], $CellContext`ans = $CellContext`delta[
+             
+             Part[$CellContext`pos, $CellContext`i], $CellContext`ans]]; \
+$CellContext`ans]; $CellContext`yamanouchiQ[
+         Pattern[$CellContext`path, 
+          Blank[]]] := Apply[And, 
+         Map[Count[#, 1] >= Count[#, 2]& , 
+          Table[
+           Take[$CellContext`path, $CellContext`i], {$CellContext`i, 1, 
+            Length[$CellContext`path]}]]]; $CellContext`tohighest[
+         Pattern[$CellContext`path, 
+          Blank[]]] := 
+       Module[{$CellContext`ans = $CellContext`path, $CellContext`d = 0}, 
+         While[
+           Not[
+            $CellContext`yamanouchiQ[$CellContext`ans]], $CellContext`ans = 
+            RotateRight[$CellContext`ans]; $CellContext`d = $CellContext`d + 
+             1]; {$CellContext`d, $CellContext`ans}]; $CellContext`ktt[
+         Pattern[$CellContext`path, 
+          Blank[]]] := Map[# - {0, 
+          Part[
+           $CellContext`tohighest[$CellContext`path], 1]}& , 
+         $CellContext`kkr[
+          Part[
+           $CellContext`tohighest[$CellContext`path], 2]]]; Null); 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->False,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->198957779]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "DetailsSection"],
+
+Cell[TextData[{
+ "Box-ball systems (BBS for short) were introduced by Takahashi\[Dash]Satsuma \
+in 1990 in their study of the construction of examples of soliton cellular \
+automata. The periodic version of BBS (PBBS) was then introduced by Yura\
+\[Dash]Tokihiro in 2001. Since then BBS were extensively studied because many \
+deep and unexpected connections with different branches of mathematics and \
+mathematical physics were discovered. Among those are connections with the \
+theory of the crystal base of quantum affine algebras, various topics in \
+combinatorics, the Riemann theta functions, tropical algebraic geometry, and \
+the theory of discrete KP- and Toda-type integrable systems. For example, \
+local time evolution rules of BBS and PBBS are identical to the combinatorial \
+",
+ Cell[BoxData[
+  FormBox["R", TraditionalForm]], "InlineMath"],
+ "-matrices of the crystal base theory."
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4621457009347253`*^9, 3.4621457401219254`*^9}, {
+   3.4621459190695252`*^9, 3.4621459336087255`*^9}, {3.462146113195925*^9, 
+   3.462146124537125*^9}, {3.462147188950325*^9, 3.462147197467925*^9}, {
+   3.462147233769125*^9, 3.4621472403523254`*^9}, {3.462472151363489*^9, 
+   3.462472152722847*^9}, {3.4624725218743715`*^9, 3.4624726365916533`*^9}, {
+   3.46315374876657*^9, 3.4631537490906024`*^9}, {3.4631827636921225`*^9, 
+   3.463182869319722*^9}, {3.4631830423549223`*^9, 3.463183077376922*^9}, {
+   3.463183483850522*^9, 3.463183496158922*^9}, {3.463200431128518*^9, 
+   3.463200471563718*^9}, {3.463200534135318*^9, 3.463200561029718*^9}, {
+   3.463201338422118*^9, 3.463201339935318*^9}, {3.4632644644763255`*^9, 
+   3.463264470794326*^9}, {3.463264502743126*^9, 3.4632645063311253`*^9}, {
+   3.4633251831798267`*^9, 3.4633252660397325`*^9}, 3.4655622300149336`*^9, 
+   3.4657431572420735`*^9, {3.4657536785396757`*^9, 3.4657536809054337`*^9}},
+ CellID->276535910],
+
+Cell["\<\
+A recent breakthrough is the discovery of the connection with the rigged \
+configurations (RC for short) that were originally discovered by \
+Kerov\[Dash]Kirillov\[Dash]Reshetikhin in 1986 during their study of the \
+Bethe ansatz of the quantum integrable models \
+(Kuniba\[Dash]Okado\[Dash]Sakamoto\[Dash]Takagi\[Dash]Yamada 2006 for BBS and \
+Kuniba\[Dash]Takagi\[Dash]Takenouchi 2006 for PBBS). RC are depicted by Young \
+diagrams associated with integers. Roughly speaking, each row represents a \
+soliton of the length equal to the row and integers determine the positions \
+of such solitons. Similar machinery is established for a wider class of \
+algebras and yields general solutions of BBS and PBBS. Note that in this \
+Demonstration, the periodic boundary condition leads us to consider the \
+quotient space of the set of RC.\
+\>", "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.462145935231125*^9, 3.4621459370251255`*^9}, {
+   3.462145970237525*^9, 3.462145974137525*^9}, {3.4621460057119255`*^9, 
+   3.462146103321125*^9}, {3.4621461657679253`*^9, 3.462146279257925*^9}, {
+   3.462146363497325*^9, 3.4621463665237255`*^9}, {3.462146400547325*^9, 
+   3.462146400609725*^9}, {3.462147284203925*^9, 3.4621472859043255`*^9}, {
+   3.462147316215125*^9, 3.4621473307075253`*^9}, {3.462147362047925*^9, 
+   3.462147364965125*^9}, {3.4624726587632446`*^9, 3.462472731606062*^9}, 
+   3.463178939854122*^9, {3.4631789835185223`*^9, 3.4631792239301224`*^9}, {
+   3.4631793157829223`*^9, 3.4631793176549225`*^9}, {3.463179351896922*^9, 
+   3.4631793540965223`*^9}, 3.4631793849533224`*^9, {3.4631802491809225`*^9, 
+   3.4631802728461223`*^9}, {3.4631803089757223`*^9, 3.463180311128522*^9}, {
+   3.463180458115322*^9, 3.463180459332122*^9}, {3.4631805271499224`*^9, 
+   3.463180528865922*^9}, {3.463186776361122*^9, 3.4631867785607224`*^9}, {
+   3.463200915176918*^9, 3.4632009152705183`*^9}, {3.4633252964774275`*^9, 
+   3.4633253098680816`*^9}, 3.4655622446859336`*^9},
+ CellID->164378504],
+
+Cell[TextData[{
+ "Interested readers are invited to read the following research paper to get \
+comprehensive information of known results and references related with this \
+Demonstration:",
+ " A. N. Kirillov and R. Sakamoto, \"",
+ ButtonBox["Relationships between Two Approaches: Rigged Configurations and \
+10-Eliminations",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://arxiv.org/abs/0902.2286"], None},
+  ButtonNote->"http://arxiv.org/abs/0902.2286"],
+ ",\" ",
+ StyleBox["Letters in Mathematical Physics",
+  FontSlant->"Italic"],
+ ", 89, 2009 pp. 51\[Dash]65. "
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.462146401966925*^9, 3.462146614875925*^9}, {
+   3.4621474005019255`*^9, 3.4621474064611254`*^9}, {3.462147456069125*^9, 
+   3.462147456864725*^9}, 3.4622925841647882`*^9, {3.4624727568869886`*^9, 
+   3.4624727583869696`*^9}, {3.462472902166379*^9, 3.462472912713119*^9}, {
+   3.463743632935603*^9, 3.463743633375245*^9}, 3.465562262576934*^9},
+ CellID->423094802]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.4622926216662235`*^9},
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.3895522232313623`*^9},
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0, CellBaseline -> Baseline], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4633253427741213`*^9, 3.463325352070936*^9}},
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell["", "SearchTermsSection"],
+
+Cell["", "RelatedLinksSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Reiho Sakamoto",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Reiho+Sakamoto"]\
+, None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Reiho+Sakamoto"]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4621440909787254`*^9, 3.462144096407525*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1264, 706},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"8.0 for Microsoft Windows (64-bit) (November 7, 2010)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[96798, 2200, 376, 9, 22, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[97177, 2211, 678, 16, 22, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[97858, 2229, 340, 11, 22, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[98201, 2242, 637, 15, 22, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[98841, 2259, 844, 21, 22, "ControlSuggestions",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[99688, 2282, 369, 9, 22, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[100060, 2293, 1556, 33, 22, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[101619, 2328, 908, 21, 22, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 103452, 2386},
+ {"RotateAndZoomIn3D", 103561, 2389},
+ {"DragLocators", 103671, 2392},
+ {"CreateAndDeleteLocators", 103787, 2395},
+ {"SliderZoom", 103901, 2398},
+ {"GamepadControls", 104007, 2401},
+ {"AutomaticAnimation", 104120, 2404},
+ {"BookmarkAnimation", 104238, 2407}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 135, 2, 74, "DemoTitle"],
+Cell[705, 26, 33, 0, 266, "InitializationSection"],
+Cell[CellGroupData[{
+Cell[763, 30, 29, 0, 188, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[817, 34, 28539, 709, 2028, "Input"],
+Cell[29359, 745, 11911, 256, 533, "Output",
+ CellID->432010115]
+}, {2}]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[41316, 1007, 36, 0, 166, "ManipulateCaptionSection"],
+Cell[41355, 1009, 2553, 49, 85, "ManipulateCaption",
+ CellID->214508731]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[43945, 1063, 28, 0, 168, "ThumbnailSection"],
+Cell[43976, 1065, 11910, 256, 533, "Output",
+ CellID->94623524]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[55923, 1326, 28, 0, 138, "SnapshotsSection"],
+Cell[55954, 1328, 11911, 256, 533, "Output",
+ CellID->332283182],
+Cell[67868, 1586, 11910, 256, 533, "Output",
+ CellID->21184083],
+Cell[79781, 1844, 11911, 256, 533, "Output",
+ CellID->198957779]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[91729, 2105, 26, 0, 332, "DetailsSection"],
+Cell[91758, 2107, 1936, 30, 83, "DetailNotes",
+ CellID->276535910],
+Cell[93697, 2139, 2016, 30, 82, "DetailNotes",
+ CellID->164378504],
+Cell[95716, 2171, 1005, 22, 37, "DetailNotes",
+ CellID->423094802]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[96758, 2198, 37, 0, 120, "ControlSuggestionsSection"],
+Cell[96798, 2200, 376, 9, 22, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[97177, 2211, 678, 16, 22, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[97858, 2229, 340, 11, 22, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[98201, 2242, 637, 15, 22, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[98841, 2259, 844, 21, 22, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[99688, 2282, 369, 9, 22, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[100060, 2293, 1556, 33, 22, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[101619, 2328, 908, 21, 22, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[102542, 2352, 30, 0, 152, "SearchTermsSection"],
+Cell[102575, 2354, 31, 0, 126, "RelatedLinksSection"],
+Cell[CellGroupData[{
+Cell[102631, 2358, 25, 0, 124, "AuthorSection"],
+Cell[102659, 2360, 391, 11, 22, "Author"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

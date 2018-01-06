@@ -1,0 +1,1727 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     68229,       1718]
+NotebookOptionsPosition[     64585,       1606]
+NotebookOutlinePosition[     66187,       1656]
+CellTagsIndexPosition[     65859,       1644]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Logic with Letters", "DemoTitle",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4532000579375*^9, 3.45320006053125*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["", "InitializationSection"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"names1", "[", "fonts1_", "]"}], "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Text", "[", 
+      RowBox[{"Style", "[", 
+       RowBox[{"#", ",", "fonts1"}], "]"}], "]"}], "&"}], "/@", 
+    RowBox[{"CharacterRange", "[", 
+     RowBox[{"\"\<A\>\"", ",", "\"\<U\>\""}], "]"}]}]}], ";", 
+  RowBox[{"names2", "=", 
+   RowBox[{"CharacterRange", "[", 
+    RowBox[{"\"\<A\>\"", ",", "\"\<U\>\""}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"RandomKsublist", "[", 
+     RowBox[{"set_", ",", "k_"}], "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"sub", "=", 
+         RowBox[{"{", "}"}]}], ",", 
+        RowBox[{"rest", "=", "set"}], ",", "new"}], "}"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Do", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"new", "=", 
+           RowBox[{"rest", "[", 
+            RowBox[{"[", 
+             RowBox[{"RandomInteger", "[", 
+              RowBox[{"{", 
+               RowBox[{"1", ",", 
+                RowBox[{"Length", "[", "rest", "]"}]}], "}"}], "]"}], "]"}], 
+            "]"}]}], ";", 
+          RowBox[{"sub", "=", 
+           RowBox[{"Append", "[", 
+            RowBox[{"sub", ",", "new"}], "]"}]}], ";", 
+          RowBox[{"rest", "=", 
+           RowBox[{"Complement", "[", 
+            RowBox[{"rest", ",", 
+             RowBox[{"{", "new", "}"}]}], "]"}]}]}], ",", 
+         RowBox[{"{", "k", "}"}]}], "]"}], ";", "sub"}]}], "]"}]}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"set2A", "[", "n_", "]"}], ":=", 
+    RowBox[{"Complement", "[", 
+     RowBox[{
+      RowBox[{"Flatten", "[", 
+       RowBox[{
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"i", ",", "j"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "1", ",", "n"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"j", ",", "1", ",", "n"}], "}"}]}], "]"}], ",", "1"}], 
+       "]"}], ",", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"i", ",", "i"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}]}], "]"}]}], ";"}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Above1", "[", 
+    RowBox[{"pt1_", ",", "pt2_"}], "]"}], ":=", 
+   RowBox[{"pt1", ">", "pt2"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Below1", "[", 
+    RowBox[{"pt1_", ",", "pt2_"}], "]"}], ":=", 
+   RowBox[{"pt1", "<", "pt2"}]}], ";"}]}], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.452853635515625*^9, 3.45285370146875*^9}, {
+   3.45285374825*^9, 3.452853938328125*^9}, {3.452854059109375*^9, 
+   3.4528541215*^9}, {3.45303153209375*^9, 3.453031651015625*^9}, 
+   3.453032278953125*^9, {3.453033639875*^9, 3.45303367453125*^9}, 
+   3.453033924265625*^9, {3.45303641703125*^9, 3.45303642709375*^9}, {
+   3.453036466484375*^9, 3.453036486375*^9}, 3.4530366799375*^9, {
+   3.4530929813125*^9, 3.453092995109375*^9}, {3.453100746859375*^9, 
+   3.453100752984375*^9}, {3.4531030710625*^9, 3.453103099046875*^9}, {
+   3.453185998734375*^9, 3.45318599915625*^9}, {3.45319958203125*^9, 
+   3.453199586828125*^9}, 3.453199720171875*^9, 3.45320007621875*^9, {
+   3.4533737206406527`*^9, 3.453373731674756*^9}, {3.45475770134375*^9, 
+   3.454757703578125*^9}},
+ CellID->29234715]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"If", "[", 
+     RowBox[{"try", ",", 
+      RowBox[{
+       RowBox[{"ranint", "=", 
+        RowBox[{"RandomInteger", "[", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "1000"}], "}"}], "]"}]}], ";", 
+       RowBox[{"try", "=", "False"}]}]}], "]"}], ";", 
+    RowBox[{"With", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"ran", "=", 
+         RowBox[{"SeedRandom", "[", "ranint", "]"}]}], ",", 
+        RowBox[{"st", "=", 
+         RowBox[{"RandomKsublist", "[", 
+          RowBox[{
+           RowBox[{"Range", "[", 
+            RowBox[{"2", "n"}], "]"}], ",", "n"}], "]"}]}], ",", 
+        RowBox[{"st1", "=", 
+         RowBox[{"RandomKsublist", "[", 
+          RowBox[{
+           RowBox[{"Range", "[", 
+            RowBox[{"2", "n"}], "]"}], ",", "n"}], "]"}]}], ",", 
+        RowBox[{"varpoints", "=", 
+         RowBox[{"RandomKsublist", "[", 
+          RowBox[{
+           RowBox[{"set2A", "[", "n", "]"}], ",", "m"}], "]"}]}]}], "}"}], 
+      ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"nn", "=", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"0", ",", 
+            RowBox[{"st1", "[", 
+             RowBox[{"[", "i", "]"}], "]"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Pane", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"Labeled", "[", 
+          RowBox[{
+           RowBox[{"Graphics", "[", 
+            RowBox[{
+             RowBox[{"Union", "[", 
+              RowBox[{
+               RowBox[{"Table", "[", 
+                RowBox[{
+                 RowBox[{"Line", "[", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"i", "-", "0.5"}], ",", "0.5"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"i", "-", "0.5"}], ",", 
+                    RowBox[{
+                    RowBox[{"2", "n"}], "+", "0.5"}]}], "}"}]}], "}"}], "]"}],
+                  ",", 
+                 RowBox[{"{", 
+                  RowBox[{"i", ",", "0", ",", "1"}], "}"}]}], "]"}], ",", 
+               RowBox[{"Table", "[", 
+                RowBox[{
+                 RowBox[{"Line", "[", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"-", "0.5"}], ",", 
+                    RowBox[{"i", "+", "0.5"}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"0.5", ",", 
+                    RowBox[{"i", "+", "0.5"}]}], "}"}]}], "}"}], "]"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"i", ",", "0", ",", 
+                   RowBox[{"2", "n"}]}], "}"}]}], "]"}]}], "]"}], ",", 
+             RowBox[{"ImageSize", "\[Rule]", "25"}]}], "]"}], ",", 
+           RowBox[{"Dynamic", "[", 
+            RowBox[{"Text", "@", 
+             RowBox[{"Grid", "[", 
+              RowBox[{"Table", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"StringJoin", "[", 
+                   RowBox[{"\"\<     \>\"", ",", 
+                    RowBox[{"names2", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"varpoints", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"i", ",", "1"}], "]"}], "]"}], "]"}], "]"}], ",", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"Above1", "[", 
+                    RowBox[{
+                    RowBox[{"st", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"varpoints", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"i", ",", "1"}], "]"}], "]"}], "]"}], "]"}], ",", 
+                    RowBox[{"st", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"varpoints", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"i", ",", "2"}], "]"}], "]"}], "]"}], "]"}]}], 
+                    "]"}], ",", "\"\< is above \>\"", ",", 
+                    "\"\< is below \>\""}], "]"}], ",", 
+                    RowBox[{"names2", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"varpoints", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"i", ",", "2"}], "]"}], "]"}], "]"}], "]"}], ",", 
+                    "\"\<.\>\""}], "]"}], ",", 
+                  RowBox[{
+                   RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"Above1", "[", 
+                    RowBox[{
+                    RowBox[{"st", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"varpoints", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"i", ",", "1"}], "]"}], "]"}], "]"}], "]"}], ",", 
+                    RowBox[{"st", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"varpoints", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"i", ",", "2"}], "]"}], "]"}], "]"}], "]"}]}], 
+                    "]"}], ",", "Above1", ",", "Below1"}], "]"}], "[", 
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{"nn", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"varpoints", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"i", ",", "1"}], "]"}], "]"}], "]"}], "]"}], "[", 
+                    RowBox[{"[", "2", "]"}], "]"}], ",", 
+                    RowBox[{
+                    RowBox[{"nn", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"varpoints", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"i", ",", "2"}], "]"}], "]"}], "]"}], "]"}], "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}], "]"}]}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", "1", ",", "m"}], "}"}]}], "]"}], "]"}]}], 
+            "]"}], ",", "Right"}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"450", ",", "375"}], "}"}]}], "]"}]}]}], "]"}]}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"n", ",", "5", ",", "\"\<number of letters\>\""}], "}"}], ",", 
+     "4", ",", "8", ",", "1", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"m", ",", "5", ",", "\"\<number of statements\>\""}], "}"}], 
+     ",", "1", ",", "12", ",", "1", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"try", ",", "False", ",", "\"\<try again\>\""}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"False", ",", "True"}], "}"}]}], "}"}], ",", "Delimiter", ",", 
+   RowBox[{
+   "Style", "[", "\"\<Move the letters to make the statements true!\>\"", 
+    "]"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"nn", ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"0", ",", "12"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "18"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "9"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "5"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "10"}], "}"}]}], "}"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", 
+       RowBox[{"2", "n"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "1"}], "}"}], ",", "Locator", ",", 
+     RowBox[{"Appearance", "\[Rule]", 
+      RowBox[{"names1", "[", "20", "]"}]}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"st", ",", 
+       RowBox[{"{", 
+        RowBox[{"22", ",", "17", ",", "8", ",", "5", ",", "23"}], "}"}]}], 
+      "}"}], ",", 
+     RowBox[{"ControlType", "\[Rule]", "None"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"st1", ",", 
+       RowBox[{"{", 
+        RowBox[{"12", ",", "18", ",", "9", ",", "5", ",", "10"}], "}"}]}], 
+      "}"}], ",", 
+     RowBox[{"ControlType", "\[Rule]", "None"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"ranint", ",", "262"}], "}"}], ",", 
+     RowBox[{"ControlType", "\[Rule]", "None"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"SaveDefinitions", "\[Rule]", "True"}], ",", 
+   RowBox[{"AutorunSequencing", "\[Rule]", 
+    RowBox[{"{", "2", "}"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.453200099078125*^9, 3.45320010221875*^9}, {
+   3.4533737426108494`*^9, 3.4533737589344816`*^9}, {3.453373804793067*^9, 
+   3.4533738141400013`*^9}, {3.4533738611006975`*^9, 3.453373960104597*^9}, {
+   3.4533740520877943`*^9, 3.4533742335179353`*^9}, {3.4533742755861416`*^9, 
+   3.453374328402423*^9}, {3.45475713421875*^9, 3.45475715096875*^9}, {
+   3.45475722165625*^9, 3.4547572329375*^9}, {3.45475808840625*^9, 
+   3.45475812421875*^9}, {3.45475818765625*^9, 3.454758204515625*^9}, {
+   3.454758308671875*^9, 3.45475831328125*^9}, 3.454758356765625*^9, {
+   3.4547583986875*^9, 3.454758403078125*^9}, {3.45475846190625*^9, 
+   3.454758488046875*^9}, {3.454758570296875*^9, 3.454758570890625*^9}, {
+   3.4547853214946785`*^9, 3.454785327838266*^9}, {3.454848123594759*^9, 
+   3.4548481660270023`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`m$$ = 5, $CellContext`n$$ = 
+    5, $CellContext`nn$$ = {{0, 2}, {0, 5}, {0, 4}, {0, 9}, {0, 
+    6}}, $CellContext`ranint$$ = 262, $CellContext`st$$ = {22, 17, 8, 5, 
+    23}, $CellContext`st1$$ = {12, 18, 9, 5, 10}, $CellContext`try$$ = False, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`n$$], 5, "number of letters"}, 4, 8, 1}, {{
+       Hold[$CellContext`m$$], 5, "number of statements"}, 1, 12, 1}, {{
+       Hold[$CellContext`try$$], False, "try again"}, {False, True}}, {
+      Hold[
+       Style["Move the letters to make the statements true!"]], 
+      Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`nn$$], {{0, 2}, {0, 5}, {0, 4}, {0, 9}, {0, 6}}}, {0,
+       1}, 
+      Dynamic[{0, 2 $CellContext`n$$}], {1, 1}}, {{
+       Hold[$CellContext`st$$], {22, 17, 8, 5, 23}}}, {{
+       Hold[$CellContext`st1$$], {12, 18, 9, 5, 10}}}, {{
+       Hold[$CellContext`ranint$$], 262}}}, Typeset`size$$ = {
+    450., {185., 190.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`n$32308$$ = 
+    0, $CellContext`m$32309$$ = 0, $CellContext`try$32310$$ = 
+    False, $CellContext`nn$32311$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`m$$ = 5, $CellContext`n$$ = 
+        5, $CellContext`nn$$ = {{0, 2}, {0, 5}, {0, 4}, {0, 9}, {0, 
+         6}}, $CellContext`ranint$$ = 
+        262, $CellContext`st$$ = {22, 17, 8, 5, 23}, $CellContext`st1$$ = {12,
+          18, 9, 5, 10}, $CellContext`try$$ = False}, "ControllerVariables" :> {
+        Hold[$CellContext`n$$, $CellContext`n$32308$$, 0], 
+        Hold[$CellContext`m$$, $CellContext`m$32309$$, 0], 
+        Hold[$CellContext`try$$, $CellContext`try$32310$$, False], 
+        Hold[$CellContext`nn$$, $CellContext`nn$32311$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (
+       If[$CellContext`try$$, $CellContext`ranint$$ = 
+          RandomInteger[{1, 1000}]; $CellContext`try$$ = False]; 
+       With[{$CellContext`ran$ = 
+          SeedRandom[$CellContext`ranint$$], $CellContext`st$ = \
+$CellContext`RandomKsublist[
+            Range[
+            2 $CellContext`n$$], $CellContext`n$$], $CellContext`st1$ = \
+$CellContext`RandomKsublist[
+            Range[
+            2 $CellContext`n$$], $CellContext`n$$], $CellContext`varpoints$ = \
+$CellContext`RandomKsublist[
+            $CellContext`set2A[$CellContext`n$$], $CellContext`m$$]}, \
+$CellContext`nn$$ = Table[{0, 
+             Part[$CellContext`st1$, $CellContext`i]}, {$CellContext`i, 
+             1, $CellContext`n$$}]; Pane[
+           Labeled[
+            Graphics[
+             Union[
+              Table[
+               
+               Line[{{$CellContext`i - 0.5, 0.5}, {$CellContext`i - 0.5, 
+                  2 $CellContext`n$$ + 0.5}}], {$CellContext`i, 0, 1}], 
+              Table[
+               
+               Line[{{-0.5, $CellContext`i + 0.5}, {
+                 0.5, $CellContext`i + 0.5}}], {$CellContext`i, 0, 
+                2 $CellContext`n$$}]], ImageSize -> 25], 
+            Dynamic[
+             Text[
+              Grid[
+               Table[{
+                 StringJoin["     ", 
+                  Part[$CellContext`names2, 
+                   Part[$CellContext`varpoints$, $CellContext`i, 1]], 
+                  If[
+                   $CellContext`Above1[
+                    Part[$CellContext`st$, 
+                    Part[$CellContext`varpoints$, $CellContext`i, 1]], 
+                    Part[$CellContext`st$, 
+                    Part[$CellContext`varpoints$, $CellContext`i, 2]]], 
+                   " is above ", " is below "], 
+                  Part[$CellContext`names2, 
+                   Part[$CellContext`varpoints$, $CellContext`i, 2]], "."], 
+                 If[
+                  $CellContext`Above1[
+                   Part[$CellContext`st$, 
+                    Part[$CellContext`varpoints$, $CellContext`i, 1]], 
+                   Part[$CellContext`st$, 
+                    
+                    Part[$CellContext`varpoints$, $CellContext`i, 
+                    2]]], $CellContext`Above1, $CellContext`Below1][
+                  Part[
+                   Part[$CellContext`nn$$, 
+                    Part[$CellContext`varpoints$, $CellContext`i, 1]], 2], 
+                  Part[
+                   Part[$CellContext`nn$$, 
+                    Part[$CellContext`varpoints$, $CellContext`i, 2]], 
+                   2]]}, {$CellContext`i, 1, $CellContext`m$$}]]]], Right], {
+           450, 375}]]), 
+      "Specifications" :> {{{$CellContext`n$$, 5, "number of letters"}, 4, 8, 
+         1, Appearance -> 
+         "Labeled"}, {{$CellContext`m$$, 5, "number of statements"}, 1, 12, 1,
+          Appearance -> 
+         "Labeled"}, {{$CellContext`try$$, False, "try again"}, {
+         False, True}}, Delimiter, 
+        Style[
+        "Move the letters to make the statements true!"], \
+{{$CellContext`nn$$, {{0, 2}, {0, 5}, {0, 4}, {0, 9}, {0, 6}}}, {0, 1}, 
+         Dynamic[{0, 2 $CellContext`n$$}], {1, 1}, ControlType -> Locator, 
+         Appearance -> {
+           Text[
+            Style["A", 20]], 
+           Text[
+            Style["B", 20]], 
+           Text[
+            Style["C", 20]], 
+           Text[
+            Style["D", 20]], 
+           Text[
+            Style["E", 20]], 
+           Text[
+            Style["F", 20]], 
+           Text[
+            Style["G", 20]], 
+           Text[
+            Style["H", 20]], 
+           Text[
+            Style["I", 20]], 
+           Text[
+            Style["J", 20]], 
+           Text[
+            Style["K", 20]], 
+           Text[
+            Style["L", 20]], 
+           Text[
+            Style["M", 20]], 
+           Text[
+            Style["N", 20]], 
+           Text[
+            Style["O", 20]], 
+           Text[
+            Style["P", 20]], 
+           Text[
+            Style["Q", 20]], 
+           Text[
+            Style["R", 20]], 
+           Text[
+            Style["S", 20]], 
+           Text[
+            Style["T", 20]], 
+           Text[
+            Style["U", 20]]}}, {{$CellContext`st$$, {22, 17, 8, 5, 23}}, 
+         ControlType -> None}, {{$CellContext`st1$$, {12, 18, 9, 5, 10}}, 
+         ControlType -> None}, {{$CellContext`ranint$$, 262}, ControlType -> 
+         None}}, "Options" :> {AutorunSequencing -> {2}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{505., {272., 277.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`RandomKsublist[
+         Pattern[$CellContext`set, 
+          Blank[]], 
+         Pattern[$CellContext`k, 
+          Blank[]]] := 
+       Module[{$CellContext`sub = {}, $CellContext`rest = $CellContext`set, \
+$CellContext`new}, Do[$CellContext`new = Part[$CellContext`rest, 
+              RandomInteger[{1, 
+                Length[$CellContext`rest]}]]; $CellContext`sub = 
+            Append[$CellContext`sub, $CellContext`new]; $CellContext`rest = 
+            Complement[$CellContext`rest, {$CellContext`new}], \
+{$CellContext`k}]; $CellContext`sub], $CellContext`set2A[
+         Pattern[$CellContext`n, 
+          Blank[]]] := Complement[
+         Flatten[
+          
+          Table[{$CellContext`i, $CellContext`j}, {$CellContext`i, 
+            1, $CellContext`n}, {$CellContext`j, 1, $CellContext`n}], 1], 
+         Table[{$CellContext`i, $CellContext`i}, {$CellContext`i, 
+           1, $CellContext`n}]], $CellContext`names2 = {
+        "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", 
+         "O", "P", "Q", "R", "S", "T", "U"}, $CellContext`Above1[
+         Pattern[$CellContext`pt1, 
+          Blank[]], 
+         Pattern[$CellContext`pt2, 
+          
+          Blank[]]] := $CellContext`pt1 > $CellContext`pt2, \
+$CellContext`Below1[
+         Pattern[$CellContext`pt1, 
+          Blank[]], 
+         Pattern[$CellContext`pt2, 
+          Blank[]]] := $CellContext`pt1 < $CellContext`pt2}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->532399904]
+}, {2}]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell["\<\
+Drag the letters from one box to another to make all statements true.\
+\>", "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.453200116953125*^9, 3.453200118875*^9}, {
+   3.4533743717557573`*^9, 3.4533743721467967`*^9}, {3.454785361978017*^9, 
+   3.4547853813368964`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`m$$ = 12, $CellContext`n$$ = 
+    6, $CellContext`nn$$ = {{0, 12}, {0, 2}, {0, 5}, {0, 10}, {0, 3}, {0, 
+    1}}, $CellContext`ranint$$ = 992, $CellContext`st$$ = {22, 17, 8, 5, 
+    23}, $CellContext`st1$$ = {12, 18, 9, 5, 10}, $CellContext`try$$ = False, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`n$$], 6, "number of letters"}, 4, 8, 1}, {{
+       Hold[$CellContext`m$$], 12, "number of statements"}, 1, 12, 1}, {{
+       Hold[$CellContext`try$$], False, "try again"}, {False, True}}, {
+      Hold[
+       Style["Move the letters to make the statements true!"]], 
+      Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`nn$$], {{0, 12}, {0, 2}, {0, 5}, {0, 10}, {0, 3}, {0,
+        1}}}, {0, 1}, 
+      Dynamic[{0, 2 $CellContext`n$$}], {1, 1}}, {{
+       Hold[$CellContext`st$$], {22, 17, 8, 5, 23}}}, {{
+       Hold[$CellContext`st1$$], {12, 18, 9, 5, 10}}}, {{
+       Hold[$CellContext`ranint$$], 992}}}, Typeset`size$$ = {
+    450., {185., 190.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`n$32387$$ = 
+    0, $CellContext`m$32388$$ = 0, $CellContext`try$32389$$ = 
+    False, $CellContext`nn$32390$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`m$$ = 12, $CellContext`n$$ = 
+        6, $CellContext`nn$$ = {{0, 12}, {0, 2}, {0, 5}, {0, 10}, {0, 3}, {0, 
+         1}}, $CellContext`ranint$$ = 
+        992, $CellContext`st$$ = {22, 17, 8, 5, 23}, $CellContext`st1$$ = {12,
+          18, 9, 5, 10}, $CellContext`try$$ = False}, "ControllerVariables" :> {
+        Hold[$CellContext`n$$, $CellContext`n$32387$$, 0], 
+        Hold[$CellContext`m$$, $CellContext`m$32388$$, 0], 
+        Hold[$CellContext`try$$, $CellContext`try$32389$$, False], 
+        Hold[$CellContext`nn$$, $CellContext`nn$32390$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (
+       If[$CellContext`try$$, $CellContext`ranint$$ = 
+          RandomInteger[{1, 1000}]; $CellContext`try$$ = False]; 
+       With[{$CellContext`ran$ = 
+          SeedRandom[$CellContext`ranint$$], $CellContext`st$ = \
+$CellContext`RandomKsublist[
+            Range[
+            2 $CellContext`n$$], $CellContext`n$$], $CellContext`st1$ = \
+$CellContext`RandomKsublist[
+            Range[
+            2 $CellContext`n$$], $CellContext`n$$], $CellContext`varpoints$ = \
+$CellContext`RandomKsublist[
+            $CellContext`set2A[$CellContext`n$$], $CellContext`m$$]}, \
+$CellContext`nn$$ = Table[{0, 
+             Part[$CellContext`st1$, $CellContext`i]}, {$CellContext`i, 
+             1, $CellContext`n$$}]; Pane[
+           Labeled[
+            Graphics[
+             Union[
+              Table[
+               
+               Line[{{$CellContext`i - 0.5, 0.5}, {$CellContext`i - 0.5, 
+                  2 $CellContext`n$$ + 0.5}}], {$CellContext`i, 0, 1}], 
+              Table[
+               
+               Line[{{-0.5, $CellContext`i + 0.5}, {
+                 0.5, $CellContext`i + 0.5}}], {$CellContext`i, 0, 
+                2 $CellContext`n$$}]], ImageSize -> 25], 
+            Dynamic[
+             Text[
+              Grid[
+               Table[{
+                 StringJoin["     ", 
+                  Part[$CellContext`names2, 
+                   Part[$CellContext`varpoints$, $CellContext`i, 1]], 
+                  If[
+                   $CellContext`Above1[
+                    Part[$CellContext`st$, 
+                    Part[$CellContext`varpoints$, $CellContext`i, 1]], 
+                    Part[$CellContext`st$, 
+                    Part[$CellContext`varpoints$, $CellContext`i, 2]]], 
+                   " is above ", " is below "], 
+                  Part[$CellContext`names2, 
+                   Part[$CellContext`varpoints$, $CellContext`i, 2]], "."], 
+                 If[
+                  $CellContext`Above1[
+                   Part[$CellContext`st$, 
+                    Part[$CellContext`varpoints$, $CellContext`i, 1]], 
+                   Part[$CellContext`st$, 
+                    
+                    Part[$CellContext`varpoints$, $CellContext`i, 
+                    2]]], $CellContext`Above1, $CellContext`Below1][
+                  Part[
+                   Part[$CellContext`nn$$, 
+                    Part[$CellContext`varpoints$, $CellContext`i, 1]], 2], 
+                  Part[
+                   Part[$CellContext`nn$$, 
+                    Part[$CellContext`varpoints$, $CellContext`i, 2]], 
+                   2]]}, {$CellContext`i, 1, $CellContext`m$$}]]]], Right], {
+           450, 375}]]), 
+      "Specifications" :> {{{$CellContext`n$$, 6, "number of letters"}, 4, 8, 
+         1, Appearance -> 
+         "Labeled"}, {{$CellContext`m$$, 12, "number of statements"}, 1, 12, 
+         1, Appearance -> 
+         "Labeled"}, {{$CellContext`try$$, False, "try again"}, {
+         False, True}}, Delimiter, 
+        Style[
+        "Move the letters to make the statements true!"], \
+{{$CellContext`nn$$, {{0, 12}, {0, 2}, {0, 5}, {0, 10}, {0, 3}, {0, 1}}}, {0, 
+         1}, 
+         Dynamic[{0, 2 $CellContext`n$$}], {1, 1}, ControlType -> Locator, 
+         Appearance -> {
+           Text[
+            Style["A", 20]], 
+           Text[
+            Style["B", 20]], 
+           Text[
+            Style["C", 20]], 
+           Text[
+            Style["D", 20]], 
+           Text[
+            Style["E", 20]], 
+           Text[
+            Style["F", 20]], 
+           Text[
+            Style["G", 20]], 
+           Text[
+            Style["H", 20]], 
+           Text[
+            Style["I", 20]], 
+           Text[
+            Style["J", 20]], 
+           Text[
+            Style["K", 20]], 
+           Text[
+            Style["L", 20]], 
+           Text[
+            Style["M", 20]], 
+           Text[
+            Style["N", 20]], 
+           Text[
+            Style["O", 20]], 
+           Text[
+            Style["P", 20]], 
+           Text[
+            Style["Q", 20]], 
+           Text[
+            Style["R", 20]], 
+           Text[
+            Style["S", 20]], 
+           Text[
+            Style["T", 20]], 
+           Text[
+            Style["U", 20]]}}, {{$CellContext`st$$, {22, 17, 8, 5, 23}}, 
+         ControlType -> None}, {{$CellContext`st1$$, {12, 18, 9, 5, 10}}, 
+         ControlType -> None}, {{$CellContext`ranint$$, 992}, ControlType -> 
+         None}}, "Options" :> {AutorunSequencing -> {2}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{505., {272., 277.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`RandomKsublist[
+         Pattern[$CellContext`set, 
+          Blank[]], 
+         Pattern[$CellContext`k, 
+          Blank[]]] := 
+       Module[{$CellContext`sub = {}, $CellContext`rest = $CellContext`set, \
+$CellContext`new}, Do[$CellContext`new = Part[$CellContext`rest, 
+              RandomInteger[{1, 
+                Length[$CellContext`rest]}]]; $CellContext`sub = 
+            Append[$CellContext`sub, $CellContext`new]; $CellContext`rest = 
+            Complement[$CellContext`rest, {$CellContext`new}], \
+{$CellContext`k}]; $CellContext`sub], $CellContext`set2A[
+         Pattern[$CellContext`n, 
+          Blank[]]] := Complement[
+         Flatten[
+          
+          Table[{$CellContext`i, $CellContext`j}, {$CellContext`i, 
+            1, $CellContext`n}, {$CellContext`j, 1, $CellContext`n}], 1], 
+         Table[{$CellContext`i, $CellContext`i}, {$CellContext`i, 
+           1, $CellContext`n}]], $CellContext`names2 = {
+        "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", 
+         "O", "P", "Q", "R", "S", "T", "U"}, $CellContext`Above1[
+         Pattern[$CellContext`pt1, 
+          Blank[]], 
+         Pattern[$CellContext`pt2, 
+          
+          Blank[]]] := $CellContext`pt1 > $CellContext`pt2, \
+$CellContext`Below1[
+         Pattern[$CellContext`pt1, 
+          Blank[]], 
+         Pattern[$CellContext`pt2, 
+          Blank[]]] := $CellContext`pt1 < $CellContext`pt2}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->354240055]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`m$$ = 12, $CellContext`n$$ = 
+    4, $CellContext`nn$$ = {{0, 7}, {0, 8}, {0, 2}, {0, 
+    6}}, $CellContext`ranint$$ = 992, $CellContext`st$$ = {22, 17, 8, 5, 
+    23}, $CellContext`st1$$ = {12, 18, 9, 5, 10}, $CellContext`try$$ = False, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`n$$], 4, "number of letters"}, 4, 8, 1}, {{
+       Hold[$CellContext`m$$], 12, "number of statements"}, 1, 12, 1}, {{
+       Hold[$CellContext`try$$], False, "try again"}, {False, True}}, {
+      Hold[
+       Style["Move the letters to make the statements true!"]], 
+      Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`nn$$], {{0, 7}, {0, 8}, {0, 2}, {0, 6}}}, {0, 1}, 
+      Dynamic[{0, 2 $CellContext`n$$}], {1, 1}}, {{
+       Hold[$CellContext`st$$], {22, 17, 8, 5, 23}}}, {{
+       Hold[$CellContext`st1$$], {12, 18, 9, 5, 10}}}, {{
+       Hold[$CellContext`ranint$$], 992}}}, Typeset`size$$ = Automatic, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`n$32466$$ = 0, $CellContext`m$32467$$ = 
+    0, $CellContext`try$32468$$ = False, $CellContext`nn$32469$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`m$$ = 12, $CellContext`n$$ = 
+        4, $CellContext`nn$$ = {{0, 7}, {0, 8}, {0, 2}, {0, 
+         6}}, $CellContext`ranint$$ = 
+        992, $CellContext`st$$ = {22, 17, 8, 5, 23}, $CellContext`st1$$ = {12,
+          18, 9, 5, 10}, $CellContext`try$$ = False}, "ControllerVariables" :> {
+        Hold[$CellContext`n$$, $CellContext`n$32466$$, 0], 
+        Hold[$CellContext`m$$, $CellContext`m$32467$$, 0], 
+        Hold[$CellContext`try$$, $CellContext`try$32468$$, False], 
+        Hold[$CellContext`nn$$, $CellContext`nn$32469$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (
+       If[$CellContext`try$$, $CellContext`ranint$$ = 
+          RandomInteger[{1, 1000}]; $CellContext`try$$ = False]; 
+       With[{$CellContext`ran$ = 
+          SeedRandom[$CellContext`ranint$$], $CellContext`st$ = \
+$CellContext`RandomKsublist[
+            Range[
+            2 $CellContext`n$$], $CellContext`n$$], $CellContext`st1$ = \
+$CellContext`RandomKsublist[
+            Range[
+            2 $CellContext`n$$], $CellContext`n$$], $CellContext`varpoints$ = \
+$CellContext`RandomKsublist[
+            $CellContext`set2A[$CellContext`n$$], $CellContext`m$$]}, \
+$CellContext`nn$$ = Table[{0, 
+             Part[$CellContext`st1$, $CellContext`i]}, {$CellContext`i, 
+             1, $CellContext`n$$}]; Pane[
+           Labeled[
+            Graphics[
+             Union[
+              Table[
+               
+               Line[{{$CellContext`i - 0.5, 0.5}, {$CellContext`i - 0.5, 
+                  2 $CellContext`n$$ + 0.5}}], {$CellContext`i, 0, 1}], 
+              Table[
+               
+               Line[{{-0.5, $CellContext`i + 0.5}, {
+                 0.5, $CellContext`i + 0.5}}], {$CellContext`i, 0, 
+                2 $CellContext`n$$}]], ImageSize -> 25], 
+            Dynamic[
+             Text[
+              Grid[
+               Table[{
+                 StringJoin["     ", 
+                  Part[$CellContext`names2, 
+                   Part[$CellContext`varpoints$, $CellContext`i, 1]], 
+                  If[
+                   $CellContext`Above1[
+                    Part[$CellContext`st$, 
+                    Part[$CellContext`varpoints$, $CellContext`i, 1]], 
+                    Part[$CellContext`st$, 
+                    Part[$CellContext`varpoints$, $CellContext`i, 2]]], 
+                   " is above ", " is below "], 
+                  Part[$CellContext`names2, 
+                   Part[$CellContext`varpoints$, $CellContext`i, 2]], "."], 
+                 If[
+                  $CellContext`Above1[
+                   Part[$CellContext`st$, 
+                    Part[$CellContext`varpoints$, $CellContext`i, 1]], 
+                   Part[$CellContext`st$, 
+                    
+                    Part[$CellContext`varpoints$, $CellContext`i, 
+                    2]]], $CellContext`Above1, $CellContext`Below1][
+                  Part[
+                   Part[$CellContext`nn$$, 
+                    Part[$CellContext`varpoints$, $CellContext`i, 1]], 2], 
+                  Part[
+                   Part[$CellContext`nn$$, 
+                    Part[$CellContext`varpoints$, $CellContext`i, 2]], 
+                   2]]}, {$CellContext`i, 1, $CellContext`m$$}]]]], Right], {
+           450, 375}]]), 
+      "Specifications" :> {{{$CellContext`n$$, 4, "number of letters"}, 4, 8, 
+         1, Appearance -> 
+         "Labeled"}, {{$CellContext`m$$, 12, "number of statements"}, 1, 12, 
+         1, Appearance -> 
+         "Labeled"}, {{$CellContext`try$$, False, "try again"}, {
+         False, True}}, Delimiter, 
+        Style[
+        "Move the letters to make the statements true!"], \
+{{$CellContext`nn$$, {{0, 7}, {0, 8}, {0, 2}, {0, 6}}}, {0, 1}, 
+         Dynamic[{0, 2 $CellContext`n$$}], {1, 1}, ControlType -> Locator, 
+         Appearance -> {
+           Text[
+            Style["A", 20]], 
+           Text[
+            Style["B", 20]], 
+           Text[
+            Style["C", 20]], 
+           Text[
+            Style["D", 20]], 
+           Text[
+            Style["E", 20]], 
+           Text[
+            Style["F", 20]], 
+           Text[
+            Style["G", 20]], 
+           Text[
+            Style["H", 20]], 
+           Text[
+            Style["I", 20]], 
+           Text[
+            Style["J", 20]], 
+           Text[
+            Style["K", 20]], 
+           Text[
+            Style["L", 20]], 
+           Text[
+            Style["M", 20]], 
+           Text[
+            Style["N", 20]], 
+           Text[
+            Style["O", 20]], 
+           Text[
+            Style["P", 20]], 
+           Text[
+            Style["Q", 20]], 
+           Text[
+            Style["R", 20]], 
+           Text[
+            Style["S", 20]], 
+           Text[
+            Style["T", 20]], 
+           Text[
+            Style["U", 20]]}}, {{$CellContext`st$$, {22, 17, 8, 5, 23}}, 
+         ControlType -> None}, {{$CellContext`st1$$, {12, 18, 9, 5, 10}}, 
+         ControlType -> None}, {{$CellContext`ranint$$, 992}, ControlType -> 
+         None}}, "Options" :> {AutorunSequencing -> {2}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`RandomKsublist[
+         Pattern[$CellContext`set, 
+          Blank[]], 
+         Pattern[$CellContext`k, 
+          Blank[]]] := 
+       Module[{$CellContext`sub = {}, $CellContext`rest = $CellContext`set, \
+$CellContext`new}, Do[$CellContext`new = Part[$CellContext`rest, 
+              RandomInteger[{1, 
+                Length[$CellContext`rest]}]]; $CellContext`sub = 
+            Append[$CellContext`sub, $CellContext`new]; $CellContext`rest = 
+            Complement[$CellContext`rest, {$CellContext`new}], \
+{$CellContext`k}]; $CellContext`sub], $CellContext`set2A[
+         Pattern[$CellContext`n, 
+          Blank[]]] := Complement[
+         Flatten[
+          
+          Table[{$CellContext`i, $CellContext`j}, {$CellContext`i, 
+            1, $CellContext`n}, {$CellContext`j, 1, $CellContext`n}], 1], 
+         Table[{$CellContext`i, $CellContext`i}, {$CellContext`i, 
+           1, $CellContext`n}]], $CellContext`names2 = {
+        "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", 
+         "O", "P", "Q", "R", "S", "T", "U"}, $CellContext`Above1[
+         Pattern[$CellContext`pt1, 
+          Blank[]], 
+         Pattern[$CellContext`pt2, 
+          
+          Blank[]]] := $CellContext`pt1 > $CellContext`pt2, \
+$CellContext`Below1[
+         Pattern[$CellContext`pt1, 
+          Blank[]], 
+         Pattern[$CellContext`pt2, 
+          Blank[]]] := $CellContext`pt1 < $CellContext`pt2}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->691366063],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`m$$ = 5, $CellContext`n$$ = 
+    5, $CellContext`nn$$ = {{0, 9}, {0, 1}, {0, 6}, {0, 10}, {0, 
+    8}}, $CellContext`ranint$$ = 992, $CellContext`st$$ = {22, 17, 8, 5, 
+    23}, $CellContext`st1$$ = {12, 18, 9, 5, 10}, $CellContext`try$$ = False, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`n$$], 5, "number of letters"}, 4, 8, 1}, {{
+       Hold[$CellContext`m$$], 5, "number of statements"}, 1, 12, 1}, {{
+       Hold[$CellContext`try$$], False, "try again"}, {False, True}}, {
+      Hold[
+       Style["Move the letters to make the statements true!"]], 
+      Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`nn$$], {{0, 9}, {0, 1}, {0, 6}, {0, 10}, {0, 8}}}, {
+      0, 1}, 
+      Dynamic[{0, 2 $CellContext`n$$}], {1, 1}}, {{
+       Hold[$CellContext`st$$], {22, 17, 8, 5, 23}}}, {{
+       Hold[$CellContext`st1$$], {12, 18, 9, 5, 10}}}, {{
+       Hold[$CellContext`ranint$$], 992}}}, Typeset`size$$ = Automatic, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`n$32545$$ = 0, $CellContext`m$32546$$ = 
+    0, $CellContext`try$32547$$ = False, $CellContext`nn$32548$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`m$$ = 5, $CellContext`n$$ = 
+        5, $CellContext`nn$$ = {{0, 9}, {0, 1}, {0, 6}, {0, 10}, {0, 
+         8}}, $CellContext`ranint$$ = 
+        992, $CellContext`st$$ = {22, 17, 8, 5, 23}, $CellContext`st1$$ = {12,
+          18, 9, 5, 10}, $CellContext`try$$ = False}, "ControllerVariables" :> {
+        Hold[$CellContext`n$$, $CellContext`n$32545$$, 0], 
+        Hold[$CellContext`m$$, $CellContext`m$32546$$, 0], 
+        Hold[$CellContext`try$$, $CellContext`try$32547$$, False], 
+        Hold[$CellContext`nn$$, $CellContext`nn$32548$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (
+       If[$CellContext`try$$, $CellContext`ranint$$ = 
+          RandomInteger[{1, 1000}]; $CellContext`try$$ = False]; 
+       With[{$CellContext`ran$ = 
+          SeedRandom[$CellContext`ranint$$], $CellContext`st$ = \
+$CellContext`RandomKsublist[
+            Range[
+            2 $CellContext`n$$], $CellContext`n$$], $CellContext`st1$ = \
+$CellContext`RandomKsublist[
+            Range[
+            2 $CellContext`n$$], $CellContext`n$$], $CellContext`varpoints$ = \
+$CellContext`RandomKsublist[
+            $CellContext`set2A[$CellContext`n$$], $CellContext`m$$]}, \
+$CellContext`nn$$ = Table[{0, 
+             Part[$CellContext`st1$, $CellContext`i]}, {$CellContext`i, 
+             1, $CellContext`n$$}]; Pane[
+           Labeled[
+            Graphics[
+             Union[
+              Table[
+               
+               Line[{{$CellContext`i - 0.5, 0.5}, {$CellContext`i - 0.5, 
+                  2 $CellContext`n$$ + 0.5}}], {$CellContext`i, 0, 1}], 
+              Table[
+               
+               Line[{{-0.5, $CellContext`i + 0.5}, {
+                 0.5, $CellContext`i + 0.5}}], {$CellContext`i, 0, 
+                2 $CellContext`n$$}]], ImageSize -> 25], 
+            Dynamic[
+             Text[
+              Grid[
+               Table[{
+                 StringJoin["     ", 
+                  Part[$CellContext`names2, 
+                   Part[$CellContext`varpoints$, $CellContext`i, 1]], 
+                  If[
+                   $CellContext`Above1[
+                    Part[$CellContext`st$, 
+                    Part[$CellContext`varpoints$, $CellContext`i, 1]], 
+                    Part[$CellContext`st$, 
+                    Part[$CellContext`varpoints$, $CellContext`i, 2]]], 
+                   " is above ", " is below "], 
+                  Part[$CellContext`names2, 
+                   Part[$CellContext`varpoints$, $CellContext`i, 2]], "."], 
+                 If[
+                  $CellContext`Above1[
+                   Part[$CellContext`st$, 
+                    Part[$CellContext`varpoints$, $CellContext`i, 1]], 
+                   Part[$CellContext`st$, 
+                    
+                    Part[$CellContext`varpoints$, $CellContext`i, 
+                    2]]], $CellContext`Above1, $CellContext`Below1][
+                  Part[
+                   Part[$CellContext`nn$$, 
+                    Part[$CellContext`varpoints$, $CellContext`i, 1]], 2], 
+                  Part[
+                   Part[$CellContext`nn$$, 
+                    Part[$CellContext`varpoints$, $CellContext`i, 2]], 
+                   2]]}, {$CellContext`i, 1, $CellContext`m$$}]]]], Right], {
+           450, 375}]]), 
+      "Specifications" :> {{{$CellContext`n$$, 5, "number of letters"}, 4, 8, 
+         1, Appearance -> 
+         "Labeled"}, {{$CellContext`m$$, 5, "number of statements"}, 1, 12, 1,
+          Appearance -> 
+         "Labeled"}, {{$CellContext`try$$, False, "try again"}, {
+         False, True}}, Delimiter, 
+        Style[
+        "Move the letters to make the statements true!"], \
+{{$CellContext`nn$$, {{0, 9}, {0, 1}, {0, 6}, {0, 10}, {0, 8}}}, {0, 1}, 
+         Dynamic[{0, 2 $CellContext`n$$}], {1, 1}, ControlType -> Locator, 
+         Appearance -> {
+           Text[
+            Style["A", 20]], 
+           Text[
+            Style["B", 20]], 
+           Text[
+            Style["C", 20]], 
+           Text[
+            Style["D", 20]], 
+           Text[
+            Style["E", 20]], 
+           Text[
+            Style["F", 20]], 
+           Text[
+            Style["G", 20]], 
+           Text[
+            Style["H", 20]], 
+           Text[
+            Style["I", 20]], 
+           Text[
+            Style["J", 20]], 
+           Text[
+            Style["K", 20]], 
+           Text[
+            Style["L", 20]], 
+           Text[
+            Style["M", 20]], 
+           Text[
+            Style["N", 20]], 
+           Text[
+            Style["O", 20]], 
+           Text[
+            Style["P", 20]], 
+           Text[
+            Style["Q", 20]], 
+           Text[
+            Style["R", 20]], 
+           Text[
+            Style["S", 20]], 
+           Text[
+            Style["T", 20]], 
+           Text[
+            Style["U", 20]]}}, {{$CellContext`st$$, {22, 17, 8, 5, 23}}, 
+         ControlType -> None}, {{$CellContext`st1$$, {12, 18, 9, 5, 10}}, 
+         ControlType -> None}, {{$CellContext`ranint$$, 992}, ControlType -> 
+         None}}, "Options" :> {AutorunSequencing -> {2}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`RandomKsublist[
+         Pattern[$CellContext`set, 
+          Blank[]], 
+         Pattern[$CellContext`k, 
+          Blank[]]] := 
+       Module[{$CellContext`sub = {}, $CellContext`rest = $CellContext`set, \
+$CellContext`new}, Do[$CellContext`new = Part[$CellContext`rest, 
+              RandomInteger[{1, 
+                Length[$CellContext`rest]}]]; $CellContext`sub = 
+            Append[$CellContext`sub, $CellContext`new]; $CellContext`rest = 
+            Complement[$CellContext`rest, {$CellContext`new}], \
+{$CellContext`k}]; $CellContext`sub], $CellContext`set2A[
+         Pattern[$CellContext`n, 
+          Blank[]]] := Complement[
+         Flatten[
+          
+          Table[{$CellContext`i, $CellContext`j}, {$CellContext`i, 
+            1, $CellContext`n}, {$CellContext`j, 1, $CellContext`n}], 1], 
+         Table[{$CellContext`i, $CellContext`i}, {$CellContext`i, 
+           1, $CellContext`n}]], $CellContext`names2 = {
+        "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", 
+         "O", "P", "Q", "R", "S", "T", "U"}, $CellContext`Above1[
+         Pattern[$CellContext`pt1, 
+          Blank[]], 
+         Pattern[$CellContext`pt2, 
+          
+          Blank[]]] := $CellContext`pt1 > $CellContext`pt2, \
+$CellContext`Below1[
+         Pattern[$CellContext`pt1, 
+          Blank[]], 
+         Pattern[$CellContext`pt2, 
+          Blank[]]] := $CellContext`pt1 < $CellContext`pt2}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->38054110],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`m$$ = 10, $CellContext`n$$ = 
+    7, $CellContext`nn$$ = {{0, 14}, {0, 6}, {0, 5}, {0, 8}, {0, 7}, {0, 
+    10}, {0, 9}}, $CellContext`ranint$$ = 262, $CellContext`st$$ = {22, 17, 8,
+     5, 23}, $CellContext`st1$$ = {12, 18, 9, 5, 10}, $CellContext`try$$ = 
+    False, Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`n$$], 7, "number of letters"}, 4, 8, 1}, {{
+       Hold[$CellContext`m$$], 10, "number of statements"}, 1, 12, 1}, {{
+       Hold[$CellContext`try$$], False, "try again"}, {False, True}}, {
+      Hold[
+       Style["Move the letters to make the statements true!"]], 
+      Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`nn$$], {{0, 14}, {0, 6}, {0, 5}, {0, 8}, {0, 7}, {0, 
+       10}, {0, 9}}}, {0, 1}, 
+      Dynamic[{0, 2 $CellContext`n$$}], {1, 1}}, {{
+       Hold[$CellContext`st$$], {22, 17, 8, 5, 23}}}, {{
+       Hold[$CellContext`st1$$], {12, 18, 9, 5, 10}}}, {{
+       Hold[$CellContext`ranint$$], 262}}}, Typeset`size$$ = Automatic, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`n$32624$$ = 0, $CellContext`m$32625$$ = 
+    0, $CellContext`try$32626$$ = False, $CellContext`nn$32627$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`m$$ = 10, $CellContext`n$$ = 
+        7, $CellContext`nn$$ = {{0, 14}, {0, 6}, {0, 5}, {0, 8}, {0, 7}, {0, 
+         10}, {0, 9}}, $CellContext`ranint$$ = 
+        262, $CellContext`st$$ = {22, 17, 8, 5, 23}, $CellContext`st1$$ = {12,
+          18, 9, 5, 10}, $CellContext`try$$ = False}, "ControllerVariables" :> {
+        Hold[$CellContext`n$$, $CellContext`n$32624$$, 0], 
+        Hold[$CellContext`m$$, $CellContext`m$32625$$, 0], 
+        Hold[$CellContext`try$$, $CellContext`try$32626$$, False], 
+        Hold[$CellContext`nn$$, $CellContext`nn$32627$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (
+       If[$CellContext`try$$, $CellContext`ranint$$ = 
+          RandomInteger[{1, 1000}]; $CellContext`try$$ = False]; 
+       With[{$CellContext`ran$ = 
+          SeedRandom[$CellContext`ranint$$], $CellContext`st$ = \
+$CellContext`RandomKsublist[
+            Range[
+            2 $CellContext`n$$], $CellContext`n$$], $CellContext`st1$ = \
+$CellContext`RandomKsublist[
+            Range[
+            2 $CellContext`n$$], $CellContext`n$$], $CellContext`varpoints$ = \
+$CellContext`RandomKsublist[
+            $CellContext`set2A[$CellContext`n$$], $CellContext`m$$]}, \
+$CellContext`nn$$ = Table[{0, 
+             Part[$CellContext`st1$, $CellContext`i]}, {$CellContext`i, 
+             1, $CellContext`n$$}]; Pane[
+           Labeled[
+            Graphics[
+             Union[
+              Table[
+               
+               Line[{{$CellContext`i - 0.5, 0.5}, {$CellContext`i - 0.5, 
+                  2 $CellContext`n$$ + 0.5}}], {$CellContext`i, 0, 1}], 
+              Table[
+               
+               Line[{{-0.5, $CellContext`i + 0.5}, {
+                 0.5, $CellContext`i + 0.5}}], {$CellContext`i, 0, 
+                2 $CellContext`n$$}]], ImageSize -> 25], 
+            Dynamic[
+             Text[
+              Grid[
+               Table[{
+                 StringJoin["     ", 
+                  Part[$CellContext`names2, 
+                   Part[$CellContext`varpoints$, $CellContext`i, 1]], 
+                  If[
+                   $CellContext`Above1[
+                    Part[$CellContext`st$, 
+                    Part[$CellContext`varpoints$, $CellContext`i, 1]], 
+                    Part[$CellContext`st$, 
+                    Part[$CellContext`varpoints$, $CellContext`i, 2]]], 
+                   " is above ", " is below "], 
+                  Part[$CellContext`names2, 
+                   Part[$CellContext`varpoints$, $CellContext`i, 2]], "."], 
+                 If[
+                  $CellContext`Above1[
+                   Part[$CellContext`st$, 
+                    Part[$CellContext`varpoints$, $CellContext`i, 1]], 
+                   Part[$CellContext`st$, 
+                    
+                    Part[$CellContext`varpoints$, $CellContext`i, 
+                    2]]], $CellContext`Above1, $CellContext`Below1][
+                  Part[
+                   Part[$CellContext`nn$$, 
+                    Part[$CellContext`varpoints$, $CellContext`i, 1]], 2], 
+                  Part[
+                   Part[$CellContext`nn$$, 
+                    Part[$CellContext`varpoints$, $CellContext`i, 2]], 
+                   2]]}, {$CellContext`i, 1, $CellContext`m$$}]]]], Right], {
+           450, 375}]]), 
+      "Specifications" :> {{{$CellContext`n$$, 7, "number of letters"}, 4, 8, 
+         1, Appearance -> 
+         "Labeled"}, {{$CellContext`m$$, 10, "number of statements"}, 1, 12, 
+         1, Appearance -> 
+         "Labeled"}, {{$CellContext`try$$, False, "try again"}, {
+         False, True}}, Delimiter, 
+        Style[
+        "Move the letters to make the statements true!"], \
+{{$CellContext`nn$$, {{0, 14}, {0, 6}, {0, 5}, {0, 8}, {0, 7}, {0, 10}, {0, 
+          9}}}, {0, 1}, 
+         Dynamic[{0, 2 $CellContext`n$$}], {1, 1}, ControlType -> Locator, 
+         Appearance -> {
+           Text[
+            Style["A", 20]], 
+           Text[
+            Style["B", 20]], 
+           Text[
+            Style["C", 20]], 
+           Text[
+            Style["D", 20]], 
+           Text[
+            Style["E", 20]], 
+           Text[
+            Style["F", 20]], 
+           Text[
+            Style["G", 20]], 
+           Text[
+            Style["H", 20]], 
+           Text[
+            Style["I", 20]], 
+           Text[
+            Style["J", 20]], 
+           Text[
+            Style["K", 20]], 
+           Text[
+            Style["L", 20]], 
+           Text[
+            Style["M", 20]], 
+           Text[
+            Style["N", 20]], 
+           Text[
+            Style["O", 20]], 
+           Text[
+            Style["P", 20]], 
+           Text[
+            Style["Q", 20]], 
+           Text[
+            Style["R", 20]], 
+           Text[
+            Style["S", 20]], 
+           Text[
+            Style["T", 20]], 
+           Text[
+            Style["U", 20]]}}, {{$CellContext`st$$, {22, 17, 8, 5, 23}}, 
+         ControlType -> None}, {{$CellContext`st1$$, {12, 18, 9, 5, 10}}, 
+         ControlType -> None}, {{$CellContext`ranint$$, 262}, ControlType -> 
+         None}}, "Options" :> {AutorunSequencing -> {2}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`RandomKsublist[
+         Pattern[$CellContext`set, 
+          Blank[]], 
+         Pattern[$CellContext`k, 
+          Blank[]]] := 
+       Module[{$CellContext`sub = {}, $CellContext`rest = $CellContext`set, \
+$CellContext`new}, Do[$CellContext`new = Part[$CellContext`rest, 
+              RandomInteger[{1, 
+                Length[$CellContext`rest]}]]; $CellContext`sub = 
+            Append[$CellContext`sub, $CellContext`new]; $CellContext`rest = 
+            Complement[$CellContext`rest, {$CellContext`new}], \
+{$CellContext`k}]; $CellContext`sub], $CellContext`set2A[
+         Pattern[$CellContext`n, 
+          Blank[]]] := Complement[
+         Flatten[
+          
+          Table[{$CellContext`i, $CellContext`j}, {$CellContext`i, 
+            1, $CellContext`n}, {$CellContext`j, 1, $CellContext`n}], 1], 
+         Table[{$CellContext`i, $CellContext`i}, {$CellContext`i, 
+           1, $CellContext`n}]], $CellContext`names2 = {
+        "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", 
+         "O", "P", "Q", "R", "S", "T", "U"}, $CellContext`Above1[
+         Pattern[$CellContext`pt1, 
+          Blank[]], 
+         Pattern[$CellContext`pt2, 
+          
+          Blank[]]] := $CellContext`pt1 > $CellContext`pt2, \
+$CellContext`Below1[
+         Pattern[$CellContext`pt1, 
+          Blank[]], 
+         Pattern[$CellContext`pt2, 
+          Blank[]]] := $CellContext`pt1 < $CellContext`pt2}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->544484285]
+}, Open  ]],
+
+Cell["", "DetailsSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.453200150203125*^9},
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.3895522232313623`*^9},
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0, CellBaseline -> Baseline], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SearchTermsSection"],
+
+Cell["logic", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.453200143734375*^9, 3.4532001455625*^9}},
+ CellID->638346149]
+}, Open  ]],
+
+Cell["", "RelatedLinksSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Izidor Hafner",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Izidor+Hafner"],
+     None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Izidor+Hafner"]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.45320013184375*^9, 3.4532001379375*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{800, 942},
+WindowMargins->{{15, Automatic}, {Automatic, 1}},
+FrontEndVersion->"7.0 for Microsoft Windows (64-bit) (February 18, 2009)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[58231, 1425, 312, 8, 22, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[58546, 1435, 678, 16, 22, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[59227, 1453, 402, 12, 22, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[59632, 1467, 637, 15, 22, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[60272, 1484, 844, 21, 22, "ControlSuggestions",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[61119, 1507, 369, 9, 22, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[61491, 1518, 1464, 31, 22, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[62958, 1551, 908, 21, 22, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 64960, 1617},
+ {"RotateAndZoomIn3D", 65069, 1620},
+ {"DragLocators", 65179, 1623},
+ {"CreateAndDeleteLocators", 65295, 1626},
+ {"SliderZoom", 65409, 1629},
+ {"GamepadControls", 65515, 1632},
+ {"AutomaticAnimation", 65628, 1635},
+ {"BookmarkAnimation", 65745, 1638}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 126, 2, 74, "DemoTitle"],
+Cell[CellGroupData[{
+Cell[718, 28, 33, 0, 266, "InitializationSection"],
+Cell[754, 30, 3430, 95, 228, "Input",
+ InitializationCell->True,
+ CellID->29234715]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[4221, 130, 29, 0, 188, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[4275, 134, 9737, 243, 528, "Input"],
+Cell[14015, 379, 8730, 202, 561, "Output",
+ CellID->532399904]
+}, {2}]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[22791, 587, 36, 0, 166, "ManipulateCaptionSection"],
+Cell[22830, 589, 299, 6, 22, "ManipulateCaption"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23166, 600, 28, 0, 168, "ThumbnailSection"],
+Cell[23197, 602, 8785, 203, 561, "Output",
+ CellID->354240055]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[32019, 810, 28, 0, 138, "SnapshotsSection"],
+Cell[32050, 812, 8636, 199, 37, "Output",
+ CellID->691366063],
+Cell[40689, 1013, 8674, 200, 37, "Output",
+ CellID->38054110],
+Cell[49366, 1215, 8759, 201, 37, "Output",
+ CellID->544484285]
+}, Open  ]],
+Cell[58140, 1419, 26, 0, 332, "DetailsSection"],
+Cell[CellGroupData[{
+Cell[58191, 1423, 37, 0, 108, "ControlSuggestionsSection"],
+Cell[58231, 1425, 312, 8, 22, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[58546, 1435, 678, 16, 22, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[59227, 1453, 402, 12, 22, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[59632, 1467, 637, 15, 22, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[60272, 1484, 844, 21, 22, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[61119, 1507, 369, 9, 22, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[61491, 1518, 1464, 31, 22, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[62958, 1551, 908, 21, 22, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[63903, 1577, 30, 0, 152, "SearchTermsSection"],
+Cell[63936, 1579, 136, 3, 22, "SearchTerms",
+ CellID->638346149]
+}, Open  ]],
+Cell[64087, 1585, 31, 0, 138, "RelatedLinksSection"],
+Cell[CellGroupData[{
+Cell[64143, 1589, 25, 0, 124, "AuthorSection"],
+Cell[64171, 1591, 386, 11, 22, "Author"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

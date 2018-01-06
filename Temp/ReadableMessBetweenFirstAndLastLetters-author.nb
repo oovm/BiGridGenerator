@@ -1,0 +1,997 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     38397,        988]
+NotebookOptionsPosition[     34217,        855]
+NotebookOutlinePosition[     35822,        906]
+CellTagsIndexPosition[     35502,        894]
+WindowFrame->Normal
+ContainsDynamic->True *)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Readable Mess between First and Last Letters", "DemoTitle",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3846921995708947`*^9, 3.3846922055899096`*^9}, {
+   3.3846944714968424`*^9, 3.3846944782876225`*^9}, 3.3846986051378417`*^9, {
+   3.384796656001436*^9, 3.384796656329561*^9}, {3.384892175491197*^9, 
+   3.384892202752019*^9}, {3.384893356351076*^9, 3.384893396431756*^9}, {
+   3.384895339748953*^9, 3.384895352083519*^9}, {3.3849016385020103`*^9, 
+   3.3849016836672707`*^9}, 3.384901725316619*^9, {3.3853195410346575`*^9, 
+   3.3853195411648445`*^9}, {3.3854036984420896`*^9, 3.3854036991631265`*^9}}],\
+
+
+Cell[CellGroupData[{
+
+Cell["", "InitializationSection"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+  "st", "=", 
+   "\"\<Do you have an acrobatic mind? fi yuo cna raed tihs, yuo hvae na \
+arocbitac mnid too. Cna yuo raed tihs? Olny 55% of plepoe can. I cdnuolt \
+blveiee taht I cluod aulaclty uesdnatnrd waht I was rdanieg. Due to the \
+phaonmneal pweor of the hmuan mnid, aoccdrnig to rscheearch at Cmabrigde \
+Uinervtisy, it dseno't mtaetr in waht oerdr the ltteres in a wrod are, the \
+olny iproamtnt tihng is taht the frsit and lsat ltteer be in the rghit pclae. \
+The rset can be a taotl mses and you can sitll raed it whotuit a pboerlm. \
+Tihs is bcuseae the huamn mnid deos not raed ervey lteter by istlef, but the \
+wrod as a wlohe. I awlyas tghuhot slpeling was ipmorantt!\>\""}], 
+  ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.385220364211078*^9, 3.3852204159776974`*^9}, {
+   3.3852204642286234`*^9, 3.385220478666401*^9}, {3.385220525089167*^9, 
+   3.385220533386201*^9}},
+ CellID->872136736],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"af", "[", 
+   RowBox[{"t_", ",", "tf_"}], "]"}], ":=", 
+  RowBox[{"StringJoin", "[", 
+   RowBox[{"Riffle", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"StringLength", "[", "#", "]"}], ">", 
+          RowBox[{"If", "[", 
+           RowBox[{"tf", ",", "1", ",", "2"}], "]"}]}], ",", 
+         RowBox[{"ag", "[", 
+          RowBox[{
+           RowBox[{"Characters", "[", "#", "]"}], ",", "tf"}], "]"}], ",", 
+         "#"}], "]"}], "&"}], "/@", 
+      RowBox[{"StringSplit", "[", "t", "]"}]}], ",", "\"\< \>\""}], "]"}], 
+   "]"}]}]], "Input",
+ InitializationCell->True,
+ CellID->1426231177],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ag", "[", 
+   RowBox[{"c_", ",", "tf_"}], "]"}], ":=", 
+  RowBox[{"StringJoin", "[", 
+   RowBox[{"If", "[", 
+    RowBox[{"tf", ",", 
+     RowBox[{"RandomSample", "[", "c", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"First", "[", "c", "]"}], ",", 
+       RowBox[{"RandomSample", "[", 
+        RowBox[{"Most", "[", 
+         RowBox[{"Rest", "[", "c", "]"}], "]"}], "]"}], ",", 
+       RowBox[{"Last", "[", "c", "]"}]}], "}"}]}], "]"}], "]"}]}]], "Input",
+ InitializationCell->True,
+ CellID->454924025]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"SeedRandom", "[", "sr", "]"}], ";", 
+    RowBox[{"Pane", "[", 
+     RowBox[{
+      RowBox[{"Style", "[", 
+       RowBox[{
+        RowBox[{"StringJoin", "[", 
+         RowBox[{"Flatten", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Transpose", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{"af", "[", 
+                  RowBox[{"#", ",", "tf"}], "]"}], "&"}], "/@", 
+                RowBox[{"#", "[", 
+                 RowBox[{"[", "1", "]"}], "]"}]}], ",", 
+               RowBox[{"#", "[", 
+                RowBox[{"[", "2", "]"}], "]"}]}], "}"}], "]"}], "&"}], "[", 
+           RowBox[{"Transpose", "[", 
+            RowBox[{"Partition", "[", 
+             RowBox[{
+              RowBox[{"StringSplit", "[", 
+               RowBox[{"st", ",", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"Thread", "[", 
+                   RowBox[{"Rule", "[", 
+                    RowBox[{"#", ",", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"#", "<>", "\"\< \>\""}], "&"}], "/@", "#"}]}], 
+                    "]"}], "]"}], "&"}], "[", 
+                 RowBox[{"{", 
+                  RowBox[{
+                  "\"\<,\>\"", ",", "\"\<.\>\"", ",", "\"\<?\>\"", ",", 
+                   "\"\<!\>\""}], "}"}], "]"}]}], "]"}], ",", "2"}], "]"}], 
+            "]"}], "]"}], "]"}], "]"}], ",", "\"\<Menu\>\""}], "]"}], ",", 
+      "300"}], "]"}]}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"sr", ",", "0", ",", "\"\<seed random\>\""}], "}"}], ",", "0", 
+     ",", 
+     RowBox[{
+      RowBox[{"-", "1"}], "+", 
+      RowBox[{"2", "^", "24"}]}], ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"tf", ",", "False", ",", "\"\<include first and last\>\""}], 
+      "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"False", ",", "True"}], "}"}], ",", 
+     RowBox[{"ControlPlacement", "\[Rule]", "Left"}]}], "}"}], ",", " ", 
+   RowBox[{"SaveDefinitions", "\[Rule]", "True"}]}], "]"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3846920949942646`*^9, 3.3846921319295845`*^9}, {
+   3.3846930886281977`*^9, 3.3846930925640144`*^9}, {3.3846931708616304`*^9, 
+   3.3846931861366405`*^9}, 3.384693269683433*^9, {3.38469338323936*^9, 
+   3.3846934102328606`*^9}, {3.384694264748635*^9, 3.384694303980915*^9}, {
+   3.384700583385208*^9, 3.384700599054768*^9}, {3.384816297126442*^9, 
+   3.384816322241672*^9}, 3.384816400544376*^9, {3.384892040320265*^9, 
+   3.384892077476872*^9}, {3.384892245166635*^9, 3.384892253203096*^9}, {
+   3.3848937347968807`*^9, 3.384893750265902*^9}, 3.384895366738833*^9, {
+   3.384895494021369*^9, 3.384895495384693*^9}, {3.384895759947915*^9, 
+   3.3848957684348927`*^9}, {3.384895978517165*^9, 3.384896013649144*^9}, 
+   3.384896212378861*^9, {3.384896359850524*^9, 3.384896401452426*^9}, 
+   3.3848966085568237`*^9, {3.384896706709525*^9, 3.384896791228797*^9}, {
+   3.3848968701832027`*^9, 3.3848968809603863`*^9}, {3.384897029450294*^9, 
+   3.384897117423232*^9}, {3.384897176583399*^9, 3.384897178179693*^9}, {
+   3.384897245085397*^9, 3.384897264842884*^9}, {3.384901832113312*^9, 
+   3.384901888923428*^9}, {3.385221196758525*^9, 3.385221200313637*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`sr$$ = 0, $CellContext`tf$$ = False, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`sr$$], 0, "seed random"}, 0, 16777215, 1}, {{
+       Hold[$CellContext`tf$$], False, "include first and last"}, {
+      False, True}}}, Typeset`size$$ = {300., {112.5, 117.5}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`sr$17191$$ = 0, $CellContext`tf$17192$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`sr$$ = 0, $CellContext`tf$$ = False}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`sr$$, $CellContext`sr$17191$$, 0], 
+        Hold[$CellContext`tf$$, $CellContext`tf$17192$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (SeedRandom[$CellContext`sr$$]; Pane[
+         Style[
+          StringJoin[
+           Flatten[
+            (Transpose[{
+              Map[$CellContext`af[#, $CellContext`tf$$]& , 
+               Part[#, 1]], 
+              Part[#, 2]}]& )[
+             Transpose[
+              Partition[
+               StringSplit[$CellContext`st, 
+                (
+                Thread[# -> Map[StringJoin[#, " "]& , #]]& )[{
+                 ",", ".", "?", "!"}]], 2]]]]], "Menu"], 300]), 
+      "Specifications" :> {{{$CellContext`sr$$, 0, "seed random"}, 0, 
+         16777215, 
+         1}, {{$CellContext`tf$$, False, "include first and last"}, {
+         False, True}, ControlPlacement -> Left}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{455., {156., 161.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`af[
+         Pattern[$CellContext`t, 
+          Blank[]], 
+         Pattern[$CellContext`tf, 
+          Blank[]]] := StringJoin[
+         Riffle[
+          Map[If[StringLength[#] > If[$CellContext`tf, 1, 2], 
+            $CellContext`ag[
+             Characters[#], $CellContext`tf], #]& , 
+           StringSplit[$CellContext`t]], " "]], $CellContext`ag[
+         Pattern[$CellContext`c, 
+          Blank[]], 
+         Pattern[$CellContext`tf, 
+          Blank[]]] := StringJoin[
+         If[$CellContext`tf, 
+          RandomSample[$CellContext`c], {
+           First[$CellContext`c], 
+           RandomSample[
+            Most[
+             Rest[$CellContext`c]]], 
+           Last[$CellContext`c]}]], $CellContext`st = 
+       "Do you have an acrobatic mind? fi yuo cna raed tihs, yuo hvae na \
+arocbitac mnid too. Cna yuo raed tihs? Olny 55% of plepoe can. I cdnuolt \
+blveiee taht I cluod aulaclty uesdnatnrd waht I was rdanieg. Due to the \
+phaonmneal pweor of the hmuan mnid, aoccdrnig to rscheearch at Cmabrigde \
+Uinervtisy, it dseno't mtaetr in waht oerdr the ltteres in a wrod are, the \
+olny iproamtnt tihng is taht the frsit and lsat ltteer be in the rghit pclae. \
+The rset can be a taotl mses and you can sitll raed it whotuit a pboerlm. \
+Tihs is bcuseae the huamn mnid deos not raed ervey lteter by istlef, but the \
+wrod as a wlohe. I awlyas tghuhot slpeling was ipmorantt!"}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->492278057]
+}, {2}]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell["\<\
+This self-descriptive paragraph explains how most of us can read it in spite \
+of its mixed up  letters. Keeping the first and last letters where they \
+belong seems to be the key. \
+\>", "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.385220573261794*^9, 3.3852206962008677`*^9}},
+ CellID->270666]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`sr$$ = 16777215, $CellContext`tf$$ = False, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`sr$$], 16777215, "seed random"}, 0, 16777215, 1}, {{
+       Hold[$CellContext`tf$$], False, "include first and last"}, {
+      False, True}}}, Typeset`size$$ = {300., {112.5, 117.5}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`sr$17247$$ = 0, $CellContext`tf$17248$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`sr$$ = 16777215, $CellContext`tf$$ = 
+        False}, "ControllerVariables" :> {
+        Hold[$CellContext`sr$$, $CellContext`sr$17247$$, 0], 
+        Hold[$CellContext`tf$$, $CellContext`tf$17248$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (SeedRandom[$CellContext`sr$$]; Pane[
+         Style[
+          StringJoin[
+           Flatten[
+            (Transpose[{
+              Map[$CellContext`af[#, $CellContext`tf$$]& , 
+               Part[#, 1]], 
+              Part[#, 2]}]& )[
+             Transpose[
+              Partition[
+               StringSplit[$CellContext`st, 
+                (
+                Thread[# -> Map[StringJoin[#, " "]& , #]]& )[{
+                 ",", ".", "?", "!"}]], 2]]]]], "Menu"], 300]), 
+      "Specifications" :> {{{$CellContext`sr$$, 16777215, "seed random"}, 0, 
+         16777215, 
+         1}, {{$CellContext`tf$$, False, "include first and last"}, {
+         False, True}, ControlPlacement -> Left}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{455., {156., 161.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`af[
+         Pattern[$CellContext`t, 
+          Blank[]], 
+         Pattern[$CellContext`tf, 
+          Blank[]]] := StringJoin[
+         Riffle[
+          Map[If[StringLength[#] > If[$CellContext`tf, 1, 2], 
+            $CellContext`ag[
+             Characters[#], $CellContext`tf], #]& , 
+           StringSplit[$CellContext`t]], " "]], $CellContext`ag[
+         Pattern[$CellContext`c, 
+          Blank[]], 
+         Pattern[$CellContext`tf, 
+          Blank[]]] := StringJoin[
+         If[$CellContext`tf, 
+          RandomSample[$CellContext`c], {
+           First[$CellContext`c], 
+           RandomSample[
+            Most[
+             Rest[$CellContext`c]]], 
+           Last[$CellContext`c]}]], $CellContext`st = 
+       "Do you have an acrobatic mind? fi yuo cna raed tihs, yuo hvae na \
+arocbitac mnid too. Cna yuo raed tihs? Olny 55% of plepoe can. I cdnuolt \
+blveiee taht I cluod aulaclty uesdnatnrd waht I was rdanieg. Due to the \
+phaonmneal pweor of the hmuan mnid, aoccdrnig to rscheearch at Cmabrigde \
+Uinervtisy, it dseno't mtaetr in waht oerdr the ltteres in a wrod are, the \
+olny iproamtnt tihng is taht the frsit and lsat ltteer be in the rghit pclae. \
+The rset can be a taotl mses and you can sitll raed it whotuit a pboerlm. \
+Tihs is bcuseae the huamn mnid deos not raed ervey lteter by istlef, but the \
+wrod as a wlohe. I awlyas tghuhot slpeling was ipmorantt!"}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->623737533]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`sr$$ = 15578843, $CellContext`tf$$ = True, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`sr$$], 16777215, "seed random"}, 0, 16777215, 1}, {{
+       Hold[$CellContext`tf$$], True, "include first and last"}, {
+      False, True}}}, Typeset`size$$ = {300., {112.5, 117.5}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`sr$17303$$ = 0, $CellContext`tf$17304$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`sr$$ = 16777215, $CellContext`tf$$ = True},
+       "ControllerVariables" :> {
+        Hold[$CellContext`sr$$, $CellContext`sr$17303$$, 0], 
+        Hold[$CellContext`tf$$, $CellContext`tf$17304$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (SeedRandom[$CellContext`sr$$]; Pane[
+         Style[
+          StringJoin[
+           Flatten[
+            (Transpose[{
+              Map[$CellContext`af[#, $CellContext`tf$$]& , 
+               Part[#, 1]], 
+              Part[#, 2]}]& )[
+             Transpose[
+              Partition[
+               StringSplit[$CellContext`st, 
+                (
+                Thread[# -> Map[StringJoin[#, " "]& , #]]& )[{
+                 ",", ".", "?", "!"}]], 2]]]]], "Menu"], 300]), 
+      "Specifications" :> {{{$CellContext`sr$$, 16777215, "seed random"}, 0, 
+         16777215, 1}, {{$CellContext`tf$$, True, "include first and last"}, {
+         False, True}, ControlPlacement -> Left}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{455., {156., 161.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`af[
+         Pattern[$CellContext`t, 
+          Blank[]], 
+         Pattern[$CellContext`tf, 
+          Blank[]]] := StringJoin[
+         Riffle[
+          Map[If[StringLength[#] > If[$CellContext`tf, 1, 2], 
+            $CellContext`ag[
+             Characters[#], $CellContext`tf], #]& , 
+           StringSplit[$CellContext`t]], " "]], $CellContext`ag[
+         Pattern[$CellContext`c, 
+          Blank[]], 
+         Pattern[$CellContext`tf, 
+          Blank[]]] := StringJoin[
+         If[$CellContext`tf, 
+          RandomSample[$CellContext`c], {
+           First[$CellContext`c], 
+           RandomSample[
+            Most[
+             Rest[$CellContext`c]]], 
+           Last[$CellContext`c]}]], $CellContext`st = 
+       "Do you have an acrobatic mind? fi yuo cna raed tihs, yuo hvae na \
+arocbitac mnid too. Cna yuo raed tihs? Olny 55% of plepoe can. I cdnuolt \
+blveiee taht I cluod aulaclty uesdnatnrd waht I was rdanieg. Due to the \
+phaonmneal pweor of the hmuan mnid, aoccdrnig to rscheearch at Cmabrigde \
+Uinervtisy, it dseno't mtaetr in waht oerdr the ltteres in a wrod are, the \
+olny iproamtnt tihng is taht the frsit and lsat ltteer be in the rghit pclae. \
+The rset can be a taotl mses and you can sitll raed it whotuit a pboerlm. \
+Tihs is bcuseae the huamn mnid deos not raed ervey lteter by istlef, but the \
+wrod as a wlohe. I awlyas tghuhot slpeling was ipmorantt!"}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->636510100],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`sr$$ = 5355439, $CellContext`tf$$ = False, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`sr$$], 5355439, "seed random"}, 0, 16777215, 1}, {{
+       Hold[$CellContext`tf$$], False, "include first and last"}, {
+      False, True}}}, Typeset`size$$ = {300., {112.5, 117.5}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`sr$17359$$ = 0, $CellContext`tf$17360$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`sr$$ = 5355439, $CellContext`tf$$ = False},
+       "ControllerVariables" :> {
+        Hold[$CellContext`sr$$, $CellContext`sr$17359$$, 0], 
+        Hold[$CellContext`tf$$, $CellContext`tf$17360$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (SeedRandom[$CellContext`sr$$]; Pane[
+         Style[
+          StringJoin[
+           Flatten[
+            (Transpose[{
+              Map[$CellContext`af[#, $CellContext`tf$$]& , 
+               Part[#, 1]], 
+              Part[#, 2]}]& )[
+             Transpose[
+              Partition[
+               StringSplit[$CellContext`st, 
+                (
+                Thread[# -> Map[StringJoin[#, " "]& , #]]& )[{
+                 ",", ".", "?", "!"}]], 2]]]]], "Menu"], 300]), 
+      "Specifications" :> {{{$CellContext`sr$$, 5355439, "seed random"}, 0, 
+         16777215, 
+         1}, {{$CellContext`tf$$, False, "include first and last"}, {
+         False, True}, ControlPlacement -> Left}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{455., {156., 161.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`af[
+         Pattern[$CellContext`t, 
+          Blank[]], 
+         Pattern[$CellContext`tf, 
+          Blank[]]] := StringJoin[
+         Riffle[
+          Map[If[StringLength[#] > If[$CellContext`tf, 1, 2], 
+            $CellContext`ag[
+             Characters[#], $CellContext`tf], #]& , 
+           StringSplit[$CellContext`t]], " "]], $CellContext`ag[
+         Pattern[$CellContext`c, 
+          Blank[]], 
+         Pattern[$CellContext`tf, 
+          Blank[]]] := StringJoin[
+         If[$CellContext`tf, 
+          RandomSample[$CellContext`c], {
+           First[$CellContext`c], 
+           RandomSample[
+            Most[
+             Rest[$CellContext`c]]], 
+           Last[$CellContext`c]}]], $CellContext`st = 
+       "Do you have an acrobatic mind? fi yuo cna raed tihs, yuo hvae na \
+arocbitac mnid too. Cna yuo raed tihs? Olny 55% of plepoe can. I cdnuolt \
+blveiee taht I cluod aulaclty uesdnatnrd waht I was rdanieg. Due to the \
+phaonmneal pweor of the hmuan mnid, aoccdrnig to rscheearch at Cmabrigde \
+Uinervtisy, it dseno't mtaetr in waht oerdr the ltteres in a wrod are, the \
+olny iproamtnt tihng is taht the frsit and lsat ltteer be in the rghit pclae. \
+The rset can be a taotl mses and you can sitll raed it whotuit a pboerlm. \
+Tihs is bcuseae the huamn mnid deos not raed ervey lteter by istlef, but the \
+wrod as a wlohe. I awlyas tghuhot slpeling was ipmorantt!"}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->159990885],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`sr$$ = 10758271, $CellContext`tf$$ = False, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`sr$$], 10758271, "seed random"}, 0, 16777215, 1}, {{
+       Hold[$CellContext`tf$$], False, "include first and last"}, {
+      False, True}}}, Typeset`size$$ = {300., {112.5, 117.5}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`sr$17415$$ = 0, $CellContext`tf$17416$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`sr$$ = 10758271, $CellContext`tf$$ = 
+        False}, "ControllerVariables" :> {
+        Hold[$CellContext`sr$$, $CellContext`sr$17415$$, 0], 
+        Hold[$CellContext`tf$$, $CellContext`tf$17416$$, False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> (SeedRandom[$CellContext`sr$$]; Pane[
+         Style[
+          StringJoin[
+           Flatten[
+            (Transpose[{
+              Map[$CellContext`af[#, $CellContext`tf$$]& , 
+               Part[#, 1]], 
+              Part[#, 2]}]& )[
+             Transpose[
+              Partition[
+               StringSplit[$CellContext`st, 
+                (
+                Thread[# -> Map[StringJoin[#, " "]& , #]]& )[{
+                 ",", ".", "?", "!"}]], 2]]]]], "Menu"], 300]), 
+      "Specifications" :> {{{$CellContext`sr$$, 10758271, "seed random"}, 0, 
+         16777215, 
+         1}, {{$CellContext`tf$$, False, "include first and last"}, {
+         False, True}, ControlPlacement -> Left}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{455., {156., 161.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`af[
+         Pattern[$CellContext`t, 
+          Blank[]], 
+         Pattern[$CellContext`tf, 
+          Blank[]]] := StringJoin[
+         Riffle[
+          Map[If[StringLength[#] > If[$CellContext`tf, 1, 2], 
+            $CellContext`ag[
+             Characters[#], $CellContext`tf], #]& , 
+           StringSplit[$CellContext`t]], " "]], $CellContext`ag[
+         Pattern[$CellContext`c, 
+          Blank[]], 
+         Pattern[$CellContext`tf, 
+          Blank[]]] := StringJoin[
+         If[$CellContext`tf, 
+          RandomSample[$CellContext`c], {
+           First[$CellContext`c], 
+           RandomSample[
+            Most[
+             Rest[$CellContext`c]]], 
+           Last[$CellContext`c]}]], $CellContext`st = 
+       "Do you have an acrobatic mind? fi yuo cna raed tihs, yuo hvae na \
+arocbitac mnid too. Cna yuo raed tihs? Olny 55% of plepoe can. I cdnuolt \
+blveiee taht I cluod aulaclty uesdnatnrd waht I was rdanieg. Due to the \
+phaonmneal pweor of the hmuan mnid, aoccdrnig to rscheearch at Cmabrigde \
+Uinervtisy, it dseno't mtaetr in waht oerdr the ltteres in a wrod are, the \
+olny iproamtnt tihng is taht the frsit and lsat ltteer be in the rghit pclae. \
+The rset can be a taotl mses and you can sitll raed it whotuit a pboerlm. \
+Tihs is bcuseae the huamn mnid deos not raed ervey lteter by istlef, but the \
+wrod as a wlohe. I awlyas tghuhot slpeling was ipmorantt!"}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->681162311]
+}, Open  ]],
+
+Cell["", "DetailsSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SearchTermsSection"],
+
+Cell["compression", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.384901967507331*^9, 3.384901969986771*^9}},
+ CellID->238854090],
+
+Cell["perception", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3849019627959337`*^9, 3.3849019652501383`*^9}},
+ CellID->919597707],
+
+Cell["permutation", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3848973751864033`*^9, 3.384897376841017*^9}, {
+   3.384901945566085*^9, 3.384901948825989*^9}},
+ CellID->2122095480],
+
+Cell["redundancy", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.384901972517021*^9, 3.384901977355088*^9}},
+ CellID->773754387],
+
+Cell["Exploratorium exhibit", "SearchTerms",
+ CellID->178773065]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "RelatedLinksSection"],
+
+Cell[TextData[ButtonBox["Huffman Coding",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/HuffmanCoding.html"], 
+   None}]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.38490209454428*^9, 3.384902117321005*^9}},
+ CellID->1476499724]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Michael Schreiber",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Michael+\
+Schreiber"], None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Michael+Schreiber"]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3847000132337427`*^9, 3.3847000198798256`*^9}, {
+   3.384891917239002*^9, 3.38489192187381*^9}},
+ CellID->766590275]
+}, Open  ]]
+}, Open  ]]
+},
+AutoGeneratedPackage->None,
+WindowSize->{705, 573},
+WindowMargins->{{97, -10}, {Automatic, 46}},
+FrontEndVersion->"6.0 for Microsoft Windows (32-bit) (June 19, 2007)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[27105, 643, 311, 8, 70, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[27419, 653, 677, 16, 70, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[28099, 671, 339, 11, 70, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[28441, 684, 636, 15, 70, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[29080, 701, 842, 21, 70, "ControlSuggestions",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[29925, 724, 303, 8, 70, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[30231, 734, 1411, 31, 70, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[31645, 767, 881, 21, 70, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 34611, 867},
+ {"RotateAndZoomIn3D", 34719, 870},
+ {"DragLocators", 34828, 873},
+ {"CreateAndDeleteLocators", 34943, 876},
+ {"SliderZoom", 35056, 879},
+ {"GamepadControls", 35161, 882},
+ {"AutomaticAnimation", 35273, 885},
+ {"BookmarkAnimation", 35389, 888}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[590, 23, 613, 8, 70, "DemoTitle"],
+Cell[CellGroupData[{
+Cell[1230, 36, 33, 0, 70, "InitializationSection"],
+Cell[1266, 38, 986, 19, 70, "Input",
+ InitializationCell->True,
+ CellID->872136736],
+Cell[2255, 59, 707, 22, 70, "Input",
+ InitializationCell->True,
+ CellID->1426231177],
+Cell[2965, 83, 553, 16, 70, "Input",
+ InitializationCell->True,
+ CellID->454924025]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[3555, 104, 29, 0, 70, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[3609, 108, 3425, 77, 70, "Input"],
+Cell[7037, 187, 3862, 83, 70, "Output",
+ CellID->492278057]
+}, {2}]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10945, 276, 36, 0, 70, "ManipulateCaptionSection"],
+Cell[10984, 278, 327, 7, 70, "ManipulateCaption",
+ CellID->270666]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11348, 290, 28, 0, 70, "ThumbnailSection"],
+Cell[11379, 292, 3892, 83, 70, "Output",
+ CellID->623737533]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15308, 380, 28, 0, 70, "SnapshotsSection"],
+Cell[15339, 382, 3876, 82, 70, "Output",
+ CellID->636510100],
+Cell[19218, 466, 3886, 83, 70, "Output",
+ CellID->159990885],
+Cell[23107, 551, 3892, 83, 70, "Output",
+ CellID->681162311]
+}, Open  ]],
+Cell[27014, 637, 26, 0, 70, "DetailsSection"],
+Cell[CellGroupData[{
+Cell[27065, 641, 37, 0, 70, "ControlSuggestionsSection"],
+Cell[27105, 643, 311, 8, 70, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[27419, 653, 677, 16, 70, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[28099, 671, 339, 11, 70, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[28441, 684, 636, 15, 70, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[29080, 701, 842, 21, 70, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[29925, 724, 303, 8, 70, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[30231, 734, 1411, 31, 70, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[31645, 767, 881, 21, 70, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[32563, 793, 30, 0, 70, "SearchTermsSection"],
+Cell[32596, 795, 144, 3, 70, "SearchTerms",
+ CellID->238854090],
+Cell[32743, 800, 147, 3, 70, "SearchTerms",
+ CellID->919597707],
+Cell[32893, 805, 197, 4, 70, "SearchTerms",
+ CellID->2122095480],
+Cell[33093, 811, 143, 3, 70, "SearchTerms",
+ CellID->773754387],
+Cell[33239, 816, 64, 1, 70, "SearchTerms",
+ CellID->178773065]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[33340, 822, 31, 0, 70, "RelatedLinksSection"],
+Cell[33374, 824, 279, 7, 70, "RelatedLinks",
+ CellID->1476499724]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[33690, 836, 25, 0, 70, "AuthorSection"],
+Cell[33718, 838, 471, 13, 70, "Author",
+ CellID->766590275]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

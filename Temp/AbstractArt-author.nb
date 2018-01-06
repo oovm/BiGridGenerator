@@ -1,0 +1,995 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     46023,        986]
+NotebookOptionsPosition[     42524,        878]
+NotebookOutlinePosition[     44099,        928]
+CellTagsIndexPosition[     43779,        916]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Abstract Art", "DemoTitle",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4965456678342757`*^9, 3.4965456709436507`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["", "InitializationSection"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"dp", "[", 
+   RowBox[{"pts_", ",", "col_", ",", "pp_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "nf", "}"}], ",", 
+    RowBox[{
+     RowBox[{"nf", "=", 
+      RowBox[{"Nearest", "[", "pts", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"DensityPlot", "[", 
+      RowBox[{
+       RowBox[{"First", "[", 
+        RowBox[{"nf", "[", 
+         RowBox[{"{", 
+          RowBox[{"x", ",", "y"}], "}"}], "]"}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", "0", ",", "1"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"y", ",", "0", ",", "1"}], "}"}], ",", 
+       RowBox[{"PlotPoints", "\[Rule]", "pp"}], ",", 
+       RowBox[{"ColorFunction", "\[Rule]", "col"}], ",", 
+       RowBox[{"ImageSize", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"400", ",", "400"}], "}"}]}], ",", 
+       RowBox[{"PlotRange", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"0", ",", "1"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"0", ",", "1"}], "}"}]}], "}"}]}], ",", 
+       RowBox[{"MeshFunctions", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"#3", "&"}], ",", 
+          RowBox[{"#3", "&"}]}], "}"}]}], ",", 
+       RowBox[{"Mesh", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Range", "[", 
+           RowBox[{
+            RowBox[{"-", "1"}], ",", "1", ",", "0.4"}], "]"}], ",", 
+          RowBox[{"Range", "[", 
+           RowBox[{
+            RowBox[{"-", "0.8"}], ",", "0.8", ",", "0.4"}], "]"}]}], "}"}]}], 
+       ",", 
+       RowBox[{"MeshStyle", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"Black", ",", "Thick"}], "}"}]}], ",", 
+       RowBox[{"FrameTicks", "\[Rule]", "False"}], ",", 
+       RowBox[{"PerformanceGoal", "\[Rule]", "\"\<Quality\>\""}]}], "]"}]}]}],
+    "]"}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4965458276467757`*^9, 3.4965458283655257`*^9}, 
+   3.4965459553655257`*^9, {3.496663703208288*^9, 3.496663704520419*^9}, {
+   3.496663942910256*^9, 3.49666394855482*^9}},
+ CellID->30370229]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"dp", "[", 
+    RowBox[{"pts", ",", "col", ",", "pp"}], "]"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"pts", ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"0.9185653402456098`", ",", "0.7341988338110532`"}], "}"}], 
+         ",", 
+         RowBox[{"{", 
+          RowBox[{"0.23371483912112612`", ",", "0.45434326375175504`"}], 
+          "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"0.0013213011759554139`", ",", "0.5604930579681124`"}], 
+          "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"0.6567348458633968`", ",", "0.2348057236736183`"}], 
+          "}"}]}], "}"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "1"}], "}"}], ",", "Locator", ",", 
+     RowBox[{"LocatorAutoCreate", "\[Rule]", "True"}], ",", 
+     RowBox[{"Appearance", "\[Rule]", "None"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"pp", ",", "2", ",", "\"\<resolution\>\""}], "}"}], ",", "2", 
+     ",", "100", ",", "1"}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"col", ",", "\"\<Rainbow\>\"", ",", "\"\<color scheme\>\""}], 
+      "}"}], ",", 
+     RowBox[{"ColorData", "[", "\"\<Gradients\>\"", "]"}], ",", 
+     RowBox[{"ControlType", "\[Rule]", "PopupMenu"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"SaveDefinitions", "\[Rule]", "True"}]}], "]"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, 3.4965456995999007`*^9, {3.496663667042672*^9, 
+   3.496663680936061*^9}, {3.4966637644694138`*^9, 3.496663774476414*^9}, {
+   3.4966638136673326`*^9, 3.496663868284794*^9}, {3.496663906030568*^9, 
+   3.4966639104120064`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`col$$ = "Rainbow", $CellContext`pp$$ = 
+    2, $CellContext`pts$$ = {{0.9185653402456098, 0.7341988338110532}, {
+    0.23371483912112612`, 0.45434326375175504`}, {0.0013213011759554139`, 
+    0.5604930579681124}, {0.6567348458633968, 0.2348057236736183}}, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`pts$$], {{0.9185653402456098, 0.7341988338110532}, {
+       0.23371483912112612`, 0.45434326375175504`}, {0.0013213011759554139`, 
+       0.5604930579681124}, {0.6567348458633968, 0.2348057236736183}}}, {0, 
+      0}, {1, 1}}, {{
+       Hold[$CellContext`pp$$], 2, "resolution"}, 2, 100, 1}, {{
+       Hold[$CellContext`col$$], "Rainbow", "color scheme"}, {
+      "AlpineColors", "Aquamarine", "ArmyColors", "AtlanticColors", 
+       "AuroraColors", "AvocadoColors", "BeachColors", "BlueGreenYellow", 
+       "BrassTones", "BrightBands", "BrownCyanTones", "CandyColors", 
+       "CherryTones", "CMYKColors", "CoffeeTones", "DarkBands", "DarkRainbow",
+        "DarkTerrain", "DeepSeaColors", "FallColors", "FruitPunchColors", 
+       "FuchsiaTones", "GrayTones", "GrayYellowTones", "GreenBrownTerrain", 
+       "GreenPinkTones", "IslandColors", "LakeColors", "LightTemperatureMap", 
+       "LightTerrain", "MintColors", "NeonColors", "Pastel", "PearlColors", 
+       "PigeonTones", "PlumColors", "Rainbow", "RedBlueTones", 
+       "RedGreenSplit", "RoseColors", "RustTones", "SandyTerrain", 
+       "SiennaTones", "SolarColors", "SouthwestColors", "StarryNightColors", 
+       "SunsetColors", "TemperatureMap", "ThermometerColors", 
+       "ValentineTones", "WatermelonColors"}}}, Typeset`size$$ = {
+    400., {198., 202.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`pts$33819$$ = {0, 
+    0}, $CellContext`pp$33820$$ = 0, $CellContext`col$33821$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`col$$ = "Rainbow", $CellContext`pp$$ = 
+        2, $CellContext`pts$$ = {{0.9185653402456098, 0.7341988338110532}, {
+         0.23371483912112612`, 0.45434326375175504`}, {0.0013213011759554139`,
+          0.5604930579681124}, {0.6567348458633968, 0.2348057236736183}}}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`pts$$, $CellContext`pts$33819$$, {0, 0}], 
+        Hold[$CellContext`pp$$, $CellContext`pp$33820$$, 0], 
+        Hold[$CellContext`col$$, $CellContext`col$33821$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> $CellContext`dp[$CellContext`pts$$, $CellContext`col$$, \
+$CellContext`pp$$], 
+      "Specifications" :> {{{$CellContext`pts$$, {{0.9185653402456098, 
+          0.7341988338110532}, {0.23371483912112612`, 0.45434326375175504`}, {
+          0.0013213011759554139`, 0.5604930579681124}, {0.6567348458633968, 
+          0.2348057236736183}}}, {0, 0}, {1, 1}, ControlType -> Locator, 
+         LocatorAutoCreate -> True, Appearance -> 
+         None}, {{$CellContext`pp$$, 2, "resolution"}, 2, 100, 
+         1}, {{$CellContext`col$$, "Rainbow", "color scheme"}, {
+         "AlpineColors", "Aquamarine", "ArmyColors", "AtlanticColors", 
+          "AuroraColors", "AvocadoColors", "BeachColors", "BlueGreenYellow", 
+          "BrassTones", "BrightBands", "BrownCyanTones", "CandyColors", 
+          "CherryTones", "CMYKColors", "CoffeeTones", "DarkBands", 
+          "DarkRainbow", "DarkTerrain", "DeepSeaColors", "FallColors", 
+          "FruitPunchColors", "FuchsiaTones", "GrayTones", "GrayYellowTones", 
+          "GreenBrownTerrain", "GreenPinkTones", "IslandColors", "LakeColors",
+           "LightTemperatureMap", "LightTerrain", "MintColors", "NeonColors", 
+          "Pastel", "PearlColors", "PigeonTones", "PlumColors", "Rainbow", 
+          "RedBlueTones", "RedGreenSplit", "RoseColors", "RustTones", 
+          "SandyTerrain", "SiennaTones", "SolarColors", "SouthwestColors", 
+          "StarryNightColors", "SunsetColors", "TemperatureMap", 
+          "ThermometerColors", "ValentineTones", "WatermelonColors"}, 
+         ControlType -> PopupMenu}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{449., {259.34375, 264.65625}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`dp[
+         Pattern[$CellContext`pts, 
+          Blank[]], 
+         Pattern[$CellContext`col, 
+          Blank[]], 
+         Pattern[$CellContext`pp, 
+          Blank[]]] := 
+       Module[{$CellContext`nf}, $CellContext`nf = Nearest[$CellContext`pts]; 
+         DensityPlot[
+           First[
+            $CellContext`nf[{$CellContext`x, $CellContext`y}]], \
+{$CellContext`x, 0, 1}, {$CellContext`y, 0, 1}, PlotPoints -> $CellContext`pp,
+            ColorFunction -> $CellContext`col, ImageSize -> {400, 400}, 
+           PlotRange -> {{0, 1}, {0, 1}}, MeshFunctions -> {#3& , #3& }, Mesh -> {
+             Range[-1, 1, 0.4], 
+             Range[-0.8, 0.8, 0.4]}, MeshStyle -> {Black, Thick}, FrameTicks -> 
+           False, PerformanceGoal -> "Quality"]], 
+       Attributes[PlotRange] = {ReadProtected}}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.496697080501242*^9, 3.4966970972669744`*^9}, 
+   3.496697156532979*^9},
+ CellID->22837669]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell["\<\
+Create your own abstract art. Click and drag in the picture to change the \
+position of invisible locators. Hold the ALT key and click anywhere in the \
+picture to add more locators that define more colored regions. Increase the \
+resolution to see the regions more clearly. Choose different color schemes \
+from the pull-down menu.\
+\>", "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4965461625530257`*^9, 3.4965462885374007`*^9}, {
+   3.4965463943030257`*^9, 3.4965464294280257`*^9}, {3.4966971250327773`*^9, 
+   3.496697130345311*^9}, 3.496697169126809*^9, {3.497622998847557*^9, 
+   3.497623016308209*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`col$$ = "Rainbow", $CellContext`pp$$ = 
+    2, $CellContext`pts$$ = {{0.6145, 0.8300000000000001}, {
+    0.9062956045018307, 0.4782560339287134}, {0.124, 0.44}, {
+    0.9668251439477269, 0.5245965698484798}}, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`pts$$], {{0.6145, 0.8300000000000001}, {
+       0.9062956045018307, 0.4782560339287134}, {0.124, 0.44}, {
+       0.9668251439477269, 0.5245965698484798}}}, {0, 0}, {1, 1}}, {{
+       Hold[$CellContext`pp$$], 2, "resolution"}, 2, 100, 1}, {{
+       Hold[$CellContext`col$$], "Rainbow", "color scheme"}, {
+      "AlpineColors", "Aquamarine", "ArmyColors", "AtlanticColors", 
+       "AuroraColors", "AvocadoColors", "BeachColors", "BlueGreenYellow", 
+       "BrassTones", "BrightBands", "BrownCyanTones", "CandyColors", 
+       "CherryTones", "CMYKColors", "CoffeeTones", "DarkBands", "DarkRainbow",
+        "DarkTerrain", "DeepSeaColors", "FallColors", "FruitPunchColors", 
+       "FuchsiaTones", "GrayTones", "GrayYellowTones", "GreenBrownTerrain", 
+       "GreenPinkTones", "IslandColors", "LakeColors", "LightTemperatureMap", 
+       "LightTerrain", "MintColors", "NeonColors", "Pastel", "PearlColors", 
+       "PigeonTones", "PlumColors", "Rainbow", "RedBlueTones", 
+       "RedGreenSplit", "RoseColors", "RustTones", "SandyTerrain", 
+       "SiennaTones", "SolarColors", "SouthwestColors", "StarryNightColors", 
+       "SunsetColors", "TemperatureMap", "ThermometerColors", 
+       "ValentineTones", "WatermelonColors"}}}, Typeset`size$$ = {
+    400., {198., 202.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`pts$792200$$ = {0, 
+    0}, $CellContext`pp$792201$$ = 0, $CellContext`col$792202$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`col$$ = "Rainbow", $CellContext`pp$$ = 
+        2, $CellContext`pts$$ = {{0.6145, 0.8300000000000001}, {
+         0.9062956045018307, 0.4782560339287134}, {0.124, 0.44}, {
+         0.9668251439477269, 0.5245965698484798}}}, "ControllerVariables" :> {
+        Hold[$CellContext`pts$$, $CellContext`pts$792200$$, {0, 0}], 
+        Hold[$CellContext`pp$$, $CellContext`pp$792201$$, 0], 
+        Hold[$CellContext`col$$, $CellContext`col$792202$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> $CellContext`dp[$CellContext`pts$$, $CellContext`col$$, \
+$CellContext`pp$$], 
+      "Specifications" :> {{{$CellContext`pts$$, {{0.6145, 
+          0.8300000000000001}, {0.9062956045018307, 0.4782560339287134}, {
+          0.124, 0.44}, {0.9668251439477269, 0.5245965698484798}}}, {0, 0}, {
+         1, 1}, ControlType -> Locator, LocatorAutoCreate -> True, Appearance -> 
+         None}, {{$CellContext`pp$$, 2, "resolution"}, 2, 100, 
+         1}, {{$CellContext`col$$, "Rainbow", "color scheme"}, {
+         "AlpineColors", "Aquamarine", "ArmyColors", "AtlanticColors", 
+          "AuroraColors", "AvocadoColors", "BeachColors", "BlueGreenYellow", 
+          "BrassTones", "BrightBands", "BrownCyanTones", "CandyColors", 
+          "CherryTones", "CMYKColors", "CoffeeTones", "DarkBands", 
+          "DarkRainbow", "DarkTerrain", "DeepSeaColors", "FallColors", 
+          "FruitPunchColors", "FuchsiaTones", "GrayTones", "GrayYellowTones", 
+          "GreenBrownTerrain", "GreenPinkTones", "IslandColors", "LakeColors",
+           "LightTemperatureMap", "LightTerrain", "MintColors", "NeonColors", 
+          "Pastel", "PearlColors", "PigeonTones", "PlumColors", "Rainbow", 
+          "RedBlueTones", "RedGreenSplit", "RoseColors", "RustTones", 
+          "SandyTerrain", "SiennaTones", "SolarColors", "SouthwestColors", 
+          "StarryNightColors", "SunsetColors", "TemperatureMap", 
+          "ThermometerColors", "ValentineTones", "WatermelonColors"}, 
+         ControlType -> PopupMenu}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{449., {259.34375, 264.65625}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`dp[
+         Pattern[$CellContext`pts, 
+          Blank[]], 
+         Pattern[$CellContext`col, 
+          Blank[]], 
+         Pattern[$CellContext`pp, 
+          Blank[]]] := 
+       Module[{$CellContext`nf}, $CellContext`nf = Nearest[$CellContext`pts]; 
+         DensityPlot[
+           First[
+            $CellContext`nf[{$CellContext`x, $CellContext`y}]], \
+{$CellContext`x, 0, 1}, {$CellContext`y, 0, 1}, PlotPoints -> $CellContext`pp,
+            ColorFunction -> $CellContext`col, ImageSize -> {400, 400}, 
+           PlotRange -> {{0, 1}, {0, 1}}, MeshFunctions -> {#3& , #3& }, Mesh -> {
+             Range[-1, 1, 0.4], 
+             Range[-0.8, 0.8, 0.4]}, MeshStyle -> {Black, Thick}, FrameTicks -> 
+           False, PerformanceGoal -> "Quality"]]}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->240942890]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`col$$ = "Pastel", $CellContext`pp$$ = 
+    2, $CellContext`pts$$ = {{0.6145, 0.8300000000000001}, {
+    0.9062956045018307, 0.4782560339287134}, {0.124, 0.44}, {
+    0.9668251439477269, 0.5245965698484798}}, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`pts$$], {{0.6145, 0.8300000000000001}, {
+       0.9062956045018307, 0.4782560339287134}, {0.124, 0.44}, {
+       0.9668251439477269, 0.5245965698484798}}}, {0, 0}, {1, 1}}, {{
+       Hold[$CellContext`pp$$], 2, "resolution"}, 2, 100, 1}, {{
+       Hold[$CellContext`col$$], "Pastel", "color scheme"}, {
+      "AlpineColors", "Aquamarine", "ArmyColors", "AtlanticColors", 
+       "AuroraColors", "AvocadoColors", "BeachColors", "BlueGreenYellow", 
+       "BrassTones", "BrightBands", "BrownCyanTones", "CandyColors", 
+       "CherryTones", "CMYKColors", "CoffeeTones", "DarkBands", "DarkRainbow",
+        "DarkTerrain", "DeepSeaColors", "FallColors", "FruitPunchColors", 
+       "FuchsiaTones", "GrayTones", "GrayYellowTones", "GreenBrownTerrain", 
+       "GreenPinkTones", "IslandColors", "LakeColors", "LightTemperatureMap", 
+       "LightTerrain", "MintColors", "NeonColors", "Pastel", "PearlColors", 
+       "PigeonTones", "PlumColors", "Rainbow", "RedBlueTones", 
+       "RedGreenSplit", "RoseColors", "RustTones", "SandyTerrain", 
+       "SiennaTones", "SolarColors", "SouthwestColors", "StarryNightColors", 
+       "SunsetColors", "TemperatureMap", "ThermometerColors", 
+       "ValentineTones", "WatermelonColors"}}}, Typeset`size$$ = {
+    400., {198., 202.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`pts$792263$$ = {0, 
+    0}, $CellContext`pp$792264$$ = 0, $CellContext`col$792265$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`col$$ = "Pastel", $CellContext`pp$$ = 
+        2, $CellContext`pts$$ = {{0.6145, 0.8300000000000001}, {
+         0.9062956045018307, 0.4782560339287134}, {0.124, 0.44}, {
+         0.9668251439477269, 0.5245965698484798}}}, "ControllerVariables" :> {
+        Hold[$CellContext`pts$$, $CellContext`pts$792263$$, {0, 0}], 
+        Hold[$CellContext`pp$$, $CellContext`pp$792264$$, 0], 
+        Hold[$CellContext`col$$, $CellContext`col$792265$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> $CellContext`dp[$CellContext`pts$$, $CellContext`col$$, \
+$CellContext`pp$$], 
+      "Specifications" :> {{{$CellContext`pts$$, {{0.6145, 
+          0.8300000000000001}, {0.9062956045018307, 0.4782560339287134}, {
+          0.124, 0.44}, {0.9668251439477269, 0.5245965698484798}}}, {0, 0}, {
+         1, 1}, ControlType -> Locator, LocatorAutoCreate -> True, Appearance -> 
+         None}, {{$CellContext`pp$$, 2, "resolution"}, 2, 100, 
+         1}, {{$CellContext`col$$, "Pastel", "color scheme"}, {
+         "AlpineColors", "Aquamarine", "ArmyColors", "AtlanticColors", 
+          "AuroraColors", "AvocadoColors", "BeachColors", "BlueGreenYellow", 
+          "BrassTones", "BrightBands", "BrownCyanTones", "CandyColors", 
+          "CherryTones", "CMYKColors", "CoffeeTones", "DarkBands", 
+          "DarkRainbow", "DarkTerrain", "DeepSeaColors", "FallColors", 
+          "FruitPunchColors", "FuchsiaTones", "GrayTones", "GrayYellowTones", 
+          "GreenBrownTerrain", "GreenPinkTones", "IslandColors", "LakeColors",
+           "LightTemperatureMap", "LightTerrain", "MintColors", "NeonColors", 
+          "Pastel", "PearlColors", "PigeonTones", "PlumColors", "Rainbow", 
+          "RedBlueTones", "RedGreenSplit", "RoseColors", "RustTones", 
+          "SandyTerrain", "SiennaTones", "SolarColors", "SouthwestColors", 
+          "StarryNightColors", "SunsetColors", "TemperatureMap", 
+          "ThermometerColors", "ValentineTones", "WatermelonColors"}, 
+         ControlType -> PopupMenu}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{449., {259.34375, 264.65625}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`dp[
+         Pattern[$CellContext`pts, 
+          Blank[]], 
+         Pattern[$CellContext`col, 
+          Blank[]], 
+         Pattern[$CellContext`pp, 
+          Blank[]]] := 
+       Module[{$CellContext`nf}, $CellContext`nf = Nearest[$CellContext`pts]; 
+         DensityPlot[
+           First[
+            $CellContext`nf[{$CellContext`x, $CellContext`y}]], \
+{$CellContext`x, 0, 1}, {$CellContext`y, 0, 1}, PlotPoints -> $CellContext`pp,
+            ColorFunction -> $CellContext`col, ImageSize -> {400, 400}, 
+           PlotRange -> {{0, 1}, {0, 1}}, MeshFunctions -> {#3& , #3& }, Mesh -> {
+             Range[-1, 1, 0.4], 
+             Range[-0.8, 0.8, 0.4]}, MeshStyle -> {Black, Thick}, FrameTicks -> 
+           False, PerformanceGoal -> "Quality"]]}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->9904537],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`col$$ = "Rainbow", $CellContext`pp$$ = 
+    100, $CellContext`pts$$ = {{0.6145, 0.8300000000000001}, {
+    0.9062956045018307, 0.4782560339287134}, {0.124, 0.44}, {
+    0.9668251439477269, 0.5245965698484798}, {0.7156, 0.8479}, {0.1539, 
+    0.7752}, {0.861, 0.42910000000000004`}, {0.387, 0.2185}, {0.1464, 
+    0.2187}, {0.3672, 0.6151}, {0.5954, 0.7577}, {0.6930000000000001, 
+    0.7147}, {0.6153000000000001, 0.542}, {0.5223, 0.5022}, {0.1688, 
+    0.7799}, {0.1915, 0.5319}, {0.1915, 0.3589}, {0.5279, 
+    0.23870000000000002`}}, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`pts$$], {{0.6145, 0.8300000000000001}, {
+       0.9062956045018307, 0.4782560339287134}, {0.124, 0.44}, {
+       0.9668251439477269, 0.5245965698484798}, {0.7156, 0.8479}, {0.1539, 
+       0.7752}, {0.861, 0.42910000000000004`}, {0.387, 0.2185}, {0.1464, 
+       0.2187}, {0.3672, 0.6151}, {0.5954, 0.7577}, {0.6930000000000001, 
+       0.7147}, {0.6153000000000001, 0.542}, {0.5223, 0.5022}, {0.1688, 
+       0.7799}, {0.1915, 0.5319}, {0.1915, 0.3589}, {0.5279, 
+       0.23870000000000002`}}}, {0, 0}, {1, 1}}, {{
+       Hold[$CellContext`pp$$], 100, "resolution"}, 2, 100, 1}, {{
+       Hold[$CellContext`col$$], "Rainbow", "color scheme"}, {
+      "AlpineColors", "Aquamarine", "ArmyColors", "AtlanticColors", 
+       "AuroraColors", "AvocadoColors", "BeachColors", "BlueGreenYellow", 
+       "BrassTones", "BrightBands", "BrownCyanTones", "CandyColors", 
+       "CherryTones", "CMYKColors", "CoffeeTones", "DarkBands", "DarkRainbow",
+        "DarkTerrain", "DeepSeaColors", "FallColors", "FruitPunchColors", 
+       "FuchsiaTones", "GrayTones", "GrayYellowTones", "GreenBrownTerrain", 
+       "GreenPinkTones", "IslandColors", "LakeColors", "LightTemperatureMap", 
+       "LightTerrain", "MintColors", "NeonColors", "Pastel", "PearlColors", 
+       "PigeonTones", "PlumColors", "Rainbow", "RedBlueTones", 
+       "RedGreenSplit", "RoseColors", "RustTones", "SandyTerrain", 
+       "SiennaTones", "SolarColors", "SouthwestColors", "StarryNightColors", 
+       "SunsetColors", "TemperatureMap", "ThermometerColors", 
+       "ValentineTones", "WatermelonColors"}}}, Typeset`size$$ = {
+    400., {198., 202.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`pts$792326$$ = {0, 
+    0}, $CellContext`pp$792327$$ = 0, $CellContext`col$792328$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`col$$ = "Rainbow", $CellContext`pp$$ = 
+        100, $CellContext`pts$$ = {{0.6145, 0.8300000000000001}, {
+         0.9062956045018307, 0.4782560339287134}, {0.124, 0.44}, {
+         0.9668251439477269, 0.5245965698484798}, {0.7156, 0.8479}, {0.1539, 
+         0.7752}, {0.861, 0.42910000000000004`}, {0.387, 0.2185}, {0.1464, 
+         0.2187}, {0.3672, 0.6151}, {0.5954, 0.7577}, {0.6930000000000001, 
+         0.7147}, {0.6153000000000001, 0.542}, {0.5223, 0.5022}, {0.1688, 
+         0.7799}, {0.1915, 0.5319}, {0.1915, 0.3589}, {0.5279, 
+         0.23870000000000002`}}}, "ControllerVariables" :> {
+        Hold[$CellContext`pts$$, $CellContext`pts$792326$$, {0, 0}], 
+        Hold[$CellContext`pp$$, $CellContext`pp$792327$$, 0], 
+        Hold[$CellContext`col$$, $CellContext`col$792328$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> $CellContext`dp[$CellContext`pts$$, $CellContext`col$$, \
+$CellContext`pp$$], 
+      "Specifications" :> {{{$CellContext`pts$$, {{0.6145, 
+          0.8300000000000001}, {0.9062956045018307, 0.4782560339287134}, {
+          0.124, 0.44}, {0.9668251439477269, 0.5245965698484798}, {0.7156, 
+          0.8479}, {0.1539, 0.7752}, {0.861, 0.42910000000000004`}, {0.387, 
+          0.2185}, {0.1464, 0.2187}, {0.3672, 0.6151}, {0.5954, 0.7577}, {
+          0.6930000000000001, 0.7147}, {0.6153000000000001, 0.542}, {0.5223, 
+          0.5022}, {0.1688, 0.7799}, {0.1915, 0.5319}, {0.1915, 0.3589}, {
+          0.5279, 0.23870000000000002`}}}, {0, 0}, {1, 1}, ControlType -> 
+         Locator, LocatorAutoCreate -> True, Appearance -> 
+         None}, {{$CellContext`pp$$, 100, "resolution"}, 2, 100, 
+         1}, {{$CellContext`col$$, "Rainbow", "color scheme"}, {
+         "AlpineColors", "Aquamarine", "ArmyColors", "AtlanticColors", 
+          "AuroraColors", "AvocadoColors", "BeachColors", "BlueGreenYellow", 
+          "BrassTones", "BrightBands", "BrownCyanTones", "CandyColors", 
+          "CherryTones", "CMYKColors", "CoffeeTones", "DarkBands", 
+          "DarkRainbow", "DarkTerrain", "DeepSeaColors", "FallColors", 
+          "FruitPunchColors", "FuchsiaTones", "GrayTones", "GrayYellowTones", 
+          "GreenBrownTerrain", "GreenPinkTones", "IslandColors", "LakeColors",
+           "LightTemperatureMap", "LightTerrain", "MintColors", "NeonColors", 
+          "Pastel", "PearlColors", "PigeonTones", "PlumColors", "Rainbow", 
+          "RedBlueTones", "RedGreenSplit", "RoseColors", "RustTones", 
+          "SandyTerrain", "SiennaTones", "SolarColors", "SouthwestColors", 
+          "StarryNightColors", "SunsetColors", "TemperatureMap", 
+          "ThermometerColors", "ValentineTones", "WatermelonColors"}, 
+         ControlType -> PopupMenu}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{449., {259.34375, 264.65625}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`dp[
+         Pattern[$CellContext`pts, 
+          Blank[]], 
+         Pattern[$CellContext`col, 
+          Blank[]], 
+         Pattern[$CellContext`pp, 
+          Blank[]]] := 
+       Module[{$CellContext`nf}, $CellContext`nf = Nearest[$CellContext`pts]; 
+         DensityPlot[
+           First[
+            $CellContext`nf[{$CellContext`x, $CellContext`y}]], \
+{$CellContext`x, 0, 1}, {$CellContext`y, 0, 1}, PlotPoints -> $CellContext`pp,
+            ColorFunction -> $CellContext`col, ImageSize -> {400, 400}, 
+           PlotRange -> {{0, 1}, {0, 1}}, MeshFunctions -> {#3& , #3& }, Mesh -> {
+             Range[-1, 1, 0.4], 
+             Range[-0.8, 0.8, 0.4]}, MeshStyle -> {Black, Thick}, FrameTicks -> 
+           False, PerformanceGoal -> "Quality"]]}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->438499227],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`col$$ = "SunsetColors", $CellContext`pp$$ = 
+    2, $CellContext`pts$$ = {{0.6145, 0.8300000000000001}, {
+    0.9062956045018307, 0.4782560339287134}, {0.876, 0.644}, {0.447, 0.599}, {
+    0.6455000000000001, 0.7651}, {0.728, 0.529}, {0.8284, 0.3965}, {0.7135, 
+    0.261}, {0.44620000000000004`, 0.2235}, {0.359, 0.429}, {0.098, 0.331}}, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`pts$$], {{0.6145, 0.8300000000000001}, {
+       0.9062956045018307, 0.4782560339287134}, {0.876, 0.644}, {0.447, 
+       0.599}, {0.6455000000000001, 0.7651}, {0.728, 0.529}, {0.8284, 
+       0.3965}, {0.7135, 0.261}, {0.44620000000000004`, 0.2235}, {0.359, 
+       0.429}, {0.098, 0.331}}}, {0, 0}, {1, 1}}, {{
+       Hold[$CellContext`pp$$], 2, "resolution"}, 2, 100, 1}, {{
+       Hold[$CellContext`col$$], "SunsetColors", "color scheme"}, {
+      "AlpineColors", "Aquamarine", "ArmyColors", "AtlanticColors", 
+       "AuroraColors", "AvocadoColors", "BeachColors", "BlueGreenYellow", 
+       "BrassTones", "BrightBands", "BrownCyanTones", "CandyColors", 
+       "CherryTones", "CMYKColors", "CoffeeTones", "DarkBands", "DarkRainbow",
+        "DarkTerrain", "DeepSeaColors", "FallColors", "FruitPunchColors", 
+       "FuchsiaTones", "GrayTones", "GrayYellowTones", "GreenBrownTerrain", 
+       "GreenPinkTones", "IslandColors", "LakeColors", "LightTemperatureMap", 
+       "LightTerrain", "MintColors", "NeonColors", "Pastel", "PearlColors", 
+       "PigeonTones", "PlumColors", "Rainbow", "RedBlueTones", 
+       "RedGreenSplit", "RoseColors", "RustTones", "SandyTerrain", 
+       "SiennaTones", "SolarColors", "SouthwestColors", "StarryNightColors", 
+       "SunsetColors", "TemperatureMap", "ThermometerColors", 
+       "ValentineTones", "WatermelonColors"}}}, Typeset`size$$ = {
+    400., {198., 202.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`pts$792389$$ = {0, 
+    0}, $CellContext`pp$792390$$ = 0, $CellContext`col$792391$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`col$$ = "SunsetColors", $CellContext`pp$$ = 
+        2, $CellContext`pts$$ = {{0.6145, 0.8300000000000001}, {
+         0.9062956045018307, 0.4782560339287134}, {0.876, 0.644}, {0.447, 
+         0.599}, {0.6455000000000001, 0.7651}, {0.728, 0.529}, {0.8284, 
+         0.3965}, {0.7135, 0.261}, {0.44620000000000004`, 0.2235}, {0.359, 
+         0.429}, {0.098, 0.331}}}, "ControllerVariables" :> {
+        Hold[$CellContext`pts$$, $CellContext`pts$792389$$, {0, 0}], 
+        Hold[$CellContext`pp$$, $CellContext`pp$792390$$, 0], 
+        Hold[$CellContext`col$$, $CellContext`col$792391$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> $CellContext`dp[$CellContext`pts$$, $CellContext`col$$, \
+$CellContext`pp$$], 
+      "Specifications" :> {{{$CellContext`pts$$, {{0.6145, 
+          0.8300000000000001}, {0.9062956045018307, 0.4782560339287134}, {
+          0.876, 0.644}, {0.447, 0.599}, {0.6455000000000001, 0.7651}, {0.728,
+           0.529}, {0.8284, 0.3965}, {0.7135, 0.261}, {0.44620000000000004`, 
+          0.2235}, {0.359, 0.429}, {0.098, 0.331}}}, {0, 0}, {1, 1}, 
+         ControlType -> Locator, LocatorAutoCreate -> True, Appearance -> 
+         None}, {{$CellContext`pp$$, 2, "resolution"}, 2, 100, 
+         1}, {{$CellContext`col$$, "SunsetColors", "color scheme"}, {
+         "AlpineColors", "Aquamarine", "ArmyColors", "AtlanticColors", 
+          "AuroraColors", "AvocadoColors", "BeachColors", "BlueGreenYellow", 
+          "BrassTones", "BrightBands", "BrownCyanTones", "CandyColors", 
+          "CherryTones", "CMYKColors", "CoffeeTones", "DarkBands", 
+          "DarkRainbow", "DarkTerrain", "DeepSeaColors", "FallColors", 
+          "FruitPunchColors", "FuchsiaTones", "GrayTones", "GrayYellowTones", 
+          "GreenBrownTerrain", "GreenPinkTones", "IslandColors", "LakeColors",
+           "LightTemperatureMap", "LightTerrain", "MintColors", "NeonColors", 
+          "Pastel", "PearlColors", "PigeonTones", "PlumColors", "Rainbow", 
+          "RedBlueTones", "RedGreenSplit", "RoseColors", "RustTones", 
+          "SandyTerrain", "SiennaTones", "SolarColors", "SouthwestColors", 
+          "StarryNightColors", "SunsetColors", "TemperatureMap", 
+          "ThermometerColors", "ValentineTones", "WatermelonColors"}, 
+         ControlType -> PopupMenu}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{449., {259.34375, 264.65625}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`dp[
+         Pattern[$CellContext`pts, 
+          Blank[]], 
+         Pattern[$CellContext`col, 
+          Blank[]], 
+         Pattern[$CellContext`pp, 
+          Blank[]]] := 
+       Module[{$CellContext`nf}, $CellContext`nf = Nearest[$CellContext`pts]; 
+         DensityPlot[
+           First[
+            $CellContext`nf[{$CellContext`x, $CellContext`y}]], \
+{$CellContext`x, 0, 1}, {$CellContext`y, 0, 1}, PlotPoints -> $CellContext`pp,
+            ColorFunction -> $CellContext`col, ImageSize -> {400, 400}, 
+           PlotRange -> {{0, 1}, {0, 1}}, MeshFunctions -> {#3& , #3& }, Mesh -> {
+             Range[-1, 1, 0.4], 
+             Range[-0.8, 0.8, 0.4]}, MeshStyle -> {Black, Thick}, FrameTicks -> 
+           False, PerformanceGoal -> "Quality"]]}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->84883871]
+}, Open  ]],
+
+Cell["", "DetailsSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.4965463067249007`*^9},
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.4965463097405257`*^9},
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.4965463114592757`*^9},
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.3895522232313623`*^9},
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0, CellBaseline -> Baseline], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.4965463167092757`*^9},
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell["", "SearchTermsSection"],
+
+Cell["", "RelatedLinksSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Noel Patson",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Noel+Patson"], 
+    None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Noel+Patson"]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4965464481311507`*^9, 3.4965464496936507`*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{738, 736},
+WindowMargins->{{10, Automatic}, {Automatic, 0}},
+FrontEndVersion->"7.0 for Mac OS X x86 (32-bit) (February 18, 2009)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "AutomaticAnimation"->{
+  Cell[39538, 797, 1528, 32, 29, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[41069, 831, 908, 21, 29, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]},
+ "CreateAndDeleteLocators"->{
+  Cell[37615, 745, 701, 16, 29, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "DragLocators"->{
+  Cell[37208, 731, 404, 12, 29, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "GamepadControls"->{
+  Cell[39166, 786, 369, 9, 29, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "ResizeImages"->{
+  Cell[36148, 702, 376, 9, 29, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[36527, 713, 678, 16, 29, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "SliderZoom"->{
+  Cell[38319, 763, 844, 21, 29, "ControlSuggestions",
+   CellTags->"SliderZoom"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"AutomaticAnimation", 42894, 889},
+ {"BookmarkAnimation", 43010, 892},
+ {"CreateAndDeleteLocators", 43130, 895},
+ {"DragLocators", 43245, 898},
+ {"GamepadControls", 43352, 901},
+ {"ResizeImages", 43458, 904},
+ {"RotateAndZoomIn3D", 43566, 907},
+ {"SliderZoom", 43673, 910}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 127, 2, 74, "DemoTitle"],
+Cell[CellGroupData[{
+Cell[719, 28, 33, 0, 266, "InitializationSection"],
+Cell[755, 30, 2154, 58, 84, "Input",
+ InitializationCell->True,
+ CellID->30370229]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2946, 93, 29, 0, 230, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[3000, 97, 1917, 48, 159, "Input"],
+Cell[4920, 147, 5961, 102, 536, "Output",
+ CellID->22837669]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10930, 255, 36, 0, 166, "ManipulateCaptionSection"],
+Cell[10969, 257, 641, 11, 63, "ManipulateCaption"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11647, 273, 28, 0, 168, "ThumbnailSection"],
+Cell[11678, 275, 5588, 95, 536, "Output",
+ CellID->240942890]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17303, 375, 28, 0, 138, "SnapshotsSection"],
+Cell[17334, 377, 5582, 95, 536, "Output",
+ CellID->9904537],
+Cell[22919, 474, 6970, 115, 536, "Output",
+ CellID->438499227],
+Cell[29892, 591, 6150, 102, 536, "Output",
+ CellID->84883871]
+}, Open  ]],
+Cell[36057, 696, 26, 0, 332, "DetailsSection"],
+Cell[CellGroupData[{
+Cell[36108, 700, 37, 0, 108, "ControlSuggestionsSection"],
+Cell[36148, 702, 376, 9, 29, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[36527, 713, 678, 16, 29, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[37208, 731, 404, 12, 29, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[37615, 745, 701, 16, 29, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[38319, 763, 844, 21, 29, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[39166, 786, 369, 9, 29, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[39538, 797, 1528, 32, 29, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[41069, 831, 908, 21, 29, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[41992, 855, 30, 0, 152, "SearchTermsSection"],
+Cell[42025, 857, 31, 0, 126, "RelatedLinksSection"],
+Cell[CellGroupData[{
+Cell[42081, 861, 25, 0, 124, "AuthorSection"],
+Cell[42109, 863, 387, 11, 21, "Author"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

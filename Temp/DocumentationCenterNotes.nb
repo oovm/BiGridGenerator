@@ -1,0 +1,2100 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     91115,       2092]
+NotebookOptionsPosition[     55948,       1486]
+NotebookOutlinePosition[     79197,       1885]
+CellTagsIndexPosition[     77926,       1863]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[TextData[{
+ "This notebook is Copyright \[Copyright], 2008 Scientific Arts, LLC,  all \
+rights reserved.  It may be redistributed only in full and in its original \
+form without modification; and it may not be used for any commercial purpose \
+without permission from Scientific Arts.  A non-exclusive royalty-free \
+license is given to reproduce and use all the of the ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " ",
+ StyleBox["code",
+  FontSlant->"Italic"],
+ " in this notebook for any purpose whatsoever, as well as any of the ideas.  \
+ No guarantee whatsoever is given as to the  accuracy or functionality of \
+anything presented in this document.  Use at your own risk. \[LineSeparator]\
+\[LineSeparator]Enjoy: I hope that it's useful. For further information on  \
+",
+ StyleBox["A",
+  FontWeight->"Bold",
+  FontColor->RGBColor[0.542718, 0.103822, 0.139086]],
+ StyleBox[" ",
+  FontWeight->"Bold"],
+ StyleBox["Work",
+  FontWeight->"Bold",
+  FontColor->RGBColor[0.647059, 0.119585, 0.134844]],
+ StyleBox["Life",
+  FontWeight->"Bold",
+  FontColor->RGBColor[0.692302, 0.471, 0.275517]],
+ StyleBox[" ",
+  FontWeight->"Bold"],
+ StyleBox["Frame",
+  FontWeight->"Bold",
+  FontColor->RGBColor[0.0872663, 0.520363, 0.287388]],
+ StyleBox["Work",
+  FontWeight->"Bold",
+  FontColor->RGBColor[0, 0.300008, 0.4]],
+ ", please click on the Scientific Arts banner above."
+}], "Text",
+ Editable->False,
+ CellFrame->True,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417128787102659*^9, 3.417128932911289*^9}, {
+   3.417128966977538*^9, 3.417129009600556*^9}, {3.4171299658753567`*^9, 
+   3.41713007488867*^9}, 3.417130106213378*^9, {3.417130890353876*^9, 
+   3.417130965142454*^9}, {3.4171310313529577`*^9, 3.417131134463414*^9}, {
+   3.417131180005157*^9, 3.41713120084977*^9}},
+ Background->GrayLevel[0.9],
+ CellID->2123826423,ExpressionUUID->"bb937568-49e4-4e17-8075-325d658e61c1"],
+
+Cell["Version of Tue 15 Apr 2008 13:20:00", "Text",
+ Editable->False,
+ Deletable->True,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417268790243142*^9, 3.41726880540938*^9}},
+ TextAlignment->Center,
+ CellID->1486673549,ExpressionUUID->"77d9f60d-6e61-4fb7-8aae-a2bd96b78f34"],
+
+Cell[TextData[{
+ "Go to ",
+ ButtonBox["http://www.scientificarts.com/worklife/notebooks/",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://www.scientificarts.com/worklife/notebooks/"], None}],
+ " for updates to this notebook"
+}], "Text",
+ Editable->False,
+ Deletable->True,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.4172689423328753`*^9, 3.417268968683189*^9}},
+ TextAlignment->Center,
+ CellID->550105198,ExpressionUUID->"0d07f614-b369-4bf8-9876-f3967b6b1f69"],
+
+Cell[CellGroupData[{
+
+Cell["The Structure of Documentation Directories", "Section",
+ Editable->False,
+ ShowCellBracket->False,
+ ShowGroupOpener->True,
+ CellID->1851443488,ExpressionUUID->"58a2b9af-3e3f-4e7b-b3a3-0281ea70a848"],
+
+Cell["\<\
+Typically when you have an application such as a package in a directory that \
+directory will contain the documentation for that application.\
+\>", "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417033633332902*^9, 3.417033680256357*^9}},
+ CellID->1393114728,ExpressionUUID->"4a76306f-1c35-4315-b7e7-142613e461b4"],
+
+Cell[TextData[{
+ "Let us say that your application is in a directory called ",
+ StyleBox["MyApplication", "SR"],
+ ".  Then, within this directory, there will be a directory called ",
+ StyleBox["Documentation", "SR"],
+ " and there will also be a file called ",
+ StyleBox["PacletInfo.m", "MR"],
+ ".  More about the ",
+ StyleBox["PacletInfo.m", "MR"],
+ " file will be described later on."
+}], "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417033689423996*^9, 3.417033777833687*^9}, {
+  3.417130279471484*^9, 3.417130282404149*^9}},
+ CellID->65030255,ExpressionUUID->"0bb37439-6d45-4022-9ab2-21d1688cccba"],
+
+Cell[TextData[{
+ "Within the ",
+ StyleBox["Documentation", "SR"],
+ " directory there will be another directory called ",
+ StyleBox["English", "SR"],
+ " (assuming that your documentation is in English).  And within the English \
+directory will be three directories called"
+}], "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417033796246358*^9, 3.417033839746915*^9}},
+ CellID->1943657550,ExpressionUUID->"5321abdb-171e-490a-b179-1ae0e94c5ee2"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[StyleBox["Guides", "SR"]], "Item",
+ Editable->False,
+ ShowCellBracket->False,
+ CellID->74658445,ExpressionUUID->"14f70440-794f-42b3-9c2b-0c6a6ae1cd4d"],
+
+Cell[TextData[StyleBox["Tutorials", "SR"]], "Item",
+ Editable->False,
+ ShowCellBracket->False,
+ CellID->1678688333,ExpressionUUID->"710bf97d-2cda-460d-9051-9a8b83f31aab"],
+
+Cell[TextData[StyleBox["ReferencePages", "SR"]], "Item",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{3.4170358137214127`*^9},
+ CellID->654035267,ExpressionUUID->"360e1519-a947-414b-855a-f31a2747f7ec"]
+}, Open  ]],
+
+Cell[TextData[{
+ "And within the ",
+ StyleBox["ReferencePages", "SR"],
+ " directory is another directory called ",
+ StyleBox["Symbols", "SR"],
+ "."
+}], "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.4170428273572493`*^9, 3.41704285727801*^9}, 
+   3.417043889128631*^9},
+ CellID->61916233,ExpressionUUID->"ac7c1621-33ae-4447-b02c-0ba8e3e86377"],
+
+Cell["So the form of the directory hierarchy looks like: ", "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{3.417035791405319*^9},
+ CellID->1549427123,ExpressionUUID->"15d02d8f-1029-45b5-b608-7fa0e078c7c9"],
+
+Cell[BoxData[
+ FrameBox[
+  GraphicsBox[
+   TagBox[
+    GraphicsComplexBox[{{0., 4.}, {0., 3.}, {0., 2.}, {-1., 1.}, {0., 1.}, {
+     1., 1.}, {1., 0.}}, {
+      {RGBColor[0.5, 0., 0.], Arrowheads[{{0.02554714064914992, 0.7}}], 
+       ArrowBox[{1, 2}], ArrowBox[{2, 3}], ArrowBox[{3, 4}], ArrowBox[{3, 5}],
+        ArrowBox[{3, 6}], ArrowBox[{6, 7}]}, {InsetBox[
+        FrameBox["\<\"MyApplication\"\>",
+         Background->RGBColor[1, 1, 0.8],
+         FrameStyle->RGBColor[0.94, 0.85, 0.36],
+         StripOnInput->False], 1], InsetBox[
+        FrameBox["\<\"Documentation\"\>",
+         Background->RGBColor[1, 1, 0.8],
+         FrameStyle->RGBColor[0.94, 0.85, 0.36],
+         StripOnInput->False], 2], InsetBox[
+        FrameBox["\<\"English\"\>",
+         Background->RGBColor[1, 1, 0.8],
+         FrameStyle->RGBColor[0.94, 0.85, 0.36],
+         StripOnInput->False], 3], InsetBox[
+        FrameBox["\<\"Guides\"\>",
+         Background->RGBColor[1, 1, 0.8],
+         FrameStyle->RGBColor[0.94, 0.85, 0.36],
+         StripOnInput->False], 4], InsetBox[
+        FrameBox["\<\"Tutorials\"\>",
+         Background->RGBColor[1, 1, 0.8],
+         FrameStyle->RGBColor[0.94, 0.85, 0.36],
+         StripOnInput->False], 5], InsetBox[
+        FrameBox["\<\"ReferencePages\"\>",
+         Background->RGBColor[1, 1, 0.8],
+         FrameStyle->RGBColor[0.94, 0.85, 0.36],
+         StripOnInput->False], 6], InsetBox[
+        FrameBox["\<\"Symbols\"\>",
+         Background->RGBColor[1, 1, 0.8],
+         FrameStyle->RGBColor[0.94, 0.85, 0.36],
+         StripOnInput->False], 7]}}],
+    Annotation[#, 
+     VertexCoordinateRules -> {{0., 4.}, {0., 3.}, {0., 2.}, {-1., 1.}, {0., 
+      1.}, {1., 1.}, {1., 0.}}]& ],
+   AspectRatio->Automatic,
+   BaseStyle->{FontFamily -> "Helvetica"},
+   FrameTicks->None,
+   PlotRange->All,
+   PlotRangePadding->Scaled[0.1]],
+  StripOnInput->False]], "Graphics",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{3.417042767034029*^9},
+ TextAlignment->Center,
+ CellTags->{
+  "DiaryDate[{2008, 4, 13, 0, 12, 41.115594}]", 
+   "EphemeralGUID[42813389784420250757880456136848447631]", 
+   "CellGUID[80430276481694835362319120721296092751]"},
+ CellID->208273949,ExpressionUUID->"ad4a80fc-e194-4b7e-a3ea-b0d101672fca"],
+
+Cell[TextData[{
+ "The three directories, ",
+ StyleBox["Guides", "SR"],
+ ", ",
+ StyleBox["Tutorials", "SR"],
+ ", and ",
+ StyleBox["ReferencePages", "SR"],
+ " have the following purposes:"
+}], "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417035796051252*^9, 3.417035844993277*^9}, 
+   3.417129095549333*^9},
+ CellID->272202062,ExpressionUUID->"72947190-e392-45af-baef-992ab6e18e42"],
+
+Cell[CellGroupData[{
+
+Cell["Guides", "Subsubsection",
+ Editable->False,
+ ShowCellBracket->False,
+ ShowGroupOpener->False,
+ CellChangeTimes->{3.417041818162662*^9},
+ CellID->759887924,ExpressionUUID->"d0a32fba-a1cf-4a12-aba6-fb98d82c6e27"],
+
+Cell["\<\
+This is the directory in which, for example, Tables of Contents notebooks \
+would reside.  Also, more generally, Guide Pages would go here.\
+\>", "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417035865318654*^9, 3.4170359274021893`*^9}},
+ CellID->1387564179,ExpressionUUID->"f9f8c4ed-b43b-47cf-9635-2f348beda512"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Tutorials", "Subsubsection",
+ Editable->False,
+ ShowCellBracket->False,
+ ShowGroupOpener->False,
+ CellID->351089959,ExpressionUUID->"70ecdd1b-cce5-4778-82ca-773ea661f797"],
+
+Cell["\<\
+Here go the actual tutorials: the discursive content that you create.  In \
+effect this is the descriptive documentation itself.\
+\>", "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417035930263755*^9, 3.417035975530663*^9}},
+ CellID->1266233680,ExpressionUUID->"8a837875-0799-4023-ac15-be469b67bff7"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ReferencePages", "Subsubsection",
+ Editable->False,
+ ShowCellBracket->False,
+ ShowGroupOpener->False,
+ CellChangeTimes->{3.4170358137214127`*^9},
+ CellID->1631362604,ExpressionUUID->"1053fe80-a80a-4700-b507-fbcb72c33e51"],
+
+Cell[TextData[{
+ "In this directory there is a subdirectory called ",
+ StyleBox["Symbols", "SR"],
+ ".  In the ",
+ StyleBox["Symbols", "SR"],
+ " directory is placed the notebooks\[LongDash]one for each function\
+\[LongDash]that give the specific documentation for each function in your \
+package.  At the very least each such page would contain the usage message \
+for each function in your package."
+}], "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.4170359777864943`*^9, 3.4170360176676693`*^9}, {
+   3.4170360514949427`*^9, 3.417036080812749*^9}, {3.4170427812227917`*^9, 
+   3.417042799622271*^9}, 3.417043893631226*^9},
+ CellID->26517990,ExpressionUUID->"81ca9db1-3ce0-46a0-9abb-58ae3c9b9a1e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "The ",
+ StyleBox["PacletInfo.m", "MR"],
+ " File"
+}], "Subsection",
+ Editable->False,
+ ShowCellBracket->False,
+ ShowGroupOpener->True,
+ TaggingRules:>{"GUIDTag[59517498499764084709173016840460217470]"},
+ CellChangeTimes->{{3.417036168576928*^9, 3.41703617938203*^9}},
+ CellTags->{
+  "DiaryDate[{2008, 4, 13, 0, 42, 47.501359}]", 
+   "EphemeralGUID[332395247488929281630951474907650830001]", 
+   "CellGUID[42951417094012448381146599396971351441]"},
+ CellID->1611906811,ExpressionUUID->"8d7cf957-b239-4a89-8505-9df37fe77cae"],
+
+Cell[TextData[{
+ "As mentioned above, within the package directory which we are calling ",
+ StyleBox["MyApplication", "SR"],
+ " there will also be a file called ",
+ StyleBox["PacletInfo.m", "MR"],
+ ".  This is a file with a specific structure which tells ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " what is contained within the ",
+ StyleBox["Guides", "SR"],
+ ", ",
+ StyleBox["Tutorials", "SR"],
+ ", and ",
+ StyleBox["ReferencePages", "SR"],
+ " directories and how the ",
+ StyleBox["Documentation Center", "IT"],
+ " should categorize and access them.  The ",
+ StyleBox["PacletInfo.m", "MR"],
+ " file is a plain text file with elements that describe what sorts of \
+materials are contained in the  ",
+ StyleBox["Guides", "SR"],
+ ", ",
+ StyleBox["Tutorials", "SR"],
+ ", and ",
+ StyleBox["ReferencePages", "SR"],
+ " directories as well as things such as what Context the functions described \
+within the ",
+ StyleBox["ReferencePages", "SR"],
+ " belong to.  Also it lets the ",
+ StyleBox["Documentation Center", "IT"],
+ " know how to list the material on the Installed Add-Ons page that is linked \
+to from the front page of the ",
+ StyleBox["Documentation Center", "IT"],
+ "."
+}], "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417036185454341*^9, 3.417036430969136*^9}, {
+   3.417036526440156*^9, 3.417036541282936*^9}, 3.417041518898465*^9, 
+   3.4170438996258583`*^9},
+ CellID->811565572,ExpressionUUID->"6d69f0e5-43ae-47cd-977e-54bb3e41777c"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Internal Details", "Section",
+ Editable->False,
+ ShowCellBracket->False,
+ ShowGroupOpener->True,
+ CellID->1993613587,ExpressionUUID->"a2d50324-431c-4a30-b048-bd9e238b4da0"],
+
+Cell[TextData[{
+ "A very bare bones approach to creating ",
+ StyleBox["Documentation Center", "IT"],
+ " material would make use of the directory structure described above along \
+with a hand coded ",
+ StyleBox["PacletInfo.m", "MR"],
+ " file.  In ",
+ StyleBox["A",
+  FontWeight->"Bold",
+  FontColor->RGBColor[0.542718, 0.103822, 0.139086]],
+ StyleBox[" ",
+  FontWeight->"Bold"],
+ StyleBox["Work",
+  FontWeight->"Bold",
+  FontColor->RGBColor[0.647059, 0.119585, 0.134844]],
+ StyleBox["Life",
+  FontWeight->"Bold",
+  FontColor->RGBColor[0.692302, 0.471, 0.275517]],
+ StyleBox[" ",
+  FontWeight->"Bold"],
+ StyleBox["Frame",
+  FontWeight->"Bold",
+  FontColor->RGBColor[0.0872663, 0.520363, 0.287388]],
+ StyleBox["Work",
+  FontWeight->"Bold",
+  FontColor->RGBColor[0, 0.300008, 0.4]],
+ " all of this is created automatically, but it is useful to know some of \
+this information in case one wants to modify documentation directly as well \
+as for potential debugging purposes."
+}], "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417036132662982*^9, 3.417036156709416*^9}, {
+   3.417036547987471*^9, 3.417036587971613*^9}, {3.4170367436407213`*^9, 
+   3.417036797198488*^9}, 3.41713013305996*^9, 3.417130247385849*^9},
+ CellID->1158743001,ExpressionUUID->"1a9ecfb8-3218-4e7a-ae9c-f238dfeda6bf"],
+
+Cell[TextData[{
+ "In addition to the ",
+ StyleBox["PacletInfo.m", "MR"],
+ " file the notebooks that will be placed within the ",
+ StyleBox["Guides", "SR"],
+ ", ",
+ StyleBox["Tutorials", "SR"],
+ ", and ",
+ StyleBox["ReferencePages", "SR"],
+ " directories must be modified in a particular way which is described \
+below."
+}], "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.4170366090285378`*^9, 3.417036676756877*^9}, 
+   3.417130133071001*^9},
+ CellID->924029707,ExpressionUUID->"632c6762-af62-4b0f-a29b-761046147b48"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ StyleBox["PacletInfo.m", "MR"],
+ " file"
+}], "Subsection",
+ Editable->False,
+ ShowCellBracket->False,
+ ShowGroupOpener->True,
+ TaggingRules:>{"GUIDTag[180655695136350397516236887972834616248]"},
+ CellChangeTimes->{{3.417036829458043*^9, 3.417036833823184*^9}},
+ CellTags->{
+  "DiaryDate[{2008, 4, 13, 0, 53, 45.534556}]", 
+   "EphemeralGUID[176361740331776999843739039682268417365]", 
+   "CellGUID[239025176700050435742155733489199174370]"},
+ CellID->1798212562,ExpressionUUID->"c3505c2f-96a0-480c-8630-201c220263fc"],
+
+Cell[TextData[{
+ "Here is how a ",
+ StyleBox["PacletInfo.m", "MR"],
+ " file might be built.  We will describe a simple case where there is one \
+Guide page, one Tutorial, and one function Reference page.  Assume that "
+}], "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417036590754477*^9, 3.4170366014435787`*^9}, {
+  3.417036701477289*^9, 3.417036705877186*^9}, {3.417036841147045*^9, 
+  3.417036918800508*^9}},
+ CellID->419662065,ExpressionUUID->"aeee66e7-bd7c-4664-9bc1-c0882a072453"],
+
+Cell[TextData[{
+ "The Guide page is a notebook called ",
+ StyleBox["TableOfContents.nb", "MR"],
+ ", this will contain links to each of the Tutorial pages."
+}], "Text",
+ Editable->False,
+ CellDingbat->"\[EmptyDiamond]",
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417036590754477*^9, 3.4170366014435787`*^9}, {
+   3.417036701477289*^9, 3.417036705877186*^9}, {3.417036841147045*^9, 
+   3.417036918800508*^9}, 3.417037024149334*^9, {3.417041859610045*^9, 
+   3.417041891592304*^9}},
+ CellID->1021165303,ExpressionUUID->"bbdc32ad-d6d0-41da-8f80-122019ebb92f"],
+
+Cell[TextData[{
+ "The Tutorial pages comprise two notebooks called ",
+ StyleBox["ATutorial.nb", "MR"],
+ " and ",
+ StyleBox["AnotherTutorial.nb", "MR"]
+}], "Text",
+ Editable->False,
+ CellDingbat->"\[EmptyDiamond]",
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417036590754477*^9, 3.4170366014435787`*^9}, {
+  3.417036701477289*^9, 3.417036705877186*^9}, {3.417036841147045*^9, 
+  3.417036918800508*^9}, {3.417037029558613*^9, 3.4170370377699757`*^9}, {
+  3.417038740567833*^9, 3.417038760794983*^9}},
+ CellID->35940697,ExpressionUUID->"b72a2bb1-baf5-4525-ab89-2db69893294a"],
+
+Cell[TextData[{
+ "The Reference pages comprise two notebooks called ",
+ StyleBox["AFunction.nb", "MR"],
+ " and ",
+ StyleBox["AnotherFunction.nb", "MR"]
+}], "Text",
+ Editable->False,
+ CellDingbat->"\[EmptyDiamond]",
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417036590754477*^9, 3.4170366014435787`*^9}, {
+  3.417036701477289*^9, 3.417036705877186*^9}, {3.417036841147045*^9, 
+  3.417036918800508*^9}, {3.417037041354515*^9, 3.417037070242503*^9}, {
+  3.4170387696355143`*^9, 3.417038791211796*^9}},
+ CellID->612389672,ExpressionUUID->"a7f87330-9bff-4e27-8c33-5ff18c57efa2"],
+
+Cell[TextData[{
+ "Note that, in the case of the Reference page's name, it generally should \
+correspond to the function's name itself.   So we assume that the package \
+that is being documented has a function called ",
+ StyleBox["AFunction", "MR"],
+ "."
+}], "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.4170370755530376`*^9, 3.417037110882811*^9}, {
+  3.4170377119875593`*^9, 3.417037730611898*^9}},
+ CellID->1691580880,ExpressionUUID->"226ff9a5-72a7-4aba-b082-880820969101"],
+
+Cell[TextData[{
+ "Now further assume that the package Context is ",
+ StyleBox["MyApplication`MyPackage`", "MR"],
+ ".  This assumes that the package's file is called ",
+ StyleBox["MyPackage.m", "MR"],
+ " and is within the directory called ",
+ StyleBox["MyApplication", "SR"],
+ ".  The ",
+ StyleBox["PacletInfo.m", "MR"],
+ " file is also in this directory as we mentioned earlier."
+}], "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417037741622814*^9, 3.417037882894299*^9}, 
+   3.417041387821267*^9},
+ CellID->2011331174,ExpressionUUID->"5c3106fb-f041-4f00-828c-170d3e9f6c25"],
+
+Cell["So, with all of this, the directory and file structure is", "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417037933542287*^9, 3.417037947238995*^9}, {
+  3.417038113686068*^9, 3.417038124330194*^9}},
+ CellID->902953991,ExpressionUUID->"3ca21f55-920c-4b4d-8a57-6609dad3d1a0"],
+
+Cell[BoxData[
+ FrameBox[
+  GraphicsBox[
+   TagBox[
+    GraphicsComplexBox[{{0., 5.}, {-1., 4.}, {0., 4.}, {1., 4.}, {-1., 
+     3.}, {-3., 2.}, {-3., 1.}, {-1., 2.}, {-2., 1.}, {-1., 1.}, {0., 2.}, {
+     0., 1.}, {-1., 0.}, {0., 0.}}, {
+      {RGBColor[0.5, 0., 0.], Arrowheads[{{0.023064257028112448`, 0.7}}], 
+       ArrowBox[{1, 2}], ArrowBox[{1, 3}], ArrowBox[{1, 4}], ArrowBox[{2, 5}],
+        ArrowBox[{5, 6}], ArrowBox[{5, 8}], ArrowBox[{5, 11}], 
+       ArrowBox[{6, 7}], ArrowBox[{8, 9}], ArrowBox[{8, 10}], 
+       ArrowBox[{11, 12}], ArrowBox[{12, 13}], ArrowBox[{12, 14}]}, {
+       InsetBox[
+        FrameBox["\<\"MyApplication\"\>",
+         Background->RGBColor[1, 1, 0.8],
+         FrameStyle->RGBColor[0.94, 0.85, 0.36],
+         StripOnInput->False], 1], InsetBox[
+        FrameBox["\<\"Documentation\"\>",
+         Background->RGBColor[1, 1, 0.8],
+         FrameStyle->RGBColor[0.94, 0.85, 0.36],
+         StripOnInput->False], 2], InsetBox[
+        FrameBox["\<\"MyPackage.m\"\>",
+         Background->RGBColor[1, 1, 0.8],
+         FrameStyle->RGBColor[0.94, 0.85, 0.36],
+         StripOnInput->False], 3], InsetBox[
+        FrameBox["\<\"PacletInfo.m\"\>",
+         Background->RGBColor[1, 1, 0.8],
+         FrameStyle->RGBColor[0.94, 0.85, 0.36],
+         StripOnInput->False], 4], InsetBox[
+        FrameBox["\<\"English\"\>",
+         Background->RGBColor[1, 1, 0.8],
+         FrameStyle->RGBColor[0.94, 0.85, 0.36],
+         StripOnInput->False], 5], InsetBox[
+        FrameBox["\<\"Guides\"\>",
+         Background->RGBColor[1, 1, 0.8],
+         FrameStyle->RGBColor[0.94, 0.85, 0.36],
+         StripOnInput->False], 6], InsetBox[
+        FrameBox["\<\"TableOfContents.nb\"\>",
+         Background->RGBColor[1, 1, 0.8],
+         FrameStyle->RGBColor[0.94, 0.85, 0.36],
+         StripOnInput->False], 7], InsetBox[
+        FrameBox["\<\"Tutorials\"\>",
+         Background->RGBColor[1, 1, 0.8],
+         FrameStyle->RGBColor[0.94, 0.85, 0.36],
+         StripOnInput->False], 8], InsetBox[
+        FrameBox["\<\"ATutorial.nb\"\>",
+         Background->RGBColor[1, 1, 0.8],
+         FrameStyle->RGBColor[0.94, 0.85, 0.36],
+         StripOnInput->False], 9], InsetBox[
+        FrameBox["\<\"AnotherTutorial.nb\"\>",
+         Background->RGBColor[1, 1, 0.8],
+         FrameStyle->RGBColor[0.94, 0.85, 0.36],
+         StripOnInput->False], 10], InsetBox[
+        FrameBox["\<\"ReferencePages\"\>",
+         Background->RGBColor[1, 1, 0.8],
+         FrameStyle->RGBColor[0.94, 0.85, 0.36],
+         StripOnInput->False], 11], InsetBox[
+        FrameBox["\<\"Symbols\"\>",
+         Background->RGBColor[1, 1, 0.8],
+         FrameStyle->RGBColor[0.94, 0.85, 0.36],
+         StripOnInput->False], 12], InsetBox[
+        FrameBox["\<\"AFunction.nb\"\>",
+         Background->RGBColor[1, 1, 0.8],
+         FrameStyle->RGBColor[0.94, 0.85, 0.36],
+         StripOnInput->False], 13], InsetBox[
+        FrameBox["\<\"AnotherFunction.nb\"\>",
+         Background->RGBColor[1, 1, 0.8],
+         FrameStyle->RGBColor[0.94, 0.85, 0.36],
+         StripOnInput->False], 14]}}],
+    Annotation[#, 
+     VertexCoordinateRules -> {{0., 5.}, {-1., 4.}, {0., 4.}, {1., 4.}, {-1., 
+      3.}, {-3., 2.}, {-3., 1.}, {-1., 2.}, {-2., 1.}, {-1., 1.}, {0., 2.}, {
+      0., 1.}, {-1., 0.}, {0., 0.}}]& ],
+   AspectRatio->Automatic,
+   BaseStyle->{FontFamily -> "Helvetica"},
+   FrameTicks->None,
+   ImageSize->500,
+   PlotRange->All,
+   PlotRangePadding->Scaled[0.1]],
+  StripOnInput->False]], "Graphics",
+ ShowCellBracket->False,
+ CellChangeTimes->{3.417042892776276*^9},
+ TextAlignment->Center,
+ CellID->1244042883,ExpressionUUID->"6e7f01af-cd39-4c4b-8cca-7bdf4479a66e"],
+
+Cell[TextData[{
+ "Finally, assume that you want the ",
+ StyleBox["Documentation Center", "IT"],
+ " to list your package by a name that may be different from its Context \
+name, say \"My Magnificent Package\".  Note that this can contain spaces, but \
+other items that we specify should not contain spaces\[LongDash]just to be \
+safe. And also assume that you want the root of hyperlinks that lead to it to \
+be called FirstApplication.  We are just using FirstApplication here to show \
+the generality that is possible.  It might make much more sense to call it ",
+ StyleBox["MyApplication", "SR"],
+ " or MyPackage for clarity. Indeed you would want this to be a word that, \
+when it is typed into the input field of the ",
+ StyleBox["Documentation Center", "IT"],
+ " toolbar, would be the one that you expect to lead you to a table of \
+contents.  So, the package name might be the best choice."
+}], "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417038166728672*^9, 3.417038214098987*^9}, {
+   3.417038482969615*^9, 3.417038564345366*^9}, {3.4170388965954847`*^9, 
+   3.4170389832225227`*^9}, {3.417039501467555*^9, 3.417039576230713*^9}, 
+   3.417043933665843*^9},
+ CellID->199619429,ExpressionUUID->"a481bfb5-07fe-426b-8896-2aeea27e0bcf"],
+
+Cell[TextData[{
+ "Here is the content of the ",
+ StyleBox["PacletInfo.m", "MR"],
+ " file that would represent this overall circumstance.  Note that there is \
+also a specification of the packages current Version number.  This is not \
+mandatory, but it makes sense to include it."
+}], "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417038221334536*^9, 3.417038250195487*^9}, {
+   3.417039601459694*^9, 3.4170396331835327`*^9}, 3.41704394127124*^9},
+ CellID->634286589,ExpressionUUID->"3df87b14-a3dd-4442-9160-c2d2f9a9a130"],
+
+Cell["\<\
+Paclet[
+ 
+ \tName -> \"My Magnificent Package\",
+ 
+ \tVersion -> \"1.1.0\",
+ 
+ \tExtensions -> {
+   \t\t{\"Application\", Root -> \"FirstApplication\", Context -> \
+\"MyApplication`MyPackage`\"},
+   \t\t\t{\"Documentation\", 
+   \t\t\t   Language -> \"English\", 
+   \t\t\t   LinkBase -> \"FirstApplication\", 
+    \t\t\tResources -> {
+      \t\t\t\t\"Guides/TableOfContents\"}
+    \t\t\t},
+   \t\t\t{\"Documentation\", 
+   \t\t\t   Language -> \"English\", 
+   \t\t\t   LinkBase -> \"FirstApplication\", 
+    \t\t\tResources -> {
+      \t\t\t\t\"Tutorials/ATutorial\",
+      \t\t\t\t\"Tutorials/AnotherTutorial\"
+      \t\t\t\t}
+    \t\t\t},
+   \t\t\t{\"Documentation\", 
+   \t\t\t   Language -> \"English\", 
+   \t\t\t   LinkBase -> \"FirstApplication\", 
+    \t\t\tResources -> {
+      \t\t\t\t\"ReferencePages/Symbols/AFunction\",
+      \t\t\t\t\"ReferencePages/Symbols/AnotherFunction\"
+      \t\t\t}
+    \t}
+   }
+ ]\
+\>", "Program",
+ Editable->True,
+ CellFrame->True,
+ ShowCellBracket->False,
+ CellMargins->{{60, 29}, {0, 8}},
+ TaggingRules:>{"GUIDTag[36538469260668625056776423143815230507]"},
+ CellChangeTimes->{{3.417038450543178*^9, 3.417038462039351*^9}, {
+   3.417038612522846*^9, 3.4170387081308413`*^9}, {3.41703886254526*^9, 
+   3.417038874085185*^9}, 3.417038987884515*^9, {3.417039585784651*^9, 
+   3.417039589647313*^9}},
+ CellTags->{
+  "DiaryDate[{2008, 4, 13, 1, 20, 49.526384}]", 
+   "EphemeralGUID[172765327242001422606226980615579606153]", 
+   "CellGUID[295143705471389554471718887170486879399]"},
+ CellID->345877615,ExpressionUUID->"2061dc46-3a6a-43e0-940a-d6a5d5ced353"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Preparing the Notebooks", "Subsection",
+ Editable->False,
+ ShowCellBracket->False,
+ ShowGroupOpener->True,
+ TaggingRules:>{"GUIDTag[180655695136350397516236887972834616248]"},
+ CellChangeTimes->{{3.417036829458043*^9, 3.417036833823184*^9}, {
+  3.417039047954221*^9, 3.417039052751742*^9}},
+ CellTags->{
+  "DiaryDate[{2008, 4, 13, 0, 53, 45.534556}]", 
+   "EphemeralGUID[176361740331776999843739039682268417365]", 
+   "CellGUID[239025176700050435742155733489199174370]"},
+ CellID->1608718659,ExpressionUUID->"0ff7c53c-4302-444b-bb2a-026c882449ff"],
+
+Cell[TextData[{
+ "The simplest way to prepare the notebooks that you will place in the ",
+ StyleBox["Guides", "SR"],
+ ", ",
+ StyleBox["Tutorials", "SR"],
+ ", and ",
+ StyleBox["ReferencePages", "SR"],
+ " directories is to make sure that they have several key properties.  In \
+general you will want to create these notebooks and then make the changes \
+that we describe in the following in duplicates of the notebooks rather than \
+the originals."
+}], "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417039641752789*^9, 3.4170397713054857`*^9}},
+ CellID->1521735763,ExpressionUUID->"c8fcabd0-0358-4e97-bfa0-6bb765fb8518"],
+
+Cell["\<\
+However the first item can, and probably should, be done to the originals.\
+\>", "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.4170397846870337`*^9, 3.417039807313663*^9}},
+ CellID->1430216618,ExpressionUUID->"26941fb1-525b-44ae-878a-84b97fb35898"],
+
+Cell[CellGroupData[{
+
+Cell["First Step", "Subsubsection",
+ Editable->False,
+ ShowCellBracket->False,
+ ShowGroupOpener->False,
+ CellChangeTimes->{{3.417040676773334*^9, 3.417040678886492*^9}},
+ CellID->488956408,ExpressionUUID->"b90222b9-6469-4c27-93d3-5ec1522cb46b"],
+
+Cell[TextData[{
+ "For each notebook call its notebook object ",
+ StyleBox["nb", "MR"],
+ ".  Then execute the following for each notebook in turn:"
+}], "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417039812431612*^9, 3.417039849674564*^9}},
+ CellID->866237855,ExpressionUUID->"717da58b-1eb0-4ec4-b636-63d139a43de8"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SetOptions", "[", 
+   RowBox[{"nb", ",", 
+    RowBox[{"System`CreateCellID", "\[Rule]", "True"}]}], "]"}], 
+  ";"}]], "Input",
+ CellFrame->True,
+ CellChangeTimes->{{3.4170398512513657`*^9, 3.417039886108205*^9}, {
+  3.4170401556435843`*^9, 3.417040166912355*^9}},
+ CellID->1067985972,ExpressionUUID->"fdbd65a4-059d-4c40-9fb7-987605110cda"],
+
+Cell["\<\
+Of course, alternatively, you could execute the following within the notebook \
+itself and then delete it:\
+\>", "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417039924528008*^9, 3.417039966540133*^9}},
+ CellID->1127019764,ExpressionUUID->"4da925b3-9bc2-43ed-b9f5-9c6bca46ed21"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SetOptions", "[", 
+   RowBox[{
+    RowBox[{"EvaluationNotebook", "[", "]"}], ",", 
+    RowBox[{"System`CreateCellID", "\[Rule]", "True"}]}], "]"}], 
+  ";"}]], "Input",
+ CellFrame->True,
+ CellChangeTimes->{{3.41703994296802*^9, 3.417039946001601*^9}, 
+   3.417040169528623*^9},
+ CellID->1015407008,ExpressionUUID->"f1221de5-7276-4212-9200-11c0b086e8cd"],
+
+Cell["\<\
+Once this has been done you should select the entire notebook's contents, \
+copy it, then select the entire notebook's contents again, and past it back.  \
+Alternatively, and much more easily, you can do this programmatically as \
+follows:\
+\>", "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417039968626067*^9, 3.4170400446132307`*^9}, {
+  3.417040198209714*^9, 3.417040205016041*^9}, {3.4170439431753263`*^9, 
+  3.4170439453676033`*^9}},
+ CellID->2040524394,ExpressionUUID->"b26cf69d-389f-417d-8cc4-a0c9ca49f14c"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "nbg", "}"}], ",", "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"nbg", "=", 
+      RowBox[{"NotebookGet", "[", "nb", "]"}]}], ";", "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", 
+     RowBox[{"NotebookPut", "[", 
+      RowBox[{"nbg", ",", "nb"}], "]"}]}]}], "\[IndentingNewLine]", "]"}], 
+  ";"}]], "Input",
+ CellFrame->True,
+ CellChangeTimes->{{3.41704004920208*^9, 3.417040092511674*^9}, {
+  3.4170401280187387`*^9, 3.417040164337761*^9}},
+ CellID->1927131015,ExpressionUUID->"5d1f47ff-0f1a-41ae-85fc-408c13afba93"],
+
+Cell[TextData[{
+ "Or, you can perform both steps using the following\[LongDash]again assuming \
+that you have assigned the notebook's ",
+ StyleBox["NotebookObject", "MR"],
+ " to the parameter ",
+ StyleBox["nb", "MR"],
+ ".  Here some more code is inserted to make sure that the notebook in \
+question allows for its cells to be modified and so on:"
+}], "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417040213054427*^9, 3.417040250680685*^9}, {
+  3.4170403414425497`*^9, 3.417040372378847*^9}, {3.417040640769836*^9, 
+  3.417040642062442*^9}},
+ CellID->574959792,ExpressionUUID->"4db7134e-8bd8-47ba-ae19-eb9b46d9e76e"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"nbg", ",", "editable"}], "}"}], ",", "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"editable", "=", 
+      RowBox[{"Editable", "/.", 
+       RowBox[{"Options", "[", 
+        RowBox[{"nb", ",", "Editable"}], "]"}]}]}], ";", 
+     "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"SetOptions", "[", 
+      RowBox[{"nb", ",", 
+       RowBox[{"Editable", "\[Rule]", "True"}]}], "]"}], ";", 
+     "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"SetOptions", "[", 
+      RowBox[{"nb", ",", 
+       RowBox[{"System`CreateCellID", "\[Rule]", "True"}]}], "]"}], ";", 
+     "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"nbg", "=", 
+      RowBox[{"NotebookGet", "[", "nb", "]"}]}], ";", "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", 
+     RowBox[{"SelectionMove", "[", 
+      RowBox[{"nb", ",", "All", ",", "Notebook"}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"SetOptions", "[", 
+      RowBox[{
+       RowBox[{"NotebookSelection", "[", "nb", "]"}], ",", 
+       RowBox[{"Editable", "\[Rule]", "True"}], ",", 
+       RowBox[{"Deletable", "\[Rule]", "True"}], ",", 
+       RowBox[{"Copyable", "\[Rule]", "True"}]}], "]"}], ";", 
+     "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"NotebookPut", "[", 
+      RowBox[{"nbg", ",", "nb"}], "]"}], ";", "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", 
+     RowBox[{"SetOptions", "[", 
+      RowBox[{"nb", ",", 
+       RowBox[{"Editable", "\[Rule]", "editable"}]}], "]"}]}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "]"}], ";"}]], "Input",
+ CellFrame->True,
+ CellChangeTimes->{{3.41704004920208*^9, 3.417040092511674*^9}, {
+  3.4170401280187387`*^9, 3.417040164337761*^9}, {3.4170402602690287`*^9, 
+  3.417040263035157*^9}, {3.417040301559554*^9, 3.417040333004673*^9}, {
+  3.417040388253783*^9, 3.417040453663763*^9}, {3.417040517637335*^9, 
+  3.4170405440812798`*^9}, {3.417040580636512*^9, 3.417040646555256*^9}},
+ CellID->1820296291,ExpressionUUID->"9484d7ca-ee1d-4972-befa-08f1a7c16c5d"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Second Step", "Subsubsection",
+ Editable->False,
+ ShowCellBracket->False,
+ ShowGroupOpener->False,
+ TaggingRules:>{"GUIDTag[118870112486447110865418585164841824192]"},
+ CellChangeTimes->{{3.417040720265873*^9, 3.417040722442267*^9}},
+ CellTags->{
+  "DiaryDate[{2008, 4, 13, 1, 58, 39.111264}]", 
+   "EphemeralGUID[210922070307389724018971557495804869296]", 
+   "CellGUID[129831369265561216313689924859750096925]"},
+ CellID->1617915834,ExpressionUUID->"f1c34b75-8072-41aa-b804-368ba00e73c9"],
+
+Cell[TextData[{
+ "Each of the notebooks should be assigned the ",
+ StyleBox["Wolfram/Reference.nb", "MR"],
+ " style sheet.  This is not absolutely necessary, but making this assignment \
+will bring the style of your notebooks into alignment with those already in \
+the ",
+ StyleBox["Documentation Center", "IT"],
+ ".  (See below if you do not wish to do this.)"
+}], "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417040733538096*^9, 3.417040827345583*^9}},
+ CellID->873483724,ExpressionUUID->"c9a3e825-8c57-4a2f-ad94-4d64504ec90e"],
+
+Cell[TextData[{
+ "An important thing to note is that the ",
+ StyleBox["Wolfram/Reference.nb", "MR"],
+ " style sheet generally does not allow editing of the notebook that it is \
+assigned to.  So you should only make this change to the final notebook that \
+you will be using, after you have made all final edits to it. "
+}], "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417040856432014*^9, 3.417040920522027*^9}},
+ CellID->73048577,ExpressionUUID->"7fefd7fd-5f72-42e4-8c1c-a35bc6539fa7"],
+
+Cell["To make this style sheet assignment execute the following ", "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.41704083110865*^9, 3.4170408479047318`*^9}},
+ CellID->442738376,ExpressionUUID->"53b961f8-8dab-4cbd-8967-7f9fa7da56ee"],
+
+Cell[BoxData[
+ RowBox[{"SetOptions", "[", 
+  RowBox[{"nb", ",", 
+   RowBox[{"StyleDefinitions", "\[Rule]", 
+    RowBox[{"FrontEnd`FileName", "[", 
+     RowBox[{
+      RowBox[{"{", "\"\<Wolfram\>\"", "}"}], ",", "\"\<Reference.nb\>\""}], 
+     "]"}]}]}], "]"}]], "Input",
+ CellFrame->True,
+ CellChangeTimes->{{3.4170409292572727`*^9, 3.417040940900275*^9}, {
+  3.417040979465312*^9, 3.41704098605715*^9}},
+ CellID->1514271202,ExpressionUUID->"78a355b7-d3dc-4884-aa62-9685a4fe125d"],
+
+Cell[TextData[{
+ "When you do this you will notice that the notebook automatically acquires \
+the ",
+ StyleBox["Documentation Center", "IT"],
+ " toolbar."
+}], "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.4170410243305397`*^9, 3.41704105467619*^9}},
+ CellID->1165522259,ExpressionUUID->"debb6148-dfdf-4d7a-ade1-4698a80160b0"],
+
+Cell[TextData[{
+ "If, on the other hand, you don't want to use the ",
+ StyleBox["Wolfram/Reference.nb", "MR"],
+ " style sheet, you can still use your notebooks with whatever style sheet \
+you wish\[LongDash]this way you can retain whatever appearance you want to \
+maintain, as well as any custom style definitions you chose to add."
+}], "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417041060963724*^9, 3.41704118855157*^9}},
+ CellID->1734262726,ExpressionUUID->"ee121dff-daee-4f4d-a7aa-ecae2a04f32d"],
+
+Cell[TextData[{
+ "The one change that you will need to make though is to add the \
+Documentation Center Toolbar.  To do this you simply execute the following \
+for the notebook object ",
+ StyleBox["nb", "MR"],
+ "."
+}], "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417041198141552*^9, 3.417041244278844*^9}, {
+  3.417043953919505*^9, 3.417043955887714*^9}},
+ CellID->2105578798,ExpressionUUID->"4abc2a6e-de7f-4db4-941e-fa65e79b6924"],
+
+Cell[BoxData[
+ RowBox[{"SetOptions", "[", 
+  RowBox[{"nb", ",", 
+   RowBox[{"DockedCells", "\[Rule]", 
+    RowBox[{"FEPrivate`FrontEndResource", "[", 
+     RowBox[{"\"\<FEExpressions\>\"", ",", "\"\<HelpViewerToolbar\>\""}], 
+     "]"}]}]}], "]"}]], "Input",
+ CellFrame->True,
+ CellChangeTimes->{{3.417041255563348*^9, 3.417041318601766*^9}},
+ CellID->79839073,ExpressionUUID->"e7f46e16-e12e-4149-aa48-bbeda580f5b7"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Third Step", "Subsubsection",
+ Editable->False,
+ ShowCellBracket->False,
+ ShowGroupOpener->False,
+ TaggingRules:>{"GUIDTag[143533477015819697023429953754928864597]"},
+ CellChangeTimes->{{3.4170419150434113`*^9, 3.417041917024302*^9}, {
+  3.417046113378891*^9, 3.417046121606011*^9}},
+ CellTags->{
+  "DiaryDate[{2008, 4, 13, 2, 18, 25.624995}]", 
+   "EphemeralGUID[147598008489010039404399412378462218749]", 
+   "CellGUID[152346254120921335328834174773187628751]"},
+ CellID->677811783,ExpressionUUID->"d4f4d51d-d943-49d0-b18b-4f0f98bf9b3c"],
+
+Cell[TextData[{
+ "When a notebook is assigned the  ",
+ StyleBox["Wolfram/Reference.nb", "MR"],
+ " style sheet it will automatically have headers and footers that, when it \
+is printed out, will state that the notebook was printed from the \
+Documentation Center and that Wolfram Research owns the copyright to its \
+content.  Of course this is not the right thing to do for non-Wolfram \
+documentation Center pages, so you will probably want to change these as well \
+for your various notebooks.  The simplest thing to do is to modify all of \
+your notebooks' headers and footers to :"
+}], "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417046126704205*^9, 3.417046192054762*^9}, {
+  3.417123502640737*^9, 3.41712357395798*^9}, {3.417123850046955*^9, 
+  3.417123857410467*^9}},
+ CellID->1729373193,ExpressionUUID->"aa50272f-d313-4e97-ae63-a871e2a5de67"],
+
+Cell[BoxData[
+ RowBox[{"SetOptions", "[", 
+  RowBox[{"nb", ",", "\[IndentingNewLine]", 
+   RowBox[{"PageFooters", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"None", ",", "None", ",", "None"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Cell", "[", 
+         RowBox[{
+          RowBox[{"TextData", "[", 
+           RowBox[{
+           "{", "\"\<\[Copyright] 2008 [[***YOUR NAME OR COMPANY HERE***]]. \
+All rights reserved.\>\"", "}"}], "]"}], ",", "\"\<PageFooter\>\""}], "]"}], 
+        ",", "None", ",", "None"}], "}"}]}], "}"}]}], ",", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"PageHeaders", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"None", ",", "None", ",", "None"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"None", ",", "None", ",", 
+        RowBox[{"Cell", "[", 
+         RowBox[{
+          RowBox[{"TextData", "[", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"Cell", "[", 
+              RowBox[{
+               RowBox[{"TextData", "[", 
+                RowBox[{
+                "{", "\"\<Printed from [[YOUR APPLICATION'S NAME]] \
+documentation \>\"", "}"}], "]"}], ",", "\"\<PageHeader\>\""}], "]"}], ",", 
+             RowBox[{"Cell", "[", 
+              RowBox[{
+               RowBox[{"TextData", "[", 
+                RowBox[{"{", 
+                 RowBox[{"CounterBox", "[", "\"\<Page\>\"", "]"}], "}"}], 
+                "]"}], ",", "\"\<PageNumber\>\""}], "]"}]}], "}"}], "]"}], 
+          ",", 
+          RowBox[{"CellMargins", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"Inherited", ",", 
+               RowBox[{"-", "29"}]}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"Inherited", ",", "Inherited"}], "}"}]}], "}"}]}]}], 
+         "]"}]}], "}"}]}], "}"}]}]}], "\[IndentingNewLine]", "]"}]], "Input",
+ CellFrame->True,
+ CellChangeTimes->{{3.4171236274440813`*^9, 3.417123670466576*^9}, {
+  3.417123706694004*^9, 3.417123709482977*^9}, {3.417123743392383*^9, 
+  3.417123839248569*^9}},
+ CellID->1073637145,ExpressionUUID->"30c06ae7-60c5-4951-950a-66fbadcc80d2"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Fourth Step", "Subsubsection",
+ Editable->False,
+ ShowCellBracket->False,
+ ShowGroupOpener->False,
+ TaggingRules:>{"GUIDTag[143533477015819697023429953754928864597]"},
+ CellChangeTimes->{{3.4170419150434113`*^9, 3.417041917024302*^9}, {
+  3.417046113378891*^9, 3.417046114518908*^9}},
+ CellTags->{
+  "DiaryDate[{2008, 4, 13, 2, 18, 25.624995}]", 
+   "EphemeralGUID[147598008489010039404399412378462218749]", 
+   "CellGUID[152346254120921335328834174773187628751]"},
+ CellID->990567650,ExpressionUUID->"09ad6713-ebc1-471a-8f6a-759d8d05edfa"],
+
+Cell[TextData[{
+ "The third step is to create and prepare the ",
+ StyleBox["TableOfContents.nb", "MR"],
+ " notebook.  This will have two links: one to the first Tutorial, ",
+ StyleBox["ATutorial.nb", "MR"],
+ ", and another to the second Tutorial, ",
+ StyleBox["AnotherTutorial.nb", "MR"],
+ "."
+}], "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417041926416683*^9, 3.417042010114025*^9}},
+ CellID->1177262006,ExpressionUUID->"a806c594-6ab2-4cd7-81cb-9053cdfd36d7"],
+
+Cell["Here is the Cell expression for the first Cell", "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417042189682804*^9, 3.4170421998125343`*^9}},
+ CellID->150307908,ExpressionUUID->"0b0e601d-681d-4bd6-9b92-76a1b865c10d"],
+
+Cell[BoxData[
+ RowBox[{"Cell", "[", 
+  RowBox[{
+   RowBox[{"TextData", "[", 
+    RowBox[{"ButtonBox", "[", 
+     RowBox[{"\"\<A heading for the first tutorial\>\"", ",", 
+      RowBox[{"BaseStyle", "\[Rule]", "\"\<Link\>\""}], ",", 
+      RowBox[{
+      "ButtonData", "\[Rule]", 
+       "\"\<paclet:FirstApplication/tutorial/ATutorial\>\""}]}], "]"}], "]"}],
+    ",", "\"\<TOCChapter\>\"", ",", 
+   RowBox[{"ShowGroupOpener", "\[Rule]", "True"}]}], "]"}]], "Input",
+ CellFrame->True,
+ CellChangeTimes->{{3.417042148105544*^9, 3.4170422086934347`*^9}, 
+   3.417042241292778*^9, {3.41704228222853*^9, 3.4170422920965757`*^9}},
+ CellID->1338427831,ExpressionUUID->"1ae0a717-cad4-4b7f-9330-2f1fdb86d215"],
+
+Cell["\<\
+And here is the Cell expression for the second cell in the table of contents\
+\>", "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.4170422493992453`*^9, 3.417042270533964*^9}},
+ CellID->784240884,ExpressionUUID->"3c24e600-4c7a-47f8-95c4-4e00fca451a7"],
+
+Cell[BoxData[
+ RowBox[{"Cell", "[", 
+  RowBox[{
+   RowBox[{"TextData", "[", 
+    RowBox[{"ButtonBox", "[", 
+     RowBox[{"\"\<A heading for the second tutorial\>\"", ",", 
+      RowBox[{"BaseStyle", "\[Rule]", "\"\<Link\>\""}], ",", 
+      RowBox[{
+      "ButtonData", "\[Rule]", 
+       "\"\<paclet:FirstApplication/tutorial/AnotherTutorial\>\""}]}], "]"}], 
+    "]"}], ",", "\"\<TOCChapter\>\"", ",", 
+   RowBox[{"ShowGroupOpener", "\[Rule]", "True"}]}], "]"}]], "Input",
+ CellFrame->True,
+ CellChangeTimes->{{3.417042148105544*^9, 3.4170422086934347`*^9}, 
+   3.417042241292778*^9, {3.41704229696518*^9, 3.417042303577032*^9}},
+ CellID->1629395749,ExpressionUUID->"a322e4bd-49c5-4c8a-8757-141fe961ddfb"],
+
+Cell[TextData[{
+ "Note that you can create cells that link directly to particular locations \
+in a Tutorial by pointing the link to the particular CellID (this is one of \
+the reasons for Step 1 above.  Simply go to that cell in the Tutorial and \
+examine its Cell expression using the menu command: ",
+ StyleBox["Cell \[RightTriangle] Show Expression", "SR"],
+ ".  In the cell expression you will see a Cell Option of the form ",
+ StyleBox["CellID->an integer", "MR"],
+ ".  Say that that integer is 123456.  Then you can create a cell in the \
+Table of Contents that has a link to that cell in the Tutorial with the \
+following, for example:"
+}], "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.4171293717581177`*^9, 3.417129535792396*^9}, {
+  3.417129597743226*^9, 3.417129770051765*^9}, {3.4171298995147667`*^9, 
+  3.417129902504941*^9}},
+ CellID->174875117,ExpressionUUID->"97a9102f-0fe0-4b41-94ec-ef5d2f5b3668"],
+
+Cell[BoxData[
+ RowBox[{"Cell", "[", 
+  RowBox[{
+   RowBox[{"TextData", "[", 
+    RowBox[{"ButtonBox", "[", 
+     RowBox[{"\"\<A heading for the second tutorial\>\"", ",", 
+      RowBox[{"BaseStyle", "\[Rule]", "\"\<Link\>\""}], ",", 
+      RowBox[{
+      "ButtonData", "\[Rule]", 
+       "\"\<paclet:FirstApplication/tutorial/AnotherTutorial#123456.\>\""}]}],
+      "]"}], "]"}], ",", "\"\<TOCSection\>\"", ",", 
+   RowBox[{"ShowGroupOpener", "\[Rule]", "True"}]}], "]"}]], "Input",
+ CellFrame->True,
+ CellChangeTimes->{{3.4171297990475197`*^9, 3.417129808839014*^9}},
+ CellID->1368462323,ExpressionUUID->"841287d0-9cd4-441e-9cbf-09a3c4a27376"],
+
+Cell[TextData[{
+ "So with these you could create the notebook ",
+ StyleBox["TableOfContents.nb", "MR"],
+ " programmatically as follows"
+}], "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417042312907638*^9, 3.417042326878275*^9}, {
+   3.417042437618286*^9, 3.41704244943229*^9}, 3.417043959455399*^9},
+ CellID->542886899,ExpressionUUID->"b07f2de6-80ce-4d88-ab1e-b851240ce952"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"NotebookPut", "[", "\[IndentingNewLine]", 
+   RowBox[{"Notebook", "[", 
+    RowBox[{
+     RowBox[{"{", " ", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Cell", "[", 
+        RowBox[{
+        "\"\<Table of Contents for MyApplication\>\"", ",", 
+         "\"\<TOCDocumentTitle\>\"", ",", 
+         RowBox[{"ShowGroupOpener", "\[Rule]", "False"}], ",", 
+         RowBox[{"TextAlignment", "\[Rule]", "Center"}]}], "]"}], ",", 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"Cell", "[", 
+        RowBox[{
+         RowBox[{"TextData", "[", 
+          RowBox[{"ButtonBox", "[", 
+           RowBox[{"\"\<A heading for the first tutorial\>\"", ",", 
+            RowBox[{"BaseStyle", "\[Rule]", "\"\<Link\>\""}], ",", 
+            RowBox[{
+            "ButtonData", "\[Rule]", 
+             "\"\<paclet:FirstApplication/tutorial/ATutorial\>\""}]}], "]"}], 
+          "]"}], ",", "\"\<TOCChapter\>\"", ",", 
+         RowBox[{"ShowGroupOpener", "\[Rule]", "True"}]}], "]"}], ",", 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"Cell", "[", 
+        RowBox[{
+         RowBox[{"TextData", "[", 
+          RowBox[{"ButtonBox", "[", 
+           RowBox[{"\"\<A heading for the second tutorial\>\"", ",", 
+            RowBox[{"BaseStyle", "\[Rule]", "\"\<Link\>\""}], ",", 
+            RowBox[{
+            "ButtonData", "\[Rule]", 
+             "\"\<paclet:FirstApplication/tutorial/AnotherTutorial\>\""}]}], 
+           "]"}], "]"}], ",", "\"\<TOCChapter\>\"", ",", 
+         RowBox[{"ShowGroupOpener", "\[Rule]", "True"}]}], "]"}], ",", 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"Cell", "[", 
+        RowBox[{
+         RowBox[{"TextData", "[", 
+          RowBox[{"ButtonBox", "[", 
+           RowBox[{"\"\<A heading for the second tutorial\>\"", ",", 
+            RowBox[{"BaseStyle", "\[Rule]", "\"\<Link\>\""}], ",", 
+            RowBox[{
+            "ButtonData", "\[Rule]", 
+             
+             "\"\<paclet:FirstApplication/tutorial/AnotherTutorial#123456.\>\"\
+"}]}], "]"}], "]"}], ",", "\"\<TOCSection\>\"", ",", 
+         RowBox[{"ShowGroupOpener", "\[Rule]", "True"}]}], "]"}]}], "}"}], 
+     ",", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"StyleDefinitions", "\[Rule]", 
+      RowBox[{"FrontEnd`FileName", "[", 
+       RowBox[{
+        RowBox[{"{", "\"\<Wolfram\>\"", "}"}], ",", "\"\<Reference.nb\>\""}], 
+       "]"}]}]}], "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", "]"}], 
+  ";"}]], "Input",
+ CellFrame->True,
+ CellChangeTimes->{{3.4171298358032827`*^9, 3.417129886009748*^9}},
+ CellID->1789579037,ExpressionUUID->"0f31069a-ec82-49ab-911a-5c4e9aecad05"],
+
+Cell[TextData[{
+ "Then once you have created this you should save it as the notebook ",
+ StyleBox["TableOfContents.nb", "MR"],
+ "."
+}], "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417042650426072*^9, 3.417042674602515*^9}},
+ CellID->168800748,ExpressionUUID->"9ea3ad8d-c934-4bde-891f-58eaf62b8d93"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Placing the Notebooks", "Subsection",
+ Editable->False,
+ ShowCellBracket->False,
+ ShowGroupOpener->True,
+ TaggingRules:>{"GUIDTag[180655695136350397516236887972834616248]"},
+ CellChangeTimes->{{3.417036829458043*^9, 3.417036833823184*^9}, {
+  3.417039047954221*^9, 3.417039052751742*^9}, {3.41704297830764*^9, 
+  3.417042979256813*^9}},
+ CellTags->{
+  "DiaryDate[{2008, 4, 13, 0, 53, 45.534556}]", 
+   "EphemeralGUID[176361740331776999843739039682268417365]", 
+   "CellGUID[239025176700050435742155733489199174370]"},
+ CellID->727947389,ExpressionUUID->"64eb6d22-ab80-4195-90a5-282ffcb25c3f"],
+
+Cell[TextData[{
+ "The full directory structure of your package (i.e.,  the full directory \
+that we have called ",
+ StyleBox["MyApplication ", "SR"],
+ "in this document) needs to now be placed where ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " can find it.  Generally this will be in one of the following locations"
+}], "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417042982883144*^9, 3.417043024520936*^9}, {
+  3.4170431676218967`*^9, 3.417043221795845*^9}, {3.417043876123352*^9, 
+  3.4170438764855337`*^9}},
+ CellID->397429964,ExpressionUUID->"9799badd-f829-45c4-90f3-b2159aac1a48"],
+
+Cell[BoxData[
+ RowBox[{"ToFileName", "[", 
+  RowBox[{"{", 
+   RowBox[{"$UserBaseDirectory", ",", "\"\<Applications\>\""}], "}"}], 
+  "]"}]], "Input",
+ CellFrame->True,
+ CellChangeTimes->{{3.417043016444915*^9, 3.417043109131579*^9}},
+ CellID->931262778,ExpressionUUID->"51a8b57b-2a98-4849-b7b6-e5e5d7708a2b"],
+
+Cell[BoxData[
+ RowBox[{"ToFileName", "[", 
+  RowBox[{"{", 
+   RowBox[{"$BaseDirectory", ",", "\"\<Applications\>\""}], "}"}], 
+  "]"}]], "Input",
+ CellFrame->True,
+ CellChangeTimes->{{3.417043016444915*^9, 3.417043109131579*^9}, {
+  3.41704315245612*^9, 3.4170431590066357`*^9}},
+ CellID->1159302381,ExpressionUUID->"52bdfe6c-b7e5-4922-94dc-83e1962cf6a6"],
+
+Cell[TextData[{
+ "The first location will allow ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " to find the application (and its documentation) for the particular user \
+that is logged in.  The second location will allow system-wide access for all \
+users who have access to that computer independent of their log-in \
+credentials."
+}], "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417043236051313*^9, 3.417043328417741*^9}},
+ CellID->2117088579,ExpressionUUID->"39b82fa3-e075-446e-9fc4-d15ef60d9a98"],
+
+Cell["\<\
+The easiest way to place the package in one of these locations is to do it \
+programmatically.  \
+\>", "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417044983066684*^9, 3.417045017030313*^9}, 
+   3.417130210116768*^9},
+ CellID->2095136887,ExpressionUUID->"9899df89-6414-4d6e-9595-cb4dfffb02b7"],
+
+Cell[TextData[{
+ "So if the full path to the directory where your application is located is \
+called ",
+ StyleBox["fullPathToMyApplication", "MR"],
+ " then you can simply execute the following (this is for the first \
+\"Applications\" directory above):"
+}], "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417044983066684*^9, 3.417045118783332*^9}},
+ CellID->676299950,ExpressionUUID->"dfd7d484-f950-4bbd-af9c-3fc02fe01544"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"Quiet", "@", 
+    RowBox[{"DeleteDirectory", "[", 
+     RowBox[{
+      StyleBox[
+       RowBox[{"ToFileName", "[", 
+        RowBox[{"{", 
+         RowBox[{
+         "$UserBaseDirectory", ",", "\"\<Applications\>\"", ",", 
+          "\"\<MyApplication\>\""}], "}"}], "]"}],
+       ShowStringCharacters->True], 
+      StyleBox[",",
+       ShowStringCharacters->True], 
+      RowBox[{
+       StyleBox["DeleteContents",
+        ShowStringCharacters->True], 
+       StyleBox["\[Rule]",
+        ShowStringCharacters->True], "True"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"CopyDirectory", "[", 
+  RowBox[{"fullPathToMyApplication", ",", 
+   RowBox[{"ToFileName", "[", 
+    RowBox[{"{", 
+     RowBox[{
+     "$UserBaseDirectory", ",", "\"\<Applications\>\"", ",", 
+      "\"\<MyApplication\>\""}], "}"}], "]"}]}], "]"}]}], "Input",
+ CellFrame->True,
+ CellChangeTimes->{{3.417045122728397*^9, 3.417045212072711*^9}},
+ CellID->2089799726,ExpressionUUID->"d3488e1e-463c-4c2d-8568-e3b23d420f4e"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Letting ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " Know"
+}], "Subsubsection",
+ Editable->False,
+ ShowCellBracket->False,
+ ShowGroupOpener->True,
+ TaggingRules:>{"GUIDTag[180655695136350397516236887972834616248]"},
+ CellChangeTimes->{{3.417036829458043*^9, 3.417036833823184*^9}, {
+  3.417039047954221*^9, 3.417039052751742*^9}, {3.41704297830764*^9, 
+  3.417042979256813*^9}, {3.417045402344803*^9, 3.417045410203664*^9}},
+ CellTags->{
+  "DiaryDate[{2008, 4, 13, 0, 53, 45.534556}]", 
+   "EphemeralGUID[176361740331776999843739039682268417365]", 
+   "CellGUID[239025176700050435742155733489199174370]"},
+ CellID->1306270061,ExpressionUUID->"31c3084f-2014-4491-9637-22d0003dadda"],
+
+Cell[TextData[{
+ "Once you place the completed application in one of these locations you can \
+then either restart ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " or execute the following after closing the ",
+ StyleBox["Documentation Center", "IT"],
+ " if it is open."
+}], "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.4170433318154917`*^9, 3.417043386870078*^9}},
+ CellID->251200110,ExpressionUUID->"1ff82248-d469-4c4b-a2bf-aa57843051a4"],
+
+Cell[BoxData[
+ RowBox[{"PacletManager`RestartPacletManager", "[", "]"}]], "Input",
+ CellFrame->True,
+ CellChangeTimes->{{3.417043433994094*^9, 3.4170434390760202`*^9}},
+ CellID->1268486319,ExpressionUUID->"8dfd1be7-c4d2-4540-99a8-f10c577083de"],
+
+Cell[TextData[{
+ "This will generally reset much of what is needed to make ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " recognize the changes for the purposes of the ",
+ StyleBox["Documentation Center", "IT"],
+ ".  However, the foolproof method is, of course, to restart ",
+ StyleBox["Mathematica.",
+  FontSlant->"Italic"]
+}], "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellChangeTimes->{{3.417129193942165*^9, 3.417129297629423*^9}},
+ CellID->94448901,ExpressionUUID->"65f4b7cd-0a8a-40b7-ad9d-69f3f41d9510"],
+
+Cell[" ", "Text",
+ Editable->False,
+ ShowCellBracket->False,
+ CellID->1432083710,ExpressionUUID->"34d0feaf-53c8-4ee9-a4c9-1e9b86d21866"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+Editable->True,
+WindowSize->{787, 749},
+WindowMargins->{{433, Automatic}, {Automatic, 103}},
+DockedCells->{
+  Cell[
+   BoxData[
+    FormBox[
+     TagBox[
+      ButtonBox[
+       PaneSelectorBox[{False -> InterpretationBox[
+           RowBox[{
+             StyleBox[
+             "\"S\"", FontSlant -> "Italic", FontColor -> RGBColor[0.7, 0, 0],
+               StripOnInput -> False], "\[InvisibleSpace]", 
+             StyleBox[
+             "\"c\"", FontSlant -> "Italic", FontColor -> 
+              RGBColor[0.8, 0.2, 0], StripOnInput -> False], 
+             "\[InvisibleSpace]", 
+             StyleBox[
+             "\"i\"", FontSlant -> "Italic", FontColor -> 
+              RGBColor[0.8, 0.4, 0], StripOnInput -> False], 
+             "\[InvisibleSpace]", 
+             StyleBox[
+             "\"e\"", FontSlant -> "Italic", FontColor -> 
+              RGBColor[0.9, 0.5, 0], StripOnInput -> False], 
+             "\[InvisibleSpace]", 
+             StyleBox[
+             "\"n\"", FontSlant -> "Italic", FontColor -> RGBColor[1, 0.6, 0],
+               StripOnInput -> False], "\[InvisibleSpace]", 
+             StyleBox[
+             "\"t\"", FontSlant -> "Italic", FontColor -> 
+              RGBColor[0.6, 0.6, 0.], StripOnInput -> False], 
+             "\[InvisibleSpace]", 
+             StyleBox[
+             "\"i\"", FontSlant -> "Italic", FontColor -> 
+              RGBColor[0.3, 0.5, 0.3], StripOnInput -> False], 
+             "\[InvisibleSpace]", 
+             StyleBox[
+             "\"f\"", FontSlant -> "Italic", FontColor -> 
+              RGBColor[0.2, 0.4, 0.3], StripOnInput -> False], 
+             "\[InvisibleSpace]", 
+             StyleBox[
+             "\"i\"", FontSlant -> "Italic", FontColor -> 
+              RGBColor[0, 0.3, 0.5], StripOnInput -> False], 
+             "\[InvisibleSpace]", 
+             StyleBox[
+             "\"c\"", FontSlant -> "Italic", FontColor -> 
+              RGBColor[0, 0.2, 0.6], StripOnInput -> False], 
+             "\[InvisibleSpace]", 
+             StyleBox["\" \"", FontSlant -> "Italic", StripOnInput -> False], 
+             "\[InvisibleSpace]", 
+             StyleBox[
+             "\"A\"", FontSlant -> "Italic", FontColor -> 
+              RGBColor[0.5, 0, 0.7], StripOnInput -> False], 
+             "\[InvisibleSpace]", 
+             StyleBox[
+             "\"r\"", FontSlant -> "Italic", FontColor -> 
+              RGBColor[0.4, 0, 0.6], StripOnInput -> False], 
+             "\[InvisibleSpace]", 
+             StyleBox[
+             "\"t\"", FontSlant -> "Italic", FontColor -> 
+              RGBColor[0.5, 0.1, 0.6], StripOnInput -> False], 
+             "\[InvisibleSpace]", 
+             StyleBox[
+             "\"s\"", FontSlant -> "Italic", FontColor -> 
+              RGBColor[0.6, 0.2, 0.6], StripOnInput -> False], 
+             "\[InvisibleSpace]", 
+             StyleBox[
+             "\" LLC\"", FontColor -> RGBColor[0, 0.35, 0], FontSize -> 9, 
+              FontFamily -> "Helvetica", StripOnInput -> False], 
+             "\[InvisibleSpace]", 
+             StyleBox[
+             "\" (\[Copyright], 2008)\"", FontColor -> RGBColor[0, 0.35, 0], 
+              FontSize -> 9, FontFamily -> "Helvetica", StripOnInput -> 
+              False]}], 
+           Row[{
+             Style[
+             "S", FontSlant -> "Italic", FontColor -> RGBColor[0.7, 0, 0]], 
+             Style[
+             "c", FontSlant -> "Italic", FontColor -> RGBColor[0.8, 0.2, 0]], 
+             
+             Style[
+             "i", FontSlant -> "Italic", FontColor -> RGBColor[0.8, 0.4, 0]], 
+             
+             Style[
+             "e", FontSlant -> "Italic", FontColor -> RGBColor[0.9, 0.5, 0]], 
+             
+             Style[
+             "n", FontSlant -> "Italic", FontColor -> RGBColor[1, 0.6, 0]], 
+             Style[
+             "t", FontSlant -> "Italic", FontColor -> RGBColor[0.6, 0.6, 0.]], 
+             Style[
+             "i", FontSlant -> "Italic", FontColor -> 
+              RGBColor[0.3, 0.5, 0.3]], 
+             Style[
+             "f", FontSlant -> "Italic", FontColor -> 
+              RGBColor[0.2, 0.4, 0.3]], 
+             Style[
+             "i", FontSlant -> "Italic", FontColor -> RGBColor[0, 0.3, 0.5]], 
+             
+             Style[
+             "c", FontSlant -> "Italic", FontColor -> RGBColor[0, 0.2, 0.6]], 
+             
+             Style[" ", FontSlant -> "Italic"], 
+             Style[
+             "A", FontSlant -> "Italic", FontColor -> RGBColor[0.5, 0, 0.7]], 
+             
+             Style[
+             "r", FontSlant -> "Italic", FontColor -> RGBColor[0.4, 0, 0.6]], 
+             
+             Style[
+             "t", FontSlant -> "Italic", FontColor -> 
+              RGBColor[0.5, 0.1, 0.6]], 
+             Style[
+             "s", FontSlant -> "Italic", FontColor -> 
+              RGBColor[0.6, 0.2, 0.6]], 
+             Style[
+             " LLC", FontColor -> RGBColor[0, 0.35, 0], FontSize -> 9, 
+              FontFamily -> "Helvetica"], 
+             Style[
+             " (\[Copyright], 2008)", FontColor -> RGBColor[0, 0.35, 0], 
+              FontSize -> 9, FontFamily -> "Helvetica"]}]], True -> StyleBox[
+           InterpretationBox[
+            RowBox[{
+              StyleBox[
+              "\"S\"", FontSlant -> "Italic", FontColor -> 
+               RGBColor[0.7, 0, 0], StripOnInput -> False], 
+              "\[InvisibleSpace]", 
+              StyleBox[
+              "\"c\"", FontSlant -> "Italic", FontColor -> 
+               RGBColor[0.8, 0.2, 0], StripOnInput -> False], 
+              "\[InvisibleSpace]", 
+              StyleBox[
+              "\"i\"", FontSlant -> "Italic", FontColor -> 
+               RGBColor[0.8, 0.4, 0], StripOnInput -> False], 
+              "\[InvisibleSpace]", 
+              StyleBox[
+              "\"e\"", FontSlant -> "Italic", FontColor -> 
+               RGBColor[0.9, 0.5, 0], StripOnInput -> False], 
+              "\[InvisibleSpace]", 
+              StyleBox[
+              "\"n\"", FontSlant -> "Italic", FontColor -> 
+               RGBColor[1, 0.6, 0], StripOnInput -> False], 
+              "\[InvisibleSpace]", 
+              StyleBox[
+              "\"t\"", FontSlant -> "Italic", FontColor -> 
+               RGBColor[0.6, 0.6, 0.], StripOnInput -> False], 
+              "\[InvisibleSpace]", 
+              StyleBox[
+              "\"i\"", FontSlant -> "Italic", FontColor -> 
+               RGBColor[0.3, 0.5, 0.3], StripOnInput -> False], 
+              "\[InvisibleSpace]", 
+              StyleBox[
+              "\"f\"", FontSlant -> "Italic", FontColor -> 
+               RGBColor[0.2, 0.4, 0.3], StripOnInput -> False], 
+              "\[InvisibleSpace]", 
+              StyleBox[
+              "\"i\"", FontSlant -> "Italic", FontColor -> 
+               RGBColor[0, 0.3, 0.5], StripOnInput -> False], 
+              "\[InvisibleSpace]", 
+              StyleBox[
+              "\"c\"", FontSlant -> "Italic", FontColor -> 
+               RGBColor[0, 0.2, 0.6], StripOnInput -> False], 
+              "\[InvisibleSpace]", 
+              StyleBox["\" \"", FontSlant -> "Italic", StripOnInput -> False],
+               "\[InvisibleSpace]", 
+              StyleBox[
+              "\"A\"", FontSlant -> "Italic", FontColor -> 
+               RGBColor[0.5, 0, 0.7], StripOnInput -> False], 
+              "\[InvisibleSpace]", 
+              StyleBox[
+              "\"r\"", FontSlant -> "Italic", FontColor -> 
+               RGBColor[0.4, 0, 0.6], StripOnInput -> False], 
+              "\[InvisibleSpace]", 
+              StyleBox[
+              "\"t\"", FontSlant -> "Italic", FontColor -> 
+               RGBColor[0.5, 0.1, 0.6], StripOnInput -> False], 
+              "\[InvisibleSpace]", 
+              StyleBox[
+              "\"s\"", FontSlant -> "Italic", FontColor -> 
+               RGBColor[0.6, 0.2, 0.6], StripOnInput -> False], 
+              "\[InvisibleSpace]", 
+              StyleBox[
+              "\" LLC\"", FontColor -> RGBColor[0, 0.35, 0], FontSize -> 9, 
+               FontFamily -> "Helvetica", StripOnInput -> False], 
+              "\[InvisibleSpace]", 
+              StyleBox[
+              "\" (\[Copyright], 2008)\"", FontColor -> RGBColor[0, 0.35, 0], 
+               FontSize -> 9, FontFamily -> "Helvetica", StripOnInput -> 
+               False]}], 
+            Row[{
+              Style[
+              "S", FontSlant -> "Italic", FontColor -> RGBColor[0.7, 0, 0]], 
+              Style[
+              "c", FontSlant -> "Italic", FontColor -> RGBColor[0.8, 0.2, 0]], 
+              Style[
+              "i", FontSlant -> "Italic", FontColor -> RGBColor[0.8, 0.4, 0]], 
+              Style[
+              "e", FontSlant -> "Italic", FontColor -> RGBColor[0.9, 0.5, 0]], 
+              Style[
+              "n", FontSlant -> "Italic", FontColor -> RGBColor[1, 0.6, 0]], 
+              Style[
+              "t", FontSlant -> "Italic", FontColor -> 
+               RGBColor[0.6, 0.6, 0.]], 
+              Style[
+              "i", FontSlant -> "Italic", FontColor -> 
+               RGBColor[0.3, 0.5, 0.3]], 
+              Style[
+              "f", FontSlant -> "Italic", FontColor -> 
+               RGBColor[0.2, 0.4, 0.3]], 
+              Style[
+              "i", FontSlant -> "Italic", FontColor -> RGBColor[0, 0.3, 0.5]], 
+              Style[
+              "c", FontSlant -> "Italic", FontColor -> RGBColor[0, 0.2, 0.6]], 
+              Style[" ", FontSlant -> "Italic"], 
+              Style[
+              "A", FontSlant -> "Italic", FontColor -> RGBColor[0.5, 0, 0.7]], 
+              Style[
+              "r", FontSlant -> "Italic", FontColor -> RGBColor[0.4, 0, 0.6]], 
+              Style[
+              "t", FontSlant -> "Italic", FontColor -> 
+               RGBColor[0.5, 0.1, 0.6]], 
+              Style[
+              "s", FontSlant -> "Italic", FontColor -> 
+               RGBColor[0.6, 0.2, 0.6]], 
+              Style[
+              " LLC", FontColor -> RGBColor[0, 0.35, 0], FontSize -> 9, 
+               FontFamily -> "Helvetica"], 
+              Style[
+              " (\[Copyright], 2008)", FontColor -> RGBColor[0, 0.35, 0], 
+               FontSize -> 9, FontFamily -> "Helvetica"]}]], 
+           "HyperlinkActive"]}, 
+        Dynamic[
+         CurrentValue["MouseOver"]], ImageSize -> Automatic, FrameMargins -> 
+        0, BaselinePosition -> Baseline], BaseStyle -> "Hyperlink", 
+       ButtonData -> {
+         URL["http://scientificarts.com/worklife"], None}, ButtonNote -> 
+       "http://scientificarts.com/worklife"], 
+      Annotation[#, "http://scientificarts.com/worklife", "Hyperlink"]& ], 
+     StandardForm]], "Text", TextAlignment -> Center, ShowCellBracket -> 
+   False, CellDingbat -> None, CellFrameMargins -> 5, 
+   CellMargins -> {{0, 0}, {5, 1}}, FontFamily -> "Times New Roman", 
+   CellFrame -> {{0, 0}, {2, 2}}, FontSize -> 35, Background -> 
+   RGBColor[0.9333333333333333, 0.9333333333333333, 0.9333333333333333]]},
+PrivateNotebookOptions->{"VersionedStylesheet"->{"Default.nb"[8.] -> False}},
+TaggingRules:>{
+ "This notebook is Copyright \[Copyright], 2008 Scientific Arts, LLC,  all \
+rights reserved.  It may be redistributed only in full and in its original \
+form without modification; and it may not be used for any commercial purpose \
+without permission from Scientific Arts.  A non-exclusive royalty-free \
+license is given to reproduce and use all the of the Mathematica code in this \
+notebook for any purpose whatsoever, as well as any of the ideas.   No \
+guarantee whatsoever is given as to the  accuracy or functionality of \
+anything presented in this document.  Use at your own risk. \n\nEnjoy: I hope \
+that it's useful. For further information on  A WorkLife FrameWork, please \
+click on the Scientific Arts banner above.", "SaveBackupToolbarDockedCell"},
+CreateCellID->True,
+FrontEndVersion->"11.2 for Microsoft Windows (64-bit) (2017\:5e7410\:67082\
+\:65e5)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "DiaryDate[{2008, 4, 13, 0, 12, 41.115594}]"->{
+  Cell[6078, 176, 2257, 54, 452, "Graphics",ExpressionUUID->"ad4a80fc-e194-4b7e-a3ea-b0d101672fca",
+   CellTags->{"DiaryDate[{2008, 4, 13, 0, 12, 41.115594}]", "EphemeralGUID[42813389784420250757880456136848447631]", "CellGUID[80430276481694835362319120721296092751]"},
+   CellID->208273949]},
+ "EphemeralGUID[42813389784420250757880456136848447631]"->{
+  Cell[6078, 176, 2257, 54, 452, "Graphics",ExpressionUUID->"ad4a80fc-e194-4b7e-a3ea-b0d101672fca",
+   CellTags->{"DiaryDate[{2008, 4, 13, 0, 12, 41.115594}]", "EphemeralGUID[42813389784420250757880456136848447631]", "CellGUID[80430276481694835362319120721296092751]"},
+   CellID->208273949]},
+ "CellGUID[80430276481694835362319120721296092751]"->{
+  Cell[6078, 176, 2257, 54, 452, "Graphics",ExpressionUUID->"ad4a80fc-e194-4b7e-a3ea-b0d101672fca",
+   CellTags->{"DiaryDate[{2008, 4, 13, 0, 12, 41.115594}]", "EphemeralGUID[42813389784420250757880456136848447631]", "CellGUID[80430276481694835362319120721296092751]"},
+   CellID->208273949]},
+ "DiaryDate[{2008, 4, 13, 0, 42, 47.501359}]"->{
+  Cell[10922, 313, 540, 14, 53, "Subsection",ExpressionUUID->"8d7cf957-b239-4a89-8505-9df37fe77cae",
+   CellTags->{"DiaryDate[{2008, 4, 13, 0, 42, 47.501359}]", "EphemeralGUID[332395247488929281630951474907650830001]", "CellGUID[42951417094012448381146599396971351441]"},
+   CellID->1611906811]},
+ "EphemeralGUID[332395247488929281630951474907650830001]"->{
+  Cell[10922, 313, 540, 14, 53, "Subsection",ExpressionUUID->"8d7cf957-b239-4a89-8505-9df37fe77cae",
+   CellTags->{"DiaryDate[{2008, 4, 13, 0, 42, 47.501359}]", "EphemeralGUID[332395247488929281630951474907650830001]", "CellGUID[42951417094012448381146599396971351441]"},
+   CellID->1611906811]},
+ "CellGUID[42951417094012448381146599396971351441]"->{
+  Cell[10922, 313, 540, 14, 53, "Subsection",ExpressionUUID->"8d7cf957-b239-4a89-8505-9df37fe77cae",
+   CellTags->{"DiaryDate[{2008, 4, 13, 0, 42, 47.501359}]", "EphemeralGUID[332395247488929281630951474907650830001]", "CellGUID[42951417094012448381146599396971351441]"},
+   CellID->1611906811]},
+ "DiaryDate[{2008, 4, 13, 0, 53, 45.534556}]"->{
+  Cell[15057, 438, 534, 13, 53, "Subsection",ExpressionUUID->"c3505c2f-96a0-480c-8630-201c220263fc",
+   CellTags->{"DiaryDate[{2008, 4, 13, 0, 53, 45.534556}]", "EphemeralGUID[176361740331776999843739039682268417365]", "CellGUID[239025176700050435742155733489199174370]"},
+   CellID->1798212562],
+  Cell[26387, 722, 553, 11, 53, "Subsection",ExpressionUUID->"0ff7c53c-4302-444b-bb2a-026c882449ff",
+   CellTags->{"DiaryDate[{2008, 4, 13, 0, 53, 45.534556}]", "EphemeralGUID[176361740331776999843739039682268417365]", "CellGUID[239025176700050435742155733489199174370]"},
+   CellID->1608718659],
+  Cell[49489, 1305, 598, 12, 34, "Subsection",ExpressionUUID->"64eb6d22-ab80-4195-90a5-282ffcb25c3f",
+   CellTags->{"DiaryDate[{2008, 4, 13, 0, 53, 45.534556}]", "EphemeralGUID[176361740331776999843739039682268417365]", "CellGUID[239025176700050435742155733489199174370]"},
+   CellID->727947389],
+  Cell[53807, 1424, 709, 17, 25, "Subsubsection",ExpressionUUID->"31c3084f-2014-4491-9637-22d0003dadda",
+   CellTags->{"DiaryDate[{2008, 4, 13, 0, 53, 45.534556}]", "EphemeralGUID[176361740331776999843739039682268417365]", "CellGUID[239025176700050435742155733489199174370]"},
+   CellID->1306270061]},
+ "EphemeralGUID[176361740331776999843739039682268417365]"->{
+  Cell[15057, 438, 534, 13, 53, "Subsection",ExpressionUUID->"c3505c2f-96a0-480c-8630-201c220263fc",
+   CellTags->{"DiaryDate[{2008, 4, 13, 0, 53, 45.534556}]", "EphemeralGUID[176361740331776999843739039682268417365]", "CellGUID[239025176700050435742155733489199174370]"},
+   CellID->1798212562],
+  Cell[26387, 722, 553, 11, 53, "Subsection",ExpressionUUID->"0ff7c53c-4302-444b-bb2a-026c882449ff",
+   CellTags->{"DiaryDate[{2008, 4, 13, 0, 53, 45.534556}]", "EphemeralGUID[176361740331776999843739039682268417365]", "CellGUID[239025176700050435742155733489199174370]"},
+   CellID->1608718659],
+  Cell[49489, 1305, 598, 12, 34, "Subsection",ExpressionUUID->"64eb6d22-ab80-4195-90a5-282ffcb25c3f",
+   CellTags->{"DiaryDate[{2008, 4, 13, 0, 53, 45.534556}]", "EphemeralGUID[176361740331776999843739039682268417365]", "CellGUID[239025176700050435742155733489199174370]"},
+   CellID->727947389],
+  Cell[53807, 1424, 709, 17, 25, "Subsubsection",ExpressionUUID->"31c3084f-2014-4491-9637-22d0003dadda",
+   CellTags->{"DiaryDate[{2008, 4, 13, 0, 53, 45.534556}]", "EphemeralGUID[176361740331776999843739039682268417365]", "CellGUID[239025176700050435742155733489199174370]"},
+   CellID->1306270061]},
+ "CellGUID[239025176700050435742155733489199174370]"->{
+  Cell[15057, 438, 534, 13, 53, "Subsection",ExpressionUUID->"c3505c2f-96a0-480c-8630-201c220263fc",
+   CellTags->{"DiaryDate[{2008, 4, 13, 0, 53, 45.534556}]", "EphemeralGUID[176361740331776999843739039682268417365]", "CellGUID[239025176700050435742155733489199174370]"},
+   CellID->1798212562],
+  Cell[26387, 722, 553, 11, 53, "Subsection",ExpressionUUID->"0ff7c53c-4302-444b-bb2a-026c882449ff",
+   CellTags->{"DiaryDate[{2008, 4, 13, 0, 53, 45.534556}]", "EphemeralGUID[176361740331776999843739039682268417365]", "CellGUID[239025176700050435742155733489199174370]"},
+   CellID->1608718659],
+  Cell[49489, 1305, 598, 12, 34, "Subsection",ExpressionUUID->"64eb6d22-ab80-4195-90a5-282ffcb25c3f",
+   CellTags->{"DiaryDate[{2008, 4, 13, 0, 53, 45.534556}]", "EphemeralGUID[176361740331776999843739039682268417365]", "CellGUID[239025176700050435742155733489199174370]"},
+   CellID->727947389],
+  Cell[53807, 1424, 709, 17, 25, "Subsubsection",ExpressionUUID->"31c3084f-2014-4491-9637-22d0003dadda",
+   CellTags->{"DiaryDate[{2008, 4, 13, 0, 53, 45.534556}]", "EphemeralGUID[176361740331776999843739039682268417365]", "CellGUID[239025176700050435742155733489199174370]"},
+   CellID->1306270061]},
+ "DiaryDate[{2008, 4, 13, 1, 20, 49.526384}]"->{
+  Cell[24745, 669, 1605, 48, 473, "Program",ExpressionUUID->"2061dc46-3a6a-43e0-940a-d6a5d5ced353",
+   CellTags->{"DiaryDate[{2008, 4, 13, 1, 20, 49.526384}]", "EphemeralGUID[172765327242001422606226980615579606153]", "CellGUID[295143705471389554471718887170486879399]"},
+   CellID->345877615]},
+ "EphemeralGUID[172765327242001422606226980615579606153]"->{
+  Cell[24745, 669, 1605, 48, 473, "Program",ExpressionUUID->"2061dc46-3a6a-43e0-940a-d6a5d5ced353",
+   CellTags->{"DiaryDate[{2008, 4, 13, 1, 20, 49.526384}]", "EphemeralGUID[172765327242001422606226980615579606153]", "CellGUID[295143705471389554471718887170486879399]"},
+   CellID->345877615]},
+ "CellGUID[295143705471389554471718887170486879399]"->{
+  Cell[24745, 669, 1605, 48, 473, "Program",ExpressionUUID->"2061dc46-3a6a-43e0-940a-d6a5d5ced353",
+   CellTags->{"DiaryDate[{2008, 4, 13, 1, 20, 49.526384}]", "EphemeralGUID[172765327242001422606226980615579606153]", "CellGUID[295143705471389554471718887170486879399]"},
+   CellID->345877615]},
+ "DiaryDate[{2008, 4, 13, 1, 58, 39.111264}]"->{
+  Cell[33591, 910, 496, 10, 44, "Subsubsection",ExpressionUUID->"f1c34b75-8072-41aa-b804-368ba00e73c9",
+   CellTags->{"DiaryDate[{2008, 4, 13, 1, 58, 39.111264}]", "EphemeralGUID[210922070307389724018971557495804869296]", "CellGUID[129831369265561216313689924859750096925]"},
+   CellID->1617915834]},
+ "EphemeralGUID[210922070307389724018971557495804869296]"->{
+  Cell[33591, 910, 496, 10, 44, "Subsubsection",ExpressionUUID->"f1c34b75-8072-41aa-b804-368ba00e73c9",
+   CellTags->{"DiaryDate[{2008, 4, 13, 1, 58, 39.111264}]", "EphemeralGUID[210922070307389724018971557495804869296]", "CellGUID[129831369265561216313689924859750096925]"},
+   CellID->1617915834]},
+ "CellGUID[129831369265561216313689924859750096925]"->{
+  Cell[33591, 910, 496, 10, 44, "Subsubsection",ExpressionUUID->"f1c34b75-8072-41aa-b804-368ba00e73c9",
+   CellTags->{"DiaryDate[{2008, 4, 13, 1, 58, 39.111264}]", "EphemeralGUID[210922070307389724018971557495804869296]", "CellGUID[129831369265561216313689924859750096925]"},
+   CellID->1617915834]},
+ "DiaryDate[{2008, 4, 13, 2, 18, 25.624995}]"->{
+  Cell[37716, 1017, 545, 11, 44, "Subsubsection",ExpressionUUID->"d4f4d51d-d943-49d0-b18b-4f0f98bf9b3c",
+   CellTags->{"DiaryDate[{2008, 4, 13, 2, 18, 25.624995}]", "EphemeralGUID[147598008489010039404399412378462218749]", "CellGUID[152346254120921335328834174773187628751]"},
+   CellID->677811783],
+  Cell[41393, 1109, 546, 11, 44, "Subsubsection",ExpressionUUID->"09ad6713-ebc1-471a-8f6a-759d8d05edfa",
+   CellTags->{"DiaryDate[{2008, 4, 13, 2, 18, 25.624995}]", "EphemeralGUID[147598008489010039404399412378462218749]", "CellGUID[152346254120921335328834174773187628751]"},
+   CellID->990567650]},
+ "EphemeralGUID[147598008489010039404399412378462218749]"->{
+  Cell[37716, 1017, 545, 11, 44, "Subsubsection",ExpressionUUID->"d4f4d51d-d943-49d0-b18b-4f0f98bf9b3c",
+   CellTags->{"DiaryDate[{2008, 4, 13, 2, 18, 25.624995}]", "EphemeralGUID[147598008489010039404399412378462218749]", "CellGUID[152346254120921335328834174773187628751]"},
+   CellID->677811783],
+  Cell[41393, 1109, 546, 11, 44, "Subsubsection",ExpressionUUID->"09ad6713-ebc1-471a-8f6a-759d8d05edfa",
+   CellTags->{"DiaryDate[{2008, 4, 13, 2, 18, 25.624995}]", "EphemeralGUID[147598008489010039404399412378462218749]", "CellGUID[152346254120921335328834174773187628751]"},
+   CellID->990567650]},
+ "CellGUID[152346254120921335328834174773187628751]"->{
+  Cell[37716, 1017, 545, 11, 44, "Subsubsection",ExpressionUUID->"d4f4d51d-d943-49d0-b18b-4f0f98bf9b3c",
+   CellTags->{"DiaryDate[{2008, 4, 13, 2, 18, 25.624995}]", "EphemeralGUID[147598008489010039404399412378462218749]", "CellGUID[152346254120921335328834174773187628751]"},
+   CellID->677811783],
+  Cell[41393, 1109, 546, 11, 44, "Subsubsection",ExpressionUUID->"09ad6713-ebc1-471a-8f6a-759d8d05edfa",
+   CellTags->{"DiaryDate[{2008, 4, 13, 2, 18, 25.624995}]", "EphemeralGUID[147598008489010039404399412378462218749]", "CellGUID[152346254120921335328834174773187628751]"},
+   CellID->990567650]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"DiaryDate[{2008, 4, 13, 0, 12, 41.115594}]", 68013, 1752},
+ {"EphemeralGUID[42813389784420250757880456136848447631]", 68367, 1756},
+ {"CellGUID[80430276481694835362319120721296092751]", 68716, 1760},
+ {"DiaryDate[{2008, 4, 13, 0, 42, 47.501359}]", 69059, 1764},
+ {"EphemeralGUID[332395247488929281630951474907650830001]", 69417, 1768},
+ {"CellGUID[42951417094012448381146599396971351441]", 69769, 1772},
+ {"DiaryDate[{2008, 4, 13, 0, 53, 45.534556}]", 70115, 1776},
+ {"EphemeralGUID[176361740331776999843739039682268417365]", 71369, 1789},
+ {"CellGUID[239025176700050435742155733489199174370]", 72618, 1802},
+ {"DiaryDate[{2008, 4, 13, 1, 20, 49.526384}]", 73860, 1815},
+ {"EphemeralGUID[172765327242001422606226980615579606153]", 74217, 1819},
+ {"CellGUID[295143705471389554471718887170486879399]", 74569, 1823},
+ {"DiaryDate[{2008, 4, 13, 1, 58, 39.111264}]", 74914, 1827},
+ {"EphemeralGUID[210922070307389724018971557495804869296]", 75276, 1831},
+ {"CellGUID[129831369265561216313689924859750096925]", 75633, 1835},
+ {"DiaryDate[{2008, 4, 13, 2, 18, 25.624995}]", 75983, 1839},
+ {"EphemeralGUID[147598008489010039404399412378462218749]", 76645, 1846},
+ {"CellGUID[152346254120921335328834174773187628751]", 77302, 1853}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[545, 20, 1888, 46, 228, "Text",ExpressionUUID->"bb937568-49e4-4e17-8075-325d658e61c1",
+ CellID->2123826423],
+Cell[2436, 68, 277, 6, 34, "Text",ExpressionUUID->"77d9f60d-6e61-4fb7-8aae-a2bd96b78f34",
+ CellID->1486673549],
+Cell[2716, 76, 475, 13, 34, "Text",ExpressionUUID->"0d07f614-b369-4bf8-9876-f3967b6b1f69",
+ CellID->550105198],
+Cell[CellGroupData[{
+Cell[3216, 93, 204, 4, 66, "Section",ExpressionUUID->"58a2b9af-3e3f-4e7b-b3a3-0281ea70a848",
+ CellID->1851443488],
+Cell[3423, 99, 350, 7, 56, "Text",ExpressionUUID->"4a76306f-1c35-4315-b7e7-142613e461b4",
+ CellID->1393114728],
+Cell[3776, 108, 629, 15, 78, "Text",ExpressionUUID->"0bb37439-6d45-4022-9ab2-21d1688cccba",
+ CellID->65030255],
+Cell[4408, 125, 468, 11, 56, "Text",ExpressionUUID->"5321abdb-171e-490a-b179-1ae0e94c5ee2",
+ CellID->1943657550],
+Cell[CellGroupData[{
+Cell[4901, 140, 165, 3, 29, "Item",ExpressionUUID->"14f70440-794f-42b3-9c2b-0c6a6ae1cd4d",
+ CellID->74658445],
+Cell[5069, 145, 170, 3, 29, "Item",ExpressionUUID->"710bf97d-2cda-460d-9051-9a8b83f31aab",
+ CellID->1678688333],
+Cell[5242, 150, 218, 4, 29, "Item",ExpressionUUID->"360e1519-a947-414b-855a-f31a2747f7ec",
+ CellID->654035267]
+}, Open  ]],
+Cell[5475, 157, 369, 11, 34, "Text",ExpressionUUID->"ac7c1621-33ae-4447-b02c-0ba8e3e86377",
+ CellID->61916233],
+Cell[5847, 170, 228, 4, 34, "Text",ExpressionUUID->"15d02d8f-1029-45b5-b608-7fa0e078c7c9",
+ CellID->1549427123],
+Cell[6078, 176, 2257, 54, 452, "Graphics",ExpressionUUID->"ad4a80fc-e194-4b7e-a3ea-b0d101672fca",
+ CellTags->{"DiaryDate[{2008, 4, 13, 0, 12, 41.115594}]", "EphemeralGUID[42813389784420250757880456136848447631]", "CellGUID[80430276481694835362319120721296092751]"},
+ CellID->208273949],
+Cell[8338, 232, 408, 13, 34, "Text",ExpressionUUID->"72947190-e392-45af-baef-992ab6e18e42",
+ CellID->272202062],
+Cell[CellGroupData[{
+Cell[8771, 249, 216, 5, 44, "Subsubsection",ExpressionUUID->"d0a32fba-a1cf-4a12-aba6-fb98d82c6e27",
+ CellID->759887924],
+Cell[8990, 256, 350, 7, 56, "Text",ExpressionUUID->"f9f8c4ed-b43b-47cf-9635-2f348beda512",
+ CellID->1387564179]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9377, 268, 177, 4, 44, "Subsubsection",ExpressionUUID->"70ecdd1b-cce5-4778-82ca-773ea661f797",
+ CellID->351089959],
+Cell[9557, 274, 337, 7, 56, "Text",ExpressionUUID->"8a837875-0799-4023-ac15-be469b67bff7",
+ CellID->1266233680]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9931, 286, 227, 5, 44, "Subsubsection",ExpressionUUID->"1053fe80-a80a-4700-b507-fbcb72c33e51",
+ CellID->1631362604],
+Cell[10161, 293, 724, 15, 78, "Text",ExpressionUUID->"81ca9db1-3ce0-46a0-9abb-58ae3c9b9a1e",
+ CellID->26517990]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10922, 313, 540, 14, 53, "Subsection",ExpressionUUID->"8d7cf957-b239-4a89-8505-9df37fe77cae",
+ CellTags->{"DiaryDate[{2008, 4, 13, 0, 42, 47.501359}]", "EphemeralGUID[332395247488929281630951474907650830001]", "CellGUID[42951417094012448381146599396971351441]"},
+ CellID->1611906811],
+Cell[11465, 329, 1479, 40, 188, "Text",ExpressionUUID->"6d69f0e5-43ae-47cd-977e-54bb3e41777c",
+ CellID->811565572]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12993, 375, 178, 4, 66, "Section",ExpressionUUID->"a2d50324-431c-4a30-b048-bd9e238b4da0",
+ CellID->1993613587],
+Cell[13174, 381, 1312, 35, 100, "Text",ExpressionUUID->"1a9ecfb8-3218-4e7a-ae9c-f238dfeda6bf",
+ CellID->1158743001],
+Cell[14489, 418, 543, 16, 56, "Text",ExpressionUUID->"632c6762-af62-4b0f-a29b-761046147b48",
+ CellID->924029707],
+Cell[CellGroupData[{
+Cell[15057, 438, 534, 13, 53, "Subsection",ExpressionUUID->"c3505c2f-96a0-480c-8630-201c220263fc",
+ CellTags->{"DiaryDate[{2008, 4, 13, 0, 53, 45.534556}]", "EphemeralGUID[176361740331776999843739039682268417365]", "CellGUID[239025176700050435742155733489199174370]"},
+ CellID->1798212562],
+Cell[15594, 453, 514, 11, 56, "Text",ExpressionUUID->"aeee66e7-bd7c-4664-9bc1-c0882a072453",
+ CellID->419662065],
+Cell[16111, 466, 559, 12, 34, "Text",ExpressionUUID->"bbdc32ad-d6d0-41da-8f80-122019ebb92f",
+ CellID->1021165303],
+Cell[16673, 480, 575, 13, 34, "Text",ExpressionUUID->"b72a2bb1-baf5-4525-ab89-2db69893294a",
+ CellID->35940697],
+Cell[17251, 495, 577, 13, 34, "Text",ExpressionUUID->"a7f87330-9bff-4e27-8c33-5ff18c57efa2",
+ CellID->612389672],
+Cell[17831, 510, 503, 11, 56, "Text",ExpressionUUID->"226ff9a5-72a7-4aba-b082-880820969101",
+ CellID->1691580880],
+Cell[18337, 523, 602, 15, 78, "Text",ExpressionUUID->"5c3106fb-f041-4f00-828c-170d3e9f6c25",
+ CellID->2011331174],
+Cell[18942, 540, 306, 5, 34, "Text",ExpressionUUID->"3ca21f55-920c-4b4d-8a57-6609dad3d1a0",
+ CellID->902953991],
+Cell[19251, 547, 3668, 83, 641, "Graphics",ExpressionUUID->"6e7f01af-cd39-4c4b-8cca-7bdf4479a66e",
+ CellID->1244042883],
+Cell[22922, 632, 1268, 22, 166, "Text",ExpressionUUID->"a481bfb5-07fe-426b-8896-2aeea27e0bcf",
+ CellID->199619429],
+Cell[24193, 656, 549, 11, 78, "Text",ExpressionUUID->"3df87b14-a3dd-4442-9160-c2d2f9a9a130",
+ CellID->634286589],
+Cell[24745, 669, 1605, 48, 473, "Program",ExpressionUUID->"2061dc46-3a6a-43e0-940a-d6a5d5ced353",
+ CellTags->{"DiaryDate[{2008, 4, 13, 1, 20, 49.526384}]", "EphemeralGUID[172765327242001422606226980615579606153]", "CellGUID[295143705471389554471718887170486879399]"},
+ CellID->345877615]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26387, 722, 553, 11, 53, "Subsection",ExpressionUUID->"0ff7c53c-4302-444b-bb2a-026c882449ff",
+ CellTags->{"DiaryDate[{2008, 4, 13, 0, 53, 45.534556}]", "EphemeralGUID[176361740331776999843739039682268417365]", "CellGUID[239025176700050435742155733489199174370]"},
+ CellID->1608718659],
+Cell[26943, 735, 645, 15, 100, "Text",ExpressionUUID->"c8fcabd0-0358-4e97-bfa0-6bb765fb8518",
+ CellID->1521735763],
+Cell[27591, 752, 285, 6, 34, "Text",ExpressionUUID->"26941fb1-525b-44ae-878a-84b97fb35898",
+ CellID->1430216618],
+Cell[CellGroupData[{
+Cell[27901, 762, 244, 5, 44, "Subsubsection",ExpressionUUID->"b90222b9-6469-4c27-93d3-5ec1522cb46b",
+ CellID->488956408],
+Cell[28148, 769, 342, 8, 34, "Text",ExpressionUUID->"717da58b-1eb0-4ec4-b636-63d139a43de8",
+ CellID->866237855],
+Cell[28493, 779, 374, 9, 45, "Input",ExpressionUUID->"fdbd65a4-059d-4c40-9fb7-987605110cda",
+ CellID->1067985972],
+Cell[28870, 790, 315, 7, 34, "Text",ExpressionUUID->"4da925b3-9bc2-43ed-b9f5-9c6bca46ed21",
+ CellID->1127019764],
+Cell[29188, 799, 387, 10, 45, "Input",ExpressionUUID->"f1221de5-7276-4212-9200-11c0b086e8cd",
+ CellID->1015407008],
+Cell[29578, 811, 552, 11, 78, "Text",ExpressionUUID->"b26cf69d-389f-417d-8cc4-a0c9ca49f14c",
+ CellID->2040524394],
+Cell[30133, 824, 634, 16, 136, "Input",ExpressionUUID->"5d1f47ff-0f1a-41ae-85fc-408c13afba93",
+ CellID->1927131015],
+Cell[30770, 842, 643, 14, 78, "Text",ExpressionUUID->"4db7134e-8bd8-47ba-ae19-eb9b46d9e76e",
+ CellID->574959792],
+Cell[31416, 858, 2138, 47, 352, "Input",ExpressionUUID->"9484d7ca-ee1d-4972-befa-08f1a7c16c5d",
+ CellID->1820296291]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[33591, 910, 496, 10, 44, "Subsubsection",ExpressionUUID->"f1c34b75-8072-41aa-b804-368ba00e73c9",
+ CellTags->{"DiaryDate[{2008, 4, 13, 1, 58, 39.111264}]", "EphemeralGUID[210922070307389724018971557495804869296]", "CellGUID[129831369265561216313689924859750096925]"},
+ CellID->1617915834],
+Cell[34090, 922, 557, 12, 78, "Text",ExpressionUUID->"c9a3e825-8c57-4a2f-ad94-4d64504ec90e",
+ CellID->873483724],
+Cell[34650, 936, 515, 10, 78, "Text",ExpressionUUID->"7fefd7fd-5f72-42e4-8c1c-a35bc6539fa7",
+ CellID->73048577],
+Cell[35168, 948, 259, 4, 34, "Text",ExpressionUUID->"53b961f8-8dab-4cbd-8967-7f9fa7da56ee",
+ CellID->442738376],
+Cell[35430, 954, 480, 11, 45, "Input",ExpressionUUID->"78a355b7-d3dc-4884-aa62-9685a4fe125d",
+ CellID->1514271202],
+Cell[35913, 967, 352, 9, 34, "Text",ExpressionUUID->"debb6148-dfdf-4d7a-ade1-4698a80160b0",
+ CellID->1165522259],
+Cell[36268, 978, 529, 10, 78, "Text",ExpressionUUID->"ee121dff-daee-4f4d-a7aa-ecae2a04f32d",
+ CellID->1734262726],
+Cell[36800, 990, 460, 11, 56, "Text",ExpressionUUID->"4abc2a6e-de7f-4db4-941e-fa65e79b6924",
+ CellID->2105578798],
+Cell[37263, 1003, 416, 9, 45, "Input",ExpressionUUID->"e7f46e16-e12e-4149-aa48-bbeda580f5b7",
+ CellID->79839073]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[37716, 1017, 545, 11, 44, "Subsubsection",ExpressionUUID->"d4f4d51d-d943-49d0-b18b-4f0f98bf9b3c",
+ CellTags->{"DiaryDate[{2008, 4, 13, 2, 18, 25.624995}]", "EphemeralGUID[147598008489010039404399412378462218749]", "CellGUID[152346254120921335328834174773187628751]"},
+ CellID->677811783],
+Cell[38264, 1030, 879, 16, 122, "Text",ExpressionUUID->"aa50272f-d313-4e97-ae63-a871e2a5de67",
+ CellID->1729373193],
+Cell[39146, 1048, 2210, 56, 280, "Input",ExpressionUUID->"30c06ae7-60c5-4951-950a-66fbadcc80d2",
+ CellID->1073637145]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[41393, 1109, 546, 11, 44, "Subsubsection",ExpressionUUID->"09ad6713-ebc1-471a-8f6a-759d8d05edfa",
+ CellTags->{"DiaryDate[{2008, 4, 13, 2, 18, 25.624995}]", "EphemeralGUID[147598008489010039404399412378462218749]", "CellGUID[152346254120921335328834174773187628751]"},
+ CellID->990567650],
+Cell[41942, 1122, 490, 12, 56, "Text",ExpressionUUID->"a806c594-6ab2-4cd7-81cb-9053cdfd36d7",
+ CellID->1177262006],
+Cell[42435, 1136, 248, 4, 34, "Text",ExpressionUUID->"0b0e601d-681d-4bd6-9b92-76a1b865c10d",
+ CellID->150307908],
+Cell[42686, 1142, 700, 15, 82, "Input",ExpressionUUID->"1ae0a717-cad4-4b7f-9330-2f1fdb86d215",
+ CellID->1338427831],
+Cell[43389, 1159, 286, 6, 34, "Text",ExpressionUUID->"3c24e600-4c7a-47f8-95c4-4e00fca451a7",
+ CellID->784240884],
+Cell[43678, 1167, 706, 15, 82, "Input",ExpressionUUID->"a322e4bd-49c5-4c8a-8757-141fe961ddfb",
+ CellID->1629395749],
+Cell[44387, 1184, 941, 17, 122, "Text",ExpressionUUID->"97a9102f-0fe0-4b41-94ec-ef5d2f5b3668",
+ CellID->174875117],
+Cell[45331, 1203, 644, 14, 74, "Input",ExpressionUUID->"841287d0-9cd4-441e-9cbf-09a3c4a27376",
+ CellID->1368462323],
+Cell[45978, 1219, 402, 9, 26, "Text",ExpressionUUID->"b07f2de6-80ce-4d88-ab1e-b851240ce952",
+ CellID->542886899],
+Cell[46383, 1230, 2727, 59, 344, "Input",ExpressionUUID->"0f31069a-ec82-49ab-911a-5c4e9aecad05",
+ CellID->1789579037],
+Cell[49113, 1291, 327, 8, 26, "Text",ExpressionUUID->"9ea3ad8d-c934-4bde-891f-58eaf62b8d93",
+ CellID->168800748]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[49489, 1305, 598, 12, 34, "Subsection",ExpressionUUID->"64eb6d22-ab80-4195-90a5-282ffcb25c3f",
+ CellTags->{"DiaryDate[{2008, 4, 13, 0, 53, 45.534556}]", "EphemeralGUID[176361740331776999843739039682268417365]", "CellGUID[239025176700050435742155733489199174370]"},
+ CellID->727947389],
+Cell[50090, 1319, 623, 14, 41, "Text",ExpressionUUID->"9799badd-f829-45c4-90f3-b2159aac1a48",
+ CellID->397429964],
+Cell[50716, 1335, 308, 7, 43, "Input",ExpressionUUID->"51a8b57b-2a98-4849-b7b6-e5e5d7708a2b",
+ CellID->931262778],
+Cell[51027, 1344, 355, 8, 43, "Input",ExpressionUUID->"52bdfe6c-b7e5-4922-94dc-83e1962cf6a6",
+ CellID->1159302381],
+Cell[51385, 1354, 536, 12, 41, "Text",ExpressionUUID->"39b82fa3-e075-446e-9fc4-d15ef60d9a98",
+ CellID->2117088579],
+Cell[51924, 1368, 331, 8, 26, "Text",ExpressionUUID->"9899df89-6414-4d6e-9595-cb4dfffb02b7",
+ CellID->2095136887],
+Cell[52258, 1378, 449, 10, 41, "Text",ExpressionUUID->"dfd7d484-f950-4bbd-af9c-3fc02fe01544",
+ CellID->676299950],
+Cell[52710, 1390, 1072, 30, 104, "Input",ExpressionUUID->"d3488e1e-463c-4c2d-8568-e3b23d420f4e",
+ CellID->2089799726],
+Cell[CellGroupData[{
+Cell[53807, 1424, 709, 17, 25, "Subsubsection",ExpressionUUID->"31c3084f-2014-4491-9637-22d0003dadda",
+ CellTags->{"DiaryDate[{2008, 4, 13, 0, 53, 45.534556}]", "EphemeralGUID[176361740331776999843739039682268417365]", "CellGUID[239025176700050435742155733489199174370]"},
+ CellID->1306270061],
+Cell[54519, 1443, 473, 12, 41, "Text",ExpressionUUID->"1ff82248-d469-4c4b-a2bf-aa57843051a4",
+ CellID->251200110],
+Cell[54995, 1457, 244, 4, 43, "Input",ExpressionUUID->"8dfd1be7-c4d2-4540-99a8-f10c577083de",
+ CellID->1268486319],
+Cell[55242, 1463, 527, 13, 41, "Text",ExpressionUUID->"65f4b7cd-0a8a-40b7-ad9d-69f3f41d9510",
+ CellID->94448901],
+Cell[55772, 1478, 136, 3, 26, "Text",ExpressionUUID->"34d0feaf-53c8-4ee9-a4c9-1e9b86d21866",
+ CellID->1432083710]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

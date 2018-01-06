@@ -1,0 +1,1102 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     51567,       1093]
+NotebookOptionsPosition[     47696,        972]
+NotebookOutlinePosition[     49289,       1023]
+CellTagsIndexPosition[     48967,       1011]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Word Scramble Decoder", "DemoTitle",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.530747167115424*^9, 3.530747192009542*^9}}],
+
+Cell["", "InitializationSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"letters", ",", " ", "length", ",", " ", "potentialwords"}], 
+      "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"letters", " ", "=", " ", 
+       RowBox[{"Select", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+          "letter1", ",", " ", "letter2", ",", " ", "letter3", ",", " ", 
+           "letter4", ",", " ", "letter5", ",", " ", "letter6", ",", " ", 
+           "letter7", ",", " ", "letter8"}], "}"}], ",", " ", 
+         RowBox[{
+          RowBox[{"#", "\[NotEqual]", " ", "\"\< \>\""}], "&"}]}], "]"}]}], 
+      ";", "\[IndentingNewLine]", 
+      RowBox[{"length", " ", "=", " ", 
+       RowBox[{"Length", "[", "letters", "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"potentialwords", " ", "=", 
+       RowBox[{"StringJoin", "/@", 
+        RowBox[{"Permutations", "[", 
+         RowBox[{"letters", ",", 
+          RowBox[{"{", 
+           RowBox[{"2", ",", "length"}], "}"}]}], "]"}]}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Reverse", "[", 
+       RowBox[{"SortBy", "[", 
+        RowBox[{
+         RowBox[{"Intersection", "[", 
+          RowBox[{"words", ",", " ", "potentialwords"}], "]"}], ",", " ", 
+         "StringLength"}], "]"}], "]"}]}]}], "\[IndentingNewLine]", "]"}], 
+   ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"letter1", ",", " ", "\"\<c\>\""}], "}"}], ",", 
+     RowBox[{
+     "Characters", "[", "\"\< abcdefghijklmnopgrstuvwxyz\>\"", "]"}]}], "}"}],
+    ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"letter2", ",", " ", "\"\<a\>\""}], "}"}], ",", 
+     RowBox[{
+     "Characters", "[", "\"\< abcdefghijklmnopgrstuvwxyz\>\"", "]"}]}], "}"}],
+    ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"letter3", ",", " ", "\"\<t\>\""}], "}"}], ",", 
+     RowBox[{
+     "Characters", "[", "\"\< abcdefghijklmnopgrstuvwxyz\>\"", "]"}]}], "}"}],
+    ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"letter4", ",", " ", "\"\< \>\""}], "}"}], ",", 
+     RowBox[{
+     "Characters", "[", "\"\< abcdefghijklmnopgrstuvwxyz\>\"", "]"}]}], "}"}],
+    ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"letter5", ",", " ", "\"\< \>\""}], "}"}], ",", 
+     RowBox[{
+     "Characters", "[", "\"\< abcdefghijklmnopgrstuvwxyz\>\"", "]"}]}], "}"}],
+    ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"letter6", ",", " ", "\"\< \>\""}], "}"}], ",", 
+     RowBox[{
+     "Characters", "[", "\"\< abcdefghijklmnopgrstuvwxyz\>\"", "]"}]}], "}"}],
+    ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"letter7", ",", " ", "\"\< \>\""}], "}"}], ",", 
+     RowBox[{
+     "Characters", "[", "\"\< abcdefghijklmnopgrstuvwxyz\>\"", "]"}]}], "}"}],
+    ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"letter8", ",", " ", "\"\< \>\""}], "}"}], ",", 
+     RowBox[{
+     "Characters", "[", "\"\< abcdefghijklmnopgrstuvwxyz\>\"", "]"}]}], "}"}],
+    ",", "\[IndentingNewLine]", 
+   RowBox[{"ContentSize", "\[Rule]", " ", 
+    RowBox[{"{", 
+     RowBox[{"420", ",", "420"}], "}"}]}], ",", "\[IndentingNewLine]", 
+   RowBox[{"Initialization", "\[RuleDelayed]", " ", 
+    RowBox[{"{", 
+     RowBox[{"words", " ", "=", " ", 
+      RowBox[{"DictionaryLookup", "[", "\"\<*\>\"", "]"}]}], "}"}]}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.530745453265695*^9, 3.530745494878594*^9}, {
+   3.530745600044821*^9, 3.530745675722556*^9}, {3.530745761657604*^9, 
+   3.530745786495726*^9}, {3.530745884925338*^9, 3.530745901013097*^9}, {
+   3.530746359879656*^9, 3.5307463701684237`*^9}, {3.5307464151287193`*^9, 
+   3.5307464173590317`*^9}, {3.530746473806823*^9, 3.530746480845972*^9}, {
+   3.530746563004073*^9, 3.530746629451377*^9}, {3.530892417933417*^9, 
+   3.5308924282620497`*^9}, {3.530892485310793*^9, 3.530892495770133*^9}, {
+   3.5308925322853127`*^9, 3.5308925502778597`*^9}, {3.530892937889326*^9, 
+   3.5308929483227696`*^9}, {3.5308930097174287`*^9, 
+   3.5308931680724487`*^9}, {3.5308932050036*^9, 3.530893283782592*^9}, {
+   3.5308935145375195`*^9, 3.5308935517614174`*^9}, {3.5308936362443967`*^9, 
+   3.5308936606208897`*^9}, {3.530893698480127*^9, 3.5308937248806944`*^9}, {
+   3.5308937637644267`*^9, 3.530893766804489*^9}, 3.5308943891063166`*^9, {
+   3.530894438292302*^9, 3.5308944472924824`*^9}, {3.5308944779530954`*^9, 
+   3.530894490368349*^9}, {3.530894529889139*^9, 3.530894545764459*^9}, {
+   3.5308946172147913`*^9, 3.5308946993839426`*^9}, {3.5308951228231697`*^9, 
+   3.530895134983486*^9}},
+ CellID->1180829860],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`letter1$$ = "c", $CellContext`letter2$$ = 
+    "a", $CellContext`letter3$$ = "t", $CellContext`letter4$$ = 
+    " ", $CellContext`letter5$$ = " ", $CellContext`letter6$$ = 
+    " ", $CellContext`letter7$$ = " ", $CellContext`letter8$$ = " ", 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`letter1$$], "c"}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter2$$], "a"}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter3$$], "t"}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter4$$], " "}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter5$$], " "}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter6$$], " "}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter7$$], " "}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter8$$], " "}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}}, 
+    Typeset`size$$ = {119., {2.25, 7.5}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`letter1$241241$$ = 0, $CellContext`letter2$241242$$ = 
+    0, $CellContext`letter3$241243$$ = 0, $CellContext`letter4$241244$$ = 
+    0, $CellContext`letter5$241245$$ = 0, $CellContext`letter6$241246$$ = 
+    0, $CellContext`letter7$241247$$ = 0, $CellContext`letter8$241248$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`letter1$$ = "c", $CellContext`letter2$$ = 
+        "a", $CellContext`letter3$$ = "t", $CellContext`letter4$$ = 
+        " ", $CellContext`letter5$$ = " ", $CellContext`letter6$$ = 
+        " ", $CellContext`letter7$$ = " ", $CellContext`letter8$$ = " "}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`letter1$$, $CellContext`letter1$241241$$, 0], 
+        Hold[$CellContext`letter2$$, $CellContext`letter2$241242$$, 0], 
+        Hold[$CellContext`letter3$$, $CellContext`letter3$241243$$, 0], 
+        Hold[$CellContext`letter4$$, $CellContext`letter4$241244$$, 0], 
+        Hold[$CellContext`letter5$$, $CellContext`letter5$241245$$, 0], 
+        Hold[$CellContext`letter6$$, $CellContext`letter6$241246$$, 0], 
+        Hold[$CellContext`letter7$$, $CellContext`letter7$241247$$, 0], 
+        Hold[$CellContext`letter8$$, $CellContext`letter8$241248$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`letters$, $CellContext`length$, \
+$CellContext`potentialwords$}, $CellContext`letters$ = 
+         Select[{$CellContext`letter1$$, $CellContext`letter2$$, \
+$CellContext`letter3$$, $CellContext`letter4$$, $CellContext`letter5$$, \
+$CellContext`letter6$$, $CellContext`letter7$$, $CellContext`letter8$$}, # != 
+           " "& ]; $CellContext`length$ = 
+         Length[$CellContext`letters$]; $CellContext`potentialwords$ = 
+         Map[StringJoin, 
+           Permutations[$CellContext`letters$, {2, $CellContext`length$}]]; 
+        Reverse[
+          SortBy[
+           Intersection[$CellContext`words, $CellContext`potentialwords$], 
+           StringLength]]], 
+      "Specifications" :> {{{$CellContext`letter1$$, "c"}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter2$$, "a"}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter3$$, "t"}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter4$$, " "}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter5$$, " "}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter6$$, " "}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter7$$, " "}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter8$$, " "}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}},
+       "Options" :> {ContentSize -> {420, 420}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{523., {221., 227.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`words = DictionaryLookup["*"]}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.530996190403845*^9, 3.530996314033164*^9},
+ CellID->1334754437]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell["\<\
+Have you ever wondered about how combinations of different letters make up \
+words? This Demonstration lets you choose letters and returns the words that \
+can be formed from those letters. I made this so I could easily cheat at word \
+scrambling games, but that kind of takes the fun out of it.\
+\>", "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.530746828987041*^9, 3.530746948488206*^9}, {
+   3.5307469992384453`*^9, 3.530747061221506*^9}, {3.5308954770032616`*^9, 
+   3.530895491858856*^9}, {3.530996117716084*^9, 3.530996126092486*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`letter1$$ = "c", $CellContext`letter2$$ = 
+    "a", $CellContext`letter3$$ = "t", $CellContext`letter4$$ = 
+    "i", $CellContext`letter5$$ = "r", $CellContext`letter6$$ = 
+    "e", $CellContext`letter7$$ = "l", $CellContext`letter8$$ = "p", 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`letter1$$], "c"}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter2$$], "a"}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter3$$], "t"}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter4$$], "i"}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter5$$], "r"}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter6$$], "e"}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter7$$], "l"}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter8$$], "p"}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}}, 
+    Typeset`size$$ = {381.701171875, {303., 9.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`letter1$831$$ = 0, $CellContext`letter2$832$$ = 
+    0, $CellContext`letter3$833$$ = 0, $CellContext`letter4$834$$ = 
+    0, $CellContext`letter5$835$$ = 0, $CellContext`letter6$836$$ = 
+    0, $CellContext`letter7$837$$ = 0, $CellContext`letter8$838$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`letter1$$ = "c", $CellContext`letter2$$ = 
+        "a", $CellContext`letter3$$ = "t", $CellContext`letter4$$ = 
+        "i", $CellContext`letter5$$ = "r", $CellContext`letter6$$ = 
+        "e", $CellContext`letter7$$ = "l", $CellContext`letter8$$ = "p"}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`letter1$$, $CellContext`letter1$831$$, 0], 
+        Hold[$CellContext`letter2$$, $CellContext`letter2$832$$, 0], 
+        Hold[$CellContext`letter3$$, $CellContext`letter3$833$$, 0], 
+        Hold[$CellContext`letter4$$, $CellContext`letter4$834$$, 0], 
+        Hold[$CellContext`letter5$$, $CellContext`letter5$835$$, 0], 
+        Hold[$CellContext`letter6$$, $CellContext`letter6$836$$, 0], 
+        Hold[$CellContext`letter7$$, $CellContext`letter7$837$$, 0], 
+        Hold[$CellContext`letter8$$, $CellContext`letter8$838$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`letters$, $CellContext`length$, \
+$CellContext`potentialwords$}, $CellContext`letters$ = 
+         Select[{$CellContext`letter1$$, $CellContext`letter2$$, \
+$CellContext`letter3$$, $CellContext`letter4$$, $CellContext`letter5$$, \
+$CellContext`letter6$$, $CellContext`letter7$$, $CellContext`letter8$$}, # != 
+           " "& ]; $CellContext`length$ = 
+         Length[$CellContext`letters$]; $CellContext`potentialwords$ = 
+         Map[StringJoin, 
+           Permutations[$CellContext`letters$, {2, $CellContext`length$}]]; 
+        Reverse[
+          SortBy[
+           Intersection[$CellContext`words, $CellContext`potentialwords$], 
+           StringLength]]], 
+      "Specifications" :> {{{$CellContext`letter1$$, "c"}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter2$$, "a"}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter3$$, "t"}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter4$$, "i"}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter5$$, "r"}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter6$$, "e"}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter7$$, "l"}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter8$$, "p"}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}},
+       "Options" :> {ContentSize -> {420, 420}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{523., {221., 227.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`words = DictionaryLookup["*"]}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->315352050]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`letter1$$ = "c", $CellContext`letter2$$ = 
+    "a", $CellContext`letter3$$ = "r", $CellContext`letter4$$ = 
+    " ", $CellContext`letter5$$ = " ", $CellContext`letter6$$ = 
+    " ", $CellContext`letter7$$ = " ", $CellContext`letter8$$ = " ", 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`letter1$$], "c"}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter2$$], "a"}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter3$$], "r"}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter4$$], " "}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter5$$], " "}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter6$$], " "}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter7$$], " "}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter8$$], " "}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}}, 
+    Typeset`size$$ = {69., {2.25, 7.5}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`letter1$928$$ = 0, $CellContext`letter2$929$$ = 
+    0, $CellContext`letter3$930$$ = 0, $CellContext`letter4$931$$ = 
+    0, $CellContext`letter5$932$$ = 0, $CellContext`letter6$933$$ = 
+    0, $CellContext`letter7$934$$ = 0, $CellContext`letter8$935$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`letter1$$ = "c", $CellContext`letter2$$ = 
+        "a", $CellContext`letter3$$ = "r", $CellContext`letter4$$ = 
+        " ", $CellContext`letter5$$ = " ", $CellContext`letter6$$ = 
+        " ", $CellContext`letter7$$ = " ", $CellContext`letter8$$ = " "}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`letter1$$, $CellContext`letter1$928$$, 0], 
+        Hold[$CellContext`letter2$$, $CellContext`letter2$929$$, 0], 
+        Hold[$CellContext`letter3$$, $CellContext`letter3$930$$, 0], 
+        Hold[$CellContext`letter4$$, $CellContext`letter4$931$$, 0], 
+        Hold[$CellContext`letter5$$, $CellContext`letter5$932$$, 0], 
+        Hold[$CellContext`letter6$$, $CellContext`letter6$933$$, 0], 
+        Hold[$CellContext`letter7$$, $CellContext`letter7$934$$, 0], 
+        Hold[$CellContext`letter8$$, $CellContext`letter8$935$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`letters$, $CellContext`length$, \
+$CellContext`potentialwords$}, $CellContext`letters$ = 
+         Select[{$CellContext`letter1$$, $CellContext`letter2$$, \
+$CellContext`letter3$$, $CellContext`letter4$$, $CellContext`letter5$$, \
+$CellContext`letter6$$, $CellContext`letter7$$, $CellContext`letter8$$}, # != 
+           " "& ]; $CellContext`length$ = 
+         Length[$CellContext`letters$]; $CellContext`potentialwords$ = 
+         Map[StringJoin, 
+           Permutations[$CellContext`letters$, {2, $CellContext`length$}]]; 
+        Reverse[
+          SortBy[
+           Intersection[$CellContext`words, $CellContext`potentialwords$], 
+           StringLength]]], 
+      "Specifications" :> {{{$CellContext`letter1$$, "c"}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter2$$, "a"}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter3$$, "r"}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter4$$, " "}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter5$$, " "}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter6$$, " "}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter7$$, " "}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter8$$, " "}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}},
+       "Options" :> {ContentSize -> {420, 420}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{523., {221., 227.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`words = DictionaryLookup["*"]}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->550624994],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`letter1$$ = "b", $CellContext`letter2$$ = 
+    "a", $CellContext`letter3$$ = "e", $CellContext`letter4$$ = 
+    "f", $CellContext`letter5$$ = "h", $CellContext`letter6$$ = 
+    " ", $CellContext`letter7$$ = " ", $CellContext`letter8$$ = " ", 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`letter1$$], "b"}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter2$$], "a"}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter3$$], "e"}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter4$$], "f"}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter5$$], "h"}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter6$$], " "}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter7$$], " "}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter8$$], " "}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}}, 
+    Typeset`size$$ = {219., {2.25, 8.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`letter1$1025$$ = 0, $CellContext`letter2$1026$$ = 
+    0, $CellContext`letter3$1027$$ = 0, $CellContext`letter4$1028$$ = 
+    0, $CellContext`letter5$1029$$ = 0, $CellContext`letter6$1030$$ = 
+    0, $CellContext`letter7$1031$$ = 0, $CellContext`letter8$1032$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`letter1$$ = "b", $CellContext`letter2$$ = 
+        "a", $CellContext`letter3$$ = "e", $CellContext`letter4$$ = 
+        "f", $CellContext`letter5$$ = "h", $CellContext`letter6$$ = 
+        " ", $CellContext`letter7$$ = " ", $CellContext`letter8$$ = " "}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`letter1$$, $CellContext`letter1$1025$$, 0], 
+        Hold[$CellContext`letter2$$, $CellContext`letter2$1026$$, 0], 
+        Hold[$CellContext`letter3$$, $CellContext`letter3$1027$$, 0], 
+        Hold[$CellContext`letter4$$, $CellContext`letter4$1028$$, 0], 
+        Hold[$CellContext`letter5$$, $CellContext`letter5$1029$$, 0], 
+        Hold[$CellContext`letter6$$, $CellContext`letter6$1030$$, 0], 
+        Hold[$CellContext`letter7$$, $CellContext`letter7$1031$$, 0], 
+        Hold[$CellContext`letter8$$, $CellContext`letter8$1032$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`letters$, $CellContext`length$, \
+$CellContext`potentialwords$}, $CellContext`letters$ = 
+         Select[{$CellContext`letter1$$, $CellContext`letter2$$, \
+$CellContext`letter3$$, $CellContext`letter4$$, $CellContext`letter5$$, \
+$CellContext`letter6$$, $CellContext`letter7$$, $CellContext`letter8$$}, # != 
+           " "& ]; $CellContext`length$ = 
+         Length[$CellContext`letters$]; $CellContext`potentialwords$ = 
+         Map[StringJoin, 
+           Permutations[$CellContext`letters$, {2, $CellContext`length$}]]; 
+        Reverse[
+          SortBy[
+           Intersection[$CellContext`words, $CellContext`potentialwords$], 
+           StringLength]]], 
+      "Specifications" :> {{{$CellContext`letter1$$, "b"}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter2$$, "a"}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter3$$, "e"}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter4$$, "f"}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter5$$, "h"}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter6$$, " "}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter7$$, " "}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter8$$, " "}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}},
+       "Options" :> {ContentSize -> {420, 420}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{523., {221., 227.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`words = DictionaryLookup["*"]}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->58833180],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`letter1$$ = "c", $CellContext`letter2$$ = 
+    "a", $CellContext`letter3$$ = "t", $CellContext`letter4$$ = 
+    "i", $CellContext`letter5$$ = "r", $CellContext`letter6$$ = 
+    " ", $CellContext`letter7$$ = " ", $CellContext`letter8$$ = " ", 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`letter1$$], "c"}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter2$$], "a"}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter3$$], "t"}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter4$$], "i"}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter5$$], "r"}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter6$$], " "}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter7$$], " "}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}, {{
+       Hold[$CellContext`letter8$$], " "}, {
+      " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+       "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}}, 
+    Typeset`size$$ = {235.701171875, {18., 9.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`letter1$1122$$ = 0, $CellContext`letter2$1123$$ = 
+    0, $CellContext`letter3$1124$$ = 0, $CellContext`letter4$1125$$ = 
+    0, $CellContext`letter5$1126$$ = 0, $CellContext`letter6$1127$$ = 
+    0, $CellContext`letter7$1128$$ = 0, $CellContext`letter8$1129$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`letter1$$ = "c", $CellContext`letter2$$ = 
+        "a", $CellContext`letter3$$ = "t", $CellContext`letter4$$ = 
+        "i", $CellContext`letter5$$ = "r", $CellContext`letter6$$ = 
+        " ", $CellContext`letter7$$ = " ", $CellContext`letter8$$ = " "}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`letter1$$, $CellContext`letter1$1122$$, 0], 
+        Hold[$CellContext`letter2$$, $CellContext`letter2$1123$$, 0], 
+        Hold[$CellContext`letter3$$, $CellContext`letter3$1124$$, 0], 
+        Hold[$CellContext`letter4$$, $CellContext`letter4$1125$$, 0], 
+        Hold[$CellContext`letter5$$, $CellContext`letter5$1126$$, 0], 
+        Hold[$CellContext`letter6$$, $CellContext`letter6$1127$$, 0], 
+        Hold[$CellContext`letter7$$, $CellContext`letter7$1128$$, 0], 
+        Hold[$CellContext`letter8$$, $CellContext`letter8$1129$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`letters$, $CellContext`length$, \
+$CellContext`potentialwords$}, $CellContext`letters$ = 
+         Select[{$CellContext`letter1$$, $CellContext`letter2$$, \
+$CellContext`letter3$$, $CellContext`letter4$$, $CellContext`letter5$$, \
+$CellContext`letter6$$, $CellContext`letter7$$, $CellContext`letter8$$}, # != 
+           " "& ]; $CellContext`length$ = 
+         Length[$CellContext`letters$]; $CellContext`potentialwords$ = 
+         Map[StringJoin, 
+           Permutations[$CellContext`letters$, {2, $CellContext`length$}]]; 
+        Reverse[
+          SortBy[
+           Intersection[$CellContext`words, $CellContext`potentialwords$], 
+           StringLength]]], 
+      "Specifications" :> {{{$CellContext`letter1$$, "c"}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter2$$, "a"}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter3$$, "t"}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter4$$, "i"}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter5$$, "r"}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter6$$, " "}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter7$$, " "}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", 
+          "z"}}, {{$CellContext`letter8$$, " "}, {
+         " ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+           "n", "o", "p", "g", "r", "s", "t", "u", "v", "w", "x", "y", "z"}}},
+       "Options" :> {ContentSize -> {420, 420}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{523., {221., 227.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`words = DictionaryLookup["*"]}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->241696132]
+}, Open  ]],
+
+Cell["", "DetailsSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.3895522232313623`*^9},
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0, CellBaseline -> Baseline], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SearchTermsSection"],
+
+Cell["textual analysis", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.530747479086913*^9, 3.530747499673772*^9}, {
+   3.53089550096172*^9, 3.5308955207700124`*^9}},
+ CellID->666652846],
+
+Cell["characters", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.530747479086913*^9, 3.530747499673772*^9}, {
+   3.53089550096172*^9, 3.5308955197774725`*^9}},
+ CellID->510561933],
+
+Cell["strings", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.530747479086913*^9, 3.530747499673772*^9}, {
+   3.53089550096172*^9, 3.5308955123371754`*^9}},
+ CellID->183042146],
+
+Cell["anagrams", "SearchTerms",
+ CellChangeTimes->{{3.5308955150172825`*^9, 3.5308955169298587`*^9}},
+ CellID->488341194]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "RelatedLinksSection"],
+
+Cell[TextData[ButtonBox["Anagrams",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://demonstrations.wolfram.com/Anagrams/"], None},
+ ButtonNote->"http://demonstrations.wolfram.com/Anagrams/"]], "RelatedLinks",
+ CellChangeTimes->{{3.530895546275611*^9, 3.53089555401092*^9}},
+ CellID->570194566],
+
+Cell[TextData[ButtonBox["Seven-Letter Anagrams with High-Frequency Letters",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://demonstrations.wolfram.com/\
+SevenLetterAnagramsWithHighFrequencyLetters/"], None},
+ ButtonNote->
+  "http://demonstrations.wolfram.com/\
+SevenLetterAnagramsWithHighFrequencyLetters/"]], "RelatedLinks",
+ CellChangeTimes->{{3.530895577856874*^9, 3.530895577856874*^9}},
+ CellID->603102040]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Szymon Steplewski",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Szymon+\
+Steplewski"], None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Szymon+Steplewski"]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.530747504089472*^9, 3.530747509401497*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{825, 746},
+WindowMargins->{{31, Automatic}, {Automatic, 18}},
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "UTF-8"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[40054, 753, 312, 8, 29, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[40369, 763, 678, 16, 29, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[41050, 781, 340, 11, 29, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[41393, 794, 637, 15, 29, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[42033, 811, 844, 21, 29, "ControlSuggestions",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[42880, 834, 369, 9, 29, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[43252, 845, 1464, 31, 29, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[44719, 878, 908, 21, 29, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 48076, 984},
+ {"RotateAndZoomIn3D", 48184, 987},
+ {"DragLocators", 48293, 990},
+ {"CreateAndDeleteLocators", 48408, 993},
+ {"SliderZoom", 48521, 996},
+ {"GamepadControls", 48626, 999},
+ {"AutomaticAnimation", 48738, 1002},
+ {"BookmarkAnimation", 48854, 1005}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 132, 2, 74, "DemoTitle"],
+Cell[714, 26, 33, 0, 261, "InitializationSection"],
+Cell[CellGroupData[{
+Cell[772, 30, 29, 0, 189, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[826, 34, 4895, 117, 279, "Input",
+ CellID->1180829860],
+Cell[5724, 153, 6766, 112, 460, "Output",
+ CellID->1334754437]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12539, 271, 36, 0, 171, "ManipulateCaptionSection"],
+Cell[12578, 273, 572, 9, 51, "ManipulateCaption"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13187, 287, 28, 0, 173, "ThumbnailSection"],
+Cell[13218, 289, 6661, 111, 460, "Output",
+ CellID->315352050]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[19916, 405, 28, 0, 143, "SnapshotsSection"],
+Cell[19947, 407, 6652, 111, 460, "Output",
+ CellID->550624994],
+Cell[26602, 520, 6667, 111, 460, "Output",
+ CellID->58833180],
+Cell[33272, 633, 6676, 111, 460, "Output",
+ CellID->241696132]
+}, Open  ]],
+Cell[39963, 747, 26, 0, 337, "DetailsSection"],
+Cell[CellGroupData[{
+Cell[40014, 751, 37, 0, 115, "ControlSuggestionsSection"],
+Cell[40054, 753, 312, 8, 29, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[40369, 763, 678, 16, 29, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[41050, 781, 340, 11, 29, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[41393, 794, 637, 15, 29, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[42033, 811, 844, 21, 29, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[42880, 834, 369, 9, 29, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[43252, 845, 1464, 31, 29, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[44719, 878, 908, 21, 29, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[45664, 904, 30, 0, 155, "SearchTermsSection"],
+Cell[45697, 906, 200, 4, 21, "SearchTerms",
+ CellID->666652846],
+Cell[45900, 912, 194, 4, 21, "SearchTerms",
+ CellID->510561933],
+Cell[46097, 918, 191, 4, 21, "SearchTerms",
+ CellID->183042146],
+Cell[46291, 924, 121, 2, 21, "SearchTerms",
+ CellID->488341194]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[46449, 931, 31, 0, 141, "RelatedLinksSection"],
+Cell[46483, 933, 300, 6, 21, "RelatedLinks",
+ CellID->570194566],
+Cell[46786, 941, 419, 9, 21, "RelatedLinks",
+ CellID->603102040]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[47242, 955, 25, 0, 141, "AuthorSection"],
+Cell[47270, 957, 398, 11, 21, "Author"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

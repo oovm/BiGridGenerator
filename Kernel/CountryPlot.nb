@@ -1,0 +1,772 @@
+Notebook[{
+Cell[BoxData[
+ RowBox[{"BeginPackage", "[", "\"\<CountryPlot`\>\"", "]"}]], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"d2c43ac1-7c9f-4597-b2de-caf357a625d8"],
+
+Cell[BoxData[{
+ RowBox[{"Unprotect", "[", "CountryPlot3D", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Unprotect", "[", "CountryPlot", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"CountryPlot3D", "::", "usage"}], "=", 
+   "\"\<CountryPlot3D[{{c1, v1},...}] produces a three-dimensional plot whith \
+raised countries\nCountryPlot3D[property] plots the CountryData property for \
+all countries\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"CountryPlot", "::", "usage"}], "=", 
+  "\"\<CountryPlot[{{c1,v1},...} produces a plot of the countries \
+ci\>\""}]}], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"76e7f50c-da25-47b6-aa45-97f3b2a7c309"],
+
+Cell[CellGroupData[{
+
+Cell["Private context", \
+"Section",ExpressionUUID->"ae491263-2d3e-4c10-be9d-618ca650f5ef"],
+
+Cell[BoxData[{
+ RowBox[{"Begin", "[", "\"\<`Private`\>\"", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Unprotect", "[", "raisePolygonEdge", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"ClearAll", "[", 
+  RowBox[{"raisePolygonEdge", ",", "expandCountries", ",", "getRange"}], 
+  "]"}]}], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"8206e102-73f1-4c68-9b11-81669eee6a2c"],
+
+Cell[CellGroupData[{
+
+Cell["raisePolygonEdge", \
+"Subsection",ExpressionUUID->"f76ab65b-7234-47ac-b6fd-0c1d8277aece"],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"raisePolygonEdge", "::", "usage"}], "=", 
+     "\"\<raisePolygonEdge[polygon, height] Create a thick polygon\>\""}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Options", "[", "raisePolygonEdge", "]"}], "=", 
+     RowBox[{"{", 
+      RowBox[{"\"\<EdgeStyle\>\"", "\[Rule]", 
+       RowBox[{"Unevaluated", "[", 
+        RowBox[{"Sequence", "[", "]"}], "]"}]}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"raisePolygonEdge", "[", 
+      RowBox[{"p_Polygon", ",", 
+       RowBox[{"h_", "?", "NumericQ"}], ",", 
+       RowBox[{"OptionsPattern", "[", "]"}]}], "]"}], ":=", 
+     RowBox[{"Block", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"data", "=", 
+          RowBox[{"p", "[", 
+           RowBox[{"[", "1", "]"}], "]"}]}], ",", "pts"}], "}"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Depth", "[", "data", "]"}], "\[Equal]", "3"}], ",", 
+          RowBox[{"data", "=", 
+           RowBox[{"{", "data", "}"}]}]}], "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"pts", "=", 
+         RowBox[{"Flatten", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"Partition", "[", 
+              RowBox[{"#", ",", "2", ",", "1"}], "]"}], "&"}], "/@", "data"}],
+            ",", "1"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"{", "\[IndentingNewLine]", 
+         RowBox[{"(*", " ", "Sides", " ", "*)"}], "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"OptionValue", "[", "\"\<EdgeStyle\>\"", "]"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"Polygon", "[", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"{", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"#", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"1", ",", "1"}], "]"}], "]"}], ",", 
+                   RowBox[{"#", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"1", ",", "2"}], "]"}], "]"}], ",", "0"}], "}"}], 
+                 ",", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"#", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"1", ",", "1"}], "]"}], "]"}], ",", 
+                   RowBox[{"#", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"1", ",", "2"}], "]"}], "]"}], ",", "h"}], "}"}], 
+                 ",", "\[IndentingNewLine]", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"#", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"2", ",", "1"}], "]"}], "]"}], ",", 
+                   RowBox[{"#", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"2", ",", "2"}], "]"}], "]"}], ",", "h"}], "}"}], 
+                 ",", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"#", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"2", ",", "1"}], "]"}], "]"}], ",", 
+                   RowBox[{"#", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"2", ",", "2"}], "]"}], "]"}], ",", "0"}], 
+                  "}"}]}], "\[IndentingNewLine]", "}"}], "&"}], "/@", "pts"}],
+              "\[IndentingNewLine]", "]"}]}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"(*", " ", "roof", " ", "*)"}], "\[IndentingNewLine]", 
+          RowBox[{"Polygon", "[", 
+           RowBox[{"data", "/.", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"a_", "?", "NumericQ"}], ",", 
+               RowBox[{"b_", "?", "NumericQ"}]}], "}"}], "\[RuleDelayed]", 
+             RowBox[{"{", 
+              RowBox[{"a", ",", "b", ",", "h"}], "}"}]}]}], "]"}]}], 
+         "\[IndentingNewLine]", "}"}]}]}], "\[IndentingNewLine]", "]"}]}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"raisePolygonEdge", "[", 
+     RowBox[{"p_List", ",", 
+      RowBox[{"h_", "?", "NumericQ"}], ",", 
+      RowBox[{"opts", ":", 
+       RowBox[{"OptionsPattern", "[", "]"}]}]}], "]"}], ":=", 
+    RowBox[{"p", "/.", 
+     RowBox[{"{", 
+      RowBox[{"poly_Polygon", "\[RuleDelayed]", 
+       RowBox[{"raisePolygonEdge", "[", 
+        RowBox[{"poly", ",", "h", ",", "opts"}], "]"}]}], 
+      "}"}]}]}]}]}]], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"e32c1328-0253-45ad-9b98-e01f8f4bd392"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["expandCountries", \
+"Subsection",ExpressionUUID->"6e9620ea-ccda-4eeb-a70b-1eac3038dd1d"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"Expands", " ", "\"\<Europe\>\"", " ", "etc"}], " ", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"expandCountries", "[", 
+    RowBox[{"c", ":", 
+     RowBox[{"{", 
+      RowBox[{"_String", "..."}], "}"}]}], "]"}], ":=", 
+   RowBox[{"Cases", "[", 
+    RowBox[{
+     RowBox[{"Flatten", "[", 
+      RowBox[{"CountryData", "/@", "c"}], "]"}], ",", "_String"}], 
+    "]"}]}]}]], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"0075cfc3-92bf-4870-889e-989f93e9b8ba"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["getRange", \
+"Subsection",ExpressionUUID->"e0691bd6-3998-4ab5-9dd1-fef01894d874"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"getRange", "[", 
+   RowBox[{"data_", "?", "MatrixQ"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"{", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"Min", "[", "#", "]"}], ",", 
+      RowBox[{"Max", "[", "#", "]"}]}], "}"}], "&"}], "/@", 
+   RowBox[{"(", 
+    RowBox[{"data", "\[Transpose]"}], ")"}]}]}]], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"025adfaf-c77f-4ff6-ac9f-91da9e80cf97"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["iCountryPlot", \
+"Subsection",ExpressionUUID->"8053593b-2ade-4161-8598-a8a49136a3ac"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"Does", " ", "all", " ", "the", " ", "work"}], ",", " ", 
+    RowBox[{"used", " ", "by", " ", "CountryPlot", 
+     RowBox[{"(", 
+      RowBox[{"3", "D"}], ")"}], " ", "functions"}]}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"ClearAll", "[", "iCountryPlot", "]"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Options", "[", "iCountryPlot", "]"}], "=", 
+     RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+        RowBox[{
+        "ColorFunction", " ", "gets", " ", "arguments", " ", "height"}], ",", 
+        " ", "country", ",", 
+        RowBox[{"True", "|", 
+         RowBox[{
+         "False", " ", "depending", " ", "on", " ", "if", " ", "the", " ", 
+          "country", " ", "was", " ", "in", " ", "the", " ", "given", " ", 
+          "set", " ", "or", " ", 
+          RowBox[{"not", ".", "\[IndentingNewLine]", "It"}], " ", "may", " ", 
+          "return", " ", "any", " ", "graphics", " ", "object"}]}]}], " ", 
+       "*)"}], "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ColorFunction", "\[Rule]", "Automatic"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"ColorFunctionScaling", "\[Rule]", "True"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"\"\<ExtraCountries\>\"", "\[Rule]", "None"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+         RowBox[{"ScaleHeight", "\[Rule]", 
+          RowBox[{
+          "h", " ", "scales", " ", "the", " ", "height", " ", "values", " ", 
+           "to", " ", "lie", " ", "between", " ", "0", " ", "and", " ", 
+           "h"}]}], ",", "\[IndentingNewLine]", 
+         RowBox[{"no", " ", "scaling", " ", "if", " ", "False"}]}], " ", 
+        "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"\"\<ScaleHeight\>\"", "\[Rule]", 
+        RowBox[{"Scaled", "[", "0.1", "]"}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{"\"\<ExtraHeight\>\"", "\[Rule]", "0"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+       "\"\<CartographicProperty\>\"", "\[Rule]", 
+        "\"\<SchematicPolygon\>\""}]}], "\[IndentingNewLine]", "}"}]}], ";"}],
+    "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"iCountryPlot", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"data", ":", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"_String", ",", 
+           RowBox[{"_", "?", "NumericQ"}]}], "}"}], ".."}], "}"}]}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"opts", ":", 
+       RowBox[{"OptionsPattern", "[", "]"}]}]}], "]"}], ":=", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Block", "[", 
+     RowBox[{
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{"scaledCountries", ",", "\[IndentingNewLine]", 
+        RowBox[{"colorFunction", "=", 
+         RowBox[{"OptionValue", "[", "ColorFunction", "]"}]}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"extraopt", "=", 
+         RowBox[{"OptionValue", "[", "\"\<ExtraCountries\>\"", "]"}]}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"scaleHeight", "=", 
+         RowBox[{"OptionValue", "[", "\"\<ScaleHeight\>\"", "]"}]}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"extraHeight", "=", 
+         RowBox[{"OptionValue", "[", "\"\<ExtraHeight\>\"", "]"}]}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"polyType", "=", 
+         RowBox[{"OptionValue", "[", "\"\<CartographicProperty\>\"", "]"}]}], 
+        ",", "\[IndentingNewLine]", "countries", ",", 
+        RowBox[{"extra", "=", 
+         RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", "flatPolys", ",", 
+        "polys", ",", "\[IndentingNewLine]", "styles", ",", 
+        "\[IndentingNewLine]", "maxHeight", ",", "\[IndentingNewLine]", "x", 
+        ",", "y"}], "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"c1", ",", "h1", ",", "True"}], "}"}], ",", " ", "..."}], 
+        " ", "}"}], " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"countries", "=", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"PadRight", "[", 
+           RowBox[{"#", ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Length", "@", "#"}], ",", "3"}], "}"}], ",", "True"}], 
+           "]"}], "&"}], "@", "data"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"maxHeight", "=", 
+        RowBox[{"Max", "[", 
+         RowBox[{"countries", "[", 
+          RowBox[{"[", 
+           RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"scaledCountries", "=", "countries"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"scaledCountries", "[", 
+         RowBox[{"[", 
+          RowBox[{"All", ",", "2"}], "]"}], "]"}], "=", 
+        RowBox[{"Most", "@", 
+         RowBox[{"Rescale", "[", 
+          RowBox[{"Append", "[", 
+           RowBox[{
+            RowBox[{"scaledCountries", "[", 
+             RowBox[{"[", 
+              RowBox[{"All", ",", "2"}], "]"}], "]"}], ",", "0"}], "]"}], 
+          "]"}]}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"extra", "=", 
+        RowBox[{"Switch", "[", "\[IndentingNewLine]", 
+         RowBox[{"extraopt", ",", "\[IndentingNewLine]", "All", ",", 
+          RowBox[{"CountryData", "[", "]"}], ",", "\[IndentingNewLine]", 
+          "_String", ",", 
+          RowBox[{"{", "extraopt", "}"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{"_String", ".."}], "}"}], ",", "extraopt", ",", 
+          "\[IndentingNewLine]", "_", ",", 
+          RowBox[{"{", "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Length", "[", "extra", "]"}], ">", "0"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"With", "[", 
+          RowBox[{
+           RowBox[{"{", "\[IndentingNewLine]", 
+            RowBox[{"missing", "=", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"If", "[", 
+                RowBox[{
+                 RowBox[{"#", "\[NotEqual]", 
+                  RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", 
+                 RowBox[{"PadRight", "[", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"{", "#", "}"}], "\[Transpose]"}], ",", 
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"Length", "@", "#"}], ",", "3"}], "}"}], ",", 
+                   RowBox[{"{", 
+                    RowBox[{"False", ",", "extraHeight"}], "}"}]}], "]"}], 
+                 ",", "\[IndentingNewLine]", 
+                 RowBox[{"{", "}"}]}], "\[IndentingNewLine]", "]"}], "&"}], 
+              "@", 
+              RowBox[{"Complement", "[", "\[IndentingNewLine]", 
+               RowBox[{
+                RowBox[{"expandCountries", "@", "extra"}], ",", 
+                "\[IndentingNewLine]", 
+                RowBox[{"expandCountries", "@", 
+                 RowBox[{"countries", "[", 
+                  RowBox[{"[", 
+                   RowBox[{"All", ",", "1"}], "]"}], "]"}]}]}], 
+               "\[IndentingNewLine]", "]"}]}]}], "}"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"countries", "=", 
+             RowBox[{"Join", "[", 
+              RowBox[{"countries", ",", "missing"}], "]"}]}], ";", 
+            "\[IndentingNewLine]", 
+            RowBox[{"scaledCountries", "=", 
+             RowBox[{"Join", "[", 
+              RowBox[{"scaledCountries", ",", "missing"}], "]"}]}]}]}], 
+          "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}], ";", 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"colorFunction", "=", "\[IndentingNewLine]", 
+        RowBox[{"Switch", "[", "\[IndentingNewLine]", 
+         RowBox[{
+         "colorFunction", ",", "\[IndentingNewLine]", "Automatic", ",", 
+          RowBox[{
+           RowBox[{"If", "[", 
+            RowBox[{"#3", ",", 
+             RowBox[{
+              RowBox[{"ColorData", "[", "\"\<ThermometerColors\>\"", "]"}], 
+              "[", "#1", "]"}], ",", "Gray"}], "]"}], "&"}], ",", 
+          "\[IndentingNewLine]", "_String", ",", "\[IndentingNewLine]", 
+          RowBox[{"With", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"colorFunction", "=", "colorFunction"}], "}"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"ColorData", "[", "colorFunction", "]"}], "[", "#1", 
+              "]"}], "&"}]}], "]"}], ",", "\[IndentingNewLine]", "_", ",", 
+          "colorFunction"}], "\[IndentingNewLine]", "]"}]}], ";", 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"styles", "=", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"OptionValue", "[", "ColorFunctionScaling", "]"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"colorFunction", "[", 
+             RowBox[{
+              FractionBox["#1", "maxHeight"], ",", "#2", ",", "#3"}], "]"}], 
+            "&"}], ",", "\[IndentingNewLine]", "colorFunction"}], "]"}], "@@@", 
+         RowBox[{"countries", "[", 
+          RowBox[{"[", 
+           RowBox[{"All", ",", 
+            RowBox[{"{", 
+             RowBox[{"2", ",", "1", ",", "3"}], "}"}]}], "]"}], "]"}]}]}], 
+       ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"flatPolys", "=", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"CountryData", "[", 
+           RowBox[{"#1", ",", "polyType"}], "]"}], "&"}], "@@@", 
+         "countries"}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"scaleHeight", "=", 
+        RowBox[{"Switch", "[", "\[IndentingNewLine]", 
+         RowBox[{"scaleHeight", ",", "\[IndentingNewLine]", 
+          RowBox[{"(*", " ", 
+           RowBox[{
+           "portion", " ", "of", " ", "maximum", " ", "side", " ", "length"}],
+            " ", "*)"}], "\[IndentingNewLine]", 
+          RowBox[{"Scaled", "[", 
+           RowBox[{"_", "?", "NumericQ"}], "]"}], ",", 
+          RowBox[{
+           FractionBox[
+            RowBox[{"scaleHeight", "[", 
+             RowBox[{"[", "1", "]"}], "]"}], "maxHeight"], " ", 
+           RowBox[{"Max", "[", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"#2", "-", "#1"}], "&"}], "@@@", 
+             RowBox[{"getRange", "@", 
+              RowBox[{"Cases", "[", "\[IndentingNewLine]", 
+               RowBox[{"flatPolys", ",", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"x_", "?", "NumericQ"}], ",", 
+                   RowBox[{"y_", "?", "NumericQ"}]}], "}"}], "\[RuleDelayed]", 
+                 RowBox[{"{", 
+                  RowBox[{"x", ",", "y"}], "}"}]}], ",", 
+                "\[IndentingNewLine]", "Infinity"}], "]"}]}]}], 
+            "\[IndentingNewLine]", "]"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"_", "?", "NumericQ"}], ",", "scaleHeight", ",", 
+          "\[IndentingNewLine]", "_", ",", "1"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"\"\<Polygons\>\"", "\[Rule]", "flatPolys"}], ",", " ", 
+         RowBox[{"\"\<Styles\>\"", "\[Rule]", "styles"}], ",", 
+         RowBox[{"\"\<Heights\>\"", "->", 
+          RowBox[{"scaleHeight", " ", 
+           RowBox[{"countries", "[", 
+            RowBox[{"[", 
+             RowBox[{"All", ",", "2"}], "]"}], "]"}]}]}]}], "}"}]}]}], 
+     "\[IndentingNewLine]", "\[IndentingNewLine]", "]"}]}], 
+   "\[IndentingNewLine]"}]}]], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"927c31e7-c355-4013-91ae-7a9ee038b61e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["CountryPlot", \
+"Subsection",ExpressionUUID->"5f112f85-7619-4a94-9944-6b41ef2d7a98"],
+
+Cell[BoxData[{
+ RowBox[{"ClearAll", "[", "CountryPlot", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Options", "[", "CountryPlot", "]"}], "=", 
+    RowBox[{"Join", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"Options", "[", "iCountryPlot", "]"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"Options", "[", "Graphics", "]"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"CountryPlot", "[", 
+   RowBox[{
+    RowBox[{"dat", ":", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"_String", ",", 
+         RowBox[{"_", "?", "NumericQ"}]}], "}"}], ".."}], "}"}]}], ",", 
+    RowBox[{"opts", ":", 
+     RowBox[{"OptionsPattern", "[", "]"}]}]}], "]"}], ":=", 
+  "\[IndentingNewLine]", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", "\[IndentingNewLine]", 
+     RowBox[{"poly", ",", "style"}], "\[IndentingNewLine]", "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"poly", ",", "style"}], "}"}], "=", 
+      RowBox[{
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{"\"\<Polygons\>\"", ",", "\"\<Styles\>\""}], 
+        "\[IndentingNewLine]", "}"}], "/.", 
+       RowBox[{"iCountryPlot", "[", "\[IndentingNewLine]", 
+        RowBox[{"dat", ",", "\[IndentingNewLine]", 
+         RowBox[{"FilterRules", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"opts", ",", 
+             RowBox[{"Options", "[", "CountryPlot", "]"}]}], "}"}], ",", 
+           RowBox[{"Options", "[", "iCountryPlot", "]"}]}], "]"}]}], 
+        "\[IndentingNewLine]", "]"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Graphics", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"style", ",", "poly"}], "}"}], "\[Transpose]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"FilterRules", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"opts", ",", 
+           RowBox[{"Options", "[", "CountryPlot", "]"}]}], "}"}], ",", 
+         RowBox[{"Options", "[", "Graphics", "]"}]}], "]"}]}], 
+      "\[IndentingNewLine]", "]"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}]}], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"32734b66-bfc6-4bd9-8ce3-1caa97453e8e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["CountryPlot3D", \
+"Subsection",ExpressionUUID->"7f9ad4ec-05d4-435d-85ab-5914d7648089"],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"ClearAll", "[", "CountryPlot3D", "]"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Options", "[", "CountryPlot3D", "]"}], "=", 
+     RowBox[{"Join", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Options", "[", "iCountryPlot", "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"Boxed", "\[Rule]", "False"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"\"\<Lighting\>\"", "\[Rule]", "\"\<Neutral\>\""}]}], 
+        "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"Options", "[", "Graphics3D", "]"}]}], "\[IndentingNewLine]", 
+      "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"CountryPlot3D", "[", 
+      RowBox[{
+       RowBox[{"dat", ":", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"_String", ",", 
+            RowBox[{"_", "?", "NumericQ"}]}], "}"}], ".."}], "}"}]}], ",", 
+       RowBox[{"opts", ":", 
+        RowBox[{"OptionsPattern", "[", "]"}]}]}], "]"}], ":=", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Block", "[", 
+      RowBox[{
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{"poly", ",", "style", ",", "height"}], "\[IndentingNewLine]", 
+        "}"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"poly", ",", "style", ",", "height"}], "}"}], "=", 
+         RowBox[{
+          RowBox[{"{", "\[IndentingNewLine]", 
+           RowBox[{
+           "\"\<Polygons\>\"", ",", "\"\<Styles\>\"", ",", 
+            "\"\<Heights\>\""}], "\[IndentingNewLine]", "}"}], "/.", 
+          RowBox[{"iCountryPlot", "[", "\[IndentingNewLine]", 
+           RowBox[{"dat", ",", "\[IndentingNewLine]", 
+            RowBox[{"FilterRules", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"opts", ",", 
+                RowBox[{"Options", "[", "CountryPlot3D", "]"}]}], "}"}], ",", 
+              RowBox[{"Options", "[", "iCountryPlot", "]"}]}], "]"}]}], 
+           "\[IndentingNewLine]", "]"}]}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"poly", "=", 
+         RowBox[{"raisePolygonEdge", "@@@", 
+          RowBox[{"Transpose", "[", 
+           RowBox[{"{", 
+            RowBox[{"poly", ",", "height"}], "}"}], "]"}]}]}], ";", 
+        "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"Graphics3D", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"style", ",", "poly"}], "}"}], "\[Transpose]"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"FilterRules", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"opts", ",", 
+              RowBox[{"Options", "[", "CountryPlot3D", "]"}]}], "}"}], ",", 
+            RowBox[{"Options", "[", "Graphics3D", "]"}]}], "]"}]}], "]"}]}]}],
+       "\[IndentingNewLine]", "\[IndentingNewLine]", "]"}]}], ";"}], 
+   "\[IndentingNewLine]"}]}]], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"6b8e131a-7706-4663-8a05-c078bb8fa789"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Convenience calls", \
+"Subsection",ExpressionUUID->"97115bd3-032a-492a-83a9-8f1f43333209"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"Inject", " ", "the", " ", "countryplot", " ", "functions"}], " ", 
+   "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"With", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"fn", "=", "#"}], "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+       "Plot", " ", "a", " ", "property", " ", "for", " ", "whole", " ", 
+        "world"}], " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"fn", "[", 
+         RowBox[{"prop_String", ",", 
+          RowBox[{"opts", ":", 
+           RowBox[{"OptionsPattern", "[", "]"}]}]}], "]"}], ":=", 
+        "\[IndentingNewLine]", 
+        RowBox[{"fn", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"Cases", "[", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"#", ",", 
+                RowBox[{"CountryData", "[", 
+                 RowBox[{"#", ",", "prop"}], "]"}]}], "}"}], "&"}], "/@", 
+             RowBox[{"CountryData", "[", "]"}]}], ",", "\[IndentingNewLine]", 
+            RowBox[{"{", 
+             RowBox[{"_", ",", 
+              RowBox[{"_", "?", "NumericQ"}]}], "}"}], ",", "1"}], "]"}], ",",
+           "\[IndentingNewLine]", 
+          RowBox[{"FilterRules", "[", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"opts", ",", 
+              RowBox[{"{", 
+               RowBox[{"\"\<ExtraCountries\>\"", "\[Rule]", "All"}], "}"}], 
+              ",", 
+              RowBox[{"Options", "[", "fn", "]"}]}], "}"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"Options", "[", "fn", "]"}]}], "]"}]}], 
+         "\[IndentingNewLine]", "]"}]}], ";", "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{"For", " ", "just", " ", "some", " ", "countries"}], " ", 
+        "*)"}], "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"fn", "[", 
+         RowBox[{
+          RowBox[{"countries", ":", 
+           RowBox[{"{", 
+            RowBox[{"_String", ".."}], "}"}]}], ",", "prop_String", ",", 
+          RowBox[{"opts", ":", 
+           RowBox[{"OptionsPattern", "[", "]"}]}]}], "]"}], ":=", 
+        "\[IndentingNewLine]", 
+        RowBox[{"fn", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"Cases", "[", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"#", ",", 
+                RowBox[{"CountryData", "[", 
+                 RowBox[{"#", ",", "prop"}], "]"}]}], "}"}], "&"}], "/@", 
+             RowBox[{"expandCountries", "[", "countries", "]"}]}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"{", 
+             RowBox[{"_", ",", 
+              RowBox[{"_", "?", "NumericQ"}]}], "}"}], ",", "1"}], "]"}], ",",
+           "\[IndentingNewLine]", 
+          RowBox[{"FilterRules", "[", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"opts", ",", 
+              RowBox[{"{", 
+               RowBox[{"\"\<ExtraCountries\>\"", "\[Rule]", "countries"}], 
+               "}"}], ",", 
+              RowBox[{"Options", "[", "fn", "]"}]}], "}"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"Options", "[", "fn", "]"}]}], "]"}]}], 
+         "\[IndentingNewLine]", "]"}]}], ";"}]}], "\[IndentingNewLine]", 
+     "]"}], "&"}], "/@", 
+   RowBox[{"{", 
+    RowBox[{"CountryPlot3D", ",", "CountryPlot"}], "}"}]}]}]], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"5b4da726-1f87-422c-b1ae-a3a8a796335a"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Protect", \
+"Section",ExpressionUUID->"2f53d457-75dc-4166-89c5-e5dc70a9d29e"],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Protect", "[", "raisePolygonEdge", "]"}], "\[IndentingNewLine]", 
+   RowBox[{"End", "[", "]"}], "\[IndentingNewLine]", 
+   RowBox[{"Protect", "[", "CountryPlot3D", "]"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"EndPackage", "[", "]"}]}]}]], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"651a5362-493b-43f8-bc9b-7a875db3f30d"]
+}, Open  ]]
+},
+AutoGeneratedPackage->Automatic,
+WindowSize->{740, 596},
+WindowMargins->{{Automatic, 512}, {Automatic, 126}},
+PrivateNotebookOptions->{"FileOutlineCache"->False,
+"VersionedStylesheet"->{"Default.nb"[8.] -> False}},
+ShowSelection->True,
+TrackCellChangeTimes->False,
+FrontEndVersion->"11.2 for Microsoft Windows (64-bit) (2017\:5e7410\:67082\
+\:65e5)",
+StyleDefinitions->"Default.nb"
+]
+

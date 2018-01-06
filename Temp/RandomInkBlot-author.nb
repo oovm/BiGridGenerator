@@ -1,0 +1,1104 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     44911,       1095]
+NotebookOptionsPosition[     40799,        966]
+NotebookOutlinePosition[     42438,       1017]
+CellTagsIndexPosition[     42118,       1005]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Random Ink Blot", "DemoTitle",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.489334512997306*^9, 3.4893345164346523`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["", "InitializationSection"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"RandomInkBlot", "[", 
+   RowBox[{"mu_", ",", "sigma_", ",", "seed_", ",", "resolution_"}], "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"pStart", "=", 
+       RowBox[{"Range", "[", 
+        RowBox[{"0", ",", "1", ",", 
+         RowBox[{"1", "/", "resolution"}]}], "]"}]}], ",", "pX", ",", "pY"}], 
+     "}"}], ",", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"BlockRandom", "[", 
+      RowBox[{
+       RowBox[{"SeedRandom", "[", "seed", "]"}], ";", 
+       RowBox[{"pX", "=", 
+        RowBox[{"FoldList", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"#1", "+", 
+             RowBox[{"RandomReal", "[", 
+              RowBox[{"NormalDistribution", "[", 
+               RowBox[{
+                RowBox[{"mu", "[", 
+                 RowBox[{"[", "1", "]"}], "]"}], ",", 
+                RowBox[{"sigma", "[", 
+                 RowBox[{"[", "1", "]"}], "]"}]}], "]"}], "]"}]}], ")"}], 
+           "&"}], ",", "0", ",", 
+          RowBox[{"Rest", "@", "pStart"}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"pY", "=", 
+        RowBox[{"FoldList", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"#1", "+", 
+             RowBox[{"RandomReal", "[", 
+              RowBox[{"NormalDistribution", "[", 
+               RowBox[{
+                RowBox[{"mu", "[", 
+                 RowBox[{"[", "2", "]"}], "]"}], ",", 
+                RowBox[{"sigma", "[", 
+                 RowBox[{"[", "2", "]"}], "]"}]}], "]"}], "]"}]}], ")"}], 
+           "&"}], ",", "0", ",", 
+          RowBox[{"Rest", "@", "pX"}]}], "]"}]}], ";"}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Graphics", "[", 
+      RowBox[{
+       RowBox[{"Polygon", "[", 
+        RowBox[{"Join", "[", 
+         RowBox[{
+          RowBox[{"Transpose", "[", 
+           RowBox[{"{", 
+            RowBox[{"pX", ",", "pY"}], "}"}], "]"}], ",", 
+          RowBox[{"Reverse", "@", 
+           RowBox[{"Transpose", "[", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"-", "pX"}], ",", "pY"}], "}"}], "]"}]}]}], "]"}], 
+        "]"}], ",", 
+       RowBox[{"AspectRatio", "\[Rule]", "1"}], ",", 
+       RowBox[{"ImageSize", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"400", ",", "400"}], "}"}]}]}], "]"}]}]}], "]"}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.489335739536105*^9, 3.489335766644265*^9}, {
+   3.4893368773114758`*^9, 3.489336877467737*^9}, {3.4893375521993637`*^9, 
+   3.4893376388215923`*^9}, {3.489337685913835*^9, 3.4893377025539274`*^9}, {
+   3.489337822049361*^9, 3.489337824580514*^9}, {3.489337867985097*^9, 
+   3.4893378720786896`*^9}, {3.4893379839806423`*^9, 3.489338065790001*^9}, {
+   3.4893381637706137`*^9, 3.4893381706609735`*^9}, {3.489339800919598*^9, 
+   3.4893398402075267`*^9}},
+ CellID->946665775]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"RandomInkBlot", "[", 
+    RowBox[{"\[Mu]", ",", "\[Sigma]", ",", "seed", ",", "vertices"}], "]"}], 
+   ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"vertices", ",", "350"}], "}"}], ",", "5", ",", "2500", ",", 
+     "1", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"seed", ",", "164", ",", "\"\<random seed\>\""}], "}"}], ",", 
+     RowBox[{"-", "1000"}], ",", "1000", ",", "1", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\[Mu]", ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", ".5"}], ",", "0"}], "}"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "1"}], ",", 
+       RowBox[{"-", "1"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "1"}], "}"}], ",", "Slider2D", ",", 
+     RowBox[{"ControlPlacement", "\[Rule]", "Left"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\[Sigma]", ",", 
+       RowBox[{"{", 
+        RowBox[{"5", ",", "5"}], "}"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{".01", ",", ".01"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"100", ",", "100"}], "}"}], ",", "Slider2D", ",", 
+     RowBox[{"ControlPlacement", "\[Rule]", "Left"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"SaveDefinitions", "\[Rule]", "True"}]}], "]"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, 3.489334543042835*^9, {3.489335049207658*^9, 
+   3.4893350787219605`*^9}, {3.48933512504801*^9, 3.4893351292353225`*^9}, 
+   3.4893352079349213`*^9, {3.4893352516829615`*^9, 3.489335605635854*^9}, {
+   3.4893356471964917`*^9, 3.4893357095843215`*^9}, {3.4893357746751556`*^9, 
+   3.4893359593700056`*^9}, {3.489336002508698*^9, 3.489336008758418*^9}, {
+   3.489336124581354*^9, 3.4893361502208304`*^9}, {3.48933627251213*^9, 
+   3.4893363267634735`*^9}, {3.4893363796229553`*^9, 3.48933638168729*^9}, {
+   3.489336417781872*^9, 3.4893364234118757`*^9}, {3.489336473612745*^9, 
+   3.4893364751609955`*^9}, {3.4893365274132843`*^9, 
+   3.4893365979179583`*^9}, {3.4893366349286146`*^9, 3.489336784393523*^9}, {
+   3.4893368497312326`*^9, 3.489336864919899*^9}, {3.489336906829367*^9, 
+   3.489336952348488*^9}, {3.4893369926640835`*^9, 3.4893369932735057`*^9}, {
+   3.489337039448927*^9, 3.489337129125916*^9}, {3.489337207891541*^9, 
+   3.489337276735291*^9}, {3.489337393063416*^9, 3.4893374065477753`*^9}, {
+   3.4893377089443293`*^9, 3.489337808065523*^9}, {3.4893381561927795`*^9, 
+   3.489338234736638*^9}, {3.4893386182356105`*^9, 3.489338635001128*^9}, {
+   3.4893398155560617`*^9, 3.4893399290364084`*^9}, {3.4899249496547365`*^9, 
+   3.489924970335805*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`seed$$ = 164, $CellContext`vertices$$ = 
+    350, $CellContext`\[Mu]$$ = {-0.5, 0}, $CellContext`\[Sigma]$$ = {5, 5}, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`vertices$$], 350}, 5, 2500, 1}, {{
+       Hold[$CellContext`seed$$], 164, "random seed"}, -1000, 1000, 1}, {{
+       Hold[$CellContext`\[Mu]$$], {-0.5, 0}}, {-1, -1}, {1, 1}}, {{
+       Hold[$CellContext`\[Sigma]$$], {5, 5}}, {0.01, 0.01}, {100, 100}}}, 
+    Typeset`size$$ = {400., {198., 202.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`vertices$8972$$ = 0, $CellContext`seed$8973$$ = 
+    0, $CellContext`\[Mu]$8974$$ = {0, 0}, $CellContext`\[Sigma]$8975$$ = {0, 
+    0}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`seed$$ = 164, $CellContext`vertices$$ = 
+        350, $CellContext`\[Mu]$$ = {-0.5, 0}, $CellContext`\[Sigma]$$ = {5, 
+         5}}, "ControllerVariables" :> {
+        Hold[$CellContext`vertices$$, $CellContext`vertices$8972$$, 0], 
+        Hold[$CellContext`seed$$, $CellContext`seed$8973$$, 0], 
+        Hold[$CellContext`\[Mu]$$, $CellContext`\[Mu]$8974$$, {0, 0}], 
+        Hold[$CellContext`\[Sigma]$$, $CellContext`\[Sigma]$8975$$, {0, 0}]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> $CellContext`RandomInkBlot[$CellContext`\[Mu]$$, \
+$CellContext`\[Sigma]$$, $CellContext`seed$$, $CellContext`vertices$$], 
+      "Specifications" :> {{{$CellContext`vertices$$, 350}, 5, 2500, 1, 
+         Appearance -> 
+         "Labeled"}, {{$CellContext`seed$$, 164, "random seed"}, -1000, 1000, 
+         1, Appearance -> 
+         "Labeled"}, {{$CellContext`\[Mu]$$, {-0.5, 0}}, {-1, -1}, {1, 1}, 
+         ControlType -> Slider2D, ControlPlacement -> 
+         Left}, {{$CellContext`\[Sigma]$$, {5, 5}}, {0.01, 0.01}, {100, 100}, 
+         ControlType -> Slider2D, ControlPlacement -> Left}}, "Options" :> {},
+       "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{548., {258., 263.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`RandomInkBlot[
+         Pattern[$CellContext`mu, 
+          Blank[]], 
+         Pattern[$CellContext`sigma, 
+          Blank[]], 
+         Pattern[$CellContext`seed, 
+          Blank[]], 
+         Pattern[$CellContext`resolution, 
+          Blank[]]] := 
+       Block[{$CellContext`pStart = 
+          Range[0, 1, 
+            1/$CellContext`resolution], $CellContext`pX, $CellContext`pY}, 
+         BlockRandom[
+          SeedRandom[$CellContext`seed]; $CellContext`pX = 
+            FoldList[# + RandomReal[
+                NormalDistribution[
+                 Part[$CellContext`mu, 1], 
+                 Part[$CellContext`sigma, 1]]]& , 0, 
+              Rest[$CellContext`pStart]]; $CellContext`pY = 
+            FoldList[# + RandomReal[
+                NormalDistribution[
+                 Part[$CellContext`mu, 2], 
+                 Part[$CellContext`sigma, 2]]]& , 0, 
+              Rest[$CellContext`pX]]; Null]; Graphics[
+           Polygon[
+            Join[
+             Transpose[{$CellContext`pX, $CellContext`pY}], 
+             Reverse[
+              Transpose[{-$CellContext`pX, $CellContext`pY}]]]], AspectRatio -> 
+           1, ImageSize -> {400, 400}]]}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->216022784]
+}, {2}]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell[TextData[{
+ "Create fractal-like polygons inspired by the Rorschach test. The points in \
+the polygon are determined by a random walk process. A normal distribution is \
+used. You can control the mean and variance parameters ",
+ Cell[BoxData[
+  FormBox["\[Mu]", TraditionalForm]], "InlineMath"],
+ " and ",
+ Cell[BoxData[
+  FormBox["\[Sigma]", TraditionalForm]], "InlineMath"],
+ ". You can also set the seed used in the random number generator and the \
+number of vertices."
+}], "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.489338312052457*^9, 3.4893385978294907`*^9}, {
+   3.48933995815432*^9, 3.4893399716116657`*^9}, {3.4893512888224893`*^9, 
+   3.489351359057314*^9}, {3.489513755371634*^9, 3.489513782784286*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`seed$$ = 164, $CellContext`vertices$$ = 
+    599, $CellContext`\[Mu]$$ = {
+    0.15999999999999992`, -0.16000000000000003`}, $CellContext`\[Sigma]$$ = {
+    100., 100.}, Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`vertices$$], 599}, 5, 2500, 1}, {{
+       Hold[$CellContext`seed$$], 164, "random seed"}, -1000, 1000, 1}, {{
+       Hold[$CellContext`\[Mu]$$], {
+       0.15999999999999992`, -0.16000000000000003`}}, {-1, -1}, {1, 1}}, {{
+       Hold[$CellContext`\[Sigma]$$], {100., 100.}}, {0.01, 0.01}, {100, 
+      100}}}, Typeset`size$$ = {400., {198., 202.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`vertices$9042$$ = 0, $CellContext`seed$9043$$ = 
+    0, $CellContext`\[Mu]$9044$$ = {0, 0}, $CellContext`\[Sigma]$9045$$ = {0, 
+    0}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`seed$$ = 164, $CellContext`vertices$$ = 
+        599, $CellContext`\[Mu]$$ = {
+         0.15999999999999992`, -0.16000000000000003`}, \
+$CellContext`\[Sigma]$$ = {100., 100.}}, "ControllerVariables" :> {
+        Hold[$CellContext`vertices$$, $CellContext`vertices$9042$$, 0], 
+        Hold[$CellContext`seed$$, $CellContext`seed$9043$$, 0], 
+        Hold[$CellContext`\[Mu]$$, $CellContext`\[Mu]$9044$$, {0, 0}], 
+        Hold[$CellContext`\[Sigma]$$, $CellContext`\[Sigma]$9045$$, {0, 0}]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> $CellContext`RandomInkBlot[$CellContext`\[Mu]$$, \
+$CellContext`\[Sigma]$$, $CellContext`seed$$, $CellContext`vertices$$], 
+      "Specifications" :> {{{$CellContext`vertices$$, 599}, 5, 2500, 1, 
+         Appearance -> 
+         "Labeled"}, {{$CellContext`seed$$, 164, "random seed"}, -1000, 1000, 
+         1, Appearance -> 
+         "Labeled"}, {{$CellContext`\[Mu]$$, {
+          0.15999999999999992`, -0.16000000000000003`}}, {-1, -1}, {1, 1}, 
+         ControlType -> Slider2D, ControlPlacement -> 
+         Left}, {{$CellContext`\[Sigma]$$, {100., 100.}}, {0.01, 0.01}, {100, 
+         100}, ControlType -> Slider2D, ControlPlacement -> Left}}, 
+      "Options" :> {}, "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{548., {258., 263.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`RandomInkBlot[
+         Pattern[$CellContext`mu, 
+          Blank[]], 
+         Pattern[$CellContext`sigma, 
+          Blank[]], 
+         Pattern[$CellContext`seed, 
+          Blank[]], 
+         Pattern[$CellContext`resolution, 
+          Blank[]]] := 
+       Block[{$CellContext`pStart = 
+          Range[0, 1, 
+            1/$CellContext`resolution], $CellContext`pX, $CellContext`pY}, 
+         BlockRandom[
+          SeedRandom[$CellContext`seed]; $CellContext`pX = 
+            FoldList[# + RandomReal[
+                NormalDistribution[
+                 Part[$CellContext`mu, 1], 
+                 Part[$CellContext`sigma, 1]]]& , 0, 
+              Rest[$CellContext`pStart]]; $CellContext`pY = 
+            FoldList[# + RandomReal[
+                NormalDistribution[
+                 Part[$CellContext`mu, 2], 
+                 Part[$CellContext`sigma, 2]]]& , 0, 
+              Rest[$CellContext`pX]]; Null]; Graphics[
+           Polygon[
+            Join[
+             Transpose[{$CellContext`pX, $CellContext`pY}], 
+             Reverse[
+              Transpose[{-$CellContext`pX, $CellContext`pY}]]]], AspectRatio -> 
+           1, ImageSize -> {400, 400}]]}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->204700880]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`seed$$ = -714, $CellContext`vertices$$ = 
+    5, $CellContext`\[Mu]$$ = {-1, 
+     0.15999999999999992`}, $CellContext`\[Sigma]$$ = {5.5, 45.}, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`vertices$$], 5}, 5, 2500, 1}, {{
+       Hold[$CellContext`seed$$], -714, "random seed"}, -1000, 1000, 1}, {{
+       Hold[$CellContext`\[Mu]$$], {-1, 0.15999999999999992`}}, {-1, -1}, {1, 
+      1}}, {{
+       Hold[$CellContext`\[Sigma]$$], {5.5, 45.}}, {0.01, 0.01}, {100, 100}}},
+     Typeset`size$$ = Automatic, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`vertices$9112$$ = 
+    0, $CellContext`seed$9113$$ = 0, $CellContext`\[Mu]$9114$$ = {0, 
+    0}, $CellContext`\[Sigma]$9115$$ = {0, 0}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`seed$$ = -714, $CellContext`vertices$$ = 
+        5, $CellContext`\[Mu]$$ = {-1, 
+          0.15999999999999992`}, $CellContext`\[Sigma]$$ = {5.5, 45.}}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`vertices$$, $CellContext`vertices$9112$$, 0], 
+        Hold[$CellContext`seed$$, $CellContext`seed$9113$$, 0], 
+        Hold[$CellContext`\[Mu]$$, $CellContext`\[Mu]$9114$$, {0, 0}], 
+        Hold[$CellContext`\[Sigma]$$, $CellContext`\[Sigma]$9115$$, {0, 0}]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> $CellContext`RandomInkBlot[$CellContext`\[Mu]$$, \
+$CellContext`\[Sigma]$$, $CellContext`seed$$, $CellContext`vertices$$], 
+      "Specifications" :> {{{$CellContext`vertices$$, 5}, 5, 2500, 1, 
+         Appearance -> 
+         "Labeled"}, {{$CellContext`seed$$, -714, "random seed"}, -1000, 1000,
+          1, Appearance -> 
+         "Labeled"}, {{$CellContext`\[Mu]$$, {-1, 
+           0.15999999999999992`}}, {-1, -1}, {1, 1}, ControlType -> Slider2D, 
+         ControlPlacement -> Left}, {{$CellContext`\[Sigma]$$, {5.5, 45.}}, {
+         0.01, 0.01}, {100, 100}, ControlType -> Slider2D, ControlPlacement -> 
+         Left}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`RandomInkBlot[
+         Pattern[$CellContext`mu, 
+          Blank[]], 
+         Pattern[$CellContext`sigma, 
+          Blank[]], 
+         Pattern[$CellContext`seed, 
+          Blank[]], 
+         Pattern[$CellContext`resolution, 
+          Blank[]]] := 
+       Block[{$CellContext`pStart = 
+          Range[0, 1, 
+            1/$CellContext`resolution], $CellContext`pX, $CellContext`pY}, 
+         BlockRandom[
+          SeedRandom[$CellContext`seed]; $CellContext`pX = 
+            FoldList[# + RandomReal[
+                NormalDistribution[
+                 Part[$CellContext`mu, 1], 
+                 Part[$CellContext`sigma, 1]]]& , 0, 
+              Rest[$CellContext`pStart]]; $CellContext`pY = 
+            FoldList[# + RandomReal[
+                NormalDistribution[
+                 Part[$CellContext`mu, 2], 
+                 Part[$CellContext`sigma, 2]]]& , 0, 
+              Rest[$CellContext`pX]]; Null]; Graphics[
+           Polygon[
+            Join[
+             Transpose[{$CellContext`pX, $CellContext`pY}], 
+             Reverse[
+              Transpose[{-$CellContext`pX, $CellContext`pY}]]]], AspectRatio -> 
+           1, ImageSize -> {400, 400}]]}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->351242993],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`seed$$ = 291, $CellContext`vertices$$ = 
+    2500, $CellContext`\[Mu]$$ = {-0.69, -0.040000000000000036`}, \
+$CellContext`\[Sigma]$$ = {46., 62.}, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`vertices$$], 2500}, 5, 2500, 1}, {{
+       Hold[$CellContext`seed$$], 291, "random seed"}, -1000, 1000, 1}, {{
+       Hold[$CellContext`\[Mu]$$], {-0.69, -0.040000000000000036`}}, {-1, \
+-1}, {1, 1}}, {{
+       Hold[$CellContext`\[Sigma]$$], {46., 62.}}, {0.01, 0.01}, {100, 100}}},
+     Typeset`size$$ = Automatic, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`vertices$9182$$ = 
+    0, $CellContext`seed$9183$$ = 0, $CellContext`\[Mu]$9184$$ = {0, 
+    0}, $CellContext`\[Sigma]$9185$$ = {0, 0}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`seed$$ = 291, $CellContext`vertices$$ = 
+        2500, $CellContext`\[Mu]$$ = {-0.69, -0.040000000000000036`}, \
+$CellContext`\[Sigma]$$ = {46., 62.}}, "ControllerVariables" :> {
+        Hold[$CellContext`vertices$$, $CellContext`vertices$9182$$, 0], 
+        Hold[$CellContext`seed$$, $CellContext`seed$9183$$, 0], 
+        Hold[$CellContext`\[Mu]$$, $CellContext`\[Mu]$9184$$, {0, 0}], 
+        Hold[$CellContext`\[Sigma]$$, $CellContext`\[Sigma]$9185$$, {0, 0}]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> $CellContext`RandomInkBlot[$CellContext`\[Mu]$$, \
+$CellContext`\[Sigma]$$, $CellContext`seed$$, $CellContext`vertices$$], 
+      "Specifications" :> {{{$CellContext`vertices$$, 2500}, 5, 2500, 1, 
+         Appearance -> 
+         "Labeled"}, {{$CellContext`seed$$, 291, "random seed"}, -1000, 1000, 
+         1, Appearance -> 
+         "Labeled"}, {{$CellContext`\[Mu]$$, {-0.69, \
+-0.040000000000000036`}}, {-1, -1}, {1, 1}, ControlType -> Slider2D, 
+         ControlPlacement -> Left}, {{$CellContext`\[Sigma]$$, {46., 62.}}, {
+         0.01, 0.01}, {100, 100}, ControlType -> Slider2D, ControlPlacement -> 
+         Left}}, "Options" :> {}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`RandomInkBlot[
+         Pattern[$CellContext`mu, 
+          Blank[]], 
+         Pattern[$CellContext`sigma, 
+          Blank[]], 
+         Pattern[$CellContext`seed, 
+          Blank[]], 
+         Pattern[$CellContext`resolution, 
+          Blank[]]] := 
+       Block[{$CellContext`pStart = 
+          Range[0, 1, 
+            1/$CellContext`resolution], $CellContext`pX, $CellContext`pY}, 
+         BlockRandom[
+          SeedRandom[$CellContext`seed]; $CellContext`pX = 
+            FoldList[# + RandomReal[
+                NormalDistribution[
+                 Part[$CellContext`mu, 1], 
+                 Part[$CellContext`sigma, 1]]]& , 0, 
+              Rest[$CellContext`pStart]]; $CellContext`pY = 
+            FoldList[# + RandomReal[
+                NormalDistribution[
+                 Part[$CellContext`mu, 2], 
+                 Part[$CellContext`sigma, 2]]]& , 0, 
+              Rest[$CellContext`pX]]; Null]; Graphics[
+           Polygon[
+            Join[
+             Transpose[{$CellContext`pX, $CellContext`pY}], 
+             Reverse[
+              Transpose[{-$CellContext`pX, $CellContext`pY}]]]], AspectRatio -> 
+           1, ImageSize -> {400, 400}]]}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->557065493],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`seed$$ = -16, $CellContext`vertices$$ = 
+    1589, $CellContext`\[Mu]$$ = {-0.33999999999999997`, -0.13}, \
+$CellContext`\[Sigma]$$ = {14.5, 20.}, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`vertices$$], 1589}, 5, 2500, 1}, {{
+       Hold[$CellContext`seed$$], -16, "random seed"}, -1000, 1000, 1}, {{
+       Hold[$CellContext`\[Mu]$$], {-0.33999999999999997`, -0.13}}, {-1, -1}, \
+{1, 1}}, {{
+       Hold[$CellContext`\[Sigma]$$], {14.5, 20.}}, {0.01, 0.01}, {100, 
+      100}}}, Typeset`size$$ = Automatic, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`vertices$9252$$ = 0, $CellContext`seed$9253$$ = 
+    0, $CellContext`\[Mu]$9254$$ = {0, 0}, $CellContext`\[Sigma]$9255$$ = {0, 
+    0}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`seed$$ = -16, $CellContext`vertices$$ = 
+        1589, $CellContext`\[Mu]$$ = {-0.33999999999999997`, -0.13}, \
+$CellContext`\[Sigma]$$ = {14.5, 20.}}, "ControllerVariables" :> {
+        Hold[$CellContext`vertices$$, $CellContext`vertices$9252$$, 0], 
+        Hold[$CellContext`seed$$, $CellContext`seed$9253$$, 0], 
+        Hold[$CellContext`\[Mu]$$, $CellContext`\[Mu]$9254$$, {0, 0}], 
+        Hold[$CellContext`\[Sigma]$$, $CellContext`\[Sigma]$9255$$, {0, 0}]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> $CellContext`RandomInkBlot[$CellContext`\[Mu]$$, \
+$CellContext`\[Sigma]$$, $CellContext`seed$$, $CellContext`vertices$$], 
+      "Specifications" :> {{{$CellContext`vertices$$, 1589}, 5, 2500, 1, 
+         Appearance -> 
+         "Labeled"}, {{$CellContext`seed$$, -16, "random seed"}, -1000, 1000, 
+         1, Appearance -> 
+         "Labeled"}, {{$CellContext`\[Mu]$$, {-0.33999999999999997`, -0.13}}, \
+{-1, -1}, {1, 1}, ControlType -> Slider2D, ControlPlacement -> 
+         Left}, {{$CellContext`\[Sigma]$$, {14.5, 20.}}, {0.01, 0.01}, {100, 
+         100}, ControlType -> Slider2D, ControlPlacement -> Left}}, 
+      "Options" :> {}, "DefaultOptions" :> {ControllerLinking -> True}],
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`RandomInkBlot[
+         Pattern[$CellContext`mu, 
+          Blank[]], 
+         Pattern[$CellContext`sigma, 
+          Blank[]], 
+         Pattern[$CellContext`seed, 
+          Blank[]], 
+         Pattern[$CellContext`resolution, 
+          Blank[]]] := 
+       Block[{$CellContext`pStart = 
+          Range[0, 1, 
+            1/$CellContext`resolution], $CellContext`pX, $CellContext`pY}, 
+         BlockRandom[
+          SeedRandom[$CellContext`seed]; $CellContext`pX = 
+            FoldList[# + RandomReal[
+                NormalDistribution[
+                 Part[$CellContext`mu, 1], 
+                 Part[$CellContext`sigma, 1]]]& , 0, 
+              Rest[$CellContext`pStart]]; $CellContext`pY = 
+            FoldList[# + RandomReal[
+                NormalDistribution[
+                 Part[$CellContext`mu, 2], 
+                 Part[$CellContext`sigma, 2]]]& , 0, 
+              Rest[$CellContext`pX]]; Null]; Graphics[
+           Polygon[
+            Join[
+             Transpose[{$CellContext`pX, $CellContext`pY}], 
+             Reverse[
+              Transpose[{-$CellContext`pX, $CellContext`pY}]]]], AspectRatio -> 
+           1, ImageSize -> {400, 400}]]}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->6343698],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`seed$$ = -206, $CellContext`vertices$$ = 
+    1748, $CellContext`\[Mu]$$ = {-0.13, 1.}, $CellContext`\[Sigma]$$ = {40.5,
+     100.}, Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`vertices$$], 1748}, 5, 2500, 1}, {{
+       Hold[$CellContext`seed$$], -206, "random seed"}, -1000, 1000, 1}, {{
+       Hold[$CellContext`\[Mu]$$], {-0.13, 1.}}, {-1, -1}, {1, 1}}, {{
+       Hold[$CellContext`\[Sigma]$$], {40.5, 100.}}, {0.01, 0.01}, {100, 
+      100}}}, Typeset`size$$ = Automatic, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`vertices$9322$$ = 0, $CellContext`seed$9323$$ = 
+    0, $CellContext`\[Mu]$9324$$ = {0, 0}, $CellContext`\[Sigma]$9325$$ = {0, 
+    0}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`seed$$ = -206, $CellContext`vertices$$ = 
+        1748, $CellContext`\[Mu]$$ = {-0.13, 1.}, $CellContext`\[Sigma]$$ = {
+         40.5, 100.}}, "ControllerVariables" :> {
+        Hold[$CellContext`vertices$$, $CellContext`vertices$9322$$, 0], 
+        Hold[$CellContext`seed$$, $CellContext`seed$9323$$, 0], 
+        Hold[$CellContext`\[Mu]$$, $CellContext`\[Mu]$9324$$, {0, 0}], 
+        Hold[$CellContext`\[Sigma]$$, $CellContext`\[Sigma]$9325$$, {0, 0}]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> $CellContext`RandomInkBlot[$CellContext`\[Mu]$$, \
+$CellContext`\[Sigma]$$, $CellContext`seed$$, $CellContext`vertices$$], 
+      "Specifications" :> {{{$CellContext`vertices$$, 1748}, 5, 2500, 1, 
+         Appearance -> 
+         "Labeled"}, {{$CellContext`seed$$, -206, "random seed"}, -1000, 1000,
+          1, Appearance -> 
+         "Labeled"}, {{$CellContext`\[Mu]$$, {-0.13, 1.}}, {-1, -1}, {1, 1}, 
+         ControlType -> Slider2D, ControlPlacement -> 
+         Left}, {{$CellContext`\[Sigma]$$, {40.5, 100.}}, {0.01, 0.01}, {100, 
+         100}, ControlType -> Slider2D, ControlPlacement -> Left}}, 
+      "Options" :> {}, "DefaultOptions" :> {ControllerLinking -> True}],
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`RandomInkBlot[
+         Pattern[$CellContext`mu, 
+          Blank[]], 
+         Pattern[$CellContext`sigma, 
+          Blank[]], 
+         Pattern[$CellContext`seed, 
+          Blank[]], 
+         Pattern[$CellContext`resolution, 
+          Blank[]]] := 
+       Block[{$CellContext`pStart = 
+          Range[0, 1, 
+            1/$CellContext`resolution], $CellContext`pX, $CellContext`pY}, 
+         BlockRandom[
+          SeedRandom[$CellContext`seed]; $CellContext`pX = 
+            FoldList[# + RandomReal[
+                NormalDistribution[
+                 Part[$CellContext`mu, 1], 
+                 Part[$CellContext`sigma, 1]]]& , 0, 
+              Rest[$CellContext`pStart]]; $CellContext`pY = 
+            FoldList[# + RandomReal[
+                NormalDistribution[
+                 Part[$CellContext`mu, 2], 
+                 Part[$CellContext`sigma, 2]]]& , 0, 
+              Rest[$CellContext`pX]]; Null]; Graphics[
+           Polygon[
+            Join[
+             Transpose[{$CellContext`pX, $CellContext`pY}], 
+             Reverse[
+              Transpose[{-$CellContext`pX, $CellContext`pY}]]]], AspectRatio -> 
+           1, ImageSize -> {400, 400}]]}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->289614498]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "DetailsSection"],
+
+Cell[TextData[{
+ "For more information on the Rorschach test, see ",
+ ButtonBox["http://en.wikipedia.org/wiki/Rorschach_test",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://en.wikipedia.org/wiki/Rorschach_test"], None},
+  ButtonNote->"http://en.wikipedia.org/wiki/Rorschach_test"],
+ "."
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.489339318311554*^9, 3.4893393315766697`*^9}, {
+   3.4893399825727615`*^9, 3.4893399833898435`*^9}, {3.48951382476693*^9, 
+   3.489513864545422*^9}, 3.4895139411446867`*^9},
+ CellID->627298492]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.489339989545459*^9},
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.489339135443535*^9, 3.4893391365997477`*^9}},
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.3895522232313623`*^9, 
+  3.489339991001604*^9},
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0, CellBaseline -> Baseline], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.489351372385524*^9},
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SearchTermsSection"],
+
+Cell["fractal", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.489339249876682*^9, 3.489339252970313*^9}},
+ CellID->210189998],
+
+Cell["Rorschach test", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.489339257157652*^9, 3.489339264126135*^9}},
+ CellID->69645894],
+
+Cell["random walk", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.489339267782244*^9, 3.48933927050089*^9}},
+ CellID->153467053]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "RelatedLinksSection"],
+
+Cell[TextData[ButtonBox["Fractal",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/Fractal.html"], None},
+ ButtonNote->"http://mathworld.wolfram.com/Fractal.html"]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4893414981123004`*^9, 3.489341504594949*^9}},
+ CellID->760302658],
+
+Cell[TextData[ButtonBox["Random Walk",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/RandomWalk.html"], None},
+ ButtonNote->"http://mathworld.wolfram.com/RandomWalk.html"]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.489341516371126*^9, 3.4893415235568447`*^9}},
+ CellID->6277264]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Andy Ross",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Andy+Ross"], 
+    None},
+  ButtonNote->"http://demonstrations.wolfram.com/author.html?author=Andy+Ross"]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4893393391545033`*^9, 3.489339341216924*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{996, 914},
+WindowMargins->{{19, Automatic}, {Automatic, 6}},
+PrivateNotebookOptions -> {"NotebookAuthor" -> ""},
+FrontEndVersion->"7.0 for Microsoft Windows (64-bit) (February 18, 2009)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[33287, 751, 374, 9, 22, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[33664, 762, 678, 16, 22, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[34345, 780, 432, 13, 22, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[34780, 795, 637, 15, 22, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[35420, 812, 844, 21, 22, "ControlSuggestions",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[36267, 835, 393, 10, 22, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[36663, 847, 1526, 32, 22, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[38192, 881, 908, 21, 22, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 41226, 978},
+ {"RotateAndZoomIn3D", 41334, 981},
+ {"DragLocators", 41443, 984},
+ {"CreateAndDeleteLocators", 41558, 987},
+ {"SliderZoom", 41671, 990},
+ {"GamepadControls", 41776, 993},
+ {"AutomaticAnimation", 41889, 996},
+ {"BookmarkAnimation", 42005, 999}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 128, 2, 74, "DemoTitle"],
+Cell[CellGroupData[{
+Cell[720, 28, 33, 0, 266, "InitializationSection"],
+Cell[756, 30, 3002, 76, 128, "Input",
+ InitializationCell->True,
+ CellID->946665775]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[3795, 111, 29, 0, 188, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[3849, 115, 2967, 65, 148, "Input"],
+Cell[6819, 182, 4078, 82, 533, "Output",
+ CellID->216022784]
+}, {2}]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10943, 270, 36, 0, 166, "ManipulateCaptionSection"],
+Cell[10982, 272, 744, 15, 53, "ManipulateCaption"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11763, 292, 28, 0, 168, "ThumbnailSection"],
+Cell[11794, 294, 4274, 86, 533, "Output",
+ CellID->204700880]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16105, 385, 28, 0, 138, "SnapshotsSection"],
+Cell[16136, 387, 4132, 84, 37, "Output",
+ CellID->351242993],
+Cell[20271, 473, 4125, 83, 37, "Output",
+ CellID->557065493],
+Cell[24399, 558, 4120, 83, 37, "Output",
+ CellID->6343698],
+Cell[28522, 643, 4066, 81, 37, "Output",
+ CellID->289614498]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[32625, 729, 26, 0, 332, "DetailsSection"],
+Cell[32654, 731, 556, 13, 22, "DetailNotes",
+ CellID->627298492]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[33247, 749, 37, 0, 120, "ControlSuggestionsSection"],
+Cell[33287, 751, 374, 9, 22, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[33664, 762, 678, 16, 22, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[34345, 780, 432, 13, 22, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[34780, 795, 637, 15, 22, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[35420, 812, 844, 21, 22, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[36267, 835, 393, 10, 22, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[36663, 847, 1526, 32, 22, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[38192, 881, 908, 21, 22, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[39137, 907, 30, 0, 152, "SearchTermsSection"],
+Cell[39170, 909, 140, 3, 22, "SearchTerms",
+ CellID->210189998],
+Cell[39313, 914, 146, 3, 22, "SearchTerms",
+ CellID->69645894],
+Cell[39462, 919, 143, 3, 22, "SearchTerms",
+ CellID->153467053]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[39642, 927, 31, 0, 138, "RelatedLinksSection"],
+Cell[39676, 929, 322, 7, 22, "RelatedLinks",
+ CellID->760302658],
+Cell[40001, 938, 330, 7, 22, "RelatedLinks",
+ CellID->6277264]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[40368, 950, 25, 0, 136, "AuthorSection"],
+Cell[40396, 952, 375, 10, 22, "Author"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

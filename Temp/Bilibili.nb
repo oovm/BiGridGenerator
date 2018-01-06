@@ -1,0 +1,667 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     28080,        659]
+NotebookOptionsPosition[     27295,        627]
+NotebookOutlinePosition[     27652,        643]
+CellTagsIndexPosition[     27609,        640]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"$CharacterEncoding", "=", "\"\<UTF-8\>\""}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"$Appkey", "=", "\"\<8e9fc618fbd41e28\>\""}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"$ID2009max", "=", "5714"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"$ID2010max", "=", "78765"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"$ID2011max", "=", "259332"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"$ID2012max", "=", "680417"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"$ID2016max", "=", "73886288"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"MD5", "=", 
+  RowBox[{
+   RowBox[{"IntegerString", "[", 
+    RowBox[{
+     RowBox[{"Hash", "[", 
+      RowBox[{"#", ",", "\"\<MD5\>\""}], "]"}], ",", "16", ",", "32"}], "]"}],
+    "&"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"$TimeNow", ":=", 
+   RowBox[{"ToString", "@", 
+    RowBox[{"IntegerPart", "[", 
+     RowBox[{
+      RowBox[{"1000", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"AbsoluteTime", "[", 
+          RowBox[{"DateObject", "[", "]"}], "]"}], "\[IndentingNewLine]", "-", 
+         RowBox[{"AbsoluteTime", "[", 
+          RowBox[{"{", 
+           RowBox[{"1970", ",", " ", "1", ",", " ", "1", ",", "8"}], "}"}], 
+          "]"}]}], ")"}]}], "+", 
+      RowBox[{"RandomInteger", "[", "1000", "]"}]}], "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"GetVideo", "[", 
+    RowBox[{"id_", "?", "Positive"}], "]"}], ":=", 
+   RowBox[{"Import", "[", 
+    RowBox[{
+     RowBox[{
+     "\"\<http://api.bilibili.com/view?type=json&appkey=\>\"", 
+      "\[IndentingNewLine]", "<>", "$Appkey", "<>", "\"\<&id=\>\"", "<>", 
+      RowBox[{"ToString", "[", "id", "]"}]}], ",", "\"\<json\>\""}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Pause", "[", "0.3", "]"}]}], "Input",
+ CellChangeTimes->{{3.6930437981890373`*^9, 3.693043810491149*^9}, {
+  3.693048210971344*^9, 3.69304821839811*^9}, {3.6931018757493286`*^9, 
+  3.6931018845794888`*^9}, {3.6931021564114647`*^9, 3.693102169027341*^9}, {
+  3.693102365521242*^9, 3.6931023733088264`*^9}, {3.693102613188402*^9, 
+  3.69310261909737*^9}}],
+
+Cell[BoxData["\<\"8e9fc618fbd41e28\"\>"], "Output",
+ CellChangeTimes->{3.693106310586105*^9, 3.6931065335938325`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"IntegerString", "[", 
+   RowBox[{
+    RowBox[{"Hash", "[", 
+     RowBox[{"#1", ",", "\<\"MD5\"\>"}], "]"}], ",", "16", ",", "32"}], "]"}],
+   "&"}]], "Output",
+ CellChangeTimes->{3.693106310586105*^9, 3.6931065335938325`*^9}]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"head", "=", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{
+      "\"\<User-Agent\>\"", "\[Rule]", 
+       "\"\<Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) \
+AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 \
+Safari/537.36\>\""}], ",", 
+      RowBox[{
+      "\"\<X-Requested-With\>\"", "\[Rule]", "\"\<XMLHttpRequest\>\""}], ",", 
+      RowBox[{
+      "\"\<Referer\>\"", "\[Rule]", "\"\<http://space.bilibili.com/2/\>\""}], 
+      ",", 
+      RowBox[{
+      "\"\<Origin\>\"", "\[Rule]", "\"\<http://space.bilibili.com\>\""}], ",", 
+      RowBox[{"\"\<Host\>\"", "\[Rule]", "\"\<space.bilibili.com\>\""}], ",", 
+      RowBox[{
+      "\"\<AlexaToolbar-ALX_NS_PH\>\"", "\[Rule]", 
+       "\"\<AlexaToolbar/alx-4.0\>\""}], ",", 
+      RowBox[{
+      "\"\<Accept-Language\>\"", "\[Rule]", 
+       "\"\<zh-CN,zh;q=0.8,en;q=0.6,ja;q=0.4\>\""}], ",", 
+      RowBox[{
+      "\"\<Accept\>\"", "\[Rule]", 
+       "\"\<application/json, text/javascript, */*; q=0.01\>\""}]}], "}"}]}], 
+   ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SpaceResponse", ":=", 
+   RowBox[{
+    RowBox[{"URLRead", "[", 
+     RowBox[{"\[LeftAssociation]", 
+      RowBox[{
+       RowBox[{"\"\<Scheme\>\"", "\[Rule]", "\"\<http\>\""}], ",", 
+       RowBox[{"\"\<Domain\>\"", "\[Rule]", "\"\<space.bilibili.com\>\""}], 
+       ",", 
+       RowBox[{"\"\<Port\>\"", "\[Rule]", "None"}], ",", 
+       RowBox[{"\"\<Path\>\"", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+         "\"\<\>\"", ",", "\"\<ajax\>\"", ",", "\"\<member\>\"", ",", 
+          "\"\<GetInfo\>\""}], "}"}]}], ",", 
+       RowBox[{"\"\<Headers\>\"", "\[Rule]", "head"}], ",", 
+       RowBox[{"\"\<Query\>\"", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"\"\<mid\>\"", "\[Rule]", "#"}], ",", 
+          RowBox[{"\"\<_\>\"", "\[Rule]", "$TimeNow"}]}], "}"}]}]}], 
+      "\[RightAssociation]"}], "]"}], "&"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.6930408577990265`*^9, 3.6930408610273247`*^9}, {
+   3.6930408984668727`*^9, 3.693040900688743*^9}, {3.6930410506875095`*^9, 
+   3.693041057283203*^9}, 3.6930411225954447`*^9, {3.693041176264834*^9, 
+   3.693041179184188*^9}, {3.6930412479525986`*^9, 3.693041322484521*^9}, 
+   3.693041464889129*^9, {3.693041497247938*^9, 3.6930415096136203`*^9}, {
+   3.6930415555900555`*^9, 3.693041578291147*^9}, 3.693041652589119*^9, {
+   3.6930418760778055`*^9, 3.6930418889525537`*^9}, {3.6930419890217686`*^9, 
+   3.6930420016207113`*^9}, {3.6930421130845013`*^9, 
+   3.6930421155164113`*^9}, {3.693042231075066*^9, 3.6930422753184223`*^9}, {
+   3.693042314504402*^9, 3.693042321061545*^9}, {3.693043617874397*^9, 
+   3.6930436473440742`*^9}, {3.6930437044218764`*^9, 
+   3.6930437241265635`*^9}, {3.6930437623097286`*^9, 
+   3.6930437826862445`*^9}, {3.693043824446176*^9, 3.6930438514127836`*^9}, {
+   3.693044143300759*^9, 3.6930441724149137`*^9}, {3.6930442047216244`*^9, 
+   3.6930442267685056`*^9}, {3.6930442929044614`*^9, 3.6930443193975844`*^9}, 
+   3.6930443526649375`*^9, {3.6930444487898674`*^9, 3.693044449243228*^9}, {
+   3.6930456273930473`*^9, 3.6930456780119457`*^9}, {3.6930457093016796`*^9, 
+   3.693045710110261*^9}, {3.6930457529994154`*^9, 3.6930457732837076`*^9}, {
+   3.6930458183249397`*^9, 3.6930458473540344`*^9}, 3.693045880482174*^9, {
+   3.6930459363144197`*^9, 3.6930459742356796`*^9}, {3.693046077046934*^9, 
+   3.6930460928060007`*^9}, {3.693046898886361*^9, 3.693046980607179*^9}, 
+   3.693048000010852*^9, {3.6930482357832537`*^9, 3.693048240311761*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"try", "=", 
+  RowBox[{"SpaceResponse", "[", "\"\<2\>\"", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Import", "[", "try", "]"}]}], "Input",
+ CellChangeTimes->{{3.6930458247353973`*^9, 3.6930458513393497`*^9}, {
+  3.693048243096613*^9, 3.69304824356456*^9}, {3.693106391777692*^9, 
+  3.693106393223536*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TagBox["HTTPResponse",
+    "SummaryHead"], "[", 
+   DynamicModuleBox[{Typeset`open$$ = False}, 
+    PanelBox[
+     PaneSelectorBox[{False->GridBox[{
+        {
+         ButtonBox[
+          PaneSelectorBox[{False->
+           GraphicsBox[
+            {RGBColor[0, 
+              NCache[
+               Rational[2, 3], 0.6666666666666666], 0], DiskBox[{0, 0}], 
+             InsetBox[
+              StyleBox["\<\"200\"\>",
+               StripOnInput->False,
+               LineColor->GrayLevel[1],
+               FrontFaceColor->GrayLevel[1],
+               BackFaceColor->GrayLevel[1],
+               GraphicsColor->GrayLevel[1],
+               FontSize->10,
+               FontWeight->Bold,
+               FontColor->GrayLevel[1]], Scaled[{0.53, 0.48}]]},
+            Background->None,
+            
+            ImageSize->
+             Dynamic[{
+              Automatic, (3 CurrentValue["FontCapHeight"])/
+               AbsoluteCurrentValue[Magnification]}]], True->
+           GraphicsBox[
+            {RGBColor[0, 
+              NCache[
+               Rational[4, 9], 0.4444444444444444], 0], DiskBox[{0, 0}], 
+             InsetBox[
+              StyleBox["\<\"200\"\>",
+               StripOnInput->False,
+               LineColor->RGBColor[
+                 Rational[2, 3], 
+                 Rational[2, 3], 
+                 Rational[2, 3]],
+               FrontFaceColor->RGBColor[
+                 Rational[2, 3], 
+                 Rational[2, 3], 
+                 Rational[2, 3]],
+               BackFaceColor->RGBColor[
+                 Rational[2, 3], 
+                 Rational[2, 3], 
+                 Rational[2, 3]],
+               GraphicsColor->RGBColor[
+                 Rational[2, 3], 
+                 Rational[2, 3], 
+                 Rational[2, 3]],
+               FontSize->10,
+               FontWeight->Bold,
+               FontColor->RGBColor[
+                 Rational[2, 3], 
+                 Rational[2, 3], 
+                 Rational[2, 3]]], Scaled[{0.53, 0.48}]]},
+            Background->None,
+            
+            ImageSize->
+             Dynamic[{
+              Automatic, (3 CurrentValue["FontCapHeight"])/
+               AbsoluteCurrentValue[Magnification]}]]}, Dynamic[
+            CurrentValue["MouseOver"]],
+           FrameMargins->0,
+           ImageSize->Automatic],
+          Appearance->"Frameless",
+          
+          ButtonFunction:>
+           With[{CloudObject`Private`file$ = 
+             FileNameJoin[{$TemporaryDirectory, 
+                StringJoin["HTTPResponse", 
+                 IntegerString[
+                  Hash[
+                   HTTPResponse[
+                    
+                    ByteArray[{123, 34, 115, 116, 97, 116, 117, 115, 34, 58, 
+                    102, 97, 108, 115, 101, 44, 34, 100, 97, 116, 97, 34, 58, 
+                    34, 92, 117, 53, 51, 99, 50, 92, 117, 54, 53, 55, 48, 92, 
+                    117, 57, 53, 49, 57, 92, 117, 56, 98, 101, 102, 34, 125}], 
+                    Association[
+                    "Headers" -> {{"Date", "Wed, 11 Jan 2017 06:56:43 GMT"}, {
+                    "Content-Type", "application/json;charset=utf-8"}, {
+                    "Transfer-Encoding", "chunked"}, {
+                    "Connection", "keep-alive"}, {"Server", "Tengine"}, {
+                    "X-Upstream", "172.18.3.201:80"}, {
+                    "X-TKID", "1484117803450163717943"}, {
+                    "Expires", "Wed, 11 Jan 2017 06:56:42 GMT"}, {
+                    "Cache-Control", "no-cache"}, {
+                    "X-Cache", "BYPASS from cn-sxty-cu-w-01.hdslb.com"}}, 
+                    "StatusCode" -> 200, "Cookies" -> {}, "ContentType" -> 
+                    "application/json;charset=utf-8"], CharacterEncoding -> 
+                    None]], 36, 13], ".", 
+                 First[
+                  StringCases[
+                   First[
+                    CloudObject`Private`toContentTypeWithEncoding[
+                    HTTPResponse[
+                    
+                    ByteArray[{123, 34, 115, 116, 97, 116, 117, 115, 34, 58, 
+                    102, 97, 108, 115, 101, 44, 34, 100, 97, 116, 97, 34, 58, 
+                    34, 92, 117, 53, 51, 99, 50, 92, 117, 54, 53, 55, 48, 92, 
+                    117, 57, 53, 49, 57, 92, 117, 56, 98, 101, 102, 34, 125}],
+                     
+                    Association[
+                    "Headers" -> {{"Date", "Wed, 11 Jan 2017 06:56:43 GMT"}, {
+                    "Content-Type", "application/json;charset=utf-8"}, {
+                    "Transfer-Encoding", "chunked"}, {
+                    "Connection", "keep-alive"}, {"Server", "Tengine"}, {
+                    "X-Upstream", "172.18.3.201:80"}, {
+                    "X-TKID", "1484117803450163717943"}, {
+                    "Expires", "Wed, 11 Jan 2017 06:56:42 GMT"}, {
+                    "Cache-Control", "no-cache"}, {
+                    "X-Cache", "BYPASS from cn-sxty-cu-w-01.hdslb.com"}}, 
+                    "StatusCode" -> 200, "Cookies" -> {}, "ContentType" -> 
+                    "application/json;charset=utf-8"], CharacterEncoding -> 
+                    None]]], {
+                   StringExpression[StartOfString, "text/plain"] :> "txt", 
+                    StringExpression[
+                    Repeated[
+                    Except["/"]], "/", 
+                    Pattern[CloudObject`Private`a, 
+                    Repeated[WordCharacter]], 
+                    BlankNullSequence[]] :> CloudObject`Private`a}], 
+                  "txt"]]}]}, BinaryWrite[CloudObject`Private`file$, 
+              CloudObject`Private`HTTPProperty[
+               HTTPResponse[
+                
+                ByteArray[{123, 34, 115, 116, 97, 116, 117, 115, 34, 58, 102, 
+                 97, 108, 115, 101, 44, 34, 100, 97, 116, 97, 34, 58, 34, 92, 
+                 117, 53, 51, 99, 50, 92, 117, 54, 53, 55, 48, 92, 117, 57, 
+                 53, 49, 57, 92, 117, 56, 98, 101, 102, 34, 125}], 
+                Association[
+                "Headers" -> {{"Date", "Wed, 11 Jan 2017 06:56:43 GMT"}, {
+                   "Content-Type", "application/json;charset=utf-8"}, {
+                   "Transfer-Encoding", "chunked"}, {
+                   "Connection", "keep-alive"}, {"Server", "Tengine"}, {
+                   "X-Upstream", "172.18.3.201:80"}, {
+                   "X-TKID", "1484117803450163717943"}, {
+                   "Expires", "Wed, 11 Jan 2017 06:56:42 GMT"}, {
+                   "Cache-Control", "no-cache"}, {
+                   "X-Cache", "BYPASS from cn-sxty-cu-w-01.hdslb.com"}}, 
+                 "StatusCode" -> 200, "Cookies" -> {}, "ContentType" -> 
+                 "application/json;charset=utf-8"], CharacterEncoding -> 
+                None], "BodyBytes"]]; Close[CloudObject`Private`file$]; 
+            SystemOpen[CloudObject`Private`file$]],
+          Evaluator->Automatic,
+          Method->"Preemptive"], GridBox[{
+           {
+            RowBox[{
+             TagBox["\<\"Status: \"\>",
+              "SummaryItemAnnotation"], "\[InvisibleSpace]", 
+             TagBox["\<\"OK\"\>",
+              "SummaryItem"]}]},
+           {
+            RowBox[{
+             TagBox["\<\"Content type: \"\>",
+              "SummaryItemAnnotation"], "\[InvisibleSpace]", 
+             TagBox["\<\"application/json;charset=utf-8\"\>",
+              "SummaryItem"]}]}
+          },
+          AutoDelete->False,
+          
+          BaseStyle->{
+           ShowStringCharacters -> False, NumberMarks -> False, 
+            PrintPrecision -> 3, ShowSyntaxStyles -> False},
+          GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Automatic}}},
+          
+          GridBoxItemSize->{
+           "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+          GridBoxSpacings->{"Columns" -> {{2}}, "Rows" -> {{Automatic}}}]}
+       },
+       AutoDelete->False,
+       BaselinePosition->{1, 1},
+       GridBoxAlignment->{"Rows" -> {{Top}}},
+       GridBoxItemSize->{
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}], True->GridBox[{
+        {
+         ButtonBox[
+          PaneSelectorBox[{False->
+           GraphicsBox[
+            {RGBColor[0, 
+              NCache[
+               Rational[2, 3], 0.6666666666666666], 0], DiskBox[{0, 0}], 
+             InsetBox[
+              StyleBox["\<\"200\"\>",
+               StripOnInput->False,
+               LineColor->GrayLevel[1],
+               FrontFaceColor->GrayLevel[1],
+               BackFaceColor->GrayLevel[1],
+               GraphicsColor->GrayLevel[1],
+               FontSize->10,
+               FontWeight->Bold,
+               FontColor->GrayLevel[1]], Scaled[{0.53, 0.48}]]},
+            Background->None,
+            
+            ImageSize->
+             Dynamic[{
+              Automatic, (3 CurrentValue["FontCapHeight"])/
+               AbsoluteCurrentValue[Magnification]}]], True->
+           GraphicsBox[
+            {RGBColor[0, 
+              NCache[
+               Rational[4, 9], 0.4444444444444444], 0], DiskBox[{0, 0}], 
+             InsetBox[
+              StyleBox["\<\"200\"\>",
+               StripOnInput->False,
+               LineColor->RGBColor[
+                 Rational[2, 3], 
+                 Rational[2, 3], 
+                 Rational[2, 3]],
+               FrontFaceColor->RGBColor[
+                 Rational[2, 3], 
+                 Rational[2, 3], 
+                 Rational[2, 3]],
+               BackFaceColor->RGBColor[
+                 Rational[2, 3], 
+                 Rational[2, 3], 
+                 Rational[2, 3]],
+               GraphicsColor->RGBColor[
+                 Rational[2, 3], 
+                 Rational[2, 3], 
+                 Rational[2, 3]],
+               FontSize->10,
+               FontWeight->Bold,
+               FontColor->RGBColor[
+                 Rational[2, 3], 
+                 Rational[2, 3], 
+                 Rational[2, 3]]], Scaled[{0.53, 0.48}]]},
+            Background->None,
+            
+            ImageSize->
+             Dynamic[{
+              Automatic, (3 CurrentValue["FontCapHeight"])/
+               AbsoluteCurrentValue[Magnification]}]]}, Dynamic[
+            CurrentValue["MouseOver"]],
+           FrameMargins->0,
+           ImageSize->Automatic],
+          Appearance->"Frameless",
+          
+          ButtonFunction:>
+           With[{CloudObject`Private`file$ = 
+             FileNameJoin[{$TemporaryDirectory, 
+                StringJoin["HTTPResponse", 
+                 IntegerString[
+                  Hash[
+                   HTTPResponse[
+                    
+                    ByteArray[{123, 34, 115, 116, 97, 116, 117, 115, 34, 58, 
+                    102, 97, 108, 115, 101, 44, 34, 100, 97, 116, 97, 34, 58, 
+                    34, 92, 117, 53, 51, 99, 50, 92, 117, 54, 53, 55, 48, 92, 
+                    117, 57, 53, 49, 57, 92, 117, 56, 98, 101, 102, 34, 125}], 
+                    Association[
+                    "Headers" -> {{"Date", "Wed, 11 Jan 2017 06:56:43 GMT"}, {
+                    "Content-Type", "application/json;charset=utf-8"}, {
+                    "Transfer-Encoding", "chunked"}, {
+                    "Connection", "keep-alive"}, {"Server", "Tengine"}, {
+                    "X-Upstream", "172.18.3.201:80"}, {
+                    "X-TKID", "1484117803450163717943"}, {
+                    "Expires", "Wed, 11 Jan 2017 06:56:42 GMT"}, {
+                    "Cache-Control", "no-cache"}, {
+                    "X-Cache", "BYPASS from cn-sxty-cu-w-01.hdslb.com"}}, 
+                    "StatusCode" -> 200, "Cookies" -> {}, "ContentType" -> 
+                    "application/json;charset=utf-8"], CharacterEncoding -> 
+                    None]], 36, 13], ".", 
+                 First[
+                  StringCases[
+                   First[
+                    CloudObject`Private`toContentTypeWithEncoding[
+                    HTTPResponse[
+                    
+                    ByteArray[{123, 34, 115, 116, 97, 116, 117, 115, 34, 58, 
+                    102, 97, 108, 115, 101, 44, 34, 100, 97, 116, 97, 34, 58, 
+                    34, 92, 117, 53, 51, 99, 50, 92, 117, 54, 53, 55, 48, 92, 
+                    117, 57, 53, 49, 57, 92, 117, 56, 98, 101, 102, 34, 125}], 
+                    Association[
+                    "Headers" -> {{"Date", "Wed, 11 Jan 2017 06:56:43 GMT"}, {
+                    "Content-Type", "application/json;charset=utf-8"}, {
+                    "Transfer-Encoding", "chunked"}, {
+                    "Connection", "keep-alive"}, {"Server", "Tengine"}, {
+                    "X-Upstream", "172.18.3.201:80"}, {
+                    "X-TKID", "1484117803450163717943"}, {
+                    "Expires", "Wed, 11 Jan 2017 06:56:42 GMT"}, {
+                    "Cache-Control", "no-cache"}, {
+                    "X-Cache", "BYPASS from cn-sxty-cu-w-01.hdslb.com"}}, 
+                    "StatusCode" -> 200, "Cookies" -> {}, "ContentType" -> 
+                    "application/json;charset=utf-8"], CharacterEncoding -> 
+                    None]]], {
+                   StringExpression[StartOfString, "text/plain"] :> "txt", 
+                    StringExpression[
+                    Repeated[
+                    Except["/"]], "/", 
+                    Pattern[CloudObject`Private`a, 
+                    Repeated[WordCharacter]], 
+                    BlankNullSequence[]] :> CloudObject`Private`a}], 
+                  "txt"]]}]}, BinaryWrite[CloudObject`Private`file$, 
+              CloudObject`Private`HTTPProperty[
+               HTTPResponse[
+                
+                ByteArray[{123, 34, 115, 116, 97, 116, 117, 115, 34, 58, 102, 
+                 97, 108, 115, 101, 44, 34, 100, 97, 116, 97, 34, 58, 34, 92, 
+                 117, 53, 51, 99, 50, 92, 117, 54, 53, 55, 48, 92, 117, 57, 
+                 53, 49, 57, 92, 117, 56, 98, 101, 102, 34, 125}], 
+                Association[
+                "Headers" -> {{"Date", "Wed, 11 Jan 2017 06:56:43 GMT"}, {
+                   "Content-Type", "application/json;charset=utf-8"}, {
+                   "Transfer-Encoding", "chunked"}, {
+                   "Connection", "keep-alive"}, {"Server", "Tengine"}, {
+                   "X-Upstream", "172.18.3.201:80"}, {
+                   "X-TKID", "1484117803450163717943"}, {
+                   "Expires", "Wed, 11 Jan 2017 06:56:42 GMT"}, {
+                   "Cache-Control", "no-cache"}, {
+                   "X-Cache", "BYPASS from cn-sxty-cu-w-01.hdslb.com"}}, 
+                 "StatusCode" -> 200, "Cookies" -> {}, "ContentType" -> 
+                 "application/json;charset=utf-8"], CharacterEncoding -> 
+                None], "BodyBytes"]]; Close[CloudObject`Private`file$]; 
+            SystemOpen[CloudObject`Private`file$]],
+          Evaluator->Automatic,
+          Method->"Preemptive"], GridBox[{
+           {
+            RowBox[{
+             TagBox["\<\"Status: \"\>",
+              "SummaryItemAnnotation"], "\[InvisibleSpace]", 
+             TagBox["\<\"OK\"\>",
+              "SummaryItem"]}]},
+           {
+            RowBox[{
+             TagBox["\<\"Content type: \"\>",
+              "SummaryItemAnnotation"], "\[InvisibleSpace]", 
+             TagBox["\<\"application/json;charset=utf-8\"\>",
+              "SummaryItem"]}]}
+          },
+          AutoDelete->False,
+          
+          BaseStyle->{
+           ShowStringCharacters -> False, NumberMarks -> False, 
+            PrintPrecision -> 3, ShowSyntaxStyles -> False},
+          GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Automatic}}},
+          GridBoxItemSize->{
+           "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+          GridBoxSpacings->{"Columns" -> {{2}}, "Rows" -> {{Automatic}}}]}
+       },
+       AutoDelete->False,
+       BaselinePosition->{1, 1},
+       GridBoxAlignment->{"Rows" -> {{Top}}},
+       GridBoxItemSize->{
+        "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}]}, Dynamic[
+      Typeset`open$$],
+      ImageSize->Automatic],
+     BaselinePosition->Baseline],
+    DynamicModuleValues:>{}], "]"}],
+  HTTPResponse[
+   ByteArray[{123, 34, 115, 116, 97, 116, 117, 115, 34, 58, 102, 97, 108, 115,
+     101, 44, 34, 100, 97, 116, 97, 34, 58, 34, 92, 117, 53, 51, 99, 50, 92, 
+    117, 54, 53, 55, 48, 92, 117, 57, 53, 49, 57, 92, 117, 56, 98, 101, 102, 
+    34, 125}], 
+   Association[
+   "Headers" -> {{"Date", "Wed, 11 Jan 2017 06:56:43 GMT"}, {
+      "Content-Type", "application/json;charset=utf-8"}, {
+      "Transfer-Encoding", "chunked"}, {"Connection", "keep-alive"}, {
+      "Server", "Tengine"}, {"X-Upstream", "172.18.3.201:80"}, {
+      "X-TKID", "1484117803450163717943"}, {
+      "Expires", "Wed, 11 Jan 2017 06:56:42 GMT"}, {
+      "Cache-Control", "no-cache"}, {
+      "X-Cache", "BYPASS from cn-sxty-cu-w-01.hdslb.com"}}, "StatusCode" -> 
+    200, "Cookies" -> {}, "ContentType" -> "application/json;charset=utf-8"], 
+   CharacterEncoding -> None],
+  Editable->False,
+  SelectWithContents->True,
+  Selectable->False]], "Output",
+ CellChangeTimes->{3.6931066033547697`*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"\<\"data\"\>", "\[Rule]", "\<\"\:53c2\:6570\:9519\:8bef\"\>"}], 
+   ",", 
+   RowBox[{"\<\"status\"\>", "\[Rule]", "False"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.6931066033547697`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\"\<http://space.bilibili.com/ajax/member/GetInfo?mid=2&_=\>\"", "<>",
+   "$TimeNow"}]], "Input",
+ CellChangeTimes->{{3.6931066361571493`*^9, 3.6931066647691536`*^9}}],
+
+Cell[BoxData["\<\"http://space.bilibili.com/ajax/member/GetInfo?mid=2&_=\
+1484117865682\"\>"], "Output",
+ CellChangeTimes->{{3.6931066524369736`*^9, 3.6931066653871574`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"GetVideo", "[", "1536", "]"}]], "Input",
+ CellChangeTimes->{{3.6931067896982555`*^9, 3.693106802979618*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"\<\"arctype\"\>", "\[Rule]", "\<\"Unknow\"\>"}], ",", 
+   RowBox[{"\<\"offsite\"\>", 
+    "\[Rule]", "\<\"http://share.acg.tv/flash.swf?aid=1536&page=1\"\>"}], ",", 
+   RowBox[{"\<\"review\"\>", "\[Rule]", "\<\"11\"\>"}], ",", 
+   RowBox[{"\<\"coins\"\>", "\[Rule]", "\<\"12\"\>"}], ",", 
+   RowBox[{"\<\"allow_download\"\>", "\[Rule]", "1"}], ",", 
+   RowBox[{"\<\"instant_server\"\>", "\[Rule]", "\<\"chat.bilibili.com\"\>"}],
+    ",", 
+   RowBox[{"\<\"allow_feed\"\>", "\[Rule]", "0"}], ",", 
+   RowBox[{"\<\"created\"\>", "\[Rule]", "1264481542"}], ",", 
+   RowBox[{"\<\"video_review\"\>", "\[Rule]", "\<\"339\"\>"}], ",", 
+   RowBox[{"\<\"play\"\>", "\[Rule]", "\<\"4139\"\>"}], ",", 
+   RowBox[{"\<\"typename\"\>", "\[Rule]", "\<\"\:5176\:4ed6\"\>"}], ",", 
+   RowBox[{"\<\"credit\"\>", "\[Rule]", "\<\"5\"\>"}], ",", 
+   RowBox[{"\<\"title\"\>", 
+    "\[Rule]", "\<\"\:3010\:5408\:4f5c\:3011\:4e03\:8272\:306e\:904a\:6232\
+\:738b\:52d5\:753b\"\>"}], ",", 
+   RowBox[{"\<\"tid\"\>", "\[Rule]", "53"}], ",", 
+   RowBox[{"\<\"tag\"\>", 
+    "\[Rule]", "\<\"\:4e03\:8272\:306e\:30cb\:30b3\:30cb\:30b3\:52d5\:753b,\
+\:6e38\:620f\:738b\"\>"}], ",", 
+   RowBox[{"\<\"favorites\"\>", "\[Rule]", "\<\"27\"\>"}], ",", 
+   RowBox[{"\<\"description\"\>", 
+    "\[Rule]", "\<\"sm9465555\:ff0c\:4e03\:8272\[Times]\:6e38\:620f\:738b\
+\:ff0c\:65e0\:9700\:591a\:89e3\:91ca\"\>"}], ",", 
+   RowBox[{"\<\"author\"\>", "\[Rule]", "\<\"\:771f\:7ea2\:306e\:77b3\"\>"}], 
+   ",", 
+   RowBox[{"\<\"allow_bp\"\>", "\[Rule]", "0"}], ",", 
+   RowBox[{"\<\"mid\"\>", "\[Rule]", "\<\"629\"\>"}], ",", 
+   RowBox[{"\<\"pic\"\>", 
+    "\[Rule]", "\<\"http://i0.hdslb.com/userup/629/12644Q542-1423.jpg\"\>"}], 
+   ",", 
+   RowBox[{"\<\"face\"\>", 
+    "\[Rule]", \
+"\<\"http://i0.hdslb.com/bfs/face/b42144ce967d0c0d354082eb791d1a9f48ab87a9.\
+jpg\"\>"}], ",", 
+   RowBox[{"\<\"pages\"\>", "\[Rule]", "1"}], ",", 
+   RowBox[{"\<\"created_at\"\>", "\[Rule]", "\<\"2010-01-26 12:52\"\>"}], ",", 
+   RowBox[{"\<\"src\"\>", "\[Rule]", "\<\"c\"\>"}], ",", 
+   RowBox[{"\<\"spid\"\>", "\[Rule]", "Null"}], ",", 
+   RowBox[{"\<\"cid\"\>", "\[Rule]", "3852097"}], ",", 
+   RowBox[{"\<\"partname\"\>", "\[Rule]", "\<\"\"\>"}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.6931067914298725`*^9, 3.6931068037109947`*^9}}]
+}, Open  ]]
+},
+WindowSize->{759, 833},
+WindowMargins->{{436, Automatic}, {36, Automatic}},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (2016\:5e7410\:67088\
+\:65e5)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 2203, 56, 407, "Input"],
+Cell[2786, 80, 117, 1, 30, "Output"],
+Cell[2906, 83, 260, 7, 30, "Output"]
+}, Open  ]],
+Cell[3181, 93, 3586, 72, 300, "Input"],
+Cell[CellGroupData[{
+Cell[6792, 169, 330, 6, 66, "Input"],
+Cell[7125, 177, 17002, 373, 69, "Output"],
+Cell[24130, 552, 240, 6, 33, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[24407, 563, 191, 3, 30, "Input"],
+Cell[24601, 568, 174, 2, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[24812, 575, 132, 2, 30, "Input"],
+Cell[24947, 579, 2332, 45, 225, "Output"]
+}, Open  ]]
+}
+]
+*)
+

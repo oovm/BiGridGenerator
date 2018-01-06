@@ -1,0 +1,1973 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     63247,       1734]*)
+(*NotebookOutlinePosition[     64566,       1776]*)
+(*  CellTagsIndexPosition[     64522,       1772]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell[BoxData[
+    \( (*modified, \ \(12/03\)/06*) \)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell["The Lights Out Puzzle", "Title",
+  TextAlignment->Center],
+
+Cell[TextData[{
+  "A simple puzzle provides an interesting application of mathematical \
+analysis and functional programming with ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  "."
+}], "Subsubtitle"],
+
+Cell["\<\
+by Robert Cowen and
+John W. Kennedy\
+\>", "Text"],
+
+Cell[TextData[{
+  "A puzzle, called ",
+  StyleBox["Lights Out, ",
+    FontSlant->"Italic"],
+  "provides an excellent opportunity to use ",
+  StyleBox["Mathematica's ",
+    FontSlant->"Italic"],
+  "functional programming style to easily explore mathematically interesting \
+questions.  A rectangular board is constructed from squares. (The original \
+puzzle consists of a 5-by-5 board.) Squares can be in one of two states: ",
+  StyleBox["light",
+    FontSlant->"Italic"],
+  " or ",
+  StyleBox["dark. ",
+    FontSlant->"Italic"],
+  "If a square is touched, its state reverses and so does the state of each \
+of its neighboring squares (that is, those squares with which it shares an \
+edge). The puzzle is to touch squares of a board, which are initially all \
+lit, so that all squares become dark. If there is a solution to the puzzle, \
+it is natural to ask if there is more than one solution and, if so, what is a \
+minimal solution\[LongDash]one with fewest squares touched.  In fact it is \
+convenient  to consider the problem on graphs (defined below), especially \
+since ",
+  StyleBox["Mathematica,",
+    FontSlant->"Italic"],
+  " in its DiscreteMath Combinatorica package, has many defined graph \
+functions. The computational aspect of the problem of finding solutions, as \
+the board size increases, may at first appear rather daunting; however, in \
+the next section we show that it reduces to finding solutions of linear \
+equations over the two element field {0,1}\[LongDash]a very tractable \
+problem."
+}], "Text",
+  FontWeight->"Plain"],
+
+Cell[CellGroupData[{
+
+Cell["The Algebraic Connection", "Section"],
+
+Cell[TextData[{
+  "A casual examination of ",
+  StyleBox["Lights Out",
+    FontSlant->"Italic"],
+  " puzzles leads to interesting observations on which a much better \
+understanding of the nature of the problem depends. Changing the state of a \
+square an even number of times is equivalent to not changing it at all; \
+changing the state an odd number of times is equivalent to changing it only \
+once (its state is reversed). Furthermore, the order in which we touch \
+various squares is unimportant\[LongDash]it is only the number of times we \
+touch a square that matters. These facts imply that, if the puzzle can be \
+solved at all, it can be solved by touching some squares exactly once and the \
+others not at all. Thus, a solution consists of indicating which squares to \
+touch once.\n\nWe set up a local equation for each square on the board that \
+must be satisfied by any solution. In any solution to the ",
+  StyleBox["Lights Out ",
+    FontSlant->"Italic"],
+  "puzzle, the total number of times each square and all its neighbors are \
+touched must be odd if that square is ultimately to be darkened. For an ",
+  Cell[BoxData[
+      \(TraditionalForm\`m\)]],
+  "-by-",
+  Cell[BoxData[
+      \(TraditionalForm\`n\)]],
+  " board, number the squares ",
+  StyleBox["i",
+    FontSlant->"Italic"],
+  " = 1, 2, \[Ellipsis], ",
+  StyleBox["mn,",
+    FontSlant->"Italic"],
+  " and let ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_i\)]],
+  " represent the number of times that square ",
+  StyleBox["i",
+    FontSlant->"Italic"],
+  " is touched. As mentioned above, we can assume ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_i\)]],
+  " is either",
+  StyleBox[" ",
+    FontSlant->"Italic"],
+  "0 or",
+  StyleBox[" ",
+    FontSlant->"Italic"],
+  "1. Then, the number of times a square ",
+  StyleBox["i",
+    FontSlant->"Italic"],
+  " changes state is represented by summing ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_i\)]],
+  " and the variables, ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_j\)]],
+  ", for the squares ",
+  StyleBox[" j ",
+    FontSlant->"Italic"],
+  "that are adjacent to ",
+  StyleBox["i",
+    FontSlant->"Italic"],
+  ". This will result in a change of state for square ",
+  StyleBox["i",
+    FontSlant->"Italic"],
+  " if and only if the sum is odd\[LongDash]that is, equal to 1 modulo 2. \
+Consequently, the local equation for each square consists of setting this sum \
+(over the square and its neighbors) equal to 1 mod 2. "
+}], "Text",
+  TextAlignment->Left],
+
+Cell["\<\
+For the 3-by-3 board, with numbered squares, depicted in the \
+following figure, the set of local equations to be solved, mod 2, is  listed \
+below.\
+\>", "Text",
+  TextAlignment->Left],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    RowBox[{"                                    ", 
+      TagBox[GridBox[{
+            {"1", "2", "3"},
+            {"4", "5", "6"},
+            {"7", "8", "9"}
+            },
+          GridFrame->True,
+          RowLines->True,
+          ColumnLines->True],
+        DisplayForm]}]], "Input"],
+
+Cell[BoxData[
+    \({{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}\)], "Output"]
+}, Open  ]],
+
+Cell[TextData[{
+  "\n",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_\(\(1\)\(\ \)\)\)]],
+  "+",
+  Cell[BoxData[
+      \(TraditionalForm\`\(\(\ \)\(x\_2\)\)\)]],
+  "+ ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_\(\(4\)\(\ \ \)\)\)]],
+  "= 1\n",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_\(\(2\)\(\ \)\)\)]],
+  "+ ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_1\)]],
+  "+ ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_\(\(3\)\(\ \)\)\)]],
+  "+ ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_\(\(5\)\(\ \)\)\)]],
+  "= 1\n",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_\(\(3\)\(\ \)\)\)]],
+  "+ ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_\(\(2\)\(\ \)\)\)]],
+  "+ ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_\(\(6\)\(\ \)\)\)]],
+  "= 1\n",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_\(\(4\)\(\ \)\)\)]],
+  "+ ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_\(\(1\)\(\ \)\)\)]],
+  "+ ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_\(\(5\)\(\ \)\)\)]],
+  "+ ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_\(\(7\)\(\ \)\)\)]],
+  "= 1\n",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_5\)]],
+  " +",
+  Cell[BoxData[
+      \(TraditionalForm\`\(\(\ \)\(x\_\(\(2\)\(\ \)\)\)\)\)]],
+  "+ ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_\(\(4\)\(\ \)\)\)]],
+  "+ ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_\(\(6\)\(\ \)\)\)]],
+  "+ ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_\(\(8\)\(\ \)\)\)]],
+  "= 1\n",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_6\)]],
+  " + ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_\(\(3\)\(\ \)\)\)]],
+  "+ ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_\(\(5\)\(\ \)\)\)]],
+  "+ ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_\(\(9\)\(\ \)\)\)]],
+  "= 1\n",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_\(\(7\)\(\ \)\)\)]],
+  "+ ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_\(\(4\)\(\ \)\)\)]],
+  "+ ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_\(\(8\)\(\ \)\)\)]],
+  "= 1\n",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_\(\(8\)\(\ \)\)\)]],
+  "+ ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_\(\(5\)\(\ \)\)\)]],
+  "+ ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_\(\(7\)\(\ \)\)\)]],
+  "+ ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_\(\(9\)\(\ \)\)\)]],
+  "= 1\n",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_\(\(9\)\(\ \)\)\)]],
+  "+ ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_\(\(6\)\(\ \)\)\)]],
+  "+ ",
+  Cell[BoxData[
+      \(TraditionalForm\`x\_\(\(8\)\(\ \)\)\)]],
+  "= 1"
+}], "Text",
+  CellMargins->{{Inherited, 238.75}, {Inherited, Inherited}},
+  TextAlignment->Right],
+
+Cell[TextData[{
+  "Since we require solutions to the system of equations modulo 2 we append \
+the statement ",
+  StyleBox["Modulus==2,",
+    FontFamily->"Courier",
+    FontWeight->"Bold"],
+  " to one of the equations."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    RowBox[{"Solve", "[", 
+      RowBox[{"{", 
+        RowBox[{
+          RowBox[{
+            RowBox[{
+              RowBox[{\(x\_1\), "+", 
+                FormBox[\(x\_2\),
+                  "TraditionalForm"], "+", 
+                FormBox[\(x\_4\),
+                  "TraditionalForm"]}], "==", "1"}], "&&", \(Modulus == 2\)}],
+           ",", 
+          RowBox[{
+            RowBox[{\(x\_2\), "+", 
+              FormBox[\(x\_1\),
+                "TraditionalForm"], "+", 
+              FormBox[\(x\_3\),
+                "TraditionalForm"], "+", 
+              FormBox[\(x\_5\),
+                "TraditionalForm"]}], "==", "1"}], ",", 
+          RowBox[{
+            RowBox[{\(x\_3\), "+", 
+              FormBox[\(x\_2\),
+                "TraditionalForm"], "+", 
+              FormBox[\(x\_6\),
+                "TraditionalForm"]}], "==", "1"}], ",", 
+          RowBox[{
+            RowBox[{\(x\_4\), "+", 
+              FormBox[\(x\_1\),
+                "TraditionalForm"], "+", 
+              FormBox[\(x\_5\),
+                "TraditionalForm"], "+", 
+              FormBox[\(x\_7\),
+                "TraditionalForm"]}], "==", "1"}], ",", 
+          RowBox[{
+            RowBox[{\(x\_5\), "+", 
+              FormBox[\(x\_2\),
+                "TraditionalForm"], "+", 
+              FormBox[\(x\_4\),
+                "TraditionalForm"], "+", 
+              FormBox[\(x\_6\),
+                "TraditionalForm"], "+", 
+              FormBox[\(x\_8\),
+                "TraditionalForm"]}], "==", "1"}], ",", 
+          RowBox[{
+            RowBox[{\(x\_6\), "+", 
+              FormBox[\(x\_3\),
+                "TraditionalForm"], "+", 
+              FormBox[\(x\_5\),
+                "TraditionalForm"], "+", 
+              FormBox[\(x\_9\),
+                "TraditionalForm"]}], "==", "1"}], ",", 
+          RowBox[{
+            RowBox[{\(x\_7\), "+", 
+              FormBox[\(x\_4\),
+                "TraditionalForm"], "+", 
+              FormBox[\(x\_8\),
+                "TraditionalForm"]}], "==", "1"}], ",", 
+          RowBox[{
+            RowBox[{\(x\_8\), "+", 
+              FormBox[\(x\_5\),
+                "TraditionalForm"], "+", 
+              FormBox[\(x\_7\),
+                "TraditionalForm"], "+", 
+              FormBox[\(x\_9\),
+                "TraditionalForm"]}], "==", "1"}], ",", 
+          RowBox[{
+            RowBox[{\(x\_9\), "+", 
+              FormBox[\(x\_6\),
+                "TraditionalForm"], "+", 
+              FormBox[\(x\_8\),
+                "TraditionalForm"]}], "==", "1"}]}], "}"}], "]"}]], "Input"],
+
+Cell[BoxData[
+    \({{Modulus \[Rule] 2, x\_1 \[Rule] 1, x\_3 \[Rule] 1, x\_7 \[Rule] 1, 
+        x\_9 \[Rule] 1, x\_2 \[Rule] 0, x\_4 \[Rule] 0, x\_6 \[Rule] 0, 
+        x\_8 \[Rule] 0, x\_5 \[Rule] 1}}\)], "Output"]
+}, Open  ]],
+
+Cell[TextData[{
+  "The solution tells us that to darken all squares on the 3-by-3 board we \
+need only touch squares 1, 3, 5, 7, and 9. Of course, the difficulty with \
+this method is having to type all the local equations. In the next section we \
+show how this can be avoided by using ",
+  StyleBox["Mathematica's",
+    FontSlant->"Italic"],
+  " facility in handling graph structures."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["The Graph Connection", "Section"],
+
+Cell[TextData[{
+  "A ",
+  StyleBox["graph",
+    FontSlant->"Italic"],
+  " is a non-empty set of \"point\" objects, called vertices, together with a \
+set of \"line\" objects, called ",
+  StyleBox["edges",
+    FontSlant->"Italic"],
+  ", each of which joins some pair of the vertices. If two vertices are \
+joined by an edge they are said to be ",
+  StyleBox["adjacent",
+    FontSlant->"Italic"],
+  " and are called ",
+  StyleBox["neighbors.",
+    FontSlant->"Italic"],
+  " The puzzle can be played on any graphical \"board\" with vertices in one \
+of two states, light or dark, and the rule is that when any vertex is \
+touched, that vertex and all of its neighbors change their states. The \
+rectangular boards for the ",
+  StyleBox["Lights Out",
+    FontSlant->"Italic"],
+  " puzzle can be viewed as graphs, with a vertex representing each square of \
+the board, and each edge indicating that the vertices it connects belong to \
+adjacent squares on  the board. Graphs of this type are often called ",
+  StyleBox["grid graphs. ",
+    FontSlant->"Italic"],
+  "We can use the ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " command ",
+  StyleBox["GridGraph[m,n]",
+    FontFamily->"Courier",
+    FontWeight->"Bold"],
+  " to enter the ",
+  StyleBox["m",
+    FontSlant->"Italic"],
+  "-by-",
+  StyleBox["n",
+    FontSlant->"Italic"],
+  " grid graph; however, it is first necessary to load the standard package ",
+  
+  StyleBox["DiscreteMath`Combinatorica",
+    FontFamily->"Courier",
+    FontWeight->"Bold"],
+  StyleBox["`",
+    FontWeight->"Bold"],
+  ". "
+}], "Text"],
+
+Cell[BoxData[
+    \(Needs["\<DiscreteMath`Combinatorica`\>"]\)], "Input"],
+
+Cell[TextData[{
+  "The 5-by-5 grid graph corresponds to the original board in the ",
+  StyleBox["Lights Out",
+    FontSlant->"Italic"],
+  " problem; to display it we enter"
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(ShowGraph[GridGraph[5, 5]]\)], "Input"],
+
+Cell[GraphicsData["PostScript", "\<\
+%!
+%%Creator: Mathematica
+%%AspectRatio: 1 
+MathPictureStart
+/Mabs {
+Mgmatrix idtransform
+Mtmatrix dtransform
+} bind def
+/Mabsadd { Mabs
+3 -1 roll add
+3 1 roll add
+exch } bind def
+%% Graphics
+%%IncludeResource: font Courier
+%%IncludeFont: Courier
+/Courier findfont 10  scalefont  setfont
+% Scaling calculations
+0.0454545 0.909091 0.0454545 0.909091 [
+[ 0 0 0 0 ]
+[ 1 1 0 0 ]
+] MathScale
+% Start of Graphics
+1 setlinecap
+1 setlinejoin
+newpath
+0 0 m
+1 0 L
+1 1 L
+0 1 L
+closepath
+clip
+newpath
+0 g
+.005 w
+[ ] 0 setdash
+.04545 .04545 m
+.27273 .04545 L
+s
+.04545 .04545 m
+.04545 .27273 L
+s
+.27273 .04545 m
+.5 .04545 L
+s
+.27273 .04545 m
+.27273 .27273 L
+s
+.5 .04545 m
+.72727 .04545 L
+s
+.5 .04545 m
+.5 .27273 L
+s
+.72727 .04545 m
+.95455 .04545 L
+s
+.72727 .04545 m
+.72727 .27273 L
+s
+.95455 .04545 m
+.95455 .27273 L
+s
+.04545 .27273 m
+.27273 .27273 L
+s
+.04545 .27273 m
+.04545 .5 L
+s
+.27273 .27273 m
+.5 .27273 L
+s
+.27273 .27273 m
+.27273 .5 L
+s
+.5 .27273 m
+.72727 .27273 L
+s
+.5 .27273 m
+.5 .5 L
+s
+.72727 .27273 m
+.95455 .27273 L
+s
+.72727 .27273 m
+.72727 .5 L
+s
+.95455 .27273 m
+.95455 .5 L
+s
+.04545 .5 m
+.27273 .5 L
+s
+.04545 .5 m
+.04545 .72727 L
+s
+.27273 .5 m
+.5 .5 L
+s
+.27273 .5 m
+.27273 .72727 L
+s
+.5 .5 m
+.72727 .5 L
+s
+.5 .5 m
+.5 .72727 L
+s
+.72727 .5 m
+.95455 .5 L
+s
+.72727 .5 m
+.72727 .72727 L
+s
+.95455 .5 m
+.95455 .72727 L
+s
+.04545 .72727 m
+.27273 .72727 L
+s
+.04545 .72727 m
+.04545 .95455 L
+s
+.27273 .72727 m
+.5 .72727 L
+s
+.27273 .72727 m
+.27273 .95455 L
+s
+.5 .72727 m
+.72727 .72727 L
+s
+.5 .72727 m
+.5 .95455 L
+s
+.72727 .72727 m
+.95455 .72727 L
+s
+.72727 .72727 m
+.72727 .95455 L
+s
+.95455 .72727 m
+.95455 .95455 L
+s
+.04545 .95455 m
+.27273 .95455 L
+s
+.27273 .95455 m
+.5 .95455 L
+s
+.5 .95455 m
+.72727 .95455 L
+s
+.72727 .95455 m
+.95455 .95455 L
+s
+.025 w
+.04545 .04545 Mdot
+.27273 .04545 Mdot
+.5 .04545 Mdot
+.72727 .04545 Mdot
+.95455 .04545 Mdot
+.04545 .27273 Mdot
+.27273 .27273 Mdot
+.5 .27273 Mdot
+.72727 .27273 Mdot
+.95455 .27273 Mdot
+.04545 .5 Mdot
+.27273 .5 Mdot
+.5 .5 Mdot
+.72727 .5 Mdot
+.95455 .5 Mdot
+.04545 .72727 Mdot
+.27273 .72727 Mdot
+.5 .72727 Mdot
+.72727 .72727 Mdot
+.95455 .72727 Mdot
+.04545 .95455 Mdot
+.27273 .95455 Mdot
+.5 .95455 Mdot
+.72727 .95455 Mdot
+.95455 .95455 Mdot
+% End of Graphics
+MathPictureEnd
+\
+\>"], "Graphics",
+  ImageSize->{116.688, 116.688},
+  ImageMargins->{{43, 0}, {0, 0}},
+  ImageRegion->{{0, 1}, {0, 1}},
+  ImageCache->GraphicsData["Bitmap", "\<\
+CF5dJ6E]HGAYHf4PAg9QL6QYHg<PAVmbKF5d0`40002A0000TB000`400?l00000o`00003oT@3oool0
+0940oooo002A0?ooo`00T@3oool00940oooo002A0?ooo`001P3ooon5000000H0oooo00050?ooo`<0
+00007P3oool3000001h0oooo0`00000N0?ooo`<000007@3oool3000000H0oooo00060?ooo`030000
+003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000
+003oool0oooo01d0oooo0P0000060?ooo`001P3oool00`000000oooo0?ooo`0N0?ooo`030000003o
+ool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003o
+ool0oooo00@0oooo00060?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool0
+0`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool0103oool0
+00H0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo
+01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`040?ooo`001P3oool00`000000
+oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000
+oooo0?ooo`0N0?ooo`030000003oool0oooo00@0oooo00060?ooo`030000003oool0oooo01h0oooo
+00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo
+00<000000?ooo`3oool0103oool000H0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?oo
+o`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?oo
+o`040?ooo`001P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<00000
+0?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo00@0oooo00060?oo
+o`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?oo
+o`030000003oool0oooo01h0oooo00<000000?ooo`3oool0103oool000H0oooo00<000000?ooo`3o
+ool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3o
+ool07P3oool00`000000oooo0?ooo`040?ooo`001P3oool00`000000oooo0?ooo`0N0?ooo`030000
+003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000
+003oool0oooo00@0oooo00060?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3o
+ool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool0103o
+ool000H0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0
+oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`040?ooo`001P3oool00`00
+0000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`00
+0000oooo0?ooo`0N0?ooo`030000003oool0oooo00@0oooo00060?ooo`030000003oool0oooo01h0
+oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0
+oooo00<000000?ooo`3oool0103oool000H0oooo00<000000?ooo`3oool07P3oool00`000000oooo
+0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo
+0?ooo`040?ooo`001P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<0
+00000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo00@0oooo0006
+0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N
+0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool0103oool000H0oooo00<000000?oo
+o`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?oo
+o`3oool07P3oool00`000000oooo0?ooo`040?ooo`001P3oool00`000000oooo0?ooo`0N0?ooo`03
+0000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`03
+0000003oool0oooo00@0oooo00060?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool0
+7P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool0
+103oool000H0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003o
+ool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`040?ooo`001P3oool0
+0`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool0
+0`000000oooo0?ooo`0N0?ooo`030000003oool0oooo00@0oooo00060?ooo`030000003oool0oooo
+01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo
+01h0oooo00<000000?ooo`3oool0103oool000H0oooo00<000000?ooo`3oool07P3oool00`000000
+oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000
+oooo0?ooo`040?ooo`001P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo
+00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo00@0oooo
+00060?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?oo
+o`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool0103oool000H0oooo00<00000
+0?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<00000
+0?ooo`3oool07P3oool00`000000oooo0?ooo`040?ooo`001P3oool00`000000oooo0?ooo`0N0?oo
+o`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?oo
+o`030000003oool0oooo00@0oooo00060?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3o
+ool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3o
+ool0103oool000H0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000
+003oool0oooo01h0oooo00<000000?ooo`3oool07@3oool2000000H0oooo00050?ooohH000001P3o
+ool000H0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0
+oooo01h0oooo00<000000?ooo`3oool07@3oool2000000H0oooo00060?ooo`030000003oool0oooo
+01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo
+01h0oooo00<000000?ooo`3oool0103oool000H0oooo00<000000?ooo`3oool07P3oool00`000000
+oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000
+oooo0?ooo`040?ooo`001P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo
+00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo00@0oooo
+00060?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?oo
+o`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool0103oool000H0oooo00<00000
+0?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<00000
+0?ooo`3oool07P3oool00`000000oooo0?ooo`040?ooo`001P3oool00`000000oooo0?ooo`0N0?oo
+o`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?oo
+o`030000003oool0oooo00@0oooo00060?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3o
+ool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3o
+ool0103oool000H0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000
+003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`040?ooo`001P3o
+ool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3o
+ool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo00@0oooo00060?ooo`030000003oool0
+oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0
+oooo01h0oooo00<000000?ooo`3oool0103oool000H0oooo00<000000?ooo`3oool07P3oool00`00
+0000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`00
+0000oooo0?ooo`040?ooo`001P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0
+oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo00@0
+oooo00060?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo
+0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool0103oool000H0oooo00<0
+00000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<0
+00000?ooo`3oool07P3oool00`000000oooo0?ooo`040?ooo`001P3oool00`000000oooo0?ooo`0N
+0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N
+0?ooo`030000003oool0oooo00@0oooo00060?ooo`030000003oool0oooo01h0oooo00<000000?oo
+o`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?oo
+o`3oool0103oool000H0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`03
+0000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`040?ooo`00
+1P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool0
+7P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo00@0oooo00060?ooo`030000003o
+ool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003o
+ool0oooo01h0oooo00<000000?ooo`3oool0103oool000H0oooo00<000000?ooo`3oool07P3oool0
+0`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool0
+0`000000oooo0?ooo`040?ooo`001P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo
+01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo
+00@0oooo00060?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000
+oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool0103oool000H0oooo
+00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo
+00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`040?ooo`001P3oool00`000000oooo0?oo
+o`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?oo
+o`0N0?ooo`030000003oool0oooo00@0oooo00060?ooo`030000003oool0oooo01h0oooo00<00000
+0?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<00000
+0?ooo`3oool0103oool000H0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?oo
+o`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`040?oo
+o`001P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3o
+ool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo00@0oooo00060?ooo`030000
+003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000
+003oool0oooo01h0oooo00<000000?ooo`3oool0103oool000H0oooo00<000000?ooo`3oool07P3o
+ool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3o
+ool00`000000oooo0?ooo`040?ooo`001P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0
+oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0
+oooo00@0oooo00060?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`00
+0000oooo0?ooo`0N0?ooo`030000003oool0oooo01d0oooo0P0000060?ooo`001@3ooon6000000H0
+oooo00060?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo
+0?ooo`0N0?ooo`030000003oool0oooo01d0oooo0P0000060?ooo`001P3oool00`000000oooo0?oo
+o`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?oo
+o`0N0?ooo`030000003oool0oooo00@0oooo00060?ooo`030000003oool0oooo01h0oooo00<00000
+0?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<00000
+0?ooo`3oool0103oool000H0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?oo
+o`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`040?oo
+o`001P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3o
+ool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo00@0oooo00060?ooo`030000
+003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000
+003oool0oooo01h0oooo00<000000?ooo`3oool0103oool000H0oooo00<000000?ooo`3oool07P3o
+ool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3o
+ool00`000000oooo0?ooo`040?ooo`001P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0
+oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0
+oooo00@0oooo00060?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`00
+0000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool0103oool000H0
+oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0
+oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`040?ooo`001P3oool00`000000oooo
+0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo
+0?ooo`0N0?ooo`030000003oool0oooo00@0oooo00060?ooo`030000003oool0oooo01h0oooo00<0
+00000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<0
+00000?ooo`3oool0103oool000H0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N
+0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`04
+0?ooo`001P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?oo
+o`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo00@0oooo00060?ooo`03
+0000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`03
+0000003oool0oooo01h0oooo00<000000?ooo`3oool0103oool000H0oooo00<000000?ooo`3oool0
+7P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool0
+7P3oool00`000000oooo0?ooo`040?ooo`001P3oool00`000000oooo0?ooo`0N0?ooo`030000003o
+ool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003o
+ool0oooo00@0oooo00060?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool0
+0`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool0103oool0
+00H0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo
+01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`040?ooo`001P3oool00`000000
+oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000
+oooo0?ooo`0N0?ooo`030000003oool0oooo00@0oooo00060?ooo`030000003oool0oooo01h0oooo
+00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo
+00<000000?ooo`3oool0103oool000H0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?oo
+o`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?oo
+o`040?ooo`001P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<00000
+0?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo00@0oooo00060?oo
+o`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?oo
+o`030000003oool0oooo01h0oooo00<000000?ooo`3oool0103oool000H0oooo00<000000?ooo`3o
+ool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3o
+ool07P3oool00`000000oooo0?ooo`040?ooo`001P3oool00`000000oooo0?ooo`0N0?ooo`030000
+003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000
+003oool0oooo00@0oooo00060?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3o
+ool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool0103o
+ool000H0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0
+oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`040?ooo`001P3oool00`00
+0000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`00
+0000oooo0?ooo`0N0?ooo`030000003oool0oooo00@0oooo00060?ooo`030000003oool0oooo01h0
+oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0
+oooo00<000000?ooo`3oool0103oool000H0oooo00<000000?ooo`3oool07P3oool00`000000oooo
+0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo
+0?ooo`040?ooo`001P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<0
+00000?ooo`3oool07P3oool00`000000oooo0?ooo`0M0?ooo`8000001P3oool000D0ooooQP000006
+0?ooo`001P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?oo
+o`3oool07P3oool00`000000oooo0?ooo`0M0?ooo`8000001P3oool000H0oooo00<000000?ooo`3o
+ool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3o
+ool07P3oool00`000000oooo0?ooo`040?ooo`001P3oool00`000000oooo0?ooo`0N0?ooo`030000
+003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000
+003oool0oooo00@0oooo00060?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3o
+ool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool0103o
+ool000H0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0
+oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`040?ooo`001P3oool00`00
+0000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`00
+0000oooo0?ooo`0N0?ooo`030000003oool0oooo00@0oooo00060?ooo`030000003oool0oooo01h0
+oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0
+oooo00<000000?ooo`3oool0103oool000H0oooo00<000000?ooo`3oool07P3oool00`000000oooo
+0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo
+0?ooo`040?ooo`001P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<0
+00000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo00@0oooo0006
+0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N
+0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool0103oool000H0oooo00<000000?oo
+o`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?oo
+o`3oool07P3oool00`000000oooo0?ooo`040?ooo`001P3oool00`000000oooo0?ooo`0N0?ooo`03
+0000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`03
+0000003oool0oooo00@0oooo00060?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool0
+7P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool0
+103oool000H0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003o
+ool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`040?ooo`001P3oool0
+0`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool0
+0`000000oooo0?ooo`0N0?ooo`030000003oool0oooo00@0oooo00060?ooo`030000003oool0oooo
+01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo
+01h0oooo00<000000?ooo`3oool0103oool000H0oooo00<000000?ooo`3oool07P3oool00`000000
+oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000
+oooo0?ooo`040?ooo`001P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo
+00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo00@0oooo
+00060?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?oo
+o`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool0103oool000H0oooo00<00000
+0?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<00000
+0?ooo`3oool07P3oool00`000000oooo0?ooo`040?ooo`001P3oool00`000000oooo0?ooo`0N0?oo
+o`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?oo
+o`030000003oool0oooo00@0oooo00060?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3o
+ool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3o
+ool0103oool000H0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000
+003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`040?ooo`001P3o
+ool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3o
+ool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo00@0oooo00060?ooo`030000003oool0
+oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0
+oooo01h0oooo00<000000?ooo`3oool0103oool000H0oooo00<000000?ooo`3oool07P3oool00`00
+0000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`00
+0000oooo0?ooo`040?ooo`001P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0
+oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo00@0
+oooo00060?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo
+0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool0103oool000H0oooo00<0
+00000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<0
+00000?ooo`3oool07P3oool00`000000oooo0?ooo`040?ooo`001P3oool00`000000oooo0?ooo`0N
+0?ooo`030000003oool0oooo01h0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N
+0?ooo`030000003oool0oooo00@0oooo00060?ooo`030000003oool0oooo01h0oooo00<000000?oo
+o`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003oool0oooo01h0oooo00<000000?oo
+o`3oool0103oool000H0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`03
+0000003oool0oooo01h0oooo00<000000?ooo`3oool07@3oool2000000H0oooo00050?ooohH00000
+1P3oool000H0oooo00<000000?ooo`3oool07P3oool00`000000oooo0?ooo`0N0?ooo`030000003o
+ool0oooo01h0oooo00<000000?ooo`3oool07@3oool00`000000oooo0?ooo`050?ooo`00T@3oool0
+0940oooo002A0?ooo`00T@3oool00940oooo0000\
+\>"],
+  ImageRangeCache->{{{0, 144.813}, {144.813, 0}} -> {-0.0500054, -0.0500054, \
+0.00949513, 0.00949513}}],
+
+Cell[BoxData[
+    TagBox[\(\[SkeletonIndicator]  Graphics  \[SkeletonIndicator]\),
+      False,
+      Editable->False]], "Output"]
+}, Open  ]],
+
+Cell["\<\
+Note that the squares in the picture do not correspond to squares \
+on the board; the board squares are represented by the vertices (dots). \
+\>",
+   "Text"],
+
+Cell[TextData[{
+  "One convient way to represent a graph is by means of a matrix called the \
+adjacency matrix of the graph. If there are ",
+  StyleBox["n",
+    FontSlant->"Italic"],
+  " vertices, numbered 1 to ",
+  StyleBox["n",
+    FontSlant->"Italic"],
+  ", the adjacency matrix is an ",
+  StyleBox["n-",
+    FontSlant->"Italic"],
+  " by-",
+  StyleBox["n",
+    FontSlant->"Italic"],
+  " matrix with the entry in the ",
+  StyleBox["i",
+    FontSlant->"Italic"],
+  "-th row,  ",
+  StyleBox["j",
+    FontSlant->"Italic"],
+  "-th column equal to 1 if the ",
+  StyleBox["i",
+    FontSlant->"Italic"],
+  "-th vertex is adjacent to the ",
+  StyleBox["j",
+    FontSlant->"Italic"],
+  "-th vertex; if not this entry is 0. ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " gives the adjacency matrix as the first of two entries in its \
+representation of a graph when a graph is entered; the second entry describes \
+an embedding of the vertices in the plane. It is the first entry, the \
+adjacency matrix, that is of interest to us here. Thus, the adjacency matrix \
+for the 3-by-3 puzzle is obtained by"
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(ToAdjacencyMatrix[GridGraph[3, 3]] // MatrixForm\)], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {"0", "1", "0", "1", "0", "0", "0", "0", "0"},
+            {"1", "0", "1", "0", "1", "0", "0", "0", "0"},
+            {"0", "1", "0", "0", "0", "1", "0", "0", "0"},
+            {"1", "0", "0", "0", "1", "0", "1", "0", "0"},
+            {"0", "1", "0", "1", "0", "1", "0", "1", "0"},
+            {"0", "0", "1", "0", "1", "0", "0", "0", "1"},
+            {"0", "0", "0", "1", "0", "0", "0", "1", "0"},
+            {"0", "0", "0", "0", "1", "0", "1", "0", "1"},
+            {"0", "0", "0", "0", "0", "1", "0", "1", "0"}
+            },
+          RowSpacings->1,
+          ColumnSpacings->1,
+          ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"]
+}, Open  ]],
+
+Cell[TextData[{
+  "Now this is almost the same as the coefficient matrix of the set of \
+equations we used to solve the 3-by-3 board ",
+  StyleBox["Lights Out",
+    FontSlant->"Italic"],
+  " puzzle. It lacks only the 1s on the main diagonal, to indicate that \
+touching a square also contributes to its own change of state. Thus to get \
+the coefficient matrix we enter, "
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(ToAdjacencyMatrix[GridGraph[3, 3]] + IdentityMatrix[3*3] // 
+      MatrixForm\)], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {"1", "1", "0", "1", "0", "0", "0", "0", "0"},
+            {"1", "1", "1", "0", "1", "0", "0", "0", "0"},
+            {"0", "1", "1", "0", "0", "1", "0", "0", "0"},
+            {"1", "0", "0", "1", "1", "0", "1", "0", "0"},
+            {"0", "1", "0", "1", "1", "1", "0", "1", "0"},
+            {"0", "0", "1", "0", "1", "1", "0", "0", "1"},
+            {"0", "0", "0", "1", "0", "0", "1", "1", "0"},
+            {"0", "0", "0", "0", "1", "0", "1", "1", "1"},
+            {"0", "0", "0", "0", "0", "1", "0", "1", "1"}
+            },
+          RowSpacings->1,
+          ColumnSpacings->1,
+          ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"]
+}, Open  ]],
+
+Cell[TextData[{
+  "This is the coefficient matrix for the left side of the set of equations; \
+the right side consists of a vector of 1s. ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " can solve the system with just this information, using the built function \
+",
+  StyleBox["LinearSolve",
+    FontFamily->"Courier",
+    FontWeight->"Bold"],
+  ", and indicating that we are solving it mod 2. We further partition the \
+solution into three rows corresponding to the rows of the puzzle."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(mat = 
+        ToAdjacencyMatrix[GridGraph[3, 3]] + IdentityMatrix[3*3];\)\), "\n", 
+    \(Partition[LinearSolve[mat, Table[1, {9}], Modulus \[Rule] 2], 
+      3]\)}], "Input"],
+
+Cell[BoxData[
+    \({{1, 0, 1}, {0, 1, 0}, {1, 0, 1}}\)], "Output"]
+}, Open  ]],
+
+Cell[TextData[{
+  "Again, the entries indicate how many times to touch the corresponding \
+square in order to solve this ",
+  StyleBox["Lights Out",
+    FontSlant->"Italic"],
+  " puzzle.\n\nMore generally, we can now search for a solution for the ",
+  StyleBox["m",
+    FontSlant->"Italic"],
+  "-by-",
+  StyleBox["n",
+    FontSlant->"Italic"],
+  " board as follows."
+}], "Text"],
+
+Cell[BoxData[
+    \(LightsOut[m_, n_] := 
+      Module[{mat}, 
+        mat = \((ToAdjacencyMatrix[GridGraph[m, n]] + IdentityMatrix[m*n])\); 
+        Partition[LinearSolve[mat, Table[1, {m*n}], Modulus \[Rule] 2], 
+          m]\n\t]\)], "Input"],
+
+Cell["We next look for solutions on a 6-by-5 board.", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(LightsOut[6, 5]\)], "Input"],
+
+Cell[BoxData[
+    \({{0, 0, 1, 1, 0, 0}, {1, 0, 1, 1, 0, 1}, {0, 1, 0, 0, 1, 0}, {1, 0, 1, 
+        1, 0, 1}, {0, 0, 1, 1, 0, 0}}\)], "Output"]
+}, Open  ]],
+
+Cell[TextData[{
+  "We can get a little fancier and actually have ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " draw the board and put an X on each square that should be touched. The \
+resulting patterns are really quite nice."
+}], "Text"],
+
+Cell[BoxData[
+    \(drawsol[m_, n_] := 
+      GridBox[LightsOut[m, n] /. {1 \[Rule] "\<X\>", 0 \[Rule] "\<\>"}, 
+          RowLines \[Rule] True, ColumnLines \[Rule] True, 
+          GridFrame \[Rule] True] // DisplayForm\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(drawsol[6, 5]\)], "Input"],
+
+Cell[BoxData[
+    TagBox[GridBox[{
+          {"", "", "X", "X", "", ""},
+          {"X", "", "X", "X", "", "X"},
+          {"", "X", "", "", "X", ""},
+          {"X", "", "X", "X", "", "X"},
+          {"", "", "X", "X", "", ""}
+          },
+        GridFrame->True,
+        RowLines->True,
+        ColumnLines->True],
+      DisplayForm]], "Output"]
+}, Open  ]],
+
+Cell["Larger puzzles are also easily solved; for example,", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(drawsol[14, 11]\)], "Input"],
+
+Cell[BoxData[
+    TagBox[GridBox[{
+          {"X", "X", "", "X", "", "X", "X", "X", "X", "", "X", "", "X", "X"},
+          {"X", "X", "X", "", "X", "X", "", "", "X", "X", "", "X", "X", "X"},
+          {"", "X", "X", "", "X", "", "X", "X", "", "X", "", "X", "X", ""},
+          {"X", "", "", "X", "X", "", "X", "X", "", "X", "X", "", "", "X"},
+          {"", "X", "X", "X", "", "X", "", "", "X", "", "X", "X", "X", ""},
+          {"X", "X", "", "", "", "", "X", "X", "", "", "", "", "X", "X"},
+          {"X", "", "X", "", "X", "X", "X", "X", "X", "X", "", "X", "", "X"},
+          {"X", "", "", "X", "X", "", "X", "X", "", "X", "X", "", "", "X"},
+          {"X", "", "X", "X", "", "", "", "", "", "", "X", "X", "", "X"},
+          {"X", "X", "X", "", "X", "X", "", "", "X", "X", "", "X", "X", "X"},
+          {"", "", "", "", "X", "X", "", "", "X", "X", "", "", "", ""}
+          },
+        GridFrame->True,
+        RowLines->True,
+        ColumnLines->True],
+      DisplayForm]], "Output"]
+}, Open  ]],
+
+Cell[TextData[{
+  "The reader can easily display more solutions; we find them rather \
+attractive and think that they would make admirable quilting patterns. \n\n",
+  StyleBox["LinearSolve",
+    FontFamily->"Courier",
+    FontWeight->"Bold"],
+  " only gives one solution. There may be more. We show how to find all \
+solutions later. First, in the next section, we describe how to tell if the \
+solution is unique."
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Unique Solutions", "Section"],
+
+Cell[TextData[{
+  StyleBox["LinearSolve",
+    FontFamily->"Courier",
+    FontWeight->"Bold"],
+  " finds one solution if there is one; otherwise it reports that no solution \
+exists. One way to decide if there is a ",
+  StyleBox["unique",
+    FontSlant->"Italic"],
+  " solution is to use ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  "'s determinant function, ",
+  StyleBox["Det",
+    FontFamily->"Courier",
+    FontWeight->"Bold"],
+  ". It is a theorem of linear algebra that a system of linear equations has \
+a unique solution if and only if the determinant of the coefficient matrix is \
+not zero. Since we are solving the system mod 2 we need to compute the \
+determinant mod 2. For example, for the 3-by-3 board considered above,"
+}], "Text"],
+
+Cell[BoxData[
+    \(\(mat = 
+        ToAdjacencyMatrix[GridGraph[3, 3]] + 
+          IdentityMatrix[3*3];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Det[mat, Modulus \[Rule] 2]\)], "Input"],
+
+Cell[BoxData[
+    \(1\)], "Output"]
+}, Open  ]],
+
+Cell[TextData[{
+  "Thus we are assured that the solution to the 3-by-3 board is unique. In \
+the same way, we tested the square boards, ",
+  StyleBox["n",
+    FontSlant->"Italic"],
+  "-by-",
+  StyleBox["n",
+    FontSlant->"Italic"],
+  ",  up to ",
+  StyleBox["n ",
+    FontSlant->"Italic"],
+  "= 20, for solution uniqueness and found that there are unique solutions \
+for ",
+  StyleBox["n ",
+    FontSlant->"Italic"],
+  "= 2, 3, 6, 7, 8, 10, 12, 13, 15, 18, and 20. Unfortunately there seems to \
+be no way  to determine which boards have ",
+  StyleBox["unique",
+    FontSlant->"Italic"],
+  " solutions without such lengthy computations. In particular, we have not \
+found any patterns relating to uniquenss of solution; however, we encourage \
+interested readers to investigate this further. "
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["All Solutions", "Section"],
+
+Cell[TextData[{
+  "It has been proved by several authors that there always is at least one \
+solution for any graphical board (see for example References [1], [3], and \
+[5]). We began to believe that this rather remarkable result was true through \
+our investigation of the problem with ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  ".",
+  StyleBox[" LinearSolve",
+    FontFamily->"Courier",
+    FontWeight->"Bold"],
+  " only finds one solution.  To find all solutions, we recall from linear \
+algebra that if you take a particular solution (obtained, say, from ",
+  StyleBox["LinearSolve",
+    FontFamily->"Courier",
+    FontWeight->"Bold"],
+  ") and add any linear combination of basis vectors for the nullspace, you \
+still have a solution, and, in fact, all solutions are obtainable in this \
+way. We must of course perform all the calculations Modulo 2. To replace \
+ordinary addition by addition, mod 2, we introduce ",
+  StyleBox["boolesum",
+    FontFamily->"Courier",
+    FontWeight->"Bold"],
+  StyleBox[".",
+    FontWeight->"Bold"],
+  " "
+}], "Text"],
+
+Cell[BoxData[
+    \(\(\(boolesum[x_, y_] := 
+        If[\((x == 0 && y == 0)\) || \((x == 1 && y == 1)\), 0, 1];\)\(\n\)
+    \)\)], "Input"],
+
+Cell[TextData[{
+  "To apply boolesum to more arguments, we use the operator ",
+  StyleBox["Fold",
+    FontFamily->"Courier",
+    FontWeight->"Bold"],
+  StyleBox[".",
+    FontWeight->"Bold"],
+  " For example if we want to apply it to {1,1,0,1}, we do the following."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Fold[boolesum, 1, {1, 0, 1}]\)], "Input"],
+
+Cell[BoxData[
+    \(1\)], "Output"]
+}, Open  ]],
+
+Cell[TextData[{
+  "In order to enable ",
+  StyleBox["boolesum",
+    FontFamily->"Courier",
+    FontWeight->"Bold"],
+  " to work \"properly\" with lists (that is, operate \"coordinatewise\")  we \
+inform ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " that the function is ",
+  StyleBox["Listable",
+    FontFamily->"Courier",
+    FontWeight->"Bold"],
+  "."
+}], "Text"],
+
+Cell[BoxData[
+    \(\(SetAttributes[boolesum, Listable];\)\)], "Input"],
+
+Cell[TextData[{
+  "We use ",
+  StyleBox["LinearSolve",
+    FontFamily->"Courier",
+    FontWeight->"Bold"],
+  StyleBox[" ",
+    FontFamily->"Courier"],
+  "to obtain a particular solution. To generate the nullspace basis, we use ",
+  
+  StyleBox["Mathematica's",
+    FontSlant->"Italic"],
+  " ",
+  StyleBox["NullSpace ",
+    FontFamily->"Courier",
+    FontWeight->"Bold"],
+  StyleBox[" (",
+    FontWeight->"Bold"],
+  "adding ",
+  StyleBox["Modulus\[Rule]2",
+    FontFamily->"Courier",
+    FontWeight->"Bold"],
+  "  to its arguments).  To form linear combinations of these basis vectors, \
+since the coefficients are either 1 (include the vector) or 0 (exclude the \
+vector),  we simply add (mod 2) each subset of basis vectors to the \
+particular solution obtained with ",
+  StyleBox["LinearSolve",
+    FontFamily->"Courier",
+    FontWeight->"Bold"],
+  ". We use ",
+  StyleBox["Subsets",
+    FontFamily->"Courier",
+    FontWeight->"Bold"],
+  " to form the subsets, and ",
+  StyleBox["boolesum",
+    FontFamily->"Courier",
+    FontWeight->"Bold"],
+  " together with ",
+  StyleBox["Fold",
+    FontFamily->"Courier",
+    FontWeight->"Bold"],
+  " to add them up. Also we partition the solutions into rows."
+}], "Text"],
+
+Cell[BoxData[
+    \(LightsOutAll[m_, n_] := 
+      Module[{x, mat, l}, 
+        mat = \((ToAdjacencyMatrix[GridGraph[m, n]] + IdentityMatrix[m*n])\); 
+        x = LinearSolve[mat, Table[1, {m*n}], Modulus \[Rule] 2]; \n\t\tl = 
+          Subsets[NullSpace[mat, Modulus \[Rule] 2]]; \n\t\tTable[
+          Partition[Fold[boolesum, x, l[\([i]\)]], m], {i, 
+            Length[l]}]\n\t]\)], "Input"],
+
+Cell["This allows us to construct the unique 3-by-3 solution.", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(LightsOutAll[3, 3]\)], "Input"],
+
+Cell[BoxData[
+    \({{{1, 0, 1}, {0, 1, 0}, {1, 0, 1}}}\)], "Output"]
+}, Open  ]],
+
+Cell["Similarly, we get all 16 of the 4-by-4 solutions.", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(LightsOutAll[4, 4]\)], "Input"],
+
+Cell[BoxData[
+    \({{{1, 1, 1, 1}, {1, 0, 0, 1}, {1, 1, 1, 1}, {0, 0, 0, 0}}, {{0, 0, 0, 
+          1}, {1, 1, 0, 0}, {1, 1, 0, 0}, {0, 0, 0, 1}}, {{0, 1, 0, 0}, {0, 
+          0, 0, 1}, {1, 0, 0, 0}, {0, 0, 1, 0}}, {{0, 0, 1, 0}, {1, 0, 0, 
+          0}, {0, 0, 0, 1}, {0, 1, 0, 0}}, {{1, 0, 0, 0}, {0, 0, 1, 1}, {0, 
+          0, 1, 1}, {1, 0, 0, 0}}, {{1, 0, 1, 0}, {0, 1, 0, 0}, {1, 0, 1, 
+          1}, {0, 0, 1, 1}}, {{1, 1, 0, 0}, {1, 1, 0, 1}, {0, 0, 1, 0}, {0, 
+          1, 0, 1}}, {{0, 1, 1, 0}, {0, 1, 1, 0}, {0, 0, 0, 0}, {1, 0, 0, 
+          1}}, {{1, 0, 0, 1}, {0, 0, 0, 0}, {0, 1, 1, 0}, {0, 1, 1, 0}}, {{0, 
+          0, 1, 1}, {1, 0, 1, 1}, {0, 1, 0, 0}, {1, 0, 1, 0}}, {{0, 1, 0, 
+          1}, {0, 0, 1, 0}, {1, 1, 0, 1}, {1, 1, 0, 0}}, {{0, 1, 1, 1}, {0, 
+          1, 0, 1}, {0, 1, 0, 1}, {0, 1, 1, 1}}, {{1, 1, 0, 1}, {1, 1, 1, 
+          0}, {0, 1, 1, 1}, {1, 0, 1, 1}}, {{1, 0, 1, 1}, {0, 1, 1, 1}, {1, 
+          1, 1, 0}, {1, 1, 0, 1}}, {{1, 1, 1, 0}, {1, 0, 1, 0}, {1, 0, 1, 
+          0}, {1, 1, 1, 0}}, {{0, 0, 0, 0}, {1, 1, 1, 1}, {1, 0, 0, 1}, {1, 
+          1, 1, 1}}}\)], "Output"]
+}, Open  ]],
+
+Cell[TextData[{
+  "We can even define an operator that draws the ",
+  StyleBox["k",
+    FontSlant->"Italic"],
+  "-th solution for the ",
+  StyleBox["m",
+    FontSlant->"Italic"],
+  "-by-",
+  StyleBox["n",
+    FontSlant->"Italic"],
+  " board; we then use it to give the sixth solution of the 11-by-11 board."
+}], "Text"],
+
+Cell[BoxData[
+    \(solveboard[m_, n_, k_] := 
+      GridBox[\(LightsOutAll[m, n]\)[\([k]\)] /. {1 \[Rule] "\<X\>", 
+              0 \[Rule] "\<\>"}, RowLines \[Rule] True, 
+          ColumnLines \[Rule] True, GridFrame \[Rule] True] // 
+        DisplayForm\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(solveboard[11, 11, 3]\)], "Input"],
+
+Cell[BoxData[
+    TagBox[GridBox[{
+          {"X", "", "", "", "X", "X", "X", "", "X", "", "X"},
+          {"", "", "X", "", "X", "", "X", "X", "", "X", ""},
+          {"", "", "", "X", "X", "", "", "X", "", "", "X"},
+          {"X", "X", "X", "X", "", "", "X", "X", "", "X", ""},
+          {"X", "", "", "", "X", "", "X", "", "X", "", "X"},
+          {"X", "X", "", "X", "", "X", "X", "", "", "", ""},
+          {"", "X", "X", "", "", "X", "", "", "", "X", ""},
+          {"X", "", "X", "X", "", "X", "X", "X", "", "", ""},
+          {"", "", "", "X", "X", "", "", "X", "", "", "X"},
+          {"", "X", "X", "", "X", "X", "X", "X", "", "", ""},
+          {"", "X", "X", "", "", "", "", "", "", "X", ""}
+          },
+        GridFrame->True,
+        RowLines->True,
+        ColumnLines->True],
+      DisplayForm]], "Output"]
+}, Open  ]],
+
+Cell[TextData[{
+  "Of special interest are \"minimal\" solutions\[LongDash]those with the \
+least number of \"touched\" squares. To pick out minimal solutions we first \
+flatten each solution so that it consists of a single sequence of 0s and 1s \
+and add the terms in order to count the number of 1s; those solutions with \
+the smallest total are minimal solutions. The following sequence of defined \
+functions leads to the function ",
+  StyleBox["MinSol",
+    FontFamily->"Courier",
+    FontWeight->"Bold"],
+  ", which will pick out a minimal solution. We use the 4-by-4 board to \
+illustrate. We then add a function, ",
+  StyleBox["DrawMinSol",
+    FontFamily->"Courier",
+    FontWeight->"Bold"],
+  ", that draws minimal solutions for rectangular boards; and we use it to \
+draw a minimal solution for the 4-by-4,  5-by-5 (since this was the original \
+",
+  StyleBox["Lights Out",
+    FontSlant->"Italic"],
+  " board), 6-by-6 (for comparison with a variant of the problem given at the \
+end of this paper), and 9-by-9 (for a larger example) boards."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(total[x_] := Plus @@ Flatten[x];\)\), "\n", 
+    \(\(SmallestTotal[x_] := 
+        Min[Table[total[x[\([k]\)]], {k, Length[x]}]];\)\)}], "Input"],
+
+Cell[BoxData[
+    RowBox[{\(General::"spell1"\), \(\(:\)\(\ \)\), "\<\"Possible spelling \
+error: new symbol name \\\"\\!\\(total\\)\\\" is similar to existing symbol \
+\\\"\\!\\(Total\\)\\\". \\!\\(\\*ButtonBox[\\\"More\[Ellipsis]\\\", \
+ButtonStyle->\\\"RefGuideLinkText\\\", ButtonFrame->None, \
+ButtonData:>\\\"General::spell1\\\"]\\)\"\>"}]], "Message"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(SmallestTotal[LightsOutAll[4, 4]]\)], "Input"],
+
+Cell[BoxData[
+    \(4\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(MinSol[x_] := 
+        Select[x, total[#] == SmallestTotal[x] &, 1];\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(MinSol[LightsOutAll[4, 4]]\)], "Input"],
+
+Cell[BoxData[
+    \({{{0, 1, 0, 0}, {0, 0, 0, 1}, {1, 0, 0, 0}, {0, 0, 1, 0}}}\)], "Output"]
+}, Open  ]],
+
+Cell[BoxData[
+    \(DrawMinSol[x_] := 
+      GridBox[Flatten[MinSol[LightsOutAll[x, x]], 1] /. {1 \[Rule] "\<X\>", 
+              0 \[Rule] "\<\>"}, RowLines \[Rule] True, 
+          ColumnLines \[Rule] True, GridFrame \[Rule] True] // 
+        DisplayForm\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(DrawMinSol[4]\)], "Input"],
+
+Cell[BoxData[
+    TagBox[GridBox[{
+          {"", "X", "", ""},
+          {"", "", "", "X"},
+          {"X", "", "", ""},
+          {"", "", "X", ""}
+          },
+        GridFrame->True,
+        RowLines->True,
+        ColumnLines->True],
+      DisplayForm]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(DrawMinSol[5]\)], "Input"],
+
+Cell[BoxData[
+    TagBox[GridBox[{
+          {"", "X", "X", "", "X"},
+          {"", "X", "X", "X", ""},
+          {"", "", "X", "X", "X"},
+          {"X", "X", "", "X", "X"},
+          {"X", "X", "", "", ""}
+          },
+        GridFrame->True,
+        RowLines->True,
+        ColumnLines->True],
+      DisplayForm]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(DrawMinSol[6]\)], "Input"],
+
+Cell[BoxData[
+    TagBox[GridBox[{
+          {"X", "", "X", "X", "", "X"},
+          {"", "X", "X", "X", "X", ""},
+          {"X", "X", "X", "X", "X", "X"},
+          {"X", "X", "X", "X", "X", "X"},
+          {"", "X", "X", "X", "X", ""},
+          {"X", "", "X", "X", "", "X"}
+          },
+        GridFrame->True,
+        RowLines->True,
+        ColumnLines->True],
+      DisplayForm]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(DrawMinSol[9]\)], "Input"],
+
+Cell[BoxData[
+    TagBox[GridBox[{
+          {"X", "", "", "X", "", "", "", "", "X"},
+          {"", "", "", "", "", "X", "X", "", ""},
+          {"", "X", "X", "", "", "X", "X", "", ""},
+          {"", "X", "X", "", "", "", "", "", "X"},
+          {"", "", "", "", "X", "", "", "", ""},
+          {"X", "", "", "", "", "", "X", "X", ""},
+          {"", "", "X", "X", "", "", "X", "X", ""},
+          {"", "", "X", "X", "", "", "", "", ""},
+          {"X", "", "", "", "", "X", "", "", "X"}
+          },
+        GridFrame->True,
+        RowLines->True,
+        ColumnLines->True],
+      DisplayForm]], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Open Problems", "Section"],
+
+Cell[TextData[{
+  "Many open questions remain concerning the ",
+  StyleBox["Lights Out",
+    FontSlant->"Italic"],
+  " problem on boards (grid graphs) and graphs in general. Here are a few \
+that we feel are espeicially worthy of investigation with  ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  ". \n\nWrite a ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " program to find all minimal solutions and use it to investigate which \
+graphs have unique minimal solutions. \n\nCan formulas for the number of \
+touched squares in a minimal solution be obtained for grid graphs or various \
+classes of grid graphs?  If complete accuracy is not obtainable, can \
+informative upper and lower bounds be provided? (The same questions can be \
+asked for classes of graphs that are not grid graphs.) See Reference [2] for \
+some partial results.\n\nIf we vary the starting condition so that some \
+vertices start in the light state and some in the dark state, but still want \
+to extinguish all squares, it is not always possible to find a solution. \
+Which starting configurations have solutions for particular graphs or classes \
+of graphs? A 5-by-5 version of ",
+  StyleBox["Lights Out,",
+    FontSlant->"Italic"],
+  " which allows the player to select any starting configuration, can be \
+played online (see Reference [6]); in addition, a solution, if one exists, \
+will be provided if desired. If there is no solution, what is the maximum \
+number of squares that can be extinguished? This maximization problem is \
+studied in Reference [4]. ",
+  StyleBox["\n",
+    FontColor->RGBColor[1, 0, 0]],
+  "\nFinally, suppose we modify the ",
+  StyleBox["Lights Out",
+    FontSlant->"Italic"],
+  " rule so that touching a vertex on a graphical board changes only the \
+state of the neighbors of that vertex\[LongDash]but not the state of the \
+vertex itself. Then, the only change needed in the treatment we presented is \
+that no longer do we add the identity matrix in setting up the coefficient \
+matrix for the system of linear equations to be solved. With this \
+modification, all the functions above can be employed. In the modified \
+problem, not every rectangular board (or every graph for that matter) has a \
+solution. For example, the 5-by-5 board lacks a solution.  However, the \
+6-by-6 board has solutions. We show a minimal solution for the 6-by-6 board \
+in this variant of the puzzle for comparison with the \"regular\" ",
+  StyleBox["Lights Out",
+    FontSlant->"Italic"],
+  " minimal solution that we gave above for this grid graph. "
+}], "Text"],
+
+Cell[BoxData[
+    TagBox[GridBox[{
+          {"X", "X", "", "", "X", "X"},
+          {"", "", "", "", "", ""},
+          {"", "", "X", "X", "", ""},
+          {"X", "", "", "", "", "X"},
+          {"X", "", "", "", "", "X"},
+          {"", "", "X", "X", "", ""}
+          },
+        GridFrame->True,
+        RowLines->True,
+        ColumnLines->True],
+      DisplayForm]], "Output",
+  GeneratedCell->False,
+  CellAutoOverwrite->False],
+
+Cell[TextData[{
+  "Notice how many fewer squares need to be \"touched\" in the 6-by-6 case \
+for this variant of the problem.\nExactly which grid graphs do have solutions \
+for this modification is not known. Again, the reader is encouraged to \
+investigate using ",
+  StyleBox["Mathematica.",
+    FontSlant->"Italic"],
+  " "
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["References ", "Section"],
+
+Cell[TextData[{
+  "[1] Y. Caro; Simple proofs to three parity theorems. ",
+  StyleBox["Ars Combinatorica,",
+    FontSlant->"Italic"],
+  " ",
+  StyleBox["42",
+    FontWeight->"Bold"],
+  ", 175\[Dash]180 (1996). \n\n[2] M.M. Conlon, M. Falidas, M.J. Forde, J.W. \
+Kennedy, S. McIlwaine, and J. Stern; Inversion numbers of graphs. ",
+  StyleBox["Graph Theory Notes of New York,",
+    FontSlant->"Italic"],
+  " ",
+  StyleBox["XXXVII",
+    FontWeight->"Bold"],
+  ", 42\[Dash]48 (1999). \n\n[3] R. Cowen, S.H. Hechler, J.W. Kennedy, and A. \
+Ryba; Inversion and neighborhood inversion in graphs. ",
+  StyleBox["Graph Theory Notes of New York,",
+    FontSlant->"Italic"],
+  " ",
+  StyleBox["XXXVII",
+    FontWeight->"Bold"],
+  ", 37\[Dash]41 (1999). \n\n[4] J. Goldwasser and W. Klostermeyer; \
+Maximization versions of \"Lights Out\" games in grids and graphs, ",
+  StyleBox["Congressus Numerantium",
+    FontSlant->"Italic"],
+  ", ",
+  StyleBox["126",
+    FontWeight->"Bold"],
+  ", 99-111.\n\n[5] K. Sutter; Linear cellular automata and the \
+Garden-of-Eden, ",
+  StyleBox["The Mathematical Intelligencer, ",
+    FontSlant->"Italic"],
+  StyleBox["11",
+    FontWeight->"Bold"],
+  ", 49\[Dash]53 (1989).\n\n[6] \
+http://www.whitman.edu/offices_departments/mathematics/lights_out/"
+}], "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ABOUT THE AUTHORS", "Subsection"],
+
+Cell[TextData[{
+  "Robert Cowen and John W. Kennedy teach mathematics at Queens College of \
+The City University of New York where they give a course in mathematical \
+algorithms that meets in the Department\[CloseCurlyQuote]s ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " lab. They are writing a book, ",
+  StyleBox["Discovering Mathematics with Mathematica,",
+    FontSlant->"Italic"],
+  " based on the course. This article is adapted from a chapter in the book. \
+\n",
+  StyleBox["\n",
+    FontWeight->"Bold"],
+  "cowen@forbin.qc.edu;     \n\njkennedy@nyas.org"
+}], "Text"]
+}, Open  ]]
+}, Open  ]],
+
+Cell["ELECTRONIC SUBSCRIPTIONS", "Subsection"],
+
+Cell[TextData[{
+  StyleBox["Included in the distribution for each electronic subscription is \
+the file",
+    FontFamily->"Times New Roman",
+    FontSize->12],
+  StyleBox[" ", "Input",
+    FontFamily->"Times New Roman",
+    FontSize->12],
+  StyleBox["lightsOut.nb", "Input",
+    FontWeight->"Plain"],
+  StyleBox[", containing ",
+    FontFamily->"Times New Roman",
+    FontSize->12],
+  StyleBox["Mathematica",
+    FontFamily->"Times New Roman",
+    FontSize->12,
+    FontSlant->"Italic"],
+  StyleBox[" code for the material described in this article.",
+    FontFamily->"Times New Roman",
+    FontSize->12]
+}], "Text"]
+},
+FrontEndVersion->"5.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 937}},
+WindowToolbars->{},
+CellGrouping->Manual,
+WindowSize->{1272, 903},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+PrintingCopies->1,
+PrintingPageRange->{1, Automatic},
+PageHeaders->{{Cell[ 
+        TextData[ {
+          CounterBox[ "Page"]}], "PageNumber"], Inherited, Cell[ 
+        TextData[ {
+          ValueBox[ "FileName"]}], "Header"]}, {Cell[ 
+        TextData[ {
+          ValueBox[ "FileName"]}], "Header"], Inherited, Cell[ 
+        TextData[ {
+          CounterBox[ "Page"]}], "PageNumber"]}},
+PrintingOptions->{"PrintingMargins"->{{54, 54}, {72, 72}},
+"PrintCellBrackets"->False,
+"PrintRegistrationMarks"->False,
+"PrintMultipleHorizontalPages"->False},
+CellLabelAutoDelete->True,
+Magnification->1.25,
+StyleDefinitions -> "Default.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1754, 51, 63, 1, 35, "Input"],
+
+Cell[CellGroupData[{
+Cell[1842, 56, 63, 1, 117, "Title"],
+Cell[1908, 59, 209, 6, 38, "Subsubtitle"],
+Cell[2120, 67, 59, 3, 59, "Text"],
+Cell[2182, 72, 1550, 32, 164, "Text"],
+
+Cell[CellGroupData[{
+Cell[3757, 108, 43, 0, 92, "Section"],
+Cell[3803, 110, 2492, 67, 227, "Text"],
+Cell[6298, 179, 195, 5, 38, "Text"],
+
+Cell[CellGroupData[{
+Cell[6518, 188, 307, 10, 77, "Input"],
+Cell[6828, 200, 67, 1, 35, "Output"]
+}, Open  ]],
+Cell[6910, 204, 2528, 103, 227, "Text"],
+Cell[9441, 309, 230, 7, 39, "Text"],
+
+Cell[CellGroupData[{
+Cell[9696, 320, 2571, 71, 56, "Input"],
+Cell[12270, 393, 217, 3, 35, "Output"]
+}, Open  ]],
+Cell[12502, 399, 399, 8, 59, "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[12938, 412, 39, 0, 92, "Section"],
+Cell[12980, 414, 1574, 47, 124, "Text"],
+Cell[14557, 463, 73, 1, 35, "Input"],
+Cell[14633, 466, 184, 5, 38, "Text"],
+
+Cell[CellGroupData[{
+Cell[14842, 475, 59, 1, 35, "Input"],
+Cell[14904, 478, 21268, 424, 156, 2261, 185, "GraphicsData", "PostScript", \
+"Graphics"],
+Cell[36175, 904, 130, 3, 35, "Output"]
+}, Open  ]],
+Cell[36320, 910, 167, 4, 38, "Text"],
+Cell[36490, 916, 1119, 34, 101, "Text"],
+
+Cell[CellGroupData[{
+Cell[37634, 954, 81, 1, 35, "Input"],
+Cell[37718, 957, 801, 17, 192, "Output"]
+}, Open  ]],
+Cell[38534, 977, 384, 8, 59, "Text"],
+
+Cell[CellGroupData[{
+Cell[38943, 989, 110, 2, 35, "Input"],
+Cell[39056, 993, 801, 17, 192, "Output"]
+}, Open  ]],
+Cell[39872, 1013, 509, 12, 60, "Text"],
+
+Cell[CellGroupData[{
+Cell[40406, 1029, 199, 4, 56, "Input"],
+Cell[40608, 1035, 67, 1, 35, "Output"]
+}, Open  ]],
+Cell[40690, 1039, 378, 12, 80, "Text"],
+Cell[41071, 1053, 245, 5, 77, "Input"],
+Cell[41319, 1060, 61, 0, 38, "Text"],
+
+Cell[CellGroupData[{
+Cell[41405, 1064, 48, 1, 35, "Input"],
+Cell[41456, 1067, 143, 2, 35, "Output"]
+}, Open  ]],
+Cell[41614, 1072, 251, 6, 38, "Text"],
+Cell[41868, 1080, 234, 4, 35, "Input"],
+
+Cell[CellGroupData[{
+Cell[42127, 1088, 46, 1, 35, "Input"],
+Cell[42176, 1091, 348, 11, 132, "Output"]
+}, Open  ]],
+Cell[42539, 1105, 67, 0, 38, "Text"],
+
+Cell[CellGroupData[{
+Cell[42631, 1109, 48, 1, 35, "Input"],
+Cell[42682, 1112, 990, 17, 246, "Output"]
+}, Open  ]],
+Cell[43687, 1132, 427, 9, 81, "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[44151, 1146, 35, 0, 92, "Section"],
+Cell[44189, 1148, 758, 19, 81, "Text"],
+Cell[44950, 1169, 120, 3, 35, "Input"],
+
+Cell[CellGroupData[{
+Cell[45095, 1176, 60, 1, 35, "Input"],
+Cell[45158, 1179, 35, 1, 35, "Output"]
+}, Open  ]],
+Cell[45208, 1183, 806, 22, 80, "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[46051, 1210, 32, 0, 92, "Section"],
+Cell[46086, 1212, 1071, 26, 105, "Text"],
+Cell[47160, 1240, 140, 3, 56, "Input"],
+Cell[47303, 1245, 277, 8, 40, "Text"],
+
+Cell[CellGroupData[{
+Cell[47605, 1257, 61, 1, 35, "Input"],
+Cell[47669, 1260, 35, 1, 35, "Output"]
+}, Open  ]],
+Cell[47719, 1264, 378, 14, 39, "Text"],
+Cell[48100, 1280, 71, 1, 35, "Input"],
+Cell[48174, 1283, 1212, 41, 83, "Text"],
+Cell[49389, 1326, 396, 7, 119, "Input"],
+Cell[49788, 1335, 71, 0, 38, "Text"],
+
+Cell[CellGroupData[{
+Cell[49884, 1339, 51, 1, 35, "Input"],
+Cell[49938, 1342, 69, 1, 35, "Output"]
+}, Open  ]],
+Cell[50022, 1346, 65, 0, 38, "Text"],
+
+Cell[CellGroupData[{
+Cell[50112, 1350, 51, 1, 35, "Input"],
+Cell[50166, 1353, 1116, 15, 182, "Output"]
+}, Open  ]],
+Cell[51297, 1371, 319, 11, 38, "Text"],
+Cell[51619, 1384, 270, 5, 56, "Input"],
+
+Cell[CellGroupData[{
+Cell[51914, 1393, 54, 1, 35, "Input"],
+Cell[51971, 1396, 825, 17, 246, "Output"]
+}, Open  ]],
+Cell[52811, 1416, 1065, 22, 123, "Text"],
+
+Cell[CellGroupData[{
+Cell[53901, 1442, 168, 3, 56, "Input"],
+Cell[54072, 1447, 358, 5, 29, "Message"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[54467, 1457, 66, 1, 35, "Input"],
+Cell[54536, 1460, 35, 1, 35, "Output"]
+}, Open  ]],
+Cell[54586, 1464, 105, 2, 35, "Input"],
+
+Cell[CellGroupData[{
+Cell[54716, 1470, 59, 1, 35, "Input"],
+Cell[54778, 1473, 92, 1, 35, "Output"]
+}, Open  ]],
+Cell[54885, 1477, 269, 5, 77, "Input"],
+
+Cell[CellGroupData[{
+Cell[55179, 1486, 46, 1, 35, "Input"],
+Cell[55228, 1489, 270, 10, 112, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[55535, 1504, 46, 1, 35, "Input"],
+Cell[55584, 1507, 329, 11, 132, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[55950, 1523, 46, 1, 35, "Input"],
+Cell[55999, 1526, 398, 12, 150, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[56434, 1543, 46, 1, 35, "Input"],
+Cell[56483, 1546, 611, 15, 208, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[57143, 1567, 32, 0, 92, "Section"],
+Cell[57178, 1569, 2573, 47, 395, "Text"],
+Cell[59754, 1618, 434, 14, 133, "Output"],
+Cell[60191, 1634, 337, 8, 59, "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[60565, 1647, 30, 0, 92, "Section"],
+Cell[60598, 1649, 1285, 36, 253, "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[61920, 1690, 39, 0, 48, "Subsection"],
+Cell[61962, 1692, 589, 14, 143, "Text"]
+}, Open  ]]
+}, Open  ]],
+Cell[62578, 1710, 46, 0, 48, "Subsection"],
+Cell[62627, 1712, 616, 20, 39, "Text"]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

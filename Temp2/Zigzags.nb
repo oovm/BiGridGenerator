@@ -1,0 +1,1334 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     58249,       1326]
+NotebookOptionsPosition[     19585,        536]
+NotebookOutlinePosition[     53791,       1244]
+CellTagsIndexPosition[     53720,       1239]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[TextData[{
+ "Practical Design with ",
+ StyleBox["Artlandia",
+  FontSlant->"Italic"]
+}], "Title",
+ FontColor->GrayLevel[1],
+ CellTags->"Zigzags",ExpressionUUID->"e1486cc6-eb18-4b6d-bc0c-0d93a5412961"],
+
+Cell[TextData[{
+ " ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["Artlandia", 
+    StyleBox["\[RegisteredTrademark]",
+     FontSlant->"Plain"]], TraditionalForm]],ExpressionUUID->
+  "9f2e2754-4dd8-43eb-a11e-4e4083be3727"],
+ " Demo Series"
+}], "Subsubtitle",ExpressionUUID->"0d953665-0f58-4bdb-8b85-2ed0be09452a"],
+
+Cell[TextData[{
+ "Copyright \[Copyright] 1998-2001 by Artlandia, Inc. This notebook \
+demonstrates some of the designer tools available in ",
+ StyleBox["Artlandia",
+  FontSlant->"Italic"],
+ ". The notebook may be copied or distributed freely, as long as it is \
+distributed in its entirety. All other rights reserved. In particular, \
+reproduction of individual images without the prior written permission of the \
+copyright holder is expressly prohibited. Questions and comments are welcome \
+at ",
+ StyleBox["info@artlandia.com",
+  FontColor->RGBColor[0, 0, 1]],
+ ". More information about ",
+ StyleBox["Artlandia",
+  FontSlant->"Italic"],
+ " and related products is available at ",
+ ButtonBox["http://www.artlandia.com",
+  BaseStyle->"Hyperlink",
+  ButtonData:>{
+    URL["http://www.artlandia.com"], None}],
+ ". For more information about the ",
+ StyleBox["Graphica",
+  FontSlant->"Italic"],
+ " books visit ",
+ ButtonBox["http://www.graphica.com",
+  BaseStyle->"Hyperlink",
+  ButtonData:>{
+    URL["http://www.graphica.com"], None}],
+ ". ",
+ StyleBox["Artlandia",
+  FontSlant->"Italic"],
+ " is a registered trademark of Artlandia, Inc. ",
+ StyleBox["Graphica",
+  FontSlant->"Italic"],
+ " is a trademark of Wolfram Media, Inc. All other product names are \
+trademarks of their producers. The notebook excerpted from ",
+ StyleBox["The Artlandia Guide",
+  FontSlant->"Italic"],
+ ", Champaign, IL: Artlandia, Inc., 1998."
+}], "SmallText",ExpressionUUID->"69e55e8f-09ba-4e20-9cac-3f2ea91ea328"],
+
+Cell[TextData[{
+ StyleBox["Artlandia",
+  FontSlant->"Italic"],
+ " is a ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ "-based application that lets you easily create patterns, ornaments, and \
+designs for fun or practical purposes. Images generated with ",
+ StyleBox["Artlandia",
+  FontSlant->"Italic"],
+ " adorn textiles, ",
+ StyleBox["wallcoverings,",
+  CellOpen->False],
+ " gift wraps, and book and magazine covers; other images have been used for \
+fine art pieces. Following describes how one such image was produced."
+}], "Text",ExpressionUUID->"3347d633-68c4-4e3f-9dc7-9871b8ee1473"],
+
+Cell[CellGroupData[{
+
+Cell["The Zigzags Pattern", "Section",
+ CellTags->"Zigzags",ExpressionUUID->"7c9380c2-f4da-4035-909d-5e5ea718b99a"],
+
+Cell[TextData[{
+ "The ",
+ StyleBox["Zigzags",
+  FontSlant->"Italic"],
+ " pattern is constructed by embellishing a few wavy lines with zigzags \
+overlapped with intermittent dots."
+}], "Text",
+ CellTags->"Zigzags",ExpressionUUID->"a0928d75-0bd1-4603-a537-e421556b39ef"],
+
+Cell[TextData[{
+ "Load ",
+ StyleBox["Artlandia",
+  FontSlant->"Italic"],
+ "."
+}], "MathCaption",
+ CellTags->"Zigzags",ExpressionUUID->"bfdfd6fd-8b4d-45dc-b130-576290917eeb"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"<<", "Artlandia`"}]], "Input",
+ CellTags->"Zigzags",
+ CellLabel->"In[1]:=",ExpressionUUID->"9c891c5c-8431-4e70-85a6-4acbe1f2cd31"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Get","noopen",
+   "\"\:65e0\:6cd5\:6253\:5f00 \
+\\!\\(\\*RowBox[{\\\"\\\\\\\"Artlandia`\\\\\\\"\\\"}]\\).\"",2,1,2,
+   32051061575926092722,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.723969107773655*^9},
+ CellTags->"Zigzags",
+ CellLabel->
+  "\:6b63\:5728\:8ba1\:7b97In[1]:=",ExpressionUUID->"41525750-7f6c-44de-a77d-\
+dc929adcaf04"],
+
+Cell[BoxData["$Failed"], "Output",
+ CellChangeTimes->{3.7239691078093843`*^9},
+ CellTags->"Zigzags",
+ CellLabel->"Out[1]=",ExpressionUUID->"8e9dbf4c-8bd4-4c54-9dec-4fcd33e5d41a"]
+}, Open  ]],
+
+Cell["\<\
+These are the image colors and the background color for the pattern.\
+\>", "MathCaption",
+ CellTags->"Zigzags",ExpressionUUID->"807cb369-28eb-446a-847a-12ad4b01384b"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"colors", "=", 
+   RowBox[{"{", 
+    RowBox[{"Banana", ",", "GeraniumLake", ",", "LightSalmon", ",", "Gold"}], 
+    "}"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"background", "=", "Raspberry"}], ";"}]}], "Input",
+ AspectRatioFixed->True,
+ CellTags->"Zigzags",
+ CellLabel->"In[2]:=",ExpressionUUID->"52950521-6143-4417-bdcf-579adc862f99"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ColorBar", "[", 
+   RowBox[{
+    RowBox[{"Flatten", "[", 
+     RowBox[{"{", 
+      RowBox[{"background", ",", " ", "colors"}], "}"}], "]"}], ",", 
+    RowBox[{"OrderingFunction", "\[Rule]", "None"}]}], "]"}], ";"}]], "Input",\
+
+ CellTags->"Zigzags",
+ CellLabel->"In[4]:=",ExpressionUUID->"54538a27-d38b-484a-9d00-0720620ef778"],
+
+Cell[TextData[{
+ "Wavy lines are computed using the ",
+ StyleBox["Artlandia",
+  FontSlant->"Italic"],
+ "'s ",
+ StyleBox["ad hoc",
+  FontSlant->"Italic"],
+ " function ",
+ StyleBox["SmoothArray", "MR"],
+ " that creates a high-order interpolation of a shorter natural array."
+}], "Text",
+ CellTags->"Zigzags",ExpressionUUID->"cb12551d-c2b3-4b8b-9d0b-4ef6f064199c"],
+
+Cell["This is a typical smooth array.", "MathCaption",
+ CellTags->"Zigzags",ExpressionUUID->"274f7b9c-63f6-4a19-b046-43b02324b232"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ListPlot", "[", 
+   RowBox[{"SmoothArray", "[", "100", "]"}], "]"}], ";"}]], "Input",
+ CellTags->"Zigzags",
+ CellLabel->"In[5]:=",ExpressionUUID->"0cd5f77e-14c5-408e-8c47-6e322124e0bc"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "ListPlot","lpn",
+   "\"\\!\\(\\*RowBox[{\\\"SmoothArray\\\", \\\"[\\\", \\\"100.`\\\", \\\"]\\\
+\"}]\\) \:4e0d\:662f\:7531\:6570\:5b57\:6216\:8005\:6570\:5bf9\:7ec4\:6210\
+\:7684\:5217\:8868.\"",2,5,3,32051061575926092722,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.723969108178746*^9},
+ CellTags->"Zigzags",
+ CellLabel->
+  "\:6b63\:5728\:8ba1\:7b97In[5]:=",ExpressionUUID->"16df9eae-c071-47c0-9d89-\
+be47413ebae3"]
+}, Open  ]],
+
+Cell["\<\
+This sets the number of wavy lines and the number of points in each line.\
+\>", "MathCaption",
+ CellTags->"Zigzags",ExpressionUUID->"3cf0cc71-264e-45f4-a153-7b115ff52067"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"lines", "=", "20"}], ";", 
+  RowBox[{"points", "=", "50"}], ";"}]], "Input",
+ CellTags->"Zigzags",
+ CellLabel->"In[6]:=",ExpressionUUID->"296614ee-8a62-43a5-99f6-a68325aa4e02"],
+
+Cell[TextData[{
+ "This creates wavy lines. By giving the smooth arrays appropriate bounds, we \
+make them barely intersect. Then we spread the lines horizontally using the \
+function ",
+ StyleBox["Crown", "MR"],
+ "."
+}], "MathCaption",
+ CellTags->"Zigzags",ExpressionUUID->"2acddad2-e58c-4131-b557-bfc711a38d95"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"traces", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Crown", "[", 
+      RowBox[{
+       RowBox[{"SmoothArray", "[", 
+        RowBox[{"points", ",", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"1", ",", "1.4"}], "}"}], "+", 
+          FractionBox["#", "2"]}]}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"0", ",", "0"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", 
+           RowBox[{"lines", " ", ".75"}]}], "}"}]}], "}"}]}], "]"}], "&"}], "/@", 
+    RowBox[{"Range", "[", "lines", "]"}]}]}], ";"}]], "Input",
+ CellTags->"Zigzags",
+ CellLabel->"In[7]:=",ExpressionUUID->"fd6bb9a5-40b7-430b-9a62-c37b90306866"],
+
+Cell["Here are the traces of the wavy lines.", "MathCaption",
+ CellTags->"Zigzags",ExpressionUUID->"30949b97-52e5-4bfd-9480-e1d98a4f13f6"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Show", "[", 
+   RowBox[{
+    RowBox[{"Graphics", "[", 
+     RowBox[{"Map", "[", 
+      RowBox[{"Point", ",", "traces", ",", 
+       RowBox[{"{", "2", "}"}]}], "]"}], "]"}], ",", 
+    RowBox[{"AspectRatio", "\[Rule]", "Automatic"}]}], "]"}], ";"}]], "Input",\
+
+ CellTags->"Zigzags",
+ CellLabel->"In[8]:=",ExpressionUUID->"2b2d41cf-affc-4619-aaf3-6b045e04d616"],
+
+Cell["\<\
+This sets the thickness and the point size multiplier for the embellishments.\
+\
+\>", "MathCaption",
+ CellTags->"Zigzags",ExpressionUUID->"7bdd554d-361d-4766-a9af-65ca562f5e65"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"thickness", " ", "=", " ", 
+   RowBox[{"NaturalArray", "[", 
+    RowBox[{"lines", ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "1.5"}], "}"}]}], "]"}]}], ";"}]], "Input",
+ CellTags->"Zigzags",
+ CellLabel->"In[9]:=",ExpressionUUID->"a1e48a01-a8a6-45d0-8c0e-922d43a84f61"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"psizemultiplier", "=", "2"}], ";"}]], "Input",
+ CellTags->"Zigzags",
+ CellLabel->"In[10]:=",ExpressionUUID->"783a9466-590d-433e-a5c0-f5da559e2663"],
+
+Cell[TextData[{
+ "In the next step, we create randomly colored zigzags around each wavy line \
+and decorate the wavy lines with colored dots. The zigzags are computed using \
+the ",
+ StyleBox["ad hoc",
+  FontSlant->"Italic"],
+ " function ",
+ StyleBox["Zigzag", "MR"],
+ ". By selecting the length of the array of points that form the zigzags \
+equal to the number of points in the wavy lines, we make the dots centered \
+between the segments."
+}], "Text",
+ CellTags->"Zigzags",ExpressionUUID->"6bdbcab8-e795-470e-b076-385c93cb66ed"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Show", "[", 
+   RowBox[{
+    RowBox[{"Graphics", "[", 
+     RowBox[{"MapThread", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"RandomElement", "[", "colors", "]"}], ",", 
+            RowBox[{"AbsoluteThickness", "[", "#", "]"}], ",", 
+            RowBox[{"Zigzag", "[", 
+             RowBox[{
+              RowBox[{"Length", "[", "#2", "]"}], ",", " ", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{".5", ",", ".75"}], "}"}], " ", "#"}], ",", "#2"}], 
+             "]"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"RandomElement", "[", "colors", "]"}], ",", 
+            RowBox[{"AbsolutePointSize", "[", 
+             RowBox[{"psizemultiplier", " ", "#"}], "]"}], ",", 
+            RowBox[{"Point", "/@", "#2"}]}], "}"}]}], "}"}], "&"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"thickness", ",", "traces"}], "}"}]}], "]"}], "]"}], ",", 
+    RowBox[{"AspectRatio", "\[Rule]", "Automatic"}], ",", 
+    RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+    RowBox[{"Background", "\[Rule]", "background"}]}], "]"}], ";"}]], "Input",\
+
+ CellTags->"Zigzags",
+ CellLabel->"In[11]:=",ExpressionUUID->"f3108088-9436-4c6d-a4d8-89ec2b1054db"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "MapThread","mptd",
+   "\"\\!\\(\\*RowBox[{\\\"MapThread\\\", \\\"[\\\", RowBox[{RowBox[{RowBox[{\
+\\\"{\\\", RowBox[{RowBox[{\\\"{\\\", RowBox[{RowBox[{\\\"RandomElement\\\", \
+\\\"[\\\", \\\"colors\\\", \\\"]\\\"}], \\\",\\\", \
+RowBox[{\\\"AbsoluteThickness\\\", \\\"[\\\", \\\"#1\\\", \\\"]\\\"}], \
+\\\",\\\", RowBox[{\\\"Zigzag\\\", \\\"[\\\", RowBox[{RowBox[{\\\"Length\\\", \
+\\\"[\\\", \\\"#2\\\", \\\"]\\\"}], \\\",\\\", RowBox[{RowBox[{\\\"{\\\", \
+RowBox[{\\\"0.5`\\\", \\\",\\\", \\\"0.75`\\\"}], \\\"}\\\"}], \\\" \\\", \
+\\\"#1\\\"}], \\\",\\\", \\\"#2\\\"}], \\\"]\\\"}]}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{RowBox[{\\\"RandomElement\\\", \\\"[\\\", \
+\\\"colors\\\", \\\"]\\\"}], \\\",\\\", RowBox[{\\\"AbsolutePointSize\\\", \\\
+\"[\\\", RowBox[{\\\"psizemultiplier\\\", \\\" \\\", \\\"#1\\\"}], \
+\\\"]\\\"}], \\\",\\\", RowBox[{\\\"Point\\\", \\\"/@\\\", \\\"#2\\\"}]}], \\\
+\"}\\\"}]}], \\\"}\\\"}], \\\"&\\\"}], \\\",\\\", RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{\\\"NaturalArray\\\", \\\"[\\\", RowBox[{\\\"20\\\", \
+\\\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"1\\\", \\\",\\\", \\\"1.5`\\\"}], \
+\\\"}\\\"}]}], \\\"]\\\"}], \\\",\\\", RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{\\\"Crown\\\", \\\"[\\\", \
+RowBox[{RowBox[{\\\"SmoothArray\\\", \\\"[\\\", RowBox[{\\\"50\\\", \
+\\\",\\\", RowBox[{\\\"{\\\", RowBox[{FractionBox[\\\"3\\\", \\\"2\\\"], \
+\\\",\\\", \\\"1.9`\\\"}], \\\"}\\\"}]}], \\\"]\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{RowBox[{\\\"{\\\", RowBox[{\\\"0\\\", \\\",\\\", \
+\\\"0\\\"}], \\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"0\\\", \\\
+\",\\\", \\\"15.`\\\"}], \\\"}\\\"}]}], \\\"}\\\"}]}], \\\"]\\\"}], \
+\\\",\\\", RowBox[{\\\"\[LeftSkeleton]\\\", \\\"18\\\", \
+\\\"\[RightSkeleton]\\\"}], \\\",\\\", RowBox[{\\\"Crown\\\", \\\"[\\\", \
+RowBox[{RowBox[{\\\"SmoothArray\\\", \\\"[\\\", RowBox[{\\\"50\\\", \
+\\\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"11\\\", \\\",\\\", \\\"11.4`\\\"}], \
+\\\"}\\\"}]}], \\\"]\\\"}], \\\",\\\", RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{\\\"{\\\", RowBox[{\\\"0\\\", \\\",\\\", \\\"0\\\"}], \\\"}\\\
+\"}], \\\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"0\\\", \\\",\\\", \
+\\\"15.`\\\"}], \\\"}\\\"}]}], \\\"}\\\"}]}], \\\"]\\\"}]}], \\\"}\\\"}]}], \
+\\\"}\\\"}]}], \\\"]\\\"}]\\) \:4e2d\:4f4d\:7f6e {2, \\!\\(\\*RowBox[{\\\"1\\\
+\"}]\\)} \:5904\:7684\:5bf9\:8c61 \\!\\(\\*RowBox[{\\\"NaturalArray\\\", \
+\\\"[\\\", RowBox[{\\\"20\\\", \\\",\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"1\\\", \\\",\\\", \\\"1.5`\\\"}], \\\"}\\\"}]}], \\\"]\\\"}]\\) \
+\:53ea\:542b\:6709 \\!\\(\\*RowBox[{\\\"0\\\"}]\\) \:4e2a\:7ef4\:5ea6\:ff08\
+\:8981\:6c42\:7ef4\:5ea6\:4e3a \\!\\(\\*RowBox[{\\\"1\\\"}]\\)\:ff09.\"",2,11,
+   4,32051061575926092722,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.723969108315878*^9},
+ CellTags->"Zigzags",
+ CellLabel->
+  "\:6b63\:5728\:8ba1\:7b97In[11]:=",ExpressionUUID->"4e48382a-19b3-4ebb-8901-\
+e8e8509b16cf"]
+}, Open  ]],
+
+Cell["This trims the previous pattern from all sides.", "MathCaption",
+ CellTags->"Zigzags",ExpressionUUID->"5c4a8dc6-f47e-4f78-8b33-e0b9f292a9f0"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Zoom", "[", 
+   RowBox[{"%", ",", ".9"}], "]"}], ";"}]], "Input",
+ CellTags->"Zigzags",
+ CellLabel->"In[12]:=",ExpressionUUID->"b1718123-a0ba-46cb-9156-2cd95ac7218f"],
+
+Cell["\<\
+The trimming sets the appropriate plot range and is an alternative to \
+explicitly specifying control points when we form a tile from a graphics.\
+\>", "Text",
+ CellTags->"Zigzags",ExpressionUUID->"743ffa96-c8d6-4bb0-89c9-d11b55c3815b"],
+
+Cell[TextData[{
+ "This makes a tile of the symmetry group \[ScriptP]4\[ScriptG] based on the \
+above pattern. By setting the option ",
+ StyleBox["Boundary", "MR"],
+ " to ",
+ StyleBox["True", "MR"],
+ " we retain in the pattern all the parts of the lines that intersect the \
+boundary of the unit cell."
+}], "MathCaption",
+ CellTags->"Zigzags",ExpressionUUID->"8ecdd3c6-4b4e-4d68-bee1-e6b465d3705d"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Tile", "[", 
+  RowBox[{"%", ",", "\[ScriptP]4\[ScriptG]", ",", " ", 
+   RowBox[{"Boundary", "\[Rule]", "True"}]}], "]"}]], "Input",
+ CellTags->"Zigzags",
+ CellLabel->"In[13]:=",ExpressionUUID->"4c9366c0-75ea-479a-8b3c-77570ea701c5"],
+
+Cell[BoxData[
+ RowBox[{"Tile", "[", 
+  RowBox[{
+   RowBox[{"Zoom", "[", 
+    RowBox[{
+     GraphicsBox[MapThread[{{
+         $CellContext`RandomElement[$CellContext`colors], 
+         AbsoluteThickness[#], 
+         $CellContext`Zigzag[
+          Length[#2], {0.5, 0.75} #, #2]}, {
+         $CellContext`RandomElement[$CellContext`colors], 
+         AbsolutePointSize[$CellContext`psizemultiplier #], 
+         Map[Point, #2]}}& , {
+        $CellContext`NaturalArray[20, {1, 1.5}], {
+         $CellContext`Crown[
+          $CellContext`SmoothArray[50, {
+            Rational[3, 2], 1.9}], {{0, 0}, {0, 15.}}], 
+         $CellContext`Crown[
+          $CellContext`SmoothArray[50, {2, 2.4}], {{0, 0}, {0, 15.}}], 
+         $CellContext`Crown[
+          $CellContext`SmoothArray[50, {
+            Rational[5, 2], 2.9}], {{0, 0}, {0, 15.}}], 
+         $CellContext`Crown[
+          $CellContext`SmoothArray[50, {3, 3.4}], {{0, 0}, {0, 15.}}], 
+         $CellContext`Crown[
+          $CellContext`SmoothArray[50, {
+            Rational[7, 2], 3.9}], {{0, 0}, {0, 15.}}], 
+         $CellContext`Crown[
+          $CellContext`SmoothArray[50, {4, 4.4}], {{0, 0}, {0, 15.}}], 
+         $CellContext`Crown[
+          $CellContext`SmoothArray[50, {
+            Rational[9, 2], 4.9}], {{0, 0}, {0, 15.}}], 
+         $CellContext`Crown[
+          $CellContext`SmoothArray[50, {5, 5.4}], {{0, 0}, {0, 15.}}], 
+         $CellContext`Crown[
+          $CellContext`SmoothArray[50, {
+            Rational[11, 2], 5.9}], {{0, 0}, {0, 15.}}], 
+         $CellContext`Crown[
+          $CellContext`SmoothArray[50, {6, 6.4}], {{0, 0}, {0, 15.}}], 
+         $CellContext`Crown[
+          $CellContext`SmoothArray[50, {
+            Rational[13, 2], 6.9}], {{0, 0}, {0, 15.}}], 
+         $CellContext`Crown[
+          $CellContext`SmoothArray[50, {7, 7.4}], {{0, 0}, {0, 15.}}], 
+         $CellContext`Crown[
+          $CellContext`SmoothArray[50, {
+            Rational[15, 2], 7.9}], {{0, 0}, {0, 15.}}], 
+         $CellContext`Crown[
+          $CellContext`SmoothArray[50, {8, 8.4}], {{0, 0}, {0, 15.}}], 
+         $CellContext`Crown[
+          $CellContext`SmoothArray[50, {
+            Rational[17, 2], 8.9}], {{0, 0}, {0, 15.}}], 
+         $CellContext`Crown[
+          $CellContext`SmoothArray[50, {9, 9.4}], {{0, 0}, {0, 15.}}], 
+         $CellContext`Crown[
+          $CellContext`SmoothArray[50, {
+            Rational[19, 2], 9.9}], {{0, 0}, {0, 15.}}], 
+         $CellContext`Crown[
+          $CellContext`SmoothArray[50, {10, 10.4}], {{0, 0}, {0, 15.}}], 
+         $CellContext`Crown[
+          $CellContext`SmoothArray[50, {
+            Rational[21, 2], 10.9}], {{0, 0}, {0, 15.}}], 
+         $CellContext`Crown[
+          $CellContext`SmoothArray[50, {11, 11.4}], {{0, 0}, {0, 15.}}]}}],
+      AspectRatio->Automatic,
+      Background->$CellContext`Raspberry,
+      PlotRange->All], ",", "0.9`"}], "]"}], ",", "\[ScriptP]4\[ScriptG]", 
+   ",", 
+   RowBox[{"Boundary", "\[Rule]", "True"}]}], "]"}]], "Output",
+ CellChangeTimes->{3.723969108358909*^9},
+ CellTags->"Zigzags",
+ CellLabel->"Out[13]=",ExpressionUUID->"6ebab120-e687-4822-b4cb-b21baa3452f9"]
+}, Open  ]],
+
+Cell["\<\
+This is the 2 \[Times] 2 tiling made from the tile, trimmed from all sides.\
+\>", "MathCaption",
+ CellTags->"Zigzags",ExpressionUUID->"5ee5dec4-5068-4f37-bdb8-a5f4fca9e024"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Zoom", "[", 
+   RowBox[{
+    RowBox[{"Tiling", "[", 
+     RowBox[{"%", ",", 
+      RowBox[{"{", 
+       RowBox[{"2", ",", "2"}], "}"}], ",", 
+      RowBox[{"Background", "\[Rule]", "background"}], ",", 
+      RowBox[{"AspectRatio", "\[Rule]", "Automatic"}], ",", 
+      RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}], ",", ".7"}], "]"}], 
+  ";"}]], "Input",
+ CellTags->"Zigzags",
+ CellLabel->"In[14]:=",ExpressionUUID->"31ad6c04-91ff-45c6-b842-a4ea591aced1"],
+
+Cell["\<\
+A similar image has been successfully licensed to a textile manufacturer. \
+\>", "Text",
+ CellTags->"Zigzags",ExpressionUUID->"a0515a44-e2a2-47db-8599-d0ae1f5c3eea"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1076, 876},
+WindowMargins->{{7, Automatic}, {Automatic, 3}},
+FrontEndVersion->"11.2 for Microsoft Windows (64-bit) (2017\:5e7410\:67082\
+\:65e5)",
+StyleDefinitions->Notebook[{
+   Cell[
+    CellGroupData[{
+      Cell["Style Definitions", "Subtitle"], 
+      Cell[
+      "Modify the definitions below to change the default appearance of all \
+cells in a given style.  Make modifications to any definition using commands \
+in the Format menu.", "Text"], 
+      Cell[
+       CellGroupData[{
+         Cell["Style Environment Names", "Subsection"], 
+         Cell[
+          StyleData[All, "Working"], 
+          CellBracketOptions -> {"Color" -> RGBColor[0, 0.2, 1]}, 
+          ScriptMinSize -> 9], 
+         Cell[
+          StyleData[All, "Printout"], PageWidth -> PaperWidth, 
+          PrivateFontOptions -> {"FontType" -> "Outline"}]}, Closed]], 
+      Cell[
+       CellGroupData[{
+         Cell["Notebook Options", "Subsection"], 
+         Cell[
+         "  The options defined for the style below will be used at the \
+Notebook level.  ", "Text"], 
+         Cell[
+          StyleData["Notebook"], PageHeaders -> {{
+             Cell[
+              TextData[{
+                CounterBox["Page"]}], "PageNumber"], None, 
+             Cell[
+              TextData[{
+                OptionValueBox["FileName"]}], "Header"]}, {
+             Cell[
+              TextData[{
+                OptionValueBox["FileName"]}], "Header"], None, 
+             Cell[
+              TextData[{
+                CounterBox["Page"]}], "PageNumber"]}}, 
+          PrintingOptions -> {
+           "FacingPages" -> True, "FirstPageHeader" -> False}, 
+          CellLabelAutoDelete -> False, CellFrameLabelMargins -> 6, 
+          StyleMenuListing -> None]}, Closed]], 
+      Cell[
+       CellGroupData[{
+         Cell["Headings", "Subsection"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Title"], ShowCellBracket -> False, 
+             CellMargins -> {{0, Inherited}, {2, 0}}, 
+             CellGroupingRules -> {"TitleGrouping", 0}, PageBreakBelow -> 
+             False, CounterIncrements -> "Title", 
+             CounterAssignments -> {{"Section", 0}, {"Equation", 0}, {
+               "Figure", 0}, {"Subtitle", 0}, {"Subsubtitle", 0}}, FontFamily -> 
+             "Helvetica", FontSize -> 30, FontWeight -> "Bold", FontColor -> 
+             GrayLevel[1], Background -> 
+             RGBColor[0.210407, 0.652186, 0.527092]], 
+            Cell[
+             StyleData["Title", "Printout"], 
+             CellMargins -> {{2, 10}, {2, 30}}, FontSize -> 24, FontColor -> 
+             GrayLevel[1], Background -> 
+             RGBColor[0.210407, 0.652186, 0.527092]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Subtitle"], ShowCellBracket -> False, 
+             CellMargins -> {{12, Inherited}, {2, 8}}, 
+             CellGroupingRules -> {"TitleGrouping", 10}, PageBreakBelow -> 
+             False, CounterIncrements -> "Subtitle", 
+             CounterAssignments -> {{"Section", 0}, {"Equation", 0}, {
+               "Figure", 0}, {"Subsubtitle", 0}}, FontFamily -> "Helvetica", 
+             FontSize -> 24, FontWeight -> "Plain", FontColor -> 
+             RGBColor[0.0796216, 0.246769, 0.199435]], 
+            Cell[
+             StyleData["Subtitle", "Printout"], 
+             CellMargins -> {{2, 10}, {2, 4}}, FontSize -> 18, FontColor -> 
+             GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Subsubtitle"], CellFrame -> {{0, 0}, {2, 0}}, 
+             ShowCellBracket -> False, CellMargins -> {{0, 0}, {0, -2}}, 
+             CellGroupingRules -> {"TitleGrouping", 20}, PageBreakBelow -> 
+             False, CellFrameColor -> RGBColor[0.210407, 0.652186, 0.527092], 
+             CounterIncrements -> "Subsubtitle", 
+             CounterAssignments -> {{"Section", 0}, {"Equation", 0}, {
+               "Figure", 0}}, FontFamily -> "Helvetica", FontSize -> 14, 
+             FontSlant -> "Italic", FontColor -> 
+             RGBColor[0.0796216, 0.246769, 0.199435], Background -> 
+             RGBColor[0.790356, 0.992233, 0.874968]], 
+            Cell[
+             StyleData["Subsubtitle", "Printout"], 
+             CellMargins -> {{2, 10}, {2, 8}}, FontSize -> 12, FontColor -> 
+             GrayLevel[0], Background -> None]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Section"], CellFrame -> {{0, 0}, {2, 0}}, 
+             ShowCellBracket -> False, CellMargins -> {{10, 40}, {2, 40}}, 
+             CellElementSpacings -> {"ClosedGroupTopMargin" -> 18}, 
+             CellGroupingRules -> {"SectionGrouping", 30}, PageBreakBelow -> 
+             False, CellFrameColor -> RGBColor[0.0796216, 0.246769, 0.199435],
+              CounterIncrements -> "Section", 
+             CounterAssignments -> {{"Subsection", 0}, {"Subsubsection", 0}}, 
+             FontFamily -> "Helvetica", FontSize -> 18, FontWeight -> "Bold", 
+             FontColor -> RGBColor[0.0796216, 0.246769, 0.199435]], 
+            Cell[
+             StyleData["Section", "Printout"], 
+             CellMargins -> {{2, 4}, {2, 40}}, FontSize -> 14]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Subsection"], CellDingbat -> "\[FilledSquare]", 
+             CellMargins -> {{24, 4}, {2, 18}}, 
+             CellElementSpacings -> {"ClosedGroupTopMargin" -> 12}, 
+             CellGroupingRules -> {"SectionGrouping", 40}, PageBreakBelow -> 
+             False, CellFrameLabelMargins -> 6, CounterIncrements -> 
+             "Subsection", CounterAssignments -> {{"Subsubsection", 0}}, 
+             FontFamily -> "Helvetica", FontSize -> 15, FontWeight -> "Bold"], 
+            Cell[
+             StyleData["Subsection", "Printout"], 
+             CellMargins -> {{2, 4}, {2, 18}}, FontSize -> 12]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Subsubsection"], CellMargins -> {{10, 4}, {2, 18}}, 
+             CellElementSpacings -> {"ClosedGroupTopMargin" -> 12}, 
+             CellGroupingRules -> {"SectionGrouping", 50}, PageBreakBelow -> 
+             False, CounterIncrements -> "Subsubsection", FontFamily -> 
+             "Helvetica", FontWeight -> "Bold"], 
+            Cell[
+             StyleData["Subsubsection", "Printout"], 
+             CellMargins -> {{2, 4}, {2, 18}}, FontSize -> 10]}, Closed]]}, 
+        Closed]], 
+      Cell[
+       CellGroupData[{
+         Cell["Text", "Subsection", ShowCellBracket -> False], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Text"], ShowCellBracket -> False, 
+             CellMargins -> {{10, 40}, {0, 8}}, TextJustification -> 1, 
+             ParagraphSpacing -> {0, 8}, CounterIncrements -> "Text"], 
+            Cell[
+             StyleData["Text", "Printout"], CellMargins -> {{2, 4}, {0, 8}}, 
+             FontSize -> 10]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["MathCaption"], CellFrame -> {{4, 0}, {0, 0}}, 
+             ShowCellBracket -> False, CellMargins -> {{47, 62}, {0, 14}}, 
+             CellFrameMargins -> 5, CellFrameColor -> 
+             RGBColor[0.0796216, 0.246769, 0.199435], LineSpacing -> {1, 1}, 
+             ParagraphSpacing -> {0, 8}], 
+            Cell[
+             StyleData["MathCaption", "Printout"], 
+             CellMargins -> {{34, 62}, {0, 14}}, CellFrameColor -> 
+             GrayLevel[0.700008], FontSize -> 10, FontColor -> GrayLevel[0]]},
+            Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["SmallText"], CellFrame -> {{0, 0}, {2, 0}}, 
+             ShowCellBracket -> False, CellMargins -> {{12, 100}, {2, 6}}, 
+             CellFrameColor -> RGBColor[0.210407, 0.652186, 0.527092], 
+             AutoIndent -> False, TextJustification -> 1, 
+             LineSpacing -> {1, 3}, CounterIncrements -> "SmallText", 
+             FontFamily -> "Geneva", FontSize -> 9], 
+            Cell[
+             StyleData["SmallText", "Presentation"], 
+             CellMargins -> {{24, 10}, {8, 8}}, LineSpacing -> {1, 5}, 
+             FontSize -> 12], 
+            Cell[
+             StyleData["SmallText", "Condensed"], 
+             CellMargins -> {{8, 10}, {5, 5}}, LineSpacing -> {1, 2}, 
+             FontSize -> 9], 
+            Cell[
+             StyleData["SmallText", "Printout"], 
+             CellMargins -> {{2, 2}, {5, 5}}, FontSize -> 7]}, Closed]]}, 
+        Closed]], 
+      Cell[
+       CellGroupData[{
+         Cell["Input/Output", "Subsection"], 
+         Cell[
+         "The cells in this section define styles used for input and output \
+to the kernel.  Be careful when modifying, renaming, or removing these \
+styles, because the front end associates special meanings with these style \
+names.    ", "Text"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Input"], CellMargins -> {{56, 4}, {3, 9}}, 
+             Evaluatable -> True, CellGroupingRules -> "InputGrouping", 
+             PageBreakWithin -> False, GroupPageBreakWithin -> False, 
+             CellLabelMargins -> {{21, Inherited}, {Inherited, Inherited}}, 
+             DefaultFormatType -> DefaultInputFormatType, 
+             AutoItalicWords -> {}, FormatType -> StandardForm, 
+             ShowStringCharacters -> True, NumberMarks -> True, 
+             CounterIncrements -> "Input", FontWeight -> "Bold"], 
+            Cell[
+             StyleData["Input", "Printout"], ShowCellBracket -> False, 
+             CellMargins -> {{42, 4}, {3, 8}}, FontSize -> 10]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Output"], CellMargins -> {{57, 4}, {5, 2}}, 
+             CellEditDuplicate -> True, CellGroupingRules -> "OutputGrouping",
+              PageBreakWithin -> False, GroupPageBreakWithin -> False, 
+             GeneratedCell -> True, CellAutoOverwrite -> True, 
+             CellLabelMargins -> {{21, Inherited}, {Inherited, Inherited}}, 
+             DefaultFormatType -> DefaultOutputFormatType, 
+             AutoItalicWords -> {}, FormatType -> StandardForm, 
+             CounterIncrements -> "Output"], 
+            Cell[
+             StyleData["Output", "Printout"], ShowCellBracket -> False, 
+             CellMargins -> {{42, 4}, {4, 2}}, FontSize -> 10]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Message"], CellMargins -> {{56, 4}, {3, 8}}, 
+             CellGroupingRules -> "OutputGrouping", PageBreakWithin -> False, 
+             GroupPageBreakWithin -> False, GeneratedCell -> True, 
+             CellAutoOverwrite -> True, ShowCellLabel -> False, 
+             CellLabelMargins -> {{21, Inherited}, {Inherited, Inherited}}, 
+             DefaultFormatType -> DefaultOutputFormatType, 
+             AutoItalicWords -> {}, FormatType -> InputForm, 
+             CounterIncrements -> "Message", StyleMenuListing -> None, 
+             FontColor -> RGBColor[0, 0.2, 1]], 
+            Cell[
+             StyleData["Message", "Printout"], ShowCellBracket -> False, 
+             CellMargins -> {{42, 4}, {4, 2}}, FontSize -> 10, FontColor -> 
+             GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Print"], CellMargins -> {{56, 4}, {3, 8}}, 
+             CellGroupingRules -> "OutputGrouping", PageBreakWithin -> False, 
+             GroupPageBreakWithin -> False, GeneratedCell -> True, 
+             CellAutoOverwrite -> True, ShowCellLabel -> False, 
+             CellLabelMargins -> {{21, Inherited}, {Inherited, Inherited}}, 
+             DefaultFormatType -> DefaultOutputFormatType, 
+             AutoItalicWords -> {}, FormatType -> InputForm, 
+             CounterIncrements -> "Print", StyleMenuListing -> None], 
+            Cell[
+             StyleData["Print", "Printout"], ShowCellBracket -> False, 
+             CellMargins -> {{42, 4}, {4, 2}}, FontSize -> 10]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Graphics"], 
+             CellMargins -> {{56, Inherited}, {Inherited, Inherited}}, 
+             CellGroupingRules -> "GraphicsGrouping", CellHorizontalScrolling -> 
+             True, PageBreakWithin -> False, GeneratedCell -> True, 
+             CellAutoOverwrite -> True, ShowCellLabel -> False, 
+             DefaultFormatType -> DefaultOutputFormatType, FormatType -> 
+             InputForm, CounterIncrements -> "Graphics", StyleMenuListing -> 
+             None], 
+            Cell[
+             StyleData["Graphics", "Printout"], 
+             CellMargins -> {{40, 4}, {4, 2}}, ImageSize -> {250, 250}, 
+             FontSize -> 9]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["CellLabel"], StyleMenuListing -> None, FontFamily -> 
+             "Helvetica", FontSize -> 9, FontColor -> RGBColor[0, 0.2, 1]], 
+            Cell[
+             StyleData["CellLabel", "Printout"], FontSize -> 7, FontSlant -> 
+             "Oblique", FontColor -> GrayLevel[0]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell["Inline Formatting", "Subsubsection"], 
+            Cell[
+            "These styles are for modifying individual words or letters in a \
+cell exclusive of the cell tag.", "Text"], 
+            Cell[
+             StyleData["MR"], StyleMenuListing -> None, FontFamily -> 
+             "Courier", FontWeight -> "Plain", FontSlant -> "Plain"]}, 
+           Closed]]}, Closed]], 
+      Cell[
+       CellGroupData[{
+         Cell["Unique Styles", "Subsection"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Author"], ShowCellBracket -> False, 
+             CellMargins -> {{20, 30}, {15, 15}}, 
+             CellGroupingRules -> {"TitleGrouping", 20}, PageBreakBelow -> 
+             False, CellFrameMargins -> {{0, 4}, {8, 4}}, 
+             LineSpacing -> {1, 0}, 
+             CounterAssignments -> {{"Section", 0}, {"Equation", 0}, {
+               "Figure", 0}}, FontFamily -> "Helvetica", FontSize -> 14, 
+             FontWeight -> "Bold", FontSlant -> "Plain", FontTracking -> 
+             "Plain", 
+             FontVariations -> {
+              "Outline" -> False, "Shadow" -> False, "Underline" -> False}], 
+            Cell[
+             StyleData["Author", "Presentation"], 
+             CellMargins -> {{20, 30}, {45, 10}}], 
+            Cell[
+             StyleData["Author", "Printout"], 
+             CellMargins -> {{18, 30}, {45, 5}}]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["TextTop"], CellFrame -> {{0, 0}, {0, 2}}, 
+             ShowCellBracket -> False, CellMargins -> {{10, 40}, {0, 6}}, 
+             CellHorizontalScrolling -> True, CellFrameMargins -> 6, 
+             CellFrameColor -> RGBColor[0.210407, 0.652186, 0.527092], 
+             ShowSpecialCharacters -> Automatic, TextJustification -> 1, 
+             ParagraphSpacing -> {0, 8}, CounterIncrements -> "Text"], 
+            Cell[
+             StyleData["TextTop", "Printout"], 
+             CellMargins -> {{2, 40}, {0, 6}}, CellFrameMargins -> 6, 
+             TextJustification -> 1, FontSize -> 10]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["ItemizedText"], CellMargins -> {{20, 4}, {0, 8}}, 
+             ShowSpecialCharacters -> Automatic, ParagraphSpacing -> {0, 8}, 
+             ParagraphIndent -> -15, CounterIncrements -> "Text"], 
+            Cell[
+             StyleData["ItemizedText", "Printout"], FontSize -> 10]}, 
+           Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["ItemizedTextNote"], CellMargins -> {{35, 4}, {0, 4}}, 
+             ShowSpecialCharacters -> Automatic, ParagraphSpacing -> {0, 4}, 
+             CounterIncrements -> "Text"], 
+            Cell[
+             StyleData["ItemizedTextNote", "Printout"], FontSize -> 10]}, 
+           Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["IndentedText"], CellMargins -> {{20, 4}, {0, 6}}, 
+             ShowSpecialCharacters -> Automatic, ParagraphSpacing -> {0, 8}, 
+             CounterIncrements -> "Text"], 
+            Cell[
+             StyleData["IndentedText", "Printout"], FontSize -> 10]}, 
+           Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Note"], CellFrame -> True, 
+             CellMargins -> {{10, 4}, {0, 8}}, CellHorizontalScrolling -> 
+             True, ShowSpecialCharacters -> Automatic, 
+             ParagraphSpacing -> {0, 8}, CounterIncrements -> "Text", 
+             FontFamily -> "Helvetica", FontSize -> 10], 
+            Cell[
+             StyleData["Note", "Printout"], CellMargins -> {{2, 4}, {0, 8}}, 
+             FontSize -> 8]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["1ColumnBox"], CellFrame -> True, 
+             CellMargins -> {{10, 4}, {0, 8}}, CellHorizontalScrolling -> 
+             True, LineIndent -> 0, Background -> GrayLevel[0.8], 
+             FrameBoxOptions -> {
+              FrameMargins -> {{15.600000000000001`, 15.600000000000001`}, {
+                11.700000000000001`, 11.700000000000001`}}}, 
+             GridBoxOptions -> {GridBoxSpacings -> {"Columns" -> {
+                   Offset[0.27999999999999997`], {
+                    Offset[0.7]}, 
+                   Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+                 "Rows" -> {
+                   Offset[0.2], {
+                    Offset[0.4]}, 
+                   Offset[0.2]}, "RowsIndexed" -> {}}}], 
+            Cell[
+             StyleData["1ColumnBox", "Printout"], 
+             CellMargins -> {{2, 4}, {0, 8}}, FontSize -> 10, Background -> 
+             GrayLevel[0.900008]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["2ColumnBox"], CellFrame -> True, 
+             CellMargins -> {{10, 4}, {0, 8}}, CellHorizontalScrolling -> 
+             True, LineIndent -> 0, Background -> GrayLevel[0.8], 
+             FrameBoxOptions -> {
+              FrameMargins -> {{15.600000000000001`, 15.600000000000001`}, {
+                11.700000000000001`, 11.700000000000001`}}}, 
+             GridBoxOptions -> {GridBoxItemSize -> {"Columns" -> {
+                   Scaled[0.39], {
+                    Scaled[0.59]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+                 "RowsIndexed" -> {}}}], 
+            Cell[
+             StyleData["2ColumnBox", "Printout"], 
+             CellMargins -> {{2, 4}, {0, 8}}, FontSize -> 10, Background -> 
+             GrayLevel[0.900008]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["2ColumnSmallBox"], CellFrame -> True, 
+             CellMargins -> {{10, 4}, {0, 8}}, CellHorizontalScrolling -> 
+             True, LineIndent -> 0, Background -> GrayLevel[0.8], 
+             FrameBoxOptions -> {
+              FrameMargins -> {{15.600000000000001`, 15.600000000000001`}, {
+                11.700000000000001`, 11.700000000000001`}}}, 
+             GridBoxOptions -> {
+              GridBoxAlignment -> {
+                "Columns" -> {Right, {Left}}, "ColumnsIndexed" -> {}, 
+                 "Rows" -> {{Baseline}}, "RowsIndexed" -> {}}, 
+               GridBoxItemSize -> {"Columns" -> {{
+                    Scaled[0.35]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+                 "RowsIndexed" -> {}}, GridBoxSpacings -> {"Columns" -> {
+                   Offset[0.27999999999999997`], {
+                    Offset[1.0499999999999998`]}, 
+                   Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+                 "Rows" -> {
+                   Offset[0.2], {
+                    Offset[0.4]}, 
+                   Offset[0.2]}, "RowsIndexed" -> {}}}], 
+            Cell[
+             StyleData["2ColumnSmallBox", "Printout"], 
+             CellMargins -> {{2, 4}, {0, 8}}, FontSize -> 10, Background -> 
+             GrayLevel[0.900008]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["3ColumnBox"], CellFrame -> True, 
+             CellMargins -> {{10, 4}, {0, 8}}, CellHorizontalScrolling -> 
+             True, LineIndent -> 0, Background -> GrayLevel[0.8], 
+             FrameBoxOptions -> {
+              FrameMargins -> {{15.600000000000001`, 15.600000000000001`}, {
+                11.700000000000001`, 11.700000000000001`}}}, 
+             GridBoxOptions -> {GridBoxItemSize -> {"Columns" -> {{
+                    Scaled[0.325]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}},
+                  "RowsIndexed" -> {}}}], 
+            Cell[
+             StyleData["3ColumnBox", "Printout"], 
+             CellMargins -> {{2, 4}, {0, 8}}, FontSize -> 10, Background -> 
+             GrayLevel[0.900008]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["3ColumnSmallBox"], CellFrame -> True, 
+             CellMargins -> {{10, 4}, {0, 8}}, CellHorizontalScrolling -> 
+             True, LineIndent -> 0, Background -> GrayLevel[0.8], 
+             FrameBoxOptions -> {
+              FrameMargins -> {{15.600000000000001`, 15.600000000000001`}, {
+                11.700000000000001`, 11.700000000000001`}}}, 
+             GridBoxOptions -> {
+              GridBoxAlignment -> {
+                "Columns" -> {Right, Center, {Left}}, "ColumnsIndexed" -> {}, 
+                 "Rows" -> {{Baseline}}, "RowsIndexed" -> {}}, 
+               GridBoxItemSize -> {"Columns" -> {{
+                    Scaled[0.23]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+                 "RowsIndexed" -> {}}, GridBoxSpacings -> {"Columns" -> {
+                   Offset[0.27999999999999997`], {
+                    Offset[1.0499999999999998`]}, 
+                   Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, 
+                 "Rows" -> {
+                   Offset[0.2], {
+                    Offset[0.4]}, 
+                   Offset[0.2]}, "RowsIndexed" -> {}}}], 
+            Cell[
+             StyleData["3ColumnSmallBox", "Printout"], 
+             CellMargins -> {{2, 4}, {0, 8}}, FontSize -> 10, Background -> 
+             GrayLevel[0.900008]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["4ColumnBox"], CellFrame -> True, 
+             CellMargins -> {{10, 4}, {0, 8}}, CellHorizontalScrolling -> 
+             True, LineIndent -> 0, Background -> GrayLevel[0.8], 
+             FrameBoxOptions -> {
+              FrameMargins -> {{15.600000000000001`, 15.600000000000001`}, {
+                11.700000000000001`, 11.700000000000001`}}}, 
+             GridBoxOptions -> {GridBoxItemSize -> {"Columns" -> {
+                   Scaled[0.145], 
+                   Scaled[0.345], 
+                   Scaled[0.145], {
+                    Scaled[0.345]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}},
+                  "RowsIndexed" -> {}}}], 
+            Cell[
+             StyleData["4ColumnBox", "Printout"], 
+             CellMargins -> {{2, 4}, {0, 8}}, FontSize -> 10, Background -> 
+             GrayLevel[0.900008]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["5ColumnBox"], CellFrame -> True, 
+             CellMargins -> {{10, 4}, {0, 8}}, CellHorizontalScrolling -> 
+             True, LineIndent -> 0, Background -> GrayLevel[0.8], 
+             FrameBoxOptions -> {
+              FrameMargins -> {{15.600000000000001`, 15.600000000000001`}, {
+                11.700000000000001`, 11.700000000000001`}}}, 
+             GridBoxOptions -> {GridBoxItemSize -> {"Columns" -> {{
+                    Scaled[0.195]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}},
+                  "RowsIndexed" -> {}}}], 
+            Cell[
+             StyleData["5ColumnBox", "Printout"], 
+             CellMargins -> {{2, 4}, {0, 8}}, FontSize -> 10, Background -> 
+             GrayLevel[0.900008]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["6ColumnBox"], CellFrame -> True, 
+             CellMargins -> {{10, 4}, {0, 8}}, CellHorizontalScrolling -> 
+             True, LineIndent -> 0, Background -> GrayLevel[0.8], 
+             FrameBoxOptions -> {
+              FrameMargins -> {{15.600000000000001`, 15.600000000000001`}, {
+                11.700000000000001`, 11.700000000000001`}}}, 
+             GridBoxOptions -> {GridBoxItemSize -> {"Columns" -> {
+                   Scaled[0.13], 
+                   Scaled[0.23], 
+                   Scaled[0.13], 
+                   Scaled[0.13], 
+                   Scaled[0.23], {
+                    Scaled[0.13]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+                 "RowsIndexed" -> {}}}], 
+            Cell[
+             StyleData["6ColumnBox", "Printout"], 
+             CellMargins -> {{2, 4}, {0, 8}}, FontSize -> 10, Background -> 
+             GrayLevel[0.900008]]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Picture"], CellMargins -> {{10, Inherited}, {0, 8}}, 
+             CellHorizontalScrolling -> True], 
+            Cell[
+             StyleData["Picture", "Printout"], 
+             CellMargins -> {{2, Inherited}, {0, 8}}]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Caption"], CellMargins -> {{10, 50}, {0, 3}}, 
+             PageBreakAbove -> False, FontFamily -> "Helvetica", FontSize -> 
+             9], 
+            Cell[
+             StyleData["Caption", "Printout"], 
+             CellMargins -> {{2, 50}, {2, 4}}, FontSize -> 7]}, Closed]]}, 
+        Closed]], 
+      Cell[
+       CellGroupData[{
+         Cell["Tables", "Subsection"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["2ColumnTable"], CellMargins -> {{10, 4}, {0, 8}}, 
+             CellHorizontalScrolling -> True, 
+             GridBoxOptions -> {
+              GridBoxAlignment -> {
+                "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+                 "Rows" -> {{Baseline}}, "RowsIndexed" -> {}}, 
+               GridBoxItemSize -> {"Columns" -> {
+                   Scaled[0.39], {
+                    Scaled[0.59]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+                 "RowsIndexed" -> {}}}], 
+            Cell[
+             StyleData["2ColumnTable", "Printout"], 
+             CellMargins -> {{2, 4}, {0, 8}}, FontSize -> 10]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["3ColumnTable"], CellMargins -> {{10, 4}, {0, 8}}, 
+             CellHorizontalScrolling -> True, StyleMenuListing -> None, 
+             GridBoxOptions -> {
+              GridBoxAlignment -> {
+                "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+                 "Rows" -> {{Baseline}}, "RowsIndexed" -> {}}, 
+               GridBoxItemSize -> {"Columns" -> {{
+                    Scaled[0.325]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}},
+                  "RowsIndexed" -> {}}}], 
+            Cell[
+             StyleData["3ColumnTable", "Printout"], 
+             CellMargins -> {{2, 4}, {0, 8}}, FontSize -> 10]}, Closed]]}, 
+        Closed]], 
+      Cell[
+       CellGroupData[{
+         Cell["Formulas and Programming", "Subsection"], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["ChemicalFormula"], 
+             CellMargins -> {{42, Inherited}, {Inherited, Inherited}}, 
+             CellHorizontalScrolling -> True, DefaultFormatType -> 
+             DefaultInputFormatType, AutoSpacing -> False, 
+             ScriptBaselineShifts -> {0.6, Automatic}, ScriptLevel -> 1, 
+             SingleLetterItalics -> False, ZeroWidthTimes -> True], 
+            Cell[
+             StyleData["ChemicalFormula", "Printout"], 
+             CellMargins -> {{34, Inherited}, {Inherited, Inherited}}, 
+             FontSize -> 10]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["DisplayFormula"], 
+             CellMargins -> {{42, Inherited}, {Inherited, Inherited}}, 
+             CellHorizontalScrolling -> True, DefaultFormatType -> 
+             DefaultInputFormatType, ScriptLevel -> 0, SingleLetterItalics -> 
+             True, SpanMaxSize -> Infinity, 
+             UnderoverscriptBoxOptions -> {LimitsPositioning -> True}, 
+             GridBoxOptions -> {
+              GridBoxItemSize -> {
+                "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, 
+                 "Rows" -> {{1.}}, "RowsIndexed" -> {}}}], 
+            Cell[
+             StyleData["DisplayFormula", "Printout"], 
+             CellMargins -> {{34, Inherited}, {Inherited, Inherited}}, 
+             FontSize -> 10]}, Closed]], 
+         Cell[
+          CellGroupData[{
+            Cell[
+             StyleData["Program"], CellMargins -> {{10, 4}, {0, 8}}, 
+             CellHorizontalScrolling -> True, FontFamily -> "Courier"], 
+            Cell[
+             StyleData["Program", "Printout"], 
+             CellMargins -> {{2, Inherited}, {Inherited, Inherited}}, 
+             FontSize -> 9.5]}, Closed]]}, Closed]]}, Open]]}, Visible -> 
+  False, FrontEndVersion -> 
+  "11.2 for Microsoft Windows (64-bit) (2017\:5e7410\:67082\:65e5)", 
+  StyleDefinitions -> "Default.nb"],
+MacintoshSystemPageSetup -> \
+"00<0001804P000000]P2:?oQon82n@960dL5:0?l0080001804P000000]P2:001\n\
+0000I00000400`<300000BL?00400@00000000000000060801T1T00000000000\n\
+00000000000000000000000000000000"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "Zigzags"->{
+  Cell[580, 22, 204, 6, 53, "Title",ExpressionUUID->"e1486cc6-eb18-4b6d-bc0c-0d93a5412961",
+   CellTags->"Zigzags"],
+  Cell[3219, 101, 115, 1, 73, "Section",ExpressionUUID->"7c9380c2-f4da-4035-909d-5e5ea718b99a",
+   CellTags->"Zigzags"],
+  Cell[3337, 104, 268, 7, 23, "Text",ExpressionUUID->"a0928d75-0bd1-4603-a537-e421556b39ef",
+   CellTags->"Zigzags"],
+  Cell[3608, 113, 173, 6, 29, "MathCaption",ExpressionUUID->"bfdfd6fd-8b4d-45dc-b130-576290917eeb",
+   CellTags->"Zigzags"],
+  Cell[3806, 123, 154, 3, 25, "Input",ExpressionUUID->"9c891c5c-8431-4e70-85a6-4acbe1f2cd31",
+   CellTags->"Zigzags"],
+  Cell[3963, 128, 393, 11, 27, "Message",ExpressionUUID->"41525750-7f6c-44de-a77d-dc929adcaf04",
+   CellTags->"Zigzags"],
+  Cell[4359, 141, 178, 3, 20, "Output",ExpressionUUID->"8e9dbf4c-8bd4-4c54-9dec-4fcd33e5d41a",
+   CellTags->"Zigzags"],
+  Cell[4552, 147, 176, 3, 29, "MathCaption",ExpressionUUID->"807cb369-28eb-446a-847a-12ad4b01384b",
+   CellTags->"Zigzags"],
+  Cell[4731, 152, 370, 10, 43, "Input",ExpressionUUID->"52950521-6143-4417-bdcf-579adc862f99",
+   CellTags->"Zigzags"],
+  Cell[5104, 164, 362, 10, 25, "Input",ExpressionUUID->"54538a27-d38b-484a-9d00-0720620ef778",
+   CellTags->"Zigzags"],
+  Cell[5469, 176, 361, 11, 23, "Text",ExpressionUUID->"cb12551d-c2b3-4b8b-9d0b-4ef6f064199c",
+   CellTags->"Zigzags"],
+  Cell[5833, 189, 131, 1, 29, "MathCaption",ExpressionUUID->"274f7b9c-63f6-4a19-b046-43b02324b232",
+   CellTags->"Zigzags"],
+  Cell[5989, 194, 220, 5, 25, "Input",ExpressionUUID->"0cd5f77e-14c5-408e-8c47-6e322124e0bc",
+   CellTags->"Zigzags"],
+  Cell[6212, 201, 475, 11, 27, "Message",ExpressionUUID->"16df9eae-c071-47c0-9d89-be47413ebae3",
+   CellTags->"Zigzags"],
+  Cell[6702, 215, 181, 3, 29, "MathCaption",ExpressionUUID->"3cf0cc71-264e-45f4-a153-7b115ff52067",
+   CellTags->"Zigzags"],
+  Cell[6886, 220, 211, 5, 25, "Input",ExpressionUUID->"296614ee-8a62-43a5-99f6-a68325aa4e02",
+   CellTags->"Zigzags"],
+  Cell[7100, 227, 312, 7, 29, "MathCaption",ExpressionUUID->"2acddad2-e58c-4131-b557-bfc711a38d95",
+   CellTags->"Zigzags"],
+  Cell[7415, 236, 735, 22, 44, "Input",ExpressionUUID->"fd6bb9a5-40b7-430b-9a62-c37b90306866",
+   CellTags->"Zigzags"],
+  Cell[8153, 260, 138, 1, 29, "MathCaption",ExpressionUUID->"30949b97-52e5-4bfd-9480-e1d98a4f13f6",
+   CellTags->"Zigzags"],
+  Cell[8294, 263, 394, 11, 25, "Input",ExpressionUUID->"2b2d41cf-affc-4619-aaf3-6b045e04d616",
+   CellTags->"Zigzags"],
+  Cell[8691, 276, 187, 4, 29, "MathCaption",ExpressionUUID->"7bdd554d-361d-4766-a9af-65ca562f5e65",
+   CellTags->"Zigzags"],
+  Cell[8881, 282, 309, 8, 25, "Input",ExpressionUUID->"a1e48a01-a8a6-45d0-8c0e-922d43a84f61",
+   CellTags->"Zigzags"],
+  Cell[9193, 292, 182, 4, 25, "Input",ExpressionUUID->"783a9466-590d-433e-a5c0-f5da559e2663",
+   CellTags->"Zigzags"],
+  Cell[9378, 298, 531, 12, 39, "Text",ExpressionUUID->"6bdbcab8-e795-470e-b076-385c93cb66ed",
+   CellTags->"Zigzags"],
+  Cell[9934, 314, 1331, 34, 60, "Input",ExpressionUUID->"f3108088-9436-4c6d-a4d8-89ec2b1054db",
+   CellTags->"Zigzags"],
+  Cell[11268, 350, 2976, 46, 110, "Message",ExpressionUUID->"4e48382a-19b3-4ebb-8901-e8e8509b16cf",
+   CellTags->"Zigzags"],
+  Cell[14259, 399, 147, 1, 29, "MathCaption",ExpressionUUID->"5c4a8dc6-f47e-4f78-8b33-e0b9f292a9f0",
+   CellTags->"Zigzags"],
+  Cell[14409, 402, 201, 5, 25, "Input",ExpressionUUID->"b1718123-a0ba-46cb-9156-2cd95ac7218f",
+   CellTags->"Zigzags"],
+  Cell[14613, 409, 246, 4, 23, "Text",ExpressionUUID->"743ffa96-c8d6-4bb0-89c9-d11b55c3815b",
+   CellTags->"Zigzags"],
+  Cell[14862, 415, 397, 9, 45, "MathCaption",ExpressionUUID->"8ecdd3c6-4b4e-4d68-bee1-e6b465d3705d",
+   CellTags->"Zigzags"],
+  Cell[15284, 428, 256, 5, 25, "Input",ExpressionUUID->"4c9366c0-75ea-479a-8b3c-77570ea701c5",
+   CellTags->"Zigzags"],
+  Cell[15543, 435, 3140, 71, 99, "Output",ExpressionUUID->"6ebab120-e687-4822-b4cb-b21baa3452f9",
+   CellTags->"Zigzags"],
+  Cell[18698, 509, 183, 3, 29, "MathCaption",ExpressionUUID->"5ee5dec4-5068-4f37-bdb8-a5f4fca9e024",
+   CellTags->"Zigzags"],
+  Cell[18884, 514, 495, 13, 25, "Input",ExpressionUUID->"31ad6c04-91ff-45c6-b842-a4ea591aced1",
+   CellTags->"Zigzags"],
+  Cell[19382, 529, 175, 3, 23, "Text",ExpressionUUID->"a0515a44-e2a2-47db-8599-d0ae1f5c3eea",
+   CellTags->"Zigzags"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"Zigzags", 49442, 1165}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 204, 6, 53, "Title",ExpressionUUID->"e1486cc6-eb18-4b6d-bc0c-0d93a5412961",
+ CellTags->"Zigzags"],
+Cell[787, 30, 313, 9, 34, "Subsubtitle",ExpressionUUID->"0d953665-0f58-4bdb-8b85-2ed0be09452a"],
+Cell[1103, 41, 1492, 39, 71, "SmallText",ExpressionUUID->"69e55e8f-09ba-4e20-9cac-3f2ea91ea328"],
+Cell[2598, 82, 596, 15, 39, "Text",ExpressionUUID->"3347d633-68c4-4e3f-9dc7-9871b8ee1473"],
+Cell[CellGroupData[{
+Cell[3219, 101, 115, 1, 73, "Section",ExpressionUUID->"7c9380c2-f4da-4035-909d-5e5ea718b99a",
+ CellTags->"Zigzags"],
+Cell[3337, 104, 268, 7, 23, "Text",ExpressionUUID->"a0928d75-0bd1-4603-a537-e421556b39ef",
+ CellTags->"Zigzags"],
+Cell[3608, 113, 173, 6, 29, "MathCaption",ExpressionUUID->"bfdfd6fd-8b4d-45dc-b130-576290917eeb",
+ CellTags->"Zigzags"],
+Cell[CellGroupData[{
+Cell[3806, 123, 154, 3, 25, "Input",ExpressionUUID->"9c891c5c-8431-4e70-85a6-4acbe1f2cd31",
+ CellTags->"Zigzags"],
+Cell[3963, 128, 393, 11, 27, "Message",ExpressionUUID->"41525750-7f6c-44de-a77d-dc929adcaf04",
+ CellTags->"Zigzags"],
+Cell[4359, 141, 178, 3, 20, "Output",ExpressionUUID->"8e9dbf4c-8bd4-4c54-9dec-4fcd33e5d41a",
+ CellTags->"Zigzags"]
+}, Open  ]],
+Cell[4552, 147, 176, 3, 29, "MathCaption",ExpressionUUID->"807cb369-28eb-446a-847a-12ad4b01384b",
+ CellTags->"Zigzags"],
+Cell[4731, 152, 370, 10, 43, "Input",ExpressionUUID->"52950521-6143-4417-bdcf-579adc862f99",
+ CellTags->"Zigzags"],
+Cell[5104, 164, 362, 10, 25, "Input",ExpressionUUID->"54538a27-d38b-484a-9d00-0720620ef778",
+ CellTags->"Zigzags"],
+Cell[5469, 176, 361, 11, 23, "Text",ExpressionUUID->"cb12551d-c2b3-4b8b-9d0b-4ef6f064199c",
+ CellTags->"Zigzags"],
+Cell[5833, 189, 131, 1, 29, "MathCaption",ExpressionUUID->"274f7b9c-63f6-4a19-b046-43b02324b232",
+ CellTags->"Zigzags"],
+Cell[CellGroupData[{
+Cell[5989, 194, 220, 5, 25, "Input",ExpressionUUID->"0cd5f77e-14c5-408e-8c47-6e322124e0bc",
+ CellTags->"Zigzags"],
+Cell[6212, 201, 475, 11, 27, "Message",ExpressionUUID->"16df9eae-c071-47c0-9d89-be47413ebae3",
+ CellTags->"Zigzags"]
+}, Open  ]],
+Cell[6702, 215, 181, 3, 29, "MathCaption",ExpressionUUID->"3cf0cc71-264e-45f4-a153-7b115ff52067",
+ CellTags->"Zigzags"],
+Cell[6886, 220, 211, 5, 25, "Input",ExpressionUUID->"296614ee-8a62-43a5-99f6-a68325aa4e02",
+ CellTags->"Zigzags"],
+Cell[7100, 227, 312, 7, 29, "MathCaption",ExpressionUUID->"2acddad2-e58c-4131-b557-bfc711a38d95",
+ CellTags->"Zigzags"],
+Cell[7415, 236, 735, 22, 44, "Input",ExpressionUUID->"fd6bb9a5-40b7-430b-9a62-c37b90306866",
+ CellTags->"Zigzags"],
+Cell[8153, 260, 138, 1, 29, "MathCaption",ExpressionUUID->"30949b97-52e5-4bfd-9480-e1d98a4f13f6",
+ CellTags->"Zigzags"],
+Cell[8294, 263, 394, 11, 25, "Input",ExpressionUUID->"2b2d41cf-affc-4619-aaf3-6b045e04d616",
+ CellTags->"Zigzags"],
+Cell[8691, 276, 187, 4, 29, "MathCaption",ExpressionUUID->"7bdd554d-361d-4766-a9af-65ca562f5e65",
+ CellTags->"Zigzags"],
+Cell[8881, 282, 309, 8, 25, "Input",ExpressionUUID->"a1e48a01-a8a6-45d0-8c0e-922d43a84f61",
+ CellTags->"Zigzags"],
+Cell[9193, 292, 182, 4, 25, "Input",ExpressionUUID->"783a9466-590d-433e-a5c0-f5da559e2663",
+ CellTags->"Zigzags"],
+Cell[9378, 298, 531, 12, 39, "Text",ExpressionUUID->"6bdbcab8-e795-470e-b076-385c93cb66ed",
+ CellTags->"Zigzags"],
+Cell[CellGroupData[{
+Cell[9934, 314, 1331, 34, 60, "Input",ExpressionUUID->"f3108088-9436-4c6d-a4d8-89ec2b1054db",
+ CellTags->"Zigzags"],
+Cell[11268, 350, 2976, 46, 110, "Message",ExpressionUUID->"4e48382a-19b3-4ebb-8901-e8e8509b16cf",
+ CellTags->"Zigzags"]
+}, Open  ]],
+Cell[14259, 399, 147, 1, 29, "MathCaption",ExpressionUUID->"5c4a8dc6-f47e-4f78-8b33-e0b9f292a9f0",
+ CellTags->"Zigzags"],
+Cell[14409, 402, 201, 5, 25, "Input",ExpressionUUID->"b1718123-a0ba-46cb-9156-2cd95ac7218f",
+ CellTags->"Zigzags"],
+Cell[14613, 409, 246, 4, 23, "Text",ExpressionUUID->"743ffa96-c8d6-4bb0-89c9-d11b55c3815b",
+ CellTags->"Zigzags"],
+Cell[14862, 415, 397, 9, 45, "MathCaption",ExpressionUUID->"8ecdd3c6-4b4e-4d68-bee1-e6b465d3705d",
+ CellTags->"Zigzags"],
+Cell[CellGroupData[{
+Cell[15284, 428, 256, 5, 25, "Input",ExpressionUUID->"4c9366c0-75ea-479a-8b3c-77570ea701c5",
+ CellTags->"Zigzags"],
+Cell[15543, 435, 3140, 71, 99, "Output",ExpressionUUID->"6ebab120-e687-4822-b4cb-b21baa3452f9",
+ CellTags->"Zigzags"]
+}, Open  ]],
+Cell[18698, 509, 183, 3, 29, "MathCaption",ExpressionUUID->"5ee5dec4-5068-4f37-bdb8-a5f4fca9e024",
+ CellTags->"Zigzags"],
+Cell[18884, 514, 495, 13, 25, "Input",ExpressionUUID->"31ad6c04-91ff-45c6-b842-a4ea591aced1",
+ CellTags->"Zigzags"],
+Cell[19382, 529, 175, 3, 23, "Text",ExpressionUUID->"a0515a44-e2a2-47db-8599-d0ae1f5c3eea",
+ CellTags->"Zigzags"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

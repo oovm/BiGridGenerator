@@ -1,0 +1,1544 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.4' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     67069,       1536]
+NotebookOptionsPosition[     66496,       1515]
+NotebookOutlinePosition[     67049,       1534]
+CellTagsIndexPosition[     67006,       1531]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"minesweeperCDF", "=", 
+   RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"ClickPane", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"ArrayPlot", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"Which", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"loose", "\[Equal]", "False"}], ",", "show", ",", 
+           "\[IndentingNewLine]", "True", ",", "new"}], "]"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Frame", "\[Rule]", "False"}], ",", 
+         RowBox[{"Mesh", "\[Rule]", "All"}], ",", 
+         RowBox[{"ColorRules", "\[Rule]", "colRules"}], ",", 
+         RowBox[{"ImageSize", "\[Rule]", "450"}], ",", 
+         RowBox[{"Epilog", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{"(*", 
+            RowBox[{
+            "plot", " ", "tips", " ", "on", " ", "uncovered", " ", "tiles"}], 
+            "*)"}], 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{"loose", "\[Equal]", "True"}], ",", "tips", ",", 
+             RowBox[{"Extract", "[", 
+              RowBox[{"tips", ",", 
+               RowBox[{"Most", "@", 
+                RowBox[{"Rest", "@", 
+                 RowBox[{"Position", "[", 
+                  RowBox[{
+                   RowBox[{"Flatten", "[", "show", "]"}], ",", 
+                   RowBox[{"Except", "[", 
+                    RowBox[{"\"\<U\>\"", "|", "\"\<F\>\""}], "]"}]}], 
+                  "]"}]}]}]}], "]"}]}], "]"}], "}"}]}]}], "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"pt", "=", 
+           RowBox[{"IntegerPart", "[", "#", "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"CurrentValue", "[", "\"\<ShiftKey\>\"", "]"}], 
+             "\[Equal]", "False"}], ",", "\[IndentingNewLine]", 
+            RowBox[{"(*", " ", 
+             RowBox[{"uncover", " ", "tile"}], " ", "*)"}], 
+            "\[IndentingNewLine]", 
+            RowBox[{"(*", " ", 
+             RowBox[{"if", " ", "tile", " ", "is", " ", "blank"}], " ", 
+             "*)"}], "\[IndentingNewLine]", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"Extract", "[", 
+                RowBox[{"new", ",", 
+                 RowBox[{"clickID", "[", "pt", "]"}]}], "]"}], "\[Equal]", 
+               "0"}], ",", "\[IndentingNewLine]", 
+              RowBox[{"(*", " ", 
+               RowBox[{
+                RowBox[{"uncover", " ", "tiles", " ", "plus", " ", "NNs"}], 
+                ".."}], " ", "*)"}], "\[IndentingNewLine]", "chainUncover", 
+              ",", "\[IndentingNewLine]", 
+              RowBox[{"(*", " ", 
+               RowBox[{"else", ",", " ", 
+                RowBox[{"uncover", " ", "tile"}]}], " ", "*)"}], 
+              "\[IndentingNewLine]", 
+              RowBox[{"show", "=", 
+               RowBox[{"ReplacePart", "[", 
+                RowBox[{"show", ",", 
+                 RowBox[{
+                  RowBox[{"clickID", "[", "pt", "]"}], "->", 
+                  RowBox[{"Extract", "[", 
+                   RowBox[{"new", ",", 
+                    RowBox[{"clickID", "[", "pt", "]"}]}], "]"}]}]}], 
+                "]"}]}]}], "]"}], ",", "\[IndentingNewLine]", 
+            RowBox[{"(*", " ", 
+             RowBox[{"if", " ", "ShiftKey", " ", "is", " ", "pressed"}], " ", 
+             "*)"}], "\[IndentingNewLine]", 
+            RowBox[{"Which", "[", "\[IndentingNewLine]", 
+             RowBox[{"(*", " ", 
+              RowBox[{
+              "reveal", " ", "NNs", " ", "for", " ", "uncovered", " ", 
+               "tiles"}], " ", "*)"}], "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"Extract", "[", 
+                RowBox[{"show", ",", 
+                 RowBox[{"clickID", "[", "pt", "]"}]}], "]"}], "=!=", 
+               "\"\<U\>\"", "=!=", "\"\<F\>\""}], ",", 
+              RowBox[{"show", "=", 
+               RowBox[{"ReplacePart", "[", 
+                RowBox[{"show", ",", 
+                 RowBox[{"Normal", "[", "\[IndentingNewLine]", 
+                  RowBox[{"AssociationThread", "[", 
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Keys", "[", 
+                    RowBox[{"Select", "[", 
+                    RowBox[{
+                    RowBox[{"AssociationThread", "[", 
+                    RowBox[{
+                    RowBox[{"nn", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"clickID", "[", "pt", "]"}], 
+                    "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
+                    ",", 
+                    RowBox[{
+                    RowBox[{"clickID", "[", "pt", "]"}], 
+                    "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}]}], 
+                    "]"}], "->", 
+                    RowBox[{"Extract", "[", 
+                    RowBox[{"show", ",", 
+                    RowBox[{"nn", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"clickID", "[", "pt", "]"}], 
+                    "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
+                    ",", 
+                    RowBox[{
+                    RowBox[{"clickID", "[", "pt", "]"}], 
+                    "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}]}], 
+                    "]"}]}], "]"}]}], "]"}], ",", 
+                    RowBox[{
+                    RowBox[{"#1", "==", "\"\<U\>\""}], "&"}]}], "]"}], "]"}], 
+                    "->", "\[IndentingNewLine]", 
+                    RowBox[{"Extract", "[", 
+                    RowBox[{"new", ",", "#"}], "]"}]}], "&"}], "[", 
+                    RowBox[{"Keys", "[", 
+                    RowBox[{"Select", "[", 
+                    RowBox[{
+                    RowBox[{"AssociationThread", "[", 
+                    RowBox[{
+                    RowBox[{"nn", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"clickID", "[", "pt", "]"}], 
+                    "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
+                    ",", 
+                    RowBox[{
+                    RowBox[{"clickID", "[", "pt", "]"}], 
+                    "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}]}], 
+                    "]"}], "->", 
+                    RowBox[{"Extract", "[", 
+                    RowBox[{"show", ",", 
+                    RowBox[{"nn", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"clickID", "[", "pt", "]"}], 
+                    "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
+                    ",", 
+                    RowBox[{
+                    RowBox[{"clickID", "[", "pt", "]"}], 
+                    "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}]}], 
+                    "]"}]}], "]"}]}], "]"}], ",", 
+                    RowBox[{
+                    RowBox[{"#1", "==", "\"\<U\>\""}], "&"}]}], "]"}], "]"}], 
+                    "]"}], "]"}], "]"}]}], "]"}]}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"(*", " ", 
+               RowBox[{
+               "toggle", " ", "flags", " ", "for", " ", "covered", " ", 
+                "tiles"}], " ", "*)"}], " ", "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"Extract", "[", 
+                RowBox[{"show", ",", 
+                 RowBox[{"clickID", "[", "pt", "]"}]}], "]"}], "\[Equal]", 
+               "\"\<U\>\""}], ",", 
+              RowBox[{"show", "=", 
+               RowBox[{"ReplacePart", "[", 
+                RowBox[{"show", ",", 
+                 RowBox[{
+                  RowBox[{"clickID", "[", "pt", "]"}], "\[Rule]", 
+                  "\"\<F\>\""}]}], "]"}]}], ",", "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"Extract", "[", 
+                RowBox[{"show", ",", 
+                 RowBox[{"clickID", "[", "pt", "]"}]}], "]"}], "\[Equal]", 
+               "\"\<F\>\""}], ",", 
+              RowBox[{"show", "=", 
+               RowBox[{"ReplacePart", "[", 
+                RowBox[{"show", ",", 
+                 RowBox[{
+                  RowBox[{"clickID", "[", "pt", "]"}], "\[Rule]", 
+                  "\"\<U\>\""}]}], "]"}]}]}], "\[IndentingNewLine]", "]"}]}], 
+           "\[IndentingNewLine]", "]"}], ";"}], ")"}], "&"}]}], "]"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{"CONTROL", " ", "+", " ", "DISPLAY"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"Row", "[", 
+      RowBox[{
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"Column", "[", 
+          RowBox[{"{", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"Control", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"gridLength", ",", "10", ",", "\"\<Grid Size\>\""}], 
+                "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"10", "\[Rule]", "\"\<Small\>\""}], ",", 
+                 RowBox[{"20", "\[Rule]", "\"\<Medium\>\""}], ",", 
+                 RowBox[{"30", "\[Rule]", "\"\<Large\>\""}]}], 
+                RowBox[{"(*", 
+                 RowBox[{",", 
+                  RowBox[{"40", "\[Rule]", "\"\<X Large\>\""}]}], "*)"}], 
+                "}"}]}], "}"}], "]"}], ",", "\[IndentingNewLine]", 
+            RowBox[{"Control", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"mineProb", ",", "0.1", ",", "\"\<Mine Density\>\""}],
+                 "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"0.05", "\[Rule]", "\"\<Beginner\>\""}], ",", 
+                 RowBox[{"0.1", "\[Rule]", "\"\<Easy\>\""}], ",", 
+                 RowBox[{"0.15", "\[Rule]", "\"\<Medium\>\""}], ",", 
+                 RowBox[{"0.25", "\[Rule]", "\"\<Hard\>\""}], ",", 
+                 RowBox[{"0.3", "\[Rule]", "\"\<Expert\>\""}], ",", 
+                 RowBox[{"0.4", "\[Rule]", "\"\<Pro\>\""}]}], "}"}]}], "}"}], 
+             "]"}], ",", 
+            RowBox[{"Button", "[", 
+             RowBox[{
+              RowBox[{"Dynamic", "@", 
+               RowBox[{"Which", "[", 
+                RowBox[{
+                 RowBox[{"loose", "\[Equal]", "True"}], ",", 
+                 "\"\<You Loose - Play Again?\>\"", ",", 
+                 RowBox[{"win", "\[Equal]", "True"}], ",", 
+                 "\"\<You Win - Play Again?\>\"", ",", "True", ",", " ", 
+                 "\"\<Restart\>\""}], "]"}]}], ",", "newGame"}], "]"}]}], 
+           "\[IndentingNewLine]", "}"}], "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"Panel", "[", "\[IndentingNewLine]", 
+          RowBox[{"Column", "[", 
+           RowBox[{"{", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"Row", "[", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"TextCell", "[", "\"\<Mines: \>\"", "]"}], ",", 
+                RowBox[{"Dynamic", "@", 
+                 RowBox[{"Length", "[", "mines", "]"}]}]}], "}"}], "]"}], ",",
+              "\[IndentingNewLine]", 
+             RowBox[{"Row", "[", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"TextCell", "[", "\"\<Flags: \>\"", "]"}], ",", 
+                RowBox[{"Dynamic", "@", 
+                 RowBox[{"Count", "[", 
+                  RowBox[{"show", ",", "\"\<F\>\"", ",", "2"}], "]"}]}]}], 
+               "}"}], "]"}]}], "\[IndentingNewLine]", "}"}], "]"}], 
+          "\[IndentingNewLine]", "]"}]}], "}"}], ",", 
+       RowBox[{"Spacer", "[", "20", "]"}]}], "]"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"SaveDefinitions", "\[Rule]", "True"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"LocalizeVariables", "\[Rule]", "False"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Initialization", "\[RuleDelayed]", 
+      RowBox[{"(", "\[IndentingNewLine]", 
+       RowBox[{"(*", "functions", " ", "*)"}], "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"clickID", ":=", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"gridLength", "-", 
+             RowBox[{
+             "#", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}]}], 
+            ",", 
+            RowBox[{"1", "+", 
+             RowBox[{
+             "#", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}]}]}], 
+           "}"}], "&"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"chainUncover", ":=", 
+         RowBox[{"(", "\[IndentingNewLine]", 
+          RowBox[{"(*", 
+           RowBox[{
+            RowBox[{"if", " ", "click", " ", "ID"}], " ", "=", " ", "0"}], 
+           " ", "*)"}], "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"stepNew", "=", 
+            RowBox[{"AssociationThread", "[", 
+             RowBox[{
+              RowBox[{"nn", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"clickID", "[", "pt", "]"}], "\[LeftDoubleBracket]", 
+                 "1", "\[RightDoubleBracket]"}], ",", 
+                RowBox[{
+                 RowBox[{"clickID", "[", "pt", "]"}], "\[LeftDoubleBracket]", 
+                 "2", "\[RightDoubleBracket]"}]}], "]"}], "->", 
+              RowBox[{"Extract", "[", 
+               RowBox[{"new", ",", 
+                RowBox[{"nn", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"clickID", "[", "pt", "]"}], 
+                   "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
+                  ",", 
+                  RowBox[{
+                   RowBox[{"clickID", "[", "pt", "]"}], 
+                   "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}]}], 
+                 "]"}]}], "]"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"show", "=", 
+            RowBox[{"ReplacePart", "[", 
+             RowBox[{"show", ",", 
+              RowBox[{"Normal", "[", "stepNew", "]"}]}], "]"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"stepOld", "=", "stepNew"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"(*", " ", 
+            RowBox[{
+            "NNs", " ", "of", " ", "blank", " ", "tiles", " ", "from", " ", 
+             "step", " ", "1"}], " ", "*)"}], "\[IndentingNewLine]", 
+           RowBox[{"Do", "[", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"stepNew", "=", 
+               RowBox[{"AssociationThread", "[", 
+                RowBox[{
+                 RowBox[{"Flatten", "[", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{
+                    RowBox[{"nn", "[", 
+                    RowBox[{
+                    RowBox[{
+                    "#", "\[LeftDoubleBracket]", "1", 
+                    "\[RightDoubleBracket]"}], ",", 
+                    RowBox[{
+                    "#", "\[LeftDoubleBracket]", "2", 
+                    "\[RightDoubleBracket]"}]}], "]"}], "&"}], "/@", 
+                    RowBox[{"Keys", "[", 
+                    RowBox[{
+                    RowBox[{"Select", "[", 
+                    RowBox[{
+                    RowBox[{"#", "==", "0"}], "&"}], "]"}], "@", "stepOld"}], 
+                    "]"}]}], ",", "1"}], "]"}], "\[Rule]", " ", 
+                 RowBox[{"Extract", "[", 
+                  RowBox[{"new", ",", 
+                   RowBox[{"Flatten", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"nn", "[", 
+                    RowBox[{
+                    RowBox[{
+                    "#", "\[LeftDoubleBracket]", "1", 
+                    "\[RightDoubleBracket]"}], ",", 
+                    RowBox[{
+                    "#", "\[LeftDoubleBracket]", "2", 
+                    "\[RightDoubleBracket]"}]}], "]"}], "&"}], "/@", 
+                    RowBox[{"Keys", "[", 
+                    RowBox[{
+                    RowBox[{"Select", "[", 
+                    RowBox[{
+                    RowBox[{"#", "==", "0"}], "&"}], "]"}], "@", "stepOld"}], 
+                    "]"}]}], ",", "1"}], "]"}]}], "]"}]}], "]"}]}], ";", 
+              "\[IndentingNewLine]", 
+              RowBox[{"show", "=", 
+               RowBox[{"ReplacePart", "[", 
+                RowBox[{"show", ",", 
+                 RowBox[{"Normal", "[", "stepNew", "]"}]}], "]"}]}], ";", 
+              "\[IndentingNewLine]", 
+              RowBox[{"stepOld", "=", "stepNew"}]}], ",", 
+             "\[IndentingNewLine]", "100"}], "]"}]}], "\[IndentingNewLine]", 
+          ")"}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"nn", "=", 
+         RowBox[{"(*", 
+          RowBox[{
+           RowBox[{
+           "nearest", " ", "neighbours", " ", "of", " ", "nth", " ", "entry", 
+            " ", "of", " ", "safe", " ", "tiles"}], " ", "-", " ", 
+           RowBox[{"long", " ", "version"}]}], "*)"}], 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{"Select", "[", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{
+                  "#", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}],
+                   "\[LessEqual]", " ", "gridLength"}], "&"}], "]"}], "@", 
+               RowBox[{
+                RowBox[{"Select", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                   "#", "\[LeftDoubleBracket]", "1", 
+                    "\[RightDoubleBracket]"}], "\[LessEqual]", " ", 
+                   "gridLength"}], "&"}], "]"}], "@", 
+                RowBox[{"DeleteCases", "[", 
+                 RowBox[{"#", ",", 
+                  RowBox[{"{", 
+                   RowBox[{"0", ",", "Integer_"}], "}"}]}], "]"}]}]}], "&"}], 
+             "@", 
+             RowBox[{"DeleteCases", "[", 
+              RowBox[{"#", ",", 
+               RowBox[{"{", 
+                RowBox[{"Integer_", ",", "0"}], "}"}]}], "]"}]}], "&"}], "@", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"#1", "-", "1"}], ",", 
+               RowBox[{"#2", "-", "1"}]}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"#1", "-", "1"}], ",", "#2"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"#1", "-", "1"}], ",", 
+               RowBox[{"#2", "+", "1"}]}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"#1", ",", 
+               RowBox[{"#2", "-", "1"}]}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"#1", ",", "#2"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"#1", ",", 
+               RowBox[{"#2", "+", "1"}]}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"#1", "+", "1"}], ",", 
+               RowBox[{"#2", "-", "1"}]}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"#1", "+", "1"}], ",", "#2"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"#1", "+", "1"}], ",", 
+               RowBox[{"#2", "+", "1"}]}], "}"}]}], "}"}]}], "&"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"grid", "=", 
+         RowBox[{"(*", 
+          RowBox[{"generate", " ", "random", " ", "starting", " ", "grid"}], 
+          "*)"}], 
+         RowBox[{
+          RowBox[{"RandomChoice", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"#1", ",", 
+               RowBox[{"1", "-", "#1"}]}], "}"}], "\[Rule]", " ", 
+             RowBox[{"{", 
+              RowBox[{"\"\<m\>\"", ",", "0"}], "}"}]}], ",", 
+            RowBox[{"{", 
+             RowBox[{"#2", ",", "#2"}], "}"}]}], "]"}], "&"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"colRules", "=", 
+         RowBox[{"Join", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"Normal", "[", 
+            RowBox[{"AssociationThread", "[", 
+             RowBox[{
+              RowBox[{"Range", "[", "8", "]"}], "\[Rule]", 
+              RowBox[{"(", 
+               RowBox[{"Rest", "[", 
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"Hue", "[", 
+                    RowBox[{"1", ",", "#", ",", "1"}], "]"}], "&"}], "/@", 
+                  RowBox[{"Rescale", "[", 
+                   RowBox[{"Range", "[", "9", "]"}], "]"}]}], ")"}], "]"}], 
+               ")"}]}], "]"}], "]"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"\"\<m\>\"", "\[Rule]", 
+              RowBox[{"Hue", "[", 
+               RowBox[{"1", ",", "1", ",", "0"}], "]"}]}], ",", 
+             RowBox[{"\"\<U\>\"", "\[Rule]", 
+              RowBox[{"GrayLevel", "[", "0.8", "]"}]}], ",", 
+             RowBox[{"\"\<F\>\"", "->", 
+              RowBox[{"RGBColor", "[", 
+               RowBox[{"0.2", ",", "0.5", ",", "0.7"}], "]"}]}]}], "}"}]}], 
+          "\[IndentingNewLine]", "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{"win", " ", "condition"}], " ", "*)"}], 
+        "\[IndentingNewLine]", 
+        RowBox[{"win", ":=", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Position", "[", 
+            RowBox[{"show", ",", 
+             RowBox[{"\"\<U\>\"", "|", "\"\<F\>\""}]}], "]"}], "\[Equal]", 
+           "mines"}], "&&", 
+          RowBox[{"loose", "\[Equal]", "False"}]}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"(*", " ", 
+         RowBox[{"loose", " ", "conditions"}], " ", "*)"}], 
+        "\[IndentingNewLine]", 
+        RowBox[{"loose", ":=", 
+         RowBox[{"ContainsAny", "[", 
+          RowBox[{
+           RowBox[{"Position", "[", 
+            RowBox[{"show", ",", "\"\<m\>\""}], "]"}], ",", "mines"}], 
+          "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"(*", " ", "initilize", " ", "*)"}], "\[IndentingNewLine]", 
+        RowBox[{"mineProb", "=", "0.1"}], ";", 
+        RowBox[{"gridLength", "=", "10"}], ";", 
+        RowBox[{"pt", "=", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "0"}], "}"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"newGame", ":=", 
+         RowBox[{"(", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"label", "=", "\"\<Restart\>\""}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"test", "=", 
+            RowBox[{"grid", "[", 
+             RowBox[{"mineProb", ",", "gridLength"}], "]"}]}], ";", "\n", 
+           RowBox[{"safe", "=", 
+            RowBox[{"(*", 
+             RowBox[{
+             "array", " ", "positions", " ", "of", " ", "safe", " ", 
+              "tiles"}], "*)"}], 
+            RowBox[{"Position", "[", 
+             RowBox[{"test", ",", "0"}], "]"}]}], ";", "\n", 
+           RowBox[{"mines", "=", 
+            RowBox[{"(*", 
+             RowBox[{
+             "array", " ", "positions", " ", "of", " ", "mine", " ", 
+              "tiles"}], "*)"}], 
+            RowBox[{"Position", "[", 
+             RowBox[{"test", ",", "\"\<m\>\""}], "]"}]}], ";", "\n", 
+           RowBox[{"mineCount", "=", 
+            RowBox[{"(*", 
+             RowBox[{
+             "number", " ", "of", " ", "NNs", " ", "which", " ", "are", " ", 
+              "mines"}], "*)"}], 
+            RowBox[{"Table", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{"Length", "[", 
+                  RowBox[{"Flatten", "[", 
+                   RowBox[{"Intersection", "[", 
+                    RowBox[{
+                    RowBox[{"nn", "[", 
+                    RowBox[{
+                    RowBox[{"First", "@", 
+                    RowBox[{
+                    "safe", "\[LeftDoubleBracket]", "#", 
+                    "\[RightDoubleBracket]"}]}], ",", 
+                    RowBox[{"Last", "@", 
+                    RowBox[{
+                    "safe", "\[LeftDoubleBracket]", "#", 
+                    "\[RightDoubleBracket]"}]}]}], "]"}], ",", "mines"}], 
+                    "]"}], "]"}], "]"}], "/", "2"}], "&"}], "[", "i", "]"}], 
+              ",", 
+              RowBox[{"{", 
+               RowBox[{"i", ",", "1", ",", 
+                RowBox[{"Length", "[", "safe", "]"}]}], "}"}]}], "]"}]}], ";",
+            "\[IndentingNewLine]", 
+           RowBox[{"new", "=", 
+            RowBox[{"Replace", "[", 
+             RowBox[{"test", ",", 
+              RowBox[{"1", "\[Rule]", "\"\<m\>\""}], ",", "2"}], "]"}]}], ";",
+            "\[IndentingNewLine]", 
+           RowBox[{"new", "=", 
+            RowBox[{"(*", 
+             RowBox[{"insert", " ", "nn", " ", "mine", " ", "count"}], "*)"}], 
+            RowBox[{"ReplacePart", "[", 
+             RowBox[{"test", ",", 
+              RowBox[{"Table", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{
+                 "safe", "\[LeftDoubleBracket]", "i", 
+                  "\[RightDoubleBracket]"}], "\[Rule]", " ", 
+                 RowBox[{
+                 "mineCount", "\[LeftDoubleBracket]", "i", 
+                  "\[RightDoubleBracket]"}]}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", "1", ",", 
+                  RowBox[{"Length", "[", "safe", "]"}]}], "}"}]}], "]"}]}], 
+             "]"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"show", "=", 
+            RowBox[{"ConstantArray", "[", 
+             RowBox[{"\"\<U\>\"", ",", 
+              RowBox[{"Dimensions", "[", "new", "]"}]}], "]"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"index", "=", 
+            RowBox[{"Flatten", "[", 
+             RowBox[{
+              RowBox[{"Table", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"j", ",", "i"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"i", ",", "gridLength", ",", "1", ",", 
+                  RowBox[{"-", "1"}]}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"j", ",", "1", ",", "gridLength", ",", "1"}], 
+                 "}"}]}], "]"}], ",", "1"}], "]"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"tips", "=", 
+            RowBox[{"Table", "[", 
+             RowBox[{
+              RowBox[{"Inset", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{
+                    "#", ",", "Black", ",", "12", ",", "\"\<Title\>\""}], 
+                    "]"}], "&"}], "/@", 
+                   RowBox[{"ToString", "/@", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"Flatten", "[", "new", "]"}], "/.", 
+                    RowBox[{"{", 
+                    RowBox[{"0", "\[Rule]", "\"\<\>\""}], "}"}]}], ")"}]}]}], 
+                  ")"}], "\[LeftDoubleBracket]", "i", 
+                 "\[RightDoubleBracket]"}], ",", 
+                RowBox[{
+                 RowBox[{
+                 "index", "\[LeftDoubleBracket]", "i", 
+                  "\[RightDoubleBracket]"}], "-", "0.5"}]}], "]"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"i", ",", "1", ",", 
+                RowBox[{"gridLength", "^", "2"}]}], "}"}]}], "]"}]}], ";"}], 
+          "\[IndentingNewLine]", ")"}]}], ";", "\[IndentingNewLine]", 
+        "newGame", ";"}], "\[IndentingNewLine]", ")"}]}]}], 
+    "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.670415513524418*^9, 3.6704155196398787`*^9}, {
+   3.670415591604949*^9, 3.6704155957587795`*^9}, {3.670415747063792*^9, 
+   3.670415748746893*^9}, {3.6704159554139314`*^9, 3.6704159578118515`*^9}, {
+   3.670422749494272*^9, 3.6704227499589577`*^9}, {3.6704241697287445`*^9, 
+   3.6704241933501215`*^9}, {3.670425412276904*^9, 3.6704254150667806`*^9}, 
+   3.6704261040466204`*^9, {3.670428577894399*^9, 3.6704286244295864`*^9}, {
+   3.670428792676893*^9, 3.6704288093600845`*^9}, {3.670429479136017*^9, 
+   3.6704295972436094`*^9}, {3.670429705593422*^9, 3.6704298015043063`*^9}, {
+   3.6704300126749325`*^9, 3.670430169185369*^9}, {3.670430222048741*^9, 
+   3.6704302526197314`*^9}, {3.6704304208454123`*^9, 3.670430428174864*^9}, 
+   3.670431059659339*^9, {3.670432313070734*^9, 3.670432384957745*^9}, {
+   3.6704854116208625`*^9, 3.670485411931058*^9}, 3.670485711158111*^9, {
+   3.6704875851308823`*^9, 3.6704876001250353`*^9}, {3.670487677608988*^9, 
+   3.670487698624637*^9}, {3.670487778635476*^9, 3.6704877845797577`*^9}, 
+   3.6704879290482645`*^9, 3.6704886787061615`*^9, {3.670488849358313*^9, 
+   3.670488854120316*^9}, {3.6704893091101956`*^9, 3.6704893140556684`*^9}, {
+   3.6704967291437044`*^9, 3.670496868038418*^9}, 3.6704970411395807`*^9, {
+   3.670514245332636*^9, 3.670514249667225*^9}, {3.670520497111002*^9, 
+   3.6705205063882403`*^9}, {3.670520539164559*^9, 3.6705205941676397`*^9}, {
+   3.6705210784857473`*^9, 3.6705211624209766`*^9}, {3.6705215657300816`*^9, 
+   3.6705217557332964`*^9}, {3.670745162225909*^9, 3.6707451634468656`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[CloudObject`Private`gridLength], 10, "Grid Size"}, {
+      10 -> "Small", 20 -> "Medium", 30 -> "Large"}}, {{
+       Hold[CloudObject`Private`mineProb], 0.1, "Mine Density"}, {
+      0.05 -> "Beginner", 0.1 -> "Easy", 0.15 -> "Medium", 0.25 -> "Hard", 
+       0.3 -> "Expert", 0.4 -> "Pro"}}, {
+      Hold[
+       Row[{
+         Column[{
+           Manipulate`Place[1], 
+           Manipulate`Place[2], 
+           Button[
+            Dynamic[
+             Which[
+             CloudObject`Private`loose == True, "You Loose - Play Again?", 
+              CloudObject`Private`win == True, "You Win - Play Again?", True, 
+              "Restart"]], CloudObject`Private`newGame]}], 
+         Panel[
+          Column[{
+            Row[{
+              TextCell["Mines: "], 
+              Dynamic[
+               Length[CloudObject`Private`mines]]}], 
+            Row[{
+              TextCell["Flags: "], 
+              Dynamic[
+               Count[CloudObject`Private`show, "F", 2]]}]}]]}, 
+        Spacer[20]]], Manipulate`Dump`ThisIsNotAControl}}, Typeset`size$$ = {
+    450., {222., 227.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, CloudObject`Private`gridLength$97879$$ = 
+    False, CloudObject`Private`mineProb$97880$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     2, StandardForm, 
+      "Variables" :> {
+       CloudObject`Private`gridLength = 10, CloudObject`Private`mineProb = 
+        0.1}, "ControllerVariables" :> {
+        Hold[
+        CloudObject`Private`gridLength, 
+         CloudObject`Private`gridLength$97879$$, False], 
+        Hold[
+        CloudObject`Private`mineProb, CloudObject`Private`mineProb$97880$$, 
+         False]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> ClickPane[
+        ArrayPlot[
+         Which[
+         CloudObject`Private`loose == False, CloudObject`Private`show, True, 
+          CloudObject`Private`new], Frame -> False, Mesh -> All, ColorRules -> 
+         CloudObject`Private`colRules, ImageSize -> 450, Epilog -> {
+           If[CloudObject`Private`loose == True, CloudObject`Private`tips, 
+            Extract[CloudObject`Private`tips, 
+             Most[
+              Rest[
+               Position[
+                Flatten[CloudObject`Private`show], 
+                Except[
+                 Alternatives["U", "F"]]]]]]]}], (
+        CloudObject`Private`pt = IntegerPart[#]; 
+        If[CurrentValue["ShiftKey"] == False, 
+          If[Extract[CloudObject`Private`new, 
+             CloudObject`Private`clickID[CloudObject`Private`pt]] == 0, 
+           CloudObject`Private`chainUncover, CloudObject`Private`show = 
+           ReplacePart[
+            CloudObject`Private`show, 
+             CloudObject`Private`clickID[CloudObject`Private`pt] -> 
+             Extract[CloudObject`Private`new, 
+               CloudObject`Private`clickID[CloudObject`Private`pt]]]], 
+          Which[Extract[CloudObject`Private`show, 
+             CloudObject`Private`clickID[CloudObject`Private`pt]] =!= "U" =!= 
+           "F", CloudObject`Private`show = 
+           ReplacePart[CloudObject`Private`show, 
+             Normal[
+              AssociationThread[
+               (Keys[
+                 Select[
+                  AssociationThread[CloudObject`Private`nn[
+                    Part[
+                    CloudObject`Private`clickID[CloudObject`Private`pt], 1], 
+                    Part[
+                    CloudObject`Private`clickID[CloudObject`Private`pt], 2]] -> 
+                   Extract[CloudObject`Private`show, 
+                    CloudObject`Private`nn[
+                    Part[
+                    CloudObject`Private`clickID[CloudObject`Private`pt], 1], 
+                    Part[
+                    CloudObject`Private`clickID[CloudObject`Private`pt], 
+                    2]]]], # == "U"& ]] -> 
+               Extract[CloudObject`Private`new, #]& )[
+                Keys[
+                 Select[
+                  AssociationThread[CloudObject`Private`nn[
+                    Part[
+                    CloudObject`Private`clickID[CloudObject`Private`pt], 1], 
+                    Part[
+                    CloudObject`Private`clickID[CloudObject`Private`pt], 2]] -> 
+                   Extract[CloudObject`Private`show, 
+                    CloudObject`Private`nn[
+                    Part[
+                    CloudObject`Private`clickID[CloudObject`Private`pt], 1], 
+                    Part[
+                    CloudObject`Private`clickID[CloudObject`Private`pt], 
+                    2]]]], # == "U"& ]]]]]], Extract[CloudObject`Private`show, 
+             CloudObject`Private`clickID[CloudObject`Private`pt]] == "U", 
+           CloudObject`Private`show = 
+           ReplacePart[
+            CloudObject`Private`show, 
+             CloudObject`Private`clickID[CloudObject`Private`pt] -> "F"], 
+           Extract[CloudObject`Private`show, 
+             CloudObject`Private`clickID[CloudObject`Private`pt]] == "F", 
+           CloudObject`Private`show = 
+           ReplacePart[
+            CloudObject`Private`show, 
+             CloudObject`Private`clickID[CloudObject`Private`pt] -> "U"]]]; 
+        Null)& ], 
+      "Specifications" :> {{{
+         CloudObject`Private`gridLength, 10, "Grid Size"}, {
+         10 -> "Small", 20 -> "Medium", 30 -> "Large"}, ControlPlacement -> 
+         1}, {{CloudObject`Private`mineProb, 0.1, "Mine Density"}, {
+         0.05 -> "Beginner", 0.1 -> "Easy", 0.15 -> "Medium", 0.25 -> "Hard", 
+          0.3 -> "Expert", 0.4 -> "Pro"}, ControlPlacement -> 2}, 
+        Row[{
+          Column[{
+            Manipulate`Place[1], 
+            Manipulate`Place[2], 
+            Button[
+             Dynamic[
+              Which[
+              CloudObject`Private`loose == True, "You Loose - Play Again?", 
+               CloudObject`Private`win == True, "You Win - Play Again?", True,
+                "Restart"]], CloudObject`Private`newGame]}], 
+          Panel[
+           Column[{
+             Row[{
+               TextCell["Mines: "], 
+               Dynamic[
+                Length[CloudObject`Private`mines]]}], 
+             Row[{
+               TextCell["Flags: "], 
+               Dynamic[
+                Count[CloudObject`Private`show, "F", 2]]}]}]]}, 
+         Spacer[20]]}, "Options" :> {LocalizeVariables -> False}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{501., {296., 303.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({{CloudObject`Private`loose := ContainsAny[
+           Position[CloudObject`Private`show, "m"], 
+           CloudObject`Private`mines], CloudObject`Private`show = 
+         ReplacePart[{{0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0,
+             1, 1}, {0, 0, 0, 0, 0, 0, 0, 0, 1, "U"}, {0, 0, 1, 1, 1, 0, 0, 0,
+             1, 1}, {0, 0, 1, "U", 1, 0, 0, 0, 0, 0}, {1, 1, 2, 1, 1, 0, 0, 0,
+             0, 0}, {"U", "U", "U", 0, 0, 0, 0, 0, 0, 0}, {
+            "U", "U", "U", 0, 0, 0, 0, 0, 0, 0}, {
+            "U", "U", "U", "U", "U", "U", "U", "U", "U", "U"}, {
+            "U", "U", "U", "U", "U", "U", "U", "U", "U", "U"}}, 
+           AssociationThread[CompressedData["
+1:eJxVkIttxDAMQyNbkn9TdKWO0AU6bfep3gEBaODgkA5/l6+f3++f9jzPnz0P
+TzNrjV89rYNaf+86F3IPr6O4Oby5Yt51f33OtbjgJREl3B2/BbctFKPoF0bt
+8WYHQkmGx8dviaelYvz9wmR5vkmJUHLg2fHbwNOGYvz9wp+sC0dExsBjE12b
+itH1C+PxC+OPqWkZmTn0LTwnubbIaksxWf3COP3CpMSFScyljaNAHdIIH1P1
+8LHotk1f2yT6RhEbRV4Y9djpNAynYdafqnhphFeVNMLrkEb4XJoJn5sddtjR
+Djv80B0HXV4Yz7gw/nmys2501s3OOsWrPmB9MFkOr48hy+E1U5bDa7Ish9ch
+y+Fr6xL4Ov9qVBXL
+             "] -> 
+            Extract[{{0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 
+               1, 1}, {0, 0, 0, 0, 0, 0, 0, 0, 1, "m"}, {0, 0, 1, 1, 1, 0, 0, 
+               0, 1, 1}, {0, 0, 1, "m", 1, 0, 0, 0, 0, 0}, {1, 1, 2, 1, 1, 0, 
+               0, 0, 0, 0}, {1, "m", 1, 0, 0, 0, 0, 0, 0, 0}, {1, 1, 1, 0, 0, 
+               0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0}}, CompressedData["
+1:eJxVkIttxDAMQyNbkn9TdKWO0AU6bfep3gEBaODgkA5/l6+f3++f9jzPnz0P
+TzNrjV89rYNaf+86F3IPr6O4Oby5Yt51f33OtbjgJREl3B2/BbctFKPoF0bt
+8WYHQkmGx8dviaelYvz9wmR5vkmJUHLg2fHbwNOGYvz9wp+sC0dExsBjE12b
+itH1C+PxC+OPqWkZmTn0LTwnubbIaksxWf3COP3CpMSFScyljaNAHdIIH1P1
+8LHotk1f2yT6RhEbRV4Y9djpNAynYdafqnhphFeVNMLrkEb4XJoJn5sddtjR
+Djv80B0HXV4Yz7gw/nmys2501s3OOsWrPmB9MFkOr48hy+E1U5bDa7Ish9ch
+y+Fr6xL4Ov9qVBXL
+              "]]]], CloudObject`Private`mines = {{3, 10}, {5, 4}, {7, 2}}, 
+         CloudObject`Private`new = {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 
+           0, 0, 0, 0, 0, 1, 1}, {0, 0, 0, 0, 0, 0, 0, 0, 1, "m"}, {0, 0, 1, 
+           1, 1, 0, 0, 0, 1, 1}, {0, 0, 1, "m", 1, 0, 0, 0, 0, 0}, {1, 1, 2, 
+           1, 1, 0, 0, 0, 0, 0}, {1, "m", 1, 0, 0, 0, 0, 0, 0, 0}, {1, 1, 1, 
+           0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 
+           0, 0, 0, 0, 0, 0}}, 
+         CloudObject`Private`colRules = {
+          1 -> Hue[1, 1/8, 1], 2 -> Hue[1, 1/4, 1], 3 -> Hue[1, 3/8, 1], 4 -> 
+           Hue[1, 1/2, 1], 5 -> Hue[1, 5/8, 1], 6 -> Hue[1, 3/4, 1], 7 -> 
+           Hue[1, 7/8, 1], 8 -> Hue[1, 1, 1], "m" -> Hue[1, 1, 0], "U" -> 
+           GrayLevel[0.8], "F" -> RGBColor[0.2, 0.5, 0.7]}, 
+         CloudObject`Private`tips = {
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {0.5, 9.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {1.5, 9.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {2.5, 9.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {3.5, 9.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {4.5, 9.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {5.5, 9.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {6.5, 9.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {7.5, 9.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {8.5, 9.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {9.5, 9.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {0.5, 8.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {1.5, 8.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {2.5, 8.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {3.5, 8.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {4.5, 8.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {5.5, 8.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {6.5, 8.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {7.5, 8.5}], 
+           Inset[
+            Style["1", 
+             GrayLevel[0], 12, "Title"], {8.5, 8.5}], 
+           Inset[
+            Style["1", 
+             GrayLevel[0], 12, "Title"], {9.5, 8.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {0.5, 7.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {1.5, 7.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {2.5, 7.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {3.5, 7.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {4.5, 7.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {5.5, 7.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {6.5, 7.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {7.5, 7.5}], 
+           Inset[
+            Style["1", 
+             GrayLevel[0], 12, "Title"], {8.5, 7.5}], 
+           Inset[
+            Style["m", 
+             GrayLevel[0], 12, "Title"], {9.5, 7.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {0.5, 6.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {1.5, 6.5}], 
+           Inset[
+            Style["1", 
+             GrayLevel[0], 12, "Title"], {2.5, 6.5}], 
+           Inset[
+            Style["1", 
+             GrayLevel[0], 12, "Title"], {3.5, 6.5}], 
+           Inset[
+            Style["1", 
+             GrayLevel[0], 12, "Title"], {4.5, 6.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {5.5, 6.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {6.5, 6.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {7.5, 6.5}], 
+           Inset[
+            Style["1", 
+             GrayLevel[0], 12, "Title"], {8.5, 6.5}], 
+           Inset[
+            Style["1", 
+             GrayLevel[0], 12, "Title"], {9.5, 6.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {0.5, 5.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {1.5, 5.5}], 
+           Inset[
+            Style["1", 
+             GrayLevel[0], 12, "Title"], {2.5, 5.5}], 
+           Inset[
+            Style["m", 
+             GrayLevel[0], 12, "Title"], {3.5, 5.5}], 
+           Inset[
+            Style["1", 
+             GrayLevel[0], 12, "Title"], {4.5, 5.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {5.5, 5.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {6.5, 5.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {7.5, 5.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {8.5, 5.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {9.5, 5.5}], 
+           Inset[
+            Style["1", 
+             GrayLevel[0], 12, "Title"], {0.5, 4.5}], 
+           Inset[
+            Style["1", 
+             GrayLevel[0], 12, "Title"], {1.5, 4.5}], 
+           Inset[
+            Style["2", 
+             GrayLevel[0], 12, "Title"], {2.5, 4.5}], 
+           Inset[
+            Style["1", 
+             GrayLevel[0], 12, "Title"], {3.5, 4.5}], 
+           Inset[
+            Style["1", 
+             GrayLevel[0], 12, "Title"], {4.5, 4.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {5.5, 4.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {6.5, 4.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {7.5, 4.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {8.5, 4.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {9.5, 4.5}], 
+           Inset[
+            Style["1", 
+             GrayLevel[0], 12, "Title"], {0.5, 3.5}], 
+           Inset[
+            Style["m", 
+             GrayLevel[0], 12, "Title"], {1.5, 3.5}], 
+           Inset[
+            Style["1", 
+             GrayLevel[0], 12, "Title"], {2.5, 3.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {3.5, 3.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {4.5, 3.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {5.5, 3.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {6.5, 3.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {7.5, 3.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {8.5, 3.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {9.5, 3.5}], 
+           Inset[
+            Style["1", 
+             GrayLevel[0], 12, "Title"], {0.5, 2.5}], 
+           Inset[
+            Style["1", 
+             GrayLevel[0], 12, "Title"], {1.5, 2.5}], 
+           Inset[
+            Style["1", 
+             GrayLevel[0], 12, "Title"], {2.5, 2.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {3.5, 2.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {4.5, 2.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {5.5, 2.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {6.5, 2.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {7.5, 2.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {8.5, 2.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {9.5, 2.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {0.5, 1.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {1.5, 1.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {2.5, 1.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {3.5, 1.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {4.5, 1.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {5.5, 1.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {6.5, 1.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {7.5, 1.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {8.5, 1.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {9.5, 1.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {0.5, 0.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {1.5, 0.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {2.5, 0.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {3.5, 0.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {4.5, 0.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {5.5, 0.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {6.5, 0.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {7.5, 0.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {8.5, 0.5}], 
+           Inset[
+            Style["", 
+             GrayLevel[0], 12, "Title"], {9.5, 0.5}]}, 
+         CloudObject`Private`pt = {0, 9}, 
+         CloudObject`Private`clickID := {
+          CloudObject`Private`gridLength - Part[#, 2], 1 + Part[#, 1]}& , 
+         CloudObject`Private`clickID[
+           Pattern[CloudObject`Private`pt, 
+            Blank[]]] := Join[
+           CloudObject`Private`clickColumn[CloudObject`Private`pt], 
+           CloudObject`Private`clickRow[CloudObject`Private`pt]], 
+         CloudObject`Private`gridLength = 10, CloudObject`Private`clickColumn[
+           Pattern[CloudObject`Private`pt, 
+            Blank[]]] := (Flatten[
+           Position[
+            Partition[#, 1], 
+            Nearest[#, 
+             Part[CloudObject`Private`pt, 1]]]]& )[
+           Map[First, 
+            Part[
+             CloudObject`Private`hexPoints[CloudObject`Private`n], All, 1]]], 
+         CloudObject`Private`hexPoints = Table[
+           
+           Table[{CloudObject`Private`k ((CloudObject`Private`h Sqrt[3])/
+               2) + ((CloudObject`Private`k - 1) 
+               CloudObject`Private`m) ((CloudObject`Private`h Sqrt[3])/2), (
+               CloudObject`Private`m + CloudObject`Private`h)/ReplaceAll[
+               Mod[CloudObject`Private`k, 2], 0 -> 2] + 
+             CloudObject`Private`i}, {
+            CloudObject`Private`i, 0, # CloudObject`Private`h, 
+             CloudObject`Private`h + 
+             CloudObject`Private`m CloudObject`Private`h}], {
+           CloudObject`Private`k, 1, #, 1}]& , CloudObject`Private`h = 1, 
+         CloudObject`Private`m = 0, CloudObject`Private`n = 15, 
+         CloudObject`Private`clickRow[
+           Pattern[CloudObject`Private`pt, 
+            Blank[]]] := (Flatten[
+           Position[
+            Partition[#, 1], 
+            Nearest[#, 
+             Part[CloudObject`Private`pt, 2]]]]& )[
+           Map[Last, 
+            Part[
+             CloudObject`Private`hexPoints[CloudObject`Private`n], 
+             ReplaceAll[
+              Part[
+               Mod[
+                CloudObject`Private`clickColumn[CloudObject`Private`pt], 2], 
+               1], {0 -> 2}]]]], 
+         CloudObject`Private`chainUncover := (
+          CloudObject`Private`stepNew = 
+           AssociationThread[CloudObject`Private`nn[
+               Part[
+                CloudObject`Private`clickID[CloudObject`Private`pt], 1], 
+               Part[
+                CloudObject`Private`clickID[CloudObject`Private`pt], 2]] -> 
+             Extract[CloudObject`Private`new, 
+               CloudObject`Private`nn[
+                Part[
+                 CloudObject`Private`clickID[CloudObject`Private`pt], 1], 
+                Part[
+                 CloudObject`Private`clickID[CloudObject`Private`pt], 2]]]]; 
+          CloudObject`Private`show = ReplacePart[CloudObject`Private`show, 
+             Normal[CloudObject`Private`stepNew]]; 
+          CloudObject`Private`stepOld = CloudObject`Private`stepNew; 
+          Do[CloudObject`Private`stepNew = AssociationThread[Flatten[
+                 Map[CloudObject`Private`nn[
+                   Part[#, 1], 
+                   Part[#, 2]]& , 
+                  Keys[
+                   Select[# == 0& ][CloudObject`Private`stepOld]]], 1] -> 
+               Extract[CloudObject`Private`new, 
+                 Flatten[
+                  Map[CloudObject`Private`nn[
+                    Part[#, 1], 
+                    Part[#, 2]]& , 
+                   Keys[
+                    Select[# == 0& ][CloudObject`Private`stepOld]]], 1]]]; 
+            CloudObject`Private`show = ReplacePart[CloudObject`Private`show, 
+               Normal[CloudObject`Private`stepNew]]; 
+            CloudObject`Private`stepOld = CloudObject`Private`stepNew, 100]), 
+         CloudObject`Private`stepNew = Association[], 
+         CloudObject`Private`nn = (Select[
+          Part[#, 2] <= CloudObject`Private`gridLength; 
+           Part[#, 1] <= CloudObject`Private`gridLength& ][
+           DeleteCases[#, 
+            Alternatives[{0, 
+              Pattern[Integer, 
+               Blank[]]}, {
+              Pattern[Integer, 
+               Blank[]], 0}]]]& )[{{# - 1, #2 - 1}, {# - 1, #2}, {# - 1, #2 + 
+             1}, {#, #2 - 1}, {#, #2}, {#, #2 + 1}, {# + 1, #2 - 1}, {# + 
+             1, #2}, {# + 1, #2 + 1}}]& , CloudObject`Private`stepOld = 
+         Association[], CloudObject`Private`mineProb = 0.1, 
+         CloudObject`Private`win := And[Position[CloudObject`Private`show, 
+             Alternatives["U", "F"]] == CloudObject`Private`mines, 
+           CloudObject`Private`loose == False], 
+         CloudObject`Private`newGame := (
+          CloudObject`Private`label = "Restart"; 
+          CloudObject`Private`test = 
+           CloudObject`Private`grid[
+            CloudObject`Private`mineProb, CloudObject`Private`gridLength]; 
+          CloudObject`Private`safe = Position[CloudObject`Private`test, 0]; 
+          CloudObject`Private`mines = Position[CloudObject`Private`test, "m"]; 
+          CloudObject`Private`mineCount = Table[
+             (Length[
+               Flatten[
+                Intersection[
+                 CloudObject`Private`nn[
+                  First[
+                   Part[CloudObject`Private`safe, #]], 
+                  Last[
+                   Part[CloudObject`Private`safe, #]]], 
+                 CloudObject`Private`mines]]]/2& )[CloudObject`Private`i], {
+             CloudObject`Private`i, 1, 
+              Length[CloudObject`Private`safe]}]; 
+          CloudObject`Private`new = 
+           Replace[CloudObject`Private`test, 1 -> "m", 2]; 
+          CloudObject`Private`new = ReplacePart[CloudObject`Private`test, 
+             Table[
+             Part[CloudObject`Private`safe, CloudObject`Private`i] -> 
+              Part[CloudObject`Private`mineCount, CloudObject`Private`i], {
+              CloudObject`Private`i, 1, 
+               Length[CloudObject`Private`safe]}]]; 
+          CloudObject`Private`show = ConstantArray["U", 
+             Dimensions[CloudObject`Private`new]]; 
+          CloudObject`Private`index = Flatten[
+             
+             Table[{CloudObject`Private`j, CloudObject`Private`i}, {
+              CloudObject`Private`i, CloudObject`Private`gridLength, 1, -1}, {
+              CloudObject`Private`j, 1, CloudObject`Private`gridLength, 1}], 
+             1]; CloudObject`Private`tips = Table[
+             Inset[
+              Part[
+               Map[Style[#, Black, 12, "Title"]& , 
+                Map[ToString, 
+                 ReplaceAll[
+                  Flatten[CloudObject`Private`new], {0 -> ""}]]], 
+               CloudObject`Private`i], 
+              Part[CloudObject`Private`index, CloudObject`Private`i] - 0.5], {
+             CloudObject`Private`i, 1, CloudObject`Private`gridLength^2}]; 
+          Null), CloudObject`Private`label = "Restart", 
+         CloudObject`Private`test = {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, "m"}, {0, 0, 0, 
+           0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, "m", 0, 0, 0, 0, 0, 0}, {0, 0, 0, 
+           0, 0, 0, 0, 0, 0, 0}, {0, "m", 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 
+           0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 
+           0, 0, 0, 0, 0, 0}}, CloudObject`Private`grid = 
+         RandomChoice[{#, 1 - #} -> {"m", 0}, {#2, #2}]& , 
+         CloudObject`Private`safe = {{1, 1}, {1, 2}, {1, 3}, {1, 4}, {1, 5}, {
+          1, 6}, {1, 7}, {1, 8}, {1, 9}, {1, 10}, {2, 1}, {2, 2}, {2, 3}, {2, 
+          4}, {2, 5}, {2, 6}, {2, 7}, {2, 8}, {2, 9}, {2, 10}, {3, 1}, {3, 
+          2}, {3, 3}, {3, 4}, {3, 5}, {3, 6}, {3, 7}, {3, 8}, {3, 9}, {4, 
+          1}, {4, 2}, {4, 3}, {4, 4}, {4, 5}, {4, 6}, {4, 7}, {4, 8}, {4, 
+          9}, {4, 10}, {5, 1}, {5, 2}, {5, 3}, {5, 5}, {5, 6}, {5, 7}, {5, 
+          8}, {5, 9}, {5, 10}, {6, 1}, {6, 2}, {6, 3}, {6, 4}, {6, 5}, {6, 
+          6}, {6, 7}, {6, 8}, {6, 9}, {6, 10}, {7, 1}, {7, 3}, {7, 4}, {7, 
+          5}, {7, 6}, {7, 7}, {7, 8}, {7, 9}, {7, 10}, {8, 1}, {8, 2}, {8, 
+          3}, {8, 4}, {8, 5}, {8, 6}, {8, 7}, {8, 8}, {8, 9}, {8, 10}, {9, 
+          1}, {9, 2}, {9, 3}, {9, 4}, {9, 5}, {9, 6}, {9, 7}, {9, 8}, {9, 
+          9}, {9, 10}, {10, 1}, {10, 2}, {10, 3}, {10, 4}, {10, 5}, {10, 6}, {
+          10, 7}, {10, 8}, {10, 9}, {10, 10}}, 
+         CloudObject`Private`mineCount = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+          0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0,
+           0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 2, 1, 1, 0, 0, 0, 0, 
+          0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+           0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, 
+         CloudObject`Private`index = {{1, 10}, {2, 10}, {3, 10}, {4, 10}, {5, 
+          10}, {6, 10}, {7, 10}, {8, 10}, {9, 10}, {10, 10}, {1, 9}, {2, 9}, {
+          3, 9}, {4, 9}, {5, 9}, {6, 9}, {7, 9}, {8, 9}, {9, 9}, {10, 9}, {1, 
+          8}, {2, 8}, {3, 8}, {4, 8}, {5, 8}, {6, 8}, {7, 8}, {8, 8}, {9, 
+          8}, {10, 8}, {1, 7}, {2, 7}, {3, 7}, {4, 7}, {5, 7}, {6, 7}, {7, 
+          7}, {8, 7}, {9, 7}, {10, 7}, {1, 6}, {2, 6}, {3, 6}, {4, 6}, {5, 
+          6}, {6, 6}, {7, 6}, {8, 6}, {9, 6}, {10, 6}, {1, 5}, {2, 5}, {3, 
+          5}, {4, 5}, {5, 5}, {6, 5}, {7, 5}, {8, 5}, {9, 5}, {10, 5}, {1, 
+          4}, {2, 4}, {3, 4}, {4, 4}, {5, 4}, {6, 4}, {7, 4}, {8, 4}, {9, 
+          4}, {10, 4}, {1, 3}, {2, 3}, {3, 3}, {4, 3}, {5, 3}, {6, 3}, {7, 
+          3}, {8, 3}, {9, 3}, {10, 3}, {1, 2}, {2, 2}, {3, 2}, {4, 2}, {5, 
+          2}, {6, 2}, {7, 2}, {8, 2}, {9, 2}, {10, 2}, {1, 1}, {2, 1}, {3, 
+          1}, {4, 1}, {5, 1}, {6, 1}, {7, 1}, {8, 1}, {9, 1}, {10, 1}}}; (
+        CloudObject`Private`clickID := {
+          CloudObject`Private`gridLength - Part[#, 2], 1 + Part[#, 1]}& ; 
+        CloudObject`Private`chainUncover := (
+          CloudObject`Private`stepNew = 
+           AssociationThread[CloudObject`Private`nn[
+               Part[
+                CloudObject`Private`clickID[CloudObject`Private`pt], 1], 
+               Part[
+                CloudObject`Private`clickID[CloudObject`Private`pt], 2]] -> 
+             Extract[CloudObject`Private`new, 
+               CloudObject`Private`nn[
+                Part[
+                 CloudObject`Private`clickID[CloudObject`Private`pt], 1], 
+                Part[
+                 CloudObject`Private`clickID[CloudObject`Private`pt], 2]]]]; 
+          CloudObject`Private`show = ReplacePart[CloudObject`Private`show, 
+             Normal[CloudObject`Private`stepNew]]; 
+          CloudObject`Private`stepOld = CloudObject`Private`stepNew; 
+          Do[CloudObject`Private`stepNew = AssociationThread[Flatten[
+                 Map[CloudObject`Private`nn[
+                   Part[#, 1], 
+                   Part[#, 2]]& , 
+                  Keys[
+                   Select[# == 0& ][CloudObject`Private`stepOld]]], 1] -> 
+               Extract[CloudObject`Private`new, 
+                 Flatten[
+                  Map[CloudObject`Private`nn[
+                    Part[#, 1], 
+                    Part[#, 2]]& , 
+                   Keys[
+                    Select[# == 0& ][CloudObject`Private`stepOld]]], 1]]]; 
+            CloudObject`Private`show = ReplacePart[CloudObject`Private`show, 
+               Normal[CloudObject`Private`stepNew]]; 
+            CloudObject`Private`stepOld = CloudObject`Private`stepNew, 100]); 
+        CloudObject`Private`nn = ((Select[
+          Part[#, 2] <= CloudObject`Private`gridLength& ][
+           Select[Part[#, 1] <= CloudObject`Private`gridLength& ][
+            DeleteCases[#, {0, 
+              Pattern[Integer, 
+               Blank[]]}]]]& )[
+           DeleteCases[#, {
+             Pattern[Integer, 
+              Blank[]], 0}]]& )[{{# - 1, #2 - 1}, {# - 1, #2}, {# - 1, #2 + 
+             1}, {#, #2 - 1}, {#, #2}, {#, #2 + 1}, {# + 1, #2 - 1}, {# + 
+             1, #2}, {# + 1, #2 + 1}}]& ; 
+        CloudObject`Private`grid = 
+         RandomChoice[{#, 1 - #} -> {"m", 0}, {#2, #2}]& ; 
+        CloudObject`Private`colRules = Join[
+           Normal[
+            AssociationThread[Range[8] -> Rest[
+               Map[Hue[1, #, 1]& , 
+                Rescale[
+                 Range[9]]]]]], {
+           "m" -> Hue[1, 1, 0], "U" -> GrayLevel[0.8], "F" -> 
+            RGBColor[0.2, 0.5, 0.7]}]; 
+        CloudObject`Private`win := And[Position[CloudObject`Private`show, 
+             Alternatives["U", "F"]] == CloudObject`Private`mines, 
+           CloudObject`Private`loose == False]; 
+        CloudObject`Private`loose := ContainsAny[
+           Position[CloudObject`Private`show, "m"], 
+           CloudObject`Private`mines]; CloudObject`Private`mineProb = 0.1; 
+        CloudObject`Private`gridLength = 10; CloudObject`Private`pt = {0, 0}; 
+        CloudObject`Private`newGame := (CloudObject`Private`label = "Restart"; 
+          CloudObject`Private`test = 
+           CloudObject`Private`grid[
+            CloudObject`Private`mineProb, CloudObject`Private`gridLength]; 
+          CloudObject`Private`safe = Position[CloudObject`Private`test, 0]; 
+          CloudObject`Private`mines = Position[CloudObject`Private`test, "m"]; 
+          CloudObject`Private`mineCount = Table[
+             (Length[
+               Flatten[
+                Intersection[
+                 CloudObject`Private`nn[
+                  First[
+                   Part[CloudObject`Private`safe, #]], 
+                  Last[
+                   Part[CloudObject`Private`safe, #]]], 
+                 CloudObject`Private`mines]]]/2& )[CloudObject`Private`i], {
+             CloudObject`Private`i, 1, 
+              Length[CloudObject`Private`safe]}]; 
+          CloudObject`Private`new = 
+           Replace[CloudObject`Private`test, 1 -> "m", 2]; 
+          CloudObject`Private`new = ReplacePart[CloudObject`Private`test, 
+             Table[
+             Part[CloudObject`Private`safe, CloudObject`Private`i] -> 
+              Part[CloudObject`Private`mineCount, CloudObject`Private`i], {
+              CloudObject`Private`i, 1, 
+               Length[CloudObject`Private`safe]}]]; 
+          CloudObject`Private`show = ConstantArray["U", 
+             Dimensions[CloudObject`Private`new]]; 
+          CloudObject`Private`index = Flatten[
+             
+             Table[{CloudObject`Private`j, CloudObject`Private`i}, {
+              CloudObject`Private`i, CloudObject`Private`gridLength, 1, -1}, {
+              CloudObject`Private`j, 1, CloudObject`Private`gridLength, 1}], 
+             1]; CloudObject`Private`tips = Table[
+             Inset[
+              Part[
+               Map[Style[#, Black, 12, "Title"]& , 
+                Map[ToString, 
+                 ReplaceAll[
+                  Flatten[CloudObject`Private`new], {0 -> ""}]]], 
+               CloudObject`Private`i], 
+              Part[CloudObject`Private`index, CloudObject`Private`i] - 0.5], {
+             CloudObject`Private`i, 1, CloudObject`Private`gridLength^2}]; 
+          Null); CloudObject`Private`newGame; Null)}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.67041559663575*^9, 3.6704159586040487`*^9, 3.670416290151046*^9, 
+   3.670417863097295*^9, 3.670424194781143*^9, 3.670425416476822*^9, 
+   3.670426105782424*^9, {3.670428600100255*^9, 3.6704286257340136`*^9}, 
+   3.6704288106520257`*^9, {3.67042952708319*^9, 3.6704295477302895`*^9}, {
+   3.6704295872901344`*^9, 3.6704295980224705`*^9}, {3.6704297395740633`*^9, 
+   3.6704297501652656`*^9}, 3.670429802634364*^9, {3.6704301499127393`*^9, 
+   3.6704301699045944`*^9}, 3.6704302541574583`*^9, 3.6704304291397305`*^9, {
+   3.6704323616234136`*^9, 3.670432386522828*^9}, 3.670485413201988*^9, 
+   3.6704857127893167`*^9, 3.670487089785592*^9, 3.670487217506318*^9, 
+   3.670487701570631*^9, 3.6704877862479687`*^9, 3.670487931160387*^9, 
+   3.6704880400005603`*^9, {3.6704886824206576`*^9, 3.6704886992388363`*^9}, 
+   3.6704888577692575`*^9, 3.6704891389757657`*^9, 3.6704893163094273`*^9, 
+   3.6704949622725077`*^9, 3.6704950926936216`*^9, 3.670495437341133*^9, 
+   3.6704968699511023`*^9, 3.670497049388094*^9, 3.6705140096328564`*^9, 
+   3.6705142537440677`*^9, 3.6705144409475665`*^9, {3.670521100534881*^9, 
+   3.6705211337802877`*^9}}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"CDFDeploy", "[", 
+  RowBox[{
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+      "\"\<MinesweeperClassic\>\""}], "}"}], "]"}], ",", "minesweeperCDF", 
+   ",", 
+   RowBox[{"WindowSize", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"540", ",", "660"}], "}"}]}], ",", 
+   RowBox[{"Method", "\[Rule]", "\"\<Standalone\>\""}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.670514275200533*^9, 3.670514328728076*^9}, {
+  3.6705144252028923`*^9, 3.6705144532126727`*^9}, {3.670514599082856*^9, 
+  3.6705146361545935`*^9}, {3.670514673540185*^9, 3.670514732464961*^9}, {
+  3.670744673460272*^9, 3.670744674081357*^9}}]
+},
+WindowSize->{681, 676},
+WindowMargins->{{-7, Automatic}, {Automatic, 0}},
+FrontEndVersion->"10.4 for Microsoft Windows (64-bit) (April 11, 2016)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[StyleDefinitions -> "Default.nb"]]}, Visible -> False, 
+  FrontEndVersion -> "10.4 for Microsoft Windows (64-bit) (April 11, 2016)", 
+  StyleDefinitions -> "PrivateStylesheetFormatting.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 29367, 664, 2712, "Input"],
+Cell[29950, 688, 35828, 806, 616, "Output"]
+}, Open  ]],
+Cell[65793, 1497, 699, 16, 52, "Input"]
+}
+]
+*)
+

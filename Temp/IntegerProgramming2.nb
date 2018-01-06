@@ -1,0 +1,576 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.0'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     15377,        457]*)
+(*NotebookOutlinePosition[     16062,        480]*)
+(*  CellTagsIndexPosition[     16018,        476]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell[TextData[{
+  StyleBox["INTEGER PROGRAMMING BY THE GROEBNER BASIS METHOD", "Title",
+    FontFamily->"Times New Roman",
+    FontSize->12],
+  "\n                                      \n                         ",
+  StyleBox["by Devendra Kapadia \n                   ",
+    FontFamily->"Arial",
+    FontSize->14,
+    FontSlant->"Italic",
+    FontColor->RGBColor[0, 0, 1]],
+  StyleBox["Wolfram Research, Inc.",
+    FontSize->14,
+    FontSlant->"Italic",
+    FontColor->RGBColor[0, 0, 1]]
+}], "Text",
+  FontSize->12,
+  FontColor->RGBColor[1, 0, 0]],
+
+Cell["\<\
+
+Our aim in this notebook is to define a Mathematica function for solving \
+problems in  Integer Programming by the Groebner Basis method [Conti and \
+Traverso, AAECC`9, Lecture Notes in Computer Science, Vol. 539, 130-139, \
+Springer Verlag, 1991].
+
+The general Integer Programming problem can  be reduced  to that of \
+minimizing a cost vector c.w subject to the conditions A.w = b, where the \
+components of the optimal solution w are required  to be non-negative \
+integers.
+
+The algorithm is divided into three steps:
+
+1. The coefficients of the matrix A  are used  to form the exponents in a \
+certain binomial ideal.
+2. The Groebner basis of the binomial ideal with respect to a monomial order \
+given by the vector c is found using the kernel function GroebnerBasis.
+3. The optimal solution is found by reading off the exponents in the answer \
+obtained by reducing a certain monomial formed from the components of b, with \
+respect to the Groebner basis and the same monomial order.  The kernel \
+function PolynomialReduce is used for this step.
+
+In contrast to Linear Programming, the problem of Integer Programming is  \
+NP-complete. Hence, there will be an \"expensive step\" in any algorithm for \
+the problem. In our case, the expensive step is that of finding the Groebner  \
+basis.  
+
+We will define the function IntegerProgramming below and give several \
+examples of problems which can be solved using it. At present, we assume that \
+either all the components of A and b are non-negative or that the same \
+condition holds for the components of c,  although this restriction may be \
+easy to remove in future.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(\(\(IntegerProgramming[c_, A_, b_] := 
+      Module[{m, n, p, q, CostOrder, CostMatrix, e, t}, 
+        p = \(Dimensions[A]\)[\([1]\)]; q = \(Dimensions[A]\)[\([2]\)]; 
+        CostMatrix = 
+          Join[\[IndentingNewLine]Table[
+              KroneckerDelta[i, j], {i, 1, p + 1}, {j, 1, p + q + 1}], {Join[
+                Table[0, {i, 1, p + 1}], 
+                If[Apply[And, 
+                    Table[c[\([j]\)] \[GreaterEqual] 0, {j, 1, q}]], 
+                  Table[c[\([j]\)], {j, 1, q}], 
+                  Table[c[\([j]\)] + 
+                      Max[Table[\(-c[\([j]\)]\)/\((Sum[
+                                  A[\([i, j]\)], {i, 1, p}])\), {j, 1, q}]]*
+                        Sum[A[\([i, j]\)], {i, 1, p}], {j, 1, q}]]]}, 
+            Table[KroneckerDelta[i, p + q + 4 - j], {i, 3, q + 1}, {j, 1, 
+                p + q + 1}]]; 
+        CostOrder = Map[LCM[Denominator[#]]*#\  &, \ CostMatrix]; 
+        e = Table[
+            Max[0, Max[Table[\(-A[\([i, j]\)]\), {i, 1, p}]]], {j, 1, q}]; 
+        m = GroebnerBasis[
+            Join[{t*Product[z[i], {i, 1, p}] - 1}, 
+              Table[t^\((e[\([j]\)])\)*
+                    Product[
+                      z[i]^\((A[\([i, j]\)] + e[\([j]\)])\), {i, 1, p}] - 
+                  w[j], {j, 1, q}]], 
+            Join[{t}, Table[z[i], {i, 1, p}], Table[w[j], {j, 1, q}]], 
+            MonomialOrder -> CostOrder]; 
+        n = \(PolynomialReduce[
+              t^Max[{0, Max[Table[\(-b[\([i]\)]\), {i, 1, p}]]}]*
+                Product[
+                  z[i]^\((b[\([i]\)] + \((Max[0, 
+                            Max[Table[\(-b[\([i]\)]\), {i, 1, 
+                                  p}]]])\))\), {i, 1, p}], m, 
+              Join[{t}, Table[z[i], {i, 1, p}], Table[w[j], {j, 1, q}]], 
+              MonomialOrder -> CostOrder]\)[\([2]\)]; {Sum[
+            c[\([If\ [Length[n[\([i]\)]] == 1, n[\([i, 1]\)], 
+                    n[\([i, 1, 1]\)]]]\)]*\((If[Length[n[\([i]\)]] == 1, 1, 
+                  n[\([i, 2]\)]])\), {i, 1, Length[n]}], 
+          Table[If[Length[n[\([i]\)]] \[Equal] 1, n[\([i]\)] -> 1, 
+              n[\([i, 1]\)] -> n[\([i, 2]\)]], {i, 1, 
+              Length[n]}]}]\)\(\[IndentingNewLine]\)
+    \)\)], "Input",
+  CellLabel->"In[3]:="],
+
+Cell["\<\
+
+In all the examples  (except No. 1)  below, we will simply write the matrices \
+required for applying the IntegerProgramming function. The matrices are \
+obtained after adding slack variables and/or changing signs in the cost \
+vector  to convert the problem from one of maximizing the cost  to one of \
+minimizing the cost wherever necessary.\
+\>", "Text"],
+
+Cell[TextData[{
+  StyleBox["Example 1:  ",
+    FontColor->RGBColor[1, 0, 0]],
+  "This  is taken from pg. 372 of the book \"Using Algebraic Geometry\" by  \
+Cox, Little and O'Shea,which is the basic reference for our program :\n\n     \
+                          ",
+  "Minimize :  w[1] + 1000 w[2] + w[3] +100 w[4]\n                            \
+    subject to :\n                                         3 w[1] - 2 w[2] +  \
+w[3] == -1;\n                                        4 w[1] + w[2] - w[3] -  \
+w[4] == 5;\n                                        ( w[i] non-negative  \
+integers) "
+}], "Text"],
+
+Cell["\<\
+The problem can be translated into the matrix notation and solved using our \
+IntegerProgramming function as follows :\
+\>", "Text"],
+
+Cell[BoxData[
+    \(\(A1 = {{3, \(-2\), 1, 0}, {4, 1, \(-1\), \(-1\)}};\)\)], "Input",
+  CellLabel->"In[4]:="],
+
+Cell[BoxData[
+    \(\(b1 = {\(-1\), 5};\)\)], "Input",
+  CellLabel->"In[5]:="],
+
+Cell[BoxData[
+    \(\(c1 = {1, 1000, 1, 100};\)\)], "Input",
+  CellLabel->"In[6]:="],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(IntegerProgramming[c1, A1, b1]\)], "Input",
+  CellLabel->"In[7]:="],
+
+Cell[BoxData[
+    \({2101, {w[1] \[Rule] 1, w[2] \[Rule] 2, w[4] \[Rule] 1}}\)], "Output",
+  CellLabel->"Out[7]="]
+}, Open  ]],
+
+Cell[TextData[{
+  "Example 2: ",
+  StyleBox["This appears on pg. 374 of the above book:",
+    FontColor->GrayLevel[0]]
+}], "Text",
+  FontColor->RGBColor[1, 0, 0]],
+
+Cell[BoxData[
+    \(\(A2 = {{3, 2, 1, 1, 0, 0}, {1, 2, 3, 0, 1, 0}, {2, 1, 1, 0, 0, 
+            1}};\)\)], "Input",
+  CellLabel->"In[8]:="],
+
+Cell[BoxData[
+    \(\(b2 = {45, 21, 18};\)\)], "Input",
+  CellLabel->"In[9]:="],
+
+Cell[BoxData[
+    \(\(c2 = {\(-3\), \(-4\), \(-2\), 0, 0, 0};\)\)], "Input",
+  CellLabel->"In[10]:="],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(IntegerProgramming[c2, A2, b2]\)], "Input",
+  CellLabel->"In[11]:="],
+
+Cell[BoxData[
+    \({\(-47\), {w[1] \[Rule] 5, w[2] \[Rule] 8, 
+        w[4] \[Rule] 14}}\)], "Output",
+  CellLabel->"Out[11]="]
+}, Open  ]],
+
+Cell[TextData[{
+  StyleBox["Example 3: ",
+    FontColor->RGBColor[1, 0, 0]],
+  StyleBox["This is due to Ralph Gomory, who invented the Cutting Plane  \
+Method for solving Integer Programming problems:",
+    FontColor->GrayLevel[0]]
+}], "Text",
+  FontColor->RGBColor[1, 0, 1]],
+
+Cell[BoxData[
+    \(\(A3 = {{3, 2, 0, 1, 0, 0}, {1, 4, 0, 0, 1, 0}, {3, 3, 1, 0, 0, 
+            1}};\)\)], "Input",
+  CellLabel->"In[12]:="],
+
+Cell[BoxData[
+    \(\(b3 = {10, 11, 13};\)\)], "Input",
+  CellLabel->"In[13]:="],
+
+Cell[BoxData[
+    \(\(c3 = {\(-4\), \(-5\), \(-1\), 0, 0, 0};\)\)], "Input",
+  CellLabel->"In[14]:="],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(IntegerProgramming[c3, A3, b3]\)], "Input",
+  CellLabel->"In[15]:="],
+
+Cell[BoxData[
+    \({\(-19\), {w[1] \[Rule] 2, w[2] \[Rule] 2, w[3] \[Rule] 1, 
+        w[5] \[Rule] 1}}\)], "Output",
+  CellLabel->"Out[15]="]
+}, Open  ]],
+
+Cell[TextData[{
+  StyleBox["Example 4:  ",
+    FontColor->RGBColor[1, 0, 0]],
+  StyleBox["I have extracted this example from Adams and Loustaunau, \"An  \
+Introduction to Groebner Bases\", pg. 109.",
+    FontColor->GrayLevel[0]]
+}], "Text",
+  FontColor->RGBColor[1, 0, 1]],
+
+Cell[BoxData[
+    \(\(A4 = {{3, \(-2\), 1, \(-1\)}, {4, 1, \(-1\), 0}};\)\)], "Input",
+  CellLabel->"In[16]:="],
+
+Cell[BoxData[
+    \(\(b4 = {\(-1\), 5};\)\)], "Input",
+  CellLabel->"In[17]:="],
+
+Cell[BoxData[
+    \(\(c4 = {1000, 1, 1, 100, 0, 0};\)\)], "Input",
+  CellLabel->"In[18]:="],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(IntegerProgramming[c4, A4, b4]\)], "Input",
+  CellLabel->"In[19]:="],
+
+Cell[BoxData[
+    \({1005, {w[1] \[Rule] 1, w[2] \[Rule] 3, w[3] \[Rule] 2}}\)], "Output",
+  CellLabel->"Out[19]="]
+}, Open  ]],
+
+Cell[TextData[{
+  StyleBox["Examples 5 and 6: ",
+    FontColor->RGBColor[1, 0, 0]],
+  " ",
+  StyleBox["The next two are exercises from Adams and Loustaunau, pg. 112 :",
+    FontColor->GrayLevel[0]]
+}], "Text",
+  FontColor->RGBColor[1, 0, 1]],
+
+Cell[BoxData[
+    \(\(c5 = {1000, 1, 1, 1, 0, 0};\)\)], "Input",
+  CellLabel->"In[20]:="],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(IntegerProgramming[c5, A4, b4]\)], "Input",
+  CellLabel->"In[21]:="],
+
+Cell[BoxData[
+    \({1003, {w[1] \[Rule] 1, w[2] \[Rule] 1, w[4] \[Rule] 2}}\)], "Output",
+  CellLabel->"Out[21]="]
+}, Open  ]],
+
+Cell[BoxData[
+    \(\(c6 = {1, 1000, 1, 1, 0, 0};\)\)], "Input",
+  CellLabel->"In[22]:="],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(IntegerProgramming[c6, A4, b4]\)], "Input",
+  CellLabel->"In[23]:="],
+
+Cell[BoxData[
+    \({15, {w[1] \[Rule] 2, w[3] \[Rule] 3, w[4] \[Rule] 10}}\)], "Output",
+  CellLabel->"Out[23]="]
+}, Open  ]],
+
+Cell[TextData[{
+  StyleBox["Example 7 :",
+    FontColor->RGBColor[1, 0, 0]],
+  " The example given below is from the original paper by Conti and Traverso  \
+(pg. 137).  This example\n                    is completed in less than 2  \
+seconds in a development version due to new functionality for computing\n     \
+                Groebner bases of toric ideals added by Daniel Lichtblau."
+}], "Text"],
+
+Cell[BoxData[
+    \(\(\(A7 = {{2, 5, \(-3\), 1, \(-2\)}, {1, 7, 2, 3, 
+            1}, {4, \(-2\), \(-1\), \(-5\), 3}};\)\(\[IndentingNewLine]\)
+    \)\)], "Input",
+  CellLabel->"In[24]:="],
+
+Cell[BoxData[
+    \(\(b7 = {214, 712, 331};\)\)], "Input",
+  CellLabel->"In[25]:="],
+
+Cell[BoxData[
+    \(\(c7 = {1, 1, 1, 1, 1};\)\)], "Input",
+  CellLabel->"In[26]:="],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Timing[IntegerProgramming[c7, A7, b7]]\)], "Input",
+  CellLabel->"In[27]:="],
+
+Cell[BoxData[
+    \({209.602`\ Second, {245, {w[1] \[Rule] 39, w[2] \[Rule] 75, 
+          w[3] \[Rule] 1, w[4] \[Rule] 8, w[5] \[Rule] 122}}}\)], "Output",
+  CellLabel->"Out[27]="]
+}, Open  ]],
+
+Cell[TextData[{
+  StyleBox["Example 8:",
+    FontColor->RGBColor[1, 0, 0]],
+  " ",
+  StyleBox["Finally, here is an instance of the knapsack problem from   \n    \
+                                 http://www.rpi.edu/~mitchj/matp6640/knapsack/\
+.  \n                   The order of the  variables has been changed to \
+ensure  that the cost matrix is invertible.",
+    FontColor->GrayLevel[0]]
+}], "Text",
+  FontColor->RGBColor[1, 0, 1]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(A8 = {{0, 3, 5, 1, 0, 0, 1}, {0, 0, 0, 0, 1, 0, 1}, {0, 1, 0, 0, 0, 1, 
+          0}, {1, 0, 1, 0, 0, 0, 0}}\)], "Input",
+  CellLabel->"In[28]:="],
+
+Cell[BoxData[
+    \({{0, 3, 5, 1, 0, 0, 1}, {0, 0, 0, 0, 1, 0, 1}, {0, 1, 0, 0, 0, 1, 
+        0}, {1, 0, 1, 0, 0, 0, 0}}\)], "Output",
+  CellLabel->"Out[28]="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(b8 = {7, 1, 1, 1}\)], "Input",
+  CellLabel->"In[29]:="],
+
+Cell[BoxData[
+    \({7, 1, 1, 1}\)], "Output",
+  CellLabel->"Out[29]="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(c8 = {0, \(-4\), \(-6\), 0, 0, 0, \(-3\)}\)], "Input",
+  CellLabel->"In[30]:="],
+
+Cell[BoxData[
+    \({0, \(-4\), \(-6\), 0, 0, 0, \(-3\)}\)], "Output",
+  CellLabel->"Out[30]="]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(IntegerProgramming[c8, A8, b8]\)], "Input",
+  CellLabel->"In[31]:="],
+
+Cell[BoxData[
+    \({\(-9\), {w[3] \[Rule] 1, w[4] \[Rule] 1, w[6] \[Rule] 1, 
+        w[7] \[Rule] 1}}\)], "Output",
+  CellLabel->"Out[31]="]
+}, Open  ]],
+
+Cell[TextData[{
+  StyleBox["Conclusion and Outlook:",
+    FontColor->RGBColor[1, 0, 0]],
+  "\nInitially, the IntegerProgramming function relied on the use of the  \
+Groebner package from MathSource. I am deeply grateful to Daniel Lichtblau  \
+for explaining to me how the kernel functions GroebnerBasis and  \
+PolynomialReduce can be applied in this situation and for numerous  insights  \
+into the subject. \n\nIt is very satisyfing to note that, in principle, this  \
+rather simple function can be used to solve any feasible Integer Programming  \
+problem subject to the limitations on A, b and c mentioned above. However, it \
+ is clear that further progress will depend upon choosing the most efficient  \
+monomial order for each class of problems and also on finding efficient  \
+methods for calculating the required Groebner bases. At present, we are  \
+working on refinements of the algorithm for solving special cases of the  \
+location problem described on  ",
+  ButtonBox["http://mat.gsia.cmu.edu/orclass/integer/node8.html",
+    ButtonData:>{
+      URL[ "http://mat.gsia.cmu.edu/orclass/integer/node8.html"], None},
+    ButtonStyle->"Hyperlink"],
+  ".\n\nA truncated version of  this problem of this type (with 8 \
+neighborhoods) can be solved in the  development version referred to above in \
+about 8 secs.\n\nFinally, it would  be interesting to study complexity issues \
+for Integer Programming  along the  lines suggested by Bayer and Mumford in \
+\"What can be computed in Algebraic  Geometry?\".  Of course, this is a \
+highly speculative suggestion !"
+}], "Text"]
+},
+FrontEndVersion->"5.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1024}, {0, 695}},
+WindowSize->{899, 594},
+WindowMargins->{{30, Automatic}, {Automatic, 32}},
+StyleDefinitions -> "ArticleModern.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1754, 51, 547, 16, 94, "Text"],
+Cell[2304, 69, 1652, 33, 369, "Text"],
+Cell[3959, 104, 2257, 43, 425, "Input"],
+Cell[6219, 149, 368, 7, 65, "Text"],
+Cell[6590, 158, 602, 11, 141, "Text"],
+Cell[7195, 171, 142, 3, 27, "Text"],
+Cell[7340, 176, 110, 2, 45, "Input"],
+Cell[7453, 180, 78, 2, 45, "Input"],
+Cell[7534, 184, 84, 2, 45, "Input"],
+
+Cell[CellGroupData[{
+Cell[7643, 190, 87, 2, 45, "Input"],
+Cell[7733, 194, 114, 2, 44, "Output"]
+}, Open  ]],
+Cell[7862, 199, 162, 5, 27, "Text"],
+Cell[8027, 206, 140, 3, 45, "Input"],
+Cell[8170, 211, 79, 2, 45, "Input"],
+Cell[8252, 215, 101, 2, 45, "Input"],
+
+Cell[CellGroupData[{
+Cell[8378, 221, 88, 2, 45, "Input"],
+Cell[8469, 225, 128, 3, 44, "Output"]
+}, Open  ]],
+Cell[8612, 231, 275, 7, 27, "Text"],
+Cell[8890, 240, 141, 3, 45, "Input"],
+Cell[9034, 245, 80, 2, 45, "Input"],
+Cell[9117, 249, 101, 2, 45, "Input"],
+
+Cell[CellGroupData[{
+Cell[9243, 255, 88, 2, 45, "Input"],
+Cell[9334, 259, 143, 3, 44, "Output"]
+}, Open  ]],
+Cell[9492, 265, 272, 7, 27, "Text"],
+Cell[9767, 274, 111, 2, 45, "Input"],
+Cell[9881, 278, 79, 2, 45, "Input"],
+Cell[9963, 282, 91, 2, 45, "Input"],
+
+Cell[CellGroupData[{
+Cell[10079, 288, 88, 2, 45, "Input"],
+Cell[10170, 292, 115, 2, 44, "Output"]
+}, Open  ]],
+Cell[10300, 297, 241, 7, 27, "Text"],
+Cell[10544, 306, 89, 2, 45, "Input"],
+
+Cell[CellGroupData[{
+Cell[10658, 312, 88, 2, 45, "Input"],
+Cell[10749, 316, 115, 2, 44, "Output"]
+}, Open  ]],
+Cell[10879, 321, 89, 2, 45, "Input"],
+
+Cell[CellGroupData[{
+Cell[10993, 327, 88, 2, 45, "Input"],
+Cell[11084, 331, 114, 2, 44, "Output"]
+}, Open  ]],
+Cell[11213, 336, 400, 7, 65, "Text"],
+Cell[11616, 345, 189, 4, 65, "Input"],
+Cell[11808, 351, 83, 2, 45, "Input"],
+Cell[11894, 355, 83, 2, 45, "Input"],
+
+Cell[CellGroupData[{
+Cell[12002, 361, 96, 2, 45, "Input"],
+Cell[12101, 365, 181, 3, 44, "Output"]
+}, Open  ]],
+Cell[12297, 371, 435, 10, 65, "Text"],
+
+Cell[CellGroupData[{
+Cell[12757, 385, 166, 3, 45, "Input"],
+Cell[12926, 390, 160, 3, 44, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[13123, 398, 75, 2, 45, "Input"],
+Cell[13201, 402, 71, 2, 44, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[13309, 409, 99, 2, 45, "Input"],
+Cell[13411, 413, 95, 2, 44, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[13543, 420, 88, 2, 45, "Input"],
+Cell[13634, 424, 142, 3, 44, "Output"]
+}, Open  ]],
+Cell[13791, 430, 1582, 25, 255, "Text"]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

@@ -1,0 +1,1525 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     67312,       1516]
+NotebookOptionsPosition[     63002,       1379]
+NotebookOutlinePosition[     64595,       1429]
+CellTagsIndexPosition[     64267,       1417]
+WindowFrame->Normal
+ContainsDynamic->True *)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Selected Reflections in the Sides of a Regular Polygon", "DemoTitle",
+ CellChangeTimes->{{3.35332629756082*^9, 3.35332630671701*^9}, {
+  3.35679594761506*^9, 3.35679595611506*^9}, {3.36121534885274*^9, 
+  3.36121537708711*^9}},
+ CellID->700863240],
+
+Cell[CellGroupData[{
+
+Cell["", "InitializationSection"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"splitline", "[", "pts_", "]"}], ":=", 
+   RowBox[{"Line", "[", 
+    RowBox[{"Drop", "[", 
+     RowBox[{
+      RowBox[{"Transpose", "[", 
+       RowBox[{"{", 
+        RowBox[{"pts", ",", 
+         RowBox[{"RotateLeft", "[", "pts", "]"}]}], "}"}], "]"}], ",", 
+      RowBox[{"-", "1"}]}], "]"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.370130334640625*^9, 3.3701303748125*^9}, {
+  3.370130464265625*^9, 3.3701304963125*^9}, {3.370130552484375*^9, 
+  3.37013056025*^9}, {3.370130662578125*^9, 3.37013066490625*^9}},
+ CellID->223532114],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"nGonEdges", "[", "n_", "]"}], ":=", 
+  RowBox[{
+   RowBox[{"nGonEdges", "[", "n", "]"}], "=", 
+   RowBox[{"N", "@", 
+    RowBox[{"Apply", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"#1", ",", 
+         RowBox[{"#1", "+", 
+          FractionBox[
+           RowBox[{"#2", "-", "#1"}], 
+           RowBox[{"Norm", "[", 
+            RowBox[{"(", 
+             RowBox[{"#2", "-", "#1"}], ")"}], "]"}]]}]}], "}"}], "&"}], ",", 
+      
+      RowBox[{"N", "[", 
+       RowBox[{"Partition", "[", 
+        RowBox[{
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"Cos", "[", 
+              RowBox[{
+               FractionBox[
+                RowBox[{"k", " ", "2", " ", "\[Pi]"}], "n"], "+", 
+               FractionBox["\[Pi]", "2"]}], "]"}], ",", 
+             RowBox[{"Sin", "[", 
+              RowBox[{
+               FractionBox[
+                RowBox[{"k", " ", "2", " ", "\[Pi]"}], "n"], "+", 
+               FractionBox["\[Pi]", "2"]}], "]"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"k", ",", "0", ",", "n"}], "}"}]}], "]"}], ",", "2", ",", 
+         "1"}], "]"}], "]"}], ",", 
+      RowBox[{"{", "1", "}"}]}], "]"}]}]}]}]], "Input",
+ GeneratedCell->False,
+ CellChangeTimes:>{{3.34918946631493*^9, 3.34918949439486*^9}, 
+   3.34919002358747*^9},
+ CellID->636282839],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"reflectPointC", " ", "=", " ", 
+   RowBox[{"Compile", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"p", ",", "_Real", ",", " ", "1"}], "}"}], ",", 
+       RowBox[{"{", " ", 
+        RowBox[{"p1p2", ",", "_Real", ",", " ", "2"}], "}"}]}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"p1", "=", 
+          RowBox[{"p1p2", "[", 
+           RowBox[{"[", "1", "]"}], "]"}]}], ",", 
+         RowBox[{"p2", "=", 
+          RowBox[{"p1p2", "[", 
+           RowBox[{"[", "2", "]"}], "]"}]}]}], "}"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"-", "p"}], "+", 
+        RowBox[{"2", " ", "p1"}], "+", 
+        RowBox[{"2", " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"p", "-", "p1"}], ")"}], ".", 
+            RowBox[{"(", 
+             RowBox[{"p2", "-", "p1"}], ")"}]}], " ", 
+           RowBox[{"(", 
+            RowBox[{"p2", "-", "p1"}], ")"}]}], ")"}]}]}]}], "]"}]}], "]"}]}],
+   ";"}]], "Input",
+ GeneratedCell->False,
+ CellChangeTimes:>{{3.34918967569142*^9, 3.34918972155611*^9}, {
+  3.34918986783869*^9, 3.34918987495958*^9}},
+ CellID->220113031],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"reflectedPointGraphics", "[", 
+    RowBox[{
+    "n_", ",", " ", "digits_", ",", " ", "figure_", ",", " ", "opts___"}], 
+    "]"}], " ", ":=", " ", "\n", "  ", 
+   RowBox[{"Graphics", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"PointSize", "[", "0.0001", "]"}], ",", 
+       RowBox[{"figure", " ", "@", " ", "\n", "     ", 
+        RowBox[{"FoldList", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"reflectPointC", "[", 
+            RowBox[{"#1", ",", " ", 
+             RowBox[{
+              RowBox[{"nGonEdges", "[", "n", "]"}], "[", 
+              RowBox[{"[", "#2", "]"}], "]"}]}], "]"}], " ", "&"}], " ", ",", 
+          " ", 
+          RowBox[{"{", 
+           RowBox[{"0.", ",", " ", "0."}], "}"}], ",", " ", "\n", "     ", 
+          RowBox[{"Developer`ToPackedArray", "@", " ", 
+           RowBox[{"N", "[", "digits", "]"}]}]}], "]"}]}]}], "}"}], ",", " ", 
+     
+     RowBox[{"AspectRatio", " ", "\[Rule]", " ", "1"}], ",", " ", 
+     RowBox[{"Frame", " ", "\[Rule]", " ", "False"}], ",", " ", "\n", "   ", 
+     RowBox[{"FrameTicks", " ", "\[Rule]", " ", "False"}], ",", " ", 
+     RowBox[{"PlotRange", " ", "\[Rule]", " ", "All"}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"500", ",", "300"}], "}"}]}]}], "]"}]}], ";"}]], "Input",
+ GeneratedCell->False,
+ CellChangeTimes->{{3.34918962780833*^9, 3.34918963946621*^9}, 
+   3.34918972846704*^9, {3.34918980414967*^9, 3.34918980815264*^9}, 
+   3.34919003561283*^9, {3.34920217544591*^9, 3.34920220302509*^9}, {
+   3.35679514995881*^9, 3.35679517225568*^9}, {3.35679524128693*^9, 
+   3.35679524136506*^9}, {3.35679531870881*^9, 3.35679532000568*^9}, {
+   3.35679548649006*^9, 3.35679549039631*^9}, {3.36121549855586*^9, 
+   3.36121551232149*^9}, 3.36343513946296*^9},
+ CellID->53665935]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"splitline", ";", "\[IndentingNewLine]", 
+    RowBox[{"reflectedPointGraphics", "[", 
+     RowBox[{"n", ",", 
+      RowBox[{
+       RowBox[{"Mod", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"RealDigits", "[", 
+            RowBox[{"c", ",", "base", ",", "o"}], "]"}], 
+           "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], "+", "1"}],
+          ",", "n"}], "]"}], "+", "1"}], ",", " ", "figure"}], "]"}]}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"c", ",", "Pi", ",", "\"\<constant\>\""}], "}"}], ",", 
+     "\[IndentingNewLine]", " ", 
+     RowBox[{"{", 
+      RowBox[{"Pi", ",", "E", ",", " ", 
+       RowBox[{"GoldenRatio", "\[Rule]", "\"\<\[Phi]\>\""}], ",", " ", 
+       RowBox[{"Sqrt", "[", "2", "]"}], ",", " ", 
+       RowBox[{"Sqrt", "[", "3", "]"}], ",", " ", 
+       RowBox[{
+        RowBox[{"Log", "[", "2", "]"}], "\[Rule]", "\"\<log(2)\>\""}], ",", 
+       " ", 
+       RowBox[{
+        RowBox[{"Log", "[", "3", "]"}], "\[Rule]", "\"\<log(3)\>\""}], ",", 
+       " ", 
+       RowBox[{"EulerGamma", "\[Rule]", "\"\<\[Gamma]\>\""}]}], "}"}]}], 
+    "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"figure", ",", " ", "Point", ",", "\"\<figure\>\""}], "}"}], 
+     ",", " ", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Point", "\[Rule]", " ", "\"\<point\>\""}], ",", " ", 
+       RowBox[{"splitline", "\[Rule]", "\"\<line\>\""}], ",", " ", 
+       RowBox[{"Polygon", "\[Rule]", "\"\<polygon\>\""}]}], "}"}]}], 
+    "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"o", ",", " ", "2500", ",", " ", "\"\<digits\>\""}], "}"}], ",",
+      "1", ",", " ", "5000", ",", "1"}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"base", ",", " ", "3", ",", "\"\<base\>\""}], "}"}], ",", " ", 
+     "3", ",", " ", "60", ",", " ", "1"}], "}"}], ",", "\[IndentingNewLine]", 
+   
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"n", ",", " ", "3", ",", " ", "\"\<reflections\>\""}], "}"}], 
+     ",", " ", "3", ",", " ", "60", ",", " ", "1"}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"SaveDefinitions", "\[Rule]", "True"}], ",", 
+   RowBox[{"AutorunSequencing", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"2", ",", "4", ",", "5"}], "}"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.35332633549808*^9, 3.35332634549802*^9}, {
+   3.35878064322723*^9, 3.3587806564459*^9}, {3.36121540569649*^9, 
+   3.36121546196211*^9}, {3.36121552518086*^9, 3.36121556055586*^9}, {
+   3.36121560699336*^9, 3.36121569683711*^9}, {3.36121573497774*^9, 
+   3.36121582432149*^9}, {3.36926477170313*^9, 3.36926478157813*^9}, 
+   3.370173085045191*^9, {3.370173387605235*^9, 3.370173395334165*^9}, {
+   3.370261148848668*^9, 3.370261150958192*^9}, 3.370267301668701*^9, {
+   3.382654579*^9, 3.3826545824375*^9}, {3.387066026078125*^9, 
+   3.38706602634375*^9}},
+ CellID->1496021318],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`base$$ = 3, $CellContext`c$$ = 
+    Pi, $CellContext`figure$$ = Point, $CellContext`n$$ = 
+    3, $CellContext`o$$ = 2500, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`c$$], Pi, "constant"}, {
+      Pi, E, GoldenRatio -> "\[Phi]", 2^Rational[1, 2], 3^Rational[1, 2], 
+       Log[2] -> "log(2)", Log[3] -> "log(3)", EulerGamma -> "\[Gamma]"}}, {{
+       Hold[$CellContext`figure$$], Point, "figure"}, {
+      Point -> "point", $CellContext`splitline -> "line", Polygon -> 
+       "polygon"}}, {{
+       Hold[$CellContext`o$$], 2500, "digits"}, 1, 5000, 1}, {{
+       Hold[$CellContext`base$$], 3, "base"}, 3, 60, 1}, {{
+       Hold[$CellContext`n$$], 3, "reflections"}, 3, 60, 1}}, 
+    Typeset`size$$ = {500., {148., 152.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = False, $CellContext`c$281$$ =
+     False, $CellContext`figure$282$$ = False, $CellContext`o$283$$ = 
+    0, $CellContext`base$284$$ = 0, $CellContext`n$285$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`base$$ = 3, $CellContext`c$$ = 
+        Pi, $CellContext`figure$$ = Point, $CellContext`n$$ = 
+        3, $CellContext`o$$ = 2500}, "ControllerVariables" :> {
+        Hold[$CellContext`c$$, $CellContext`c$281$$, False], 
+        Hold[$CellContext`figure$$, $CellContext`figure$282$$, False], 
+        Hold[$CellContext`o$$, $CellContext`o$283$$, 0], 
+        Hold[$CellContext`base$$, $CellContext`base$284$$, 0], 
+        Hold[$CellContext`n$$, $CellContext`n$285$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> ($CellContext`splitline; \
+$CellContext`reflectedPointGraphics[$CellContext`n$$, Mod[Part[
+             
+             RealDigits[$CellContext`c$$, $CellContext`base$$, \
+$CellContext`o$$], 1] + 1, $CellContext`n$$] + 1, $CellContext`figure$$]), 
+      "Specifications" :> {{{$CellContext`c$$, Pi, "constant"}, {
+         Pi, E, GoldenRatio -> "\[Phi]", 2^Rational[1, 2], 3^Rational[1, 2], 
+          Log[2] -> "log(2)", Log[3] -> "log(3)", EulerGamma -> 
+          "\[Gamma]"}}, {{$CellContext`figure$$, Point, "figure"}, {
+         Point -> "point", $CellContext`splitline -> "line", Polygon -> 
+          "polygon"}}, {{$CellContext`o$$, 2500, "digits"}, 1, 5000, 
+         1}, {{$CellContext`base$$, 3, "base"}, 3, 60, 
+         1}, {{$CellContext`n$$, 3, "reflections"}, 3, 60, 1}}, 
+      "Options" :> {AutorunSequencing -> {2, 4, 5}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{544., {243., 248.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`splitline[
+         Pattern[$CellContext`pts, 
+          Blank[]]] := Line[
+         Drop[
+          Transpose[{$CellContext`pts, 
+            
+            RotateLeft[$CellContext`pts]}], -1]], \
+$CellContext`reflectedPointGraphics[
+         Pattern[$CellContext`n, 
+          Blank[]], 
+         Pattern[$CellContext`digits, 
+          Blank[]], 
+         Pattern[$CellContext`figure, 
+          Blank[]], 
+         Pattern[$CellContext`opts, 
+          BlankNullSequence[]]] := Graphics[{
+          PointSize[0.0001], 
+          $CellContext`figure[
+           FoldList[$CellContext`reflectPointC[#, 
+             Part[
+              $CellContext`nGonEdges[$CellContext`n], #2]]& , {0., 0.}, 
+            Developer`ToPackedArray[
+             N[$CellContext`digits]]]]}, AspectRatio -> 1, Frame -> False, 
+         FrameTicks -> False, PlotRange -> All, 
+         ImageSize -> {500, 300}], $CellContext`reflectPointC = 
+       CompiledFunction[{{
+           Blank[Real], 1}, {
+           Blank[Real], 2}}, {{3, 1, 0}, {3, 2, 1}, {3, 1, 6}}, {0, 1, 1, 0, 
+         10}, {{1, 5}, {7, 1, 0}, {70, 1, 0, 0, 1, 2}, {7, 2, 0}, {70, 1, 0, 
+          0, 1, 3}, {93, 41, 3, 1, 2, 3, 1, 4}, {51, 3, 4, 5}, {93, 41, 3, 1, 
+          0, 3, 1, 6}, {7, 2, 0}, {94, 273, 2, 0, 0, 3, 1, 2, 3, 1, 7}, {7, 2,
+           0}, {51, 0, 4, 8}, {91, 8, 5, 0}, {94, 273, 3, 0, 0, 3, 1, 5, 3, 1,
+           8}, {94, 273, 2, 0, 0, 3, 1, 8, 3, 1, 9}, {51, 6, 7, 9, 6}, {2}}, 
+         Function[{$CellContext`p, $CellContext`p1p2}, 
+          Block[{Internal`$$136, Internal`$$138}, 
+           
+           Module[{$CellContext`p1 = 
+             Part[$CellContext`p1p2, 1], $CellContext`p2 = 
+             Part[$CellContext`p1p2, 2]}, Internal`$$136 = -$CellContext`p1; 
+            Internal`$$138 = $CellContext`p2 + 
+              Internal`$$136; -$CellContext`p + 2 $CellContext`p1 + 
+             2 (Dot[$CellContext`p + Internal`$$136, Internal`$$138] 
+               Internal`$$138)]]], Evaluate], 
+       Attributes[Internal`$$136] = {Temporary}, 
+       Attributes[Internal`$$138] = {Temporary}, $CellContext`nGonEdges[
+        3] = {{{0., 1.}, {-0.5, 
+        0.133974596215561}}, {{-0.866025403784439, -0.5}, {
+        0.133974596215561, -0.5}}, {{0.866025403784439, -0.5}, {
+        0.366025403784439, 0.366025403784439}}}, $CellContext`nGonEdges[
+        14] = {{{0., 1.}, {-0.9749279121818236, 
+        0.7774790660436857}}, {{-0.4338837391175581, 
+        0.9009688679024191}, {-1.2157152215855878`, 
+        0.27747906604368555`}}, {{-0.7818314824680298, 
+        0.6234898018587335}, {-1.215715221585588, -0.27747906604368566`}}, \
+{{-0.9749279121818236, 
+        0.2225209339563144}, {-0.9749279121818236, -0.7774790660436857}}, \
+{{-0.9749279121818236, -0.2225209339563144}, {-0.5410441730642654, \
+-1.1234898018587336`}}, {{-0.7818314824680298, -0.6234898018587335}, \
+{-1.1102230246251565`*^-16, -1.2469796037174672`}}, {{-0.4338837391175581, \
+-0.9009688679024191}, {0.5410441730642654, -1.1234898018587336`}}, {{
+        0., -1.}, {0.9749279121818236, -0.7774790660436857}}, {{
+        0.4338837391175581, -0.9009688679024191}, {
+        1.2157152215855878`, -0.27747906604368555`}}, {{
+        0.7818314824680298, -0.6234898018587335}, {1.215715221585588, 
+        0.27747906604368566`}}, {{0.9749279121818236, -0.2225209339563144}, {
+        0.9749279121818236, 0.7774790660436857}}, {{0.9749279121818236, 
+        0.2225209339563144}, {0.5410441730642654, 1.1234898018587336`}}, {{
+        0.7818314824680298, 0.6234898018587335}, {1.1102230246251565`*^-16, 
+        1.2469796037174672`}}, {{0.4338837391175581, 
+        0.9009688679024191}, {-0.5410441730642654, 
+        1.1234898018587336`}}}, $CellContext`nGonEdges[15] = {{{0., 
+        1.}, {-0.978147600733806, 0.792088309182241}}, {{-0.4067366430758, 
+        0.913545457642601}, {-1.21575363745075, 
+        0.325760205350128}}, {{-0.743144825477394, 
+        0.669130606358858}, {-1.24314482547739, -0.196894797425581}}, \
+{{-0.951056516295154, 
+        0.309016994374947}, {-1.05558497956281, -0.685504900993326}}, \
+{{-0.994521895368273, -0.104528463267653}, {-0.685504900993326, \
+-1.05558497956281}}, {{-0.866025403784439, -0.5}, {-0.19689479742558, \
+-1.24314482547739}}, {{-0.587785252292473, -0.809016994374947}, {
+        0.325760205350128, -1.21575363745075}}, {{-0.207911690817759, \
+-0.978147600733806}, {0.792088309182241, -0.978147600733806}}, {{
+        0.207911690817759, -0.978147600733806}, {
+        1.12145714846036, -0.571410957658006}}, {{
+        0.587785252292473, -0.809016994374947}, {
+        1.25691585865133, -0.0658721688975531}}, {{0.866025403784439, -0.5}, {
+        1.17504239815939, 0.451056516295154}}, {{
+        0.994521895368273, -0.104528463267653}, {0.88999343210062, 
+        0.88999343210062}}, {{0.951056516295154, 0.309016994374947}, {
+        0.451056516295154, 1.17504239815939}}, {{0.743144825477394, 
+        0.669130606358858}, {-0.0658721688975533, 1.25691585865133}}, {{
+        0.4067366430758, 0.913545457642601}, {-0.571410957658006, 
+        1.12145714846036}}}, $CellContext`nGonEdges[
+         Pattern[$CellContext`n, 
+          Blank[]]] := ($CellContext`nGonEdges[$CellContext`n] = N[
+          Apply[{#, # + (#2 - #)/Norm[#2 - #]}& , 
+           N[
+            Partition[
+             Table[{
+               Cos[($CellContext`k 2 Pi)/$CellContext`n + Pi/2], 
+               
+               Sin[($CellContext`k 2 Pi)/$CellContext`n + 
+                Pi/2]}, {$CellContext`k, 0, $CellContext`n}], 2, 1]], {1}]])}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->891556952]
+}, {2}]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell[TextData[{
+ "Choose the sides of a polygon according to the digits of a constant in base \
+",
+ Cell[BoxData[
+  FormBox["b", TraditionalForm]], "InlineMath"],
+ ". Reflect a point iteratively in those sides. If the figure chosen is a \
+line or a polygon, join the points to form that kind of object. "
+}], "ManipulateCaption",
+ CellChangeTimes->{
+  3.35332632684189*^9, {3.35878072725795*^9, 3.35878075867962*^9}, {
+   3.36121604563399*^9, 3.36121616752461*^9}, {3.36500892236638*^9, 
+   3.3650089231945*^9}},
+ CellID->1044312921]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`base$$ = 29, $CellContext`c$$ = 
+    GoldenRatio, $CellContext`figure$$ = Point, $CellContext`n$$ = 
+    14, $CellContext`o$$ = 4220, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`c$$], GoldenRatio, "constant"}, {
+      Pi, E, GoldenRatio -> "\[Phi]", 2^Rational[1, 2], 3^Rational[1, 2], 
+       Log[2] -> "log(2)", Log[3] -> "log(3)", EulerGamma -> "\[Gamma]"}}, {{
+       Hold[$CellContext`figure$$], Point, "figure"}, {
+      Point -> "point", $CellContext`splitline -> "line", Polygon -> 
+       "polygon"}}, {{
+       Hold[$CellContext`o$$], 4220, "digits"}, 1, 5000, 1}, {{
+       Hold[$CellContext`base$$], 29, "base"}, 3, 60, 1}, {{
+       Hold[$CellContext`n$$], 14, "reflections"}, 3, 60, 1}}, 
+    Typeset`size$$ = {500., {148., 152.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = False, $CellContext`c$358$$ =
+     False, $CellContext`figure$359$$ = False, $CellContext`o$360$$ = 
+    0, $CellContext`base$361$$ = 0, $CellContext`n$362$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`base$$ = 29, $CellContext`c$$ = 
+        GoldenRatio, $CellContext`figure$$ = Point, $CellContext`n$$ = 
+        14, $CellContext`o$$ = 4220}, "ControllerVariables" :> {
+        Hold[$CellContext`c$$, $CellContext`c$358$$, False], 
+        Hold[$CellContext`figure$$, $CellContext`figure$359$$, False], 
+        Hold[$CellContext`o$$, $CellContext`o$360$$, 0], 
+        Hold[$CellContext`base$$, $CellContext`base$361$$, 0], 
+        Hold[$CellContext`n$$, $CellContext`n$362$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> ($CellContext`splitline; \
+$CellContext`reflectedPointGraphics[$CellContext`n$$, Mod[Part[
+             
+             RealDigits[$CellContext`c$$, $CellContext`base$$, \
+$CellContext`o$$], 1] + 1, $CellContext`n$$] + 1, $CellContext`figure$$]), 
+      "Specifications" :> {{{$CellContext`c$$, GoldenRatio, "constant"}, {
+         Pi, E, GoldenRatio -> "\[Phi]", 2^Rational[1, 2], 3^Rational[1, 2], 
+          Log[2] -> "log(2)", Log[3] -> "log(3)", EulerGamma -> 
+          "\[Gamma]"}}, {{$CellContext`figure$$, Point, "figure"}, {
+         Point -> "point", $CellContext`splitline -> "line", Polygon -> 
+          "polygon"}}, {{$CellContext`o$$, 4220, "digits"}, 1, 5000, 
+         1}, {{$CellContext`base$$, 29, "base"}, 3, 60, 
+         1}, {{$CellContext`n$$, 14, "reflections"}, 3, 60, 1}}, 
+      "Options" :> {AutorunSequencing -> {2, 4, 5}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{544., {243., 248.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`splitline[
+         Pattern[$CellContext`pts, 
+          Blank[]]] := Line[
+         Drop[
+          Transpose[{$CellContext`pts, 
+            
+            RotateLeft[$CellContext`pts]}], -1]], \
+$CellContext`reflectedPointGraphics[
+         Pattern[$CellContext`n, 
+          Blank[]], 
+         Pattern[$CellContext`digits, 
+          Blank[]], 
+         Pattern[$CellContext`figure, 
+          Blank[]], 
+         Pattern[$CellContext`opts, 
+          BlankNullSequence[]]] := Graphics[{
+          PointSize[0.0001], 
+          $CellContext`figure[
+           FoldList[$CellContext`reflectPointC[#, 
+             Part[
+              $CellContext`nGonEdges[$CellContext`n], #2]]& , {0., 0.}, 
+            Developer`ToPackedArray[
+             N[$CellContext`digits]]]]}, AspectRatio -> 1, Frame -> False, 
+         FrameTicks -> False, PlotRange -> All, 
+         ImageSize -> {500, 300}], $CellContext`reflectPointC = 
+       CompiledFunction[{{
+           Blank[Real], 1}, {
+           Blank[Real], 2}}, {{3, 1, 0}, {3, 2, 1}, {3, 1, 6}}, {0, 1, 1, 0, 
+         10}, {{1, 5}, {7, 1, 0}, {70, 1, 0, 0, 1, 2}, {7, 2, 0}, {70, 1, 0, 
+          0, 1, 3}, {93, 41, 3, 1, 2, 3, 1, 4}, {51, 3, 4, 5}, {93, 41, 3, 1, 
+          0, 3, 1, 6}, {7, 2, 0}, {94, 273, 2, 0, 0, 3, 1, 2, 3, 1, 7}, {7, 2,
+           0}, {51, 0, 4, 8}, {91, 8, 5, 0}, {94, 273, 3, 0, 0, 3, 1, 5, 3, 1,
+           8}, {94, 273, 2, 0, 0, 3, 1, 8, 3, 1, 9}, {51, 6, 7, 9, 6}, {2}}, 
+         Function[{$CellContext`p, $CellContext`p1p2}, 
+          Block[{Internal`$$136, Internal`$$138}, 
+           
+           Module[{$CellContext`p1 = 
+             Part[$CellContext`p1p2, 1], $CellContext`p2 = 
+             Part[$CellContext`p1p2, 2]}, Internal`$$136 = -$CellContext`p1; 
+            Internal`$$138 = $CellContext`p2 + 
+              Internal`$$136; -$CellContext`p + 2 $CellContext`p1 + 
+             2 (Dot[$CellContext`p + Internal`$$136, Internal`$$138] 
+               Internal`$$138)]]], Evaluate], 
+       Attributes[Internal`$$136] = {Temporary}, 
+       Attributes[Internal`$$138] = {Temporary}, $CellContext`nGonEdges[
+        3] = {{{0., 1.}, {-0.5, 
+        0.133974596215561}}, {{-0.866025403784439, -0.5}, {
+        0.133974596215561, -0.5}}, {{0.866025403784439, -0.5}, {
+        0.366025403784439, 0.366025403784439}}}, $CellContext`nGonEdges[
+        14] = {{{0., 1.}, {-0.9749279121818236, 
+        0.7774790660436857}}, {{-0.4338837391175581, 
+        0.9009688679024191}, {-1.2157152215855878`, 
+        0.27747906604368555`}}, {{-0.7818314824680298, 
+        0.6234898018587335}, {-1.215715221585588, -0.27747906604368566`}}, \
+{{-0.9749279121818236, 
+        0.2225209339563144}, {-0.9749279121818236, -0.7774790660436857}}, \
+{{-0.9749279121818236, -0.2225209339563144}, {-0.5410441730642654, \
+-1.1234898018587336`}}, {{-0.7818314824680298, -0.6234898018587335}, \
+{-1.1102230246251565`*^-16, -1.2469796037174672`}}, {{-0.4338837391175581, \
+-0.9009688679024191}, {0.5410441730642654, -1.1234898018587336`}}, {{
+        0., -1.}, {0.9749279121818236, -0.7774790660436857}}, {{
+        0.4338837391175581, -0.9009688679024191}, {
+        1.2157152215855878`, -0.27747906604368555`}}, {{
+        0.7818314824680298, -0.6234898018587335}, {1.215715221585588, 
+        0.27747906604368566`}}, {{0.9749279121818236, -0.2225209339563144}, {
+        0.9749279121818236, 0.7774790660436857}}, {{0.9749279121818236, 
+        0.2225209339563144}, {0.5410441730642654, 1.1234898018587336`}}, {{
+        0.7818314824680298, 0.6234898018587335}, {1.1102230246251565`*^-16, 
+        1.2469796037174672`}}, {{0.4338837391175581, 
+        0.9009688679024191}, {-0.5410441730642654, 
+        1.1234898018587336`}}}, $CellContext`nGonEdges[15] = {{{0., 
+        1.}, {-0.978147600733806, 0.792088309182241}}, {{-0.4067366430758, 
+        0.913545457642601}, {-1.21575363745075, 
+        0.325760205350128}}, {{-0.743144825477394, 
+        0.669130606358858}, {-1.24314482547739, -0.196894797425581}}, \
+{{-0.951056516295154, 
+        0.309016994374947}, {-1.05558497956281, -0.685504900993326}}, \
+{{-0.994521895368273, -0.104528463267653}, {-0.685504900993326, \
+-1.05558497956281}}, {{-0.866025403784439, -0.5}, {-0.19689479742558, \
+-1.24314482547739}}, {{-0.587785252292473, -0.809016994374947}, {
+        0.325760205350128, -1.21575363745075}}, {{-0.207911690817759, \
+-0.978147600733806}, {0.792088309182241, -0.978147600733806}}, {{
+        0.207911690817759, -0.978147600733806}, {
+        1.12145714846036, -0.571410957658006}}, {{
+        0.587785252292473, -0.809016994374947}, {
+        1.25691585865133, -0.0658721688975531}}, {{0.866025403784439, -0.5}, {
+        1.17504239815939, 0.451056516295154}}, {{
+        0.994521895368273, -0.104528463267653}, {0.88999343210062, 
+        0.88999343210062}}, {{0.951056516295154, 0.309016994374947}, {
+        0.451056516295154, 1.17504239815939}}, {{0.743144825477394, 
+        0.669130606358858}, {-0.0658721688975533, 1.25691585865133}}, {{
+        0.4067366430758, 0.913545457642601}, {-0.571410957658006, 
+        1.12145714846036}}}, $CellContext`nGonEdges[
+         Pattern[$CellContext`n, 
+          Blank[]]] := ($CellContext`nGonEdges[$CellContext`n] = N[
+          Apply[{#, # + (#2 - #)/Norm[#2 - #]}& , 
+           N[
+            Partition[
+             Table[{
+               Cos[($CellContext`k 2 Pi)/$CellContext`n + Pi/2], 
+               
+               Sin[($CellContext`k 2 Pi)/$CellContext`n + 
+                Pi/2]}, {$CellContext`k, 0, $CellContext`n}], 2, 1]], {1}]])}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->55141167]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`base$$ = 3, $CellContext`c$$ = 
+    Pi, $CellContext`figure$$ = Point, $CellContext`n$$ = 
+    3, $CellContext`o$$ = 2500, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`c$$], Pi, "constant"}, {
+      Pi, E, GoldenRatio -> "\[Phi]", 2^Rational[1, 2], 3^Rational[1, 2], 
+       Log[2] -> "log(2)", Log[3] -> "log(3)", EulerGamma -> "\[Gamma]"}}, {{
+       Hold[$CellContext`figure$$], Point, "figure"}, {
+      Point -> "point", $CellContext`splitline -> "line", Polygon -> 
+       "polygon"}}, {{
+       Hold[$CellContext`o$$], 2500, "digits"}, 1, 5000, 1}, {{
+       Hold[$CellContext`base$$], 3, "base"}, 3, 60, 1}, {{
+       Hold[$CellContext`n$$], 3, "reflections"}, 3, 60, 1}}, 
+    Typeset`size$$ = {500., {148., 152.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = False, $CellContext`c$435$$ =
+     False, $CellContext`figure$436$$ = False, $CellContext`o$437$$ = 
+    0, $CellContext`base$438$$ = 0, $CellContext`n$439$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`base$$ = 3, $CellContext`c$$ = 
+        Pi, $CellContext`figure$$ = Point, $CellContext`n$$ = 
+        3, $CellContext`o$$ = 2500}, "ControllerVariables" :> {
+        Hold[$CellContext`c$$, $CellContext`c$435$$, False], 
+        Hold[$CellContext`figure$$, $CellContext`figure$436$$, False], 
+        Hold[$CellContext`o$$, $CellContext`o$437$$, 0], 
+        Hold[$CellContext`base$$, $CellContext`base$438$$, 0], 
+        Hold[$CellContext`n$$, $CellContext`n$439$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> ($CellContext`splitline; \
+$CellContext`reflectedPointGraphics[$CellContext`n$$, Mod[Part[
+             
+             RealDigits[$CellContext`c$$, $CellContext`base$$, \
+$CellContext`o$$], 1] + 1, $CellContext`n$$] + 1, $CellContext`figure$$]), 
+      "Specifications" :> {{{$CellContext`c$$, Pi, "constant"}, {
+         Pi, E, GoldenRatio -> "\[Phi]", 2^Rational[1, 2], 3^Rational[1, 2], 
+          Log[2] -> "log(2)", Log[3] -> "log(3)", EulerGamma -> 
+          "\[Gamma]"}}, {{$CellContext`figure$$, Point, "figure"}, {
+         Point -> "point", $CellContext`splitline -> "line", Polygon -> 
+          "polygon"}}, {{$CellContext`o$$, 2500, "digits"}, 1, 5000, 
+         1}, {{$CellContext`base$$, 3, "base"}, 3, 60, 
+         1}, {{$CellContext`n$$, 3, "reflections"}, 3, 60, 1}}, 
+      "Options" :> {AutorunSequencing -> {2, 4, 5}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{544., {243., 248.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`splitline[
+         Pattern[$CellContext`pts, 
+          Blank[]]] := Line[
+         Drop[
+          Transpose[{$CellContext`pts, 
+            
+            RotateLeft[$CellContext`pts]}], -1]], \
+$CellContext`reflectedPointGraphics[
+         Pattern[$CellContext`n, 
+          Blank[]], 
+         Pattern[$CellContext`digits, 
+          Blank[]], 
+         Pattern[$CellContext`figure, 
+          Blank[]], 
+         Pattern[$CellContext`opts, 
+          BlankNullSequence[]]] := Graphics[{
+          PointSize[0.0001], 
+          $CellContext`figure[
+           FoldList[$CellContext`reflectPointC[#, 
+             Part[
+              $CellContext`nGonEdges[$CellContext`n], #2]]& , {0., 0.}, 
+            Developer`ToPackedArray[
+             N[$CellContext`digits]]]]}, AspectRatio -> 1, Frame -> False, 
+         FrameTicks -> False, PlotRange -> All, 
+         ImageSize -> {500, 300}], $CellContext`reflectPointC = 
+       CompiledFunction[{{
+           Blank[Real], 1}, {
+           Blank[Real], 2}}, {{3, 1, 0}, {3, 2, 1}, {3, 1, 6}}, {0, 1, 1, 0, 
+         10}, {{1, 5}, {7, 1, 0}, {70, 1, 0, 0, 1, 2}, {7, 2, 0}, {70, 1, 0, 
+          0, 1, 3}, {93, 41, 3, 1, 2, 3, 1, 4}, {51, 3, 4, 5}, {93, 41, 3, 1, 
+          0, 3, 1, 6}, {7, 2, 0}, {94, 273, 2, 0, 0, 3, 1, 2, 3, 1, 7}, {7, 2,
+           0}, {51, 0, 4, 8}, {91, 8, 5, 0}, {94, 273, 3, 0, 0, 3, 1, 5, 3, 1,
+           8}, {94, 273, 2, 0, 0, 3, 1, 8, 3, 1, 9}, {51, 6, 7, 9, 6}, {2}}, 
+         Function[{$CellContext`p, $CellContext`p1p2}, 
+          Block[{Internal`$$136, Internal`$$138}, 
+           
+           Module[{$CellContext`p1 = 
+             Part[$CellContext`p1p2, 1], $CellContext`p2 = 
+             Part[$CellContext`p1p2, 2]}, Internal`$$136 = -$CellContext`p1; 
+            Internal`$$138 = $CellContext`p2 + 
+              Internal`$$136; -$CellContext`p + 2 $CellContext`p1 + 
+             2 (Dot[$CellContext`p + Internal`$$136, Internal`$$138] 
+               Internal`$$138)]]], Evaluate], 
+       Attributes[Internal`$$136] = {Temporary}, 
+       Attributes[Internal`$$138] = {Temporary}, $CellContext`nGonEdges[
+        3] = {{{0., 1.}, {-0.5, 
+        0.133974596215561}}, {{-0.866025403784439, -0.5}, {
+        0.133974596215561, -0.5}}, {{0.866025403784439, -0.5}, {
+        0.366025403784439, 0.366025403784439}}}, $CellContext`nGonEdges[
+        14] = {{{0., 1.}, {-0.9749279121818236, 
+        0.7774790660436857}}, {{-0.4338837391175581, 
+        0.9009688679024191}, {-1.2157152215855878`, 
+        0.27747906604368555`}}, {{-0.7818314824680298, 
+        0.6234898018587335}, {-1.215715221585588, -0.27747906604368566`}}, \
+{{-0.9749279121818236, 
+        0.2225209339563144}, {-0.9749279121818236, -0.7774790660436857}}, \
+{{-0.9749279121818236, -0.2225209339563144}, {-0.5410441730642654, \
+-1.1234898018587336`}}, {{-0.7818314824680298, -0.6234898018587335}, \
+{-1.1102230246251565`*^-16, -1.2469796037174672`}}, {{-0.4338837391175581, \
+-0.9009688679024191}, {0.5410441730642654, -1.1234898018587336`}}, {{
+        0., -1.}, {0.9749279121818236, -0.7774790660436857}}, {{
+        0.4338837391175581, -0.9009688679024191}, {
+        1.2157152215855878`, -0.27747906604368555`}}, {{
+        0.7818314824680298, -0.6234898018587335}, {1.215715221585588, 
+        0.27747906604368566`}}, {{0.9749279121818236, -0.2225209339563144}, {
+        0.9749279121818236, 0.7774790660436857}}, {{0.9749279121818236, 
+        0.2225209339563144}, {0.5410441730642654, 1.1234898018587336`}}, {{
+        0.7818314824680298, 0.6234898018587335}, {1.1102230246251565`*^-16, 
+        1.2469796037174672`}}, {{0.4338837391175581, 
+        0.9009688679024191}, {-0.5410441730642654, 
+        1.1234898018587336`}}}, $CellContext`nGonEdges[15] = {{{0., 
+        1.}, {-0.978147600733806, 0.792088309182241}}, {{-0.4067366430758, 
+        0.913545457642601}, {-1.21575363745075, 
+        0.325760205350128}}, {{-0.743144825477394, 
+        0.669130606358858}, {-1.24314482547739, -0.196894797425581}}, \
+{{-0.951056516295154, 
+        0.309016994374947}, {-1.05558497956281, -0.685504900993326}}, \
+{{-0.994521895368273, -0.104528463267653}, {-0.685504900993326, \
+-1.05558497956281}}, {{-0.866025403784439, -0.5}, {-0.19689479742558, \
+-1.24314482547739}}, {{-0.587785252292473, -0.809016994374947}, {
+        0.325760205350128, -1.21575363745075}}, {{-0.207911690817759, \
+-0.978147600733806}, {0.792088309182241, -0.978147600733806}}, {{
+        0.207911690817759, -0.978147600733806}, {
+        1.12145714846036, -0.571410957658006}}, {{
+        0.587785252292473, -0.809016994374947}, {
+        1.25691585865133, -0.0658721688975531}}, {{0.866025403784439, -0.5}, {
+        1.17504239815939, 0.451056516295154}}, {{
+        0.994521895368273, -0.104528463267653}, {0.88999343210062, 
+        0.88999343210062}}, {{0.951056516295154, 0.309016994374947}, {
+        0.451056516295154, 1.17504239815939}}, {{0.743144825477394, 
+        0.669130606358858}, {-0.0658721688975533, 1.25691585865133}}, {{
+        0.4067366430758, 0.913545457642601}, {-0.571410957658006, 
+        1.12145714846036}}}, $CellContext`nGonEdges[
+         Pattern[$CellContext`n, 
+          Blank[]]] := ($CellContext`nGonEdges[$CellContext`n] = N[
+          Apply[{#, # + (#2 - #)/Norm[#2 - #]}& , 
+           N[
+            Partition[
+             Table[{
+               Cos[($CellContext`k 2 Pi)/$CellContext`n + Pi/2], 
+               
+               Sin[($CellContext`k 2 Pi)/$CellContext`n + 
+                Pi/2]}, {$CellContext`k, 0, $CellContext`n}], 2, 1]], {1}]])}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->110691501],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`base$$ = 29, $CellContext`c$$ = 
+    Pi, $CellContext`figure$$ = Point, $CellContext`n$$ = 
+    14, $CellContext`o$$ = 4220, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`c$$], Pi, "constant"}, {
+      Pi, E, GoldenRatio -> "\[Phi]", 2^Rational[1, 2], 3^Rational[1, 2], 
+       Log[2] -> "log(2)", Log[3] -> "log(3)", EulerGamma -> "\[Gamma]"}}, {{
+       Hold[$CellContext`figure$$], Point, "figure"}, {
+      Point -> "point", $CellContext`splitline -> "line", Polygon -> 
+       "polygon"}}, {{
+       Hold[$CellContext`o$$], 4220, "digits"}, 1, 5000, 1}, {{
+       Hold[$CellContext`base$$], 29, "base"}, 3, 60, 1}, {{
+       Hold[$CellContext`n$$], 14, "reflections"}, 3, 60, 1}}, 
+    Typeset`size$$ = {500., {148., 152.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = False, $CellContext`c$512$$ =
+     False, $CellContext`figure$513$$ = False, $CellContext`o$514$$ = 
+    0, $CellContext`base$515$$ = 0, $CellContext`n$516$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`base$$ = 29, $CellContext`c$$ = 
+        Pi, $CellContext`figure$$ = Point, $CellContext`n$$ = 
+        14, $CellContext`o$$ = 4220}, "ControllerVariables" :> {
+        Hold[$CellContext`c$$, $CellContext`c$512$$, False], 
+        Hold[$CellContext`figure$$, $CellContext`figure$513$$, False], 
+        Hold[$CellContext`o$$, $CellContext`o$514$$, 0], 
+        Hold[$CellContext`base$$, $CellContext`base$515$$, 0], 
+        Hold[$CellContext`n$$, $CellContext`n$516$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> ($CellContext`splitline; \
+$CellContext`reflectedPointGraphics[$CellContext`n$$, Mod[Part[
+             
+             RealDigits[$CellContext`c$$, $CellContext`base$$, \
+$CellContext`o$$], 1] + 1, $CellContext`n$$] + 1, $CellContext`figure$$]), 
+      "Specifications" :> {{{$CellContext`c$$, Pi, "constant"}, {
+         Pi, E, GoldenRatio -> "\[Phi]", 2^Rational[1, 2], 3^Rational[1, 2], 
+          Log[2] -> "log(2)", Log[3] -> "log(3)", EulerGamma -> 
+          "\[Gamma]"}}, {{$CellContext`figure$$, Point, "figure"}, {
+         Point -> "point", $CellContext`splitline -> "line", Polygon -> 
+          "polygon"}}, {{$CellContext`o$$, 4220, "digits"}, 1, 5000, 
+         1}, {{$CellContext`base$$, 29, "base"}, 3, 60, 
+         1}, {{$CellContext`n$$, 14, "reflections"}, 3, 60, 1}}, 
+      "Options" :> {AutorunSequencing -> {2, 4, 5}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{544., {243., 248.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`splitline[
+         Pattern[$CellContext`pts, 
+          Blank[]]] := Line[
+         Drop[
+          Transpose[{$CellContext`pts, 
+            
+            RotateLeft[$CellContext`pts]}], -1]], \
+$CellContext`reflectedPointGraphics[
+         Pattern[$CellContext`n, 
+          Blank[]], 
+         Pattern[$CellContext`digits, 
+          Blank[]], 
+         Pattern[$CellContext`figure, 
+          Blank[]], 
+         Pattern[$CellContext`opts, 
+          BlankNullSequence[]]] := Graphics[{
+          PointSize[0.0001], 
+          $CellContext`figure[
+           FoldList[$CellContext`reflectPointC[#, 
+             Part[
+              $CellContext`nGonEdges[$CellContext`n], #2]]& , {0., 0.}, 
+            Developer`ToPackedArray[
+             N[$CellContext`digits]]]]}, AspectRatio -> 1, Frame -> False, 
+         FrameTicks -> False, PlotRange -> All, 
+         ImageSize -> {500, 300}], $CellContext`reflectPointC = 
+       CompiledFunction[{{
+           Blank[Real], 1}, {
+           Blank[Real], 2}}, {{3, 1, 0}, {3, 2, 1}, {3, 1, 6}}, {0, 1, 1, 0, 
+         10}, {{1, 5}, {7, 1, 0}, {70, 1, 0, 0, 1, 2}, {7, 2, 0}, {70, 1, 0, 
+          0, 1, 3}, {93, 41, 3, 1, 2, 3, 1, 4}, {51, 3, 4, 5}, {93, 41, 3, 1, 
+          0, 3, 1, 6}, {7, 2, 0}, {94, 273, 2, 0, 0, 3, 1, 2, 3, 1, 7}, {7, 2,
+           0}, {51, 0, 4, 8}, {91, 8, 5, 0}, {94, 273, 3, 0, 0, 3, 1, 5, 3, 1,
+           8}, {94, 273, 2, 0, 0, 3, 1, 8, 3, 1, 9}, {51, 6, 7, 9, 6}, {2}}, 
+         Function[{$CellContext`p, $CellContext`p1p2}, 
+          Block[{Internal`$$136, Internal`$$138}, 
+           
+           Module[{$CellContext`p1 = 
+             Part[$CellContext`p1p2, 1], $CellContext`p2 = 
+             Part[$CellContext`p1p2, 2]}, Internal`$$136 = -$CellContext`p1; 
+            Internal`$$138 = $CellContext`p2 + 
+              Internal`$$136; -$CellContext`p + 2 $CellContext`p1 + 
+             2 (Dot[$CellContext`p + Internal`$$136, Internal`$$138] 
+               Internal`$$138)]]], Evaluate], 
+       Attributes[Internal`$$136] = {Temporary}, 
+       Attributes[Internal`$$138] = {Temporary}, $CellContext`nGonEdges[
+        3] = {{{0., 1.}, {-0.5, 
+        0.133974596215561}}, {{-0.866025403784439, -0.5}, {
+        0.133974596215561, -0.5}}, {{0.866025403784439, -0.5}, {
+        0.366025403784439, 0.366025403784439}}}, $CellContext`nGonEdges[
+        14] = {{{0., 1.}, {-0.9749279121818236, 
+        0.7774790660436857}}, {{-0.4338837391175581, 
+        0.9009688679024191}, {-1.2157152215855878`, 
+        0.27747906604368555`}}, {{-0.7818314824680298, 
+        0.6234898018587335}, {-1.215715221585588, -0.27747906604368566`}}, \
+{{-0.9749279121818236, 
+        0.2225209339563144}, {-0.9749279121818236, -0.7774790660436857}}, \
+{{-0.9749279121818236, -0.2225209339563144}, {-0.5410441730642654, \
+-1.1234898018587336`}}, {{-0.7818314824680298, -0.6234898018587335}, \
+{-1.1102230246251565`*^-16, -1.2469796037174672`}}, {{-0.4338837391175581, \
+-0.9009688679024191}, {0.5410441730642654, -1.1234898018587336`}}, {{
+        0., -1.}, {0.9749279121818236, -0.7774790660436857}}, {{
+        0.4338837391175581, -0.9009688679024191}, {
+        1.2157152215855878`, -0.27747906604368555`}}, {{
+        0.7818314824680298, -0.6234898018587335}, {1.215715221585588, 
+        0.27747906604368566`}}, {{0.9749279121818236, -0.2225209339563144}, {
+        0.9749279121818236, 0.7774790660436857}}, {{0.9749279121818236, 
+        0.2225209339563144}, {0.5410441730642654, 1.1234898018587336`}}, {{
+        0.7818314824680298, 0.6234898018587335}, {1.1102230246251565`*^-16, 
+        1.2469796037174672`}}, {{0.4338837391175581, 
+        0.9009688679024191}, {-0.5410441730642654, 
+        1.1234898018587336`}}}, $CellContext`nGonEdges[15] = {{{0., 
+        1.}, {-0.978147600733806, 0.792088309182241}}, {{-0.4067366430758, 
+        0.913545457642601}, {-1.21575363745075, 
+        0.325760205350128}}, {{-0.743144825477394, 
+        0.669130606358858}, {-1.24314482547739, -0.196894797425581}}, \
+{{-0.951056516295154, 
+        0.309016994374947}, {-1.05558497956281, -0.685504900993326}}, \
+{{-0.994521895368273, -0.104528463267653}, {-0.685504900993326, \
+-1.05558497956281}}, {{-0.866025403784439, -0.5}, {-0.19689479742558, \
+-1.24314482547739}}, {{-0.587785252292473, -0.809016994374947}, {
+        0.325760205350128, -1.21575363745075}}, {{-0.207911690817759, \
+-0.978147600733806}, {0.792088309182241, -0.978147600733806}}, {{
+        0.207911690817759, -0.978147600733806}, {
+        1.12145714846036, -0.571410957658006}}, {{
+        0.587785252292473, -0.809016994374947}, {
+        1.25691585865133, -0.0658721688975531}}, {{0.866025403784439, -0.5}, {
+        1.17504239815939, 0.451056516295154}}, {{
+        0.994521895368273, -0.104528463267653}, {0.88999343210062, 
+        0.88999343210062}}, {{0.951056516295154, 0.309016994374947}, {
+        0.451056516295154, 1.17504239815939}}, {{0.743144825477394, 
+        0.669130606358858}, {-0.0658721688975533, 1.25691585865133}}, {{
+        0.4067366430758, 0.913545457642601}, {-0.571410957658006, 
+        1.12145714846036}}}, $CellContext`nGonEdges[
+         Pattern[$CellContext`n, 
+          Blank[]]] := ($CellContext`nGonEdges[$CellContext`n] = N[
+          Apply[{#, # + (#2 - #)/Norm[#2 - #]}& , 
+           N[
+            Partition[
+             Table[{
+               Cos[($CellContext`k 2 Pi)/$CellContext`n + Pi/2], 
+               
+               Sin[($CellContext`k 2 Pi)/$CellContext`n + 
+                Pi/2]}, {$CellContext`k, 0, $CellContext`n}], 2, 1]], {1}]])}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->14918500],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`base$$ = 25, $CellContext`c$$ = 
+    Pi, $CellContext`figure$$ = Point, $CellContext`n$$ = 
+    12, $CellContext`o$$ = 4087, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`c$$], Pi, "constant"}, {
+      Pi, E, GoldenRatio -> "\[Phi]", 2^Rational[1, 2], 3^Rational[1, 2], 
+       Log[2] -> "log(2)", Log[3] -> "log(3)", EulerGamma -> "\[Gamma]"}}, {{
+       Hold[$CellContext`figure$$], Point, "figure"}, {
+      Point -> "point", $CellContext`splitline -> "line", Polygon -> 
+       "polygon"}}, {{
+       Hold[$CellContext`o$$], 4220, "digits"}, 1, 5000, 1}, {{
+       Hold[$CellContext`base$$], 29, "base"}, 3, 60, 1}, {{
+       Hold[$CellContext`n$$], 14, "reflections"}, 3, 60, 1}}, 
+    Typeset`size$$ = {500., {148., 152.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = False, $CellContext`c$512$$ =
+     False, $CellContext`figure$513$$ = False, $CellContext`o$514$$ = 
+    0, $CellContext`base$515$$ = 0, $CellContext`n$516$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`base$$ = 29, $CellContext`c$$ = 
+        Pi, $CellContext`figure$$ = Point, $CellContext`n$$ = 
+        14, $CellContext`o$$ = 4220}, "ControllerVariables" :> {
+        Hold[$CellContext`c$$, $CellContext`c$512$$, False], 
+        Hold[$CellContext`figure$$, $CellContext`figure$513$$, False], 
+        Hold[$CellContext`o$$, $CellContext`o$514$$, 0], 
+        Hold[$CellContext`base$$, $CellContext`base$515$$, 0], 
+        Hold[$CellContext`n$$, $CellContext`n$516$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> ($CellContext`splitline; \
+$CellContext`reflectedPointGraphics[$CellContext`n$$, Mod[Part[
+             
+             RealDigits[$CellContext`c$$, $CellContext`base$$, \
+$CellContext`o$$], 1] + 1, $CellContext`n$$] + 1, $CellContext`figure$$]), 
+      "Specifications" :> {{{$CellContext`c$$, Pi, "constant"}, {
+         Pi, E, GoldenRatio -> "\[Phi]", 2^Rational[1, 2], 3^Rational[1, 2], 
+          Log[2] -> "log(2)", Log[3] -> "log(3)", EulerGamma -> 
+          "\[Gamma]"}}, {{$CellContext`figure$$, Point, "figure"}, {
+         Point -> "point", $CellContext`splitline -> "line", Polygon -> 
+          "polygon"}}, {{$CellContext`o$$, 4220, "digits"}, 1, 5000, 
+         1}, {{$CellContext`base$$, 29, "base"}, 3, 60, 
+         1}, {{$CellContext`n$$, 14, "reflections"}, 3, 60, 1}}, 
+      "Options" :> {AutorunSequencing -> {2, 4, 5}}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{544., {243., 248.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`splitline[
+         Pattern[$CellContext`pts, 
+          Blank[]]] := Line[
+         Drop[
+          Transpose[{$CellContext`pts, 
+            
+            RotateLeft[$CellContext`pts]}], -1]], \
+$CellContext`reflectedPointGraphics[
+         Pattern[$CellContext`n, 
+          Blank[]], 
+         Pattern[$CellContext`digits, 
+          Blank[]], 
+         Pattern[$CellContext`figure, 
+          Blank[]], 
+         Pattern[$CellContext`opts, 
+          BlankNullSequence[]]] := Graphics[{
+          PointSize[0.0001], 
+          $CellContext`figure[
+           FoldList[$CellContext`reflectPointC[#, 
+             Part[
+              $CellContext`nGonEdges[$CellContext`n], #2]]& , {0., 0.}, 
+            Developer`ToPackedArray[
+             N[$CellContext`digits]]]]}, AspectRatio -> 1, Frame -> False, 
+         FrameTicks -> False, PlotRange -> All, 
+         ImageSize -> {500, 300}], $CellContext`reflectPointC = 
+       CompiledFunction[{{
+           Blank[Real], 1}, {
+           Blank[Real], 2}}, {{3, 1, 0}, {3, 2, 1}, {3, 1, 6}}, {0, 1, 1, 0, 
+         10}, {{1, 5}, {7, 1, 0}, {70, 1, 0, 0, 1, 2}, {7, 2, 0}, {70, 1, 0, 
+          0, 1, 3}, {93, 41, 3, 1, 2, 3, 1, 4}, {51, 3, 4, 5}, {93, 41, 3, 1, 
+          0, 3, 1, 6}, {7, 2, 0}, {94, 273, 2, 0, 0, 3, 1, 2, 3, 1, 7}, {7, 2,
+           0}, {51, 0, 4, 8}, {91, 8, 5, 0}, {94, 273, 3, 0, 0, 3, 1, 5, 3, 1,
+           8}, {94, 273, 2, 0, 0, 3, 1, 8, 3, 1, 9}, {51, 6, 7, 9, 6}, {2}}, 
+         Function[{$CellContext`p, $CellContext`p1p2}, 
+          Block[{Internal`$$136, Internal`$$138}, 
+           
+           Module[{$CellContext`p1 = 
+             Part[$CellContext`p1p2, 1], $CellContext`p2 = 
+             Part[$CellContext`p1p2, 2]}, Internal`$$136 = -$CellContext`p1; 
+            Internal`$$138 = $CellContext`p2 + 
+              Internal`$$136; -$CellContext`p + 2 $CellContext`p1 + 
+             2 (Dot[$CellContext`p + Internal`$$136, Internal`$$138] 
+               Internal`$$138)]]], Evaluate], 
+       Attributes[Internal`$$136] = {Temporary}, 
+       Attributes[Internal`$$138] = {Temporary}, $CellContext`nGonEdges[
+        3] = {{{0., 1.}, {-0.5, 
+        0.133974596215561}}, {{-0.866025403784439, -0.5}, {
+        0.133974596215561, -0.5}}, {{0.866025403784439, -0.5}, {
+        0.366025403784439, 0.366025403784439}}}, $CellContext`nGonEdges[
+        14] = {{{0., 1.}, {-0.9749279121818236, 
+        0.7774790660436857}}, {{-0.4338837391175581, 
+        0.9009688679024191}, {-1.2157152215855878`, 
+        0.27747906604368555`}}, {{-0.7818314824680298, 
+        0.6234898018587335}, {-1.215715221585588, -0.27747906604368566`}}, \
+{{-0.9749279121818236, 
+        0.2225209339563144}, {-0.9749279121818236, -0.7774790660436857}}, \
+{{-0.9749279121818236, -0.2225209339563144}, {-0.5410441730642654, \
+-1.1234898018587336`}}, {{-0.7818314824680298, -0.6234898018587335}, \
+{-1.1102230246251565`*^-16, -1.2469796037174672`}}, {{-0.4338837391175581, \
+-0.9009688679024191}, {0.5410441730642654, -1.1234898018587336`}}, {{
+        0., -1.}, {0.9749279121818236, -0.7774790660436857}}, {{
+        0.4338837391175581, -0.9009688679024191}, {
+        1.2157152215855878`, -0.27747906604368555`}}, {{
+        0.7818314824680298, -0.6234898018587335}, {1.215715221585588, 
+        0.27747906604368566`}}, {{0.9749279121818236, -0.2225209339563144}, {
+        0.9749279121818236, 0.7774790660436857}}, {{0.9749279121818236, 
+        0.2225209339563144}, {0.5410441730642654, 1.1234898018587336`}}, {{
+        0.7818314824680298, 0.6234898018587335}, {1.1102230246251565`*^-16, 
+        1.2469796037174672`}}, {{0.4338837391175581, 
+        0.9009688679024191}, {-0.5410441730642654, 
+        1.1234898018587336`}}}, $CellContext`nGonEdges[15] = {{{0., 
+        1.}, {-0.978147600733806, 0.792088309182241}}, {{-0.4067366430758, 
+        0.913545457642601}, {-1.21575363745075, 
+        0.325760205350128}}, {{-0.743144825477394, 
+        0.669130606358858}, {-1.24314482547739, -0.196894797425581}}, \
+{{-0.951056516295154, 
+        0.309016994374947}, {-1.05558497956281, -0.685504900993326}}, \
+{{-0.994521895368273, -0.104528463267653}, {-0.685504900993326, \
+-1.05558497956281}}, {{-0.866025403784439, -0.5}, {-0.19689479742558, \
+-1.24314482547739}}, {{-0.587785252292473, -0.809016994374947}, {
+        0.325760205350128, -1.21575363745075}}, {{-0.207911690817759, \
+-0.978147600733806}, {0.792088309182241, -0.978147600733806}}, {{
+        0.207911690817759, -0.978147600733806}, {
+        1.12145714846036, -0.571410957658006}}, {{
+        0.587785252292473, -0.809016994374947}, {
+        1.25691585865133, -0.0658721688975531}}, {{0.866025403784439, -0.5}, {
+        1.17504239815939, 0.451056516295154}}, {{
+        0.994521895368273, -0.104528463267653}, {0.88999343210062, 
+        0.88999343210062}}, {{0.951056516295154, 0.309016994374947}, {
+        0.451056516295154, 1.17504239815939}}, {{0.743144825477394, 
+        0.669130606358858}, {-0.0658721688975533, 1.25691585865133}}, {{
+        0.4067366430758, 0.913545457642601}, {-0.571410957658006, 
+        1.12145714846036}}}, $CellContext`nGonEdges[
+         Pattern[$CellContext`n, 
+          Blank[]]] := ($CellContext`nGonEdges[$CellContext`n] = N[
+          Apply[{#, # + (#2 - #)/Norm[#2 - #]}& , 
+           N[
+            Partition[
+             Table[{
+               Cos[($CellContext`k 2 Pi)/$CellContext`n + Pi/2], 
+               
+               Sin[($CellContext`k 2 Pi)/$CellContext`n + 
+                Pi/2]}, {$CellContext`k, 0, $CellContext`n}], 2, 1]], {1}]])}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->152196354]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "DetailsSection"],
+
+Cell[TextData[{
+ "Digit expansions of almost all real numbers show no structure. Despite \
+this, due to the underlying symmetry of the ",
+ Cell[BoxData[
+  FormBox["n", TraditionalForm]], "InlineMath"],
+ Cell[BoxData[
+  FormBox[Cell["", "InlineMath"], TraditionalForm]]],
+ "-gon, the graphics generated show some symmetry."
+}], "DetailNotes",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.36121600413399*^9, 3.36121601414961*^9}, {
+   3.36500887811638*^9, 3.3650088839445*^9}},
+ CellID->448906032]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0], BoxBaselineShift -> 
+     0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  ActionDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SearchTermsSection"],
+
+Cell["digit expansion", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.365008890507*^9, 3.365008902632*^9}},
+ CellID->901676003],
+
+Cell["polygon", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.36500886722575*^9, 3.36500886864763*^9}},
+ CellID->1000262],
+
+Cell["reflection", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.36500886974138*^9, 3.36500887128825*^9}},
+ CellID->495623666]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "RelatedLinksSection"],
+
+Cell[TextData[ButtonBox["Regular Polygon",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/RegularPolygon.html"], 
+   None}]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.36925957907813*^9, 3.36925958567188*^9}},
+ CellID->14203169],
+
+Cell[TextData[ButtonBox["Reflection",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/Reflection.html"], 
+   None}]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.369259596875*^9, 3.36925960254688*^9}},
+ CellID->793717099],
+
+Cell[TextData[ButtonBox["Decimal Expansion",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/DecimalExpansion.html"], 
+   None}]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.36925961410938*^9, 3.36925961875*^9}},
+ CellID->47126704]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Michael Trott",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Michael+Trott"],
+     None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Michael+Trott"]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.3650089553195*^9, 3.365008957882*^9}, 
+   3.36925963226563*^9},
+ CellID->33852727]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{765, 573},
+WindowMargins->{{57, -30}, {Automatic, 15}},
+FrontEndVersion->"6.0 for Microsoft Windows (32-bit) (June 19, 2007)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[55664, 1158, 310, 8, 70, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[55977, 1168, 677, 16, 70, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[56657, 1186, 339, 11, 70, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[56999, 1199, 636, 15, 70, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[57638, 1216, 842, 21, 70, "ControlSuggestions",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[58483, 1239, 303, 8, 70, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[58789, 1249, 1411, 31, 70, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[60203, 1282, 881, 21, 70, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 63368, 1390},
+ {"RotateAndZoomIn3D", 63477, 1393},
+ {"DragLocators", 63587, 1396},
+ {"CreateAndDeleteLocators", 63703, 1399},
+ {"SliderZoom", 63817, 1402},
+ {"GamepadControls", 63923, 1405},
+ {"AutomaticAnimation", 64036, 1408},
+ {"BookmarkAnimation", 64153, 1411}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[590, 23, 253, 4, 70, "DemoTitle",
+ CellID->700863240],
+Cell[CellGroupData[{
+Cell[868, 31, 33, 0, 70, "InitializationSection"],
+Cell[904, 33, 587, 15, 70, "Input",
+ CellID->223532114],
+Cell[1494, 50, 1420, 42, 70, "Input",
+ CellID->636282839],
+Cell[2917, 94, 1321, 40, 70, "Input",
+ CellID->220113031],
+Cell[4241, 136, 1869, 42, 70, "Input",
+ CellID->53665935]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[6147, 183, 29, 0, 70, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[6201, 187, 3223, 75, 70, "Input",
+ CellID->1496021318],
+Cell[9427, 264, 8956, 166, 70, "Output",
+ CellID->891556952]
+}, {2}]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18429, 436, 36, 0, 70, "ManipulateCaptionSection"],
+Cell[18468, 438, 533, 12, 70, "ManipulateCaption",
+ CellID->1044312921]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[19038, 455, 28, 0, 70, "ThumbnailSection"],
+Cell[19069, 457, 8999, 166, 70, "Output",
+ CellID->55141167]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[28105, 628, 28, 0, 70, "SnapshotsSection"],
+Cell[28136, 630, 8956, 166, 70, "Output",
+ CellID->110691501],
+Cell[37095, 798, 8963, 166, 70, "Output",
+ CellID->14918500],
+Cell[46061, 966, 8964, 166, 70, "Output",
+ CellID->152196354]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[55062, 1137, 26, 0, 70, "DetailsSection"],
+Cell[55091, 1139, 496, 12, 70, "DetailNotes",
+ CellID->448906032]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[55624, 1156, 37, 0, 70, "ControlSuggestionsSection"],
+Cell[55664, 1158, 310, 8, 70, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[55977, 1168, 677, 16, 70, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[56657, 1186, 339, 11, 70, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[56999, 1199, 636, 15, 70, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[57638, 1216, 842, 21, 70, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[58483, 1239, 303, 8, 70, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[58789, 1249, 1411, 31, 70, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[60203, 1282, 881, 21, 70, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[61121, 1308, 30, 0, 70, "SearchTermsSection"],
+Cell[61154, 1310, 142, 3, 70, "SearchTerms",
+ CellID->901676003],
+Cell[61299, 1315, 136, 3, 70, "SearchTerms",
+ CellID->1000262],
+Cell[61438, 1320, 141, 3, 70, "SearchTerms",
+ CellID->495623666]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[61616, 1328, 31, 0, 70, "RelatedLinksSection"],
+Cell[61650, 1330, 278, 7, 70, "RelatedLinks",
+ CellID->14203169],
+Cell[61931, 1339, 268, 7, 70, "RelatedLinks",
+ CellID->793717099],
+Cell[62202, 1348, 279, 7, 70, "RelatedLinks",
+ CellID->47126704]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[62518, 1360, 25, 0, 70, "AuthorSection"],
+Cell[62546, 1362, 428, 13, 70, "Author",
+ CellID->33852727]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
