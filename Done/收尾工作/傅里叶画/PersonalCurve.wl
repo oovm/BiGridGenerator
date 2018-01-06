@@ -26,18 +26,77 @@ BeginPackage["PersonalCurve`"];
 FourierPaintPointListToLines::usage = "";
 PersonalCurveMake::usage = "";
 PersonalCurveGet::usage = "";
+FourierPlot::usage = "";
 (* ::Section:: *)
 (*程序包正体*)
 (* ::Subsection::Closed:: *)
 (*主设置*)
-ExNumber::usage = "程序包的说明,这里抄一遍";
+PersonalCurve::usage = "程序包的说明,这里抄一遍";
 Begin["`Private`"];
 (* ::Subsection::Closed:: *)
 (*主体代码*)
+Needs["FourierSeries`"];
 PersonalCurve$Version="V1.0";
-PersonalCurve$LastUpdate="2016-11-11";
+PersonalCurve$LastUpdate="2018-01-06";
+
+
+
+
+
 (* ::Subsubsection:: *)
-(* 原始 FourierPaint *)
+(* FourierPlot *)
+Options[FourierCoefficientPlot]={
+	Background->Black,
+	ImageSize->500,
+	LastPointStyle->{Purple,PointSize[0.02]},
+	OutlineStyle->{Yellow},
+	InlineStyle->{White},
+	PlotStyle->{},
+	Last->2,
+	Shift->0,
+	PlotRange->{{-5,10},{-4,4}}
+};
+FourierCoefficientPlot[r_,n_,OptionsPattern[]]:=Block[
+	{st,lt,fun,par,tab,g,h},
+	st=OptionValue[Shift];lt=OptionValue[Last];
+	fun=Function[x,Accumulate@Prepend[
+		ReIm@MapThread[#1 Exp[2 Pi I #2 x]&,
+			{r,Range[Length@r]}
+		],{0,0}]];
+	par=Function[t,r.Table[Sin[2 Pi j t],{j,Length@r}]];
+	tab=Table[fun[j],{j,0,1,1/n}];
+	g=Graphics[Flatten@{
+		OptionValue[InlineStyle],MapThread[Circle[#1,Abs@#2]&,{Most@#,r}],
+		Red,Point[Most@#],
+		OptionValue[LastPointStyle],Point[Last@#],
+		OptionValue[OutlineStyle],Line@tab[[All,-1]],Line@#,
+		Dashed,Red,Line[{Last@#,{6+st,#[[-1,2]]}}]
+	},PlotRange->OptionValue[PlotRange]]&/@tab;
+	h=Table[Plot[par[t-s],{s,6+st,6+st+lt},
+		PlotStyle->OptionValue[PlotStyle]],{t,0,1,1/n}];
+	MapThread[Show[#1,#2,
+		Background->OptionValue[Background],
+		ImageSize->OptionValue[ImageSize]
+	]&,{g,h}]];
+Options[FourierPlot]={Order->5};
+FourierPlot[
+	expr_,var_Symbol,nn_Integer:1,
+	ops:OptionsPattern[{FourierPlot,FourierCoefficientPlot}]
+]:=Block[
+	{a,pics,x=var},
+	a=Table[FourierSeries`NFourierSinCoefficient[expr,x,n,FourierParameters->{1,2Pi}],{n,OptionValue[Order]}];
+	pics=If[nn==1,
+		Quiet@First@FourierCoefficientPlot[a,1,ops],
+		FourierCoefficientPlot[a,nn-1,ops]
+	]
+];
+
+
+
+
+
+(* ::Subsubsection:: *)
+(* [Raw] FourierPaint *)
 FourierPaintPointListToLines[pointList_, neighborhoodSize_:6]:= Block[
 	{L = DeleteDuplicates[pointList], NF, \[Lambda],lineBag, counter, seenQ, sLB, nearest,
 		nearest1, nextPoint,couldReverseQ,  \[ScriptD], \[ScriptN], \[ScriptS]},
@@ -176,6 +235,11 @@ FourierPaintPreviewManipulate[data_] :=Manipulate[
 	{{n, 5, "展开阶数"}, 1, 50,1,Appearance -> "Labeled"},
 	TrackedSymbols :> True, SaveDefinitions -> True
 ];
+
+
+
+
+
 (* ::Subsubsection:: *)
 (*PersonalCurveMake*)
 Options[FourierPaintFinalCurve]={"order"->25,"dx"->10^-3};
