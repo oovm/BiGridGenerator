@@ -22,21 +22,40 @@
 (*这里应该填这个函数的介绍*)
 (* ::Section:: *)
 (*函数说明*)
-BeginPackage["Example`"];
-ExampleFunction::usage = "这里应该填这个函数的说明,如果要换行用\"\\r\"\r就像这样";
+BeginPackage["CollatzFunction`"];
+Collatz::usage = "";
 (* ::Section:: *)
 (*程序包正体*)
 (* ::Subsection::Closed:: *)
 (*主设置*)
-ExNumber::usage = "程序包的说明,这里抄一遍";
+CollatzFunction::usage = "程序包的说明,这里抄一遍";
 Begin["`Private`"];
 (* ::Subsection::Closed:: *)
 (*主体代码*)
-Example$Version="V1.0";
-Example$LastUpdate="2016-11-11";
+Collatz$Version="V1.0";
+Collatz$LastUpdate="2016-11-11";
 (* ::Subsubsection:: *)
 (*功能块 1*)
-ExampleFunction[1]="我就是个示例函数,什么功能都没有";
+Collatz[n_?EvenQ]:=n/2;
+Collatz[n_?OddQ]:=3*n+1;
+Collatz[z_?InexactNumberQ]:=(2+7 z-(2+5 z) Cos[Pi*z])/4;
+Collatz/: Derivative[1][Collatz]:=(7-5 Cos[\[Pi] #]+\[Pi] (2+5#) Sin[\[Pi] #])/4&;
+CollatzFix=Compile[
+	{{z0,_Complex,0}},
+	Module[
+		{iter=0,max=3000,z=z0},
+		While[iter++<max,If[Abs[z=(1+4 z-(1+2 z) Cos[Pi z])/4]>200.,Break[]]];
+		z
+	],
+	CompilationTarget->"C",
+	Parallelization->True,
+	RuntimeAttributes->{Listable}
+];
+Collatz[z_,Fix->True]:=If[Chop[Round[#]-#]==0,Round[#],#]&[CollatzFix@z];
+
+
+
+
 
 
 
