@@ -55,40 +55,7 @@ Collatz[z_,Fix->True]:=If[Chop[Round[#]-#]==0,Round[#],#]&[CollatzFix@z];
 
 
 
-b[0]:=-1/2;
-b[n_]:=b[n]=-w[n,n+1]/n;
-w[0,m_]:=0;
-w[n_,m_]:=w[n,m]=a[m-1]+w[n-1,m]+Sum[a[j]w[n-1,m-j-1],{j,0,m-2}];
-a[j_]:=u[0,j+1];
-u[n_,k_]:=u[n,k]=Which[
-	2^n-1==k,1,
-	2^n-1>k,Sum[u[n-1,j]u[n-1,k-j],{j,0,k}],
-	2^(n+1)-1>k,0,
-	True,(u[n+1,k]-Sum[u[n,j]u[n,k-j],{j,k-1}])/2
-];
-Block[
-	{$RecursionLimit=Infinity},
-	(areas=Table[\[Pi](1-Sum[n b[n]^2,{n,nmax}]),{nmax,200}])
-];
-ListPlot[areas,PlotJoined->True,PlotStyle->Red,AxesLabel->TraditionalForm/@{n,Subscript[A, n]}]
 
-CC
-n=1000;
-cost[i_]:=Block[
-	{P=1,D=1,S=2,V=1,l},
-	l=Drop[Divisors[i],-1];
-	Join[
-		Transpose[{Thread[l->i],S+i/l V}],
-		{{i-1->i,P},{i+1->i,D}}
-	]
-]
-raw=Drop[Flatten[Table[cost[i],{i,2,n+10}],1],-1];
-{dir,wei}=Transpose[(SortBy[#,Last]&/@GatherBy[raw,First])[[All,1]]];
-G=Graph[dir,EdgeWeight->wei,PlotTheme->"Monochrome",GraphLayout->"CircularEmbedding"];
-ways=FindShortestPath[G,1,All]/@Range[n];
-dis=GraphDistance[G,1,#]&/@Range[n]//Round;
-\[Alpha]=a/.FindFit[dis,a Log[x],a,x]
-Show[ListLinePlot@dis,Plot[a Log[x]/. {a->\[Alpha]},{x,1,n},PlotStyle->Red]]
 
 
 (* ::Subsubsection:: *)
