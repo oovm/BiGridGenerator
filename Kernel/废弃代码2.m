@@ -264,5 +264,5 @@ dis=GraphDistance[G,1,#]&/@Range[n]//Round;
 Show[ListLinePlot@dis,Plot[a Log[x]/. {a->\[Alpha]},{x,1,n},PlotStyle->Red]]
 
 
-
-
+CC
+CC
