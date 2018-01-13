@@ -263,6 +263,3 @@ dis=GraphDistance[G,1,#]&/@Range[n]//Round;
 \[Alpha]=a/.FindFit[dis,a Log[x],a,x]
 Show[ListLinePlot@dis,Plot[a Log[x]/. {a->\[Alpha]},{x,1,n},PlotStyle->Red]]
 
-
-CC
-CC
