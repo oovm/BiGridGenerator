@@ -263,3 +263,15 @@ dis=GraphDistance[G,1,#]&/@Range[n]//Round;
 \[Alpha]=a/.FindFit[dis,a Log[x],a,x]
 Show[ListLinePlot@dis,Plot[a Log[x]/. {a->\[Alpha]},{x,1,n},PlotStyle->Red]]
 
+trans[a_,b_]:=Join[
+	Table[{st[a,b]->st[a,j],2},{j,b+1,a}],
+	{{st[a,b]->st[a+b,b],1},{st[a,b]->st[a+1,b],1}}
+];
+trans[a_,0]:=Append[Table[{st[a,0]->st[a,j],2},{j,1,a}],{st[a,0]->st[a+1,0],1}];
+trans[n_]:=Flatten[Table[trans[n,i],{i,0,n}],1];
+GetPath[G_,n_]:=Block[{list,min,path},
+	list=Table[GraphDistance[G,st[0,0],st[n,i]],{i,0,n}];
+	min=Round@Flatten@Position[list,Min@list];
+	path=Table[FindShortestPath[G,st[0,0],All][st[10,i]],{i,min}];
+	Association["Min"->Round@Min@list,"Path"->path]
+];
