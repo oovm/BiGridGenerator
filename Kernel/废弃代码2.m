@@ -275,3 +275,7 @@ GetPath[G_,n_]:=Block[{list,min,path},
 	path=Table[FindShortestPath[G,st[0,0],All][st[10,i]],{i,min}];
 	Association["Min"->Round@Min@list,"Path"->path]
 ];
+
+
+
+>100];
