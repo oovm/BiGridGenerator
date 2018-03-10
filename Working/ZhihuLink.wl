@@ -7,6 +7,7 @@ ZhihuLink::usage = "ZhihuLink";
 $ZhihuCookies::usage = "知乎Cookies, 有效期约一个月.";
 ZhihuStatsGet::usage = "";
 ZhihuFollowees::usage = "ZhihuFollowees[id] 获取用户的关注者数据.";
+ZhihuCookiesReset::usage = "修改你的 Zhihu Cookies.";
 Begin["`Private`"];
 (* ::Subsection::Closed:: *)
 (*主体代码*)
@@ -14,9 +15,17 @@ ZhihuLink$Version="V1.0";
 ZhihuLink$LastUpdate="2016-11-11";
 (* ::Subsubsection:: *)
 (*Keys*)
-$ZhihuCookies="aliyungf_tc=AQAAABY6ZDrdMwYAyhPfPEbyzrk9hC4+; _xsrf=0ff13a61-e50b-47a2-b7c8-6282ab4be718; q_c1=ec74bc715a2144e2969b334b09266782|1520162956000|1520162956000; _zap=cf8bf686-6ea8-40b8-9290-eb017f15681b; capsion_ticket=\"2|1:0|10:1520162959|14:capsion_ticket|44:YWVlMDQ5OTY4NTkwNGQ0Zjk2NjExNDRkNmVkZGJiYWQ=|e4b5f23bf2a0ce29bbc5d7bf876ff6b410d876f7e0425e8884bb11f3c6fe4981\"; l_n_c=1; r_cap_id=\"YzJiZWE4N2NjMjY2NGY1MGEyMDNhMDJiOTg3ZWMwN2U=|1520162989|a6166482a73ece5b0941a3ffdb611fc6d33e3dc1\"; cap_id=\"ODYzOTBmMzdkMjJkNDk3Nzk1YzYzYThhMzY3NGIzMGM=|1520162989|955b8025dc40d996a031a5927432de2747c2a067\"; l_cap_id=\"ZmM1ZWY5Y2U4ZDA2NDgyMWI5ZTgxODM1ZjM5NzM5Y2U=|1520162989|7cf5803ea5197df800134523ba120895692b0edb\"; n_c=1; z_c0=\"MS4xSHRpbkJBQUFBQUFYQUFBQVlRSlZUYlltaVZ1ckZDR1JoMk91UFZ6aUk5MllfRm5KUGNCZ0d3PT0=|1520162998|5448132cc2b7caa44c4e81b5845c9656cdbcfaf2\"; d_c0=\"AIBrq01FPA2PTjjXCuBar7KCs7lMTOoHxEo=|1520162998\"";
-(*Todo: 千万别忘了删掉*)
-name="GalAster";
+If[FindFile["Zhihu.cookies"] === $Failed,
+	$ZhihuCookies = "",
+	$ZhihuCookies = Import@FindFile["zhihu.cookies"]
+];
+ZhihuCookiesReset[]:=CreateDialog[{
+	TextCell["粘贴你的Cookies(不需要是字符型)"],
+	InputField[Dynamic[$ZhihuCookies],String,ImageSize->{400,400/GoldenRatio^2}],
+	DefaultButton[DialogReturn[$ZhihuCookies]]
+	},
+	WindowTitle->"需要Token"
+];
 $keyMin={
 	{"name","用户名"},
 	{"url_token","ID"},
@@ -99,6 +108,7 @@ ZhihuFollowees[name_String]:=Block[
 	data//Dataset
 ];
 
+(*Todo: Save 模式, 若关注人数>200则启用*)
 
 (* ::Subsection::Closed:: *)
 (*附加设置*)
