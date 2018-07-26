@@ -1,21 +1,9 @@
-Options[ASCIIfy] = {FontFamily -> "Inconsolata", ColorNegate -> False};
-ASCIIfy[img_, charchoice_, cbasic_, grainchoice_, coloredchoice_, OptionsPattern[]] := Module[
+Options[ASCIIfy] = {FontFamily -> "Inconsolata", ColorNegate -> False, Colorize -> True};
+ASCIIfy[img_, grainchoice_, OptionsPattern[]] := Module[
 	{},
 (*Chars used in output that are not part of the alphabets*)
-	If[
-		cbasic,
-		charsbasic = {"$", "&", "'", ",", ".", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ":", ";", "?"},
-		charsbasic = List[]
-	];
-	
-	(*if you use setchars[auto] it will automatically use the characters used in your country*)
-	auto = Entity["Language", "English"];
-	
-	(*Creates a list of chars to be used: lowercase, capital and special "charsbasic"*)
-	setchars[lang_] := If[lang == "Auto", Join[Alphabet[auto], Capitalize[Alphabet[auto]], charsbasic], Join[Alphabet[lang], Capitalize[Alphabet[lang]], charsbasic]];
-	
-	(*temporary switch between languages, in the future will use a drop list*)
-	chars = RandomSample[setchars[charchoice], UpTo[100]];
+	charsbasic = {"$", "&", "'", ",", ".", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ":", ";", "?"};
+	chars = RandomSample[Join[CharacterRange[65, 122], charsbasic], UpTo[100]];
 	
 	(*calculates the dimensions of characters*)
 	{truecharwidth , truecharheight} = Max /@ Transpose[ImageDimensions@Rasterize[
@@ -29,9 +17,10 @@ ASCIIfy[img_, charchoice_, cbasic_, grainchoice_, coloredchoice_, OptionsPattern
 	
 	
 	(*sets grain*)
-	If[grainchoice == "Auto",
-		charwidth = truecharwidth;charheight = truecharheight,
-		charwidth = grainchoice;charheight = Round[grainchoice * (truecharheight + 0) / truecharwidth]
+	{charwidth, charheight} = If[
+		grainchoice == "Auto",
+		{truecharwidth, truecharheight},
+		{grainchoice, Round[grainchoice * (truecharheight + 0) / truecharwidth]}
 	];
 	
 	(*dark images will not be well represented by chars, as they have a white background, so before applying the program the image brightness is scales up accordingly*)
@@ -39,15 +28,13 @@ ASCIIfy[img_, charchoice_, cbasic_, grainchoice_, coloredchoice_, OptionsPattern
 	
 	(*creates a table of rasterized columns of strings that resemble frames of a gif*)
 	
-	
-	(*Should it color negate?*)
 	graphicframe = If[OptionValue[ColorNegate] === True, ColorNegate[img], img];
 	
 	(*creates a partitioned black and white, bleached image*)
 	pic = ImagePartition[ImageApply[bleach, {ColorConvert[graphicframe, "Grayscale"]}], {charwidth, charheight}];
 	
 	(*creates a partitioned colored image if coloredchoice is true*)
-	If[coloredchoice, picwc = ImagePartition[graphicframe, {charwidth, charheight}];, ""];
+	If[OptionValue[Colorize] == True, picwc = ImagePartition[graphicframe, {charwidth, charheight}];, ""];
 	
 	(*calculated the dimensions of the partitioned image*)
 	{height, width} = Dimensions[pic];
@@ -62,17 +49,18 @@ ASCIIfy[img_, charchoice_, cbasic_, grainchoice_, coloredchoice_, OptionsPattern
 	best[x_, y_] := chars[[Position[diffs[x, y], Min[diffs[x, y]]][[1, 1]]]];
 	
 	(*creates a column of rows of colored best fitting letters, colored or black*)
-	If[coloredchoice,
-		charpic = TableForm[Table[Style[best[testx, testy], FontColor -> RGBColor[ImageMeasurements[picwc[[testy, testx]], "Mean"]]], {testy, 1, height}, {testx, 1, width}], TableSpacing -> {0, 0}],
-		charpic = TableForm[Table[Style[best[testx, testy], FontColor -> Black], {testy, 1, height}, {testx, 1, width}], TableSpacing -> {0, 0}]
+	charpic = If[
+		OptionValue[Colorize] == True,
+		TableForm[Table[Style[best[testx, testy], FontColor -> RGBColor[ImageMeasurements[picwc[[testy, testx]], "Mean"]]], {testy, 1, height}, {testx, 1, width}], TableSpacing -> {0, 0}],
+		TableForm[Table[Style[best[testx, testy], FontColor -> Black], {testy, 1, height}, {testx, 1, width}], TableSpacing -> {0, 0}]
 	];
-	
 	(*rasterizes the column of strings*)
 	If[
 		OptionValue[ColorNegate] == True,
 		ColorNegate[Rasterize[Style[TableForm[Map[Pane[#, {truecharwidth, truecharheight}, Alignment -> Center]&, charpic, {3}], TableSpacing -> {0, 1}], FontFamily -> OptionValue[FontFamily]]]],
 		Rasterize[Style[TableForm[Map[Pane[#, {truecharwidth, truecharheight}, Alignment -> Center]&, charpic, {3}], TableSpacing -> {0, 1}], FontFamily -> OptionValue[FontFamily]]]
 	]
-
-(*repetition setting: as many times as the gif is long*)
 ]
+
+
+
